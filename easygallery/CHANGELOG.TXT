@@ -1,0 +1,35 @@
+BUILD CHANGE LOG
+
+This file contains information regarding each build that is released.  A "build" is a small update 
+that fixes bugs found within a particular version.  For a full list of features in Easy Gallery
+please visit the main change at: http://laxa.ca/ee_home.html and discussion thread at:
+http://expressionengine.com/forums/viewthread/58393/
+
+BUILD: 20070922
++ Added GIF Support
++ Added jQuery and System URL under settings
++ Ability to browse other existing Galleries
+* Update User Interface
+* Update Order ID and Captions
+
+BUILD: 20070917
++ Thumbnails Automatically generated during image uploads
++ Sorting Images
+
+BUILD: 20070819
+* Fixed Clashing Publish / Edit Tabs, Blocks and Header data
+* Fixed "Divide By Zero" Warning
+* Fixed show only images for the current weblog entry (entry_id)
+
+-----------------
+
+TROUBLESHOOTING
+
+Error Code: HTTP Error, Message: 406
+
+This is related to the modsecurity bug:
+
+If you are using Apache with mod_security this will not work, you need to put the following in your .htaccess file to disable mod_security:
+
+SecFilterEngine Off
+SecFilterScanPOST Off

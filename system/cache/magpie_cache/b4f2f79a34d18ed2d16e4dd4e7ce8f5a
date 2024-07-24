@@ -1,0 +1,426 @@
+O:9:"MagpieRSS":22:{s:6:"parser";N;s:12:"current_item";a:0:{}s:5:"items";a:15:{i:0;a:9:{s:5:"title";s:38:"Like People. Answering your Questions.";s:4:"link";s:51:"http://expressionengine.com/blog/entry/like_people/";s:2:"id";s:42:"tag:expressionengine.com,2007:blog/12.2894";s:9:"published";s:20:"2007-10-08T22:45:00Z";s:7:"updated";s:20:"2007-10-08T22:11:11Z";s:6:"author";s:32:"
+            
+                  ";s:11:"author_name";s:14:"Leslie Camacho";s:10:"author_uri";s:23:"http://www.ellislab.com";s:12:"atom_content";s:1150:"
+        <p>I realize this is sort of a second thank you post but I really felt it was appropriate. Over the past week I&#8217;ve had to deal with several troublesome emails from extremely, let&#8217;s say, unique people. That type of thing can really get a person down. On my walk today it hit me that this was 3 people out of 45,000+ registered members on our forums. Actually, 2 of the 3 weren&#8217;t even registered on the forums. Most companies would kill for that sort of stability in a community. We only had to beat up Paul a few times. According to the Airbag Blog Advisory System, I would say that <a href="http://www.blogadvisorysystem.com/">Tim O&#8217;Reilly loves you and unicorns</a> and we do too.
+</p>
+<p>
+Next week I&#8217;ll be answering your questions on the video post. If you have a question you&#8217;d like answered, just post it in this week&#8217;s thread. A couple notes. 
+</p>
+<p>
+1. Just because you ask doesn&#8217;t mean we&#8217;ll answer. 
+</p>
+<p>
+2. &#8220;No&#8221; is a legitimate answer. <img src="http://ellislab.com/images/smileys/smile.gif" width="19" height="19" alt="smile" style="border:0;" /> 
+</p>      ";}i:1;a:9:{s:5:"title";s:66:"Dissecting the Default Templates: Date Headings, Dates, and Titles";s:4:"link";s:103:"http://expressionengine.com/blog/entry/dissecting_the_default_templates_date_headings_dates_and_titles/";s:2:"id";s:42:"tag:expressionengine.com,2007:blog/12.2888";s:9:"published";s:20:"2007-10-04T23:02:00Z";s:7:"updated";s:20:"2007-10-04T22:06:50Z";s:6:"author";s:32:"
+            
+                  ";s:11:"author_name";s:9:"Lisa Wess";s:10:"author_uri";s:23:"http://www.lisajill.net";s:12:"atom_content";s:6238:"
+        <p>Last week we started to <a href="http://expressionengine.com/blog/entry/dissecting_the_default_templates_the_weblog_entries_tag/">dig into the main content area of our default template</a>.&nbsp; We did this by opening up the weblog entries tag, and dissecting what the <a href="http://expressionengine.com/blog/entry/dissecting_the_default_templates_category_headings_and_parameters/">parameters</a> did.
+</p>
+<p>
+For our default template, the main content in the index page is delivered between the &#123;exp:weblog:entries&#125; opening tag and the &#123;/exp:weblog:entries&#125; closing tag.&nbsp; Everything between is some form of <a href="http://expressionengine.com/blog/entry/dissecting_the_default_templates_variables_paths_and_weblog/">variable</a> (or, of course, HTML and CSS styling) which will be replaced during rendering so that your site visitors see actual content.
+</p>
+<p>
+Now, don&#8217;t you think it&#8217;s time we take out the guts and examine them, so we know what they do and can accomplish the same on our own sites?
+</p>
+<p>
+Here are the next 4 lines of our template:
+</p>
+<p>
+</p><div class="codeblock"><code>
+<span style="color: #007700">&lt;</span><span style="color: #0000BB">div </span><span style="color: #007700">class=</span><span style="color: #DD0000">"entry"</span><span style="color: #007700">&gt;<br /></span><span style="color: #0000BB">&#123;date_heading&#125;<br /></span><span style="color: #007700">&lt;</span><span style="color: #0000BB">h3 </span><span style="color: #007700">class=</span><span style="color: #DD0000">"date"</span><span style="color: #007700">&gt;</span><span style="color: #0000BB">&#123;entry_date format</span><span style="color: #007700">=</span><span style="color: #DD0000">' %l, %F %d, %Y '</span><span style="color: #0000BB">&#125;</span><span style="color: #007700">&lt;/</span><span style="color: #0000BB">h3</span><span style="color: #007700">&gt;<br /></span><span style="color: #0000BB">&#123;</span><span style="color: #007700">/</span><span style="color: #0000BB">date_heading&#125;</span>
+</code></div><p>
+</p>
+<p>
+What we always do when dissecting a template is to figure out what each part of the template does.&nbsp; So, now that we&#8217;ve come to a new variable, let&#8217;s search for <a href="http://www.google.com/search?q=date_heading&amp;as_sitesearch=expressionengine.com%2Fdocs%2F&amp;sa=Search">date_heading</a> in the documentation.&nbsp; Our first result shows us exactly what this tag is about.&nbsp; It will output the content inside the tag pair, in this case:
+</p>
+<p>
+</p><div class="codeblock"><code>
+<span style="color: #007700">&lt;</span><span style="color: #0000BB">h3 </span><span style="color: #007700">class=</span><span style="color: #DD0000">"date"</span><span style="color: #007700">&gt;</span><span style="color: #0000BB">&#123;entry_date format</span><span style="color: #007700">=</span><span style="color: #DD0000">' %l, %F %d, %Y '</span><span style="color: #0000BB">&#125;</span><span style="color: #007700">&lt;/</span><span style="color: #0000BB">h3</span><span style="color: #007700">&gt;</span>
+</code></div><p>
+</p>
+<p>
+once for any group of entries that falls within its display parameter.&nbsp; In the default index template, if you post 6 times in one day, the date will only show up <i>once</i>.&nbsp; Now that we know that, we can also figure out that if we want the date to appear with <i>every post</i>, we will not need this {date_heading} tag pair at all.&nbsp; Neat, eh?
+</p>
+<p>
+Inside of the {date_heading} variable pair, we find the <a href="http://www.google.com/search?hl=en&amp;q=entry_date+site%3Aexpressionengine.com%2Fdocs%2F&amp;btnG=Search">{entry_date} variable</a>.&nbsp; Our first search result tells us that this variable outputs the date we entered the post on (in the Date tab of the Publish form).&nbsp; There are several date variables we find on that page, though our default template only uses {entry_date}.&nbsp; However, remember: nothing in ExpressionEngine is assumed, and that includes the format for your dates.&nbsp; As we can see, there is a link to <a href="http://expressionengine.com/docs/templates/date_variable_formatting.html">date variable formatting</a> which allows you to change the format of your date on the public page, using the format= parameter.&nbsp; This can be very helpful if you want to show, say, only the Month, or the Month and the Year, or any variation thereof: the full list of arguments is always available in the documentation.
+</p>
+<p>
+Now we get to the title.&nbsp; The title of an entry is required - it is not a custom field, which we&#8217;ll dig into next week with the next part of the template.&nbsp; The title is used in a multitude of places, including the edit page.&nbsp; Even if you do not need to title your entries, fill this in with something recognizable for yourself so that you can find it again later.
+</p>
+<p>
+However, our default template does, in fact, use the title:
+</p>
+<p>
+</p><div class="codeblock"><code>
+<span style="color: #007700">&lt;</span><span style="color: #0000BB">h2 </span><span style="color: #007700">class=</span><span style="color: #DD0000">"title"</span><span style="color: #007700">&gt;</span><span style="color: #0000BB">&#123;title&#125;</span><span style="color: #007700">&lt;/</span><span style="color: #0000BB">h2</span><span style="color: #007700">&gt;</span>
+</code></div><p>
+</p>
+<p>
+This is a second level heading that makes the title really stand out, so that a viewer can quickly see what the entry is about.&nbsp; The {title} itself is pulled from the Publish Page, where you entered the title; furthermore, the <a href="http://www.google.com/search?q=url_title&amp;as_sitesearch=expressionengine.com%2Fdocs%2F&amp;sa=Search">url_title</a>, which is often used to link to <a href="http://expressionengine.com/blog/entry/the_importance_of_semantics/">single entry pages</a> is derived, in a URL-safe format, from the title of the entry.
+</p>
+<p>
+That is enough for now, next week&#8217;s article will dig into custom fields as our default index template calls {summary}, {body}, and {extended}: all of which are, in fact, custom fields.&nbsp; So stay tuned!
+<br />
+
+</p>      ";}i:2;a:9:{s:5:"title";s:35:"Jamie Poitra Joins Development Team";s:4:"link";s:63:"http://expressionengine.com/blog/entry/jamie_poitra_joins_team/";s:2:"id";s:42:"tag:expressionengine.com,2007:blog/12.2881";s:9:"published";s:20:"2007-10-03T00:56:00Z";s:7:"updated";s:20:"2007-10-02T23:57:22Z";s:6:"author";s:32:"
+            
+                  ";s:11:"author_name";s:12:"Paul Burdick";s:10:"author_uri";s:25:"http://www.reedmaniac.com";s:12:"atom_content";s:830:"
+        <p>Thanks to heaps of cash donated by an anonymous leprechaun, we are pleased to announce the hiring of Jamie Poitra as EllisLab&#8217;s new Software Developer.&nbsp; Jamie comes to us from NetRaising, a prominent member of our Professional Network, where he is a Senior Web Associate and has helped countless people use ExpressionEngine throughout their web presences.
+</p>
+<p>
+The entire Development Team is pleased to have someone with such knowledge of using and expanding ExpressionEngine join us, as we have ambitious goals for our web publishing software over the next two years and we know his contribution will help us push them even further.&nbsp; It will also allow us to finally use some of our vacation time so that Derek can get a tan and Paul can spend some quality time with his remaining hair.
+</p>      ";}i:3;a:9:{s:5:"title";s:27:"Things I Can’t Talk About";s:4:"link";s:64:"http://expressionengine.com/blog/entry/things_i_cant_talk_about/";s:2:"id";s:42:"tag:expressionengine.com,2007:blog/12.2880";s:9:"published";s:20:"2007-10-01T23:17:00Z";s:7:"updated";s:20:"2007-10-01T22:21:10Z";s:6:"author";s:32:"
+            
+                  ";s:11:"author_name";s:14:"Leslie Camacho";s:10:"author_uri";s:23:"http://www.ellislab.com";s:12:"atom_content";s:224:"
+        <p>I think the title pretty much sums it up. There is lots going on, I just can&#8217;t be very specific at the moment without endangering my well-being. Is it really better than not knowing at all?&nbsp;
+</p>      ";}i:4;a:9:{s:5:"title";s:56:"Dissecting the Default Templates: The Weblog Entries Tag";s:4:"link";s:95:"http://expressionengine.com/blog/entry/dissecting_the_default_templates_the_weblog_entries_tag/";s:2:"id";s:42:"tag:expressionengine.com,2007:blog/12.2867";s:9:"published";s:20:"2007-09-27T20:02:01Z";s:7:"updated";s:20:"2007-09-27T19:10:06Z";s:6:"author";s:32:"
+            
+                  ";s:11:"author_name";s:9:"Lisa Wess";s:10:"author_uri";s:23:"http://www.lisajill.net";s:12:"atom_content";s:6228:"
+        <p>Welcome back to Dissection Thursday, folks!&nbsp; Today&#8217;s article is going to focus on the weblog entries tag, arguably one of the most important tag pairs in ExpressionEngine.&nbsp; If this is your first time reading this series, then I recommend reviewing the first three articles: <a href="http://expressionengine.com/blog/entry/dissecting_the_default_templates_assigned_variables/">assigned variables</a>, <a href="http://expressionengine.com/blog/entry/dissecting_the_default_templates_variables_paths_and_weblog/">variables, paths, and weblog=</a>, and the <a href="http://expressionengine.com/blog/entry/dissecting_the_default_templates_category_headings_and_parameters/">category heading tag pair</a>.
+</p>
+<p>
+We&#8217;ve often heard the weblog module referred to as a &#8220;data container&#8221;.&nbsp; The reasoning behind this is simple - between custom fields, categories, and relationships, you can store and retrieve nearly any type of information.&nbsp; But before we can run, we must first walk.&nbsp; The default templates start off with a blog-like structure.&nbsp; This isn&#8217;t because ExpressionEngine is a blog-only system, but because a weblog itself is an easy to understand medium for posting articles on one&#8217;s site and is widely recognized and understood.&nbsp; By beginning with the typical blog layout, we can have a common starting ground.
+</p>
+<p>
+Now we&#8217;ve come to the real guts of the index template - the main content area. The data itself is stored in the weblog module - remember, all of this can be done out of the box in the default installation!&nbsp; The main content area is served by using the <a href="http://expressionengine.com/docs/modules/weblog/weblog_entries.html">weblog entries tag</a>.&nbsp; This tag pair begins with an opening tag:
+</p>
+<p>
+</p><div class="codeblock"><code>
+<span style="color: #0000BB">&#123;exp</span><span style="color: #007700">:</span><span style="color: #0000BB">weblog</span><span style="color: #007700">:</span><span style="color: #0000BB">entries weblog</span><span style="color: #007700">=</span><span style="color: #DD0000">"&#123;my_weblog&#125;" </span><span style="color: #0000BB">orderby</span><span style="color: #007700">=</span><span style="color: #DD0000">"date" </span><span style="color: #0000BB">sort</span><span style="color: #007700">=</span><span style="color: #DD0000">"desc" </span><span style="color: #0000BB">limit</span><span style="color: #007700">=</span><span style="color: #DD0000">"15" </span><span style="color: #0000BB">disable</span><span style="color: #007700">=</span><span style="color: #DD0000">"member_data|trackbacks"</span><span style="color: #0000BB">&#125;</span>
+</code></div><p>
+</p>
+<p>
+Now there is a lot going on here.&nbsp; Let&#8217;s begin with a reminder on how to search for these items.&nbsp; You want to search for the beginning of the tag - <a href="http://www.google.com/search?q=exp%3Aweblog%3Aentries&amp;as_sitesearch=expressionengine.com%2Fdocs%2F&amp;sa=Search">exp:weblog:entries</a>.&nbsp; There is a lot of information there to take in, so I recommend not getting ahead of yourself - just glance at the first link, until you have a reason to search further, that is!
+</p>
+<p>
+From our previous articles, we understand just how important weblog= is, and that it is calling an assigned variable of &#123;my_weblog}.&nbsp; Great!
+</p>
+<p>
+We discussed, in an earlier article, how parameters work.&nbsp; All of those words, followed by the = sign, we now know are parameters, so we can look at the weblog entries <a href="http://expressionengine.com/docs/modules/weblog/parameters.html">parameters</a> to find out what they do.&nbsp; Since we see orderby= first, let&#8217;s have a look at what <a href="http://expressionengine.com/docs/modules/weblog/parameters.html#par_orderby">orderby=</a> is for.&nbsp; Here, in our default templates, it has a value of &#8220;date&#8221;.&nbsp; This is a typical blog method of ordering entries, and if you leave off the orderby= parameter, then it will default to date.&nbsp; However, you can use any of those values to over-ride the default to sort your data however you want.&nbsp; 
+</p>
+<p>
+We next see sort=, which works with orderby= so that you can reverse the display should you wish.&nbsp; 
+</p>
+<p>
+One sticking point we often see with folks coming into EE from another system is, &#8220;how to limit the display of articles&#8221;. Here, we see the answer - this isn&#8217;t done system-wide, but is done with the ultimate flexibility, right here as a parameter.&nbsp; You can now use this tag to display different weblog data, with different limits, rather than being locked into a system-wide limit.
+</p>
+<p>
+Lastly, we get to disable=, which deserves some special attention.&nbsp; The weblog entries tag is the heavy-lifter in ExpressionEngine; it pulls out lots of data and sorts, orders and limits that data for you.&nbsp; However, in any given weblog entries tag there may be information about the entries that you do not show and therefore does not need to be processed.&nbsp; It is best, then, to entirely disable that data in this particular tag, to optimize the behavior and keep everything running fast.&nbsp; So have a look at the <a href="http://expressionengine.com/docs/modules/weblog/parameters.html#par_disable">disable=</a> parameter.&nbsp; Once we have gone through this entire tag, I&#8217;ll make sure to come back to this parameter in order to explain how to know which values to use.
+</p>
+<p>
+Let&#8217;s summarize, then, what is in this article.&nbsp;  We have started, using the weblog entries tag, to pull our data out of the database and into the template for display.&nbsp; We have not yet actually put any variables in to display anything; however, we&#8217;ve started with the necessary building block: the opening tag for the weblog entries tag pair. We have also told the tag pair how we&#8217;re going to want that data ordered, sorted, limited, and disabled.
+</p>
+<p>
+Next week, we&#8217;ll get into the meat of the weblog entries tag, what goes between the tag pairs - those wonderful variables - so that we can actually display our articles.&nbsp; See you then!
+</p>      ";}i:5;a:9:{s:5:"title";s:37:"Last Week on the Forums, 9/18 to 9/25";s:4:"link";s:76:"http://expressionengine.com/blog/entry/last_week_on_the_forums_9_18_to_9_25/";s:2:"id";s:42:"tag:expressionengine.com,2007:blog/12.2862";s:9:"published";s:20:"2007-09-26T21:12:00Z";s:7:"updated";s:20:"2007-10-09T16:51:24Z";s:6:"author";s:32:"
+            
+                  ";s:11:"author_name";s:14:"Leslie Camacho";s:10:"author_uri";s:23:"http://www.ellislab.com";s:12:"atom_content";s:2749:"
+        <p>Last week was quite busy. Lots of goodies here and as usual, add your own. 
+</p>
+<p>
+Mark released two now plugins for Pages! <a href="http://expressionengine.com/forums/viewthread/60715/">Pages Breadcrumbs and Pages Nested Menus</a>.
+</p>
+<p>
+A new plugin has surfaced for helping <a href="http://expressionengine.com/forums/viewthread/33619/#300965">clean up an event calendar as iCal compatible output</a>
+</p>
+<p>
+Phoebe released a new plugin/extension combo for <a href="http://expressionengine.com/forums/viewthread/61506/">simple file uploading</a>.
+</p>
+<p>
+Paul shows a user how <a href="http://expressionengine.com/forums/viewthread/60053/#301549">to allow ampersands in forum posts</a>.
+</p>
+<p>
+silenz posted another new module, <a href="http://gadgets.silenz.org/index.php/gadgets/item/ajax-linktracker/">Ajax Linktracker</a>
+</p>
+<p>
+Mr. Wilson is starting a beta for <a href="http://expressionengine.com/forums/viewthread/54375/#301496">Weever</a>, a nested comments offering.
+</p>
+<p>
+brand1m gives us a heads up that <a href="http://expressionengine.com/forums/viewthread/61298/">EEDesign.org</a> has started up again (Jambor-EE, where art thou?). 
+</p>
+<p>
+Supersusie simply asked for example wiki usage and the thread turned into an <a href="http://expressionengine.com/forums/viewthread/37858/">excellent discussion of EE implementations</a>.
+</p>
+<p>
+GregF <a href="http://expressionengine.com/forums/viewthread/53445/">posts instructions for displaying your SmugMug photos with EE</a>.
+</p>
+<p>
+Lumis posted an early <a href="http://expressionengine.com/forums/viewthread/61515/">beta for a Flickr add-on</a>.
+</p>
+<p>
+Nathan asks about <a href="http://expressionengine.com/forums/viewthread/60304/P0/">Hacking the member templates to allow radio btns and checkboxes for custom profile fields</a> which eventually led to the <a href="http://expressionengine.com/wiki/Enable_radio_buttons_and_checkboxes_for_custom_member_profile_fields/">Enable radio buttons and checkboxes for custom member profile fields</a> wiki article. <strong>Hack at your own risk</strong>.
+</p>
+<p>
+Arden provides a suggestion on how to handle <a href="http://expressionengine.com/forums/viewreply/302608/">author notification when an article is edited</a>.
+</p>
+<p>
+e-man posted some <a href="http://expressionengine.com/forums/viewthread/61551/#302928">book recommendations on domscripting and Ajax</a>.
+</p>
+<p>
+<i>It came from the Staff forums</i>
+</p>
+<p>
+Anonymous staff person not named Leslie, Lisa, Rick, Robin, Sue, Allard, or Paul: &#8220;Oh, I have hurt my ankle fixing a flooding leak over at the other house in the middle of a torrential downpour by slipping off of the ladder, explaining the extra cynicism.&#8221;
+</p>      ";}i:6;a:9:{s:5:"title";s:35:"Learn How to Learn EE in 60 Seconds";s:4:"link";s:75:"http://expressionengine.com/blog/entry/learn_how_to_learn_ee_in_60_seconds/";s:2:"id";s:42:"tag:expressionengine.com,2007:blog/12.2837";s:9:"published";s:20:"2007-09-24T23:37:00Z";s:7:"updated";s:20:"2007-09-24T22:49:11Z";s:6:"author";s:32:"
+            
+                  ";s:11:"author_name";s:14:"Leslie Camacho";s:10:"author_uri";s:23:"http://www.ellislab.com";s:12:"atom_content";s:1002:"
+        <p>Ok, ok, so its actually 1:51 but what&#8217;s 51 seconds between friends? Here&#8217;s a <a href="http://expressionengine.com/files/blog/learn_ee.pdf">PDF of the movie</a> in case you would find such a thing useful. Have tips to add? Have a better way to learn EE? Post about it!
+</p>
+<p>
+This movie is geared specifically toward people new to EE. Here are the resources mentioned in the movie. 
+</p>
+<p>
+<a href="http://expressionengine.com/docs/overview/">Getting Started</a>
+</p>
+<p>
+<a href="http://expressionengine.com/tutorials/">Video Tutorials</a>
+</p>
+<p>
+<a href="http://expressionengine.com/docs/quick_start/">Quick Start Tutorial</a>
+</p>
+<p>
+<a href="http://boyink.com/splaat/weblog/category/building-an-expressionengine-site/">Building an ExpressionEngine Site</a>
+</p>
+<p>
+<a href="http://www.friendsofed.com/book.html?isbn=1590595815">Blog Design Solutions</a>
+</p>
+<p>
+And for you experienced EE developers, <a href="#">Paul&#8217;s home phone number</a>. Enjoy!
+</p>      ";}i:7;a:9:{s:5:"title";s:61:"Keeping the Wheels Greased (a.k.a. Add-on Submission Changes)";s:4:"link";s:96:"http://expressionengine.com/blog/entry/keeping_the_wheels_greased_aka_add_on_submission_changes/";s:2:"id";s:48:"tag:expressionengine.com,2007:blog/entry/14.2829";s:9:"published";s:20:"2007-09-21T15:52:00Z";s:7:"updated";s:20:"2007-09-21T15:25:53Z";s:6:"author";s:32:"
+            
+                  ";s:11:"author_name";s:11:"Derek Jones";s:10:"author_uri";s:20:"http://ellislab.com/";s:12:"atom_content";s:2169:"
+        <p>Recently we <a href="http://expressionengine.com/blog/entry/perfect_numbers_aka_add_on_developer_guidelines/">rolled out</a> a set of <a href="http://expressionengine.com/docs/development/guidelines/index.html">Developer Guidelines</a>, including a promise of news regarding changes to the submission process to ensure higher quality add-ons and a faster turnaround on reviewing your submissions.&nbsp; Today is part one of those changes.
+</p>
+<p>
+We had already linked to the guidelines and made mention on the submission form that the add-on needed to meet those requirements, but we also understand the excitement of a new add-on and submitting something for the community.&nbsp; It tends to make one not read a paragraph or two above the submission form, and one either forgets about the guidelines altogether, or doesn&#8217;t realize that they are not optional.&nbsp; Naughty!
+</p>
+<p>
+When you <a href="http://expressionengine.com/downloads/submission_guidelines/">submit an add-on</a>, you will now first be asked if your add-on meets the requirements of each of the three sections of the guidelines, with handy links to each section and the checklist that you can use once familiarized with the guidelines.&nbsp; If it helps, you can imagine Paul wearing a pair of large frame glasses with an attached chain around his neck, holding a ruler and pointing sternly.
+</p>
+<p>
+But seriously, the guidelines have a purpose, and we don&#8217;t want to seem heavy-handed or demanding here, but the reality is that we get many submissions that have to be rejected for either quality, performance, or security, and carefully reviewing someone else&#8217;s code takes a lot of time.&nbsp; The guidelines not only will ensure that you do not make the most common or egregious errors, but for many developers, your coding skills will no doubt improve as well.&nbsp; It also means that Paul and I can spend more time developing.&nbsp; So please use the developer guidelines for your own benefit - not only for your code, and for the users who use your add-on, but also so Kurt, Randy, and Ingmar won&#8217;t blame you for delaying further development.
+</p>      ";}i:8;a:9:{s:5:"title";s:66:"Dissecting the Default Templates: Category Headings and Parameters";s:4:"link";s:105:"http://expressionengine.com/blog/entry/dissecting_the_default_templates_category_headings_and_parameters/";s:2:"id";s:42:"tag:expressionengine.com,2007:blog/12.2828";s:9:"published";s:20:"2007-09-20T21:48:00Z";s:7:"updated";s:20:"2007-09-20T21:00:04Z";s:6:"author";s:32:"
+            
+                  ";s:11:"author_name";s:9:"Lisa Wess";s:10:"author_uri";s:23:"http://www.lisajill.net";s:12:"atom_content";s:9974:"
+        <p>It&#8217;s time to move further down our default index template, don&#8217;t you think?&nbsp; So far, we&#8217;ve covered <a href="http://expressionengine.com/blog/entry/dissecting_the_default_templates_assigned_variables/">assigned variables</a> and <a href="http://expressionengine.com/blog/entry/dissecting_the_default_templates_variables_paths_and_weblog/">paths,  variables, and weblog=</a>.
+</p>
+<p>
+In this article we&#8217;re going to start digging a bit deeper into the innards of ExpressionEngine; and we needn&#8217;t be too careful, she&#8217;s not fragile, I promise!
+</p>
+<p>
+We&#8217;ve already worked with those major building blocks: paths and global variables, and the next four lines:
+</p>
+<p>
+</p><div class="codeblock"><code>
+<span style="color: #007700">&lt;</span><span style="color: #0000BB">ul id</span><span style="color: #007700">=</span><span style="color: #DD0000">"navbar"</span><span style="color: #007700">&gt;<br />&nbsp;&nbsp;&lt;</span><span style="color: #0000BB">li id</span><span style="color: #007700">=</span><span style="color: #DD0000">"home"</span><span style="color: #007700">&gt;&lt;</span><span style="color: #0000BB">a href</span><span style="color: #007700">=</span><span style="color: #DD0000">"&#123;homepage&#125;" </span><span style="color: #0000BB">title</span><span style="color: #007700">=</span><span style="color: #DD0000">"Home"</span><span style="color: #007700">&gt;</span><span style="color: #0000BB">Home</span><span style="color: #007700">&lt;/</span><span style="color: #0000BB">a</span><span style="color: #007700">&gt;&lt;/</span><span style="color: #0000BB">li</span><span style="color: #007700">&gt;<br />&nbsp;&nbsp;&lt;</span><span style="color: #0000BB">li id</span><span style="color: #007700">=</span><span style="color: #DD0000">"about"</span><span style="color: #007700">&gt;&lt;</span><span style="color: #0000BB">a href</span><span style="color: #007700">=</span><span style="color: #DD0000">"&#123;path=&#123;my_template_group&#125;/about&#125;" </span><span style="color: #0000BB">title</span><span style="color: #007700">=</span><span style="color: #DD0000">"About"</span><span style="color: #007700">&gt;</span><span style="color: #0000BB">About</span><span style="color: #007700">&lt;/</span><span style="color: #0000BB">a</span><span style="color: #007700">&gt;&lt;/</span><span style="color: #0000BB">li</span><span style="color: #007700">&gt;<br />&nbsp;&nbsp;&lt;</span><span style="color: #0000BB">li id</span><span style="color: #007700">=</span><span style="color: #DD0000">"archives"</span><span style="color: #007700">&gt;&lt;</span><span style="color: #0000BB">a href</span><span style="color: #007700">=</span><span style="color: #DD0000">"&#123;path=&#123;my_template_group&#125;/archives&#125;" </span><span style="color: #0000BB">title</span><span style="color: #007700">=</span><span style="color: #DD0000">"Archives"</span><span style="color: #007700">&gt;</span><span style="color: #0000BB">Archives</span><span style="color: #007700">&lt;/</span><span style="color: #0000BB">a</span><span style="color: #007700">&gt;&lt;/</span><span style="color: #0000BB">li</span><span style="color: #007700">&gt;<br />&nbsp;&nbsp;&lt;</span><span style="color: #0000BB">li id</span><span style="color: #007700">=</span><span style="color: #DD0000">"contact"</span><span style="color: #007700">&gt;</span><span style="color: #0000BB">&#123;encode</span><span style="color: #007700">=</span><span style="color: #DD0000">"&#123;webmaster_email&#125;" </span><span style="color: #0000BB">title</span><span style="color: #007700">=</span><span style="color: #DD0000">"Contact"</span><span style="color: #0000BB">&#125;</span><span style="color: #007700">&lt;/</span><span style="color: #0000BB">li</span><span style="color: #007700">&gt;<br />&lt;/</span><span style="color: #0000BB">ul</span><span style="color: #007700">&gt;</span>
+</code></div><p>
+</p>
+<p>
+utilize those in creating basic navigation to what may be the building blocks of your site.&nbsp; This is really just normal HTML using path statements and global variables.&nbsp; We&#8217;re all great learners here, so I&#8217;m not going to re-hash those concepts; they are linked above should you need to review how those work, and of course, in the documentation.
+</p>
+<p>
+Last week we also touched on the <a href="http://www.google.com/search?q=exp%3Aweblog%3Ainfo&amp;as_sitesearch=expressionengine.com%2Fdocs%2F&amp;sa=Search">weblog info tag</a> as this is its second usage in this template.&nbsp; So we can continue on down the template immediately.
+</p>
+<p>
+Now these next six lines are where things really get super-duper interesting.&nbsp; Ready for it?
+</p>
+<p>
+</p><div class="codeblock"><code>
+<span style="color: #0000BB">&#123;exp</span><span style="color: #007700">:</span><span style="color: #0000BB">weblog</span><span style="color: #007700">:</span><span style="color: #0000BB">category_heading weblog</span><span style="color: #007700">=</span><span style="color: #DD0000">"&#123;my_weblog&#125;"</span><span style="color: #0000BB">&#125;<br /></span><span style="color: #007700">&lt;</span><span style="color: #0000BB">h2</span><span style="color: #007700">&gt;</span><span style="color: #0000BB">&#123;category_name&#125;</span><span style="color: #007700">&lt;/</span><span style="color: #0000BB">h2</span><span style="color: #007700">&gt;<br /></span><span style="color: #0000BB">&#123;if category_description&#125;<br /></span><span style="color: #007700">&lt;</span><span style="color: #0000BB">p</span><span style="color: #007700">&gt;</span><span style="color: #0000BB">&#123;category_description&#125;</span><span style="color: #007700">&lt;/</span><span style="color: #0000BB">p</span><span style="color: #007700">&gt;<br /></span><span style="color: #0000BB">&#123;</span><span style="color: #007700">/</span><span style="color: #0000BB">if&#125;<br />&#123;</span><span style="color: #007700">/</span><span style="color: #0000BB">exp</span><span style="color: #007700">:</span><span style="color: #0000BB">weblog</span><span style="color: #007700">:</span><span style="color: #0000BB">category_heading&#125;</span>
+</code></div><p>
+</p>
+<p>
+These lines introduce something new, as well as utilizing our previously-learned concepts.&nbsp; Let&#8217;s begin by figuring out this weird &#8220;exp:weblog:category_heading&#8221; tag.&nbsp; Easy, right? Just plug &#8221;<a href="http://www.google.com/search?q=exp%3Aweblog%3Acategory_heading&amp;as_sitesearch=expressionengine.com%2Fdocs%2F&amp;sa=Search">exp:weblog:category_heading</a>&#8221; into the search, and our first result will explain what this tag pair does and how to use it.
+</p>
+<p>
+First, however, let us back up a tiny bit.&nbsp; <i>Tag Pair</i>?&nbsp; In ExpressionEngine there are two main types of tags: single tags, which work on their own to output or process information, and tag pairs.&nbsp; Tag pairs begin in some way and then always close with the exp statement and a forward slash, such as in the above: &#123;/exp:weblog:category_heading&#125;.&nbsp; Tag pairs are special because they don&#8217;t output anything on their own, but allow you to use variables inside of the tag pair to output your data <i>how you want it to display</i>.&nbsp; It&#8217;s all dynamic, but you say what goes where - fairly brilliant, yes?
+</p>
+<p>
+Now, we know that the Weblog Category Heading Tag is a tag pair because it has an opening tag: &#123;exp:weblog:category_heading&#125; and a closing tag, which is the same but with a slash! &#123;/exp:weblog:category_heading&#125;.&nbsp; You might note that in the video tutorials, when Derek is using these tag pairs, he types in the opening and closing tag <i>at the same time</i>.&nbsp; This is a good habit because forgetting a closing tag is the cause of many template problems.
+</p>
+<p>
+Here is the first time where we see that a single template can serve multiple purposes, in this case, a multi-entry page, and a category multi-entry page.&nbsp; The Weblog Category Heading Tag will only show up when viewing a <a href="http://expressionengine.com/blog/entry/the_importance_of_semantics_displaying_categories/">Category Page</a> and is ignored when visiting just the index, so our template now serves multiple functions in a single template!
+</p>
+<p>
+We also learned in last week&#8217;s article that there are <i>context specific variables</i> and we can find those on our documentation page - these are variables made to work inside the Weblog Category Heading Tag, and require the surrounding tag pair for context, or they won&#8217;t know what information to display.
+</p>
+<p>
+Now we learn about a new building block for ExpressionEngine: parameters.&nbsp; A parameter is a word, followed by an = sign, that appears within either a single tag or a tag pair. Parameters are essentially settings.&nbsp; All tags have default settings and, except in in rare cases (which are noted brightly in the documentation), are not required.
+</p>
+<p>
+So in our Category Heading we see that we have the use of 3 parameters.&nbsp; As noted above, exceptions are noted quite brightly, and you can see that our weblog= parameter has an exception in some cases.&nbsp; 
+</p>
+<p>
+It is also important to note that you can always search for a parameter by using its syntax.&nbsp; For example, you can search for weblog= and find a list of all the tag pairs that take that parameter, so if you ever encounter a word followed by an equal sign, and you don&#8217;t know what it does - then go ahead and run a search for it!
+</p>
+<p>
+There is another new item here and you&#8217;ll note it - &#123;if} - ExpressionEngine allows the use of <a href="http://expressionengine.com/docs/templates/globals/conditionals.html">conditional global variables</a> - which I&#8217;ll cover in a future article.
+<br />
+	
+<br />
+I shall leave you with this and continue on next week, be ready!
+<br />
+
+</p>      ";}i:9;a:9:{s:5:"title";s:37:"Last Week on the Forums  9-11 to 9-17";s:4:"link";s:76:"http://expressionengine.com/blog/entry/last_week_on_the_forums_9_11_to_9_17/";s:2:"id";s:42:"tag:expressionengine.com,2007:blog/12.2822";s:9:"published";s:20:"2007-09-19T00:01:00Z";s:7:"updated";s:20:"2007-09-18T23:10:30Z";s:6:"author";s:32:"
+            
+                  ";s:11:"author_name";s:14:"Leslie Camacho";s:10:"author_uri";s:23:"http://www.ellislab.com";s:12:"atom_content";s:1604:"
+        <p>A short but good list this week. Don&#8217;t miss the last link on the list by Jones. And, as usual, feel free to add your own!
+</p>
+<p>
+Not exactly EE news but a good read. Jesse <a href="http://www.31three.com/weblog/archive/mobile_web_book_design3/">posted about designing</a> the website for <a href="http://cameronmoll.com/">Cameron Moll</a>&#8216;s PDF book, <a href="http://www.mobilewebbook.com/">Mobile Web Design</a> (which you should read).
+</p>
+<p>
+Orienteer asked <a href="http://expressionengine.com/forums/viewthread/60721/">How do you handle build updates for clients?</a> which led to a useful discussion.
+</p>
+<p>
+Guerrilla <a href="http://expressionengine.com/forums/viewthread/60609/#298109">asked about EE&#8217;s CSS in BBEdit</a> which led to this very useful <a href="http://expressionengine.com/wiki/Setting_BBEdit_to_.php_css_templates/">Setting BBEdit to php CSS templates</a>.
+</p>
+<p>
+Boyink publishes <a href="http://www.boyink.com/splaat/comments/building-an-expressionengine-site-chapter-7/">Building an ExpressionEngine Site Chapter 7</a>.
+</p>
+<p>
+Deronsizemore and allgood2 <a href="http://expressionengine.com/forums/viewthread/60725/">discuss the Multiple Site Manager</a>.
+</p>
+<p>
+<a href="http://expressionengine.com/forums/viewthread/60803/#299059">Mark Bowen gives a really nice rundown how of EE can be implemented with other tools</a> to a new user.
+</p>
+<p>
+Jones shares some code with wondermonkey which lets front-end users change the status of an entry with <a href="http://expressionengine.com/forums/viewthread/60902/">a click</a>.
+</p>      ";}i:10;a:9:{s:5:"title";s:22:"MySQL Performance Blog";s:4:"link";s:62:"http://expressionengine.com/blog/entry/mysql_performance_blog/";s:2:"id";s:48:"tag:expressionengine.com,2007:blog/entry/14.2820";s:9:"published";s:20:"2007-09-18T19:09:00Z";s:7:"updated";s:20:"2007-09-18T18:16:58Z";s:6:"author";s:32:"
+            
+                  ";s:11:"author_name";s:12:"Paul Burdick";s:10:"author_uri";s:25:"http://www.reedmaniac.com";s:12:"atom_content";s:927:"
+        <p>Doctor Jones and I both keep the MySQL Performance Blog in our respective feed readers because you regularly get amazing gems like today&#8217;s post about the <a href="http://www.mysqlperformanceblog.com/2007/09/18/possible-optimization-for-sort_merge-and-union-order-by-limit/">possible optimization for sort_merge and UNION ORDER BY LIMIT</a>.&nbsp;  This is an approach to writing a query that I would not have thought would be more efficient than a simple WHERE clause with OR, but my tests on even a moderately filled database like ours shows a noticeable difference.&nbsp; Heck, even the MySQL manual <a href="http://dev.mysql.com/doc/refman/4.1/en/searching-on-two-keys.html">mentions</a> this approach for searching on two different keys.&nbsp; You learn something new every day.&nbsp;  For ExpressionEngine and CodeIgniter developers out there, I highly suggest subscribing to their feed today.
+</p>      ";}i:11;a:9:{s:5:"title";s:31:"Funeral for Internet Explorer 6";s:4:"link";s:71:"http://expressionengine.com/blog/entry/funeral_for_internet_explorer_6/";s:2:"id";s:42:"tag:expressionengine.com,2007:blog/12.2818";s:9:"published";s:20:"2007-09-17T21:58:00Z";s:7:"updated";s:20:"2007-09-17T21:20:08Z";s:6:"author";s:32:"
+            
+                  ";s:11:"author_name";s:14:"Leslie Camacho";s:10:"author_uri";s:23:"http://www.ellislab.com";s:12:"atom_content";s:1181:"
+        <p>Please don&#8217;t take this video post for anything more than it is&#8230; a 30 minute creative break for Jones and I. We&#8217;re just blowing off steam on a topic near and dear to the heart of most web developers, nothing more, nothing less. If you have a video cam and need to blow off some IE6 steam as well, we invite you to post your own IE6 Eulogy and link to it from this post&#8217;s discussion thread. Or just write a eulogy. And while debugging IE6 is indeed cause for lots of cursing, please keep it PG if you link to it from our thread. 
+</p>
+<p>
+Also, Jones wants me to make sure and note a critical error in my eulogy. I refer to <a href="http://meyerweb.com/">Eric Meyer</a> as Meyer<i>s</i>. My humble apologies to Eric. Also, I should note that I&#8217;ve had exactly three meaningful interactions with <a href="http://zeldman.com">Jeffrey Zeldman</a> and my referring to him as &#8220;grumpy&#8221; is an outright deception. He is, in fact, quite personable from my brief experience. Never-the-less, that beanie on his book does make him look grumpy, no? 
+</p>
+<p>
+Next week we&#8217;ll try and do something useful for new EE users.&nbsp;
+</p>      ";}i:12;a:9:{s:5:"title";s:63:"Dissecting the Default Templates: Variables, Paths, and weblog=";s:4:"link";s:99:"http://expressionengine.com/blog/entry/dissecting_the_default_templates_variables_paths_and_weblog/";s:2:"id";s:42:"tag:expressionengine.com,2007:blog/12.2808";s:9:"published";s:20:"2007-09-13T22:12:01Z";s:7:"updated";s:20:"2007-09-13T21:48:37Z";s:6:"author";s:32:"
+            
+                  ";s:11:"author_name";s:9:"Lisa Wess";s:10:"author_uri";s:23:"http://www.lisajill.net";s:12:"atom_content";s:13370:"
+        <p>As we head down the road of dissecting the default templates, we&#8217;re going to learn some of the important facets of ExpressionEngine&#8217;s infrastructure. 
+</p>
+<p>
+Today, we&#8217;re going to focus on the area between the &lt;head&gt; and &lt;/head&gt; section of the index template.
+</p>
+<p>
+In doing that, we&#8217;re going to come across three vital elements that you need to understand, and it will be easier to do so going in.&nbsp; The first is the weblog= parameter.&nbsp; This parameter is going to be used in the majority of your tags, and tells that tag what weblog(s) you are pulling data from.&nbsp; So, when someone asks: &#8220;How do I relate a weblog to a template?&#8221; the answer is invariably &#8220;the weblog= parameter&#8221;.&nbsp; I encourage you to perform a <a href="http://www.google.com/search?q=weblog%3D&amp;as_sitesearch=expressionengine.com%2Fdocs%2F&amp;sa=Search">search for &#8220;weblog=&#8221;</a> in the docs right now to see just how many tags this parameter can be used in.
+</p>
+<p>
+The second concept is variables, there are two types: variables that are context sensitive and require a surrounding tag pair, as well as <a href="http://expressionengine.com/docs/templates/globals/index.html">global variables</a>.
+</p>
+<p>
+The third concept we&#8217;ll explore is path statements.&nbsp; Whenever you see something that is in the format of ="template_group/template_name", then that is a form of path statement.&nbsp; You can read more about those <a href="http://expressionengine.com/docs/templates/globals/path.html">here</a>.
+</p>
+<p>
+Now then, shall we dig in?
+</p>
+<p>
+You&#8217;ll find this code in our default index template:
+</p>
+<p>
+</p><div class="codeblock"><code>
+<span style="color: #007700">&lt;</span><span style="color: #0000BB">head</span><span style="color: #007700">&gt;<br />&lt;</span><span style="color: #0000BB">title</span><span style="color: #007700">&gt;</span><span style="color: #0000BB">&#123;exp</span><span style="color: #007700">:</span><span style="color: #0000BB">weblog</span><span style="color: #007700">:</span><span style="color: #0000BB">info weblog</span><span style="color: #007700">=</span><span style="color: #DD0000">"&#123;my_weblog&#125;"</span><span style="color: #0000BB">&#125;&#123;blog_title&#125;&#123;</span><span style="color: #007700">/</span><span style="color: #0000BB">exp</span><span style="color: #007700">:</span><span style="color: #0000BB">weblog</span><span style="color: #007700">:</span><span style="color: #0000BB">info&#125;</span><span style="color: #007700">&lt;/</span><span style="color: #0000BB">title</span><span style="color: #007700">&gt;<br />&lt;</span><span style="color: #0000BB">meta http</span><span style="color: #007700">-</span><span style="color: #0000BB">equiv</span><span style="color: #007700">=</span><span style="color: #DD0000">"Content-Type" </span><span style="color: #0000BB">content</span><span style="color: #007700">=</span><span style="color: #DD0000">"text/html; charset=&#123;charset&#125;" </span><span style="color: #007700">/&gt;<br /><br />&lt;</span><span style="color: #0000BB">link rel</span><span style="color: #007700">=</span><span style="color: #DD0000">'stylesheet' </span><span style="color: #0000BB">type</span><span style="color: #007700">=</span><span style="color: #DD0000">'text/css' </span><span style="color: #0000BB">media</span><span style="color: #007700">=</span><span style="color: #DD0000">'all' </span><span style="color: #0000BB">href</span><span style="color: #007700">=</span><span style="color: #DD0000">'&#123;stylesheet=&#123;my_template_group&#125;/site_css&#125;' </span><span style="color: #007700">/&gt;<br />&lt;</span><span style="color: #0000BB">style type</span><span style="color: #007700">=</span><span style="color: #DD0000">'text/css' </span><span style="color: #0000BB">media</span><span style="color: #007700">=</span><span style="color: #DD0000">'screen'</span><span style="color: #007700">&gt;@</span><span style="color: #0000BB">import </span><span style="color: #DD0000">"&#123;stylesheet=&#123;my_template_group&#125;/site_css&#125;"</span><span style="color: #007700">;&lt;/</span><span style="color: #0000BB">style</span><span style="color: #007700">&gt;<br /><br />&lt;</span><span style="color: #0000BB">link rel</span><span style="color: #007700">=</span><span style="color: #DD0000">"alternate" </span><span style="color: #0000BB">type</span><span style="color: #007700">=</span><span style="color: #DD0000">"application/rss+xml" </span><span style="color: #0000BB">title</span><span style="color: #007700">=</span><span style="color: #DD0000">"RSS" </span><span style="color: #0000BB">href</span><span style="color: #007700">=</span><span style="color: #DD0000">"&#123;path=&#123;my_template_group&#125;/rss_2.0&#125;" </span><span style="color: #007700">/&gt;<br />&lt;</span><span style="color: #0000BB">link rel</span><span style="color: #007700">=</span><span style="color: #DD0000">"alternate" </span><span style="color: #0000BB">type</span><span style="color: #007700">=</span><span style="color: #DD0000">"application/atom+xml" </span><span style="color: #0000BB">title</span><span style="color: #007700">=</span><span style="color: #DD0000">"Atom" </span><span style="color: #0000BB">href</span><span style="color: #007700">=</span><span style="color: #DD0000">"&#123;path=&#123;my_template_group&#125;/atom&#125;" </span><span style="color: #007700">/&gt;<br /><br />&lt;/</span><span style="color: #0000BB">head</span><span style="color: #007700">&gt;</span>
+</code></div><p>
+</p>
+<p>
+By breaking it down we can learn how some important concepts come into play in ExpressionEngine, so that we can use those concepts later.
+</p>
+<p>
+Line by line we go . . . 
+</p>
+<p>
+</p><div class="codeblock"><code>
+<span style="color: #007700">&lt;</span><span style="color: #0000BB">title</span><span style="color: #007700">&gt;</span><span style="color: #0000BB">&#123;exp</span><span style="color: #007700">:</span><span style="color: #0000BB">weblog</span><span style="color: #007700">:</span><span style="color: #0000BB">info weblog</span><span style="color: #007700">=</span><span style="color: #DD0000">"&#123;my_weblog&#125;"</span><span style="color: #0000BB">&#125;&#123;blog_title&#125;&#123;</span><span style="color: #007700">/</span><span style="color: #0000BB">exp</span><span style="color: #007700">:</span><span style="color: #0000BB">weblog</span><span style="color: #007700">:</span><span style="color: #0000BB">info&#125;</span><span style="color: #007700">&lt;/</span><span style="color: #0000BB">title</span><span style="color: #007700">&gt;</span>
+</code></div><p>
+</p>
+<p>
+Begin by first searching for the first part of the above tag: &#8220;exp:weblog:info&#8221; to find the <a href="http://www.google.com/search?q=exp%3Bweblog%3Ainfo&amp;as_sitesearch=expressionengine.com%2Fdocs%2F&amp;sa=Search">weblog information tag</a>.&nbsp; Now we know that this tag can be used to dynamically pull into the template information about the weblog specified in our weblog= parameter.&nbsp; In this case, we&#8217;re using this to populate the title of the browser, so that folks know what page they&#8217;re visiting.&nbsp; The advantage to doing this is that later, if you rename your weblog, then it will change anywhere you have used this tag; you do not need to worry about how many templates you place it into.
+</p>
+<p>
+Here we also see {blog_title}.&nbsp; This is a <i>context-specific variable</i> - what do I mean by that?&nbsp; It is a variable that will be changed to the blog_title that you specified in your weblog preferences, however, this variable can only be used when enclosed in the Weblog Info tag pair; if you place it outside of the tag pair, then it will not know what {blog_title} you want and will thusly echo directly to the screen.&nbsp; Most variables, with the exception of <i>global variables</i>, require a surrounding tag pair for context.
+</p>
+<p>
+Now on to the next line!
+</p>
+<p>
+</p><div class="codeblock"><code>
+<span style="color: #007700">&lt;</span><span style="color: #0000BB">meta http</span><span style="color: #007700">-</span><span style="color: #0000BB">equiv</span><span style="color: #007700">=</span><span style="color: #DD0000">"Content-Type" </span><span style="color: #0000BB">content</span><span style="color: #007700">=</span><span style="color: #DD0000">"text/html; charset=&#123;charset&#125;" </span><span style="color: #007700">/&gt;</span>
+</code></div><p>
+</p>
+<p>
+This is standard line declaring the character set of your page; however, in this case, we&#8217;re using a <a href="http://expressionengine.com/docs/templates/globals/single_variables.html">standard global variable</a> since this is something that we have defined in our ExpressionEngine settings.&nbsp; Unlike the {blog_title} variable that we discussed before, global variables do not require a context and may be used anywhere in your templates.&nbsp; 
+</p>
+<p>
+The next two lines tell the browser where to locate our stylesheet, so that we can make our pages look beautiful:
+</p>
+<p>
+</p><div class="codeblock"><code>
+<span style="color: #007700">&lt;</span><span style="color: #0000BB">link rel</span><span style="color: #007700">=</span><span style="color: #DD0000">'stylesheet' </span><span style="color: #0000BB">type</span><span style="color: #007700">=</span><span style="color: #DD0000">'text/css' </span><span style="color: #0000BB">media</span><span style="color: #007700">=</span><span style="color: #DD0000">'all' </span><span style="color: #0000BB">href</span><span style="color: #007700">=</span><span style="color: #DD0000">'&#123;stylesheet=&#123;my_template_group&#125;/site_css&#125;' </span><span style="color: #007700">/&gt;<br />&lt;</span><span style="color: #0000BB">style type</span><span style="color: #007700">=</span><span style="color: #DD0000">'text/css' </span><span style="color: #0000BB">media</span><span style="color: #007700">=</span><span style="color: #DD0000">'screen'</span><span style="color: #007700">&gt;@</span><span style="color: #0000BB">import </span><span style="color: #DD0000">"&#123;stylesheet=&#123;my_template_group&#125;/site_css&#125;"</span><span style="color: #007700">;&lt;/</span><span style="color: #0000BB">style</span><span style="color: #007700">&gt;</span>
+</code></div><p>
+</p>
+<p>
+Since we see a new tag: stylesheet=, we want to immediately plug &#8220;stylesheet&#8221; into the documentation to learn about this tag, and we&#8217;ll then find <a href="http://www.google.com/search?q=stylesheet&amp;as_sitesearch=expressionengine.com%2Fdocs%2F&amp;sa=Search">Linking to Stylesheets</a>.&nbsp; As we can see from the documentation, the stylesheet= is a variable that allows us to include the template_group and template_name; therefore, it is a type of path variable.&nbsp; ExpressionEngine uses these types of variables almost everywhere that you create a link, so it is important to understand that now so that you can easily create links between pages in your site.&nbsp; Doing so in this manner ensures that moving servers, or changing domains later, is a very simple process, not involving editing every single template.
+</p>
+<p>
+The final two lines add RSS auto-discovery to the page so that modern browsers can automatically detect and know where your RSS feeds are:
+</p>
+<p>
+</p><div class="codeblock"><code>
+<span style="color: #007700">&lt;</span><span style="color: #0000BB">link rel</span><span style="color: #007700">=</span><span style="color: #DD0000">"alternate" </span><span style="color: #0000BB">type</span><span style="color: #007700">=</span><span style="color: #DD0000">"application/rss+xml" </span><span style="color: #0000BB">title</span><span style="color: #007700">=</span><span style="color: #DD0000">"RSS" </span><span style="color: #0000BB">href</span><span style="color: #007700">=</span><span style="color: #DD0000">"&#123;path=&#123;my_template_group&#125;/rss_2.0&#125;" </span><span style="color: #007700">/&gt;<br />&lt;</span><span style="color: #0000BB">link rel</span><span style="color: #007700">=</span><span style="color: #DD0000">"alternate" </span><span style="color: #0000BB">type</span><span style="color: #007700">=</span><span style="color: #DD0000">"application/atom+xml" </span><span style="color: #0000BB">title</span><span style="color: #007700">=</span><span style="color: #DD0000">"Atom" </span><span style="color: #0000BB">href</span><span style="color: #007700">=</span><span style="color: #DD0000">"&#123;path=&#123;my_template_group&#125;/atom&#125;" </span><span style="color: #007700">/&gt;</span>
+</code></div><p>
+</p>
+<p>
+This is a fairly standard auto-discovery line, but again we are leveraging the <a href="http://expressionengine.com/docs/templates/globals/path.html">path variables</a> to ease long-term maintenance needs, as well as to make reading the template easier.
+</p>
+<p>
+So, now we have the concept of variables: context sensitive and global, path statements, and the weblog= parameter.&nbsp;  Remember, these are really basic infrastructure items that are extremely important principles in ExpressionEngine and are the building blocks of your EE sites, so this will give us some solid footing from which to venture further into the template next week.&nbsp;
+</p>      ";}i:13;a:9:{s:5:"title";s:36:"Last Week on the Forums, 9/4 to 9/11";s:4:"link";s:75:"http://expressionengine.com/blog/entry/last_week_on_the_forums_9_4_to_9_11/";s:2:"id";s:42:"tag:expressionengine.com,2007:blog/12.2804";s:9:"published";s:20:"2007-09-12T15:08:01Z";s:7:"updated";s:20:"2007-09-12T14:17:53Z";s:6:"author";s:32:"
+            
+                  ";s:11:"author_name";s:14:"Leslie Camacho";s:10:"author_uri";s:23:"http://www.ellislab.com";s:12:"atom_content";s:1326:"
+        <p>Please add your own! 
+</p>
+<p>
+Mediagirl linked to an <a href="http://www.mediagirl.com/blog/entry/on_having_layout/">incredibly useful guide for solving IE related bugs</a>.
+</p>
+<p>
+Ronny does an excellent job of <a href="http://expressionengine.com/forums/viewreply/288607/">explaining how ExpressionEngine works</a> from a practical standpoint.
+</p>
+<p>
+Kurt&#8217;s been a <a href="http://expressionengine.com/forums/viewthread/60458/">busy guy</a>.
+</p>
+<p>
+Michael Boyink (pronounced as one-syllobol) published <a href="http://www.boyink.com/splaat/comments/building-an-expressionengine-site-chapter-6/#When:22:59:00Z">Chapter 6</a> in his Building an ExpressionEngine site series.
+</p>
+<p>
+Allard updated the <a href="http://expressionengine.com/wiki/extending_View_all_posts_by_this_member/">extending View all posts by this member</a> wiki article.
+</p>
+<p>
+Nathan wrote about <a href="http://expressionengine.com/wiki/Enable_radio_buttons_and_checkboxes_for_custom_member_profile_fields/">enabling radio buttons and checkboxes for custom profile fields</a>.
+</p>
+<p>
+<i>It came from the staff forums...</i>
+</p>
+<p>
+Lisa: Hey Derek, in this thread it is mentioned several times that you helped. Any idea what might now be going on?
+</p>
+<p>
+Allard: What the!?!&nbsp; How did I get involved??
+</p>
+      ";}i:14;a:9:{s:5:"title";s:13:"Giving Thanks";s:4:"link";s:53:"http://expressionengine.com/blog/entry/giving_thanks/";s:2:"id";s:42:"tag:expressionengine.com,2007:blog/12.2799";s:9:"published";s:20:"2007-09-10T23:08:00Z";s:7:"updated";s:20:"2007-09-10T22:16:24Z";s:6:"author";s:32:"
+            
+                  ";s:11:"author_name";s:14:"Leslie Camacho";s:10:"author_uri";s:23:"http://www.ellislab.com";s:12:"atom_content";s:689:"
+        <p><a href="http://www.boyink.com/splaat/weblog/category/building-an-expressionengine-site/">Building an ExpressionEngine Site</a> by Michael Boyink.
+</p>
+<p>
+Sorry about the lighting in this video. I didn&#8217;t realize how much the outside light was shifting until after I was done recording. My goal is to produce these informal, unscripted videos in 30 minutes or less and I simply ran out of time to redo the video. But now I know to control the lighting and knowing is half the battle right?
+</p>
+<p>
+Next week Jones and I have cooked up something completely different. We&#8217;ll be attending a funeral so make sure your black formal wear is ready to go.&nbsp;
+</p>      ";}}s:7:"channel";a:8:{s:5:"title";s:7:"EE Blog";s:8:"subtitle";s:29:"EE Blog:ExpressionEngine Blog";s:4:"link";s:33:"http://expressionengine.com/blog/";s:9:"link_self";s:42:"http://expressionengine.com/xml/atom/full/";s:7:"updated";s:20:"2007-10-09T16:51:24Z";s:6:"rights";s:34:"Copyright (c) 2007, Leslie Camacho";s:9:"generator";s:16:"ExpressionEngine";s:2:"id";s:35:"tag:expressionengine.com,2007:10:08";}s:9:"textinput";a:0:{}s:5:"image";a:0:{}s:9:"feed_type";s:4:"Atom";s:12:"feed_version";N;s:8:"encoding";s:5:"utf-8";s:5:"stack";a:0:{}s:9:"inchannel";b:0;s:6:"initem";b:0;s:9:"incontent";b:0;s:11:"intextinput";b:0;s:7:"inimage";b:0;s:13:"current_field";s:0:"";s:17:"current_namespace";b:0;s:4:"etag";b:0;s:5:"ERROR";s:0:"";s:19:"_CONTENT_CONSTRUCTS";a:6:{i:0;s:7:"content";i:1;s:7:"summary";i:2;s:4:"info";i:3;s:5:"title";i:4;s:7:"tagline";i:5;s:9:"copyright";}s:16:"_KNOWN_ENCODINGS";a:3:{i:0;s:5:"UTF-8";i:1;s:8:"US-ASCII";i:2;s:10:"ISO-8859-1";}s:13:"last_modified";s:31:"Tue, 09 Oct 2007 15:51:24 GMT
+";}

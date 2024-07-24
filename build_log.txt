@@ -1,0 +1,133 @@
+Version 1.6 Build Info
+
+This file contains information regarding each build that is released.  A "build" is a small update 
+that fixes bugs found within a particular version.  For a full list of features in Version 1.6
+please visit the main change log at: http://expressionengine.com/docs/changelog.html
+
+Build: 20070815
+*Improved link processing in "Safe" HTML formatting with HTML links written with various combinations of tag attributes
+*Modified Custom Status administration to allow setting access for member groups who do not have control panel access, but might be publishing via other means
+*Modified Publish section "Preview" and "View Entry" HTML links in entries to be formatted as redirects to prevent the CP address from showing up in target sites' referrer logs
+*Modified comment validation page to have a limit of 250.
+*Further tweak to entry author validation so that checks occur only if the author is being changed
+*Fixed a bug where the {ping_servers} variable pair of the Stand-alone Entry Form was output to the browser when there were no ping servers.
+*Fixed a bug in the File Upload utility that was placing the thumbnail filename in the link's href attribute instead of the original filename
+*Fixed a bug where accented/special characters were not encoded properly in drop-down menus in the control panel
+*Fixed a bug where Moblog entries were being posted with the primary Site id only
+*Fixed a bug with a Site creation error message when unable to locate the email notification templates for your site's language
+*Fixed a bug with entry status validation with identically named statuses in different status groups
+*Fixed the title of the Enable/Disable Extensions Confirmation page
+*Fixed a bug where Super Admins were not allowed to change member usernames if the "Allow members to change their username" preference was disabled.
+*Fixed a bug where image tags in Safe HTML would not be parsed unless the src attribute came first.
+*Fixed a bug in Site Management where a site update would remove non-system configuration options incorrectly
+*Fixed a bug where the "Use this member's localization settings as the master site default?" setting was not being used properly (Bug #2708) 
+*Fixed a bug with next/prev entry tags with identical url_titles across multiple weblogs and expired entries
+
+Build: 20070726
+*Added m4v and flv to the File Browser's list of non-image suffixes
+*Modified the Right Crumbs in the Control Panel so if it opens a new window, IE does not also load the URL in the main window.
+*Modified mimes.php library to be more scrupulous in determining the correct PNG MIME type to use
+*Fixed a bug where some tables would be improperly reported as not existing -- Developers, please make sure that you are using the standard 'exp_' prefix with your tables including calls to $DB->table_exists()
+*Fixed a bug introduced in the last build where the Right Crumb popups would only work in IE.  The JS has been fixed.
+*Fixed a bug where custom date fields used multiple times in a weblog entries tag with different format strings would be improperly localized
+
+Build:  20070724
+*Added the site="" parameter to the Stats tag
+*Added a new variable to Weblog Entries tag {entry_site_id} that displays the site id for that entry
+*Fixed a problem in the Database abstraction layer where a custom database prefix caused a problem with the update script
+*Fixed a bug where the MT Import Utility was not creating a category url title for inserted categories
+*Fixed a bug in SQL Manager query pagination for MySQL versions prior to 4
+*Fixed a bug where PHP would throw an error if you tried to divide by zero
+*Fixed a bug where a PHP warning would be shown when caches were cleared on servers running in Safe Mode
+*Fixed a bug in XHTML typography when using attributes with <ul> and <ol>
+*Fixed a bug where Sites Tab Behavior preference was showing when Multiple Sites Manager was not installed
+*Fixed a bug where related entries across Sites would not display custom fields
+*Fixed a problem dealing with ports in the Snoopy library that is included in the default Magpie plugin
+*Fixed a bug where non-category conditionals in the {category} tag pair was causing a parsing problem
+*Fixed a bug with up/down arrow images for subcategories in the gallery module
+*Fixed an obscure bug with decrementing of private message counter
+*Fixed a bug in the Category Heading tag when using identically named category field variables across multiple category groups
+*Fixed a bug in the IP to Nation module which could result in countries being mistakenly marked as 'Unknown'
+*Modified the File Browser to consider files with an AVI suffix always a non-image and made the non-image suffix check case insensitive.
+*Modified automatic URL title creation to work more consistently on servers using iconv
+*Modified the install and update scripts to convert Windows file paths to a more usable format
+*Modified the Control Panel's page popups to not open the page in the main windows in IE.
+*Updated the XSS Cleaning (yes, we know...again) to not mistake GET variables as malformed HTML entities
+*Updated the Referrer Module CP so that if the Referreree was the Site URL, a forward slash is shown instead of an empty space
+
+Build:  20070708
+*Fixed a bug where if showing entries from multiple sites and each site had the same custom field short names, only one site's custom fields were shown.
+*Fixed a bug where certain sections of the CP were not having the Breadcrumb rendering properly
+*Fixed a bug where the SQL Manager was not showing the correct results for Browse Tables in the Manage Database area
+*Fixed a bug in the Tell-a-Friend tag where an entry might not be returned by the Weblog Module and return an undefined global PHP error.
+*Modified the XSS Sanitation (yet again) where PHP was inserting slashes incorrectly in a special preg_replace.
+
+Build:  20070705
+
+*Fixed a bug where the rdf:about Trackback information was not using the URL Title / Entry ID Trackback identifier preference setting
+*Fixed an undefined variable error in the display of certain queries in the SQL Manager
+*Fixed a bug in the Recount Statistics utility skipping the first record of the table to be counted
+*Fixed a bug in {if no_reverse_related_entries} when parameters are used to filter the {reverse_related_entries} tag.
+*Fixed a bug in Next / Prev Entry tags involving JOIN precedence changes in MySQL 5 that would cause a query error.
+*Fixed an unset variable problem in the Sites Manager import for Weblog Entries
+*Fixed a bug where language variables weren't always being used in control panel breadcrumb links
+*Fixed a bug where stats were not automatically updated when deleting a weblog
+*Modified entry author validation so that the Multi-Author List is only checked when the user is is attempting to change the author.
+*Modified the XSS check for images to be a bit more forgiving of XML embedded as meta data
+*Updated the XSS Sanitization code to use less memory due to PHP 5 issues
+*Updated the SQL Manager's Query Form to handle pagination for more complex queries
+*Updated the default theme's "active tab" background image to work with extreme display widths
+
+Build: 20070627
+
+*Added labels to API URL fields in the Metaweblog API and Blogger API modules to improve accessibility.
+*Fixed a bug in an implemented bugfix in build 20070626 involving SAEFs.
+*Fixed a bug with the update/install scripts' check for MySQL strict mode that would output an error on MySQL versions < 4.1
+*Fixed an upload bug in versions of PHP prior to 4.3.
+*Modified security for register_globals to disallow the unsetting of valid PHP globals
+*Modified the install check that we have a valid Database class included and a valid connection before running queries
+*Improved efficiency with Auto Linking
+*Updated the Multiple Site Manager to create 'Default HTML Buttons' for the new site on creation.
+
+Build:  20070626
+
+IMPORTANT NOTE: if you are running the Discussion Forums module, you MUST update that module to the latest build as well.
+
+*Added a check for MySQL "strict" mode to the Update script.
+*Added a workaround for a Windows file attribute bug that caused the config.php file to be reported as writable during an update when it was not.
+*Fixed the Default theme's CSS for an IE6 bug, and incorrect style information for small table headers
+*Fixed a problem where older versions of PHP did not have a recent version of the PCRE library available for working with UTF8 characters
+*Fixed a bug where Category Field parsing was greedy with variables.
+*Fixed a MySQL query bug in Search flood control
+*Fixed a few language variables so that they used correct English grammar
+*Fixed a bug where the XSS Clean check for file uploads would fail incorrectly in the Publish area.
+*Fixed a bug where a Template Group created from a Default Theme during weblog creation sometimes had the incorrect Site ID
+*Fixed an unidentified index bug involving trackbacks and the Search module.
+*Fixed some Internet Explorer 6 display problems in the control panel themes.
+*Fixed the saving of configuration and preference options when they contained backslashes
+*Fixed a bug where the Gallery module's New Entry submission form would not allow you to select an image on the server
+*Fixed a bug where trackbacks were no longer being received correctly
+*Fixed a bug with comment, gallery, and stand-alone entry forms on cached templates.
+*Fixed a bug where using Session IDs on the user side was not working for Sites besides the default
+*Updated the Image Library to suppress PHP errors and instead show an EE error when an invalid image is being modified.
+*Updated the Upload Library to improve the functionality of the XSS Cleaning when dealing with possibly naughty files.
+*Updated the IP to Nation module's database.  See the user guide for details on updating the module.
+*Updated the XSS Sanitizing code to take into account IE's expression() ability in CSS/Styles
+
+Build:  20070622
+
+*Added "Edit Sites" link to the Sites List for when the Sites Tab Behavior is none
+*Added a check to make sure the Magpie plugin exists before showing the EllisLab news feed in the CP Homepage
+*Added Classic Control Panel theme to download
+*Modified Author validation of weblog entry submission to allow Super Admins to do as they please.
+*Fixed an object scope problem when running the Multiple Site Manager under PHP 4.
+*Fixed two undefined index errors that occurred when there was only one weblog assigned to a user.
+*Fixed a bug in EE Core where it was trying to call the Pages module's language file in the Publish area.
+*Fixed a bug in Find and Replace utility where number of affected rows reported was incorrect.
+*Fixed a bug in the Pages Manager "View Page" link that would leave double slashes in the URL.
+*Fixed a bug in the {page_url} variable of the Weblog entries tag that would leave double slashes in the URL.
+*Fixed a bug in the Pages Manager "View Page" link that would leave double slashes in the URL.
+*Fixed a bug in the Publish area where Quick Save was creating multiple entries instead of saving the same one.
+*Fixed a bug in the Upload utility where resizing by percent was being done incorrectly.
+*Fixed a bug in the 1.6 update script where Windows paths were not imported into the database correctly.
+*Removed a piece of stray debugging code that was left in the Publish area script.
