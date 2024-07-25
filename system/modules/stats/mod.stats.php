@@ -159,7 +159,7 @@ class Stats {
 		{   
 			foreach ($dates as $date)
 			{
-				if (ereg("^".$date, $key))
+				if (preg_match("^".$date, $key))
 				{
 					$TMPL->tagdata = $TMPL->swap_var_single(
 																$key, 

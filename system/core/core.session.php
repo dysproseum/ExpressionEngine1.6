@@ -835,7 +835,7 @@ class Session {
 		
 		// If someone is messing with the URI we won't set the cookie
 	
-		 if ( ! ereg("^[A-Za-z0-9\%\_\/\-]+$", $URI) && ! isset($_GET['ACT']))
+		 if ( ! preg_match("^[A-Za-z0-9\%\_\/\-]+$", $URI) && ! isset($_GET['ACT']))
 		 {
 			return array();
 		 }

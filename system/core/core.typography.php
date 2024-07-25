@@ -189,7 +189,7 @@ class Typography {
         { 
             while (false !== ($file = readdir($fp))) 
             { 
-				if ( eregi(EXT."$",  $file))
+				if ( preg_match(EXT."$/i",  $file))
 				{
 					if (substr($file, 0, 3) == 'pi.')
 					{
@@ -1809,11 +1809,12 @@ class Typography {
         if ($title == "")
             $title = $email;
         
-		if (isset($this->encode_type) AND $this->encode_type == 'noscript')
-		{
-			$email = str_replace(array('@', '.'), array(' '.$LANG->line('at').' ', ' '.$LANG->line('dot').' '), $email);
-			return $email;
-		}
+		// Using $this outside object context.
+		// if (isset($this->encode_type) AND $this->encode_type == 'noscript')
+		// {
+		// 	$email = str_replace(array('@', '.'), array(' '.$LANG->line('at').' ', ' '.$LANG->line('dot').' '), $email);
+		// 	return $email;
+		// }
 		
         $bit = array();
         

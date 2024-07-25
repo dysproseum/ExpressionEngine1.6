@@ -479,7 +479,7 @@ class Functions {
             $data['onsubmit'] = 'onsubmit="'.trim($data['onsubmit']).'"';
         }
         
-        if (ereg("\?$", $data['action']))
+        if (preg_match("\?$", $data['action']))
         {
         	$action = substr($data['action'], 0, -1);
         }
@@ -2012,7 +2012,7 @@ class Functions {
         }
         else
         {   
-            if (ereg("^not ", $str))
+            if (preg_match("^not ", $str))
             {
                 $str = trim(substr($str, 3));
                 
