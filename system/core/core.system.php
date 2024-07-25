@@ -26,7 +26,9 @@
 //  Turn off magic quotes
 // --------------------------------------------------
 
+    if (function_exists('set_magic_quotes_runtime')) {
     set_magic_quotes_runtime(0);
+    }
 
 // ----------------------------------------------
 //  Instantiate the Benchmark class

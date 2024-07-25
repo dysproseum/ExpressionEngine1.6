@@ -6853,7 +6853,7 @@ class Weblog {
         
 		if ($disable = $TMPL->fetch_param('disable'))
 		{
-			if (ereg("\|", $disable))
+			if (preg_match("\|", $disable))
 			{				
 				foreach (explode("|", $disable) as $val)
 				{

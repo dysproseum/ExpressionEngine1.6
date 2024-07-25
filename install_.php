@@ -18,7 +18,6 @@
 */
 
 error_reporting(E_ALL);
-set_magic_quotes_runtime(0);
 
 
 
@@ -89,7 +88,7 @@ foreach ($_POST as $key => $val)
 	}
 }
 
-if ( ! ereg("/$", $data['site_url']))
+if ( ! preg_match("/$", $data['site_url']))
 {
 	$data['site_url'].'/';
 }
@@ -476,7 +475,7 @@ elseif ($page == 5)
 		}
 		
 		// Check for "strict mode", some queries used are incompatible
-		if ($DB->conn_id !== FALSE && version_compare(mysql_get_server_info(), '4.1-alpha', '>=') !== FALSE)
+		if ($DB->conn_id !== FALSE && version_compare(mysqli_get_server_info($DB->mysqli), '4.1-alpha', '>=') !== FALSE)
 		{
 			$mode_query = $DB->query("SELECT CONCAT(@@global.sql_mode, @@session.sql_mode) AS sql_mode");
 	
@@ -669,12 +668,12 @@ $Q[] = "CREATE TABLE `exp_sites` (
 	  `site_id` int(5) unsigned NOT NULL auto_increment,
 	  `site_label` varchar(100) NOT NULL default '',
 	  `site_name` varchar(50) NOT NULL default '',
-	  `site_description` text NOT NULL,
-	  `site_system_preferences` TEXT NOT NULL ,
-	  `site_mailinglist_preferences` TEXT NOT NULL ,
-	  `site_member_preferences` TEXT NOT NULL ,
-	  `site_template_preferences` TEXT NOT NULL ,
-	  `site_weblog_preferences` TEXT NOT NULL ,
+	  `site_description` text NOT NULL default '',
+	  `site_system_preferences` TEXT NOT NULL default '',
+	  `site_mailinglist_preferences` TEXT NOT NULL default '',
+	  `site_member_preferences` TEXT NOT NULL default '',
+	  `site_template_preferences` TEXT NOT NULL default '',
+	  `site_weblog_preferences` TEXT NOT NULL default '',
 	  PRIMARY KEY  (`site_id`),
 	  KEY `site_name` (`site_name`))";
 
@@ -1005,31 +1004,31 @@ $Q[] = "CREATE TABLE exp_members (
   screen_name varchar(50) NOT NULL,
   password varchar(40) NOT NULL,
   unique_id varchar(40) NOT NULL,
-  authcode varchar(10) NOT NULL,
+  authcode varchar(10) NOT NULL DEFAULT '',
   email varchar(50) NOT NULL,
-  url varchar(75) NOT NULL,
-  location varchar(50) NOT NULL,
-  occupation varchar(80) NOT NULL,
-  interests varchar(120) NOT NULL,
-  bday_d int(2) NOT NULL,
-  bday_m int(2) NOT NULL,
-  bday_y int(4) NOT NULL,
-  aol_im varchar(50) NOT NULL,
-  yahoo_im varchar(50) NOT NULL,
-  msn_im varchar(50) NOT NULL,
-  icq varchar(50) NOT NULL,
-  bio text NOT NULL,
-  signature text NOT NULL,
-  avatar_filename varchar(120) NOT NULL,
-  avatar_width int(4) unsigned NOT NULL,
-  avatar_height int(4) unsigned NOT NULL,  
-  photo_filename varchar(120) NOT NULL,
-  photo_width int(4) unsigned NOT NULL,
-  photo_height int(4) unsigned NOT NULL,  
-  sig_img_filename varchar(120) NOT NULL,
-  sig_img_width int(4) unsigned NOT NULL,
-  sig_img_height int(4) unsigned NOT NULL,
-  ignore_list text NOT NULL,
+  url varchar(75) NOT NULL DEFAULT '',
+  location varchar(50) NOT NULL DEFAULT '',
+  occupation varchar(80) NOT NULL DEFAULT '',
+  interests varchar(120) NOT NULL DEFAULT '',
+  bday_d int(2) NOT NULL DEFAULT 1,
+  bday_m int(2) NOT NULL DEFAULT 1,
+  bday_y int(4) NOT NULL DEFAULT 1970,
+  aol_im varchar(50) NOT NULL DEFAULT '',
+  yahoo_im varchar(50) NOT NULL DEFAULT '',
+  msn_im varchar(50) NOT NULL DEFAULT '',
+  icq varchar(50) NOT NULL DEFAULT '',
+  bio text NOT NULL DEFAULT '',
+  signature text NOT NULL DEFAULT '',
+  avatar_filename varchar(120) NOT NULL DEFAULT '',
+  avatar_width int(4) unsigned NOT NULL DEFAULT 32,
+  avatar_height int(4) unsigned NOT NULL DEFAULT 32,
+  photo_filename varchar(120) NOT NULL DEFAULT '',
+  photo_width int(4) unsigned NOT NULL DEFAULT 320,
+  photo_height int(4) unsigned NOT NULL DEFAULT 320,
+  sig_img_filename varchar(120) NOT NULL DEFAULT '',
+  sig_img_width int(4) unsigned NOT NULL DEFAULT 32,
+  sig_img_height int(4) unsigned NOT NULL DEFAULT 32,
+  ignore_list text NOT NULL DEFAULT '',
   private_messages int(4) unsigned DEFAULT '0' NOT NULL,
   accept_messages char(1) NOT NULL default 'y',
   last_view_bulletins int(10) NOT NULL default 0,
@@ -1059,15 +1058,15 @@ $Q[] = "CREATE TABLE exp_members (
   daylight_savings char(1) default 'n' NOT NULL,
   localization_is_site_default char(1) NOT NULL default 'n',
   time_format char(2) default 'us' NOT NULL,
-  cp_theme varchar(32) NOT NULL,
-  profile_theme varchar(32) NOT NULL,
-  forum_theme varchar(32) NOT NULL,
-  tracker text NOT NULL,
+  cp_theme varchar(32) NOT NULL DEFAULT '',
+  profile_theme varchar(32) NOT NULL DEFAULT '',
+  forum_theme varchar(32) NOT NULL DEFAULT '',
+  tracker text NOT NULL DEFAULT '',
   template_size varchar(2) NOT NULL default '28',
-  notepad text NOT NULL,
+  notepad text NOT NULL DEFAULT '',
   notepad_size varchar(2) NOT NULL default '18',
-  quick_links text NOT NULL,
-  quick_tabs text NOT NULL,
+  quick_links text NOT NULL DEFAULT '',
+  quick_tabs text NOT NULL DEFAULT '',
   pmember_id int(10) NOT NULL default '0',
   PRIMARY KEY (member_id),
   KEY (`group_id`),
@@ -1254,7 +1253,7 @@ $Q[] = "CREATE TABLE exp_weblogs (
  blog_name varchar(40) NOT NULL,
  blog_title varchar(100) NOT NULL,
  blog_url varchar(100) NOT NULL,
- blog_description varchar(225) NOT NULL,
+ blog_description varchar(225) NOT NULL default '',
  blog_lang varchar(12) NOT NULL,
  blog_encoding varchar(12) NOT NULL,
  total_entries mediumint(8) default '0' NOT NULL,
@@ -1272,16 +1271,16 @@ $Q[] = "CREATE TABLE exp_weblogs (
  trackback_use_url_title char(1) NOT NULL default 'n',
  trackback_max_hits int(2) unsigned NOT NULL default '5', 
  trackback_field int(4) unsigned NOT NULL,
- deft_category varchar(60) NOT NULL,
+ deft_category varchar(60) NOT NULL default '',
  deft_comments char(1) NOT NULL default 'y',
  deft_trackbacks char(1) NOT NULL default 'y',
  weblog_require_membership char(1) NOT NULL default 'y',
- weblog_max_chars int(5) unsigned NOT NULL,
+ weblog_max_chars int(5) unsigned NOT NULL default 3,
  weblog_html_formatting char(4) NOT NULL default 'all',
  weblog_allow_img_urls char(1) NOT NULL default 'y',
  weblog_auto_link_urls char(1) NOT NULL default 'y', 
  weblog_notify char(1) NOT NULL default 'n',
- weblog_notify_emails varchar(255) NOT NULL,
+ weblog_notify_emails varchar(255) NOT NULL default '',
  comment_url varchar(80) NOT NULL,
  comment_system_enabled char(1) NOT NULL default 'y',
  comment_require_membership char(1) NOT NULL default 'n',
@@ -1296,7 +1295,7 @@ $Q[] = "CREATE TABLE exp_weblogs (
  comment_auto_link_urls char(1) NOT NULL default 'y',
  comment_notify char(1) NOT NULL default 'n',
  comment_notify_authors char(1) NOT NULL default 'n',
- comment_notify_emails varchar(255) NOT NULL,
+ comment_notify_emails varchar(255) NOT NULL default '',
  comment_expiration int(4) unsigned NOT NULL default '0',
  search_results_url varchar(80) NOT NULL,
  tb_return_url varchar(80) NOT NULL,
@@ -1314,12 +1313,12 @@ $Q[] = "CREATE TABLE exp_weblogs (
  show_status_menu char(1) NOT NULL default 'y',
  show_categories_menu char(1) NOT NULL default 'y',
  show_date_menu char(1) NOT NULL default 'y', 
- rss_url varchar(80) NOT NULL,
+ rss_url varchar(80) NOT NULL default '',
  enable_versioning char(1) NOT NULL default 'n',
  enable_qucksave_versioning char(1) NOT NULL default 'n',
  max_revisions smallint(4) unsigned NOT NULL default 10,
- default_entry_title varchar(100) NOT NULL,
- url_title_prefix varchar(80) NOT NULL,
+ default_entry_title varchar(100) NOT NULL default '',
+ url_title_prefix varchar(80) NOT NULL default '',
  PRIMARY KEY (weblog_id),
  KEY (cat_group),
  KEY (status_group),
@@ -1339,7 +1338,7 @@ $Q[] = "CREATE TABLE exp_weblog_titles (
  weblog_id int(4) unsigned NOT NULL,
  author_id int(10) unsigned NOT NULL default '0',
  pentry_id int(10) NOT NULL default '0',
- forum_topic_id int(10) unsigned NOT NULL,
+ forum_topic_id int(10) unsigned NOT NULL DEFAULT 0,
  ip_address varchar(16) NOT NULL,
  title varchar(100) NOT NULL,
  url_title varchar(75) NOT NULL,
@@ -1359,12 +1358,12 @@ $Q[] = "CREATE TABLE exp_weblog_titles (
  day char(3) NOT NULL,
  expiration_date int(10) NOT NULL default '0',
  comment_expiration_date int(10) NOT NULL default '0',
- edit_date bigint(14),
- recent_comment_date int(10) NOT NULL,
+ edit_date bigint(6),
+ recent_comment_date int(10) NOT NULL default '0',
  comment_total int(4) unsigned NOT NULL default '0',
  trackback_total int(4) unsigned NOT NULL default '0',
- sent_trackbacks text NOT NULL,
- recent_trackback_date int(10) NOT NULL,
+ sent_trackbacks text NOT NULL default '',
+ recent_trackback_date int(10) NOT NULL default '0',
  PRIMARY KEY (entry_id),
  KEY (weblog_id),
  KEY (author_id),
@@ -1412,19 +1411,19 @@ $Q[] = "CREATE TABLE exp_weblog_fields (
  group_id int(4) unsigned NOT NULL, 
  field_name varchar(32) NOT NULL,
  field_label varchar(50) NOT NULL,
- field_instructions TEXT NOT NULL,
+ field_instructions TEXT NOT NULL default '',
  field_type varchar(12) NOT NULL default 'text',
  field_list_items text NOT NULL,
  field_pre_populate char(1) NOT NULL default 'n', 
- field_pre_blog_id int(6) unsigned NOT NULL,
- field_pre_field_id int(6) unsigned NOT NULL,
+ field_pre_blog_id int(6) unsigned NOT NULL default 3,
+ field_pre_field_id int(6) unsigned NOT NULL default 3,
  field_related_to varchar(12) NOT NULL default 'blog',
- field_related_id int(6) unsigned NOT NULL,
+ field_related_id int(6) unsigned NOT NULL default 3,
  field_related_orderby varchar(12) NOT NULL default 'date',
  field_related_sort varchar(4) NOT NULL default 'desc',
- field_related_max smallint(4) NOT NULL,
+ field_related_max smallint(4) NOT NULL default 3,
  field_ta_rows tinyint(2) default '8',
- field_maxl smallint(3) NOT NULL,
+ field_maxl smallint(3) NOT NULL default 3,
  field_required char(1) NOT NULL default 'n',
  field_text_direction CHAR(3) NOT NULL default 'ltr',
  field_search char(1) NOT NULL default 'n',
@@ -1474,11 +1473,11 @@ $Q[] = "CREATE TABLE exp_weblog_data (
  entry_id int(10) unsigned NOT NULL,
  site_id INT(4) UNSIGNED NOT NULL DEFAULT 1,
  weblog_id int(4) unsigned NOT NULL,
- field_id_1 text NOT NULL,
+ field_id_1 text NOT NULL default '',
  field_ft_1 varchar(40) NOT NULL default 'xhtml',
- field_id_2 text NOT NULL,
+ field_id_2 text NOT NULL default '',
  field_ft_2 varchar(40) NOT NULL default 'xhtml',
- field_id_3 text NOT NULL,
+ field_id_3 text NOT NULL default '',
  field_ft_3 varchar(40) NOT NULL default 'xhtml',
  KEY (entry_id),
  KEY (weblog_id),
@@ -1515,7 +1514,7 @@ $Q[] = "CREATE TABLE exp_comments (
  location varchar(50) NOT NULL, 
  ip_address varchar(16) NOT NULL,
  comment_date int(10) NOT NULL,
- edit_date timestamp(14),
+ edit_date timestamp(6),
  comment text NOT NULL,
  notify char(1) NOT NULL default 'n',
  PRIMARY KEY (comment_id),
@@ -1600,8 +1599,8 @@ $Q[] = "CREATE TABLE exp_category_groups (
  group_name varchar(50) NOT NULL,
  sort_order char(1) NOT NULL default 'a',
  `field_html_formatting` char(4) NOT NULL default 'all',
- `can_edit_categories` TEXT NOT NULL,
- `can_delete_categories` TEXT NOT NULL,
+ `can_edit_categories` TEXT NOT NULL DEFAULT 'n',
+ `can_delete_categories` TEXT NOT NULL DEFAULT 'n',
  is_user_blog char(1) NOT NULL default 'n',
  PRIMARY KEY (group_id),
  KEY (site_id)
@@ -1618,9 +1617,9 @@ $Q[] = "CREATE TABLE exp_categories (
  parent_id int(4) unsigned NOT NULL,
  cat_name varchar(100) NOT NULL,
  `cat_url_title` varchar(75) NOT NULL,
- cat_description text NOT NULL,
- cat_image varchar(120) NOT NULL,
- cat_order int(4) unsigned NOT NULL,
+ cat_description text NOT NULL DEFAULT '',
+ cat_image varchar(120) NOT NULL DEFAULT '',
+ cat_order int(4) unsigned NOT NULL DEFAULT 3,
  PRIMARY KEY (cat_id),
  KEY (group_id),
  KEY (cat_name),
@@ -1762,15 +1761,15 @@ $Q[] = "CREATE TABLE exp_templates (
  save_template_file char(1) NOT NULL default 'n',
  template_type varchar(16) NOT NULL default 'webpage',
  template_data mediumtext NOT NULL,
- template_notes text NOT NULL,
- edit_date int(10) NOT NULL DEFAULT 0,
+ template_notes text NOT NULL DEFAULT '',
+ edit_date int(6) NOT NULL DEFAULT 0,
  cache char(1) NOT NULL default 'n',
- refresh int(6) unsigned NOT NULL,
- no_auth_bounce varchar(50) NOT NULL,
+ refresh int(6) unsigned NOT NULL DEFAULT 0,
+ no_auth_bounce varchar(50) NOT NULL DEFAULT '',
  enable_http_auth CHAR(1) NOT NULL default 'n',
  allow_php char(1) NOT NULL default 'n',
  php_parse_location char(1) NOT NULL default 'o',
- hits int(10) unsigned NOT NULL,
+ hits int(10) unsigned NOT NULL DEFAULT 0,
  PRIMARY KEY (template_id),
  KEY (group_id),
  KEY (site_id)
@@ -1860,15 +1859,15 @@ $Q[] = "CREATE TABLE exp_upload_prefs (
  server_path varchar(100) NOT NULL,
  url varchar(100) NOT NULL,
  allowed_types varchar(3) NOT NULL default 'img',
- max_size varchar(16) NOT NULL,
- max_height varchar(6) NOT NULL,
- max_width varchar(6) NOT NULL,
- properties varchar(120) NOT NULL,
- pre_format varchar(120) NOT NULL,
- post_format varchar(120) NOT NULL,
- file_properties varchar(120) NOT NULL,
- file_pre_format varchar(120) NOT NULL,
- file_post_format varchar(120) NOT NULL,
+ max_size varchar(16) NOT NULL default 0,
+ max_height varchar(6) NOT NULL default 0,
+ max_width varchar(6) NOT NULL default 0,
+ properties varchar(120) NOT NULL default '',
+ pre_format varchar(120) NOT NULL default '',
+ post_format varchar(120) NOT NULL default '',
+ file_properties varchar(120) NOT NULL default '',
+ file_pre_format varchar(120) NOT NULL default '',
+ file_post_format varchar(120) NOT NULL default '',
  PRIMARY KEY (id),
  KEY (site_id)
 )";
@@ -2072,7 +2071,7 @@ if ($fp = @opendir($system_path.'modules/'))
 { 
 	while (false !== ($file = readdir($fp))) 
 	{ 
-		if ( ! ereg("\.",  $file))
+		if ( ! preg_match("\.",  $file))
 		{
 			if ($file == 'mailinglist')
 			{
@@ -2095,7 +2094,7 @@ if ( ! @include_once('./themes/site_themes/'.$data['template'].'/'.$data['templa
 
 // Template data
 
-$Q[] = "insert into exp_template_groups(group_id, group_name, group_order, is_site_default) values ('', 'site',  '1', 'y')";
+$Q[] = "insert into exp_template_groups(group_id, group_name, group_order, is_site_default) values (0, 'site',  '1', 'y')";
 
 foreach ($template_matrix as $tmpl)
 {
@@ -2114,7 +2113,7 @@ foreach ($template_matrix as $tmpl)
 		
 	// --------------------
 	
-	$Q[] = "insert into exp_templates(template_id, group_id, template_name, template_type, template_data, edit_date) values ('', '1', '".$func."', '".$tmpl['1']."', '".addslashes($temp)."', {$now})";
+	$Q[] = "insert into exp_templates(template_id, group_id, template_name, template_type, template_data, edit_date) values (0, '1', '".$func."', '".$tmpl['1']."', '".addslashes($temp)."', {$now})";
 }
 unset($template_matrix);
 
@@ -2128,7 +2127,7 @@ require './themes/site_themes/rss/rss.php';
 		$temp = str_replace('weblog1', 'default_site', $temp);
 
 
-$Q[] = "insert into exp_templates(template_id, group_id, template_name, template_type, template_data, edit_date) values ('', '1', 'rss_2.0', 'rss', '".addslashes($temp)."', {$now})";
+$Q[] = "insert into exp_templates(template_id, group_id, template_name, template_type, template_data, edit_date) values (0, '1', 'rss_2.0', 'rss', '".addslashes($temp)."', {$now})";
 
 	// This allows old templates to be compatible
 	$temp = str_replace("{stylesheet=weblog/weblog_css}", "{stylesheet=site/site_css}", atom());	
@@ -2137,10 +2136,10 @@ $Q[] = "insert into exp_templates(template_id, group_id, template_name, template
 	$temp = str_replace("weblog/".$val, "site/".$val, $temp);}
 	$temp = str_replace('weblog1', 'default_site', $temp);
 
-$Q[] = "insert into exp_templates(template_id, group_id, template_name, template_type, template_data, edit_date) values ('', '1', 'atom', 'rss', '".addslashes($temp)."', {$now})";
+$Q[] = "insert into exp_templates(template_id, group_id, template_name, template_type, template_data, edit_date) values (0, '1', 'atom', 'rss', '".addslashes($temp)."', {$now})";
 
 
-$Q[] = "insert into exp_template_groups(group_id, group_name, group_order) values ('', 'search', '3')";
+$Q[] = "insert into exp_template_groups(group_id, group_name, group_order) values (0, 'search', '3')";
 
 unset($template_matrix);
 require './themes/site_themes/search/search.php';			
@@ -2157,7 +2156,7 @@ foreach ($template_matrix as $tmpl)
 	$temp = str_replace("weblog/".$val, "site/".$val, $temp);}
 	$temp = str_replace('weblog1', 'default_site', $temp);
 
-	$Q[] = "insert into exp_templates(template_id, group_id, template_name, template_type, template_data, edit_date) values ('', '2', '".$name."', '".$tmpl['1']."', '".addslashes($temp)."', {$now})";
+	$Q[] = "insert into exp_templates(template_id, group_id, template_name, template_type, template_data, edit_date) values (0, '2', '".$name."', '".$tmpl['1']."', '".addslashes($temp)."', {$now})";
 }
 
 // Default Site
@@ -2167,40 +2166,40 @@ $Q[] = $DB->insert_string('exp_sites',array('site_id' => 1, 'site_label' => $dat
 
 // Specialty templates
 
-$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values ('', 'offline_template', '', '".addslashes(offline_template())."')";
-$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values ('', 'message_template', '', '".addslashes(message_template())."')";
-$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values ('', 'admin_notify_reg', '".addslashes(trim(admin_notify_reg_title()))."', '".addslashes(admin_notify_reg())."')";
-$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values ('', 'admin_notify_entry', '".addslashes(trim(admin_notify_entry_title()))."', '".addslashes(admin_notify_entry())."')";
-$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values ('', 'admin_notify_mailinglist', '".addslashes(trim(admin_notify_mailinglist_title()))."', '".addslashes(admin_notify_mailinglist())."')";
-$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values ('', 'admin_notify_comment', '".addslashes(trim(admin_notify_comment_title()))."', '".addslashes(admin_notify_comment())."')";
-$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values ('', 'admin_notify_gallery_comment', '".addslashes(trim(admin_notify_gallery_comment_title()))."', '".addslashes(admin_notify_gallery_comment())."')";
-$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values ('', 'admin_notify_trackback', '".addslashes(trim(admin_notify_trackback_title()))."', '".addslashes(admin_notify_trackback())."')";
-$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values ('', 'mbr_activation_instructions', '".addslashes(trim(mbr_activation_instructions_title()))."', '".addslashes(mbr_activation_instructions())."')";
-$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values ('', 'forgot_password_instructions', '".addslashes(trim(forgot_password_instructions_title()))."', '".addslashes(forgot_password_instructions())."')";
-$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values ('', 'reset_password_notification', '".addslashes(trim(reset_password_notification_title()))."', '".addslashes(reset_password_notification())."')";
-$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values ('', 'validated_member_notify', '".addslashes(trim(validated_member_notify_title()))."', '".addslashes(validated_member_notify())."')";
-$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values ('', 'decline_member_validation', '".addslashes(trim(decline_member_validation_title()))."', '".addslashes(decline_member_validation())."')";
-$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values ('', 'mailinglist_activation_instructions', '".addslashes(trim(mailinglist_activation_instructions_title()))."', '".addslashes(mailinglist_activation_instructions())."')";
-$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values ('', 'comment_notification', '".addslashes(trim(comment_notification_title()))."', '".addslashes(comment_notification())."')";
-$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values ('', 'gallery_comment_notification', '".addslashes(trim(gallery_comment_notification_title()))."', '".addslashes(gallery_comment_notification())."')";
-$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values ('', 'private_message_notification', '".addslashes(trim(private_message_notification_title()))."', '".addslashes(private_message_notification())."')";
-$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values ('', 'pm_inbox_full', '".addslashes(trim(pm_inbox_full_title()))."', '".addslashes(pm_inbox_full())."')";
+$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values (0, 'offline_template', '', '".addslashes(offline_template())."')";
+$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values (0, 'message_template', '', '".addslashes(message_template())."')";
+$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values (0, 'admin_notify_reg', '".addslashes(trim(admin_notify_reg_title()))."', '".addslashes(admin_notify_reg())."')";
+$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values (0, 'admin_notify_entry', '".addslashes(trim(admin_notify_entry_title()))."', '".addslashes(admin_notify_entry())."')";
+$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values (0, 'admin_notify_mailinglist', '".addslashes(trim(admin_notify_mailinglist_title()))."', '".addslashes(admin_notify_mailinglist())."')";
+$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values (0, 'admin_notify_comment', '".addslashes(trim(admin_notify_comment_title()))."', '".addslashes(admin_notify_comment())."')";
+$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values (0, 'admin_notify_gallery_comment', '".addslashes(trim(admin_notify_gallery_comment_title()))."', '".addslashes(admin_notify_gallery_comment())."')";
+$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values (0, 'admin_notify_trackback', '".addslashes(trim(admin_notify_trackback_title()))."', '".addslashes(admin_notify_trackback())."')";
+$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values (0, 'mbr_activation_instructions', '".addslashes(trim(mbr_activation_instructions_title()))."', '".addslashes(mbr_activation_instructions())."')";
+$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values (0, 'forgot_password_instructions', '".addslashes(trim(forgot_password_instructions_title()))."', '".addslashes(forgot_password_instructions())."')";
+$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values (0, 'reset_password_notification', '".addslashes(trim(reset_password_notification_title()))."', '".addslashes(reset_password_notification())."')";
+$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values (0, 'validated_member_notify', '".addslashes(trim(validated_member_notify_title()))."', '".addslashes(validated_member_notify())."')";
+$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values (0, 'decline_member_validation', '".addslashes(trim(decline_member_validation_title()))."', '".addslashes(decline_member_validation())."')";
+$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values (0, 'mailinglist_activation_instructions', '".addslashes(trim(mailinglist_activation_instructions_title()))."', '".addslashes(mailinglist_activation_instructions())."')";
+$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values (0, 'comment_notification', '".addslashes(trim(comment_notification_title()))."', '".addslashes(comment_notification())."')";
+$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values (0, 'gallery_comment_notification', '".addslashes(trim(gallery_comment_notification_title()))."', '".addslashes(gallery_comment_notification())."')";
+$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values (0, 'private_message_notification', '".addslashes(trim(private_message_notification_title()))."', '".addslashes(private_message_notification())."')";
+$Q[] = "insert into exp_specialty_templates(template_id, template_name, data_title, template_data) values (0, 'pm_inbox_full', '".addslashes(trim(pm_inbox_full_title()))."', '".addslashes(pm_inbox_full())."')";
 
 // Mailing list data
 
-$Q[] = "insert into exp_mailing_lists(list_id, list_name, list_title, list_template) values ('', 'default', 'Default Mailing List', '".addslashes(mailinglist_template())."')";
+$Q[] = "insert into exp_mailing_lists(list_id, list_name, list_title, list_template) values (0, 'default', 'Default Mailing List', '".addslashes(mailinglist_template())."')";
 
 // Default weblog preference data
 
-$Q[] = "insert into exp_weblogs (weblog_id, cat_group, blog_name, blog_title, blog_url, comment_url, search_results_url, tb_return_url, ping_return_url, blog_lang, blog_encoding, total_entries, last_entry_date, status_group, deft_status, field_group, deft_comments, deft_trackbacks, trackback_field, comment_max_chars, comment_require_email, comment_require_membership, weblog_require_membership, comment_text_formatting, search_excerpt)  values ('', '1', 'default_site', 'Default Site Weblog', '".$data['site_url'].$data['site_index']."/site/index/', '".$data['site_url'].$data['site_index']."/site/comments/', '".$data['site_url'].$data['site_index']."/site/comments/', '".$data['site_url'].$data['site_index']."/site/comments/', '".$data['site_url'].$data['site_index']."', 'en', 'utf-8', '1', '$now', '1', 'open', '1', 'y', 'y', '2', '5000', 'y', 'n', 'y', 'xhtml', '2')";
+$Q[] = "insert into exp_weblogs (weblog_id, cat_group, blog_name, blog_title, blog_url, comment_url, search_results_url, tb_return_url, ping_return_url, blog_lang, blog_encoding, total_entries, last_entry_date, status_group, deft_status, field_group, deft_comments, deft_trackbacks, trackback_field, comment_max_chars, comment_require_email, comment_require_membership, weblog_require_membership, comment_text_formatting, search_excerpt)  values (0, '1', 'default_site', 'Default Site Weblog', '".$data['site_url'].$data['site_index']."/site/index/', '".$data['site_url'].$data['site_index']."/site/comments/', '".$data['site_url'].$data['site_index']."/site/comments/', '".$data['site_url'].$data['site_index']."/site/comments/', '".$data['site_url'].$data['site_index']."', 'en', 'utf-8', '1', '$now', '1', 'open', '1', 'y', 'y', '2', '5000', 'y', 'n', 'y', 'xhtml', '2')";
 
 // Custom field and field group data
 
-$Q[] = "insert into exp_field_groups(group_id, group_name) values ('', 'Default Field Group')";
+$Q[] = "insert into exp_field_groups(group_id, group_name) values (0, 'Default Field Group')";
 
-$Q[] = "insert into exp_weblog_fields(field_id, group_id, field_name, field_label, field_type, field_list_items, field_ta_rows, field_search, field_order, field_is_hidden) values ('', '1', 'summary', 'Summary', 'textarea', '', '6', 'n', '1', 'y')";
-$Q[] = "insert into exp_weblog_fields(field_id, group_id, field_name, field_label, field_type, field_list_items, field_ta_rows, field_search, field_order, field_is_hidden) values ('', '1', 'body', 'Body', 'textarea', '', '10', 'y', '2', 'n')";
-$Q[] = "insert into exp_weblog_fields(field_id, group_id, field_name, field_label, field_type, field_list_items, field_ta_rows, field_search, field_order, field_is_hidden) values ('', '1', 'extended', 'Extended text', 'textarea', '', '12', 'n', '3', 'y')";
+$Q[] = "insert into exp_weblog_fields(field_id, group_id, field_name, field_label, field_type, field_list_items, field_ta_rows, field_search, field_order, field_is_hidden) values (0, '1', 'summary', 'Summary', 'textarea', '', '6', 'n', '1', 'y')";
+$Q[] = "insert into exp_weblog_fields(field_id, group_id, field_name, field_label, field_type, field_list_items, field_ta_rows, field_search, field_order, field_is_hidden) values (0, '1', 'body', 'Body', 'textarea', '', '10', 'y', '2', 'n')";
+$Q[] = "insert into exp_weblog_fields(field_id, group_id, field_name, field_label, field_type, field_list_items, field_ta_rows, field_search, field_order, field_is_hidden) values (0, '1', 'extended', 'Extended text', 'textarea', '', '12', 'n', '3', 'y')";
 
 $Q[] = "insert into exp_field_formatting (field_id, field_fmt) values ('1', 'none')";
 $Q[] = "insert into exp_field_formatting (field_id, field_fmt) values ('1', 'br')";
@@ -2217,10 +2216,10 @@ $Q[] = "insert into exp_field_formatting (field_id, field_fmt) values ('3', 'xht
 
 // Custom statuses
 
-$Q[] = "insert into exp_status_groups (group_id, group_name) values ('', 'Default Status Group')";
+$Q[] = "insert into exp_status_groups (group_id, group_name) values (0, 'Default Status Group')";
 
-$Q[] = "insert into exp_statuses (status_id, group_id, status, status_order, highlight) values ('', '1', 'open', '1', '009933')";
-$Q[] = "insert into exp_statuses (status_id, group_id, status, status_order, highlight) values ('', '1', 'closed', '2', '990000')";
+$Q[] = "insert into exp_statuses (status_id, group_id, status, status_order, highlight) values (0, '1', 'open', '1', '009933')";
+$Q[] = "insert into exp_statuses (status_id, group_id, status, status_order, highlight) values (0, '1', 'closed', '2', '990000')";
 
 // Member groups
 
@@ -2234,7 +2233,7 @@ $Q[] = "insert into exp_member_groups values ('5', 1, 'Members',      '', 'y', '
 
 $quick_link = 'My Site|'.$data['site_url'].$data['site_index'].'|1';
 
-$Q[] = "insert into exp_members (member_id, group_id, username, password, unique_id, email, screen_name, join_date, ip_address, timezone, daylight_savings, total_entries, last_entry_date, quick_links, language) values ('', '1', '".$DB->escape_str($data['username'])."', '".$password."', '".$unique_id."', '".$DB->escape_str($data['email'])."', '".$DB->escape_str($data['screen_name'])."', '".$now."', '".$data['ip']."', '".$data['server_timezone']."', '".$data['daylight_savings']."', '1', '".$now."', '$quick_link', '".$DB->escape_str($data['deft_lang'])."')";
+$Q[] = "insert into exp_members (member_id, group_id, username, password, unique_id, email, screen_name, join_date, ip_address, timezone, daylight_savings, total_entries, last_entry_date, quick_links, language) values (0, '1', '".$DB->escape_str($data['username'])."', '".$password."', '".$unique_id."', '".$DB->escape_str($data['email'])."', '".$DB->escape_str($data['screen_name'])."', '".$now."', '".$data['ip']."', '".$data['server_timezone']."', '".$data['daylight_savings']."', '1', '".$now."', '$quick_link', '".$DB->escape_str($data['deft_lang'])."')";
 $Q[] = "insert into exp_member_homepage (member_id, recent_entries_order, recent_comments_order, site_statistics_order, notepad_order, pmachine_news_feed) values ('1', '1', '2', '1', '2', 'l')";
 $Q[] = "insert into exp_member_data (member_id) VALUES ('1')";
 
@@ -2245,11 +2244,11 @@ $Q[] = "insert into exp_stats (total_members, total_entries, last_entry_date, re
 
 // HTML formatting buttons
 
-$Q[] = "insert into exp_html_buttons values ('', 1, '0', '<b>', '<b>', '</b>', 'b', '1', '1')";
-$Q[] = "insert into exp_html_buttons values ('', 1, '0', '<i>', '<i>', '</i>', 'i', '2', '1')";
-$Q[] = "insert into exp_html_buttons values ('', 1, '0', '<u>', '<u>', '</u>', 'u', '3', '1')";
-$Q[] = "insert into exp_html_buttons values ('', 1, '0', '<bq>', '<blockquote>', '</blockquote>', 'q', '4', '1')";
-$Q[] = "insert into exp_html_buttons values ('', 1, '0', '<strike>', '<strike>', '</strike>', 's', '5', '1')";
+$Q[] = "insert into exp_html_buttons values (0, 1, '0', '<b>', '<b>', '</b>', 'b', '1', '1')";
+$Q[] = "insert into exp_html_buttons values (0, 1, '0', '<i>', '<i>', '</i>', 'i', '2', '1')";
+$Q[] = "insert into exp_html_buttons values (0, 1, '0', '<u>', '<u>', '</u>', 'u', '3', '1')";
+$Q[] = "insert into exp_html_buttons values (0, 1, '0', '<bq>', '<blockquote>', '</blockquote>', 'q', '4', '1')";
+$Q[] = "insert into exp_html_buttons values (0, 1, '0', '<strike>', '<strike>', '</strike>', 's', '5', '1')";
 
 // Ping servers
 
@@ -2260,7 +2259,7 @@ $Q[] = "insert into exp_html_buttons values ('', 1, '0', '<strike>', '<strike>',
 
 // Create default categories
 
-$Q[] = "insert into exp_category_groups (group_id, group_name, is_user_blog) values ('', 'Default Category Group', 'n')";
+$Q[] = "insert into exp_category_groups (group_id, group_name, is_user_blog) values (0, 'Default Category Group', 'n')";
 
 $Q[] = "insert into exp_categories (cat_id, group_id, parent_id, cat_name, cat_url_title, cat_order) values ('1', '1', '0', 'Blogging', 'Blogging', '1')";
 $Q[] = "insert into exp_categories (cat_id, group_id, parent_id, cat_name, cat_url_title, cat_order) values ('2', '1', '0', 'News', 'News', '2')";
@@ -2301,7 +2300,7 @@ $body = <<<PLOPP
 
 	[size=4]The EllisLab Team[/size]
 PLOPP;
-$Q[] = "insert into exp_weblog_titles (entry_id, weblog_id, author_id, ip_address, entry_date, edit_date, year, month, day, title, url_title, status, dst_enabled) values ('', '1', '1',  '".$data['ip']."', '".$now."', '".date("YmdHis")."', '".$year."', '".$month."', '".$day."', 'Getting Started with ExpressionEngine', 'getting_started', 'open', '".$data['daylight_savings']."')";
+$Q[] = "insert into exp_weblog_titles (entry_id, weblog_id, author_id, ip_address, entry_date, edit_date, year, month, day, title, url_title, status, dst_enabled) values (0, '1', '1',  '".$data['ip']."', '".$now."', '".date("YmdHis")."', '".$year."', '".$month."', '".$day."', 'Getting Started with ExpressionEngine', 'getting_started', 'open', '".$data['daylight_savings']."')";
 $Q[] = "insert into exp_weblog_data (entry_id, weblog_id, field_id_2, field_ft_1, field_ft_2, field_ft_3) values ('1', '1', '".$DB->escape_str($body)."', 'xhtml', 'xhtml', 'xhtml')";
 
 // Upload prefs
@@ -2314,61 +2313,61 @@ if (@realpath(str_replace('../', './', $data['image_path'])) !== FALSE)
 }
 
 $props = "style=\"border: 0;\" alt=\"image\"";
-$Q[] = "insert into exp_upload_prefs (id, name, server_path, url, allowed_types, properties) values ('', 'Main Upload Directory', '".$data['image_path'].$data['upload_folder']."', '".$data['site_url'].'images/'.$data['upload_folder']."', 'all', '$props')";
+$Q[] = "insert into exp_upload_prefs (id, name, server_path, url, allowed_types, properties) values (0, 'Main Upload Directory', '".$data['image_path'].$data['upload_folder']."', '".$data['site_url'].'images/'.$data['upload_folder']."', 'all', '$props')";
 
 // Actions
 
 // Comment module
-$Q[] = "INSERT INTO exp_modules (module_id, module_name, module_version, has_cp_backend) VALUES ('', 'Comment', '1.2', 'n')";
-$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES ('', 'Comment', 'insert_new_comment')";
-$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES ('', 'Comment_CP', 'delete_comment_notification')";
+$Q[] = "INSERT INTO exp_modules (module_id, module_name, module_version, has_cp_backend) VALUES (0, 'Comment', '1.2', 'n')";
+$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES (0, 'Comment', 'insert_new_comment')";
+$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES (0, 'Comment_CP', 'delete_comment_notification')";
 
 // Emoticon module
-$Q[] = "INSERT INTO exp_modules (module_id, module_name, module_version, has_cp_backend) VALUES ('', 'Emoticon', '1.0', 'n')";
+$Q[] = "INSERT INTO exp_modules (module_id, module_name, module_version, has_cp_backend) VALUES (0, 'Emoticon', '1.0', 'n')";
 
 // Mailing List module
-$Q[] = "INSERT INTO exp_modules (module_id, module_name, module_version, has_cp_backend) VALUES ('', 'Mailinglist', '2.0', 'y')";
-$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES ('', 'Mailinglist', 'insert_new_email')";
-$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES ('', 'Mailinglist', 'authorize_email')";
-$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES ('', 'Mailinglist', 'unsubscribe')";
+$Q[] = "INSERT INTO exp_modules (module_id, module_name, module_version, has_cp_backend) VALUES (0, 'Mailinglist', '2.0', 'y')";
+$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES (0, 'Mailinglist', 'insert_new_email')";
+$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES (0, 'Mailinglist', 'authorize_email')";
+$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES (0, 'Mailinglist', 'unsubscribe')";
 
 // Member module
-$Q[] = "INSERT INTO exp_modules (module_id, module_name, module_version, has_cp_backend) VALUES ('', 'Member', '1.3', 'n')";
-$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES ('', 'Member', 'registration_form')";
-$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES ('', 'Member', 'register_member')";
-$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES ('', 'Member', 'activate_member')";
-$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES ('', 'Member', 'member_login')";
-$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES ('', 'Member', 'member_logout')";
-$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES ('', 'Member', 'retrieve_password')";
-$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES ('', 'Member', 'reset_password')";
-$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES ('', 'Member', 'send_member_email')";
-$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES ('', 'Member', 'update_un_pw')";
-$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES ('', 'Member', 'member_search')";
-$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES ('', 'Member', 'member_delete')";
+$Q[] = "INSERT INTO exp_modules (module_id, module_name, module_version, has_cp_backend) VALUES (0, 'Member', '1.3', 'n')";
+$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES (0, 'Member', 'registration_form')";
+$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES (0, 'Member', 'register_member')";
+$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES (0, 'Member', 'activate_member')";
+$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES (0, 'Member', 'member_login')";
+$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES (0, 'Member', 'member_logout')";
+$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES (0, 'Member', 'retrieve_password')";
+$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES (0, 'Member', 'reset_password')";
+$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES (0, 'Member', 'send_member_email')";
+$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES (0, 'Member', 'update_un_pw')";
+$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES (0, 'Member', 'member_search')";
+$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES (0, 'Member', 'member_delete')";
 
 // Query module
-$Q[] = "INSERT INTO exp_modules (module_id, module_name, module_version, has_cp_backend) VALUES ('', 'Query', '1.0', 'n')";
+$Q[] = "INSERT INTO exp_modules (module_id, module_name, module_version, has_cp_backend) VALUES (0, 'Query', '1.0', 'n')";
 
 // Referrer module
-$Q[] = "INSERT INTO exp_modules (module_id, module_name, module_version, has_cp_backend) VALUES ('', 'Referrer', '1.3', 'y')";
+$Q[] = "INSERT INTO exp_modules (module_id, module_name, module_version, has_cp_backend) VALUES (0, 'Referrer', '1.3', 'y')";
 
 // RSS module
-$Q[] = "INSERT INTO exp_modules (module_id, module_name, module_version, has_cp_backend) VALUES ('', 'Rss', '1.0', 'n')";
+$Q[] = "INSERT INTO exp_modules (module_id, module_name, module_version, has_cp_backend) VALUES (0, 'Rss', '1.0', 'n')";
 
 // Stats module
-$Q[] = "INSERT INTO exp_modules (module_id, module_name, module_version, has_cp_backend) VALUES ('', 'Stats', '1.0', 'n')";
+$Q[] = "INSERT INTO exp_modules (module_id, module_name, module_version, has_cp_backend) VALUES (0, 'Stats', '1.0', 'n')";
 
 // Trackback module
-$Q[] = "INSERT INTO exp_modules (module_id, module_name, module_version, has_cp_backend) VALUES ('', 'Trackback', '1.1', 'n')";
-$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES ('', 'Trackback_CP', 'receive_trackback')";
+$Q[] = "INSERT INTO exp_modules (module_id, module_name, module_version, has_cp_backend) VALUES (0, 'Trackback', '1.1', 'n')";
+$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES (0, 'Trackback_CP', 'receive_trackback')";
 
 // Weblog module
-$Q[] = "INSERT INTO exp_modules (module_id, module_name, module_version, has_cp_backend) VALUES ('', 'Weblog', '1.2', 'n')";
-$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES ('', 'Weblog', 'insert_new_entry')";
+$Q[] = "INSERT INTO exp_modules (module_id, module_name, module_version, has_cp_backend) VALUES (0, 'Weblog', '1.2', 'n')";
+$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES (0, 'Weblog', 'insert_new_entry')";
 
 // Search module
-$Q[] = "INSERT INTO exp_modules (module_id, module_name, module_version, has_cp_backend) VALUES ('', 'Search', '1.2', 'n')";
-$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES ('', 'Search', 'do_search')";
+$Q[] = "INSERT INTO exp_modules (module_id, module_name, module_version, has_cp_backend) VALUES (0, 'Search', '1.2', 'n')";
+$Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES (0, 'Search', 'do_search')";
 
 // Email module
 //$Q[] = "INSERT INTO exp_modules (module_id, module_name, module_version, has_cp_backend) VALUES ('', 'Email', '1.0', 'n')";
@@ -2411,10 +2410,10 @@ $Q[] = "INSERT INTO exp_actions (action_id, class, method) VALUES ('', 'Search',
 // --------------------------------------------------------------------
 // --------------------------------------------------------------------
     
-    if ( ! ereg("/$", $data['cp_url'])) $data['cp_url'] .= '/';
+    if ( ! preg_match("/$", $data['cp_url'])) $data['cp_url'] .= '/';
         
 	$captcha_url = $data['site_url'];
-	if ( ! ereg("/$", $captcha_url)) $captcha_url .= '/';
+	if ( ! preg_match("/$", $captcha_url)) $captcha_url .= '/';
 	$captcha_url .= 'images/captchas/';   
 	
 

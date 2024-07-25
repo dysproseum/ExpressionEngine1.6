@@ -405,7 +405,7 @@ class Input {
 
     function clean_input_keys($str)
     {    
-		 if ( ! ereg("^[A-Za-z0-9\:\_\/\-]+$", $str))
+		 if ( ! preg_match("/[A-Za-z0-9\:\_\/\-]+/", $str))
 		 { 
 			exit('Disallowed Key Characters');
 		 }

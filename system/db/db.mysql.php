@@ -38,6 +38,7 @@ class DB_Cache {
     var $row      = array();
     var $num_rows = 0;
     var $q_count  = 0;
+    var $mysqli;
 }
 // END CLASS
 
@@ -111,7 +112,7 @@ class DB {
 			}
 		}
                 
-		if ( ! ereg("_$", $this->prefix))
+		if ( ! preg_match("_$", $this->prefix))
 		{
             $this->prefix .= '_';
 		}
@@ -173,7 +174,7 @@ class DB {
     function db_connect($select_db = TRUE)
     {    
         $this->conn_id = ($this->conntype == 0) ?
-          @mysql_connect ($this->hostname, $this->username, $this->password):
+          $this->mysqli = @mysqli_connect ($this->hostname, $this->username, $this->password, $this->database):
           @mysql_pconnect($this->hostname, $this->username, $this->password);
         
         if ( ! $this->conn_id)
@@ -189,7 +190,7 @@ class DB {
 			}
         }
         
-        $this->server_info = @mysql_get_server_info();
+        $this->server_info = @mysqli_get_server_info($this->mysqli);
         
         return TRUE;
     }
@@ -202,14 +203,10 @@ class DB {
 
     function select_db()
     {
-        if ( ! @mysql_select_db($this->database, $this->conn_id))
-        {            
-            return FALSE;
-        }
-        
+	// This is handled by mysqli connect.
         return TRUE;
-	}
-	/* END */
+    }
+    /* END */
 
 
     /** ---------------------------------------    
@@ -219,7 +216,7 @@ class DB {
     function db_close()
     {
         if ($this->conn_id)
-            mysql_close($this->conn_id);
+            mysqli_close($this->mysqli);
     }         
     /* END */
     
@@ -291,8 +288,7 @@ class DB {
         }
 
         // Execute the query
-                
-        if ( ! $this->query_id = mysql_query($sql, $this->conn_id))
+        if ( ! $this->query_id = mysqli_query($this->mysqli, $sql))
         {
             if ($this->debug)
             {
@@ -313,13 +309,13 @@ class DB {
                 
         foreach ($qtypes as $type)
         {
-            if (eregi("^$type", $sql))
+            if (preg_match("/^$type/i", $sql))
             {  
-                $this->affected_rows = mysql_affected_rows($this->conn_id);
+                $this->affected_rows = mysqli_affected_rows($this->mysqli);
                 
                 if ($type == 'INSERT' || $type == 'REPLACE')
                 {
-                    $this->insert_id = mysql_insert_id($this->conn_id);
+                    $this->insert_id = mysqli_insert_id($this->mysqli);
                 }
                 
                 // Delete the cache file since the data in it is no longer current.
@@ -340,7 +336,6 @@ class DB {
                	}
             }
         }
-        
         // Fetch the field names, but only if explicitly requested
         // We use this in our SQL utilities functions
         
@@ -348,7 +343,7 @@ class DB {
         { 
             $this->field_names = array();
             
-            while ($field = mysql_fetch_field($this->query_id))
+            while ($field = $this->query_id->fetch_field())
             {
                 $this->field_names[] = $field->name;       
             }
@@ -357,19 +352,17 @@ class DB {
         // Fetch the result of the query and assign it to an array.
         // I know, the result *is* an array.  But we want our own
         // numerically indexed array so we can cache it.
-
         $i = 0;
         $result = array();
-        while ($row = mysql_fetch_array($this->query_id, MYSQL_ASSOC)) 
+        while ($row = mysqli_fetch_array($this->query_id))
         {                                    
             $result[$i] = $row;
             $i++;
         }
-        
+
         // Free the result.  Optional with MySQL, but might as well be thorough
         
-        mysql_free_result($this->query_id);
-
+        mysqli_free_result($this->query_id);
         // Instantiate the cache super-class and assign the data 
         // to it if a subsequent query hasn't already done so
         
@@ -377,7 +370,7 @@ class DB {
 		$DBC->result   = $result;
 		$DBC->row      = (isset($result['0'])) ? $result['0'] : array();
 		$DBC->num_rows = $i;
-	
+
         // Serialize the class and store it in a cache file
         
         if ($this->enable_cache == TRUE)
@@ -597,6 +590,7 @@ class DB {
 
     function escape_str($str)    
     {    
+	return $str;
     	if (is_array($str))
     	{
     		foreach($str as $key => $val)
@@ -607,9 +601,9 @@ class DB {
     		return $str;
     	}
     
-    	if (function_exists('mysql_escape_string'))
+        if (function_exists('mysqli_real_escape_string'))
     	{
-			return mysql_escape_string(stripslashes($str));
+			return $this->mysqli->real_escape_string(stripslashes($str));
 		}
 		else
 		{
