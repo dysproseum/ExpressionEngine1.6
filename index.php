@@ -114,7 +114,7 @@ if ( ! isset($system_path))
 	}
 }
 
-if ( ! preg_match("/$", $system_path)) $system_path .= '/';
+if ( ! preg_match("/$/", $system_path)) $system_path .= '/';
 
 if ( ! @include($system_path.'core/core.system'.$ext))
 {

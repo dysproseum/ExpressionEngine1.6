@@ -2264,7 +2264,7 @@ class Template {
 
         foreach ($cache_override as $val)
         {
-			if (preg_match("^/".$val."/", $IN->URI))
+			if (preg_match("/^\/".$val."\//", $IN->URI))
 			{
 				$query->row['cache'] = 'n';
 			}
@@ -2417,7 +2417,7 @@ class Template {
         { 
             while (false !== ($file = readdir($fp))) 
             { 
-				if ( ! preg_match("\.",  $file))
+				if ( ! preg_match("/\./",  $file))
 				{                            
                 	$this->modules[] = $file;
                 }
@@ -2439,7 +2439,7 @@ class Template {
         { 
             while (false !== ($file = readdir($fp))) 
             { 
-				if (preg_match(EXT."$/i",  $file) AND substr($file, 0, 3) == 'pi.')
+				if (preg_match("/".EXT."$/i",  $file) AND substr($file, 0, 3) == 'pi.')
 				{                            
 					$this->plugins[] = substr($file, 3, - strlen(EXT));
 				}

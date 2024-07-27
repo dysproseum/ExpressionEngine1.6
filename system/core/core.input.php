@@ -57,7 +57,7 @@ class Input {
     {
         global $REGX;
     		
-		$this->AGENT = ( ! isset($_SERVER['HTTP_USER_AGENT'])) 	? '' : $REGX->xss_clean($_SERVER['HTTP_USER_AGENT']);
+		$this->AGENT = $_SERVER['HTTP_USER_AGENT'];
 		
 		$_SERVER['PHP_SELF'] = strip_tags($_SERVER['PHP_SELF']);
     }
@@ -144,7 +144,6 @@ class Input {
         /** -----------------------------------
         /**  Fetch the IP address
         /** -----------------------------------*/
-        
         $CIP = (isset($_SERVER['HTTP_CLIENT_IP']) AND $_SERVER['HTTP_CLIENT_IP'] != "") ? $_SERVER['HTTP_CLIENT_IP'] : FALSE;
         $RIP = (isset($_SERVER['REMOTE_ADDR']) AND $_SERVER['REMOTE_ADDR'] != "") ? $_SERVER['REMOTE_ADDR'] : FALSE;
         $FIP = (isset($_SERVER['HTTP_X_FORWARDED_FOR']) AND $_SERVER['HTTP_X_FORWARDED_FOR'] != "") ? $_SERVER['HTTP_X_FORWARDED_FOR'] : FALSE;
@@ -153,7 +152,7 @@ class Input {
 		elseif ($RIP)		$this->IP = $RIP;
 		elseif ($CIP)		$this->IP = $CIP;
 		elseif ($FIP)		$this->IP = $FIP;
-		
+
 		if (strstr($this->IP, ','))
 		{
 			$x = explode(',', $this->IP);
@@ -385,7 +384,7 @@ class Input {
 			$str = trim($str);
         }
         
-        if ( ! get_magic_quotes_gpc())
+        if ( ! function_exists('get_magic_quotes_gpc'))
         {
             $str = addslashes($str);
         }
@@ -410,7 +409,7 @@ class Input {
 			exit('Disallowed Key Characters');
 		 }
 
-        if ( ! get_magic_quotes_gpc())
+        if ( ! function_exists('get_magic_quotes_gpc'))
         {
             $str = addslashes($str);
         }

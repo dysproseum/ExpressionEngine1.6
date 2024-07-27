@@ -387,7 +387,7 @@ class Display {
 
         $doc_path = $PREFS->ini('doc_url');
                 
-		if ( ! ereg("/$", $doc_path)) 
+		if ( ! preg_match("/\/$/", $doc_path))
 			$doc_path .= '/';
                 
         $r .= $this->anchor(BASE, $LANG->line('main_menu')).$this->nbs(3).'|'.$this->nbs(3)
@@ -2257,7 +2257,7 @@ class Display {
                 
         $form = NL."<form{$str}>".NL;
         
-        if (count($hidden > 0))
+        if (!empty($hidden))
         {
         	foreach ($hidden as $key => $val)
         	{

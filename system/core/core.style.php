@@ -39,7 +39,7 @@ class Style {
     	}
     
         if ( $stylesheet == '' ||
-             ! ereg("/", $stylesheet) ||
+             ! preg_match("/\//", $stylesheet) ||
 			   preg_match("#^(http:\/\/|www\.)#i", $stylesheet)
             )
             exit;

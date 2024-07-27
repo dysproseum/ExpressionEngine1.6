@@ -112,7 +112,7 @@ class DB {
 			}
 		}
                 
-		if ( ! preg_match("_$", $this->prefix))
+		if ( ! preg_match("/_$/", $this->prefix))
 		{
             $this->prefix .= '_';
 		}
@@ -121,7 +121,7 @@ class DB {
         {
 			$this->cache_dir = PATH_CACHE.$this->cache_dir; 
 			
-			if ( ! ereg('/$', $this->cache_dir))
+			if ( ! preg_match('/$', $this->cache_dir))
 			{
 				$this->cache_dir .= '/';
 			}
@@ -627,9 +627,9 @@ class DB {
         if ($id) 
         { 
             $msg .= "<br /><br />";
-            $msg .= "Error Number: " . mysql_errno($id);
+            $msg .= "Error Number: " . mysqli_errno($this->mysqli);
             $msg .= "<br /><br />";
-            $msg .= "Description: "  . mysql_error($id);
+            $msg .= "Description: "  . mysqli_error($this->mysqli);
         }
         
         if ($sql)
