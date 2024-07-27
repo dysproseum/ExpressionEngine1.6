@@ -479,7 +479,7 @@ class Functions {
             $data['onsubmit'] = 'onsubmit="'.trim($data['onsubmit']).'"';
         }
         
-        if (preg_match("\?$", $data['action']))
+        if (preg_match("/\?$/", $data['action']))
         {
         	$action = substr($data['action'], 0, -1);
         }
@@ -555,7 +555,7 @@ class Functions {
 		
 		if (isset($_POST['RET']))
 		{
-			if (ereg("^-", $_POST['RET']))
+			if (preg_match("^-", $_POST['RET']))
 			{
 				$return = str_replace("-", "", $_POST['RET']);
 				
@@ -569,7 +569,7 @@ class Functions {
 			}
 			else
 			{
-				if (ereg("/", $_POST['RET']))
+				if (preg_match("/", $_POST['RET']))
 				{
 					if (stristr($_POST['RET'], 'http://') OR 
 						stristr($_POST['RET'], 'https://') OR 
@@ -971,7 +971,7 @@ class Functions {
                 if ($array_name <> "")
                     $val = $array_name.'/'.$val;
 					
-				if (ereg(".php$", $val))
+				if (preg_match(".php$", $val))
 				{
 					if ($val != 'theme_master.php')
 					{				   
@@ -1320,7 +1320,7 @@ class Functions {
 		}
 				                
         if ($test_ref != '' 
-        	&& ! eregi("^{$site_url}", $test_ref) 
+		&& ! preg_match("#^{$site_url}#i", $test_ref)
         	&& ($domain == '' || !stristr($test_ref,$domain))
         	&& ($IN->whitelisted == 'y' OR $IN->blacklisted == 'n'))
         {
@@ -1648,11 +1648,11 @@ class Functions {
 		{
 			$p_uri = ( ! isset($_GET['id'])) ? $IN->URI : '/'.$_GET['id'].'/';
 			
-			if (ereg("^/[0-9]{1,6}\_[0-9]{1,4}\_[0-9]{1,4}\_[0-9]{1,4}.*$", $p_uri))
+			if (preg_match("^/[0-9]{1,6}\_[0-9]{1,4}\_[0-9]{1,4}\_[0-9]{1,4}.*$", $p_uri))
 			{
 				$pentry_id = substr($p_uri, 1, (strpos($p_uri, '_')-1));
 			}
-			elseif (ereg("^/P[0-9]{1,6}.*$", $p_uri))
+			elseif (preg_match("^/P[0-9]{1,6}.*$", $p_uri))
 			{	
 				$p_uri = str_replace("/", "", $p_uri);
 				$pentry_id = substr($p_uri, 1);
@@ -1949,7 +1949,7 @@ class Functions {
         
             if (count($ex) > 0)
             {                
-                if (ereg("^not ", $ex['0']))
+                if (preg_match("^not ", $ex['0']))
                 {
                     $ex['0'] = substr($ex['0'], 3);
                     
@@ -2012,7 +2012,7 @@ class Functions {
         }
         else
         {   
-            if (preg_match("^not ", $str))
+            if (preg_match("/^not /", $str))
             {
                 $str = trim(substr($str, 3));
                 
@@ -2070,7 +2070,7 @@ class Functions {
 		$total_conditionals = sizeof($eek['0']);
 		
 		// Mark all opening conditionals, sequentially.
-		if (sizeof($modified_str) > 0)
+		if (!empty($modified_str))
 		{
 			 for ($i = 0; $i < $total_conditionals; $i++)
 			 {
@@ -2398,10 +2398,10 @@ class Functions {
         if ($str == '')
             return;
             
-        if (ereg('^\|', $str))
+        if (preg_match('^\|', $str))
             $str = substr($str, 1);
             
-        if (ereg('\|$', $str))
+        if (preg_match('\|$', $str))
             $str = substr($str, 0, -1);
             
         $str = str_replace(' ', '', trim($str));        

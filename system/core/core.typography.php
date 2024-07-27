@@ -189,7 +189,7 @@ class Typography {
         { 
             while (false !== ($file = readdir($fp))) 
             { 
-				if ( preg_match(EXT."$/i",  $file))
+				if ( preg_match("/".EXT."$/i",  $file))
 				{
 					if (substr($file, 0, 3) == 'pi.')
 					{

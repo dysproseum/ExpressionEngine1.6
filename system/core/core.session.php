@@ -811,7 +811,7 @@ class Session {
 				return array();
 			}
 				
-			if (eregi(':', $tracker))
+			if (preg_match('/:/i', $tracker))
 			{
 				$tracker_parts = explode(':', $tracker);
 				
@@ -835,7 +835,7 @@ class Session {
 		
 		// If someone is messing with the URI we won't set the cookie
 	
-		 if ( ! preg_match("^[A-Za-z0-9\%\_\/\-]+$", $URI) && ! isset($_GET['ACT']))
+		 if ( ! preg_match("/^[A-Za-z0-9\%\_\/\-]+$/", $URI) && ! isset($_GET['ACT']))
 		 {
 			return array();
 		 }
@@ -902,27 +902,27 @@ class Session {
         {
         	if ($val == '*') continue;
         
-			if (ereg("\*$", $val))
+			if (preg_match("\*$", $val))
 			{
 				$val = str_replace("*", "", $val);
 
-				if (ereg("^$val", $match))
+				if (preg_match("^$val", $match))
 				{
 					return TRUE;
 				}
 			}
-			elseif (ereg("^\*", $val))
+			elseif (preg_match("^\*", $val))
 			{ 
         			$val = str_replace("*", "", $val);
         	
-				if (ereg("$val$", $match))
+				if (preg_match("$val$", $match))
 				{
 					return TRUE;
 				}
 			}
 			else
 			{
-				if (ereg("^$val$", $match))
+				if (preg_match("^$val$", $match))
 				{
 					return TRUE;
 				}

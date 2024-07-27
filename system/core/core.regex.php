@@ -752,7 +752,13 @@ class Regex {
 			
 			// We only want to do this when it is followed by a non-word character
 			// That way valid stuff like "dealer to" does not become "dealerto"
-			$str = preg_replace('#('.substr($temp, 0, -3).')(\W)#ise', "preg_replace('/\s+/s', '', '\\1').'\\2'", $str);
+			$str = preg_replace_callback(
+				'#('.substr($temp, 0, -3).')(\W)#is',
+				function($matches) {
+					return preg_replace('/\s+/s', '\\1', $matches[0]).'\\2';
+				},
+				$str
+			);
 		}
 	
 		/*

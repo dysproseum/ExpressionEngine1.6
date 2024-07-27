@@ -77,7 +77,6 @@ class Localize {
                          gmdate("m", $now),
                          gmdate("d", $now),
                          gmdate("Y", $now),
-                         -1	// this must be explicitly set or some FreeBSD servers behave erratically
                        );   
 
         // mktime() has a bug that causes it to fail during the DST "spring forward gap"

@@ -508,7 +508,7 @@ class Weblog_calendar extends Weblog {
 						/**  parse permalink
 						/** ----------------------------------------*/
 						
-						if (ereg("^permalink", $key))
+						if (preg_match("/^permalink/", $key))
 						{                     
 							if ($FNS->extract_path($key) != '' AND $FNS->extract_path($key) != 'SITE_INDEX')
 							{
@@ -526,7 +526,7 @@ class Weblog_calendar extends Weblog {
 						/**  parse title permalink
 						/** ----------------------------------------*/
 						
-						if (ereg("^title_permalink", $key) || ereg("^url_title_path", $key))
+						if (preg_match("/^title_permalink/", $key) || preg_match("/^url_title_path/", $key))
 						{ 
 							if ($FNS->extract_path($key) != '' AND $FNS->extract_path($key) != 'SITE_INDEX')
 							{
@@ -582,7 +582,7 @@ class Weblog_calendar extends Weblog {
 						/**  profile path
 						/** ----------------------------------------*/
 						
-						if (ereg("^profile_path", $key))
+						if (preg_match("/^profile_path/", $key))
 						{                       
 							$profile_path[$key] = $FNS->create_url($FNS->extract_path($key).'/'.$row['member_id']);
 						}
@@ -591,7 +591,7 @@ class Weblog_calendar extends Weblog {
 						/**  parse comment_path or trackback_path
 						/** ----------------------------------------*/
 						
-						if (ereg("^comment_path", $key) || ereg("^trackback_path", $key) || ereg("^entry_id_path", $key) )
+						if (preg_match("/^comment_path/", $key) || preg_match("/^trackback_path/", $key) || preg_match("/^entry_id_path/", $key) )
 						{                       
 							$id_path[$key] = $FNS->create_url($FNS->extract_path($key).'/'.$row['entry_id']);
 						}
@@ -618,7 +618,7 @@ class Weblog_calendar extends Weblog {
 						/**  {day_path}
 						/** ----------------------------------------*/
 						
-						if (ereg("^day_path", $key))
+						if (preg_match("/^day_path/", $key))
 						{               
 							$d = date('d', $LOC->set_localized_time($row['entry_date']));
 							$m = date('m', $LOC->set_localized_time($row['entry_date']));

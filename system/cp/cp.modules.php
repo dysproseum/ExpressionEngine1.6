@@ -88,7 +88,7 @@ class Modules {
         { 
             while (false !== ($file = readdir($fp))) 
             {
-                if ( ! eregi("^_", $file) AND ! eregi("^CVS$", $file) AND ! eregi(".php$",  $file) AND ! eregi(".html$",  $file) AND ! eregi(".DS_Store",  $file) AND ! eregi("\.",  $file))
+                if ( ! preg_match("/^_/i", $file) AND ! preg_match("/^CVS$/i", $file) AND ! preg_match("/.php$/i",  $file) AND ! preg_match("/.html$/i",  $file) AND ! preg_match("/.DS_Store/i",  $file) AND ! preg_match("/\./i",  $file))
                 {                 
 					$LANG->fetch_language_file(( ! isset($this->lang_overrides[$file])) ? $file : $this->lang_overrides[$file]);
                                         
@@ -363,7 +363,7 @@ class Modules {
 
         $LANG->fetch_language_file($module);        
 
-        $line = (ereg("deinstall", $method)) ? $LANG->line('module_has_been_removed') : $LANG->line('module_has_been_installed');
+        $line = (preg_match("deinstall", $method)) ? $LANG->line('module_has_been_removed') : $LANG->line('module_has_been_installed');
 	
 		$name = ($LANG->line($module.'_module_name') == FALSE) ? ucfirst($module) : $LANG->line($module.'_module_name');
 

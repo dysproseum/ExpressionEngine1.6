@@ -1271,7 +1271,7 @@ function showHideTemplate(htmlObj)
 		$qs = ($PREFS->ini('force_query_string') == 'y') ? '' : '?';        
 		$sitepath = $FNS->fetch_site_index(0, 0).$qs.'URL='.$FNS->fetch_site_index();
                 
-        if ( ! ereg("/$", $sitepath))
+        if ( ! preg_match("/\/$/", $sitepath))
             $sitepath .= '/';
               
         if (sizeof($SESS->userdata['assigned_template_groups']) == 0 AND $DSP->allowed_group('can_admin_templates') == FALSE)
@@ -2239,7 +2239,7 @@ function showHideTemplate(htmlObj)
                 if ($array_name <> "")
                     $val = $array_name.'/'.$val;
                     
-               if (ereg(".tpl$", $val) OR ereg(".css$", $val) OR stristr($val, '.js'))
+               if (preg_match(".tpl$", $val) OR preg_match(".css$", $val) OR stristr($val, '.js'))
                {    
                     $this->template_map[] = $val;
                }
@@ -2341,7 +2341,7 @@ function showHideTemplate(htmlObj)
             {
             	$basepath = $PREFS->ini('tmpl_file_basepath');
             	
-            	if ( ! ereg("/$", $basepath)) $basepath .= '/';
+		if ( ! preg_match("/$", $basepath)) $basepath .= '/';
 									
 				$basepath .= $query->row['group_name'].'/'.$query->row['template_name'].'.php';
 				
@@ -2915,7 +2915,7 @@ function showHideTemplate(htmlObj)
         {
 			$basepath = $PREFS->ini('tmpl_file_basepath');
 			
-			if ( ! ereg("/$", $basepath)) $basepath .= '/';
+			if ( ! preg_match("/$", $basepath)) $basepath .= '/';
 			
 			$basepath .= $template_group.'/'.$template_name.'.php';
 		
@@ -2928,7 +2928,7 @@ function showHideTemplate(htmlObj)
 		$qs = ($PREFS->ini('force_query_string') == 'y') ? '' : '?';        
 		$sitepath = $FNS->fetch_site_index(0, 0).$qs.'URL='.$FNS->fetch_site_index();
                      
-        if ( ! ereg("/$", $sitepath))
+        if ( ! preg_match("/$", $sitepath))
             $sitepath .= '/';
         
         if ($template_type == 'css')
@@ -3245,7 +3245,7 @@ EOT;
 				{
 					$basepath = $PREFS->ini('tmpl_file_basepath');
 					
-					if ( ! ereg("/$", $basepath)) $basepath .= '/';
+					if ( ! preg_match("/$", $basepath)) $basepath .= '/';
 					
 					$basepath .= $query->row['group_name'].'/'.$query->row['template_name'].'.php';
 				

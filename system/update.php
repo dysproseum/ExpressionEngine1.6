@@ -25,7 +25,6 @@
 // ------------------------------
 
 error_reporting(E_ALL);
-set_magic_quotes_runtime(0);
 
 $path = pathinfo(__FILE__);
 
@@ -90,7 +89,7 @@ if ( ! $DB->select_db())
 }
 
 // Check for "strict mode", some queries used are incompatible
-if (version_compare(mysql_get_server_info(), '4.1-alpha', '>='))
+if (version_compare($DB->server_info, '4.1-alpha', '>='))
 {
 	$mode_query = $DB->query("SELECT CONCAT(@@global.sql_mode, @@session.sql_mode) AS sql_mode");
 
