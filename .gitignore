@@ -1,5 +1,5 @@
 system/config.php
-images/gallery
-images/sized
-images/avatars/uploads
-images/uploads
+images/gallery/*
+images/sized/*
+images/avatars/uploads/*
+images/uploads/*

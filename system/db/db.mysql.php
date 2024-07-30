@@ -590,7 +590,6 @@ class DB {
 
     function escape_str($str)    
     {    
-	return $str;
     	if (is_array($str))
     	{
     		foreach($str as $key => $val)
@@ -603,6 +602,9 @@ class DB {
     
         if (function_exists('mysqli_real_escape_string'))
     	{
+		if (!isset($this->mysqli)) {
+			$this->mysqli = @mysqli_connect ($this->hostname, $this->username, $this->password, $this->database);
+		}
 			return $this->mysqli->real_escape_string(stripslashes($str));
 		}
 		else

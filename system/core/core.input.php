@@ -57,7 +57,12 @@ class Input {
     {
         global $REGX;
     		
-		$this->AGENT = $_SERVER['HTTP_USER_AGENT'];
+		if (isset($_SERVER['HTTP_USER_AGENT'])) {
+			$this->AGENT = $_SERVER['HTTP_USER_AGENT'];
+		}
+		else {
+			$this->AGENT = '';
+		}
 		
 		$_SERVER['PHP_SELF'] = strip_tags($_SERVER['PHP_SELF']);
     }

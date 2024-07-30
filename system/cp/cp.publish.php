@@ -2422,7 +2422,7 @@ EOT;
 			
 			$pages_uri = '';
 			$pages_template_id = '';
-			
+
 			if ($entry_id != '' && isset($pages['uris'][$entry_id]))
 			{
 				$pages_uri    		= $pages['uris'][$entry_id];
@@ -3978,7 +3978,7 @@ EOT;
         
         
         $data = array(  
-                        'entry_id'          		=> '',
+                        'entry_id'          		=> 0,
                         'weblog_id'         		=> $weblog_id,
                         'author_id'         		=> $author_id,
                         'site_id'					=> $PREFS->ini('site_id'),
