@@ -738,8 +738,9 @@ class Utilities {
 	function plugin_manager($message = '')
 	{
         global $DSP, $IN, $PREFS, $LANG, $FNS;
-     
-		if ( ! @include_once(PATH_LIB.'pclzip.lib.php'))
+
+		$enable_pclzip = FALSE;
+		if ($enable_pclzip && ! @include_once(PATH_LIB.'pclzip.lib.php'))
 		{
 			return $DSP->no_access_message('PclZip Library does not appear to be installed.  It is required.');
 		}     
@@ -753,7 +754,7 @@ class Utilities {
         { 
             while (false !== ($file = readdir($fp)))
             {
-                if (eregi('php', $file) && $file !== '.' && $file !== '..' &&  substr($file, 0, 3) == 'pi.') 
+                if (preg_match('/php/i', $file) && $file !== '.' && $file !== '..' &&  substr($file, 0, 3) == 'pi.')
                 {
 					if ( ! @include_once(PATH_PI.$file))
 						continue;
@@ -817,7 +818,6 @@ class Utilities {
         }  
 
         $i = 0;
-        
         if (count($plugins) > 0)
         {
             foreach ($plugins as $plugin)
@@ -859,7 +859,7 @@ class Utilities {
         /** -------------------------------------------
         /**  Latest Plugin Table
         /** -------------------------------------------*/
-        
+
         // Do we have the Magpie plugin so we can parse the EE plugin RSS feed?
         if (in_array('magpie', $plugins))
         {
@@ -1475,7 +1475,7 @@ class Utilities {
 		
         foreach ($query->result as $val)
         {
-            if ( ! ereg("^$DB->prefix", $val['Name']))
+            if ( ! preg_match("^$DB->prefix", $val['Name']))
             {
                 continue;
             }
@@ -1523,12 +1523,12 @@ class Utilities {
 		{
             foreach ($val as $v)
             {
-				if (eregi("^uptime", $v))
+				if (preg_match("/^uptime/i", $v))
 				{
 					$uptime = $key;
 				}
 				
-				if (eregi("^questions", $v))
+				if (preg_match("/^questions/i", $v))
 				{
 					$queries = $key;
 				}
@@ -1721,7 +1721,7 @@ class Utilities {
             
             // If it's a DELETE query, require that a Super Admin be the one submitting it
             
-            if (eregi("DELETE", $sql) || eregi('ALTER', $sql) || eregi('DROP', $sql))
+            if (preg_match("/DELETE/i", $sql) || preg_match('/ALTER/i', $sql) || preg_match('/DROP/i', $sql))
             {
 				if ($SESS->userdata['group_id'] != '1')
 				{
@@ -1821,7 +1821,7 @@ class Utilities {
             
             foreach ($qtypes as $type)
             {
-                if (eregi("^$type", $sql))
+                if (preg_match("/^$type/i", $sql))
                 {
                     $write = TRUE;
                 }
@@ -2417,7 +2417,7 @@ class Utilities {
                                 
         foreach ($query->result as $val)
         {
-            if ( ! ereg("^$DB->prefix", $val['Name']))
+            if ( ! preg_match("^$DB->prefix", $val['Name']))
             {
                 continue;
             }
@@ -3013,7 +3013,7 @@ class Utilities {
 			
 			$sql = substr($sql, 0, -1).')';        
         }
-        elseif(eregi('^template_', $field))
+        elseif(preg_match('/^template_/i', $field))
         {
         	$sql = "UPDATE `exp_templates` SET `template_data` = REPLACE(`template_data`, '$search', '$replace'), edit_date = '".$LOC->now."'
         			WHERE group_id = '".$DB->escape_str(substr($field,9))."'";
@@ -5230,7 +5230,7 @@ EOT;
             { 
                 while (false !== ($file = readdir($fp))) 
                 { 
-                    if ( eregi(".php$",  $file))
+                    if ( preg_match("/\.php$/i",  $file))
                     {
                     	if (substr($file, 0, 4) == 'lang')
                     	{
