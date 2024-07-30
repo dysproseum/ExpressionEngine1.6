@@ -64,7 +64,7 @@ class Logger {
                                            'exp_cp_log',
                 
                                             array(
-                                                    'id'         => '',
+                                                    'id'         => 0,
                                                     'member_id'  => $SESS->userdata('member_id'),
                                                     'username'   => $SESS->userdata['username'],
                                                     'ip_address' => $IN->IP,

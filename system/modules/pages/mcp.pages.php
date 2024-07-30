@@ -544,7 +544,7 @@ class Pages_CP {
     {
         global $DB;        
         
-        $sql[] = "INSERT INTO exp_modules (module_id, module_name, module_version, has_cp_backend) VALUES ('', 'Pages', '$this->version', 'y')";
+        $sql[] = "INSERT INTO exp_modules (module_id, module_name, module_version, has_cp_backend) VALUES (0, 'Pages', '$this->version', 'y')";
         $sql[] = "ALTER TABLE `exp_sites` ADD `site_pages` TEXT NOT NULL";
         
         $sql[] = "CREATE TABLE `exp_pages_configuration` (
