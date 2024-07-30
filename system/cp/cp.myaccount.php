@@ -3314,7 +3314,7 @@ class MyAccount {
 			$avstr .= "</tr>";
 		}
 		
-		if ( ! ereg("\<\/tr\>$", $avstr))
+		if ( ! preg_match("#\<\/tr\>$#", $avstr))
 		{
 			$avstr .= "</tr>";
 		}
@@ -3505,7 +3505,7 @@ class MyAccount {
 				
 				$DB->query("UPDATE exp_members SET avatar_filename = '', avatar_width='', avatar_height='' WHERE member_id = '{$id}' ");
 			
-				if (ereg('/', $query->row['avatar_filename']))
+				if (preg_match('/', $query->row['avatar_filename']))
 				{
 					@unlink($PREFS->ini('avatar_path', TRUE).$query->row['avatar_filename']);
 				}
@@ -3640,7 +3640,7 @@ class MyAccount {
 		/**  Does the image have a file extension?
 		/** ----------------------------------------*/
 		
-		if ( ! ereg('\.', $filename))
+		if ( ! preg_match('/\./', $filename))
 		{
 			return $OUT->show_user_error('submission', $LANG->line('invalid_image_type'));
 		}
@@ -3676,7 +3676,7 @@ class MyAccount {
 			$query = $DB->query("SELECT avatar_filename FROM exp_members WHERE member_id = '{$id}'");
 			$old_filename = ($query->row['avatar_filename'] == '') ? '' : $query->row['avatar_filename'];
 			
-			if (ereg('/', $old_filename))
+			if (preg_match('/', $old_filename))
 			{
 				$x = explode('/', $old_filename);
 				$old_filename =  end($x);
