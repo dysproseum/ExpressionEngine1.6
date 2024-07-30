@@ -952,7 +952,7 @@ class MagpieRSS {
 		
 		$this->ERROR = $errormsg;
 		
-		if (MAGPIE_DEBUG)
+		if (defined('MAGPIE_DEBUG'))
 		{
 			trigger_error($errormsg, $lvl);
 		}
