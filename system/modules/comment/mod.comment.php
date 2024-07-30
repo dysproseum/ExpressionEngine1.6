@@ -541,7 +541,7 @@ class Comment {
 													
 				$basepath = $FNS->remove_double_slashes($FNS->create_url($uristr, 1, 0).'/'.$deft_tmpl);
 				
-				$first_url = (ereg("\.php/$", $basepath)) ? substr($basepath, 0, -1) : $basepath;
+				$first_url = (preg_match("\.php/$", $basepath)) ? substr($basepath, 0, -1) : $basepath;
 				
 				if ($TMPL->fetch_param('paginate_base'))
 				{				
@@ -869,7 +869,7 @@ class Comment {
 				/**  parse {switch} variable
 				/** ----------------------------------------*/
 				
-				if (ereg("^switch", $key))
+				if (preg_match("/^switch/", $key))
 				{
 					$sparam = $FNS->assign_parameters($key);
 					
@@ -910,7 +910,7 @@ class Comment {
                 /**  parse permalink
                 /** ----------------------------------------*/
                 
-                if (ereg("^permalink", $key) AND isset($row['comment_id']))
+                if (preg_match("/^permalink/", $key) AND isset($row['comment_id']))
                 {                     
                         $tagdata = $TMPL->swap_var_single(
                                                             $key, 
@@ -923,7 +923,7 @@ class Comment {
                 /**  parse comment_path or trackback_path
                 /** ----------------------------------------*/
                 
-                if (ereg("^comment_path", $key) || ereg("^trackback_path", $key) || ereg("^entry_id_path", $key) )
+                if (preg_match("/^comment_path/", $key) || preg_match("/^trackback_path/", $key) || preg_match("/^entry_id_path/", $key) )
                 {                       
 					$tagdata = $TMPL->swap_var_single(
 														$key, 
@@ -937,7 +937,7 @@ class Comment {
                 /**  parse title permalink
                 /** ----------------------------------------*/
                 
-                if (ereg("^title_permalink", $key) || ereg("^url_title_path", $key))
+                if (preg_match("/^title_permalink/", $key) || preg_match("/^url_title_path/", $key))
                 { 
 					$path = ($FNS->extract_path($key) != '' AND $FNS->extract_path($key) != 'SITE_INDEX') ? $FNS->extract_path($key).'/'.$row['url_title'] : $row['url_title'];
 
@@ -1008,7 +1008,7 @@ class Comment {
                 /**  {member_search_path}
                 /** ----------------------------------------*/
                    
-                if (ereg("^member_search_path", $key))
+                if (preg_match("/^member_search_path/", $key))
                 {                   
 					$tagdata = $TMPL->swap_var_single($key, $search_link.$row['author_id'], $tagdata);
                 }
@@ -1504,9 +1504,11 @@ class Comment {
         /** ----------------------------------------
         /**  Has commenting expired?
         /** ----------------------------------------*/
-        
-        $mode = ( ! isset($this->comment_expiration_mode)) ? 0 : $this->comment_expiration_mode;
-                
+
+	// See $this->comment_expiration_mode.
+	// Prevent error: Using $this when not in object context.
+	$mode = 0;
+
         if ($mode == 0)
         {
 			if ($query->row['comment_expiration_date'] > 0)
@@ -2131,7 +2133,7 @@ class Comment {
         
 		$preview = ( ! $IN->GBL('PRV', 'POST')) ? '' : $IN->GBL('PRV');
 
-        if ( ! ereg("/", $preview))
+        if ( ! preg_match("/", $preview))
         		$preview = '';
         else
         {
@@ -2733,7 +2735,7 @@ class Comment {
 			
 			if ($_POST['email'] != '')
 			{
-				if (eregi($_POST['email'], $notify_address))
+				if (preg_match("/".$_POST['email']."/i", $notify_address))
 				{
 					$notify_address = str_replace($_POST['email'], "", $notify_address);				
 				}

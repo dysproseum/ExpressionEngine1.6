@@ -363,7 +363,7 @@ class Modules {
 
         $LANG->fetch_language_file($module);        
 
-        $line = (preg_match("deinstall", $method)) ? $LANG->line('module_has_been_removed') : $LANG->line('module_has_been_installed');
+        $line = (preg_match("/deinstall/", $method)) ? $LANG->line('module_has_been_removed') : $LANG->line('module_has_been_installed');
 	
 		$name = ($LANG->line($module.'_module_name') == FALSE) ? ucfirst($module) : $LANG->line($module.'_module_name');
 
