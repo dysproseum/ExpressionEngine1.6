@@ -1112,7 +1112,7 @@ class Search {
 		
 		if ($switch = $TMPL->fetch_param('switch'))
 		{
-			if (ereg("\|", $switch))
+			if (preg_match("/\|/", $switch))
 			{
 				$x = explode("|", $switch);
 				

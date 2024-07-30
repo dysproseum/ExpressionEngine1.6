@@ -118,7 +118,7 @@ class Regex {
 	{
 		global $PREFS;
 		
-		if (stristr($str, '.php') AND ereg("/index/$", $str))
+		if (stristr($str, '.php') AND preg_match("#/index/$#", $str))
 		{
 			$str = substr($str, 0, -6);
 		}

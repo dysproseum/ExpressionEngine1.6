@@ -122,7 +122,7 @@ class Action {
         /**  What type of module is being requested?
         /** -----------------------------------------*/
         
-        if (ereg("_CP$", $class))
+        if (preg_match("/_CP$/", $class))
         {
             $type = 'mcp'; 
             
