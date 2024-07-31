@@ -486,7 +486,7 @@ class Member_memberlist extends Member {
 		
 		$path = '';
                 
-		if (eregi("^[0-9]{1,}\-[0-9a-z_]{1,}\-[0-9a-z]{1,}\-[0-9]{1,}\-[0-9]{1,}$", $this->cur_id))
+		if (preg_match("/^[0-9]{1,}\-[0-9a-z_]{1,}\-[0-9a-z]{1,}\-[0-9]{1,}\-[0-9]{1,}$/i", $this->cur_id))
 		{
 			$x = explode("-", $this->cur_id);
 		
@@ -786,7 +786,7 @@ class Member_memberlist extends Member {
 					/**  parse profile path
 					/** ----------------------------------------*/
 					
-					if (ereg("^profile_path", $key))
+					if (preg_match("/^profile_path/", $key))
 					{                       
 						$temp = $this->_var_swap_single($key, $FNS->create_url($FNS->extract_path($key).'/'.$row['member_id']), $temp);
 					}
@@ -795,7 +795,7 @@ class Member_memberlist extends Member {
 					/**  parse avatar path
 					/** ----------------------------------------*/
 					
-					if (ereg("^path:avatars", $key))
+					if (preg_match("/^path:avatars/", $key))
 					{                       
 						$temp = $this->_var_swap_single($key, $avatar_path, $temp);
 					}
@@ -804,7 +804,7 @@ class Member_memberlist extends Member {
 					/**  parse "last_visit" 
 					/** ----------------------------------------*/
 					
-					if (ereg("^last_visit", $key))
+					if (preg_match("/^last_visit/", $key))
 					{			
 						$temp = $this->_var_swap_single($key, ($row['last_activity'] > 0) ? $LOC->decode_date($val, $row['last_activity']) : '--', $temp);
 					}
@@ -813,7 +813,7 @@ class Member_memberlist extends Member {
 					/**  parse "join_date" 
 					/** ----------------------------------------*/
 					
-					if (ereg("^join_date", $key))
+					if (preg_match("/^join_date/", $key))
 					{        
 						$temp = $this->_var_swap_single($key, ($row['join_date'] > 0) ? $LOC->decode_date($val, $row['join_date']) : '--', $temp);
 					}
@@ -822,7 +822,7 @@ class Member_memberlist extends Member {
 					/**  parse "last_entry_date" 
 					/** ----------------------------------------*/
 					
-					if (ereg("^last_entry_date", $key))
+					if (preg_match("/^last_entry_date/", $key))
 					{                     
 						$temp = $this->_var_swap_single($key, ($row['last_entry_date'] > 0) ? $LOC->decode_date($val, $row['last_entry_date']) : '--', $temp);
 					}
@@ -831,7 +831,7 @@ class Member_memberlist extends Member {
 					/**  parse "last_comment_date" 
 					/** ----------------------------------------*/
 					
-					if (ereg("^last_comment_date", $key))
+					if (preg_match("/^last_comment_date/", $key))
 					{                     
 						$temp = $this->_var_swap_single($key, ($row['last_comment_date'] > 0) ? $LOC->decode_date($val, $row['last_comment_date']) : '--', $temp);
 					}
@@ -840,7 +840,7 @@ class Member_memberlist extends Member {
 					/**  parse "last_forum_post_date" 
 					/** ----------------------------------------*/
 					
-					if (ereg("^last_forum_post_date", $key))
+					if (preg_match("/^last_forum_post_date/", $key))
 					{                     
 						$temp = $this->_var_swap_single($key, ($row['last_forum_post_date'] > 0) ? $LOC->decode_date($val, $row['last_forum_post_date']) : '--', $temp);
 					}
