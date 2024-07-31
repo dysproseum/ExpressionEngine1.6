@@ -2168,7 +2168,7 @@ function showHideMenu(objValue)
 			
 		for ($i =0; $i < sizeof($filelist); $i++) 
 		{
-			if ($filelist[$i] != '.' AND $filelist[$i] != '..' AND ! ereg("\.", $filelist[$i]))
+			if ($filelist[$i] != '.' AND $filelist[$i] != '..' AND ! preg_match("/\./", $filelist[$i]))
 			{			
 				$selected = ($filelist[$i] == $default) ? 1 : '';
 				
