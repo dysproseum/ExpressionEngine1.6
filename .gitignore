@@ -1,5 +1,11 @@
-system/config.php
-images/gallery/*
-images/sized/*
-images/avatars/uploads/*
-images/uploads/*
+/system/config.php
+.svn
+/images/avatars/uploads/
+/images/captchas/
+/images/gallery/
+/images/member_photos/
+/images/pm_attachments/
+/images/signature_attachments/
+/images/sized/
+/images/uploads/
+

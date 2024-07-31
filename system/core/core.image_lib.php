@@ -316,7 +316,7 @@ class Image_lib {
 	{
 		$protocol = 'image_process_'.$this->resize_protocol;
 		
-		if (ereg("gd2$", $protocol))
+		if (preg_match("/gd2$/", $protocol))
 		{
 			$protocol = 'image_process_gd';
 		}
