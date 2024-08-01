@@ -229,7 +229,7 @@ class Image_lib {
 		
 		if ($this->thumb_prefix != '')
 		{
-			if ( ! ereg("^[\_\-]", $this->thumb_prefix))
+			if ( ! preg_match("/^[\_\-]/", $this->thumb_prefix))
 				$this->thumb_prefix = "_".$this->thumb_prefix;
 		}
 
@@ -339,7 +339,7 @@ class Image_lib {
 	{
 		$protocol = 'image_process_'.$this->resize_protocol;
 		
-		if (ereg("gd2$", $protocol))
+		if (preg_match("gd2$", $protocol))
 		{
 			$protocol = 'image_process_gd';
 		}
@@ -542,9 +542,9 @@ class Image_lib {
     	}
     	
     	    	
-		if ( ! eregi("convert$", $this->libpath)) 
+		if ( ! preg_match("/convert$/i", $this->libpath))
 		{
-			if ( ! eregi("/$", $this->libpath)) $this->libpath .= "/";
+			if ( ! preg_match("/\/$/i", $this->libpath)) $this->libpath .= "/";
 		
 			$this->libpath .= 'convert';
     	}
