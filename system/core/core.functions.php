@@ -1949,7 +1949,7 @@ class Functions {
         
             if (count($ex) > 0)
             {                
-                if (preg_match("^not ", $ex['0']))
+                if (preg_match("/^not /", $ex['0']))
                 {
                     $ex['0'] = substr($ex['0'], 3);
                     
