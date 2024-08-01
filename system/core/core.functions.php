@@ -1336,13 +1336,13 @@ class Functions {
         		return FALSE;
         	}
 			
-			$insert_data = array (  'ref_id'  	=>  '',
+			$insert_data = array (  'ref_id'  	=>  0,
 									'ref_from' 	=> $ref,
 									'ref_to'  	=> $ref_to,
 									'user_blog'	=> (USER_BLOG === FALSE) ? '' : USER_BLOG,
 									'ref_ip'   	=> $IN->IP,
 									'ref_date'	=> $LOC->now,
-									'ref_agent'	=> $IN->AGENT,
+									'ref_agent'	=> substr($IN->AGENT, 0, 100),
 									'site_id'	=> $PREFS->ini('site_id')
 									);
 	
