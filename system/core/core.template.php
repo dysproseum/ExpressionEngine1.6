@@ -2296,7 +2296,7 @@ class Template {
         	
 			$basepath = $PREFS->ini('tmpl_file_basepath');
 			
-			if ( ! ereg("/$", $basepath)) $basepath .= '/';
+			if ( ! preg_match("/\/$/", $basepath)) $basepath .= '/';
 									
 			$basepath .= $query->row['group_name'].'/'.$query->row['template_name'].'.php';
 			
