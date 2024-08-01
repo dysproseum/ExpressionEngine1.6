@@ -8205,7 +8205,7 @@ SCRIPPITYDOO;
         
         // Does field name contain invalide characters?
         
-        if ( ! eregi("^[a-zA-z0-9\_\-]+$", $_POST['field_name'])) 
+        if ( ! preg_match("/^[a-zA-z0-9\_\-]+$/i", $_POST['field_name']))
         {
             $error[] = $LANG->line('invalid_characters');
         }
@@ -8350,6 +8350,9 @@ SCRIPPITYDOO;
         }
         else
         {
+            // Set default value to prepare new field for database insert.
+            $_POST['field_id'] = 0;
+
             unset($_POST['update_formatting']);
         
             if ($_POST['field_order'] == 0 || $_POST['field_order'] == '')
