@@ -343,13 +343,13 @@ class EEmail {
 	{
 		if ( ! is_array($email))
 		{	
-			if (ereg(',$', $email))
+			if (preg_match('/,$/', $email))
 				$email = substr($email, 0, -1);
 			
-			if (ereg('^,', $email))
+			if (preg_match('/^,/', $email))
 				$email = substr($email, 1);	
 					
-			if (ereg(',', $email))
+			if (preg_match('/,/', $email))
 			{					
 				$x = explode(',', $email);
 				
@@ -572,7 +572,7 @@ class EEmail {
 	{
 		$body = ($this->plaintext_body != '') ? $this->plaintext_body : $this->body;
 		
-		if (eregi( '\<body(.*)\</body\>', $body, $match))
+		if (preg_match( '/\<body(.*)\</body\>/i', $body, $match))
 		{
 			$body = $match['1'];
 		

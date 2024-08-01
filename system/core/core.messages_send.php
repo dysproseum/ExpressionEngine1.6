@@ -176,7 +176,7 @@ class Messages_send extends Messages {
 		$this->temp_message_id = $FNS->random('nozero', 10);
       
       	$data = array(
-      					'attachment_id'			=> '',
+      					'attachment_id'			=> 0,
       					'sender_id'				=> $this->member_id,
       					'message_id'			=> $this->temp_message_id,
       					'attachment_name'		=> $filename.$extension,
@@ -354,7 +354,7 @@ class Messages_send extends Messages {
 			$this->temp_message_id = $FNS->random('nozero', 10);
       	
       		$data = array(
-      						'attachment_id'			=> '',
+      						'attachment_id'			=> 0,
       						'sender_id'				=> $this->member_id,
       						'message_id'			=> $this->temp_message_id,
       						'attachment_name'		=> $row['attachment_name'],
@@ -853,7 +853,7 @@ class Messages_send extends Messages {
 		/**  Store Data
 		/** -------------------------------------*/
 		
-		$data = array('message_id' 			=> '',
+		$data = array('message_id' 			=> 0,
 					  'sender_id' 			=> $this->member_id,
 					  'message_date' 		=> $LOC->now,
 					  'message_subject' 	=> $REGX->xss_clean($IN->GBL('subject')),
@@ -892,7 +892,7 @@ class Messages_send extends Messages {
 		
 		if ($status == 'sent')
 		{
-			$copy_data = array( 'copy_id'	 => '',	
+			$copy_data = array( 'copy_id'	 => 0,
 								'message_id' => $message_id,
 								'sender_id'	 => $this->member_id);
 			
