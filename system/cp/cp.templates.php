@@ -1807,7 +1807,7 @@ function showHideTemplate(htmlObj)
                         $DB->insert_string(
                                              'exp_template_groups', 
                                               array(
-                                                     'group_id'        => '', 
+                                                     'group_id'        => 0,
                                                      'group_name'      => $group_name,
                                                      'group_order'     => $group_order,
                                                      'is_site_default' => $is_site_default,
@@ -1837,7 +1837,7 @@ function showHideTemplate(htmlObj)
 						$DB->insert_string(
 										   'exp_templates', 
 											array(
-												   'template_id'   => '', 
+												   'template_id'   => 0,
 												   'group_id'      => $group_id,
 												   'template_name' => 'index',
 												   'edit_date'	   => $LOC->now,
@@ -1851,7 +1851,7 @@ function showHideTemplate(htmlObj)
 				foreach ($query->result as $row)
 				{				
 					$data = array(
-									'template_id'    		=> '',
+									'template_id'    		=> 0,
 									'group_id'       		=> $group_id,
 									'template_name'  		=> $row['template_name'],
 									'template_notes'  		=> $row['template_notes'],
@@ -2318,7 +2318,7 @@ function showHideTemplate(htmlObj)
             
                         
 			$data = array(
-							'template_id'    => '',
+							'template_id'    => 0,
 							'group_id'       => $_POST['group_id'],
 							'template_name'  => $_POST['template_name'],
 							'template_type'  => $template_type,
@@ -2362,7 +2362,7 @@ function showHideTemplate(htmlObj)
                 $template_type = $query->row['template_type'];
                 
 			$data = array(
-							'template_id'    		=> '',
+							'template_id'    		=> 0,
 							'group_id'       		=> $_POST['group_id'],
 							'template_name'  		=> $_POST['template_name'],
 							'template_notes'  		=> $query->row['template_notes'],
@@ -2382,7 +2382,7 @@ function showHideTemplate(htmlObj)
         else
         {
 			$data = array(
-							'template_id'    => '',
+							'template_id'    => 0,
 							'group_id'       => $_POST['group_id'],
 							'template_name'  => $_POST['template_name'],
 							'template_type'  => $template_type,
@@ -3261,7 +3261,7 @@ EOT;
         if ($IN->GBL('save_history', 'POST') == 'y')
         {
             $data = array(
-                            'tracker_id' => '',
+                            'tracker_id' => 0,
                             'item_id'    => $template_id,
                             'item_table' => 'exp_templates',
                             'item_field' => 'template_data',
