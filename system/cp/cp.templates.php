@@ -2928,7 +2928,7 @@ function showHideTemplate(htmlObj)
 		$qs = ($PREFS->ini('force_query_string') == 'y') ? '' : '?';        
 		$sitepath = $FNS->fetch_site_index(0, 0).$qs.'URL='.$FNS->fetch_site_index();
                      
-        if ( ! preg_match("/$", $sitepath))
+        if ( ! preg_match("/\/$/", $sitepath))
             $sitepath .= '/';
         
         if ($template_type == 'css')
