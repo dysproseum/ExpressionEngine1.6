@@ -348,7 +348,7 @@ class Rss {
 			/**  {weblog_id}
 			/** ----------------------------------------*/
 			
-			if (ereg("weblog_id", $key))
+			if (preg_match("/weblog_id/", $key))
 			{                     
 				$TMPL->tagdata = $TMPL->swap_var_single(
 															$key, 
@@ -362,7 +362,7 @@ class Rss {
 			/**  {encoding}
 			/** ----------------------------------------*/
 			
-			if (ereg("encoding", $key))
+			if (preg_match("/encoding/", $key))
 			{                     
 				$TMPL->tagdata = $TMPL->swap_var_single(
 															$key, 
@@ -376,7 +376,7 @@ class Rss {
 			/**  {weblog_language}
 			/** ----------------------------------------*/
 			
-			if (ereg("weblog_language", $key))
+			if (preg_match("/weblog_language/", $key))
 			{                     
 				$TMPL->tagdata = $TMPL->swap_var_single(
 															$key, 
@@ -390,7 +390,7 @@ class Rss {
 			/**  {weblog_description}
 			/** ----------------------------------------*/
 			
-			if (ereg("weblog_description", $key))
+			if (preg_match("/weblog_description/", $key))
 			{                     
 				$TMPL->tagdata = $TMPL->swap_var_single(
 															$key, 

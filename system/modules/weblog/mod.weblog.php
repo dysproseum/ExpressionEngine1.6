@@ -3804,7 +3804,7 @@ class Weblog {
 						$blog_url = substr($blog_url, $x + 1);
 					}
 					
-					if (preg_match("/$", $blog_url))
+					if (preg_match("/\/$/", $blog_url))
 					{
 						$blog_url = substr($blog_url, 0, -1);
 					}
