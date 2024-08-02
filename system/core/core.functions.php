@@ -1224,7 +1224,7 @@ class Functions {
         	return;        	
 
 		$search_log = array(
-								'id'			=> '',
+								'id'			=> 0,
 								'member_id'		=> $SESS->userdata('member_id'),
 								'screen_name'	=> $SESS->userdata('screen_name'),
 								'ip_address'	=> $IN->IP,
