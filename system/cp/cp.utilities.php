@@ -1475,7 +1475,7 @@ class Utilities {
 		
         foreach ($query->result as $val)
         {
-            if ( ! preg_match("^$DB->prefix", $val['Name']))
+            if ( ! preg_match("/^".$DB->prefix."/", $val['Name']))
             {
                 continue;
             }
@@ -2417,7 +2417,7 @@ class Utilities {
                                 
         foreach ($query->result as $val)
         {
-            if ( ! preg_match("^$DB->prefix", $val['Name']))
+            if ( ! preg_match("/^".$DB->prefix."/", $val['Name']))
             {
                 continue;
             }
