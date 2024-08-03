@@ -1743,7 +1743,7 @@ class Utilities {
 
 					// Have to handle this differently for MySQL < 4
 					
-					if (version_compare(mysql_get_server_info(), '4.0-alpha', '<'))
+					if (version_compare(mysqli_get_server_info($DB->mysqli), '4.0-alpha', '<'))
 					{
 						$temp_sql = preg_replace("/^(\s*SELECT).+?(FROM .+?)/s", "\\1 count(*) AS count \\2", $sql);
 
