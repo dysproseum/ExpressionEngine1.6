@@ -1760,7 +1760,7 @@ $Q[] = "CREATE TABLE exp_templates (
  template_name varchar(50) NOT NULL,
  save_template_file char(1) NOT NULL default 'n',
  template_type varchar(16) NOT NULL default 'webpage',
- template_data mediumtext NOT NULL,
+ template_data mediumtext NOT NULL DEFAULT '',
  template_notes text NOT NULL DEFAULT '',
  edit_date int(6) NOT NULL DEFAULT 0,
  cache char(1) NOT NULL default 'n',
