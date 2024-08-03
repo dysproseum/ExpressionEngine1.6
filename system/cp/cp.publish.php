@@ -1198,7 +1198,7 @@ EOT;
             // the custom field order since we can't guarantee that $_POST
             // data will be in the correct order
             
-            if (count($preview_build > 0))
+            if (!empty($preview_build))
             {
 				foreach ($field_query->result as $row)
 				{
