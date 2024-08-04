@@ -555,7 +555,7 @@ class Functions {
 		
 		if (isset($_POST['RET']))
 		{
-			if (preg_match("^-", $_POST['RET']))
+			if (preg_match("/^-/", $_POST['RET']))
 			{
 				$return = str_replace("-", "", $_POST['RET']);
 				
@@ -569,7 +569,7 @@ class Functions {
 			}
 			else
 			{
-				if (preg_match("/", $_POST['RET']))
+				if (preg_match("/\//", $_POST['RET']))
 				{
 					if (stristr($_POST['RET'], 'http://') OR 
 						stristr($_POST['RET'], 'https://') OR 
