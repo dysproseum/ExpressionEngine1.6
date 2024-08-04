@@ -242,15 +242,29 @@ class Member_register extends Member {
 		/** ----------------------------------------*/
 				
 		$reg_form = $this->_var_swap($reg_form,
-									array(
-											'lang:username_length'	=> $un_min_len,
-											'lang:password_length'	=> $pw_min_len,
-											'form:localization'		=> $LOC->timezone_menu('UTC'),
-											'form:time_format'		=> $tf,
-											'form:language'			=> $FNS->language_pack_names('english')
+			array(
+				'lang:username_length'	=> $un_min_len,
+				'lang:password_length'	=> $pw_min_len,
+				'form:localization'	=> $LOC->timezone_menu('UTC'),
+				'form:time_format'	=> $tf,
+				'form:language'		=> $FNS->language_pack_names('english'),
+				'lang:member_registration' => $LANG->line('member_registration'),
+				'lang:username'		=> $LANG->line('username'),
+				'lang:password'		=> $LANG->line('password'),
+				'lang:password_confirm' => $LANG->line('password_confirm'),
+				'lang:screen_name'	=> $LANG->line('screen_name'),
+				'lang:screen_name_explanation'	=> $LANG->line('mbr_screen_name_explanation'),
+				'lang:email'		=> $LANG->line('email'),
+				'lang:url'		=> $LANG->line('url'),
+				'lang:terms_of_service' => $LANG->line('mbr_terms_of_service'),
+				'lang:captcha'		=> $LANG->line('mbr_captcha'),
+				'lang:terms_accepted'	=> $LANG->line('terms_accepted'),
+				'lang:submit'		=> $LANG->line('submit'),
+				'lang:required_fields'	=> $LANG->line('mbr_required_fields'),
+
 									 
-										)
-									);
+			)
+		);
 		
         /** ----------------------------------------
         /**  Generate Form declaration

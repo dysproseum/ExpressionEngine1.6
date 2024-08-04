@@ -87,6 +87,22 @@ class Member_auth extends Member {
 
 		$this->_set_page_title($LANG->line('member_login'));
 
+		$login_form = $this->_var_swap($login_form,
+			array(
+				'lang:login_required' 	=> $LANG->line('login_required'),
+				'lang:must_be_logged_in' => $LANG->line('must_be_logged_in'),
+				'lang:member_registration' => $LANG->line('member_registration'),
+				'path:register'		=> $this->_member_path('register'),
+				'path:forgot'		=> $this->_member_path('forgot_password'),
+				'lang:forgot_password' => $LANG->line('mbr_forgot_password'),
+				'lang:username' => $LANG->line('username'),
+				'lang:password' => $LANG->line('password'),
+				'lang:submit' => $LANG->line('submit'),
+				'lang:auto_login' => $LANG->line('mbr_auto_login'),
+				'lang:show_name' => $LANG->line('mbr_show_name'),
+			)
+		);
+
 		return $this->_var_swap($login_form, array($match['1'] => $FNS->form_declaration($data)));
 	}
 	/* END */
