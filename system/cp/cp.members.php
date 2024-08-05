@@ -3403,7 +3403,7 @@ EOT;
 
         // Does field name have invalid characters?
         
-        if ( ! eregi("^[a-zA-z0-9\_\-]+$", $_POST['m_field_name'])) 
+        if ( ! preg_match("/^[a-zA-z0-9\_\-]+$/i", $_POST['m_field_name']))
         {
             $error[] = $LANG->line('invalid_characters');
         }
@@ -3480,6 +3480,7 @@ EOT;
             }
             
             unset($_POST['$m_field_id']);
+	    $_POST['m_field_id'] = 0;
                     
             $DB->query($DB->insert_string('exp_member_fields', $_POST));
                                     
