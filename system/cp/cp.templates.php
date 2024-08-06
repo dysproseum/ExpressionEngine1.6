@@ -3984,7 +3984,7 @@ EOT;
 				return $DSP->error_message($LANG->line('duplicate_var_name'));
 			}
 			
-			$DB->query("INSERT INTO exp_global_variables (variable_id, site_id, variable_name, variable_data, user_blog_id) VALUES ('', '".$DB->escape_str($PREFS->ini('site_id'))."', '".$DB->escape_str($_POST['variable_name'])."',  '".$DB->escape_str($_POST['variable_data'])."', '$ub_id')");
+			$DB->query("INSERT INTO exp_global_variables (variable_id, site_id, variable_name, variable_data, user_blog_id) VALUES (0, '".$DB->escape_str($PREFS->ini('site_id'))."', '".$DB->escape_str($_POST['variable_name'])."',  '".$DB->escape_str($_POST['variable_data'])."', '$ub_id')");
 
         	$msg = $LANG->line('global_var_created');
 		}
