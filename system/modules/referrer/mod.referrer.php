@@ -103,7 +103,7 @@ class Referrer {
 					/**  parse {switch} variable
 					/** ----------------------------------------*/
 					
-					if (ereg("^switch", $key))
+					if (preg_match("/^switch/", $key))
 					{
 						$sparam = $FNS->assign_parameters($key);
 						
@@ -199,7 +199,7 @@ class Referrer {
                     /**  {ref_date}
                     /** ----------------------------------------*/
                     
-                	if (ereg("^ref_date", $key))
+                    if (preg_match("/^ref_date/", $key))
                     {
                     	if ( ! isset($row['ref_date']) || $row['ref_date'] == 0)
                     	{
