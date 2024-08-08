@@ -96,6 +96,8 @@ class Paginate {
 		// allows normal query strings but page URIs do not.
                 
         $path  = ($this->path == '') ? $this->base_url.'&amp;'.$this->qstr_var.'=' : $this->path;
+        // Prevent incorrect paths like /index.php/site/index.php/site/index/P10.
+        $path = substr($path, 0, strlen($path) - strlen(SELF."/"));
         $slash = ($this->path == '') ? '' : '/';
     	    	
 		/** ----------------------------------------
