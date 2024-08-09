@@ -263,10 +263,10 @@ class Gallery_CP {
 			$this->prefs[$key] = $val;		
 		}
 		
-		if ( ! ereg("^[\_\-]", $this->prefs['gallery_thumb_prefix']))  
+		if ( ! preg_match("/^[\_\-]/", $this->prefs['gallery_thumb_prefix']))
 			$this->prefs['gallery_thumb_prefix'] = "_".$this->prefs['gallery_thumb_prefix'];
 			
-		if ( ! ereg("^[\_\-]", $this->prefs['gallery_medium_prefix'])) 
+		if ( ! preg_match("/^[\_\-]/", $this->prefs['gallery_medium_prefix']))
 			$this->prefs['gallery_medium_prefix'] = "_".$this->prefs['gallery_medium_prefix'];
 		
 		$this->prefs['gallery_upload_path'] = $FNS->set_realpath($this->prefs['gallery_upload_path']);
@@ -1823,7 +1823,7 @@ EOT;
 			else
 			{
 				$x = explode("/", $serverfile);
-				$image_name = (ereg("/", $serverfile)) ? end($x) : $serverfile;	
+				$image_name = (preg_match("/\//", $serverfile)) ? end($x) : $serverfile;
 				$src = $FNS->remove_double_slashes($this->prefs['gallery_upload_path'].'/');
 			}
 			
@@ -1936,8 +1936,8 @@ EOT;
 											'wm_vrt_alignment'		=>	$this->prefs['gallery_wm_vrt_alignment'],	
 											'wm_hor_alignment'		=>	$this->prefs['gallery_wm_hor_alignment'],
 											'wm_padding'			=>	$this->prefs['gallery_wm_padding'],
-											'wm_x_offset'			=>	$this->prefs['gallery_wm_x_offset'],
-											'wm_y_offset'			=>	$this->prefs['gallery_wm_y_offset'],
+											'wm_x_offset'			=>	0,//$this->prefs['gallery_wm_x_offset'],
+											'wm_y_offset'			=>	0,//$this->prefs['gallery_wm_y_offset'],
 											'wm_x_transp'			=>	$this->prefs['gallery_wm_x_transp'],
 											'wm_y_transp'			=>	$this->prefs['gallery_wm_y_transp'],
 											'wm_text_color'			=>	$this->prefs['gallery_wm_text_color'],
@@ -2022,7 +2022,7 @@ EOT;
 		$filename	= str_replace($extension, '', $image_name);
 
 		$data = array(
-						'entry_id'				=> '',
+						'entry_id'				=> 0,
 						'gallery_id'			=> $this->gallery_id,
 						'cat_id'				=> $_POST['cat_id'],
 						'author_id'				=> $_POST['author_id'],
@@ -2403,8 +2403,8 @@ EOT;
 											'wm_vrt_alignment'		=>	$this->prefs['gallery_wm_vrt_alignment'],	
 											'wm_hor_alignment'		=>	$this->prefs['gallery_wm_hor_alignment'],
 											'wm_padding'			=>	$this->prefs['gallery_wm_padding'],
-											'wm_x_offset'			=>	$this->prefs['gallery_wm_x_offset'],
-											'wm_y_offset'			=>	$this->prefs['gallery_wm_y_offset'],
+											'wm_x_offset'			=>	0,//$this->prefs['gallery_wm_x_offset'],
+											'wm_y_offset'			=>	0,//$this->prefs['gallery_wm_y_offset'],
 											'wm_x_transp'			=>	$this->prefs['gallery_wm_x_transp'],
 											'wm_y_transp'			=>	$this->prefs['gallery_wm_y_transp'],
 											'wm_text_color'			=>	$this->prefs['gallery_wm_text_color'],
@@ -3597,7 +3597,7 @@ EOT;
 		unset($_POST['old_cat_name']);
 		
 		
-		if ( ! ereg("/$", $this->prefs['gallery_upload_path'])) $this->prefs['gallery_upload_path'] .= '/';
+		if ( ! preg_match("/\/$/", $this->prefs['gallery_upload_path'])) $this->prefs['gallery_upload_path'] .= '/';
 
 		// We need to first upadate the default category
 		
@@ -4569,7 +4569,7 @@ EOT;
 				$tpath  = PATH_CP_IMG;
 				$tpath = str_replace($site_url, '', $tpath);
 				
-				if (eregi("www.", $tpath) OR eregi("http://", $tpath))
+				if (preg_match("/www\./i", $tpath) OR preg_match("/http:\/\//i", $tpath))
 				{
 					$tpath = str_replace('http://', '', $tpath);
 					$xy = explode('/', $tpath);
@@ -6047,7 +6047,7 @@ EOT;
 			
             while (false !== ($file = readdir($fp)))
             {
-                if (eregi(".ttf$", $file)) 
+                if (preg_match("/\.ttf$/i", $file))
                 {
                 		$name = substr($file, 0, -4);
                 
@@ -6148,7 +6148,6 @@ EOT;
 						'gallery_upload_path'	=> 'gallery_upload_folder', 
 						'gallery_image_url' 	=> 'gallery_upload_folder',
 						'gallery_batch_path' 	=> 'gallery_batch_folder',
-						'gallery_batch_url'		=> 'gallery_batch_folder'
         				 );
         
         foreach($paths as $key => $val)
@@ -6158,7 +6157,7 @@ EOT;
 				$dir  = $_POST[$val];
 				$path = $_POST[$key];
 				
-				if (ereg("/$", $path))
+				if (preg_match("/\/$/i", $path))
 					$path = substr($path, 0, -1);
 				
 				$mpath = substr($path, 0, -strlen($dir)).$dir;
@@ -6176,10 +6175,10 @@ EOT;
 		$_POST['gallery_batch_url']		= ($_POST['gallery_batch_url'] != '') ? $FNS->remove_double_slashes($_POST['gallery_batch_url'].'/') : '';
         
                 
-		if ( ! ereg("^[\_\-]", $_POST['gallery_thumb_prefix']))  
+		if ( ! preg_match("/^[\_\-]/", $_POST['gallery_thumb_prefix']))
 			$_POST['gallery_thumb_prefix'] = "_".$_POST['gallery_thumb_prefix'];
         
-		if ( ! ereg("^[\_\-]", $_POST['gallery_medium_prefix']))  
+		if ( ! preg_match("/^[\_\-]/", $_POST['gallery_medium_prefix']))
 			$_POST['gallery_medium_prefix'] = "_".$_POST['gallery_medium_prefix'];
 			
         
@@ -6283,7 +6282,7 @@ EOT;
                         $DB->insert_string(
                                              'exp_template_groups', 
                                               array(
-                                                     'group_id'        => '',
+                                                     'group_id'        => 0,
                                                      'site_id'         => $PREFS->ini('site_id'),
                                                      'group_name'      => $template_group,
                                                      'group_order'     => $group_order,
@@ -6296,13 +6295,13 @@ EOT;
         
         		foreach ($template as $key => $val)
         		{
-        			$type = (ereg("css", $key)) ? "css" : "webpage";
+				$type = (preg_match("/css/", $key)) ? "css" : "webpage";
         			
         			$val = str_replace('{TMPL_template_group_name}', $template_group, $val);
         			$val = str_replace('{TMPL_gallery_name}', 		$_POST['gallery_short_name'], $val);
         		
 				$data = array(
-								'template_id'    => '',
+								'template_id'    => 0,
 								'site_id'        => $PREFS->ini('site_id'),
 								'group_id'       => $group_id,
 								'template_name'  => $key,
@@ -6433,7 +6432,7 @@ EOT;
 		$directory_url	= $FNS->remove_double_slashes($this->prefs['gallery_image_url'].'/');
 		$self_location	= BASE.AMP.'C=modules'.AMP.'M=gallery'.AMP.'P=image_toolbox'.AMP.'gallery_id='.$this->gallery_id.AMP.'menu_choice=';
 
-		if (ereg("/", $menu_choice))
+		if (preg_match("/\//", $menu_choice))
 		{
 			$x = explode("/", $menu_choice);		
 			$file_name = end($x);
@@ -8403,9 +8402,9 @@ EOT;
     {
         global $DB;
 
-        $sql[] = "INSERT INTO exp_modules (module_id, module_name, module_version, has_cp_backend) VALUES ('', 'Gallery', '$this->version', 'y')";
-        $sql[] = "INSERT INTO exp_actions (action_id, class, method) VALUES ('', 'Gallery', 'insert_new_comment')";
-        $sql[] = "INSERT INTO exp_actions (action_id, class, method) VALUES ('', 'Gallery', 'delete_comment_notification')";
+        $sql[] = "INSERT INTO exp_modules (module_id, module_name, module_version, has_cp_backend) VALUES (0, 'Gallery', '$this->version', 'y')";
+        $sql[] = "INSERT INTO exp_actions (action_id, class, method) VALUES (0, 'Gallery', 'insert_new_comment')";
+        $sql[] = "INSERT INTO exp_actions (action_id, class, method) VALUES (0, 'Gallery', 'delete_comment_notification')";
 	
 		$sql[] = "CREATE TABLE IF NOT EXISTS exp_galleries (
 					gallery_id int(4) unsigned NOT NULL auto_increment,
@@ -8423,104 +8422,104 @@ EOT;
 					gallery_batch_folder varchar(80) NOT NULL,
 					gallery_batch_path varchar(100) NOT NULL,
 					gallery_batch_url varchar(100) NOT NULL,
-					gallery_maintain_ratio char(1) NOT NULL default 'y',
-					gallery_create_thumb char(1) NOT NULL default 'y',
+					gallery_maintain_ratio char(3) NOT NULL default 'y',
+					gallery_create_thumb char(3) NOT NULL default 'y',
 					gallery_thumb_width int(4) unsigned NOT NULL,
 					gallery_thumb_height int(4) unsigned NOT NULL,
-					gallery_thumb_quality int(3) unsigned NOT NULL,
+					gallery_thumb_quality varchar(3) NOT NULL DEFAULT '',
 					gallery_thumb_prefix varchar(30) NOT NULL,
-					gallery_create_medium char(1) NOT NULL default 'y',
+					gallery_create_medium char(3) NOT NULL default 'y',
 					gallery_medium_width int(4) unsigned NOT NULL,
 					gallery_medium_height int(4) unsigned NOT NULL,
-					gallery_medium_quality int(3) unsigned NOT NULL,
+					gallery_medium_quality varchar(3) NOT NULL DEFAULT '',
 					gallery_medium_prefix varchar(30) NOT NULL,
-					gallery_wm_type char(1) NOT NULL default 'n',
+					gallery_wm_type char(3) NOT NULL default 'n',
 					gallery_wm_image_path varchar(100) NOT NULL,
 					gallery_wm_test_image_path varchar(100) NOT NULL,
-					gallery_wm_use_font char(1) NOT NULL default 'y',
+					gallery_wm_use_font char(3) NOT NULL default 'y',
 					gallery_wm_font varchar(30) NOT NULL,
 					gallery_wm_font_size int(3) unsigned NOT NULL,
 					gallery_wm_text varchar(100) NOT NULL,
-					gallery_wm_vrt_alignment char(1) NOT NULL default 'T',
-					gallery_wm_hor_alignment char(1) NOT NULL default 'L',
+					gallery_wm_vrt_alignment char(3) NOT NULL default 'T',
+					gallery_wm_hor_alignment char(3) NOT NULL default 'L',
 					gallery_wm_padding int(3) unsigned NOT NULL,
 					gallery_wm_opacity int(3) unsigned NOT NULL,
-					gallery_wm_x_offset int(4) unsigned NOT NULL,
-					gallery_wm_y_offset int(4) unsigned NOT NULL,
+					gallery_wm_x_offset varchar(4) NOT NULL DEFAULT '',
+					gallery_wm_y_offset varchar(4) NOT NULL DEFAULT '',
 					gallery_wm_x_transp int(4) NOT NULL,
 					gallery_wm_y_transp int(4) NOT NULL,
 					gallery_wm_text_color varchar(7) NOT NULL,
-					gallery_wm_use_drop_shadow char(1) NOT NULL default 'y',
+					gallery_wm_use_drop_shadow char(3) NOT NULL default 'y',
 					gallery_wm_shadow_distance int(3) unsigned NOT NULL,
 					gallery_wm_shadow_color varchar(7) NOT NULL,
-					gallery_wm_apply_to_thumb char(1) NOT NULL default 'n',
-					gallery_wm_apply_to_medium char(1) NOT NULL default 'n',
+					gallery_wm_apply_to_thumb char(3) NOT NULL default 'n',
+					gallery_wm_apply_to_medium char(3) NOT NULL default 'n',
 					gallery_text_formatting char(10) NOT NULL default 'xhtml',
-					gallery_auto_link_urls char(1) NOT NULL default 'y',
+					gallery_auto_link_urls char(3) NOT NULL default 'y',
 					gallery_comment_url varchar(100) NOT NULL,
-					gallery_comment_require_membership char(1) NOT NULL default 'n',
-					gallery_comment_use_captcha char(1) NOT NULL default 'n',
-					gallery_comment_moderate char(1) NOT NULL default 'n',
+					gallery_comment_require_membership char(3) NOT NULL default 'n',
+					gallery_comment_use_captcha char(3) NOT NULL default 'n',
+					gallery_comment_moderate char(3) NOT NULL default 'n',
 					gallery_comment_max_chars int(5) unsigned NOT NULL,
 					gallery_comment_timelock int(5) unsigned NOT NULL default '0',
-					gallery_comment_require_email char(1) NOT NULL default 'y',
+					gallery_comment_require_email char(3) NOT NULL default 'y',
 					gallery_comment_text_formatting char(5) NOT NULL default 'xhtml',
 					gallery_comment_html_formatting char(4) NOT NULL default 'safe',
-					gallery_comment_allow_img_urls char(1) NOT NULL default 'n',
-					gallery_comment_auto_link_urls char(1) NOT NULL default 'y',
-					gallery_comment_notify char(1) NOT NULL default 'n',
-					gallery_comment_notify_authors char(1) NOT NULL default 'n',
+					gallery_comment_allow_img_urls char(3) NOT NULL default 'n',
+					gallery_comment_auto_link_urls char(3) NOT NULL default 'y',
+					gallery_comment_notify char(3) NOT NULL default 'n',
+					gallery_comment_notify_authors char(3) NOT NULL default 'n',
 					gallery_comment_notify_emails varchar(255) NOT NULL,
 					gallery_comment_expiration int(4) unsigned NOT NULL default '0',
-					gallery_allow_comments char(1) NOT NULL default 'y',
-					gallery_cf_one char(1) NOT NULL default 'n',
-					gallery_cf_one_type char(1) NOT NULL default 'i',
+					gallery_allow_comments char(3) NOT NULL default 'y',
+					gallery_cf_one char(3) NOT NULL default 'n',
+					gallery_cf_one_type char(3) NOT NULL default 'i',
 					gallery_cf_one_label varchar(80) NOT NULL,
 					gallery_cf_one_list text NOT NULL,
 					gallery_cf_one_rows tinyint(2) default '8',
 					gallery_cf_one_formatting char(10) NOT NULL default 'xhtml',
-					gallery_cf_one_auto_link char(1) NOT NULL default 'y',
-					gallery_cf_one_searchable char(1) NOT NULL default 'y',
-					gallery_cf_two char(1) NOT NULL default 'n',
+					gallery_cf_one_auto_link char(3) NOT NULL default 'y',
+					gallery_cf_one_searchable char(3) NOT NULL default 'y',
+					gallery_cf_two char(3) NOT NULL default 'n',
 					gallery_cf_two_label varchar(80) NOT NULL,
-					gallery_cf_two_type char(1) NOT NULL default 'i',
+					gallery_cf_two_type char(3) NOT NULL default 'i',
 					gallery_cf_two_list text NOT NULL,
 					gallery_cf_two_rows tinyint(2) default '8',
 					gallery_cf_two_formatting char(10) NOT NULL default 'xhtml',
-					gallery_cf_two_auto_link char(1) NOT NULL default 'y',
-					gallery_cf_two_searchable char(1) NOT NULL default 'y',
-					gallery_cf_three char(1) NOT NULL default 'n',
+					gallery_cf_two_auto_link char(3) NOT NULL default 'y',
+					gallery_cf_two_searchable char(3) NOT NULL default 'y',
+					gallery_cf_three char(3) NOT NULL default 'n',
 					gallery_cf_three_label varchar(80) NOT NULL,
-					gallery_cf_three_type char(1) NOT NULL default 'i',
+					gallery_cf_three_type char(3) NOT NULL default 'i',
 					gallery_cf_three_list text NOT NULL,
 					gallery_cf_three_rows tinyint(2) default '8',
 					gallery_cf_three_formatting char(10) NOT NULL default 'xhtml',
-					gallery_cf_three_auto_link char(1) NOT NULL default 'y',
-					gallery_cf_three_searchable char(1) NOT NULL default 'y',
-					gallery_cf_four char(1) NOT NULL default 'n',
+					gallery_cf_three_auto_link char(3) NOT NULL default 'y',
+					gallery_cf_three_searchable char(3) NOT NULL default 'y',
+					gallery_cf_four char(3) NOT NULL default 'n',
 					gallery_cf_four_label varchar(80) NOT NULL,
-					gallery_cf_four_type char(1) NOT NULL default 'i',
+					gallery_cf_four_type char(3) NOT NULL default 'i',
 					gallery_cf_four_list text NOT NULL,
 					gallery_cf_four_rows tinyint(2) default '8',
 					gallery_cf_four_formatting char(10) NOT NULL default 'xhtml',
-					gallery_cf_four_auto_link char(1) NOT NULL default 'y',
-					gallery_cf_four_searchable char(1) NOT NULL default 'y',
-					gallery_cf_five char(1) NOT NULL default 'n',
+					gallery_cf_four_auto_link char(3) NOT NULL default 'y',
+					gallery_cf_four_searchable char(3) NOT NULL default 'y',
+					gallery_cf_five char(3) NOT NULL default 'n',
 					gallery_cf_five_label varchar(80) NOT NULL,
-					gallery_cf_five_type char(1) NOT NULL default 'i',
+					gallery_cf_five_type char(3) NOT NULL default 'i',
 					gallery_cf_five_list text NOT NULL,
 					gallery_cf_five_rows tinyint(2) default '8',
 					gallery_cf_five_formatting char(10) NOT NULL default 'xhtml',
-					gallery_cf_five_auto_link char(1) NOT NULL default 'y',
-					gallery_cf_five_searchable char(1) NOT NULL default 'y',
-					gallery_cf_six char(1) NOT NULL default 'n',
+					gallery_cf_five_auto_link char(3) NOT NULL default 'y',
+					gallery_cf_five_searchable char(3) NOT NULL default 'y',
+					gallery_cf_six char(3) NOT NULL default 'n',
 					gallery_cf_six_label varchar(80) NOT NULL,
-					gallery_cf_six_type char(1) NOT NULL default 'i',
+					gallery_cf_six_type char(3) NOT NULL default 'i',
 					gallery_cf_six_list text NOT NULL,
 					gallery_cf_six_rows tinyint(2) default '8',
 					gallery_cf_six_formatting char(10) NOT NULL default 'xhtml',
-					gallery_cf_six_auto_link char(1) NOT NULL default 'y',
-					gallery_cf_six_searchable char(1) NOT NULL default 'y',
+					gallery_cf_six_auto_link char(3) NOT NULL default 'y',
+					gallery_cf_six_searchable char(3) NOT NULL default 'y',
 					PRIMARY KEY (gallery_id)
 				)";    
     
@@ -8547,9 +8546,9 @@ EOT;
 					m_height int(5) unsigned NOT NULL,
 					status char(1) NOT NULL default 'o',
 					entry_date int(10) NOT NULL,
-					edit_date timestamp(14),
+					edit_date timestamp(6),
 					allow_comments char(1) NOT NULL default 'y',
-					recent_comment_date int(10) NOT NULL,
+					recent_comment_date int(10) NOT NULL default '0',
 					total_comments int(4) unsigned NOT NULL default '0',
 					comment_expiration_date int(10) NOT NULL default '0',
 					views int(10) unsigned NOT NULL default '0',
@@ -8563,7 +8562,7 @@ EOT;
 					cat_id int(10) unsigned NOT NULL auto_increment,
 					gallery_id int(4) unsigned NOT NULL,
 					parent_id int(4) unsigned NOT NULL,
-					recent_entry_date int(10) NOT NULL,
+					recent_entry_date int(10) NOT NULL default '0',
 					total_files int(8) unsigned NOT NULL default '0',
 					total_views int(10) unsigned NOT NULL default '0',
 					total_comments mediumint(8) default '0' NOT NULL,
@@ -8571,7 +8570,7 @@ EOT;
 					cat_name varchar(60) NOT NULL,
 					cat_description text NOT NULL,
 					cat_folder varchar(60) NOT NULL,
-					cat_order int(4) unsigned NOT NULL,
+					cat_order int(4) unsigned NOT NULL default '0',
 					is_default char(1) NOT NULL default 'n',
 					PRIMARY KEY (cat_id),
 					KEY (gallery_id)
@@ -8589,7 +8588,7 @@ EOT;
 					 location varchar(50) NOT NULL, 
 					 ip_address varchar(16) NOT NULL,
 					 comment_date int(10) NOT NULL,
-					 edit_date timestamp(14),
+					 edit_date timestamp(6),
 					 comment text NOT NULL,
 					 notify char(1) NOT NULL default 'n',
 					 PRIMARY KEY (comment_id),
