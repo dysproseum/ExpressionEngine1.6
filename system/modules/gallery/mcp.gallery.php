@@ -7189,7 +7189,7 @@ EOT;
 		/** -----------------------------------*/
 						
 		$folder = '';
-		if (ereg("/", $menu_choice))
+		if (preg_match("/\//", $menu_choice))
 		{	
 			$xy = explode("/", $menu_choice);
 			$folder = $FNS->remove_double_slashes(str_replace(end($xy), '', $menu_choice));			
@@ -7464,7 +7464,7 @@ EOT;
         // Strip "http://" from URL string
         // to prevent a security error
         $prefix = ( ! isset($prefix) OR $prefix == '') ? 0 : $prefix;
-		if (ereg('http://', $image_url))
+		if (preg_match('/http:\/\//', $image_url))
 		{
 			$image_url = str_replace('http://', '', $image_url);
 			$prefix = 1;
