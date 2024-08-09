@@ -656,7 +656,7 @@ EOF;
     	    					
 		foreach($emails as $addr)
 		{
-			if (ereg('\<(.*)\>', $addr, $match))
+			if (preg_match('/\<(.*)\>/', $addr, $match))
 				$addr = $match['1'];
 			
 		    if ($subscribe == TRUE)
@@ -675,7 +675,7 @@ EOF;
 		    
 		    	// We use the Admins IP address for these inserts
 				$DB->query("INSERT INTO exp_mailing_list (user_id, list_id, authcode, email, ip_address) 
-							VALUES ('',  '".$DB->escape_str($list_id)."', '".$FNS->random('alpha', 10)."', '".$DB->escape_str($addr)."', '".$DB->escape_str($IN->IP)."')");			
+							VALUES (0,  '".$DB->escape_str($list_id)."', '".$FNS->random('alpha', 10)."', '".$DB->escape_str($addr)."', '".$DB->escape_str($IN->IP)."')");			
 			}
 			else
 			{			
@@ -1020,12 +1020,12 @@ EOF;
 		 list_id int(7) unsigned NOT NULL auto_increment,
 		 list_name varchar(40) NOT NULL,
 		 list_title varchar(100) NOT NULL,
-		 list_template text NOT NULL,
+		 list_template text NOT NULL default '',
 		 PRIMARY KEY (list_id),
 		 KEY (list_name)
 		)";
 		
-		$sql[] = "CREATE TABLE exp_mailing_list (
+		$sql[] = "CREATE TABLE IF NOT EXISTS exp_mailing_list (
 		 user_id int(10) unsigned NOT NULL auto_increment,
 		 list_id int(7) unsigned default '0' NOT NULL,
 		 authcode varchar(10) NOT NULL,
@@ -1043,11 +1043,11 @@ EOF;
 		)";
 				
         
-        $sql[] = "INSERT INTO exp_modules (module_id, module_name, module_version, has_cp_backend) VALUES ('', 'Mailinglist', '$this->version', 'y')";
-        $sql[] = "INSERT INTO exp_actions (action_id, class, method) VALUES ('', 'Mailinglist', 'insert_new_email')";
-        $sql[] = "INSERT INTO exp_actions (action_id, class, method) VALUES ('', 'Mailinglist', 'authorize_email')";
-        $sql[] = "INSERT INTO exp_actions (action_id, class, method) VALUES ('', 'Mailinglist', 'unsubscribe')";
-		$sql[] = "INSERT INTO exp_mailing_lists(list_id, list_name, list_title) values ('', 'default', 'Default Mailing List')";
+        $sql[] = "INSERT INTO exp_modules (module_id, module_name, module_version, has_cp_backend) VALUES (0, 'Mailinglist', '$this->version', 'y')";
+        $sql[] = "INSERT INTO exp_actions (action_id, class, method) VALUES (0, 'Mailinglist', 'insert_new_email')";
+        $sql[] = "INSERT INTO exp_actions (action_id, class, method) VALUES (0, 'Mailinglist', 'authorize_email')";
+        $sql[] = "INSERT INTO exp_actions (action_id, class, method) VALUES (0, 'Mailinglist', 'unsubscribe')";
+		$sql[] = "INSERT INTO exp_mailing_lists(list_id, list_name, list_title) values (0, 'default', 'Default Mailing List')";
 
         foreach ($sql as $query)
         {
