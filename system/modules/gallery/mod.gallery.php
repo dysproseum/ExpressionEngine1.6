@@ -37,7 +37,7 @@ class Gallery {
     
     var	$entry_id			= '';
     var	$cat_id				= '';
-    var	$categories			= '';
+    var	$categories			= array();
     
     var	$entry_date			= array();
     var	$recent_entry_date	= array();
@@ -1051,7 +1051,7 @@ class Gallery {
                 /**  {id_path}
                 /** ----------------------------*/
                 
-                if (ereg("^id_path", $key) )
+                if (preg_match("/^id_path/", $key) )
                 {                          
 					$tagdata = $TMPL->swap_var_single(
 														$key, 
@@ -1064,7 +1064,7 @@ class Gallery {
                 /**  {category_path}
                 /** ----------------------------*/
                 
-                if (ereg("^category_path", $key) )
+                if (preg_match("/^category_path/", $key) )
                 {                          
 					$tagdata = $TMPL->swap_var_single(
 														$key, 

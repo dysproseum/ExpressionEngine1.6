@@ -101,7 +101,7 @@ class File_Browser {
 			
 				$skip = FALSE;
 				
-				if (sizeof($ignore) > 0)
+				if (!empty($ignore))
 				{
 					foreach ($this->ignore as $shun)
 					{
