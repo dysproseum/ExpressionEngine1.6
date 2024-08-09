@@ -38,7 +38,7 @@ class Query_CP {
     {
         global $DB;        
         
-        $sql[] = "INSERT INTO exp_modules (module_id, module_name, module_version, has_cp_backend) VALUES ('', 'Query', '$this->version', 'n')";
+        $sql[] = "INSERT INTO exp_modules (module_id, module_name, module_version, has_cp_backend) VALUES (0, 'Query', '$this->version', 'n')";
     
         foreach ($sql as $query)
         {
