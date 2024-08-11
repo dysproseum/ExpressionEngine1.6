@@ -1468,7 +1468,7 @@ class Functions {
 			if ($parent_entry == TRUE)
 			{
 				$DB->query("INSERT INTO exp_relationships (rel_id, rel_parent_id, rel_child_id, rel_type, rel_data) 
-							VALUES ('', '".$data['parent_id']."', '".$data['child_id']."', '".$data['type']."',
+							VALUES (0, '".$data['parent_id']."', '".$data['child_id']."', '".$data['type']."',
 									'".addslashes(serialize(array('query' => $entry_query, 'cats_fixed' => '1', 'categories' => $cat_array)))."')");
 				return $DB->insert_id;
 			}
@@ -1506,7 +1506,7 @@ class Functions {
 	
 			if ($parent_entry == TRUE)
 			{
-				$DB->query("INSERT INTO exp_relationships (rel_id, rel_parent_id, rel_child_id, rel_type, rel_data) VALUES ('', '".$data['parent_id']."', '".$data['child_id']."', '".$data['type']."', '".addslashes(serialize(array('query' => $entry_query)))."')");
+				$DB->query("INSERT INTO exp_relationships (rel_id, rel_parent_id, rel_child_id, rel_type, rel_data) VALUES (0, '".$data['parent_id']."', '".$data['child_id']."', '".$data['type']."', '".addslashes(serialize(array('query' => $entry_query)))."')");
 				return $DB->insert_id;
 			}
 			else
