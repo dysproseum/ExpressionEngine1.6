@@ -345,7 +345,7 @@ class Fortunes_CP {
         
         if ( ! isset($_POST['fortune_id']))
         {
-            $data = array('fortune_id'        => '',
+            $data = array('fortune_id'        => 0,
                           'fortune_text'    => trim($fortune_text));
             
             $DB->query($DB->insert_string('exp_fortunes', $data));
