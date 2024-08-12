@@ -953,7 +953,7 @@ DOH;
   		`wiki_id` INT(8) UNSIGNED NOT NULL,
   		`cat_name` varchar(70) NOT NULL,
   		`parent_id` int(10) unsigned NOT NULL,
-  		`cat_namespace` varchar(125) NOT NULL,
+  		`cat_namespace` varchar(125) NOT NULL DEFAULT '',
   		PRIMARY KEY  (`cat_id`),
   		KEY `wiki_id` (`wiki_id`)
   		)";
