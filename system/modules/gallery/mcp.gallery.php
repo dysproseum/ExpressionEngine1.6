@@ -3161,7 +3161,7 @@ EOT;
 			
 			$name = str_replace('.'.$ext, '', $name);
 					
-			if (eregi($i."$", $name))
+			if (preg_match("/".$i."$/i", $name))
 			{
 				$name = substr($name, 0, -strlen($i));
 			}	
