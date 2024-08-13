@@ -1447,7 +1447,7 @@ $Q[] = "CREATE TABLE exp_relationships (
  rel_child_id int(10) NOT NULL default '0',
  rel_type varchar(12) NOT NULL,
  rel_data mediumtext NOT NULL,
- reverse_rel_data mediumtext NOT NULL,
+ reverse_rel_data mediumtext NOT NULL DEFAULT '',
  PRIMARY KEY (rel_id),
  KEY (rel_parent_id),
  KEY (rel_child_id)
