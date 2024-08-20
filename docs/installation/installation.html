@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Installation Instructions &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../index.html" />
+  <style type="text/css" media="screen,print">@import url(../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="../index.html#install_docs">Installation and Update Instructions</a> &gt;
+<strong>Installation Instructions</strong>
+</div>
+
+<div id="content">
+
+<h1>Installation Instructions</h1>
+
+<div class="critical">
+
+<p><b>Important:</b> Do <strong>NOT</strong> perform these installation steps if you need to <strong>update</strong> your copy of ExpressionEngine from an earlier version.  Instead, use the  <a href="update.html">Update Instructions</a>.</p>
+
+</div>
+
+
+
+
+<dfn><br />ExpressionEngine is installed in six steps.</dfn>
+
+
+<h2>1.&nbsp; Get Your Settings</h2>
+
+
+<p>In order to install ExpressionEngine you will need to know 4 pieces of information.  If you do not know what they are, please contact your hosting provider and ask them.</p>
+
+<ol>
+<li><b>MySQL Database Name</b></li>
+<li><b>MySQL Server Address</b> (often "localhost" or the server IP address)</li>
+<li><b>MySQL Username</b></li>
+<li><b>MySQL Password</b></li>
+</ol>
+
+
+
+<p class="important"><b>Note</b>: You will need to either create your database or have an existing database before running the ExpressionEngine installation.  This can usually be done either using something such as phpMyAdmin or through your web hosting account control panel.</p>
+
+<h2>2.&nbsp; Rename the "system" folder</h2>
+
+
+<p>This is an <strong>optional, but recommended</strong> step that increases security by keeping the directory containing your ExpressionEngine backend files hidden from public access.</p>
+
+
+
+<p><b>To perform this step</b>: Rename the directory called <kbd>system</kbd>.  Choose a name that is not easily guessed.</p>
+
+
+
+<h2>3.&nbsp; Upload the Files</h2>
+
+<p>Using an FTP program such as WS_FTP, SmartFTP, Transmit, Fetch, etc. upload the ExpressionEngine files to a web accessible directory on your server. 
+
+<p><strong>Image files</strong> should be uploaded in <samp>BINARY</samp> format. The <var>texb.ttf</var> (TrueType Font) file in the <kbd>system/fonts/</kbd> folder should be uploaded in <samp>BINARY</samp> format. All other files should be uploaded in <samp>ASCII</samp> format (also known as "text" format).</p>
+
+	<p><strong>Note:</strong> Do <strong>not</strong> upload the following file and directory; they are only used for people performing an update from a previous version:</p>
+
+	<ul>
+		<li><var>system/update.php</var></li>
+		<li><kbd>system/updates/</kbd></li>
+	</ul>
+
+
+
+<h2>4.&nbsp; Set File Permissions</h2>
+
+<p class="important"><strong><a href="http://enginehosting.com" target="_blank">EngineHosting</a> clients:</strong> Due to the secure Apache process used on EngineHosting's servers, you do not need to change the default permissions and can skip this step.</p>
+
+<p class="important"><strong>Windows Servers:</strong> The files and directories that need to be set to 666 or 777 on Unix servers need to be set as <b>writeable</b> on Windows servers. You may need to contact your Host or server admin for this.</p>
+
+
+<p>If you are using a <strong>Unix server</strong> (or Unix variant, like Linux, OS X, FreeBSD, etc.) you must set the following files to <samp>666</samp>:</p>
+
+
+
+<ul>
+
+<li><var>path.php</var></li>
+<li><var>system/config.php</var></li>
+
+<li><var>system/config_bak.php</var></li>
+
+</ul>
+
+
+
+
+<p>You must set the following directories to <samp>777</samp>:</p>
+
+
+
+<ul>
+
+<li><kbd>images/avatars/uploads/</kbd></li>
+<li><kbd>images/captchas/</kbd></li>
+
+<li><kbd>images/member_photos/</kbd></li>
+<li><kbd>images/pm_attachments/</kbd></li>
+<li><kbd>images/signature_attachments/</kbd></li>
+<li><kbd>images/uploads/</kbd></li>
+<li><kbd>system/cache/</kbd></li>
+</ul>
+
+
+
+<h2>6.&nbsp; Run the Installation Wizard</h2>
+
+
+		<p>Point your browser to the ExpressionEngine Installation Wizard, located in your main ExpressionEngine root:</p>
+		
+		<p class="leftpad"><var>install.php</var></p> 
+		
+		<p>This file will perform changes that are required in order to update you to the new version of ExpressionEngine.</p>
+		
+		<p class="important"><strong>Important:</strong> Make sure you are accessing the file as you would a regular webpage, using an address similar to <samp>http://example.com/install.php</samp>. DO NOT access the file locally on your desktop computer.</p>
+
+		<p>When you are finished <b>delete</b> the <var>install.php</var> file from your server. Leaving it on the server is a security risk.</p>
+
+
+	<h2>Troubleshooting and Running PHP as CGI</h2>
+
+	<p>Please see the <a href="troubleshooting.html">Troubleshooting Page</a> for tips as well as special information if your server runs PHP as a CGI process.</p>
+
+
+
+
+</div>
+
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

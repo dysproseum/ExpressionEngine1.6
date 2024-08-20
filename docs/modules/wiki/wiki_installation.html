@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Installing the Wiki Module &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Wiki Module</a> &gt;
+<strong>Wiki Installation</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Installing the Wiki Module</h1>
+
+	<p>The Wiki Module is simple to install.</p>
+
+	<p class="important">The Wiki Module requires ExpressionEngine and does not function with versions of ExpressionEngine older than 1.4.2.</p>
+
+	<p class="important">These instructions are <strong>only</strong> for first-time installations.  <b>Do not follow the instructions below if you need to <em>update</em> your wiki installation.</b>  Instead, follow the <a href="wiki_update.html">Wiki Update</a> instructions.</p>
+
+<h2>Step 1</h2>
+
+<p>Download the latest version of ExpressionEngine and follow the <a href="../../installation/update.html">Update instructions</a>.</p>
+
+<h2>Step 2</h2>
+
+<p>Inside the unzipped software, you will find a <var>themes/wiki_themes</var> directory. Upload this directory and everything inside it to your server and place it in the <kbd>themes</kbd> directory. You should end up with it located at <var>themes/wiki_themes/</var>.</p>
+
+<h2>Step 3</h2>
+
+<p>Go into the Modules section of your ExpressionEngine Control Panel.  At the bottom of your list of modules should be the Wiki Module. Click install.</p>
+
+<h2>Step 4</h2>
+
+<p>Click on <b>Wiki</b> to <a href="wiki_cp.html">create a wiki and configure the preferences</a> in the Wiki Module Control Panel.</p>
+
+<h2>Step 5</h2>
+
+<p>Go into the Templates section of your ExpressionEngine Control Panel. Create a Template Group specifically for your wiki and in the 'index' template put the following tag:</p>
+			
+			<code>{exp:wiki base_path="Template_Group/index" wiki="wiki_short_name" theme="default"}</code>
+			
+<p>For example, lets say you created a Template Group for your wiki called "wiki", your wiki's short name is also named "wiki," and you are using the default theme. If that's the case your tag would look like this:</p>
+
+			<code>{exp:wiki base_path="wiki/index" wiki="wiki" theme="default"}</code>
+			
+<p>Please see the <a href="wiki_tag.html">Wiki Tag</a> documentation for more information.</p>
+
+	<p class="important">NOTE: <strong>Do NOT</strong> use page caching in the template containing the Wiki module tag.</p>
+	
+<h2>Done!</h2>
+
+<p>That's it! Point your browser to the 'wiki/index' template to view your wiki.</p>
+	
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

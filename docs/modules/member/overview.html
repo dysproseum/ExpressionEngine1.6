@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Member Management Overview &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Member Management</a> &gt;
+<strong>Member Management Overview</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Member Management Module Overview</h1>
+
+	<p>Many of the member management features are integrated into the base system itself, so unlike other modules, the Member Management module is not managed from within the Modules area of the control panel.  Instead, its features are found in the following three places:</p>
+	
+	<p class="important"><strong>Note:</strong> The ExpressionEngine <strong>Core</strong> version does not come with the member module, so some of the features described on this page do not apply.</p>
+	
+	<h2>Members and Groups Area</h2>
+
+	<p>The <kbd>Admin</kbd> area of the Control Panel has a dedicated <a href="../../cp/admin/members_and_groups/index.html">Members and Groups</a> section.  Here you'll find a comprehensive suite of member management utilities, including the main <a href="../../cp/admin/members_and_groups/membership_preferences.html">Members and Preferences</a> page.</p>
+
+	<h2>My Account Page</h2>
+
+	<p>By default, the Control Panel <kbd>My Account</kbd> page shows member profile information and preference settings for the person who is logged into the control panel.  It will also display information for any member if you choose a particular member from this page:</p>
+	
+	<p class="leftpad"><dfn>Admin &gt; Members and Groups &gt; View Members</dfn></p>
+
+	<h2>Site Member Profile Page</h2>
+
+	<p>The public side of your website also has a Member Profile area, enabling your site members to manage their personal profile information without having access to your Control Panel.  Typically, this Member Profile area is found at:</p>
+
+	<code>http://example.com/index.php<kbd>/member/profile/</kbd></code>
+
+	<h3>Member Profile Templates</h3>
+	
+	<p>The public profile area has its own set of templates which can be edited to change the look.  You'll find the templates located on your server here:</p>
+
+	<p class="leftpad"><samp>themes/profile_themes/default</samp></p>
+
+	<p>These templates can be edited with a text editor, or you may choose to edit them via your Control Panel at this page:</p>
+
+	<p class="leftpad"><dfn>Admin &gt; Members and Groups &gt; Member Profile Templates</dfn></p>
+
+	<p class="important">Note: In order to edit the templates via the Control Panel requires that you set the file permissions for the template files to <kbd>777</kbd></p>
+
+	<p>A good strategy is to make a copy of the entire <kbd>default</kbd> templates folder, then edit your copy so you can leave the default files intact.  In your Membership Preferences page you can set your new copy as the site default.  The Member Preferences page is located at:</p>
+	
+	<p class="leftpad"><dfn>Admin &gt; Members and Groups &gt; Membership Preferences</dfn></p>
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

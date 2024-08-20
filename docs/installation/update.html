@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Updating to New Version of ExpressionEngine &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../index.html" />
+  <style type="text/css" media="screen,print">@import url(../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="../index.html#install_docs">Installation and Update Instructions</a> &gt;
+<strong>Updating from a Previous Version of EE</strong>
+</div>
+
+<div id="content">
+
+	<h1>Updating from a Previous Version of ExpressionEngine</h1>
+
+	<p>This page describes the process for updating an older version of ExpressionEngine to the most current version. In addition to the steps on this page there may be some additional steps required for specific versions.  
+	At the bottom of this page you'll see version notes for each version.</p>
+
+	<p class="important"><b>Note:</b> If the Discussion Forum Module or Multiple Site Manager is installed, it is necessary to update them immediately after completing the ExpressionEngine update.</p>
+	
+	<h2><a name="prepare_update">1.&nbsp; Prepare for the Update</a></h2>
+
+	<ul>
+	<li><h5>Download ExpressionEngine</h5>
+		<p>The first step is to <a href="https://secure.expressionengine.com/download.php">download</a> the most current version of the ExpressionEngine software.  Once you have downloaded it, Unzip the software to your local computer.</p>
+	</li>
+	
+	<li><h5>Back-up Your Database</h5>
+		<p>It is recommended that you perform a database backup before performing an update. 
+<!-- Removed as of 1.62			
+			You can use ExpressionEngine's built in <a href="../general/database_backup.html">backup utility</a>.--></p>
+	</li>
+	
+	<li><h5>Back-up Your Config Files and Themes</h5>
+
+		<p>Download the following configuration files from your server to your local computer as a safety precaution.</p>
+		<ul>
+			<li><var>path.php</var></li>
+			<li><var>system/config.php</var></li>
+		</ul>
+		
+		<p>In addition, if you have customized any of your theme files, download them for safe keeping.</p>
+
+		<ul>
+			<li><kbd>themes/</kbd></li>
+		</ul>
+	</li>
+	
+	<li><h5>Back-up Add-Ons</h5>
+
+		<p>If you have installed any extra Plugins, Modules, or Extensions, then it is recommended that you 
+		back them up <b>and</b> their language files before performing the update. <em>It is good practice to backup 
+		the <kbd>extensions</kbd>, <kbd>language</kbd>, <kbd>modules</kbd>, and <kbd>plugins</kbd> directories in their entirety as
+		well in case of problems.</em></p>
+	</li>
+	
+	<li><h5>Take Your Site Offline</h5>
+		<p>It is recommended that you take your site offline for the duration of the update so that people visiting your site won't see any PHP errors or other anomalies that may occur while you are uploading files. Here is one approach:
+		<ol>
+		<li>Copy <dfn>system/utilities/</dfn><kbd>offline.html</kbd> to your main directory (the same place you have your main <kbd>index.php</kbd> file).</li>
+		<li>Rename <kbd>index.php</kbd> file to <kbd>index.php.backup</kbd>.</li>
+		<li>Rename <kbd>offline.html</kbd> to <kbd>index.php</kbd>. Now your visitors will see the "offline" page while you update your site.</li>
+		<li>After the update is finished, be sure to rename the files back to their original names.</li>
+		</ol>
+	</li>
+	<li><h5>Clear Caches</h5>
+		<p>In your ExpressionEngine Control Panel, go to <dfn>Admin &gt; Utilities &gt; Clear Cached Data Files</dfn>.  Select <strong>All cache files</strong> and submit the form to clear out your caches.</p>
+	</li>
+	
+	</ul>
+
+
+	<h2><a name="update_installation">2.&nbsp; Upload the New Files</a></h2>
+
+		<p>Using an FTP program such as WS_FTP, SmartFTP, Transmit, Fetch, etc. 
+		you will now upload and replace the folders listed below on your 
+		server with the new versions you downloaded. Remember to upload the files 
+		and directories in <samp>ASCII format</samp> (<strong>not Binary format</strong>).</p>
+		
+		<p>It is recommended that you delete the files you will be replacing 
+		<strong>before</strong> uploading the new files and directories.</p>
+
+		<p>Do <strong>NOT</strong> overwrite the <var>path.php</var> or <var>config.php</var> files you backed up in step one.</p>
+
+		<p class="important"><b>Important</b>: If you have installed any extra Plugins, 
+		Modules, or Extensions, then you should download those files from your server
+		first and reupload them after updating the core ExpressionEngine files. Language files for Modules and Extensions 
+		will be located in <kbd>system/language/</kbd>.</p>
+
+
+			<ul>
+				<li><kbd>system/core/</kbd></li>
+				<li><kbd>system/cp/</kbd></li>
+				<li><kbd>system/db/</kbd></li>
+				<li><kbd>system/language/</kbd></li>
+				<li><kbd>system/lib/</kbd></li>
+				<li><kbd>system/modules/</kbd></li>
+				<li><kbd>system/plugins/</kbd></li>
+				<li><kbd>system/updates/</kbd></li>
+				<li><var>system/update.php</var></li>
+				<li><kbd>system/utilities/</kbd></li>
+			</ul>
+
+
+
+	<h2><a name="file_permissions">3.&nbsp; Verify the File Permissions</a></h2>
+		
+		<p class="important">Note: If you are hosted on a Windows server you will skip this step, but you should ensure that the files and directories are writable by ExpressionEngine.  You may need to contact your Host or server admin for this.</p>
+		
+		<p>If you are using a Unix server you must set the following files to <samp>666</samp>:</p>
+		<ul>
+			<li><var>system/config.php</var></li>
+			<li><var>system/config_bak.php</var></li>
+		</ul>
+
+		
+		
+		<p>You must set the following directories to <samp>777</samp>:</p>
+		<ul>
+		<li><kbd>system/cache/</kbd> (and its contained folders)</li>
+		</ul>
+
+
+
+	<h2><a name="update_wizard">4.&nbsp; Run The Update Wizard</a></h2>
+
+		<p>Point your browser to the ExpressionEngine Update Wizard, located here:</p>
+		
+		<p class="leftpad"><var>system/update.php</var></p> 
+		
+		<p>This file will perform changes that are required in order to update you to the new version of ExpressionEngine.</p>
+		
+		<p class="important"><strong>Important:</strong> Make sure you are accessing the file as you would a regular webpage, using an address similar to <samp>http://example.com/system/update.php</samp>. DO NOT access the file locally on your desktop computer.</p>
+
+		<p>When you are finished <b>delete</b> the <kbd>system/updates/</kbd> directory and <var>system/update.php</var> file from your server.</p>
+
+
+
+
+	<h2><a name="notes">5.&nbsp; Version Specific Notes</a></h2>
+
+	<p>Please view the update notes that apply to any versions that are newer than the version you have been running.</p>
+
+		<ul>
+			<li><a href="version_notes_1.7.3.html">Version Notes 1.7.3</a></li>
+			<li><a href="version_notes_1.7.2.html">Version Notes 1.7.2</a></li>
+			<li><a href="version_notes_1.7.1.html">Version Notes 1.7.1</a></li>
+			<li><a href="version_notes_1.7.0.html">Version Notes 1.7.0</a></li>
+			<li><a href="version_notes_1.6.9.html">Version Notes 1.6.9</a></li>
+			<li><a href="version_notes_1.6.8.html">Version Notes 1.6.8</a></li>
+			<li><a href="version_notes_1.6.7.html">Version Notes 1.6.7</a></li>
+			<li><a href="version_notes_1.6.6.html">Version Notes 1.6.6</a></li>
+			<li><a href="version_notes_1.6.5.html">Version Notes 1.6.5</a></li>
+			<li><a href="version_notes_1.6.4.html">Version Notes 1.6.4</a></li>
+			<li><a href="version_notes_1.6.3.html">Version Notes 1.6.3</a></li>
+			<li><a href="version_notes_1.6.2.html">Version Notes 1.6.2</a></li>
+			<li><a href="version_notes_1.6.1.html">Version Notes 1.6.1</a></li>
+			<li><a href="version_notes_1.6.html">Version Notes 1.6</a></li>
+			<li><a href="version_notes_1.5.2.html">Version Notes 1.5.2</a></li>
+			<li><a href="version_notes_1.5.1.html">Version Notes 1.5.1</a></li>
+			<li><a href="version_notes_1.5.html">Version Notes 1.5</a></li>
+			<li><a href="version_notes_1.4.1.html">Version Notes 1.4.1</a></li>
+			<li><a href="version_notes_1.4.html">Version Notes 1.4</a></li>
+			<li><a href="version_notes_1.3.2.html">Version Notes 1.3.2</a></li>
+			<li><a href="version_notes_1.3.1.html">Version Notes 1.3.1</a></li>
+			<li><a href="version_notes_1.3.html">Version Notes 1.3</a></li>
+			<li><a href="version_notes_1.2.1.html">Version Notes 1.2.1</a></li>
+			<li><a href="version_notes_1.2.html">Version Notes 1.2</a></li>
+			<li><a href="version_notes_1.1.html">Version Notes 1.1</a></li>
+		</ul>
+
+
+
+	<h2>6.&nbsp; Update Your Documentation</h2>
+
+		<p>If you use the local version of the documentation, then you should replace your current version.  The documentation can be downloaded from the <a href="https://secure.expressionengine.com/download.php">My Purchases</a> area of ExpressionEngine.com.  It may be best for you to delete the local version of the documentation you have on your server now and then upload the new version.</p>
+
+
+</div>
+
+
+		
+<p class="center"><a href="#top">Top of Page</a></p>
+	
+	
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

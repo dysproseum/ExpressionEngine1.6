@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Photo Gallery Batch Entries &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../../index.html"><img src="../../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../../index.html">Table of Contents</a> &gt;
+<a href="../../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="../index.html">Photo Gallery</a> &gt;
+<a href="index.html">The Control Panel</a> &gt;
+<strong>Batch Entries</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Photo Gallery Batch Entries</h1>
+
+	<p>Once you have selected a photo gallery to access (<dfn>Modules &gt; Photo Gallery</dfn>) you may choose the <dfn>Batch Entries</dfn> menu option to process uploaded images in mass.</p>
+
+	<p>Note that you must have correctly set up your gallery (see <dfn><a href="preferences.html">Preferences</a></dfn>) and created <dfn><a href="categories.html">Categories</a></dfn> before you may add new entries.</p>
+
+	<p>The batch entry processing effectively works as a series of <dfn><a href="new_entry.html">New Entry</a></dfn> screens presented one after another corresponding to each of the images you have uploaded.</p>
+
+
+	<h2>Preparing</h2>
+
+	<p>Before you can begin to process your batch entries, you must first set things up.
+
+
+	<h3>Create a Batch Processing Directory</h3>
+
+		<p>First, you must have a directory on your server that you will use to hold the images that you wish to be processed by the <dfn>Batch Entries</dfn> function.  For instance, you may create a subdirectory under your regular <kbd>images/</kbd> directory.</p>
+
+
+	<h3>Set Batch Processing Preferences</h3>
+
+		<p>You must correctly specify the settings related to batch processing in the <dfn><a href="preferences.html">Preferences</a></dfn> section.</p>
+
+
+	<h3>Upload your Images</h3>
+
+		<p>Finally, you must actually upload the images you wish to be processed into the directory you specified above.  You may upload as many images as you need.  Typically, you will use FTP to upload the images into the specified directory on your server.</p>
+
+
+
+	<h2>Running the Batch Processing</h2>
+
+	<p>Once you have prepared as indicated above, you can go to the <dfn>Batch Entries</dfn> section.  You will be presented with a screen very similar to the <dfn>New Entry</dfn> one.  The fields and options will be described below.</p>
+
+	<p>After you submit an image, you will be presented with the next image in your batch directory.  This will proceed through all of your entries, allowing you to process a number of images easily.  If you have set your preferences to automatically create thumbnails or medium sized images, then those will be generated for each image as you go through your batch.</p>
+
+	<p class="important">ExpressionEngine will <strong>not</strong> delete any of your images from your batch directory.  Once you are finished with your batch processing and are satisfied, then you may delete them yourself via FTP or another method.</p>
+
+	<h2>Batch Entries Screen</h2>
+
+	<p>The <dfn>Batch Entries</dfn> screen allows you to enter the information for each entry for the gallery.  Once submitted, the next entry in the batch will be displayed.</p>
+
+
+	<h3>Filter</h3>
+
+		<p>The drop-down list at the top of the screen will allow you to filter the images based on their date.  For instance, if you have a number of images in your batch processing directory but you only with to process the ones you uploaded <em>today</em> you may do so.</p>
+
+		<p>Next to the drop-down, you will see a line indicating which image you are viewing out of how many.</p>
+
+
+	<h3>File Name</h3>
+
+		<p>The filename of the entry being viewed.  This is not editable.</p>
+
+
+	<h3>Entry Title</h3>
+
+		<p>The title for your gallery entry.  This field is required.  By default, the field is based off of the filename for the image with the file extension removed.</p>
+
+
+	<h3>Caption</h3>
+
+		<p>You may enter a description or caption to accompany the image.  To the left of this field, your image is displayed.</p>
+
+
+	<h3>Entry Date</h3>
+
+		<p>Here you may change the date for the entry.  By default, the field will populate with the current time as of when you load the form.  You may alter the date if you wish.</p>
+
+
+	<h3>Category</h3>
+
+		<p>Select the category in which to file this gallery entry.  You must select a category.</p>
+
+
+	<h3>Status</h3>
+
+		<p>You may specify whether the gallery entry is "Open" or "Closed".  Closed entries will not appear on your site but will still remain in the database.  You may always change the status later by editing the entry and thus you can use the Closed status for when you are still working on an entry.</p>
+
+
+	<h3>Apply Watermark</h3>
+
+		<p>This allows you to choose whether or not to apply a watermark to the image.  You can see the <a href="watermarking.html">watermarking</a> section for more information about setting up a watermark.</p>
+
+
+	<h3>Allow Comments</h3>
+
+		<p>You may select on a per-entry basis whether you wish to allow commenting on the entry.</p>
+
+
+	<h3>Skip to Next Image</h3>
+
+		<p>If you do not wish to process the current image at this time, then you may use the <dfn>Skip to Next Image</dfn> link to skip over the current image and proceed to the next one without processing the current one.</p>
+
+
+	<h3>Previous Image</h3>
+
+		<p>If you do not wish to process the current image at this time, then you may use the <dfn>Previous Image</dfn> link to return to the previous one without processing the current image.</p>
+
+
+	<h3>Submit this Entry</h3>
+
+		<p>Use this button to submit the current entry and bring up the next one for processing.</p>
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

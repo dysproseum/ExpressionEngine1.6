@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Simple Commerce &#8211; Email Templates &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Simple Commerce Module</a> &gt;
+<a href="sc_cp.html">Simple Commerce Control Panel</a> &gt;
+<strong>Email Templates</strong>
+</div>
+
+
+<div id="content">
+
+		<h1>Simple Commerce &#8211; Email Templates</h1>
+
+		<p>Email templates allow you to create highly customized notification templates that you can associate with store items.  Email templates can be created and used for both administrator notifications and customer notifications.</p>
+		
+		<h2>Simple Commerce Home Page Options</h2>
+		
+		<div class="imgwrapper"><img src="../../images/sc_cp_emails.png" width="490" height="131" alt="Simple Commerce Purchases" title="Simple Commerce Purchases" border="0" /></div>
+		
+		<h3>Add Email Template</h3>		
+
+		<p>The <strong>Add Email Template</strong> link allows you to create email notification templates.</p>
+
+		<h3>Edit Email Templates</h3>
+
+		<p>The <strong>Edit Email Templates</strong> link allows you to view and edit existing email templates.</p>
+
+		<h2>Add / Edit Email Template</h2>
+		
+		<p>Below is an example of a typical administrator purchase notification email.</p>
+		
+<code>Purchase completed!<br />
+<br />
+QTY {quantity} - {item_name}<br />
+<br />
+Total Payment: {payment_gross}<br />
+PayPal Transaction Fee: {payment_fee}<br />
+<br />
+--------------------------<br />
+<br />
+Buyer ({payer_status}):<br />
+<br />
+{first_name} {last_name}<br />
+{payer_business_name}<br />
+<br />
+Address ({address_status}):<br />
+<br />
+{address_name}<br />
+{address_street}<br />
+{address_city}, {address_state}  {address_zip}<br />
+{address_country}
+</code>
+
+		<h3>Email Template Name</h3>
+		
+		<p>A descriptive name for the email template.  This will be shown in the email template drop-down menus of the store <a href="sc_cp_items.html">item creation</a> form.</p>
+
+		<h3>Email Subject</h3>
+		
+		<p>The subject that will be used for the notification email.</p>
+		
+		<h3>Email Body</h3>
+		
+		<p>The message body that will be used for the notification email.</p>
+		
+		<h3>Available Variables</h3>
+		
+		<p>The following variables can be used anywhere in either the email subject or the email body.</p>
+		
+		<ul>
+			<li>{address_city}</li>
+			<li>{address_country}</li>
+			<li>{address_name}</li>
+			<li>{address_state}</li>
+			<li>{address_status}</li>
+			<li>{address_street}</li>
+			<li>{address_zip}</li>
+			<li>{business}</li>
+			<li>{custom}</li>
+			<li>{exchange_rate}</li>
+			<li>{first_name}</li>
+			<li>{invoice}</li>
+			<li>{item_name}</li>
+			<li>{item_number}</li>
+			<li>{last_name}</li>
+			<li>{mc_currency}</li>
+			<li>{mc_fee}</li>
+			<li>{mc_gross}</li>
+			<li>{memo}</li>
+			<li>{notify_version}</li>
+			<li>{num_cart_items}</li>
+			<li>{option_name1}</li>
+			<li>{option_name2}</li>
+			<li>{option_selection1}</li>
+			<li>{option_selection2}</li>
+			<li>{payer_business_name}</li>
+			<li>{payer_email}</li>
+			<li>{payer_id}</li>
+			<li>{payer_status}</li>
+			<li>{payment_date}</li>
+			<li>{payment_fee}</li>
+			<li>{payment_gross}</li>
+			<li>{payment_status}</li>
+			<li>{payment_type}</li>
+			<li>{pending_reason}</li>
+			<li>{quantity}</li>
+			<li>{reason_code}</li>
+			<li>{receiver_email}</li>
+			<li>{receiver_id}</li>
+			<li>{settle_amount}</li>
+			<li>{settle_currency}</li>
+			<li>{tax}</li>
+			<li>{txn_id}</li>
+			<li>{txn_type}</li>
+			<li>{verify_sign}</li>
+		</ul>
+		
+</div>
+		
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

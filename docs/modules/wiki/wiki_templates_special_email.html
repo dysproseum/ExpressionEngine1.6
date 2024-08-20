@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Wiki Template, Email Section &#8211; ExpressionEngine Documentation</title> 
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style> 
+
+<style type="text/css">
+.screencap {
+margin: 30px 0;
+text-align: center;}
+</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="README.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+</tr>
+</table>
+</div>
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Wiki Module</a> &gt;
+<a href="wiki_templates.html">Theme Template</a> &gt;
+<strong>Email</strong>
+</div>
+
+<div id="content">
+
+	<h1>Wiki Template, Email Section</h1>
+
+<p>These sections generate the email that notifies Wiki Admins of changes to moderated articles.</p>
+
+<p class="important"><strong>Note:</strong> The email is split into two templates; one handles the email subject and the other the body of the email.</p>
+
+<p>The email sections have the following variables available to it.</p>
+
+<h2>Single Variables</h2>
+
+<ul>
+<li><a href="#var_sin_revision_date">{revision_date format=""}</a></li>
+<li><a href="#var_sin_title">{title}</a></li>
+<li><a href="#var_sin_revision_id">{revision_id}</a></li>
+<li><a href="#var_sin_author">{author}</a></li>
+<li><a href="#var_sin_email">{email}</a></li>
+<li><a href="#var_sin_revision_notes">{revision_notes}</a></li>
+<li><a href="#var_sin_path_view_article">{path:view_article}</a></li>
+<li><a href="#var_sin_path_vew_revision">{path:view_revision}</a></li>
+<li><a href="#var_sin_path_open_revision">{path:open_revision}</a></li>
+<li><a href="#var_sin_path_close_revision">{path:close_revision}</a></li>
+<li><a href="#var_sin_content">{content}</a></li>
+<li><a href="#var_sin_article">{article}</a></li>
+</ul>
+
+<h3><a name="var_sin_revision_date">revision_date</a></h3>
+
+<code>{revision_date format=""}</code>
+
+<p>This displays the time of the most recent article revision.</p>
+
+<p>The <strong>format</strong> parameter is used to determine the date's formatting using ExpressionEngine's <a href="../../templates/date_variable_formatting.html">Date Variable Formatting</a>.</p>
+
+<h3><a name="var_sin_title">title</a></h3>
+
+<code>{title}</code>
+
+<p>Displays the article/page's Title.</p>
+
+<h3><a name="var_sin_revision_id">revision_id</a></h3>
+
+<code>{revision_id}</code>
+
+<p>Displays the revision's unique ID number.</p>
+
+<h3><a name="var_sin_author">author</a></h3>
+
+<code>{author}</code>
+
+<p>Displays the Screen Name of the revision's author.</p>
+
+<h3><a name="var_sin_email">email</a></h3>
+
+<code>{email}</code>
+
+<p>This displays the email address of the revision's author.</p>
+
+<h3><a name="var_sin_revsion_notes">revision_notes</a></h3>
+
+<code>{revision_notes}</code>
+
+<p>This displays the revision's notes (if any).</p>
+
+<h3><a name="var_sin_path_view_article">path:view_article</a></h3>
+
+<code>{path:view_article}</code>
+
+<p>Dislpays the URL to view the article.</p>
+
+<h3><a name="var_sin_path_view_revision">path:view_revision</a></h3>
+
+<code>{path:view_revision}</code>
+
+<p>Displays the URL to view the revision.</p>
+
+<h3><a name="var_sin_path_open_revision">path:open_revision</a></h3>
+
+<code>{path:open_revision}</code>
+
+<p>Displays the URL to Open the revision.</p>
+
+<p><strong>NOTE:</strong> Opening a revision approves it and makes it live. If you only want to view a revision, use the <a href="#var_sin_path_view_revision">{path:view_revision}</a> variable instead.</p>
+
+<h3><a name="var_sin_path_close_revision">path:close_revision</a></h3>
+
+<code>{path:close_revision}</code>
+
+<p>Displays the URL that will close a revision.</p>
+
+<p class="important"><strong>NOTE:</strong> The "open" and "close" links will only work if the person clicking them is a Wiki Admin.</p>
+
+<h3><a name="var_sin_content">content</a></h3>
+
+<code>{content}</code>
+
+<p>Displays the raw content of an article.</p>
+
+<h3><a name="var_sin_article">article</a></h3>
+
+<code>{article}</code>
+
+<p>Displays the fully rendered article. HTML characters will be rendered.</p>
+
+</div>
+	
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,419 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+<title>Quick Start Tutorial - Page 7</title>
+
+<meta name="MSSmartTagsPreventParsing" content="TRUE" /> <link rel="contents" href="../index.html" />
+<style type="text/css" media="screen,print">@import url(../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="../index.html#getting_started">Getting Started</a> &gt;
+<a href="index.html">Quick Start Tutorial</a> &gt;
+<strong>Step 7</strong>
+</div>
+
+
+<div id="content">
+
+<h1>Quick Start Tutorial - Step 7<div class="subhead">Bringing it all Together with EE Tags</div></h1>
+
+
+<h4>The Goal:&nbsp; Learn about Modules (specifically the EE Weblog module), learn about Single EE Tags, learn about Pair EE Tags, learn how to use Parameters in EE Tags, learn how to use Variables in EE Tags, learn the basics of EE URLs, learn about the Path Global Variable, finish your Getting Started Tutorial Weblog!</h4>
+
+
+<h2>Review</h2>
+<p>Let's review what you've accomplished so far. First you created the HTML for your web site with a Template Group and Templates. Then you created a new Weblog for your web site to hold the content. And you just finished publishing four entries to the new Weblog. Now you need to tell your Templates how to display your content. To do this, you'll use EE Tags.</p>
+
+<h2>What is an EE Tag?</h2>
+
+<p>An EE Tag tells your EE database how to display information on your web site. Tags grant you a lot of control and flexibility in what information is displayed, how that information is displayed, and even <i>when</i> information is displayed.</p>
+
+<h2>What does a an EE Tag Look Like?</h2>
+
+<p>A Tag is easy to spot since it's surrounded by curly brackets and always begins with "exp:" Here is an example.</p>
+
+<code>{exp:weblog:weblog_name}</code>
+
+<p>The first part of the tag, <samp>exp:</samp>, tells ExpressionEngine that this is a tag. The second part, <samp>weblog</samp>, is the module that the tag belongs to, in this case the <a href="../modules/weblog/index.html">Weblog module</a>. The third part (which not every tag will have), <samp>weblog_name</samp>, is the specific function from within the module that you're calling; in this case the function to display the "Weblog name."</p>
+
+<p class="important"><strong>Important concept:</strong> Most of ExpressionEngine's functionality is achieved using "Add-on Modules," which are components that provide specific features and capability.   ExpressionEngine currently has 20 different modules, which include Weblog and Content management, Mailing List, Search Engine, Communications, Moblog, Photo Gallery, and a Discussion Forum. Each module has a set of EE Tags that you put in your Templates to access a Module's functionality.</p>
+
+<h2>Parameters</h2>
+
+<p>But wait! You have two Weblogs. You have the default Weblog and you have new Getting Started Tutorial Weblog that you created for this tutorial. How does the EE Tag know which Weblog name to display? Good question. The answer is that the EE Tag <i>doesn't</i> know which Weblog name to display. So you need to tell the EE Tag that you want to display the Weblog name of the Getting Started Tutorial Weblog. You do this using <b>Parameters</b>.</p>
+
+<p>Parameters let you control and modify the behavior of an EE Tag. In your case, you need to control which Weblog name gets displayed, so you add a parameter like this:</p>
+
+<code>{exp:weblog:weblog_name <strong>weblog="gst_blog"</strong>}</code>
+
+<p>Parameters are made up of the Parameter name, in this case <samp>weblog</samp>, and a value, in this case <samp>"gst_blog"</samp> (because that is the <b>Short Name</b> of the Getting Started Tutorial Weblog). The value is always enclosed. The name is assigned the value using <samp>=</samp>.</p>
+
+<p class="important"><strong>Important concept:</strong> Whenever you need to tell EE to get information from a specific Weblog, you always use the Weblog's <b>Short Name</b>. You can find the Short Name by clicking Admin --> Weblog Administration --> Weblog Management.</p>
+
+<h2>Try it!</h2>
+
+<p>Copy the code below into the "index" Template in your "tutorial" Template Group.</p>
+
+<code>&lt;h1>The name of my weblog is {exp:weblog:weblog_name weblog="gst_blog"}&lt;/h1></code>
+
+<p>Put the code right below the opening "body" HTML tag, as shown below.</p>
+
+<code>
+&lt;html><br />
+&lt;head><br />
+&lt;title>My First EE Site&lt;/title><br />
+&lt;/head><br />
+&lt;body>
+<br />
+<br />
+<strong>&lt;h1>The name of my weblog is {exp:weblog:weblog_name weblog="gst_blog"}&lt;/h1></strong>
+<br />
+<br />
+&lt;h2>The title of my post&lt;/h2>
+<br />
+<br />
+&lt;div class="entry">
+<br />
+<br />
+&lt;p>Hello world! This is where my entry should show up.&lt;/p>
+<br />
+<br />
+&lt;/div>
+<br />
+<br />
+&lt;/body><br />
+&lt;/html>
+</code>
+
+<p>When you view your Template in a browser, <samp>{exp:weblog:weblog_name weblog="gst_blog"}</samp> is rendered with the actual name of the Weblog, as highlighted below.</p>
+
+<div class="imgwrapper"><img class="imgborder" src="../images/weblog_name_example.gif" alt="Notice how the weblog_name EE Tag gets replaced with the actual name of the weblog we specified in the parameter." title="Notice how the weblog_name EE Tag gets replaced with the actual name of the weblog we specified in the parameter." border="0" /></div>
+
+<h2>Single and Pair Tags</h2>
+
+<p>The <samp>{exp:weblog:weblog_name}</samp> is an example of a <b>Single Tag</b>. Single Tags are designed to return a single value or a single piece of information.</p>
+
+<p>A <b>Pair Tag</b> is designed to return multiple pieces of information. Pair Tags differ from Single Tags in two ways. First, a Pair Tag needs to be closed. And second, a Pair Tag can hold content between its opening and closing lines.</p>
+
+<p>Look at the <b>Weblog Entry Tag</b> as an example.</p>
+
+<code>
+{exp:weblog:entries weblog="gst_blog"}
+<br />
+<br />
+Some content goes here.
+<br />
+<br />
+{/exp:weblog:entries}
+</code>
+
+<p>Like Single Tags, Pair Tags can use Parameters. In Pair Tags, Parameters always go in the opening line, as shown above. Closing a Pair Tag is always the same. Just add a "/" before the name of the Tag. Notice that the Parameters are not repeated in the closing section, just the name of the Tag.</p>
+
+<p>The really cool thing about Pair Tags is that you can use <b>Variables</b> which allow you to pull even more information for use on your web site.</p>
+
+<h2>Variables</h2>
+
+<p>Whereas a Parameter controls and modifies, a Variable gets replaced. The easiest way to learn this is to just try it. You'll catch on right away.</p>
+
+<p>In the "index" Template in the "tutorial" Template Group, find this HTML:</p>
+
+<code>
+&lt;h1>The title of my post&lt;/h1> 
+<br />
+<br />
+&lt;div class="entry"> 
+<br />
+<br />
+&lt;p>Hello world! This is where my entry should show up.&lt;/p> 
+<br />
+<br />
+&lt;/div> 
+</code>
+
+<p>Now you're going to integrate the the Weblog Entry Tag into the HTML. This will allow you to display the content of the Getting Started Tutorial Weblog you created on your web site.</p>
+
+<p>First, <b>open</b> the Weblog Entry Tag. Remember, since you have more than one one Weblog, you need to use the <samp>weblog</samp> Parameter to tell EE each Weblog to display.</p>
+
+<code>
+<span style="font-weight: bold;">{exp:weblog:entries weblog="gst_blog"}</span>
+<br />
+<br />
+&lt;h1>The title of my post&lt;/h1> 
+<br />
+<br />
+&lt;div class="entry"> 
+<br />
+<br />
+&lt;p>Hello world! This is where my entry should show up.&lt;/p> 
+<br />
+<br />
+&lt;/div> 
+</code>
+
+<p>Second, replace "The title of my post" with the <samp>{title}</samp> Variable. When the Template is rendered in a browser, the <samp>{title}</samp> Variable will be replaced with the actual title of your Weblog entry. The User Guide documents which Variables can be used in a specific EE Tag. We'll cover how to look that up shortly.</p>
+
+<code>
+{exp:weblog:entries weblog="gst_blog"}
+<br />
+<br />
+&lt;h1><span style="font-weight: bold;">{title}</span>&lt;/h1> 
+<br />
+<br />
+&lt;div class="entry"> 
+<br />
+<br />
+&lt;p>Hello world! This is where my entry should show up.&lt;/p> 
+<br />
+<br />
+&lt;/div> 
+</code>
+
+
+<p>Third, replace "Hello world! This is where my entry should show up." with the <samp>{summary}</samp> Variable. When the Template is rendered in a browser, the <samp>{summary}</samp> Variable will be replaced by the contents of your Weblog entry's Summary field.</p>
+
+<p>Notice that here you are also replacing the HTML &lt;p> tags. By default all EE weblog entries are formatted as valid xhtml, so appropriate &lt;p> tags will be added automatically. (You can change the default setting on the Publish and Edit screens. You can change the default formatting as well.)</p> 
+
+<code>
+{exp:weblog:entries weblog="gst_blog"}
+<br />
+<br />
+&lt;h1>{title}&lt;/h1> 
+<br />
+<br />
+&lt;div class="entry"> 
+<br />
+<br />
+<span style="font-weight: bold;">{summary}</span>
+<br />
+<br />
+&lt;/div> 
+</code>
+
+<p>Fourth, close the Weblog Entry Tag.</p>
+
+<code>
+{exp:weblog:entries weblog="gst_blog"}
+<br />
+<br />
+&lt;h1>{title}&lt;/h1> 
+<br />
+<br />
+&lt;div class="entry"> 
+<br />
+<br />
+{summary}
+<br />
+<br />
+&lt;/div>
+<br />
+<br />
+<span style="font-weight: bold;">{/exp:weblog:entries}</span>
+</code>
+
+<p>Your "index" Template in the "tutorial" Template Group should now have this code.</p>
+
+<code>
+&lt;html>
+<br />
+&lt;head>
+<br />
+&lt;title>My First EE Site&lt;/title>
+<br />
+&lt;/head>
+<br />
+&lt;body> 
+<br />
+<br />
+&lt;h2>The name of my weblog is {exp:weblog:weblog_name weblog="gst_blog"}&lt;/h2>
+<br />
+<br />
+{exp:weblog:entries weblog="gst_blog"}
+<br />
+<br />
+&lt;h1>{title}&lt;/h1> 
+<br />
+<br />
+&lt;div class="entry"> 
+<br />
+<br />
+{summary}
+<br />
+<br />
+&lt;/div>
+<br />
+<br />
+{/exp:weblog:entries}
+<br />
+<br />
+&lt;/body>
+<br />
+&lt;/html>
+</code>
+
+<p>Now, update the Template and view it a browser. You should see something similar to the screen shot below.</p>
+
+<div class="imgwrapper"><img class="imgborder"src="../images/tutorial_index_working.gif" alt="Your index Template in the tutorial Template Group should look similar to this." title="Your index Template in the tutorial Template Group should look similar to this." border="0" /></div>
+
+<p>Notice that by default the Weblog Entry Tag displays all entries in the specified Weblog starting with the most recent. You can use Parameters to change this. Again, we'll cover how to look up Parameters shortly.</p>
+
+<h2>Linking to the "Full" Entry</h2>
+
+<p>A standard practice in traditional weblogs, news sites, ezines, and a number of other sites is to have a listing of "blurbs" or "summaries" of articles, entries, news releases, etc. on a page with a "read more" link that goes to a page with the "full" story, article, page, etc.</p>
+
+<p>Right now, your index Template shows the summaries (Summary field) of your Weblog entries. The last step in completing your web site is to turn your "article" template into a page that shows the "full" story or entry and link to it with a "read more" link from your "index" Template.</p>
+
+<h2>Linking to the "article" Template</h2>
+
+<p>There are a number of ways you could link to the "article" Template. We'll show you the one that is most search engine friendly: the <samp>{title_permalink}</samp> Variable available to the Weblog Entry Tag.</p>
+
+<p>The <samp>{title_permalink}</samp> variable uses the URL Title field to construct a nice, search engine friendly URL that is also easily readable in English. Variables, like Parameters, can also have values. In this case, you want to tell the <samp>{title_permalink}</samp> Variable to link to the "articles" Template, so specify the value like so:</p>
+
+<code>
+{title_permalink="tutorial/article"}
+</code>
+
+<p>Notice that the value is the Template Group name followed by the name of Template you want to link to. In general, URLs in EE are always written in this format. Here's how to use it in a standard HTML link:</p>
+
+<code>
+&lt;a href="{title_permalink='tutorial/article'}">Read More&lt;/a>
+</code>
+
+<p>This will render as:</p>
+
+<code>
+&lt;a href="http://example.com/index.php/tutorial/article/url_title_of_entry/">Read more&lt;/a>
+</code>
+
+<p>Now update your "index" Template with the code below (changes are in bold).</p>
+
+<code>
+&lt;html>
+<br />
+&lt;head>
+<br />
+&lt;title>My First EE Site&lt;/title>
+<br />
+&lt;/head>
+<br />
+&lt;body> 
+<br />
+<br />
+&lt;h2>The name of my weblog is {exp:weblog:weblog_name weblog="gst_blog"}&lt;/h2>
+<br />
+<br />
+{exp:weblog:entries weblog="gst_blog"}
+<br />
+<br />
+&lt;h1>{title}&lt;/h1> 
+<br />
+<br />
+&lt;div class="entry"> 
+<br />
+<br />
+{summary}
+<br />
+<br />
+<span style="font-weight: bold;">&lt;p>&lt;a href="{title_permalink='tutorial/article'}">Read More&lt;/a>&lt;/p></span>
+<br />
+<br />
+&lt;/div>
+<br />
+<br />
+{/exp:weblog:entries}
+<br />
+<br />
+&lt;/body>
+<br />
+&lt;/html>
+</code>
+
+<p>When you update and view your "index" Template, you'll see that the "Read More" link has been added, as highlighted in the screen shot below.</p>
+
+<div class="imgwrapper"><img class="imgborder"src="../images/tutorial_index_read_more.jpg" alt="The index Template with the Read More link to the article Template." title="The index Template with the Read More link to the article Template." border="0" /></div>
+
+<h2>Preparing the "article" Template</h2>
+
+<p>Now that you've linked to the "article" Template, you need to prepare it to show the "full" Weblog entry. The "full" entry, for the purposes of this tutorial, is a page that displays the Summary, Body, and Extended fields from your Getting Started Tutorial Weblog.</p>
+
+<p>Open the Edit screen for your "article" Template in the "tutorial" Template Group and replace the existing code with the code below. The only difference between the code below and the code on the "index" Template is that it adds the <samp>{body}</samp> and <samp>{extended}</samp> Variables which will display the content in the Body and Extended fields of your Getting Started Tutorial Weblog. It also adds a link at the bottom of the page to easily return to the "index" Template. The changes are in bold.</p>
+
+<code>
+&lt;html>
+<br />
+&lt;head>
+<br />
+&lt;title>My First EE Site&lt;/title>
+<br />
+&lt;/head>
+<br />
+&lt;body> 
+<br />
+<br />
+&lt;h2>The name of my weblog is {exp:weblog:weblog_name weblog="gst_blog"}&lt;/h2>
+<br />
+<br />
+{exp:weblog:entries weblog="gst_blog"}
+<br />
+<br />
+&lt;h1>{title}&lt;/h1> 
+<br />
+<br />
+&lt;div class="entry"> 
+<br />
+<br />
+{summary}
+<br />
+<br />
+<span style="font-weight: bold">{body}
+<br />
+<br />
+{extended}
+</span>
+<br />
+<br />
+&lt;/div>
+<br />
+<br />
+{/exp:weblog:entries}
+<br />
+<br />
+<span style="font-weight: bold;">&lt;p>&lt;a href="{path='tutorial/index'}">Back to the main page&lt;/a>.&lt;/p></span>
+<br />
+<br />
+&lt;/body>
+<br />
+&lt;/html>
+</code>
+
+<p>Just a quick note here: The <samp>{path="tutorial/index"}</samp> Variable that you used to create the link back to the "index" Template is a <b>Global Variable</b>, meaning that it can be used anywhere in any Template. It's the easiest way to create basic links to any template in your EE installation. As mentioned earlier, the format for links is always <samp>template_group/template</samp>. The User Guide has more information on the <a href="../templates/globals/path.html">Path Global Variable</a> and a full explanation of how <a href="../general/urls.html">URLS work</a>.</p>
+
+<h1>Next:&nbsp; <a href="building_on_the_basics.html">Building on the Basics</a></h1>
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer"> <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address> </div>
+
+</body> </html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Photo Gallery Watermarking &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../../index.html"><img src="../../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../../index.html">Table of Contents</a> &gt;
+<a href="../../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="../index.html">Photo Gallery</a> &gt;
+<a href="index.html">The Control Panel</a> &gt;
+<strong>Watermarking</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Photo Gallery Watermarking</h1>
+
+	<p>Within the Photo Gallery <dfn><a href="preferences.html">Preferences</a></dfn> you can choose to enable automatic watermarking of your images.  A watermark is a unique text string or graphic that is automatically added to your images to mark them as "yours" and to hamper other people from being able to "steal" your images.  These are the preferences associated with that.</p>
+
+	<ul>
+		<li><a href="#text_version">Text Version</a></li>
+		<li><a href="#graphic_version">Graphic Version</a></li>
+	</ul>
+
+
+	<h2><a name="text_version">Text Version</a></h2>
+
+	<p>You may apply a text string to be watermarked on your images.</p>
+
+
+	<h3>Watermark Alignment</h3>
+
+		<p>Here you select where you want the watermark to appear.  The first drop-down allows you to select the vertical position (top, middle, bottom) while the second allows you to specify the horizontal position (left, center, right).</p>
+
+
+	<h3>Padding</h3>
+
+		<p>This is the amount of padding that will automatically be applied to the watermark to set it away from the edge of your images.</p>
+
+
+	<h3>Horizontal Offset</h3>
+
+		<p>You may specify a horizontal offset (in pixels) to apply to the watermark position.  If you have your alignment set to "right" then your offset value will move the watermark toward the "center" of the image.</p>
+
+
+	<h3>Vertical Offset</h3>
+
+		<p>You may specify a vertical offset (in pixels) to apply to the watermark position.  If you have your alignment set to "bottom" then your offset value will move the watermark toward the "center" of the image.</p>
+
+
+	<h3>Apply Watermark to Thumbnails</h3>
+
+		<p>This determines whether you want the watermark to be added to any automatically-created thumbnail images.</p>
+
+
+	<h3>Apply Watermark to Medium Sized Images</h3>
+
+		<p>This determines whether you want the watermark to be added to any automatically-created medium sized images.</p>
+
+
+	<h3>Watermark Text</h3>
+
+		<p>Specify the text you wish to be used for the watermark.</p>
+
+
+	<h3>Use True Type Font</h3>
+
+		<p>Specify whether or not to use a True Type font.  In order to be able to use this option, True Type font support must be included in your PHP installation.  Not all Hosts and servers support this.  True Type fonts will appear to be smoother than if you disable this option.</p>
+
+
+	<h3>Font</h3>
+
+		<p>This is a drop-down of the available True Type fonts.  By default, the "texb" font is included with ExpressionEngine.  If you wish to use a different font then you will need to upload it to your <kbd>system/fonts/</kbd> directory.</p>
+		
+		<p class="important"><strong>Note</strong>: The font selection works only when "Use True Type Font" is enabled.</p>
+
+
+	<h3>Font Size</h3>
+
+		<p>The font size (in px) you wish to use with the watermark text.  Note that this is the font size that will be applied to the full-size image.  The font size will be scaled proportionally with the image size if applied to the thumbnail or medium sized image.</p>
+
+
+		<p class="important"><strong>Note</strong>: The font size selection works only when "Use True Type Font" is enabled.</p>
+			
+	<h3>Text Color</h3>
+
+		<p>You may specify any standard hex code for the font color.  You may also click the color swatch image next to the preference to launch a pop-up window containing a library of colors from which you can choose.</p>
+
+
+	<h3>Enable Dropshadow</h3>
+
+		<p>You may specify to have a dropshadow applied to your watermark text.  Dropshadows usually make the text easier to read, especially when used on images with greatly varying color.</p>
+
+
+	<h3>Dropshadow Distance</h3>
+
+		<p>The distance (in pixels) to offset the dropshadow from the regular text.</p>
+
+
+	<h3>Dropshadow Color</h3>
+
+		<p>You may specify any standard hex code for the dropshadow color.  You may also click the color swatch image next to the preference to launch a pop-up window containing a library of colors from which you can choose.</p>
+
+
+	<h3>Server Path to Test Image</h3>
+
+		<p>If you wish to test your watermark settings then you may specify the server path to a test image.  This will allow you to see how it would actually appear on a real image.  A server path is typically something similar to <samp>/home/domain.com/http_docs/cp_images/watermark_test.jpg</samp>. The specific setting will vary from server to server so you may need to contact your Host or server admin to determine what your correct "server path" is.</p>
+
+
+	<h3>Test your Watermark Settings</h3>
+
+		<p>This button will allow you to view how your watermark will look when applied to an actual image.  You need to make sure that the "Server Path to Test Image" preference above is set correctly before you will be able to test the settings.  This will open a pop-up window and display a watermarked image.  You may then make changes to your watermark settings and test again.</p>
+
+
+
+	<h2><a name="graphic_version">Graphic Version</a></h2>
+
+	<p>You may use a graphic file as your watermark.</p>
+
+
+	<h3>Watermark Alignment</h3>
+
+		<p>Here you select where you want the watermark to appear.  The first drop-down allows you to select the vertical position (top, middle, bottom) while the second allows you to specify the horizontal position (left, center, right).</p>
+
+
+	<h3>Padding</h3>
+
+		<p>This is the amount of padding that will automatically be applied to the watermark to set it away from the edge of your images.</p>
+
+
+	<h3>Horizontal Offset</h3>
+
+		<p>You may specify a horizontal offset (in pixels) to apply to the watermark position.  If you have your alignment set to "right" then your offset value will move the watermark toward the "center" of the image.</p>
+
+
+	<h3>Vertical Offset</h3>
+
+		<p>You may specify a vertical offset (in pixels) to apply to the watermark position.  If you have your alignment set to "bottom" then your offset value will move the watermark toward the "center" of the image.</p>
+
+
+	<h3>Apply Watermark to Thumbnails</h3>
+
+		<p>This determines whether you want the watermark to be added to any automatically-created thumbnail images.</p>
+
+
+	<h3>Apply Watermark to Medium Sized Images</h3>
+
+		<p>This determines whether you want the watermark to be added to any automatically-created medium sized images.</p>
+
+
+	<h3>Server Path to Watermark Image</h3>
+
+		<p>The server path to the image you wish to use as your watermark.  A server path is typically something similar to <samp>/home/domain.com/http_docs/cp_images/watermark_test.jpg</samp>. The specific setting will vary from server to server so you may need to contact your Host or server admin to determine what your correct "server path" is.</p>
+
+
+	<h3>Watermark Opacity</h3>
+
+		<p>You may specify the opacity (i.e. transparency) of your watermark image.  This allows the watermark to be faint and not completely obscure the details from the original image behind it.  A 50% opacity is typical.</p>
+
+
+	<h3>Transparency X Coordinate</h3>
+
+		<p>If your watermark image is a PNG or GIF image, you may specify a color on the image to be "transparent".  This setting (along with the next) will allow you to specify that color.  This works by specifying the "X" and "Y" coordinate pixel (measured from the upper left) within the image that corresponds to a pixel representative of the color you want to be transparent.</p>
+
+
+	<h3>Transparency Y Coordinate</h3>
+
+		<p>Along with the previous setting, this allows you to specify the coordinate to a pixel representative of the color you want to be transparent.</p>
+
+
+	<h3>Server Path to Test Image</h3>
+
+		<p>If you wish to test your watermark settings then you may specify the server path to a test image.  This will allow you to see how it would actually appear on a real image.  A server path is typically something similar to <samp>/home/domain.com/http_docs/cp_images/watermark_test.jpg</samp>. The specific setting will vary from server to server so you may need to contact your Host or server admin to determine what your correct "server path" is.</p>
+
+
+	<h3>Test your Watermark Settings</h3>
+
+		<p>This button will allow you to view how your watermark will look when applied to an actual image.  You need to make sure that the "Server Path to Test Image" preference above is set correctly before you will be able to test the settings.  This will open a pop-up window and display a watermarked image.  You may then make changes to your watermark settings and test again.</p>
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

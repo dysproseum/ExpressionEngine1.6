@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Upgrading ExpressionEngine Core or Full version to the latest build &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../index.html" />
+  <style type="text/css" media="screen,print">@import url(../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="../index.html#install_docs">Installation and Update Instructions</a> &gt;
+<strong>Upgrading ExpressionEngine to new Build</strong>
+</div>
+
+<div id="content">
+
+	<h1>Upgrading ExpressionEngine Core or Full Version to the latest Build</h1>
+
+
+	<h4>This page contains instructions for updating ExpressionEngine Core or the Full Version to the lastest build.</h4>
+	
+	<p class="important"><strong>Important:</strong>&nbsp; A "build" is a version of ExpressionEngine within the same "point" number you are currently using. For example, ExpressionEngine 1.4.1 has build 20060217 and build 20060308. A new build usually contains minor fixes and updates. Only use these instructions to update a build in the same "point" version you are currently using.  E.g. updating from <strong>1.4.2</strong> build <em>20060217</em> to <strong>1.4.2</strong> build <em>20060308</em>.  If you are updating to a new point version (1.4.<strong>2</strong> to 1.4.<strong>3</strong>), then you need to follow the instructions for <a href="update.html" title="version update instructions">Updating to New Version of ExpressionEngine</a>.</p>
+	
+<p>You can find the "point version" and the "build number" of your ExpressionEngine installation by looking in the footer of your Control Panel. You'll see something like this:</p>
+
+<code>ExpressionEngine 1.5.2 - Copyright 2005 - EllisLab, Inc.<br />
+Script executed in 0.2553 seconds 17 SQL queries used<br />
+<b>Build: 20070302</b>
+</code>
+
+<p>The build number is the date that the build was released. This makes it very easy to determine if you are using the current build. You can find the latest build number in the <a href="https://secure.expressionengine.com/download.php">Download Area</a>. There is a column with the build number. If the build number in the Download Area is more recent then the build number in your Control Panel, then you should probably update to the new build.</p>
+
+<p class="important"><b>Note:</b> If the Discussion Forum Module or Multiple Site Manager is installed, it is necessary to update them immediately after completing the ExpressionEngine update.</p>
+
+	<h2>Step 1</h2>
+
+		<p>The first step is to <a href="https://secure.expressionengine.com/download.php">download</a> ExpressionEngine. If you are using the full version of ExpressionEngine, make sure you download the Full version and not the Core version. Once you have downloaded it, Unzip the software to your local computer.</p>
+
+
+<h2>Step 2</h2>
+
+<p>Backup your <var>system/config.php</var> file before updating, just to be safe.</p>
+
+<h2>Step 3</h2>
+
+		
+		<p>Replace the following folders on your server with the new versions you just downloaded. </p>
+		
+		<p class="important"><b>Important</b>: If you have installed any extra Plugins, 
+		Modules, or Extensions, then you should download those files from your server
+		first and reupload them after updating the core ExpressionEngine files. Language files for Modules and Extensions 
+		will be located in <kbd>system/language/</kbd>.</p>
+		
+		<ul>
+			<li><kbd>system/core/</kbd></li>
+			<li><kbd>system/cp/</kbd></li>
+			<li><kbd>system/db/</kbd></li>
+			<li><kbd>system/language/</kbd></li>
+			<li><kbd>system/lib/</kbd></li>
+			<li><kbd>system/modules/</kbd></li>
+			<li><kbd>system/plugins</kbd></li>
+		</ul>
+
+		<p>Be sure that you upload all files in ASCII format (also known as "text" format).</p>
+
+<h2>Step 4</h2>
+
+<p>Delete all the files in your <kbd>/system/cache/</kbd> directory. You can do this by ftp or by using the built-in <a href="../cp/admin/utilities/clear_cached_data_files.html">Clear Cached Data Files</a> utility in the Control Panel.</p>
+
+<h4>You are now finished!</h4>
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

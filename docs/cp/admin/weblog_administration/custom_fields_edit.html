@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Custom Weblog Fields  - Add/Edit &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../../index.html"><img src="../../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../../index.html">Table of Contents</a> &gt;
+<a href="../../../index.html#cp_docs">The Control Panel</a> &gt;
+<a href="../index.html">Admin</a> &gt;
+<a href="index.html">Weblog Administration</a> &gt;
+<a href="custom_weblog_fields.html">Custom Fields</a> &gt;
+<strong>Add/Edit Fields</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Custom Weblog Fields - Add/Edit</h1>
+
+	<div class="path">Control Panel Location:&nbsp; <dfn>Admin &gt; Weblog Administration &gt; Custom Weblog Fields &gt; Add/Edit</dfn></div>	
+
+	<div class="imgwrapper"><img src="../../../images/custom_field_edit.png" width="549" height="632" alt="Custom Fields Edit" title="Custom Fields Edit" border="0" /></div>
+
+	<p>This page lets you create or edit fields, which can be one of five types, described below.</p>
+
+
+	<h3>Field Name</h3>
+
+		<p>This is the internal or "short name" for the field.  This is a <strong>required</strong> field and must be a single word with no spaces or punctuation.  The field name must be unique within the system, which means that you cannot have two field groups each containing a field with the field name of "body".  The short name is typically used as the variable name in your <a href="../../../modules/weblog/weblog_entries.html">Weblog Entries Tag</a></p>
+		
+		<p class="important"><strong>NOTE:</strong> Some words are reserved and cannot be used.  Please see the list of <a href="../../reserved_words.html">reserved words</a> for details.</p>
+
+
+	<h3>Field Label</h3>
+
+		<p>This is the descriptive name for the field.  This is a <strong>required</strong> field 
+		and it may contain spaces or punctuation.  Unlike the Field Name, the label does not
+		need to be unique within the system, so you can use the same descriptive label 
+		on multiple fields in different field groups.  The label is what will be 
+		displayed next to the field on the entry form in your <kbd>PUBLISH</kbd> page.</p>
+
+	<h3>Field Instructions</h3>
+
+		<p>These are instructions for authors on how or what to enter into the field when submitting an entry.
+		The instructions will appear below the Field Label in your <kbd>PUBLISH</kbd> page.</p>
+
+
+	<h3>Field Type</h3>
+
+		<p>You may choose what type of field this is.  There are five choices:</p>
+
+		<ol>
+			<li><b>Text Input</b>: This is a single input line for text.  It is the type of field you might use for a title, name, or other short information.</li>
+			<li><b>Textarea</b>: This is a standard text entry box with multiple lines.  This is what you would use for a main entry body.</li>
+			<li><b>Drop-down List</b>: This creates a standard HTML &lt;select> drop-down list.  You can define the contents of the list manually or pre-populate it from another custom field.</li>
+		    <li><b>Date</b>: Date field types are designed to store dates. Next to the date field in your <kbd>PUBLISH</kbd> page you'll see a calendar and two options for your date: 
+		      <ul>
+		         <li><b>Localized</b>: The date will be localized to the timezone of each user browsing your site.</li>
+		         <li><b>Fixed</b>: The date will NOT be localized and instead shown at the exact date/time you submit.</li>
+		      </ul>
+		      </li>
+		    <li><b>Relationship</b>: This is a special and very powerful field type.  It enables you to create relationships between two or more weblogs so you can show content from one entry within another. For more information please visit the <a href="../../../modules/weblog/related_entries.html">Relationships</a> page.</li>
+		</ol>
+
+
+	<h3>Default Text Formatting</h3>
+
+		<p>This option determines the default formatting selection for this field.  (The formatting option can be changed on a per-entry basis when creating new entries if needed.)  This preference will only set the <em>default</em> value for entries created from that point forward.  There are three default choices:</p>
+
+		<ol>
+			<li><b>None</b>: No automatic formatting is done; the text is left as-is.  This might be useful if you want people to be able to use full HTML in this field.</li>
+			<li><b>XHTML</b>: The field content will be formatted with ExpressionEngine's <a href="../../../general/text_formatting.html">Auto XHTML feature.</a> </li>
+			<li><b>Auto &lt;br /></b>: All line breaks in the field content will be converted into <samp>&lt;br /></samp> tags.</li>
+		</ol>
+
+		<p>The <dfb>Edit List</dfn> link will allow you to specify an ExpressionEngine Plugin to use for formatting the field.  Plugins such as "Textile" and "Markdown" can be used for this.</p>
+
+		<p>If you select the checkbox when you set up the field, then the new formatting choice will also be applied to this field for <strong>all</strong> existing entries.</p>
+
+
+	<h3>Is this a required field?</h3>
+		<p>You may determine whether this field is required.  If the field is required and the user leaves it blank, upon submission they will receive an error message prompting them to correct it.</p>
+
+
+	<h3>Text Direction</h3>
+		<p>Many foreign languages have text that is written from right to left instead of left to right, like in English.  
+		This preference allows one to change the direction that text can be written in the Textarea and Text Input custom field types.</p>
+
+
+	<h3>Is field searchable?</h3>
+		<p>This determines whether the contents of this field will be included in searches if someone elects to search within the entry content.  If you do not select this field then searches will ignore content stored in this field.</p>
+
+
+	<h3>Hide this field by default?</h3>
+		<p>Here you determine whether or not the field will be shown or hidden on the publish page by default.  If you choose "Yes", the field will be collapsed by default and in order to enter content into the field you will first have to open using the link provided on the publish page.</p>
+
+
+	<h3>Field Display Order</h3>
+		<p>You can determine the order in which the fields appear on your weblog entry screen.</p>
+
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

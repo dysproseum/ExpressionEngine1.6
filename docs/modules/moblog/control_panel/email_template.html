@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Moblog Email Template &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../../index.html"><img src="../../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../../index.html">Table of Contents</a> &gt;
+<a href="../../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="../index.html">Moblog Module</a> &gt;
+<a href="index.html">Moblog Module Control Panel</a> &gt;
+<strong>Email Template</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Moblog Email Template</h1>
+
+	<p>This page describes the syntax you can use in the <dfn>Moblog Template</dfn> setting in the Control Panel <dfn>Modules &gt; <a href="index.html">Moblog</a></dfn> section.  What this does is define how the information you submit in your email is handled.  This setting is only used for moblogs of the "weblog" type.  It is not used for "gallery" moblogs.</p>
+
+	<p>A simple example:</p>
+
+	<code>{images}<br />
+&lt;img src="{file}" width="{width}" height="{height}" alt="pic" /><br />
+{/images}<br />
+<br />
+{text}</code>
+
+	<p>A more complicated example:</p>
+
+	<code>{field name="body" format="xhtml"}<br />
+{text}<br />
+{/field}<br />
+<br />
+{field name="body_image" format="none"}<br />
+{images}<br />
+&lt;img src="{file}" width="{width}" height="{height}" alt="pic" /><br />
+{/images}<br />
+{/field}</code>
+
+
+
+
+	<h2>Variables</h2>
+
+	<ul class="minitoc">
+		<li><a href="#var_audio">{audio}</a></li>
+		<li><a href="#var_field">{field}</a></li>
+		<li><a href="#var_file">{file}</a></li>
+		<li><a href="#var_files">{files}</a></li>
+		<li><a href="#var_height">{height}</a></li>
+		<li><a href="#var_images">{images}</a></li>
+		<li><a href="#var_movie">{movie}</a></li>
+		<li><a href="#var_text">{text}</a></li>
+		<li><a href="#var_thumbnail">{thumbnail}</a></li>
+		<li><a href="#var_thumb_height">{thumb_height}</a></li>
+		<li><a href="#var_thumb_width">{thumb_width}</a></li>
+		<li><a href="#var_width">{width}</a></li>
+	</ul>
+
+
+	<h3><a name="var_audio">audio</a></h3>
+
+		<code>{audio}<br />
+&lt;p>Listen to the &lt;a href="{file}">audio&lt;/a>!&lt;/p><br />
+{/audio}</code>
+
+		<p>This tag pair allows you to specify how to process an audio file that's attached to the email.  The <samp>{file}</samp> variable inside the tag pair will contain the URL to the uploaded audio file.</p>
+
+
+	<h3><a name="var_field">field</a></h3>
+
+		<code>{field name="extended" format="xhtml"}<br />
+{text}<br />
+{/field}</code>
+
+		<p>This tag pair allows you to specify into which field you would like the contents placed.  If you do not specify a field with this variable then the contents will be placed in the default field specified in the Control Panel.  This field has two parameters:</p>
+
+		<ol>
+			<li><b>name=</b> the "short name" of the field in which you want the contents placed.</li>
+			<li><b>format=</b> the type of formatting you would like applied to the field contents: <samp>none</samp>, <samp>&lt;br /></samp>, or <samp>xhtml</samp>.</li>
+		</ol>
+
+		<p class="important">You may only specify a field that is of the "textarea" type here.  You cannot specify "text input" or "drop-down list" fields.</p>
+	<h3><a name="var_file">file</a></h3>
+
+		<code>{audio}<br />
+&lt;p>Listen to the &lt;a href="{file}">audio&lt;/a>!&lt;/p><br />
+{/audio}</code>
+
+		<p>This variable will be replaced by the URL to the uploaded file.</p>
+
+
+	<h3><a name="var_files">files</a></h3>
+
+		<code>{files match="movie|files"}<br />
+&lt;p>View the &lt;a href="{file}">presentation&lt;/a>.&lt;/p><br />
+{/files}</code>
+
+		<p>This tag pair allows you to specify how to process a standard file that's attached to the email.  The <samp>{file}</samp> variable inside the tag pair will contain the URL to the uploaded file.</p>
+
+		<p>This tag pair is special in that it has the <samp>match=</samp> parameter that can be used to determine which types of files will be affected.  The options are:</p>
+
+		<ul>
+			<li><b>all</b>: all types of files will be matched</li>
+			<li><b>audio</b>: files matching the "audio" supported format</li>
+			<li><b>files</b>: files matching the "files" supported formats</li>
+			<li><b>images</b>: files matching the "images" supported formats</li>
+			<li><b>movie</b>: files matching the "movie" supported formats</li>
+		</ul>
+
+		<p>Multiple format types may be specified by separating them with the pipe character:</p>
+
+		<code>{files match="audio|files"}</code>
+
+
+	<h3><a name="var_height">height</a></h3>
+
+		<code>&lt;img src="{file}" width="{width}" height="{height}" alt="pic" /></code>
+
+		<p>The height (in pixels) of the uploaded image.</p>
+
+
+	<h3><a name="var_images">images</a></h3>
+
+		<code>{images}<br />
+&lt;img src="{file}" width="{width}" height="{height}" alt="pic" /><br />
+{/images}</code>
+
+		<p>This tag pair allows you to specify how to process an image file that's attached to the email.  The <samp>{file}</samp> variable inside the tag pair will contain the URL to the uploaded image file.</p>
+
+
+	<h3><a name="var_movie">movie</a></h3>
+
+		<code>{movie}<br />
+&lt;p>Watch our new &lt;a href="{file}">movie&lt;/a> now.&lt;/p><br />
+{/movie}</code>
+
+		<p>This tag pair allows you to specify how to process an movie file that's attached to the email.  The <samp>{file}</samp> variable inside the tag pair will contain the URL to the uploaded movie file.</p>
+
+
+	<h3><a name="var_text">text</a></h3>
+
+		<code>{field name="extended" format="xhtml"}<br />
+{text}<br />
+{/field}</code>
+
+		<p>The text content of the email.  Typically this will be a description of the attached file.</p>
+
+
+	<h3><a name="var_thumbnail">thumbnail</a></h3>
+
+		<code>{images}<br />
+&lt;img src="{thumbnail}" width="{thumb_width}" height="{thumb_height}" alt="thumbnail image" /><br />
+{/images}</code>
+
+		<p>The URL to an automatically-generated thumbnail version of the attached image.</p>
+
+
+	<h3><a name="var_thumb_height">thumb_height</a></h3>
+
+		<code>{images}<br />
+&lt;img src="{thumbnail}" width="{thumb_width}" height="{thumb_height}" alt="thumbnail image" /><br />
+{/images}</code>
+
+		<p>The height (in pixels) of the automatically-generated thumbnail version of the attached image.</p>
+
+
+	<h3><a name="var_thumb_width">thumb_width</a></h3>
+
+		<code>{images}<br />
+&lt;img src="{thumbnail}" width="{thumb_width}" height="{thumb_height}" alt="thumbnail image" /><br />
+{/images}</code>
+
+		<p>The width (in pixels) of the automatically-generated thumbnail version of the attached image.</p>
+
+
+	<h3><a name="var_width">width</a></h3>
+
+		<code>&lt;img src="{file}" width="{width}" height="{height}" alt="pic" /></code>
+
+		<p>The width (in pixels) of the uploaded image.</p>
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

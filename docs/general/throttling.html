@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>404 Error Pages and Throttling Control &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../index.html" />
+  <style type="text/css" media="screen,print">@import url(../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="../index.html#gen_docs">General Information</a> &gt;
+<strong>Throttling Control and 404 Pages</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Throttling Control and 404 Pages</h1>
+
+	<p>ExpressionEngine has a <kbd>Throttling</kbd> feature that permits you to limit the number of page requests by a single IP address within a given time interval.  This feature is intended to help control <em>Denial of Service</em> attacks, where your pages are maliciously loaded repeatedly (usually through the use of automated scripts) in an effort to cause undue load to your web server.</p>
+	
+	<p class="important">Note: A server-wide DOS attack preventative is beyond the scope of what ExpressionEngine can do, but EE's Throttling feature can help keep your particular site from being as susceptible.</p>
+
+	<h2>Throttling Preferences</h2>
+	
+	<p>ExpressionEngine's Throttling Preferences can be found in the control panel at this page:</p>
+	
+	<p class="leftpad"><dfn>Admin &gt; System Preferences &gt; Throttling Configuration</dfn></p>
+
+	<p>The preferences in the Throttling page enable you to set various parameters to control the threshold at which the feature kicks in, and the action that should be taken when the threshold is exceeded. Since the throttling check happens very early on during ExpressionEngine's system initialization it can deal with DOS attacks before server resources are unduly used.</p>
+
+	<h2>404 Pages</h2>
+	
+	<p>In addition to the Throttling feature, ExpressionEngine allows you to specify a particular Template to display in cases where the requested page does not exist.  This preference is set in the control panel at:</p>
+	
+	<p class="leftpad"><dfn>Templates &gt; Global Template Preferences</dfn></p>
+
+	<p>Note:  The setting is a site-wide preference.</p>
+
+	<div class="important">
+	
+	<p>It is important to note that there are limitations when it comes to what will trigger this "404" type Template to display.  <strong>ExpressionEngine will only display the 404 Template if the requested Template Group in the URL does not exist</strong>.</p>
+
+	<p>Due to the dynamic nature of EE's URL structure, there is no guarantee about exactly what any particular URL segment represents beyond the first segment.  Thus, the error can only be triggered by a Template Group name that doesn't exist.</p>
+	</div>
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

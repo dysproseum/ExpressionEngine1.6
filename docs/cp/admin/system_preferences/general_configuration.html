@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>General Configuration &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../../index.html"><img src="../../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../../index.html">Table of Contents</a> &gt;
+<a href="../../../index.html#cp_docs">The Control Panel</a> &gt;
+<a href="../index.html">Admin</a> &gt;
+<a href="index.html">System Preferences</a> &gt;
+<strong>General Configuration</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>General Configuration</h1>
+	<div class="path">Control Panel Location:&nbsp; <dfn>Admin &gt; System Preferences &gt; General Configuration</dfn></div>	
+
+	<p>This section of the Control Panel allows you to define the basic settings for your website.  These are general settings that apply throughout the website/system.</p>
+
+
+	<h3>Is system on?</h3>
+
+		<p>This indicates whether or not your site is "live" and displayed to the public.  If you set this preference to "No" only members of the <dfn>Super Admin</dfn> group  will be able to see the site.  All other users will be shown the <dfn>System Offline</dfn> page, which you can edit at:</p>
+
+		<p class="leftpad"><dfn>Admin &gt; Specialty Templates &gt; System Offline Template</dfn></p>
+		
+		
+	<h3>License Number</h3>
+
+		<p>The license number you were issued upon purchasing ExpressionEngine.  The license number was included in the email purchase receipt.  If you no longer have your license number, you may view a copy of your license number by going to the <a href="https://secure.expressionengine.com/download.php">Download Area</a> of the ExpressionEngine site and accessing the "Purchase History" for your product.</p>
+
+
+	<h3>Name of your site</h3>
+
+		<p>This is the name of your website.  It may contain spaces and punctuation. This name is available in your Templates by using the <dfn>{site_name}</dfn> Global Variable.</p>
+
+
+	<h3>Name of your site's index page</h3>
+
+		<p>This is the filename of your site's "index" page.  By default, this will be <var>index.php</var>, which is located in the base folder.  You will only need to alter this setting if you have changed the filename.</p>
+
+
+	<h3>URL to the root directory of your site</h3>
+
+		<p>The full URL to the folder containing your site's index page.  For example, if you index file is located at:</p>
+		<p class="leftpad"><samp>http://example.com/index.php</samp></p>
+		<p>Then the correct setting would be:</p>
+		<p class="leftpad"><samp>http://example.com/</samp></p>
+
+
+	<h3>URL to your Control Panel index page</h3>
+
+		<p>The full URL to your ExpressionEngine Control Panel.  In most cases, this will be similar to:</p>
+		
+		<p class="leftpad"><samp>http://example.com/system/index.php</samp></p>
+
+
+	<h3>URL to your "themes" folder</h3>
+
+		<p>The full URL to your "themes" folder.  In most cases, this will be similar to:</p>
+		
+		<p class="leftpad"><samp>http://example.com/themes/</samp></p>
+
+
+	<h3>Maximum Number of Cachable URIs</h3>
+
+		<p>If you cache your templates (pages), this preference limits the total number of cache files in order to prevent them from taking up too much disk space.  150 is a good number for a small site.  If you have a large site and disk space is not an issue you can set it higher (over 300).  There is an internal limit of 1000 regardless of your preference.</p>
+
+
+	<h3>New Version Auto Check</h3>
+
+		<p>Enabling this feature will cause a message to be displayed in the Control Panel when a new version of ExpressionEngine is available.  It will <strong>not</strong> automatically download and install a new version.</p>
+
+
+	<h3>Section Designation Word</h3>
+
+		<p>By default, ExpressionEngine uses the word "weblog" throughout the Control Panel. You can change it if you prefer something more generic, like "section". <b>Note:</b> This word will <strong>not</strong> change in your templates, only in the control panel.</p>
+
+
+	<h3>URL to Documentation Directory</h3>
+
+		<p>The full URL to location of the ExpressionEngine User Guide.  This URL is used to create the <dfn>User Guide</dfn> link at the top of your Control Panel.</p>
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

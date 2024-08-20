@@ -1,0 +1,319 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Date Variable Formatting &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../index.html" />
+  <style type="text/css" media="screen,print">@import url(../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="../index.html#template_docs">Templating System</a> &gt;
+<strong>Date Variable Formatting</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Date Variable Formatting</h1>
+
+<p class="important"><strong>NOTE:</strong> Please note that these examples are to show how the date formatting codes are used in the <strong>format</strong> parameter that is used in a number of different ExpressionEngine variables.</p>
+
+	<p>Many of the tags you'll use in your templates contain variables designed to display dates and times.&nbsp; These variables can
+	be formatted so that the date appears in a manner you wish.  Here is an example of a typical "date type" tag:</p>
+		
+	<code>{date format="%F %d %Y"}</code>
+
+	<p>The "format" parameter enables you to format the date using the <dfn>Date Formatting Codes</dfn> listed below. Each code letter is always preceded by a percent sign.&nbsp; The example above would be rendered like this:</p>
+	
+	<code>January 15 2006</code>
+	
+	<p>You are allowed to use any character you want within the <dfn>format</dfn> parameter, <b>except</b> a percent sign.  For example, this:</p>
+	
+	<code>{current_time format="%D, %F %d, %Y - %g:%i:%s"}</code>
+	
+	<p>Would be rendered like this:</p>
+	
+	<code>Mon, January 15, 2006 - 10:23:45</code>
+	
+
+		
+	<h2>Date Formatting Codes</h2>
+	
+	<table>
+		<tr><th class="caption" colspan="3">Available Date Formatting Codes</th></tr>
+		<tr>
+			<th width="20%">Variable</th>
+			<th width="40%">Description</th>
+			<th width="40%">Sample Rendering</th>
+		</tr>
+		<tr><th class="group_heading" colspan="3">Seconds</th></tr>
+			<tr>
+				<td><strong>%s</strong></td>
+				<td>seconds</td>
+				<td>"00" to "59"</td>
+			</tr>
+			<tr>
+				<td><strong>%U</strong></td>
+				<td>seconds since the epoch</td>
+				<td></td>
+			</tr>
+			<tr><th class="group_heading" colspan="3">Minutes</th></tr>
+			<tr>
+				<td><strong>%i</strong></td>
+				<td>minutes</td>
+				<td>"00" - "59"</td>
+			</tr>
+			<tr><th class="group_heading" colspan="3">Hours</th></tr>
+			<tr>
+				<td><strong>%g</strong></td>
+				<td>hour, 12-hour format without leading zeros</td>
+				<td> "1" to "12"</td>
+			</tr>
+			<tr>
+				<td><strong>%G</strong></td>
+				<td>hour, 24-hour format without leading zeros</td>
+				<td>"0" to "23"</td>
+			</tr>
+			<tr>
+				<td><strong>%h</strong></td>
+				<td>hour, 12-hour format</td>
+				<td>"01" to "12"</td>
+			</tr>
+			<tr>
+				<td><strong>%H</strong></td>
+				<td>hour, 24-hour format</td>
+				<td>"00" to "23"</td>
+			</tr>
+			<tr><th class="group_heading" colspan="3">AM / PM</th></tr>
+			<tr>
+				<td><strong>%a</strong></td>
+				<td></td>
+				<td>"am" / "pm"</td>
+			</tr>
+			<tr>
+				<td><strong>%A</strong></td>
+				<td></td>
+				<td>"AM" / "PM"</td>
+			</tr>
+			<tr><th class="group_heading" colspan="3">Day</th></tr>
+			<tr>
+				<td><strong>%d</strong></td>
+				<td>day of the month, 2 digits with leading zeros</td>
+				<td>"01" to "31"</td>
+			</tr>
+			<tr>
+				<td><strong>%D</strong></td>
+				<td>day of the week, textual, 3 letters</td>
+				<td>"Fri"</td>
+			</tr>
+			<tr>
+				<td><strong>%j</strong></td>
+				<td>day of the month without leading zeros</td>
+				<td>"1" to "31"</td>
+			</tr>
+			<tr>
+				<td><strong>%l</strong></td>
+				<td>(lowercase 'L') - day of the week, textual, long</td>
+				<td>"Friday"</td>
+			</tr>
+			<tr>
+				<td><strong>%w</strong></td>
+				<td>day of the week, numeric</td>
+				<td>"0" (Sunday) to "6" (Saturday)</td>
+			</tr>
+			<tr><th class="group_heading" colspan="3">Week</th></tr>
+			<tr>
+				<td><strong>%W</strong></td>
+				<td>ISO-8601 week number of year, weeks starting on Monday</td>
+				<td>"42": the 42nd week in the year</td>
+			</tr>
+			<tr><th class="group_heading" colspan="3">Month</th></tr>
+			<tr>
+				<td><strong>%m</strong></td>
+				<td>month</td>
+				<td>"01" to "12"</td>
+			</tr>
+			<tr>
+				<td><strong>%M</strong></td>
+				<td>month, textual, 3 letters</td>
+				<td>"Jan"</td>
+			</tr>
+			<tr>
+				<td><strong>%F</strong></td>
+				<td>month, textual, long </td>
+				<td>"January"</td>
+			</tr>
+			<tr>
+				<td><strong>%n</strong></td>
+				<td>month without leading zeros</td>
+				<td> "1" to "12"</td>
+			</tr>
+			<tr>
+				<td><strong>%t</strong></td>
+				<td>number of days in the given month</td>
+				<td>"28" to "31"</td>
+			</tr>
+			<tr><th class="group_heading" colspan="3">Year</th></tr>
+			<tr>
+				<td><strong>%L</strong></td>
+				<td> boolean for whether it is a leap year</td>
+				<td>"0" or "1"</td>
+			</tr>
+			<tr>
+				<td><strong>%y</strong></td>
+				<td>year, 2 digits</td>
+				<td>"99"</td>
+			</tr>
+			<tr>
+				<td><strong>%Y</strong></td>
+				<td>year, 4 digits</td>
+				<td>"1999"</td>
+			</tr>
+			<tr>
+				<td><strong>%z</strong></td>
+				<td>day of the year</td>
+				<td>"0" to "365"</td>
+			</tr>
+			<tr><th class="group_heading" colspan="3">Other</th></tr>
+			<tr>
+				<td><strong>%B</strong></td>
+				<td>Swatch Internet time</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><strong>%I</strong></td>
+				<td>(capital i)</td>
+				<td>"1" if Daylight Saving Time, "0" otherwise</td>
+			</tr>
+			<tr>
+				<td><strong>%Q</strong></td>
+				<td>local server time zone offset, in hours and seconds, against GMT</td>
+				<td>"+06:00"</td>
+			</tr>
+			<tr>
+				<td><strong>%r</strong></td>
+				<td>RFC 822 formatting</td>
+				<td>"Thu, 21 Dec 2000 16:01:07 +0200"</td>
+			</tr>
+			<tr>
+				<td><strong>%S</strong></td>
+				<td>English ordinal suffix, 2 characters</td>
+				<td>"th", "nd"</td>
+			</tr>
+			<tr>
+				<td><strong>%T</strong></td>
+				<td>Time zone setting of this machine</td>
+				<td>MDT</td>
+			</tr>
+			<tr>
+				<td><strong>%Z</strong></td>
+				<td> time zone offset in seconds. The offset for time zones west of UTC is always negative, and for those east of UTC is always positive.</td>
+				<td>"-43200" to "43200"</td>
+			</tr>
+		</table>
+
+
+	
+	<h3>Date Formatting Constants</h3>
+	
+	<p>You may also use the pre-defined <dfn>Date Formatting Constants</dfn> listed below for easy access to some standard format strings.  For example, this:</p>
+
+	<code>{current_time format="{DATE_ATOM}"}</code>
+	
+	<p>Would be rendered like this:</p>
+	
+	<code>2006-01-15T20:23:45-06:00</code>	
+	
+	<p>Available pre-defined formatting strings are described in the table below.</p>
+	
+	<table>
+		<tr><th class="caption" colspan="3">Date Formatting Constants</th></tr>
+		<tr>
+			<th width="20%">Variable</th>
+			<th width="40%">Equivalent</th>
+			<th width="40%">Sample Rendering</th>
+		</tr>
+		<tr>
+			<td><strong>{DATE_ATOM}</strong></td>
+			<td>%Y-%m-%dT%H:%i:%s%Q</td>
+			<td>2006-10-16T08:19:39-06:00</td>
+		</tr>
+		<tr>
+			<td><strong>{DATE_COOKIE}</strong></td>
+			<td>%l, %d-%M-%y %H:%i:%s UTC</td>
+			<td>Monday, 16-Oct-06 08:19:39 UTC</td>
+		</tr>
+		<tr>
+			<td><strong>{DATE_ISO8601}</strong></td>
+			<td>%Y-%m-%dT%H:%i:%s%O</td>
+			<td>2006-10-16T08:19:39-0500</td>
+		</tr>
+		<tr>
+			<td><strong>{DATE_RFC822}</strong></td>
+			<td>%D, %d %M %y %H:%i:%s %O</td>
+			<td>Mon, 16 Oct 06 08:19:39 -0500</td>
+		</tr>
+		<tr>
+			<td><strong>{DATE_RFC850}</strong></td>
+			<td>%l, %d-%M-%y %H:%m:%i UTC</td>
+			<td>Monday, 16-Oct-06 08:10:19 UTC</td>
+		</tr>
+		<tr>
+			<td><strong>{DATE_RFC1036}</strong></td>
+			<td>%D, %d %M %y %H:%i:%s %O</td>
+			<td>Mon, 16 Oct 06 08:19:39 -0500</td>
+		</tr>
+		<tr>
+			<td><strong>{DATE_RFC1123}</strong></td>
+			<td>%D, %d %M %Y %H:%i:%s %O</td>
+			<td>Mon, 16 Oct 2006 08:19:39 -0500</td>
+		</tr>
+		<tr>
+			<td><strong>{DATE_RFC2822}</strong></td>
+			<td>%D, %d %M %Y %H:%i:%s %O</td>
+			<td>Mon, 16 Oct 2006 08:19:39 -0500</td>
+		</tr>
+		<tr>
+			<td><strong>{DATE_RSS}</strong></td>
+			<td>%D, %d %M %Y %H:%i:%s %O</td>
+			<td>Mon, 16 Oct 2006 08:19:39 -0500</td>
+		</tr>
+		<tr>
+			<td><strong>{DATE_W3C}</strong></td>
+			<td>%Y-%m-%dT%H:%i:%s%Q</td>
+			<td>2006-10-16T08:19:39-06:00</td>
+		</tr>
+	</table>
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

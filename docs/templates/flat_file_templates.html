@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Saving Templates to Text Files &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../index.html" />
+  <style type="text/css" media="screen,print">@import url(../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="../index.html#template_docs">Templating System</a> &gt;
+<strong>Template Files</strong>
+</div>
+
+
+
+<div id="content">
+
+	<h1>Saving Templates to Text Files</h1>
+
+	<p>ExpressionEngine includes a feature that will allow you to save your Template data as a regular "flat text" file on your server.  This feature is useful for people who prefer to use a program such as Dreamweaver, GoLive, BBEdit, etc. to edit and make changes to their Templates (and FTP the changes to the server).</p>
+
+
+	<h2>Enabling Saving Templates as Files</h2>
+
+	<p>In order to use this feature you must first turn it on and set it up.</p>
+
+
+	<h3>Prepare a directory</h3>
+
+		<p>You must prepare a directory/folder on your server that will contain the saved Template files.  Most people will create their directory inside the normal <kbd>system/</kbd> directory.  For example, if you want your directory named "template_files" then you would create a <kbd>system/template_files/</kbd> directory on your server.</p>
+
+		<p>You must then make the directory writable by setting the permissions on the directory to 777 so that ExpressionEngine will be allowed to save the files as well as recreate your Template_Group/Template structure.</p>
+
+
+	<h3>Set Control Panel Preferences</h3>
+
+		<p>Once your directory is created and permissions are set correctly, you can log into your Control Panel.  Go to <dfn>Templates &gt; <a href="../cp/templates/global_template_preferences.html">Global Template Preferences</a></dfn>.  There are two preferences you need to set.</p>
+
+		<ol>
+			<li><b>Allow templates to be saved as files?</b> Set this to "Yes".</li>
+			<li><b>Basepath to Template File Directory</b>: You must place the <em>server path</em> to the directory you created above in this preference.</li>
+		</ol>
+
+		<p>It is important that you use the server path for the preference and not a URL.  A server path often looks similar to <kbd>/home/usr/domain.com/http_docs/system/template_files/</kbd>.  Server paths will vary from server to server, so you should contact your Host or server admin if you are unsure of what your setting should be.</p>
+
+
+	<h2>Running your Site with Flat File Templates</h2>
+
+	<h3>Using the Feature</h3>
+
+		<p>Once you have set things up as indicated above, you will then see a new checkbox become available at the bottom of your <a href="../cp/templates/edit_template.html">Template editing page</a>.&nbsp;
+		
+		When you submit your template with the box checked, the Template will be saved as a file (in addition to updating the database).&nbsp; 
+		
+		It will also tell ExpressionEngine to use the file version of the Template instead of the database whenever your pages are viewed.&nbsp; Because ExpressionEngine is using the file version, you can then use an external program such as Dreamweaver, GoLive, BBEdit, etc. to make changes to the file without using the Control Panel interface.</p>
+
+		<p class="important"><b>Note:</b>&nbsp; If you have been making changes to your template files via FTP, and you then go back to the
+		Template editing page, ExpressionEngine will load  the file version into the form.&nbsp; <b>However</b>, unless you click "save", the database will still
+		contain the last version you saved via the Control Panel.</p>
+
+
+	<h3>Saved Template Files</h3>
+
+		<p>When you save your Template to a file, the file is saved inside the directory that you created above.  Files are saved according to your Template Group/Template structure.  That means if you save the "comments" Template inside the "weblog" Template Group, ExpressionEngine will create a saved Template file similar to this: <var>system/template_files/weblog/comments.php</var>.
+			
+	<h2>Saved Templates and the Multiple Site Manager</h2>
+	
+		<p>Sites under the Multiple Site Manager have their own preferences for saving templates as text files.  As such, when setting up a new Site under the Multiple Site Manager, you must set up a new location for saving those templates.</p>
+		
+		<p>When importing or duplicating to a new Site in the Multiple Site Manager, if you wish to use existing templates which are saved as text files, then the template directory must be manually copied to the directory for the new Site.</p>
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

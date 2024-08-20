@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Tracking Preferences &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../../index.html"><img src="../../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../../index.html">Table of Contents</a> &gt;
+<a href="../../../index.html#cp_docs">The Control Panel</a> &gt;
+<a href="../index.html">Admin</a> &gt;
+<a href="index.html">System Preferences</a> &gt;
+<strong>Tracking Preferences</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Tracking Preferences</h1>
+
+	<div class="path">Control Panel Location:&nbsp; <dfn>Admin &gt; System Preferences &gt; Tracking Preferences</dfn></div>	
+
+	<p>This section of the Control Panel allows you to define preferences for various tracking features of ExpressionEngine.  Adjustments to these settings can help decrease resource usage if you are not utilizing the features, as well as help you manage <a href="../../../general/handling_extreme_traffic.html">extreme traffic events</a>.</p>
+
+
+	<h3><a name="enable_online_user_tracking"></a>Enable Online User Tracking?</h3>
+
+		<p>You can determine whether tracking of online users is performed by the system.  When you have this preference set to "Yes", a database update will be performed for each page load so that the user statistics can be tracked and stored.</p>
+
+	<h3><a name="enable_hit_tracking"></a>Enable Template Hit Tracking?</h3>
+	
+		<p>When set to "Yes", hits to your templates will be tracked in your database on each page load.</p>
+
+	<h3><a name="enable_entry_view_tracking"></a>Enable Weblog Entry View Tracking?</h3>
+	
+		<p>When set to "Yes", you can utilize the <a href="../../../modules/weblog/entry_tracking.html">Entry Tracking</a> feature of the Weblog module.</p>
+		
+	<h3><a name="log_referrers"></a>Enable Referrer Tracking?</h3>
+
+		<p>You can determine whether referrer tracking is performed by the system.  When you have this preference set to "Yes", one additional database access query will be performed for each page load so that the statistics can be generated.</p>
+			
+	<h3>Maximum number of recent referrers to save</h3>
+
+		<p>You can limit the number of referrers stored in your database.  This setting helps ensure that your database does not get too large due to storing referrers.  Tracking does not cease when this number is reached, but will trigger automatic pruning of the collected referrer data.</p>
+
+	<h3><a name="dynamic_tracking_disabling"></a>Suspend ALL tracking when number of online visitors exceeds:</h3>
+		<p class="important"><strong>Note:</strong> Online User Tracking must be enabled for this feature to work, or the information will not be available to ExpressionEngine to determine your site's traffic.</p>
+	
+		<p>If a value is provided for this setting, when the number of "online visitors" exceeds that value, all of the above tracking features will be temporarily disabled until the number of online visitors drops below the indicated value. Recommended values for this feature will vary based on your hosting environment.  Check with your server administrator to discuss reasonable limits for your site.</p>
+		
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Default Ping Servers &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../../index.html"><img src="../../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../../index.html">Table of Contents</a> &gt;
+<a href="../../../index.html#cp_docs">The Control Panel</a> &gt;
+<a href="../index.html">Admin</a> &gt;
+<a href="index.html">Weblog Administration</a> &gt;
+<strong>Default Ping Servers</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Default Ping Servers</h1>
+
+	<div class="path">Control Panel Location:&nbsp; <dfn>Admin &gt; Weblog Administration &gt; Default Ping Servers</dfn></div>	
+
+
+	<p>This section of the Control Panel allows you to define your default <em>ping servers</em>.  Ping servers are sites that allow you to send a "ping" to them to let them know that you've posted a new entry.  Pings can be sent when you submit new entries via the <kbd>PUBLISH</kbd> page.  Examples include <a href="http://www.weblogs.com/">weblogs.com</a> and <a href="http://blo.gs/">Blo.gs</a>, among others.</p>
+	
+	<p class="important"><strong>Note:</strong>&nbsp; Each member of your site is allowed to specify their preferred ping servers via their <dfn>My Account</dfn> page.
+	These default servers are <b>only</b> used with members that have not defined their own.</p>
+
+
+	<div class="imgwrapper"><img src="../../../images/ping_servers.png" width="596" height="244" alt="Default Ping Servers" title="Default Ping Servers" border="0" /></div>
+
+
+	<h3>Server Name</h3>
+		<p>A descriptive name for the server or service.  This name will appear in the <kbd>PUBLISH</kbd> page.</p>
+
+
+	<h3>Server URL/Path</h3>
+
+		<p>The URL where the ping should be sent.  This information will be available from the the particular site receiving the ping. Example: <samp>http://rpc.weblogs.com/RPC2</samp></p>
+
+
+	<h3>Port</h3>
+
+		<p>This specifies which server port should be used to send the ping.  HTTP is typically sent on port 80; you can change this if the ping service uses a different port.  This information should be available from the service.</p>
+
+
+	<h3>Protocol</h3>
+
+		<p>What protocol should be used to send the ping.  Different ping servers accept the data in different protocols.  This information should be available from the service; it may be listed for "developers" or in a section about how to send a ping.  Currently only <b>XML-RPC</b> is supported.</p>
+		
+
+	<h3>Default</h3>
+
+		<p>This setting determines whether or not you want the checkbox for this ping server to be selected by default in the <kbd>PUBLISH</kbd> page.</p>
+
+
+	<h3>Order</h3>
+
+		<p>These settings determine the order in which the ping servers are displayed in the <kbd>PUBLISH</kbd> page.  "1" is listed first, "2" second, and so on.  Simply put the ping servers in the order you wish by placing the numbers appropriately in the boxes.</p>
+
+
+	<h2>Deleting</h2>
+
+	<p>Delete an existing ping server by removing the Server Name and then submitting the form.  Ping server deletion is permanent and irreversible, so <strong>be very careful before deleting a ping server</strong>.  There is <strong>no verification</strong> performed; once you submit the ping server is removed immediately.</p>
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

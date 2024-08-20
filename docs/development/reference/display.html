@@ -1,0 +1,1167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Display Class &#8211; ExpressionEngine Developer Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../index.html">Development</a> &gt;
+<strong>Display Class</strong>
+</div>
+
+
+<div id="content">
+<h1>Display Class</h1>
+
+
+<p>The Display class provides all the HTML display elements used in the ExpressionEngine Control Panel pages, including those of the modules.  Nearly all required HTML elements can be displayed using this class.</p>
+
+<!--set_return_data-->
+
+<div class="section">
+<h2>set_return_data(title [string], body [string], crumb [string], rcrumb [string])</h2>
+
+
+<p>Sets return data for Display class.</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong>Instead of uniquely setting the four main Display class varibles, you can use this function to set them for you.</p>
+
+<pre>
+$DSP->set_return_data($LANG->line('email_sent'), $success_mesage, $LANG->line('email_sent'));
+</pre>
+</div>
+
+
+
+<!--allowed_group-->
+
+<div class="section">
+<h2>allowed_group(which [string])</h2>
+
+
+<p>Verifies access depending on group</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong>When a user or logged in member visits an EE site, the Session class ascribes user data to them that, among other things, pertains to their member groups's access to various parts of the site. <var>which</var> is the name of the field in the exp_member_groups database table.  Returns false if they do not have access, true if they do.</p>
+
+<pre>
+if ( ! $DSP->allowed_group('can_access_admin'))
+{
+     return $DSP->no_access_message();
+}
+</pre>
+
+</div>
+
+
+<!--show_full_control_panel-->
+
+<div class="section">
+<h2>show_full_control_panel()</h2>
+
+
+<p>Outputs the default CP page.</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong>Outputs the default Control Panel page. Used by the system.</p>
+
+</div>
+
+
+<!--show_restricted_control_panel-->
+
+<div class="section">
+<h2>show_restricted_control_panel()</h2>
+
+
+<p>Shows restricted version of the CP.</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong>Outputs the default Control Panel page but lacking any of the usual links and bredcrumb. Used by the system for the login page and bookmarklet.</p>
+
+</div>
+
+
+
+<!--html_header-->
+
+<div class="section">
+<h2>html_header(title [string])</h2>
+
+
+<p>Creates Control Panel's HTML header</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong>Creates Control Panel's HTML header.  Used by the system.</p>
+
+</div>
+
+
+
+<!--fetch_stylesheet-->
+
+<div class="section">
+<h2>fetch_stylesheet()</h2>
+
+
+<p>Retrieves CSS for Control Panel </p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong>Retrieves the CSS content for the Control Panel depending on the user's settings.  Used by the system.</p>
+
+</div>
+
+
+<!--file_open-->
+
+<div class="section">
+<h2>file_open(file_location [string])</h2>
+
+
+<p>Opens up local file and returns contents</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong>OPens up a local file and returns its contents, if unable to open file returns FALSE.</p>
+
+</div>
+
+
+
+
+<!--page_header-->
+
+<div class="section">
+<h2>page_header(pad [int])</h2>
+
+
+<p>Creates topmost header for Control Panel</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong>Creates topmost header for Control Panel, which contains the Quicklinks and logout links.  Used by the system.</p>
+
+</div>
+
+
+
+<!--fetch_quicklinks-->
+
+<div class="section">
+<h2>fetch_quicklinks()</h2>
+
+
+<p>Fetches Quicklinks for the user</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong>Fetches the Quicklinks for the user that are displayed in the topmost header of the Control Panel. Used by the system.</p>
+
+</div>
+
+
+
+<!--fetch_quicktabs-->
+
+<div class="section">
+<h2>fetch_quicktabs()</h2>
+
+
+<p>Fetches CP Tabs for the user</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong>Fetches the Tabs that are added on to the default tabs in the Control Panel. Used by the system.</p>
+
+</div>
+
+
+
+<!--simple_header-->
+
+<div class="section">
+<h2>simple_header()</h2>
+
+
+<p>Creates a simple header for CP</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong>Creates a simple version of the topmost header for Control Panel. Used by the system.</p>
+
+</div>
+
+
+<!--equalize_text-->
+
+<div class="section">
+<h2>equalize_text(test [array])</h2>
+
+
+<p>Equalize length of all text in array</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong>Lets one "equalize" the text length by adding non-breaking spaces before/after each line so that they all match, which is helpful for making navigation text all the same length</p>
+
+</div>
+
+
+
+<!--page_navigation-->
+
+<div class="section">
+<h2>page_navigation()</h2>
+
+
+<p>Main Control Panel navigation</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong>Creates the main Control Panel navigation depending on the user's access permissions.  Used by the system.</p>
+
+</div>
+
+
+
+<!--content-->
+
+<div class="section">
+<h2>content()</h2>
+
+
+<p>Content wrapper</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong>Wraps the main page's content in a &ltdiv&gt; tag and returns it.  Used by the system.</p>
+
+</div>
+
+
+<!--secure_hash-->
+
+<div class="section">
+<h2>secure_hash()</h2>
+
+
+<p>Adds Secure Hashes to CP</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong>Adds Secure Hashes to $DSP->body when forms are found.</p>
+
+</div>
+
+
+
+<!--breadcrumb-->
+
+<div class="section">
+<h2>breadcrumb()</h2>
+
+
+<p>Creates breadcrumb navigation</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong>Creates breadcrumb navigation for the Control Panel when the Display class's <var>show_crumb</var> is not set to FALSE.  Used by the system.</p>
+
+</div>
+
+
+
+<!--right_crumb-->
+
+<div class="section">
+<h2>right_crumb(title [string],url [string], extra [string], pop [bool])</h2>
+
+
+<p>Creates right crumb button</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong>Creates a button on the right side of the
+breadcrumb area.  Useful for stuff like a New Item button.</p>
+
+</div>
+
+
+
+
+<!--crumb_item-->
+
+<div class="section">
+<h2>crumb_item()</h2>
+
+
+<p>Adds "breadcrum" formatting to an item</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong>Adds "breadcrum" formatting to an item.  Used by the system.</p>
+
+</div>
+
+
+<!--required-->
+
+<div class="section">
+<h2>required(blurb [string])</h2>
+
+
+<p>Required field indicator</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong>Returns the indicator that a field is required (red asterix by default).  If <var>blurb</var> is set, it adds that string below the indicator.</p>
+
+</div>
+
+
+<!--content_close-->
+
+<div class="section">
+<h2>content_close()</h2>
+
+
+<p>Closes a &lt;div&gt; tag.</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong>Closes a &lt;div&gt; tag. Used by the Display class elsewhere for formatting content.</p>
+
+</div>
+
+
+
+
+<!--copyright-->
+
+<div class="section">
+<h2>copyright()</h2>
+
+
+<p>Returns EllisLab, Inc. copyright</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong>Returns EllisLab, Inc. copyright that is displayed at the bottom of the Control Panel.  Used by the system.</p>
+
+</div>
+
+
+
+
+<!--html_footer-->
+
+<div class="section">
+<h2>html_footer()</h2>
+
+
+<p>HTML footer for Control Panel</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong>Returns HTML footer for Control Panel.  Used by the system.</p>
+
+</div>
+
+
+<!-- 
+
+===========================================
+
+BEGIN THE MEAT AND POTATOES
+
+===========================================
+
+-->
+
+<!--error_message-->
+
+<div class="section">
+<h2>error_message(message [string], num [int])</h2>
+
+
+<p>Output Error Message</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Uses the Display class to output an error message.  <var>message</var> is used for the outputted error message, while <var>num</var> deteremines if a "Back" link is added to the message (0 for no, 1 for yes).</p>
+
+<pre>
+if ( ! is_writeable($directory))
+{
+    return $DSP->error_message($LANG->line('upload_error'));
+}
+</pre>
+
+</div>
+
+
+
+
+<!--no_access_message-->
+
+<div class="section">
+<h2>no_access_message(message [string])</h2>
+
+
+<p>Unauthorized access message</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Uses the Display class to output an unauthorized access message.</p>
+
+<pre>
+if ( ! $DSP->allowed_group('can_admin_weblogs'))
+{
+    return $DSP->no_access_message();
+}
+</pre>
+
+</div>
+
+
+
+<!--pager-->
+
+<div class="section">
+<h2>pager(base_url [string], total_count [int], per_page [int], cur_page [int], qstr_var [string])</h2>
+
+
+<p>Creates Pagination</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Returns the links for pagination by using the Pagination class.  <var>base_url</var> is the base URL for the page, pre-pagination.  <var>total_count</var> is the the total number of items. <var>per_page</var> is the number of items to show per page.  <var>cur_page</var> is the current page being viewed (0 is the first page). <var>qstr_var</var> is the name of the variable in the URL's query string that determines the current pagination page.</p>
+
+<pre>
+// -----------------------------
+//  Do we need pagination?
+// -----------------------------   		
+		
+if ($query->num_rows > $row_limit)
+{						
+    $row_count = ( ! $IN->GBL('row')) ? 0 : $IN->GBL('row');
+    $url = 'C=communicate'.AMP.'M=view_cache';
+						
+    $paginate = $DSP->pager($url,
+                            $query->num_rows,
+                            $row_limit,
+                            $row_count,
+                            'row'
+                            ); 
+}
+</pre>
+
+</div>
+
+
+
+<!--delete_confirmation-->
+
+<div class="section">
+<h2>delete_confirmation(data [array])</h2>
+
+
+<p>Delete Confirmation Wrapper</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Creates a standardized confirmation message used whenever something needs to be deleted. </p>
+
+<pre>
+$r = $DSP->delete_confirmation(
+						array(
+								'url'		=> 'C=modules'.AMP.'P=delete_module_confirm',
+								'heading'	=> 'delete_module_heading',
+								'message'	=> 'delete_module_message,
+								'item'	=> $module_name,
+								'extra'	=> '',
+								'hidden'	=> array('module_id' => $module_id)
+							)
+						);	
+</pre>
+
+</div>
+
+
+
+
+
+
+
+<!--div-->
+
+<div class="section">
+<h2>div(style [string], align [string])</h2>
+
+
+<p>Creates open &lt;div&gt; tag</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Returns an opening &lt;div&gt; tag.  <var>style</var> is the value of the style attribute for the &lt;div&gt; tag and is by default 'default'.  <var>align</var> is optional and is used to specify alignment of the &lt;div&gt; tag.</p>
+
+<pre>
+$DSP->body .= $DSP->div('itemWrapper', 'center');
+</pre>
+
+</div>
+
+
+<!--div_c-->
+
+<div class="section">
+<h2>div_c</h2>
+
+
+<p>Closes a &lt;div&gt; tag</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Returns a closing &lt;div&gt; tag.</p>
+
+<pre>
+$DSP->body .=  $DSP->div('itemWrapper').
+               $DSP->anchor($link_url, $LANG->line($text)).
+               $DSP->div_c(); 
+</pre>
+
+</div>
+
+
+
+<!--qdiv-->
+
+<div class="section">
+<h2>qdiv(style [string], data [string])</h2>
+
+
+<p>Quick &lt;div&gt; tag for data</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Returns <var>data</var> enclosed in a &lt;div&gt; tag with the style attribute <var>style</var>.</p>
+
+<pre>
+$DSP->body .= $DSP->qdiv('menuHeading', $LANG->line('email'));
+// Returns &lt;div style="menuHeading"&gt;Email Address&lt;/div&gt;
+</pre>
+
+</div>
+
+
+
+
+<!--span-->
+
+<div class="section">
+<h2>span(style [string])</h2>
+
+
+<p>Opening &lt;span&gt; tag</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Returns opening &lt;span&gt; tag with style <var>style</var>.</p>
+
+<pre>
+$DSP->body .= $DSP->span('alert').$LANG->line('assign_variable').$DSP->span_c();
+</pre>
+
+</div>
+
+
+
+<!--span_c-->
+
+<div class="section">
+<h2>span_c()</h2>
+
+
+<p>Returns closing &lt;span&gt; tag</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Returns closing &lt;span&gt; tag.</p>
+
+</div>
+
+
+
+
+<!--qspan-->
+
+<div class="section">
+<h2>qspan(style [string], data [string])</h2>
+
+
+<p>Quick &lt;span&gt; tag for data</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Returns <var>data</var> enclosed in a &lt;span&gt; tag with the style attribute <var>style</var>.</p>
+
+<pre>
+$DSP->body .= $DSP->qspan('alert', $LANG->line('valid_email'));
+</pre>
+
+</div>
+
+
+
+<!--heading-->
+
+<div class="section">
+<h2>heading(data [string], which [integer])</h2>
+
+
+<p>Create HTML header tag</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Returns <var>data</var> enclosed in a an HTML header tag.  <var>which</var> is used to specify which header tag to create, 1-6 (ex:  &lt;h3&gt;).</p>
+
+<pre>
+$DSP->body .= $DSP->heading($LANG->line('error'), 3);
+</pre>
+
+</div>
+
+
+
+<!--anchor-->
+
+<div class="section">
+<h2>anchor(url [string], name [string], extras [string], pop [boolean])</h2>
+
+
+<p>Create HTML anchor (&lt;a&gt;) tag</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Returns <var>name</var> enclosed in a an HTML anchor tag with the link <var>url</var>. <var>extras</var> allows the setting of extra content within the anchor tag like the title or target attribute.  If <var>pop</var> is set to TRUE, then a <kbd>target="_blank"</kbd> will be added to the anchor tag.  The default for <var>pop</var> is FALSE.</p>
+
+<p>If you use <var>extras</var> to add additional attributes to the tag, such as javascript, remember to escape all quotes.</p>
+
+<pre>
+$DSP->body .= BR.$DSP->anchor('http://expressionengine.com/', 'ExpressionEngine', '', TRUE);
+</pre>
+
+</div>
+
+
+<!--anchorpop-->
+
+<div class="section">
+<h2>anchorpop(url [string], name [string], width [integer], height [integer])</h2>
+
+
+<p>Returns a link for a small Pop-up Window</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Returns the HTML for an anchor that uses a javascript popup window link with <var>url</var> as the link and <var>name</var> as the link's name.  You can specify the size of the window using <var>width</var> and <var>height</var>, which have default values of 500 and 400, respectively.</p>
+
+<pre>
+$DSP->body .= $DSP->anchorpop('http://expressionengine.com/', 'ExpressionEngine');
+</pre>
+
+</div>
+
+
+
+<!--pagepop-->
+
+<div class="section">
+<h2>pagepop(url [string], name [string])</h2>
+
+
+<p>Returns a link for a Full Pop-up Window</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Returns the HTML for an anchor that uses JavaScript to create a full page popup window with <var>url</var> as the link and <var>name</var> as the link's name.  </p>
+
+<pre>
+$DSP->body .= $DSP->anchorpop('http://expressionengine.com/', 'ExpressionEngine');
+</pre>
+
+</div>
+
+
+
+<!--mailto-->
+
+<div class="section">
+<h2>mailto(email [string], name [string])</h2>
+
+
+<p>Returns a mailto link.</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Returns a link containing a mail to link with <var>email</var> as the email address and <var>name</var> as the name of the link.</p>
+
+<pre>
+$DSP->body .= $DSP->mailto('webmaster@web.com', 'Webmaster');
+// Returns &lt;a href='mailto:webmaster@web.com'&gt;Webmaster&lt;/a&gt;
+</pre>
+
+</div>
+
+
+<!--br-->
+
+<div class="section">
+<h2>br(num [integer])</h2>
+
+
+<p>Returns a string of &lt;br /&gt; tags.</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Returns a string of &lt;br /&gt; tags.  <var>num</var> specified the number of &lt;br /&gt; tags to return.</p>
+</div>
+
+
+<!--qbr-->
+
+<div class="section">
+<h2>qbr(num [integer])</h2>
+
+
+<p>Returns &lt;br /&gt; tags in a &lt;div&gt; tag.</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Returns a string of &lt;br /&gt; tag enclosed in a &lt;div&gt; tag. <var>num</var> specified the number of &lt;br /&gt; tags to return. The reason for the &lt;div&gt; is XHTML Strict compatibility.</p>
+</div>
+
+
+
+<!--itemgroup-->
+
+<div class="section">
+<h2>itemgroup(top [string], bottom [string])</h2>
+
+
+<p>Returns item group.</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Returns a &lt;div&gt; with the style 'itemWrapper' (common in the CP for breaking up content) containing the data in <var>top</var> as the title (&lt;&gt;&gt; with style 'itemTitle') and <var>bottom</var> as the main content.</p>
+</div>
+
+
+
+<!--nl-->
+
+<div class="section">
+<h2>nl(num [integer])</h2>
+
+
+<p>Returns a string of newlines (\n)</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Returns a string of newlines with <var>num</var> being the number of new lines.</p>
+</div>
+
+
+
+<!--nbs-->
+
+<div class="section">
+<h2>nbs(num [integer])</h2>
+
+
+<p>Returns a string of &amp;nbsp; entities</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Returns a string of &amp;nbsp; entities with <var>num</var> being the number of &amp;nbsp; entities.</p>
+</div>
+
+
+
+<!--table_open-->
+
+<div class="section">
+<h2>table_open(properties [array])</h2>
+
+
+<p>Returns an opeing &lt;table&gt; tag</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Returns an opeing &lt;table&gt; tag based on the array of attributes sent.</p>
+
+<pre>
+$r = $DSP->table_open(array('class' => 'tableBorder', 'width' => '100%'));
+</pre>
+
+</div>
+
+
+
+<!--table_row-->
+
+<div class="section">
+<h2>table_row(array [array])</h2>
+
+
+<p>Returns a complete table row</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Returns a complete row of table data based on the text and data sent to it</p>
+
+<pre>
+$table_row = array(
+				'cell1' => array('valign' => "top", 'width' => "220px", 'text' => $first_text),
+				'cell2' => array('class' => "default", 'width'  => "8px"),
+				'cell3' => array('valign' => "top", 'text' => $third_text));
+		
+$DSP->body .= $DSP->table_row($table_row).
+</pre>
+
+</div>
+
+
+<!--table_close-->
+
+<div class="section">
+<h2>table_close(padding [bool])</h2>
+
+
+<p>Returns closing &lt;table&gt; tag</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Returns closing &lt;table&gt; tag. If parameter is TRUE, it adds some padding underneath table.</p>
+
+</div>
+
+
+
+<!--form_open-->
+
+<div class="section">
+<h2>form_open(attributes [array], hidden [array])</h2>
+
+
+<p>Returns opening form tag</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Returns opening form tag.  The first parameter is for the attributes of the &lt;form> tag and the second parameter are any hidden fields to include</p>
+
+<pre>
+$r = $DSP->form_open(	
+					array(
+						  'action'	=> 'C=modules'.AMP.'M=forum', 
+						  'method'	=> 'post',
+						  'name'	=> 'entryform',
+						  'id'		=> 'entryform'
+						 ),
+					array(
+						  'member_id' => $member_d,
+						)
+				 );</pre>
+
+</div>
+
+
+<!--form_close-->
+
+<div class="section">
+<h2>form_close()</h2>
+
+
+<p>Returns closing &lt;/form&gt; tag</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Returns closing &lt;/form&gt; tag.</p>
+
+</div>
+
+
+
+
+
+<!--input_hidden-->
+
+<div class="section">
+<h2>input_hidden(name [string], value [string])</h2>
+
+
+<p>Returns hidden field</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Returns hidden field.</p>
+
+</div>
+
+
+
+<!--input_text-->
+
+<div class="section">
+<h2>input_text(name [string], value [string], size [int], maxlength [string], style [string], width [string], extras [string], convert [boolean])</h2>
+
+
+<p>Returns input text form field</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Returns input text form field.  The <var>convert</var> parameter determines whether the <var>value</var> parameter has its entities converted to ASCII text, and the default is FALSE.</p>
+
+<p>If you use <var>extras</var> to add additional attributes to the tag, such as javascript, remember to escape all quotes.</p>
+
+<pre>
+ $DSP->body .= $DSP->div('itemWrapper').
+               $DSP->qdiv('defaultBold', BR.$LANG->line('category_name', 'cat_name')).
+               $DSP->input_text('cat_name', $cat_name, '20', '60', 'input', '260px', '', TRUE).
+               $DSP->div_c();
+</pre>
+
+</div>
+
+
+<!--input_pass-->
+
+<div class="section">
+<h2>input_pass(name [string], value [string], size [int], maxlength [string], style [string], width [string])</h2>
+
+
+<p>Returns input password form field</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Returns input password form field.  </p>
+
+</div>
+
+
+
+<!--input_textarea-->
+
+<div class="section">
+<h2>input_textarea(name [string], value [string], rows [int], style [string], width [string], extras [string], convert [boolean])</h2>
+
+
+<p>Returns textarea</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Returns textarea form field.  The <var>convert</var> parameter determines whether the <var>value</var> parameter has its entities converted to ASCII text, and the default is FALSE.</p>
+
+<p>If you use <var>extras</var> to add additional attributes to the tag, such as javascript, remember to escape all quotes.</p>
+
+<pre>
+$DSP->body .= $DSP->div('itemWrapper')  
+              .$DSP->input_textarea('template_data', $query->row['template_data'], '25', 'textarea', '100%')
+              .$DSP->div_c();
+</pre>
+
+</div>
+
+
+
+<!--input_select_header-->
+
+<div class="section">
+<h2>input_select_header(name [string], multi [string], size [integer], width [string])</h2>
+
+
+<p>Returns select list form tag</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Returns select list form tag.  
+The <var>multi</var> parameter should be set to 1, 'y', or 'yes', if you wish 
+the tag to be a multi-select list, and you can set <var>size</var> to indicate 
+how many options to show at once.</p>
+
+<pre>
+$DSP->body .= $DSP->div('itemWrapper')
+              .$DSP->qdiv('itemTitle', $LANG->line('category_option'))
+              .$DSP->input_select_header('category[]', 'y',8)
+              .$DSP->input_select_option('all', $LANG->line('none'))
+              .$DSP->input_select_option('none', $LANG->line('none'))
+              .$possible_categories
+              .$DSP->input_select_footer();
+</pre>
+
+</div>
+
+
+<!--input_select_option-->
+
+<div class="section">
+<h2>input_select_option(value [string], item [string], selected [string], extra [string])</h2>
+
+
+<p>Returns select list option tag</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Returns select list option tag. <var>value</var>
+is the value that this option will be set as, whereas <var>item</var> is 
+what is displayed for the option.  To make an item selected, set <var>selected</var> 
+equal to 1, 'y', or 'yes'.  Finally, <var>extra</var> will add any extra attributes
+onto the &lt;option> tag.</p>
+
+<pre>
+$DSP->body .= $DSP->div('itemWrapper')
+              .$DSP->qdiv('itemTitle', $LANG->line('category_option'))
+              .$DSP->input_select_header('category[]', 'y',8)
+              .$DSP->input_select_option('all', $LANG->line('all'), 'y')
+              .$DSP->input_select_option('none', $LANG->line('none'))
+              .$possible_categories
+              .$DSP->input_select_footer();
+</pre>
+
+</div>
+
+
+<!--input_select_footer-->
+
+<div class="section">
+<h2>input_select_footer()</h2>
+
+
+<p>Returns closing &lt;select&gt; tag</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Returns closing &lt;select&gt; tag.</p>
+
+</div>
+
+
+
+<!--input_checkbox-->
+
+<div class="section">
+<h2>input_checkbox(name [string], value [string], checked [string], extras [string])</h2>
+
+
+<p>Returns checkbox form tag</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Returns checkbox form tag.  To have the checkbox checked by default, set <var>checked</var> to 1, 'y', or 'yes'.</p>
+
+<p>If you use <var>extras</var> to add additional attributes to the tag, such as javascript, remember to escape all quotes.</p>
+
+<pre>
+$DSP->body .= $DSP->input_checkbox('use_format', 'y', 1);
+</pre>
+
+</div>
+
+
+<!--input_radio-->
+
+<div class="section">
+<h2>input_radio(name [string], value [string], checked [string], extras [string])</h2>
+
+
+<p>Returns radio button form tag</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Returns radio button form tag.  To have the radio button selected by default, set <var>checked</var> to 1, 'y', or 'yes'.</p>
+
+<p>If you use <var>extras</var> to add additional attributes to the tag, such as javascript, remember to escape all quotes.</p>
+
+<pre>
+$DSP->body .= $DSP->input_radio('comment_notify', 'n', $selected);
+</pre>
+
+</div>
+
+
+
+
+<!--input_submit-->
+
+<div class="section">
+<h2>input_submit(name [string], value [string], extras [string])</h2>
+
+
+<p>Returns form submit tag</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong> Returns form submit tag.</p>
+
+<p>If you use <var>extras</var> to add additional attributes to the tag, such as javascript, remember to escape all quotes.</p>
+
+</div>
+
+
+
+
+<!--toggle-->
+
+<div class="section">
+<h2>toggle()</h2>
+
+
+<p>Returns JavaScript checkbox toggle code</p>
+
+<p><strong>Class: </strong>Display (DSP)</p>
+<p><strong>Description: </strong>Returns JavaScript checkbox toggle code, which allows you to create a checkbox at the top of a list of items that will automatically select or de-select all the items in the table.  You must name the form 'target', name the select/de-select checkbox 'toggleflat' and add a bit of javascript to it, AND each item must have a checkbox named 'toggle[]' with a unique identifying code for each.  See the example below for a bit more help.</p>
+
+<pre>
+$DSP->body .= $DSP->toggle();  // Load Javascript before form
+$DSP->body .= $DSP->form('C=modules'.AMP.'M=moblog'.AMP.'P=delete_confirm', 'target');
+
+$DSP->body .= $DSP->table('tableBorder', '0', '0', '').
+              $DSP->tr().
+              $DSP->td('tablePad'); 
+
+// At the top, have one of the heading table cells contain a
+// checkbox named 'toggleflag' with the onclick javascript.
+
+$DSP->body .= $DSP->table('', '0', '0', '500px').
+              $DSP->tr().
+              $DSP->table_qcell('tableHeadingBold', 
+                                array(
+                                      $LANG->line('moblog_view'),
+                                      $LANG->line('moblog_modify'),
+                                      $DSP->input_checkbox('toggleflag', '', '', "onclick=\"toggle(this);\"").
+                                      NBS.$LANG->line('delete').NBS.NBS)
+                                ).
+              $DSP->tr_c();
+              
+$i = 0;
+
+foreach ($query->result as $row)
+{
+     $style = ($i++ % 2) ? 'tableCellOne' : 'tableCellTwo';
+     
+     $modify_url = BASE.AMP.'C=modules'.AMP.'M=moblog'.AMP.'P=modify'.AMP.'id='.$row['moblog_id'];
+     
+     $DSP->body .= $DSP->tr();
+            
+     $DSP->body .= $DSP->table_qcell($style, $row['moblog_full_name'], '50%');
+     $DSP->body .= $DSP->table_qcell($style, $DSP->anchor($modify_url,$LANG->line('moblog_modify')), '30%');
+     
+     // For each moblog/member/comment/etc. we have a checkbox with 
+     // the name being 'toggle[]' and the value the id.
+     
+     $DSP->body .= $DSP->table_qcell($style, $DSP->input_checkbox('toggle[]', $row['moblog_id']), '20%');
+                                            
+     $DSP->body .= $DSP->tr_c();
+}
+
+$DSP->body .= $DSP->table_c(); 
+
+$DSP->body .= $DSP->td_c().
+              $DSP->tr_c().
+              $DSP->table_c();
+    
+$DSP->body .= $DSP->qdiv('itemWrapper', BR.$DSP->input_submit($LANG->line('delete')));             
+$DSP->body .= $DSP->form_c(); 
+</pre>
+
+</div>
+
+
+
+
+
+
+
+</div>
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

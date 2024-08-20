@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Template Access Restriction &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#cp_docs">The Control Panel</a> &gt;
+<a href="index.html">Templates</a> &gt;
+<strong>Template Access Restriction</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Template Access Restriction</h1>
+
+	<div class="imgwrapper"><img src="../../images/template_access.png" width="473" height="640" alt="Template Access Restriction" title="Template Access Restriction" border="0" /></div>
+
+	<h3>Member Group</h3>
+	
+	<p>The member group(s) to which the Access restrictions will apply.</p>
+	
+	<h3>Can View this Page?</h3>
+	
+	<p>This determines whether or not this member group is allowed to view this template.</p>
+	
+	<h3>Unauthorized access redirect</h3>
+	
+	<p>When a member of an unauthorized member group attempts to access the template, they will be redirected to the template selected from the drop-down menu.</p>
+	
+	<h3>HTTP Authentication</h3>
+	
+	<p>If this setting is enabled, users will be prompted to login with their username and password to view the template using a standard HTTP Authentication dialog box.  An example usage of this would be to protect an RSS/Atom feed from being viewed by unauthorized users, but still be compatible with Feed Readers that support HTTP Authentication, allowing authorized members to retrieve the feed.</p>
+	
+	<p>If you have HTTP Authentication enabled, a small key icon will appear next to the template's name in the Template Manager.</p> 
+	
+	<div class="imgwrapper"><img src="../../images/template_http_auth_key.png" width="99" height="53" alt="HTTP Authentication symbol example" title="HTTP Authentication symbol example" border="0" /></div>
+
+	<p class="important"><strong>NOTE:</strong> If the login fails, the user will
+	receive a 401 Not Authorized page, and not the redirect template specified 
+	in the above drop-down menu.  Additionally, this ability is typically only 
+	available when PHP is run as an Apache module.</p>
+	
+	<p class="important"><strong>SECURITY NOTE:</strong> Do to the nature of 
+	HTTP Authentication, if used, the username and password submitted might be 
+	sent in the clear (unencrypted) and thus could be viewable by someone snooping in
+	on your network.  For this reason, we strongly encourage you to follow
+	good safety practices with this feature.  Trust your network (no open wifi networks),
+	never use a SuperAdmin login, and if possible have SSL (https://) used on these
+	pages or your site as it will encrypt your requests and protect the information sent.</p>
+	
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

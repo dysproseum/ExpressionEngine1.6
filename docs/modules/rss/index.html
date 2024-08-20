@@ -1,0 +1,294 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>RSS Module Tags &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<strong>RSS Module</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>RSS Module Tags</h1>
+	
+
+	<p>The main purpose of the RSS tag is to render the top portion of the feed containing the name of the author, the character encoding, etc., while the main weblog tag renders the actual rows.</p>
+
+	<p class="important">The RSS Module Tag is intended to be used in conjunction with the <a href="../weblog/weblog_entries.html">Weblog Entries</a> tag.</p>
+
+
+	<p>The entire RSS feed is enclosed between the following tags:</p>
+
+	<code>{exp:rss:feed}<br />
+<br />
+{/exp:rss:feed}</code>
+
+<h2>Sample RSS and Atom Templates</h2>
+
+<ul>
+	<li><a href="sample_atom.txt">Sample Atom Feed</a></li>
+	<li><a href="sample_rss.txt">Sample RSS Feed</a></li>
+</ul>
+
+
+
+	<h2>Parameters</h2>
+
+	<ul class="minitoc">
+		<li><a href="#par_status">status="open"</a></li>
+		<li><a href="#par_username">username="petunia"</a></li>
+		<li><a href="#par_weblog">weblog="news"</a></li>
+		<li><a href="#par_show_expired">show_expired="yes"</a></li>
+		<li><a href="#par_show_future_entries">show_future_entries="yes"</a></li>
+	</ul>
+
+	<p class="important">If you use any of the following parameters, you will probably want to mirror the same settings for your <samp>{exp:weblog:entries}</samp> tag contained inside the RSS tag.</p>
+
+	<h3><a name="par_status">status=</a></h3>
+
+		<code>status="open"</code>
+
+		<p>You may restrict to a particular <a href="../../cp/admin/weblog_administration/custom_entry_statuses.html">status</a>.  You can choose multiple statuses using a pipe:</p>
+
+		<code>status="draft|reviewed|published"</code>
+
+		<p>Or exclude statuses using "not"</p>
+
+		<code>status="not submitted|processing|closed"</code>
+
+
+	<h3><a name="par_username">username=</a></h3>
+
+		<code>username="petunia"</code>
+
+		<p>This parameter limits the query by username. You can use the pipe character to query by multiple usernames:</p>
+
+		<code>username="tom|dick|harry"</code>
+
+		<p>Or you can add "not" to exclude usernames:</p>
+
+		<code>username="not tom|dick|harry|fred"</code>
+
+		You can also use the constant "CURRENT_USER" to show entries from only the currently logged in user.</p>
+
+		<code>username="CURRENT_USER"</code>
+
+		<p>This allow each logged-in user to get only their entries.  Users who are not logged in won't see anything.  Alternatively, you can use the constant "NOT_CURRENT_USER" to show entries <strong>except</strong> from the currently logged in user.</p>
+
+		<code>username="NOT_CURRENT_USER"</code>
+
+
+	<h3><a name="par_weblog">weblog=</a></h3>
+
+		<code>weblog="which"</code>
+
+		<p><strong>Required</strong>. From which <a href="../../cp/admin/weblog_administration/weblog_management.html">weblog</a> to show the meta data information.</p>
+
+
+	<h3><a name="par_show_expired">show_expired=</a></h3>
+
+		<code>show_expired="yes"</code>
+
+		<p>You can determine whether you wish for entries that have "expired" to be included.</p>
+
+
+	<h3><a name="par_show_future_entries">show_future_entries=</a></h3>
+
+		<code>show_future_entries="yes"</code>
+
+		<p>You can determine whether you wish for entries dated in the "future" to be included.  This option is useful when doing things like creating a list of events, some of which have not occurred yet.  Note that EE will still display past entries; this parameter simply instructs EE to also include entries from the future.</p>
+
+
+	<h2>Variables</h2>
+
+	<ul class="minitoc">
+		<li><a href="#var_author">{author}</a></li>
+		<li><a href="#var_email">{email}</a></li>
+		<li><a href="#var_encoding">{encoding}</a></li>
+		<li><a href="#var_version">{version}</a></li>
+		<li><a href="#var_weblog_description">{weblog_description}</a></li>
+		<li><a href="#var_weblog_id">{weblog_id}</a></li>
+		<li><a href="#var_weblog_language">{weblog_language}</a></li>
+		<li><a href="#var_weblog_name">{weblog_name}</a></li>
+		<li><a href="#var_weblog_url">{weblog_url}</a></li>
+	</ul>
+
+
+	<h3><a name="var_author">author</a></h3>
+
+		<code>{author}</code>
+
+		<p>The name of the person who submitted the last entry.</p>
+
+
+	<h3><a name="var_email">email</a></h3>
+
+		<code>{email}</code>
+
+		<p>The email of the person submitting the very last entry.</p>
+
+
+	<h3><a name="var_encoding">encoding</a></h3>
+
+		<code>{encoding}</code>
+
+		<p>The XML character encoding for the weblog.</p>
+
+
+	<h3><a name="var_version">version</a></h3>
+
+		<code>{version}</code>
+
+		<p>The version of ExpressionEngine that you are using (1.0, 1.1, etc.).  This data is pulled from <var>system/core/core.system.php</var>.</p>
+
+
+	<h3><a name="var_weblog_description">weblog_description</a></h3>
+
+		<code>{weblog_description}</code>
+
+		<p>The description of the weblog.</p>
+
+
+	<h3><a name="var_weblog_id">weblog_id</a></h3>
+
+		<code>{weblog_id}</code>
+
+		<p>ID number of the weblog (not the weblog entry, the actual blog).</p>
+
+
+	<h3><a name="var_weblog_language">weblog_language</a></h3>
+
+		<code>{weblog_language}</code>
+
+		<p>The code for the language the weblog is in (en-us, etc.).</p>
+
+
+	<h3><a name="var_weblog_name">weblog_name</a></h3>
+
+		<code>{weblog_name}</code>
+
+		<p>The name of the weblog.</p>
+
+
+	<h3><a name="var_weblog_url">weblog_url</a></h3>
+
+		<code>{weblog_url}</code>
+
+		<p>The URL associated with the weblog as set in the "Weblog URL" preference under <a href="../../cp/admin/weblog_administration/weblog_management.html">Weblog Management</a>.</p>
+
+
+
+
+	<h2><a name="single_variable_dates">Single Variable Dates</a></h2>
+
+		<p>Several date variables are available for use.  As with other date variables, these require the "format" parameter in order to define how the date should be displayed.  See the <a href="../../templates/date_variable_formatting.html">date variable formatting</a> page for more information.</p>
+
+	<ul class="minitoc">
+		<li><a href="#var_date">{date format="%Y %m %d"}</a></li>
+		<li><a href="#var_edit_date">{edit_date format="%Y %m %d"}</a></li>
+		<li><a href="#var_gmt_date">{gmt_date format="%Y %m %d"}</a></li>
+		<li><a href="#var_gmt_edit_date">{gmt_edit_date format="%Y %m %d"}</a></li>
+	</ul>
+
+
+	<h3><a name="var_date">date</a></h3>
+
+		<code>{date format="%Y %m %d"}</code>
+
+		<p>The date on which the last entry was submitted.  Note:  as with all dates, the formatting codes are necessary: <samp>{date format="%Y"}</samp></p>
+
+
+	<h3><a name="var_edit_date">edit_date</a></h3>
+
+		<code>{edit_date format="%Y %m %d"}</code>
+
+		<p>The date on which the entry was last edited.</p>
+
+
+	<h3><a name="var_gmt_date">gmt_entry_date</a></h3>
+
+		<code>{gmt_date format="%Y %m %d"}</code>
+
+		<p>The date the entry was submitted in GMT.  This variable is <strong>not</strong> localized for each user's date settings.</p>
+
+
+	<h3><a name="var_gmt_edit_date">gmt_edit_date</a></h3>
+
+		<code>{gmt_edit_date format="%Y %m %d"}</code>
+
+		<p>The date on which the entry was last edited in GMT.  This variable is <strong>not</strong> localized for each user's date settings.</p>
+
+
+
+	<h2>RFC3229 Support</h2>
+
+	<p>ExpressionEngine has the ability to serve only new content if it receives an RFC3229-compliant request (<a href="http://bobwyman.pubsub.com/main/2004/09/using_rfc3229_w.html">RFC3229 info</a>).  This means that programs or servers that are configured to do so can request to only see new content that has been produced since the last time it requested a feed and EE will provide only that new content.  This allows you to reduce bandwidth costs and download time by only serving the necessary content.</p>
+
+	<p>This ability is provided by adding a special parameter to the <samp>{exp:weblog:entries}</samp> opening tag, <a href="../weblog/parameters.html#par_dynamic_start">dynamic_start="on"</a>.  It is used like so:</p>
+
+	<code>{exp:weblog:entries weblog="default_site" limit="10" rdf="off" dynamic_start="on"}</code>
+
+	<h2>Empty Feeds and Errors</h2>
+	
+	<p>If the combination of tag parameters you specify leads to an error or an empty feed, ExpressionEngine will output a valid, empty RSS feed for you.
+		If you'd like to display the tag errors in this default feed to help troubleshoot why no entries are available, you can put the RSS module into
+		debug mode by adding the <samp>debug=</samp> parameter:</p>  
+		
+	<code>{exp:rss:feed weblog="default_site" debug="yes"}</code>
+	
+	<p>If you want, you can also specify your own feed to use in place of the default, with the option of displaying the tag error as well, using the <kbd>{if empty_feed}</kbd> conditional.  Tag errors can be displayed with the <kbd>{error}</kbd> variable.:</p>
+		
+		<code>
+{if empty_feed}<br />
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;{charset}&quot;?&gt;<br />
+&lt;rss version=&quot;2.0&quot;&gt;<br />
+&nbsp;&nbsp;	&lt;channel&gt;<br />
+&nbsp;&nbsp;	&lt;title&gt;{site_name}&lt;/title&gt;<br />
+&nbsp;&nbsp;	&lt;link&gt;{site_url}&lt;/link&gt;<br />
+&nbsp;&nbsp;	&lt;description&gt;{site_name}&lt;/description&gt;<br />
+	<br />
+&nbsp;&nbsp;	&lt;item&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;		&lt;title&gt;Feed Error&lt;/title&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;		&lt;description&gt;{error}&lt;/description&gt;<br />
+&nbsp;&nbsp;	&lt;/item&gt;<br />
+&nbsp;&nbsp;	&lt;/channel&gt;<br />
+&lt;/rss&gt;<br />
+{/if}
+</code>
+	
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

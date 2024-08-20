@@ -1,0 +1,361 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Weblog Entries Conditional Variables &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Weblog Module</a> &gt;
+<strong>Conditionals</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Weblog Entries - Conditional Variables</h1>
+
+	<p><dfn>Conditional variables</dfn> allow you to add scripting to your standard <a href="variables.html">variables</a> in order to more precisely control your content.</p>
+	
+	<p class="important"><b>Note:</b>&nbsp; A more complete explanation of conditional control structures and operators can be found in the <a href="../../templates/globals/conditionals.html">Global Conditionals</a> page. Please refer to that section for more info.</p>
+
+	<p>Here is an example that tests for the "summary field" being not empty:</p>
+
+	<code>{if summary != ""}<br />
+<br />
+The summary is not empty!<br />
+<br />
+{/if}</code>
+
+	<p>An alternate, shorthand syntax can accomplish the same thing:</p>
+
+	<code>{if summary}<br />
+<br />
+The summary is not empty!<br />
+<br />
+{/if}</code>
+
+	<p>If only the variable name is in the conditional statement it tests for
+	"not empty".</p>
+
+
+	<h2>Available Conditionals</h2>
+
+	<p>Many of the single variables can be used in a conditional.  You may 
+	always use the short name of one of your custom entry fields in a 
+	conditional.  In addition, there are several unique conditionals.</p>
+
+	<ul class="minitoc">
+		<li><a href="#cond_if_allow_comments">{if allow_comments}</a></li>
+		<li><a href="#cond_if_allow_trackbacks">{if allow_trackbacks}</a></li>
+		<li><a href="#cond_if_avatar">{if avatar}</a></li>
+		<li><a href="#cond_if_category_request">{if category_request}</a></li>
+		<li><a href="#cond_if_count">{if count > 5}</a></li>
+		<li><a href="#cond_if_forum_topic">{if forum_topic}</a></li>
+		<li><a href="#cond_if_no_results">{if no_results}</a></li>
+		<li><a href="#cond_if_not_category_request">{if not_category_request}</a></li>
+		<li><a href="#cond_if_not_forum_topic">{if not_forum_topic}</a></li>
+		<li><a href="#cond_if_signature_image">{if signature_image}</a></li>
+		<li><a href="#cond_if_sticky">{if sticky}</a></li>
+	</ul>
+
+
+	<h3><a name="cond_if_allow_comments">if allow_comments</a></h3>
+
+		<code>{if allow_comments}<br />
+content<br />
+{/if}</code>
+
+		<p>This special conditional lets you conditionally display content if 
+		the current entry is set to allow comments.  This conditional will 
+		return FALSE if commenting has expired.</p>
+
+		<code>{if allow_comments}<br />
+<br />
+({comment_total}) &lt;a href="{comment_path='weblog/comments'}">Comments&lt;/a> &#8226;<br />
+<br />
+{/if}</code>
+
+		<p>Or you can display content if commenting is disabled:</p>
+
+		<code>{if allow_comments == FALSE}<br />
+content<br />
+{/if}</code>
+
+
+	<h3><a name="cond_if_allow_trackbacks">if allow_trackbacks</a></h3>
+
+		<code>{if allow_trackbacks}<br />
+content<br />
+{/if}</code>
+
+		<p>This special conditional lets you conditionally display content if
+		the current entry is set to allow trackbacks.</p>
+
+		<code>{if allow_trackbacks}<br />
+<br />
+({trackback_total}) &lt;a href="{trackback_path='weblog/trackbacks'}">Trackbacks&lt;/a> &#8226;<br />
+<br />
+{/if}</code>
+
+		<p>Or you can display content if trackbacks are disabled:</p>
+
+		<code>{if allow_trackbacks == FALSE}<br />
+content<br />
+{/if}</code>
+
+
+	<h3><a name="cond_if_avatar">if avatar</a></h3>
+
+		<code>{if avatar}<br />
+content<br />
+{/if}</code>
+
+		<p>This special conditional lets you conditionally display content if the
+		current entry's author has an avatar image specified.</p>
+
+		<code>{if avatar}<br />
+&lt;img src="{avatar_url}" width="{avatar_image_width}" height="{avatar_image_height}" alt="{author}'s avatar" /><br />
+{/if}</code>
+
+
+	<h3><a name="cond_if_category_request">if category_request</a></h3>
+
+		<code>{if category_request}<br />
+content<br />
+{/if}</code>
+
+		<p>This special conditional lets you conditionally display content if 
+		the current tag is being displayed based on a category specified in the URL.  For instance, if the URL being viewed were <samp>http://example.com/index.php/weblog/archives/C13/</samp> that could trigger this conditional.</p>
+
+
+	<h3><a name="cond_if_count">if count</a></h3>
+
+		<code>{if count > 5}
+content
+{/if}</code>
+
+		<p>This conditional allows you to test against which number entry is 
+		being displayed.  You could use this to apply different styles to the 
+		first entry or have the last 5 entries out of 10 be formatted differently.</p>
+
+
+	<h3><a name="cond_if_forum_topic">if forum_topic</a></h3>
+
+		<code>{if forum_topic}<br />
+content<br />
+{/if}</code>
+
+		<p>You may use this conditional for displaying content when a forum 
+		topic has been associated with a weblog entry.  That option is only 
+		available if the Discussion Forum Module is installed.  It will typically 
+		be used like so:</p>
+
+		<code>{if forum_topic}<br />
+&lt;a href="{path='forums/viewthread'}{forum_topic_id}">Discuss this in our forums&lt;/a><br />
+{/if}</code>
+
+
+	<h3><a name="cond_if_no_results">if no_results</a></h3>
+
+		<code>{if no_results}<br />
+content<br />
+{/if}</code>
+
+		<p>You may use this conditional for displaying a message in the case 
+		when no entries are returned.  The contents inside of the conditional 
+		will be displayed in cases where there are no results returned for the 
+		tag.</p>
+
+		<code>{if no_results}<br />
+<br />
+&lt;p>There are no entries available.&lt;/p><br />
+<br />
+{/if}</code>
+
+		<p>Further, you may specify that another Template be shown in a case 
+		when there are no results.  In order to do that, you must use the
+		<samp>redirect=</samp> variable:</p>
+
+		<code>{if no_results}<br />
+{redirect="weblog/noresult"}<br />
+{/if}</code>
+
+		<p>Lastly, if you want to simply display your 404 page (with 404 headers) when
+		no entries are returned, simply use "404" as the template name.</p>
+
+		<code>{if no_results}<br />
+{redirect="404"}<br />
+{/if}</code>
+
+
+
+	<h3><a name="cond_if_not_category_request">if not_category_request</a></h3>
+
+		<code>{if not_category_request}<br />
+content<br />
+{/if}</code>
+
+		<p>This special conditional lets you conditionally display content if 
+		the current tag is <em>not</em> being displayed based on a category
+		specified in the URL.  For instance, if the URL being viewed were 
+		<samp>http://example.com/index.php/weblog/archives/C13/</samp> 
+		that would not trigger this conditional.</p>
+
+
+	<h3><a name="cond_if_not_forum_topic">if not_forum_topic</a></h3>
+
+		<code>{if not_forum_topic}<br />
+content<br />
+{/if}</code>
+
+		<p>You may use this conditional for displaying content when <em>no</em> 
+		forum topic has been associated with a weblog entry.  That option is 
+		only available if the Discussion Forum Module is installed.  It will 
+		typically be used like so:</p>
+
+		<code>{if not_forum_topic}<br />
+There is no forum discussion available.<br />
+{/if}</code>
+
+
+	<h3><a name="cond_if_signature_image">if signature_image</a></h3>
+
+		<code>{if signature_image}<br />
+content<br />
+{/if}</code>
+
+		<p>This special conditional lets you conditionally display content 
+		if the current entry's author has a signature image specified.</p>
+
+		<code>{if signature_image}<br />
+&lt;img src="{signature_image_url}" width="{signature_image_width}" height="{signature_image_height}" alt="{author}'s signature" /><br />
+{/if}</code>
+
+
+	<h3><a name="cond_if_sticky">if sticky</a></h3>
+
+		<code>{if sticky=='y'}
+content
+{/if}</code>
+
+		<p>You may test whether an entry is set to be "sticky".  You may also 
+		test whether it is not "sticky".</p>
+
+		<code>{if sticky=='n'}
+content
+{/if}</code>
+
+
+
+	<h3>Examples:</h3>
+
+		<p>To test for the member group being "4":</p>
+
+		<code>{if group_id == "4"}<br />
+<br />
+This author, {author}, is in group 4<br />
+<br />
+{/if}</code>
+
+		<p>To test for 10 or more comments:</p>
+
+		<code>{if comment_total >= "10"}<br />
+<br />
+Look out!  Hot topic!!<br />
+<br />
+{/if}</code>
+
+
+
+	<h2>Multiple Conditions</h2>
+
+	<p>You can nest conditional statements in order to create more complicated 
+	restrictions.</p>
+
+	<code>{if summary != ""}<br />
+{if username =="fred"}<br />
+<br />
+Hey Fred!  Look at this summary.<br />
+<br />
+{/if}<br />
+{/if}</code>
+
+	<p>or</p>
+
+	<code>{if comment_total == 0}<br />
+{if trackback_total == 0}<br />
+<br />
+No one has posted yet!  Come on guys!<br />
+<br />
+{/if}<br />
+{/if}</code>
+
+	<p>Please remember that we use the PHP convention of double equals signs 
+	for equivalence:</p>
+
+	<code>{if comment_total == 10}</code>
+
+	<p>Doing the following is <strong>not</strong> allowed: <samp>{if comment_total = 10}</samp></p>
+
+
+
+
+	<h2>Special Conditionals</h2>
+
+	<p>You may also, of course, use the <a href="../../templates/globals/conditionals.html">global conditional</a> 
+	variables to test for logged in/out status as well as other things.  If you 
+	want to show something <strong>only</strong> to users who are logged in:</p>
+
+	<code>{if logged_in}<br />
+<br />
+stuff...<br />
+<br />
+{/if}</code>
+
+	<p>Or <strong>not</strong> logged in:</p>
+
+	<code>{if logged_out}<br />
+<br />
+stuff...<br />
+<br />
+{/if}</code>
+
+<p class="important"><strong>NOTE:</strong> Use of {if logged_in} and {if logged_out} inside a Weblog Entries tag on a cached template will not display properly.  The logged in state of the user whose visit prompts the cache to be written will permanently affect the information displayed to all visitors.</p>
+
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

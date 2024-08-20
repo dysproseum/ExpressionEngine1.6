@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Other Features &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Forum Module</a> &gt;
+<strong>Other Features</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Other Features</h1>
+
+
+
+
+
+	<h3>Re-Synchronize Forums</h3>
+
+		<p>At the bottom of the main <dfn>Forum Management</dfn> page there is a "Re-synchronize Forums" link.  If for some reason the forums get out of order as far as their assignment to a particular category goes, you can use this link to re-synchronized them.  This feature is almost never needed, but it is available if necessary.</p>
+
+
+	<h3>Using PHP in the Forum Templates</h3>
+
+		<p>You can enable PHP to be used in the Forum Templates if you wish.  This is done under <dfn>Default Preferences</dfn>.  You can do this if you wish to include other PHP scripts, such as banner ads.  As with regular ExpressionEngine Templates, you can choose whether the <a href="../../templates/php_templates.html">PHP is executed</a> on "Input" or "Output".</p>
+
+
+	<h3>Running the Forums Through Regular Templates</h3>
+
+		<p>By default, the Forum Module utilizes its own light-weight template display engine, rather than utilizing main templating system in ExpressionEngine. The consequence of this, though, is that you can't use general EE Tags, global variables, conditionals, or similar in the forum templates since they won't be parsed.<p>
+
+		<p>In the <dfn>Default Preferences</dfn> you set a "triggering" word for the forums, which by default is "forums".  When the trigger word is encountered in the URL by ExpressionEngine, your forums will display.  Your trigger word cannot be the same as any existing Template Group name.</p>
+
+		<p>If you absolutely must, there <em>is</em> a way to run your Forum through the standard EE template engine:</p>
+
+		<ol>
+			<li>Create a Template as normal in the main <dfn>Templates</dfn> tab of the Control Panel.  Name it as you want.</li>
+			<li>Inside that new Template, place this code <em>and <strong>only</strong> this code</em>:</li>
+		</ol>
+
+		<code>{exp:forum}</code>
+
+		<p>Your forum will then be run inside the regular EE template engine, which means that you can include standard EE Tags in the forum theme Templates.  The forum is then accessed through whichever Template you created above, so the Template name is used in place of the "trigger" word mentioned earlier.</p>
+
+		<p class="important">The down side of this approach is that it adds more processing overhead, so it's not recommended unless users really need this capability. Since the forum can't be cached, on very busy sites this can create some unwanted server load.</p>
+
+		<p>Do not cache the Template you create for the forum.  If you do so, your forum will not behave dynamically.</p>
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

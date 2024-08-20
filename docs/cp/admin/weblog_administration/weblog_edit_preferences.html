@@ -1,0 +1,336 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Edit Preferences &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../../index.html"><img src="../../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+
+<div id="navlinks">
+<a href="../../../index.html">Table of Contents</a> &gt;
+<a href="../../../index.html#cp_docs">The Control Panel</a> &gt;
+<a href="index.html">Weblog Administration</a> &gt;
+<a href="weblog_management.html">Weblog Management</a> &gt;
+<strong>Edit Preferences</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Edit Preferences</h1>
+
+	<div class="path">Control Panel Location:&nbsp; <dfn>Admin &gt; Weblog Administration &gt; Weblog Management &gt; Edit Preferences</dfn></div>	
+
+	<!--
+	<div class="imgwrapper"><img src="../../../images/weblog_create.jpg" width="775" height="300" alt="Weblog Create" title="Weblog Create" border="0" /></div>
+	-->
+
+	<p>This screen allows you to edit the preferences and settings associated with the weblog.  They include General, Administrative, Weblog Posting, and Comment Posting settings.</p>
+
+
+	<h2>General Weblog Preferences</h2>
+
+	<h3>Full Weblog Name</h3>
+
+		<p>The "full weblog name" is the descriptive name for the weblog.  This is the name of your weblog that you will show to visitors and display on your site.</p>
+
+		<p>The full weblog name is a required field.  Spaces, punctuation, and other special characters are allowed.  For example, the weblog's descriptive name might be <samp>Joe's Personal Weblog</samp>.</p>
+
+
+	<h3>Short Name</h3>
+
+		<p>The "short name" for the weblog is the name used internally within the program.  It is also used when specifying a weblog in variables or parameters in your <dfn><a href="../../templates/index.html">Templates</a></dfn>.  It is not normally shown to visitors or otherwise exposed outside of your weblog "setup".</p>
+
+		<p>The weblog's short name is a required field.  It must be a single word with no spaces.  The underscore character is allowed.  For example, the weblog's "short name" might be <samp>joe_blog</samp>.</p>
+
+
+	<h3>Weblog Description</h3>
+
+		<p>A short description of the weblog.  Spaces, punctuation, and other special characters are allowed.  This is used, for example, in RSS feeds.</p>
+
+
+	<h3>XML Language</h3>
+
+		<p>This preference determines the XML language setting that you can use for your weblog pages.  This information is available as a variable for use in the weblog Templates.  A drop-down list is available for selection.</p>
+
+
+	<h3>XML Character Encoding</h3>
+
+		<p>The character encoding used for the weblog.  Most weblogs will use "utf-8" or "iso-8859-1", but other encodings can be specified.  This information is available as a variable for use in the weblog Templates.  A drop-down list is available for selection.</p>
+
+
+
+	<h2>Path Settings</h2>
+
+
+	<h3>Weblog URL</h3>
+
+		<p>The full URL to the main page for this weblog.</p>
+
+
+	<h3>Comment Page URL</h3>
+
+		<p>The full URL to the "comments" page for this weblog.  The URL should include the Template Group and Template.  For example: <samp>http://example.com/index.php/weblog/comments/</samp></p>
+
+
+	<h3>Search Results URL</h3>
+
+		<p>The full URL where you would like search results from this weblog to be pointed.  The URL should include the Template Group and Template.  For example, if you wish that links off the search results page point to your "comments" Template you might use: <samp>http://example.com/index.php/weblog/comments/</samp></p>
+
+
+	<h3>Trackback Return URL</h3>
+
+		<p>When you send Trackbacks they include a "return" URL.  Here you can set what that URL should be.  For example: <samp>http://example.com/index.php</samp></p>
+
+
+	<h3>Ping Return URL</h3>
+
+		<p>When you send a ping to a website, it includes a return URL.  Here you can set what that URL should be.  For example: <samp>http://example.com/index.php</samp></p>
+
+
+	<h3>RSS Feed URL</h3>
+
+		<p>The URL where you can view the RSS feed for this weblog.  For example: <samp>http://example.com/index.php/weblog/rss_2.0/</samp>.  This setting is used for sending pings in the "Extended Ping" format.  Some servers may not accept "Extended Pings", so you can leave this field blank and EE will send a standard ping.</p>
+
+	<h3>Live Look Template</h3>
+	
+		<p>The template that will be used for a Live Look at your entries.  Links are available from both the main Edit section of the control panel as well as the "View Entry" page that displays after submitting an entry.  If you do not want to use a Live Look Template with a weblog, simply set this preference to "No Live Look Template".</p>
+
+
+	<h2>Administrative Preferences</h2>
+
+
+	<h3>Default Status</h3>
+
+		<p>The default status for new weblog entries.  The available options depend on what <a href="#edit_groups">Status Group</a> the weblog is assigned to use and which statuses are defined for that group.</p>
+
+
+	<h3>Default Category</h3>
+
+		<p>The default category for new weblog entries.  The available options depend on what <a href="#edit_groups">Category Group</a> the weblog is assigned to use and which categories are defined for that group.  In addition to the categories from that group, the "None" option is also available, in which case no category will be selected by default.</p>
+
+
+	<h3>Select "Allow Comments" button in Publish page by default?</h3>
+
+		<p>This lets you determine whether or not the "Allow Comments" checkbox on the new weblog entry page will be checked by default.  If you do not intend to allow, or infrequently allow, commenting on entries in this weblog then the option can be set to "No".</p>
+
+
+	<h3>Select "Allow Trackbacks" button in Publish page by default?</h3>
+
+		<p>This lets you determine whether or not the "Allow Trackbacks" checkbox on the new weblog entry page will be checked by default.  If you do not intend to allow, or infrequently allow, trackbacks on entries in this weblog then the option can be set to "No".</p>
+
+
+	<h3>Which field should be used for search excerpt?</h3>
+
+		<p>You can specify which field from your entries to use in search result excerpts.  The list is dynamically populated depending on which <a href="#edit_groups">Field Group</a> the weblog is assigned to use and which fields are defined for that group.  Only fields that have been set as "searchable" will be included.</p>
+
+
+
+	<h2>Weblog Posting Preferences</h2>
+
+	<h3>Default HTML formatting in weblog entries</h3>
+
+		<p>This setting determines how raw HTML code within entries is handled.  There are three options:</p>
+
+		<ol>
+			<li><b>Convert HTML into character entities</b>: This will convert the HTML tags so that they will display as plain text on a page when viewed.  This would be useful if you want to display example code often.</li>
+			<li><b>Allow only safe HTML</b>: This will allow "safe" HTML (&lt;b>, &lt;i>, &lt;u>, &lt;em>, &lt;strike>, &lt;strong>, &lt;pre>, &lt;code>, &lt;blockquote>, &lt;h2&gt;, &lt;h3&gt;, &lt;h4&gt;, &lt;h5&gt;, &lt;h6&gt;) to be kept so that they are interpreted by the browser when the entry is viewed.  All other HTML is converted to character entities and the raw code will be seen upon viewing.</li>
+			<li><b>Allow ALL HTML</b>: This leaves the HTML code as written and the code will then be interpreted by the browser when the entry is viewed.</li>
+		</ol>
+
+
+	<h3>Allow image URLs in weblog entries?</h3>
+
+		<p>You can determine whether or not you want people to be able to display images within your entries by using the URL for the image.  If "Yes" is selected for this option, people can display images as inline content in your weblog.  If the setting is "No" then images will not be allowed.</p>
+
+
+	<h3>Automatically turn URLs and email addresses into links?</h3>
+
+		<p>When this option is set to "Yes", any full URLs or email addresses will be automatically formatted as a valid HTML link to the address.  If the option is "No" then the URL or email address will be treated and displayed as plain text.</p>
+
+
+
+	<h2>Notification Preferences</h2>
+
+	<h3>Notify the author of an entry whenever a comment or trackback is submitted?</h3>
+
+		<p>Whenever a new comment is submitted or trackback received, the author of the entry can be notified.  An email will be sent to the email address associated with the author member in the system.</p>
+
+
+	<h3>Enable recipient list below for comment and trackbacks notification?</h3>
+
+		<p>You can specify a list of email addresses to receive notifications when a comment is posted or trackback received.  This setting determines whether or not the list will receive the updates.  The addresses are specified in the next setting.</p>
+
+
+	<h3>Email address of Notification Recipient(s)</h3>
+
+		<p>If the previous setting is set to "Yes", then these are the recipients of the email alert.  You may define a single email address or list multiple addresses by separating them with a comma.  Ex: "<samp>admin@example.com, joe@example.com</samp>"</p>
+
+
+
+	<h2>Comment Posting Preferences</h2>
+
+
+	<h3>Allow comments in this weblog?</h3>
+
+		<p>Determines whether or not comments are allowed in this weblog.</p>
+
+
+	<h3>Require membership in order to post comments?</h3>
+
+		<p>Determines whether visitors to the website must be members in order to post.  If this preferences is set to "Yes" and an unregistered visitor attempts to post a comment the comment will not be accepted and the visitor will receive a message.</p>
+
+
+	<h3>Enable Captcha for Comment Posting?</h3>
+
+		<p>Determines whether or not you require <a href="../../../general/captchas.html">CAPTCHAs</a> to be used when submitting comments.</p>
+
+
+	<h3>Require email address to post comments?</h3>
+
+		<p>You can optionally require that anyone posting comments must list an email address.  You can determine in your <dfn><a href="../../templates/index.html">Template</a></dfn> whether or not the address is shown publicly, but requiring an email address in order to post comments can help reduce the number of "spam" comments you receive since the visitor must submit a valid email address.</p>
+
+
+	<h3>Moderate Comments?</h3>
+
+		<p>If this option is enabled, then comments will not immediately appear on the site.  Instead, the comments will go into a queue and await review/moderation by an administrator.  Waiting comments can be accessed via the link on the Control Panel Home page.</p>
+
+		<p>Member Groups (such as the SuperAdmin Group by default) can be set to bypass comment moderation and have their comments posted immediately.  That option is access under <dfn>Admin &gt; Member Groups</dfn>.</p>
+
+
+	<h3>Maximum number of characters allowed in comments</h3>
+
+		<p>You may set a maximum number of characters allowed in any comment.  Setting this preference to 0 (zero) will not place a restriction on the number of characters allowed.</p>
+
+
+	<h3>Comment Re-submission Time Interval</h3>
+
+		<p>This is the optional number of seconds that must lapse after a comment is posted before that same user can post another comment.  This setting can help reduce comment "spam".  The preference can be left blank or set to 0 (zero) if you do not want to impose a limit.</p>
+
+
+	<h3>Comment Expiration</h3>
+
+		<p>The number of days after an entry is posted in which to allow comments.  After that period has expired, the entry will be closed to commenting and the comment form will no longer appear.  Existing comments will still be displayed.  Enter 0 (zero) for no expiration.  Note that this preference sets the <em>default</em> setting for the weblog.  The setting can be overridden and changed on a per-entry basis.</p>
+
+		<p>If you also select the checkbox accompanying this setting, then all existing entries in this weblog will be updated to reflect the new setting when you submit.</p>
+
+
+	<h3>Comment Text Formatting</h3>
+
+		<p>This setting determines how comments are formatted by the system.  There are three possible choices:</p>
+
+		<ol>
+			<li><b>None</b>: No automatic formatting is done; the comment is left as-is.  This could be useful if you want people to be able to use full HTML in their comments.</li>
+			<li><b>xhtml</b>: Comments will be formatted as valid XHTML.  Text blocks with double line breaks will be turned into paragraphs, line breaks will be replaced by <samp>&lt;br /></samp> tags, special characters will be formatted as character entities, etc.</li>
+			<li><b>Auto &lt;br /></b>: All line breaks in the comment will be converted into <samp>&lt;br /></samp> tags.  This includes any line breaks that may occur inside HTML code, which could cause unexpected displays.</li>
+		</ol>
+
+
+	<h3>Comment HTML Formatting</h3>
+
+		<p>Like the weblog setting, this preference determines how raw HTML code within comments is handled.  There are three options:</p>
+
+		<ol>
+			<li><b>Convert HTML into character entities</b>: This will convert the HTML tags so that they will display as plain text on a page when viewed.  This would be useful if you want to display example code often.</li>
+			<li><b>Allow only safe HTML</b>: This will allow "safe" HTML (&lt;b>, &lt;i>, &lt;u>, &lt;em>, &lt;strike>, &lt;strong>, &lt;pre>, &lt;code>, &lt;blockquote>) to be kept so that they are interpreted by the browser when the entry is viewed.  All other HTML is converted to character entities and the raw code will be seen upon viewing.  Note that while  &lt;h2&gt;, &lt;h3&gt;, &lt;h4&gt;, &lt;h5&gt;, &lt;h6&gt; are considered "safe" in weblog entries, they are not allowed in comments.</li>
+			<li><b>Allow all HTML (not recommended)</b>: This leaves the HTML code as written and the code will then be interpreted by the browser when the entry is viewed.  This is generally not recommended since visitors would be able to submit HTML code which could drastically alter the display of your webpage.</li>
+		</ol>
+
+
+	<h3>Allow image URLs in comments?</h3>
+
+		<p>You can determine whether or not you want people to be able to display images within comments by using the URL for the image.</p>
+
+
+	<h3>Automatically turn URLs and email addresses into links?</h3>
+
+		<p>When this option is set to "Yes", any full URLs or email addresses will be automatically formatted as a valid HTML link to the address.  If the option is "No" then the URL or email address will be treated and displayed as plain text.</p>
+
+
+
+	<h2>Trackback Preferences</h2>
+
+
+	<h3>Allow trackbacks in this weblog?</h3>
+
+		<p>Determines whether or not trackbacks are allowed in this weblog.</p>
+
+
+	<h3>Add Trackback Auto-discovery code to your pages?</h3>
+
+		<p>This lets you choose whether or not to automatically include standard <a href="http://www.movabletype.org/docs/mttrackback.html#autodiscovery%20of%20trackback%20ping%20urls">trackback auto-discovery</a> code with each weblog entry.  Doing so will more easily allow other people linking to, or commenting on, your entries to correctly send a Trackback to your site.</p>
+		
+	<h3>Use URL Titles in entry identifier URLs?</h3>
+
+		<p>This lets you choose whether or not to use the URL Title of your entries when the  <a href="http://www.movabletype.org/docs/mttrackback.html#autodiscovery%20of%20trackback%20ping%20urls">trackback auto-discovery</a> code is created for this weblog.  By default, we suggest using the entry ID.</p>
+
+
+	<h3>Maximum number of allowed trackback pings per hour</h3>
+
+		<p>This sets the maximum number of trackback pings received from any particular IP address to process in any given hour.  This setting can help alleviate server stress during particularly heavy traffic periods if you are receiving a lot of trackback pings.</p>
+
+
+	<h3>Randomize Trackback URL</h3>
+
+		<p>When a visitor views your site, a random code number will be added to the end of each Trackback URL for your entries. When a Trackback is received by EE, the code must match in order to be accepted. This feature works in a similar way to the CAPTCHA feature for commenting.  It is meant to help prevent Trackback spam and other automated Trackback submissions.</p>
+
+
+	<h3>Which field should be used for Trackbacks excerpt?</h3>
+
+		<p>You can specify which field from your entries to use in Trackback excerpts.  The list is dynamically populated depending on which <a href="#edit_groups">Field Group</a> the weblog is assigned to use and which fields are defined for that group.</p>
+
+		<p><b>Note:</b> This preference must be set in order for you to be able to send Trackback pings.</p>
+
+
+
+	<h2>Layout Customization in Publish Page</h2>
+
+
+	<p>Each radio button option in this section determines whether or not the 
+	associated item will appear on the <dfn>Publish</dfn> area tabs when making entries for this weblog.</p>
+	
+	<h3>Default Entry Title</h3>
+
+	<p>When a new entry is created or previewed, this value will be inserted by default in the Title field.
+	This is helpful if you wish every entry in a weblog to have the titles follow a certain format.
+	The automatic URL Title creating javascript for the Publish page will ignore this text during processing.</p>
+	
+	<h3>URL Title Prefix</h3>
+
+	<p>When a new entry is created or previewed, this value will be appended to the beginning
+	of the url_title value, which will help you insure that url_titles are unique between weblogs.</p>
+
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

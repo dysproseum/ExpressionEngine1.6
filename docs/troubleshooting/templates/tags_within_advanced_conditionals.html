@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Troubleshooting &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="./index.html" />
+  <style type="text/css" media="screen,print">@import url(./../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="index.html"><img src="./../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt; 
+<a href="../index.html">Troubleshooting</a> &gt; 
+<strong>Tags within Advanced Conditionals</strong>
+</div>
+
+
+
+<div id="content">
+
+	<h1>Tags within Advanced Conditionals</h1>
+
+	<p class="ts_desc">When using an opening tag within an advanced conditional, additional conditions do not effect output.</p>
+	
+	<h2>Advanced Conditionals and Tags</h2>
+	
+	<p>When using ExpressionEngine tags within Advanced Conditionals the entire tag block must be contained within the conditional.  Advanced Conditional [i]cannot[/i] be used to specify different opening tags, with shared markup for the rest of the tag block.
+	</p>
+	
+	<p><strong>Right:</strong></p>
+	
+	<code>
+		{if segment_3 == "foo"}<br />
+		    {exp:weblog:entries weblog="default_site"}<br />
+		        &lt;h2>{title}&lt;/h2><br />
+		    {/exp:weblog:entries}<br />
+		{if:else}<br />
+		    {exp:weblog:entries weblog="another_weblog" category="not 6|7"}<br />
+		        &lt;h2>{title&lt;/h2><br />
+		    {/exp:weblog:entries}
+		{/if}
+	</code>
+	
+	<p><strong>Wrong:</strong></p>
+	
+	<code>
+		{if segment_3 == "foo"}<br />
+		    {exp:weblog:entries weblog="default_site"}<br />
+		{if:else}<br />
+		    {exp:weblog:entries weblog="another_weblog" category="not 6|7"}<br />
+		{/if}<br />
+		        &lt;h2>{title}&lt;/h2><br />
+		    {/exp:weblog:entries}
+	</code>
+	
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>Member Groups &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" name="../../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../../index.html"><img src="../../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../../index.html">Table of Contents</a> &gt;
+<a href="../../../index.html#cp_docs">The Control Panel</a> &gt;
+<a href="../index.html">Admin</a> &gt;
+<a href="index.html">Members and Groups</a> &gt;
+<a href="member_groups.html">Member Groups</a> &gt;
+<strong>Create/Edit Member Groups</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Member Groups - Create/Edit</h1>
+	<div class="path">Control Panel Location:&nbsp; <dfn>Admin &gt; Members and Groups &gt; Member Groups &gt; Create/Edit</dfn></div>	
+
+	<p>This page describes each of the preferences available to your Member Groups.</p>
+
+	<h2>Enable Group Security Lock</h2>
+	<p>When a group is locked, only a Super Admin can assign a member to that group. If you allow other users to administrate member accounts, it is highly recommended that you ONLY unlock groups you want them to be able to assign other users to. Without this feature, anyone with administrative privileges could effectively assign themselves or others to member groups with greater privileges.</p>
+
+	<h2>Site Access</h2>
+
+	<h3>Can View Site When it is Online</h3>
+	<p>Determines whether a member of this group can view your site when it is "online" in your <a href="../system_preferences/general_configuration.html">General Configuration</a> page. It is highly unlikely that you'll ever set this preference to "no" unless the Member Groups is used with banned users.</p>
+	
+	<h3>Can View Site When it is Offline</h3>
+	<p>Determines whether a member of this group can view your site when it has been taken offline in your <a href="../system_preferences/general_configuration.html">General Configuration</a> page.</p>
+		
+	
+	
+	<h2>Member Account Privileges</h2>
+
+	<h3>Can view public profiles</h3>
+	<p>Determines whether a member of the group can view the public profiles of other members.</p>
+
+	<h3>Can email other members via the profile email console</h3>
+	<p>Determines whether a member of the group can email other members using the <dfn>Email Console</dfn> in the member profile area.</p>
+	
+	<h3>Include Members in PUBLISH page multi-author list?</h3>
+	
+	<p>Determines whether members of this group will appear in the <dfn>Publish</dfn> page "Multi-Author list".</p>
+	
+	<p class="important"><strong>NOTE:</strong> This setting overrides any individual users's setting in the <dfn>My Account</dfn> area.  If set here to "Yes", then <strong>all</strong> members of the member group will be displayed in the Multi-Author list drop-down in the <dfn>Publish</dfn> page.</p>
+	
+	<h3>Include Members in Site's Member List?</h3>
+	<p>Determines whether members of the group are included in <dfn>Member List</dfn>, typically located at:</p>
+	<p class="leftpad"><dfn>http://example.com/index.php/member/memberlist/</dfn></p>
+
+	<h3>Can delete own account - deletes all posts, entries, and comments as well</h3>
+	<p>Determines whether a member of the group can delete their own account.  If enabled, members of this group will be able to delete their own account through their front-end member control panel.</p>
+	<p class="important"><strong>NOTE:</strong> When a user deletes their own account, it also removes <em>all content</em> created by them from your site: comments, weblog entries, forum topics, and forum posts.</p>
+	
+	<h3>Email Address of Delete Notification Recipient(s)</h3>
+	<p>If the previous setting is set to "Yes", then these are the recipients of the email alert.  You may define a single email address or list multiple addresses by separating them with a comma.  Ex: "<samp>admin@example.com, joe@example.com</samp>"&nbsp; This notification only applies to members who delete their own accounts from their front-end member control panel, and not to members who are deleted from the system control panel by an administrator.</p>
+	
+	<h2>Comment Posting Privileges</h2>
+	
+	<h3>Can submit comments</h3>
+	<p>Determines whether a member of the group can post comments.</p>
+	
+	<h3>Exclude member from comment moderation</h3>
+	<p>If you use the <dfn>Comment Moderation</dfn> feature, this preference determines whether a member of the group is exempt from being moderated.</p>
+		
+	
+	<h2>Search Privileges</h2>
+	
+	<h3>Can use search utility</h3>
+	<p>Determines whether a member of the group is allowed to use the simple or advanced search forms.</p>
+	
+	<h3>Number of seconds between searches</h3>
+	<p>The number of seconds that must lapse before a user is allowed to perform a subsequent search.  Set to <kbd>0</kbd> if you do not require any time to lapse.</p>
+	
+	
+	
+	<h2>Private Messaging Privileges</h2>
+	
+	<h3>Can send private messages</h3>
+	<p>Determines whether a member of the group is allowed to send private messages.</p>
+	
+	<h3>Maximum Number of Private Messages a user can store</h3>
+	<p>Sets the maximum number of Private Messages that each member of the group can store.  This is the sum of all Private Messages in their "Inbox", "Sent", and any custom folders they have created.</p>
+
+	<h3>Maximum Number of Private Messages a user can send per day</h3>
+	<p>You may restrict how many Private Messages any particular user of the group may send in one day.  This can help prevent abuse of the Private Messaging system.</p>
+	
+	<h3>Can Add Attachments to Private Messages</h3>
+	<p>Determines whether a member of the group is allowed to add attachments to their private messages.</p>
+	
+	<h3>Can Send Bulletins</h3>
+	<p>Determines whether a member of the group is allowed to send Bulletins.</p>
+	
+	<h2>Control Panel Access</h2>
+	
+	<h3>Can access the control panel?</h3>
+	<p>Determines whether a member of the group is allowed to access the <dfn>Control Panel</dfn>.</p>	
+
+	
+	<h2>Control Panel Area Access</h2>
+	
+	<p>These preferences let you restrict access to various areas of the <dfn>Control Panel</dfn>.</p>	
+	
+	<h3>Can access PUBLISH page</h3>
+	<p>Determines whether a member of the group is allowed to access the <kbd>PUBLISH</kbd> page.</p>	
+	
+	<h3>Can access EDIT page</h3>
+	<p>Determines whether a member of the group is allowed to access the <kbd>EDIT</kbd> page.</p>	
+
+	<h3> access TEMPLATES page</h3>
+	<p>Determines whether a member of the group is allowed to access the <kbd>PUBLISH</kbd> page.</p>	
+
+	<h3>Can access COMMUNICATE page</h3>
+	<p>Determines whether a member of the group is allowed to access the <kbd>TEMPLATES</kbd> page.</p>	
+
+	<h3>Can access MODULES page</h3>
+	<p>Determines whether a member of the group is allowed to access the <kbd>MODULES</kbd> page.</p>
+	
+	<h3>Can access ADMIN page</h3>
+	<p>Determines whether a member of the group is allowed to access the <kbd>ADMIN</kbd> page.</p>	
+	
+	
+		
+	
+	<h2>Control Panel Administrative Privileges</h2>
+	
+	<p>These preferences let you assign <dfn>Control Panel</dfn> administrative privileges.</p>	
+		
+	<h3>Can administrate weblogs and weblog preferences</h3>
+	<p>Determines whether a member of the group is allowed to create, edit, and delete <dfn>Weblogs</dfn> and <dfn>Weblog preferences</dfn>.</p>
+	
+	<h3>Can administrate template groups and templates</h3>
+	<p>Determines whether a member of the group is allowed to create, edit, and delete <dfn>Template Groups</dfn> and <dfn>Templates</dfn>.</p>
+
+	<h3>Can administrate members accounts</h3>
+	<p>Determines whether a member of the group is allowed to create, edit, and delete <dfn>Membership accounts</dfn>.</p>
+	
+	<h3>Can change the group that a member is assigned to</h3>
+	<p>Determines whether a member of the group is allowed to change the <dfn>Member Groups</dfn> assignment for any given member (except Super Admins).  Note:  Only Groups that are unlocked apply to this preference.</p>
+	
+	<h3>Can administrate member profile templates</h3>
+	<p>Determines whether a member of the group is allowed to edit <dfn>Member Profile Templates</dfn>.</p>
+
+	<h3>Can delete members</h3>
+	<p>Determines whether a member of the group is allowed to delete <dfn>Member accounts</dfn>.</p>
+
+	<h3>Can ban users</h3>
+	<p>Determines whether a member of the group is allowed to access the <dfn>User Banning</dfn> page.</p>
+
+	<h3>Can administrate system utilities</h3>
+	<p>Determines whether a member of the group is allowed to administrate <dfn>Utilities</dfn>, located at: <dfn>Admin &gt; Utilities</dfn>.</p>	
+	
+	<h3>Can administrate general preferences</h3>
+	<p>Determines whether a member of the group is allowed to administrate <dfn>System Preferences</dfn>, located at: <dfn>Admin &gt; System Preferences</dfn>.</p>	
+	
+	<h3>Can install/remove modules</h3>	
+	<p>Determines whether a member of the group is allowed to install/de-install the <dfn>Modules</dfn>.</p>
+	
+	
+	
+	<h2>Control Panel Email Privileges</h2>
+	
+	<h3>Can send email via the Control Panel</h3>
+	<p>Determines whether a member of the group is allowed to send email using the <kbd>COMMUNICATE</kbd> page.</p>		
+		
+	<h3>Can send email to Member Groups</h3>
+	<p>Determines whether a member of the group is allowed to send email to entire <dfn>Member Groups</dfn> using the <kbd>COMMUNICATE</kbd> page.</p>	
+	
+	<h3>Can send email to Mailing List</h3>
+	<p>Determines whether a member of the group is allowed to send email to a <dfn>Mailing List</dfn> using the <kbd>COMMUNICATE</kbd> page.</p>	
+
+	<h3>Can view/send cached email</h3>	
+	<p>Determines whether a member of the group is allowed to see previously sent email messages as well as re-send them.</p>	
+	
+	
+	
+	
+	<h2>Weblog Posting and Editing Privileges</h2>
+	
+	<p>These preferences determine the privileges a user has with regard to creating, editing, and deleting weblog entries via the control panel.</p>
+	
+	<h3>Can view weblog entries authored by others</h3>
+	<p>Determines whether a member of the group is allowed to <b>view</b> weblog entries that have been authored by someone else.  Note: One entries within weblogs assigned to the user (see below) apply.</p>	
+
+	<h3>Can delete their own weblog entries</h3>
+	<p>Determines whether a member of the group is allowed to <b>delete</b> their own weblog entries.  Note: One entries within weblogs assigned to the user (see below) apply.</p>	
+
+	<h3>Can edit entries authored by others</h3>
+	<p>Determines whether a member of the group is allowed to <b>edit</b> weblog entries that have been authored by someone else.  If this is set to yes then members of this group will also be able to <em>view weblog entries authored by others</em> regardless of that permission's setting.  Note: One entries within weblogs assigned to the user (see below) apply.</p>	
+	
+	<h3>Can delete weblog entries authored by others</h3>
+	<p>Determines whether a member of the group is allowed to <b>delete</b> weblog entries that have been authored by someone else.  Note: One entries within weblogs assigned to the user (see below) apply.</p>	
+
+	<h3>Can change the author name when posting weblog entries</h3>
+	<p>Determines whether a member of the group is allowed to change the author name when posting or editing entries.  Note: One entries within weblogs assigned to the user (see below) apply.</p>	
+	
+	<h3>Can edit and add new categories</h3>
+	<p>Determines whether a member of the group is allowed to <b>add</b> new categories.</p>	
+	
+	<h3>Can delete categories</h3>
+	<p>Determines whether a member of the group is allowed to <b>delete</b> new categories.</p>	
+	
+	
+	<h2>Weblog Assignment</h2>
+	<p>This area will show a list of all the weblogs in the system.  You may assign a weblog or combinations of weblogs to the group. 
+	Only weblog(s) that are assigned to the group are included in the <dfn>Weblog Posting and Editing Privileges</dfn> above.</p>
+	
+	
+	
+	<h2>Comment Administration Privileges</h2>
+	
+	<h3>Can Moderate Comments</h3>
+	<p>Determines whether a member of the group is allowed to <b>moderate comments</b> via the control panel.</p>	
+	
+	<h3>Can view comments in weblog entries authored by others</h3>
+	<p>Determines whether a member of the group is allowed to <b>view comments</b> via the control panel for weblog entries authored by someone else.</p>	
+	
+	<h3>Can edit comments in their own weblog entries</h3>
+	<p>Determines whether a member of the group is allowed to <b>view comments</b> via the control panel for their own weblog entries.</p>
+
+	<h3>Can delete comments in their own weblog entries</h3>
+	<p>Determines whether a member of the group is allowed to <b>delete comments</b> for their own weblog entries.</p>
+
+	<h3>Can edit comments in ANY weblog entries</h3>
+	<p>Determines whether a member of the group is allowed to <b>edit comments</b> for weblog entries authored by someone else.</p>	
+
+	<h3>Can delete comments in ANY weblog entries</h3>	
+	<p>Determines whether a member of the group is allowed to <b>delete comments</b> for weblog entries authored by someone else.</p>	
+
+
+	
+	<h2>Template Editing Privileges</h2>
+	<p>Similar to the <dfn>Weblog Assignment</dfn> area above, this area will show a list of all the <b>Template Groups</b> in the system.  
+	You may assign a template group or combinations of them to the member group. 
+	Only Template Group(s) that are assigned to the member group are allowed to be accessed.</p>
+	
+	<h2>Module Access Privileges</h2>
+	<p>Individual Modules can be assigned to the group, allowing its control panel (if it has one) to be accessed.</p>
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address><div class="validation"><a name="http://validator.w3.org/check/referer" title="Validate XHTML">XHTML</a> | <a name="http://jigsaw.w3.org/css-validator/check/referer" title="Validate CSS">CSS</a></div>
+</div>
+
+</body>
+</html>

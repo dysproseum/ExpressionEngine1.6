@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Archive Month Links Tag &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Weblog Module</a> &gt;
+<strong>Archive Month Links Tag</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Archive Month Links Tag</h1>
+
+	<p>The <dfn>Archive Month links</dfn> tag displays a list of links for any month that contains weblog entries.  Its purpose is to
+	link to your monthly archive page.  The links created by this tag look like this:</p>
+
+	<ul>
+		<li>October, 2005</li>
+		<li>September, 2005</li>
+		<li>August, 2005</li>
+		<li>July, 2005</li>
+		<li>June, 2005</li>
+	</ul>
+
+
+
+	<p>Here is the tag syntax:</p>
+
+	<code>{exp:weblog:month_links weblog="news" limit="50"}<br />
+<br />
+{month}, {year}&lt;br /><br />
+<br />
+{/exp:weblog:month_links}</code>
+
+
+
+	<h2>Parameters</h2>
+
+	<ul class="minitoc">
+		<li><a href="#par_limit">limit="10"</a></li>
+		<li><a href="#par_show_expired">show_expired="yes"</a></li>
+		<li><a href="#par_show_future_entries">show_future_entries="yes"</a></li>
+		<li><a href="#par_sort">sort="asc"</a></li>
+		<li><a href="#par_status">status="open"</a></li>
+		<li><a href="#par_weblog">weblog="news"</a></li>
+	</ul>
+
+
+	<h3><a name="par_limit">limit=</a></h3>
+
+		<code>limit="10"</code>
+
+		<p>The number of rows to return.</p>
+		
+	<h3><a name="par_sort">sort=</a></h3>
+
+		<code>sort="asc"</code>
+
+		<code>sort="desc"</code>
+
+		<p>The sort order can be ascending or descending.  The order will default to "descending" if nothing is specified.</p>
+
+
+	<h3><a name="par_show_expired">show_expired=</a></h3>
+
+		<code>show_expired="yes"</code>
+
+		<p>You can determine whether you wish for entries that have "expired" to be included.</p>
+
+
+	<h3><a name="par_show_future_entries">show_future_entries=</a></h3>
+
+		<code>show_future_entries="yes"</code>
+
+		<p>You can determine whether you wish for entries dated in the "future" to be included.  This option is useful when doing things like creating a list of events, some of which have not occurred yet.</p>
+
+	<h3><a name="par_status">status=</a></h3>
+
+		<code>status="open"</code>
+
+		<p>You may restrict to entries with a particular <a href="../../cp/admin/weblog_administration/custom_entry_statuses.html">status</a> .  The two statuses "open" and "closed" are default statuses that are always available, so you can always specify those if needed.  You can choose multiple statuses using a pipe:</p>
+
+		<code>status="draft|reviewed|published"</code>
+
+		<p>Or exclude statuses using "not"</p>
+
+		<code>status="not submitted|processing|closed"</code>
+
+	<h3><a name="par_weblog">weblog=</a></h3>
+
+		<code>weblog="news"</code>
+
+		<p>The name of the weblog you want to limit the query to.</p>
+
+
+
+	<h2>Variables</h2>
+
+	<ul class="minitoc">
+		<li><a href="#var_month">{month}</a></li>
+		<li><a href="#var_month_num">{month_num}</a></li>
+		<li><a href="#var_month_short">{month_short}</a></li>
+		<li><a href="#var_path">{path='weblog/archives'}</a></li>
+		<li><a href="#var_year">{year}</a></li>
+		<li><a href="#var_year_short">{year_short}</a></li>
+	</ul>
+
+
+	<h3><a name="var_month">month</a></h3>
+
+		<code>{month}</code>
+
+		<p>Month, long format: September</p>
+
+
+	<h3><a name="var_month_num">month_num</a></h3>
+
+		<code>{month_num}</code>
+
+		<p>Month, numeric: 09</p>
+
+
+	<h3><a name="var_month_short">month_short</a></h3>
+
+		<code>{month_short}</code>
+
+		<p>Month, short format: Sep</p>
+
+
+	<h3><a name="var_path">path</a></h3>
+
+		<code>{path='weblog/archives'}</code>
+
+		<p>The URL to the specified template.  The month/year part of the link will be added automatically.</p>
+
+		<p>For example, this:</p>
+
+		<code>&lt;a href="{path='weblog/archives'}">{month}, {year}&lt;/a></code>
+
+		<p>Will be rendered like this:</p>
+
+		<code>&lt;a href="example.com/index.php/weblog/archives/2003/12/">December, 2003&lt;/a></code>
+
+		<p><b>Note:</b> The path setting can optionally be enclosed in quotes: <samp>{path="template_group/template_name"}</samp></p>
+
+
+	<h3><a name="var_year">year</a></h3>
+
+		<code>{year}</code>
+
+		<p>Year, long format: 2003</p>
+
+
+	<h3><a name="var_year_short">year_short</a></h3>
+
+		<code>{year_short}</code>
+
+		<p>Year, short format: 03</p>
+
+		<h2>Variables Pairs</h2>
+
+		<ul class="minitoc">
+			<li><a href="#var_year_heading">{year_heading}</a></li>
+		</ul>
+
+
+		<h3><a name="var_year_heading">year_heading</a></h3>
+
+			<code>
+					{year_heading}<br />
+					&lt;p>{year}&lt;/p><br />
+				  	{/year_heading}
+			</code>
+
+			<p>The year heading can be used to show information once for each year.</p>
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

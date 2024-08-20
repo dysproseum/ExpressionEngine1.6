@@ -1,0 +1,297 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Wiki Template, Special Search Results Section &#8211; ExpressionEngine Documentation</title> 
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style> 
+
+<style type="text/css">
+.screencap {
+margin: 30px 0;
+text-align: center;
+}
+
+#content h4 {
+	font-size: 12px;
+	font-weight: bold;
+	color:	#363;
+	background-color: transparent;
+	border-bottom: 1px solid #363;
+	margin: 10px 0 0 35px;
+	padding: 5px 0 3px 9px;
+	}
+
+#content h5 {
+	font-size: 12px;
+	font-weight: bold;
+	color:	#369;
+	background-color: transparent;
+	border-bottom: 1px solid #369;
+	margin: 10px 0 0 55px;
+	padding: 5px 0 3px 9px;
+	}
+	
+</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="README.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+</tr>
+</table>
+</div>
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Wiki Module</a> &gt;
+<a href="wiki_templates.html">Theme Template</a> &gt;
+<strong>Special Search Results</strong>
+</div>
+
+<div id="content">
+
+	<h1>Wiki Template, Special Search Results Section</h1>
+
+	<p>This section displays search results done through the wiki as outlined below:</p>
+
+<div class="screencap"><img src="../../images/wiki_search_results.jpg" width="550" height="336" alt="Displays search results done through the wiki." /></div>
+
+	<p>In addition to the variables in the <a href="wiki_templates_page.html">Wiki Page section</a>, the Special Search Results section has:</p>
+
+<ul>
+<li><a href="#vars_con">Conditional Variables</a></li>
+<li><a href="#vars_sin">Single Variables</a></li>
+<li><a href="#tags">Tags</a></li>
+</ul>
+
+<h2><a name="vars_con">Conditional Variables</a></h2>
+
+<ul>
+<li><a href="#vars_con_no_results">{if no_results}</a></li>
+<li><a href="#vars_con_results">{if results}</a></li>
+</ul>
+
+<h3><a name="vars_con_no_results">if no_results</a></h3>
+
+	<code>{if no_results}</code>
+
+	<p>Checks to see there are search results. If not, do something.</p>
+
+<h3><a name="var_con_results">if results</a></h3>
+
+	<code>{if results}</code>
+
+	<p>Checks to see if there are search results. If yes, do something.</p>
+
+<h2><a name="vars_sin">Single Variables</a></h2>
+
+<ul>
+<li><a href="#var_sin_keywords">{keywords}</a></li>
+</ul>
+
+<h3><a name="var_sin_keywords">keywords</a></h3>
+
+	<code>{keywords}</code>
+
+	<p>Displays the keywords used in the search.</p>
+
+<h2><a name="tags">Tags</a></h2>
+
+	<p>The Special Search Results section has the <strong>{wiki:search_results}</strong> tag available which is used to display the search results. This tag has <a href="#para">Parameters</a> and <a href="#vars">Variables</a> available to it.</p>
+
+<h3><a name="para">{wiki:search_results} | Parameters</a></h3>
+
+<ul>
+<li><a href="#search_para_limit">limit=""</a></li>
+<li><a href="#search_para_paginate">paginate=""</a></li>
+<li><a href="#search_para_switch">switch=""</a></li>
+</ul>
+
+<h4><a name="search_ara_limit">limit</a></h4>
+
+	<code>{wiki:search_results limit="#"}</code>
+
+	<p>This determines the number of search results to display on a page. For example, this:
+
+	<code>{wiki:search_results limit="10"}</code>
+
+	<p>Would limit the number of search results displayed to 10.</p>
+
+<h4><a name="search_para_paginate">paginate</a></h4>
+
+	<code>{wiki:search_results paginate=""}</code>
+
+	<p>This determines the placement of pagination. For example, if the <a href="#search_para_limit">limit</a> parameter is set to 10 and there are 25 results, then you can use this parameter to create pagination to browse all the search results.</p>
+
+	<p>The values for the paginate parameter are:</p>
+
+<ul>
+<li><strong>top</strong>: pagination is placed on top.</li>
+<li><strong>bottom</strong>: pagination is placed on the bottom.</li>
+<li><strong>both</strong>: pagination is placed on the top and the bottom.</li>
+</ul>
+
+<h4><a name="search_para_switch">switch</a></h4>
+
+	<code>{wiki:search_results switch=""}</code>
+
+	<p>This is used to "switch" styles using css in combination with the <a href="#search_sin_switch">switch variable</a>. For example, this:</p>
+
+	<code>
+{wiki:search_results switch="blue|red"}<br /><br />
+&lt;div class="<b>{switch}</b>">a search result&lt;/div>
+</code>
+
+	<p>Would render something like this:</p>
+
+	<code>
+&lt;div class="<b>blue</b>">a search result&lt;/div><br /><br />
+&lt;div class="<b>red</b>">a search result&lt;/div><br /><br />
+&lt;div class="<b>blue</b>">a search result&lt;/div><br /><br />
+&lt;div class="<b>red</b>">a search result&lt;/div><br /><br />
+</code>
+
+<h3><a name="vars">{wiki:search_results} | Variables</a></h3>
+
+	<p>This tag only has single variables available.</p>
+
+<ul>
+<li><a href="#search_sin_absolute_count">{absolute_count}</a></li>	
+<li><a href="#search_sin_article">{article}</a></li>
+<li><a href="#search_sin_author">{author}</a></li>
+<li><a href="#search_sin_content">{content}</a></li>
+<li><a href="#search_sin_count">{count}</a></li>
+<li><a href="#search_sin_email">{email}</a></li>
+<li><a href="#search_sin_gmt_revision_date">{gmt_revision_date format=""}</a></li>
+<li><a href="#search_sin_page_id">{page_id}</a></li>
+<li><a href="#search_sin_path_view_articles">{path:view_article}</a></li>
+<li><a href="#search_sin_revision_date">{revision_date format=""}</a></li>
+<li><a href="#search_sin_revision_id">{revision_id}</a></li>
+<li><a href="#search_sin_revision_notes">{revision_notes}</a></li>
+<li><a href="#search_sin_switch">{switch}</a></li>
+<li><a href="#search_sin_switch_adv">{switch="one|two|three"}</a></li>
+<li><a href="#search_sin_title">{title}</a></li>
+<li><a href="#search_sin_url}">{url}</a></li>
+</ul>
+
+<h4><a name="search_sin_absolute_count">absolute_count</a></h4>
+
+	<code>{absolute_count}</code>
+
+	<p>Running "count" of the displayed file, taking pagination into consideration.</p>
+
+<h4><a name="search_sin_article">article</a></h4>
+
+	<code>{article}</code>
+
+	<p>Displays the fully rendered article. HTML characters will be rendered.</p>
+
+<h4><a name="search_sin_author">author</a></h4>
+
+	<code>{author}</code>
+
+	<p>Displays the Screen Name of the revision's author.</p>
+
+<h4><a name="search_sin_content">content</a></h4>
+
+	<code>{content}</code>
+
+	<p>Displays the raw content of an article.</p>
+
+<h4><a name="search_sin_count">count</a></h4>
+
+	<code>{count}</code>
+
+	<p>"count" of the article currently being displayed</p>
+
+<h4><a name="search_sin_email">email</a></h4>
+
+	<code>{email}</code>
+
+	<p>This displays the email address of the revision's author.</p>
+
+<h4><a name="search_sin_gmt_revision_date">gmt_revision_date</a></h4>
+
+	<code>{gmt_revision_date format=""}</code>
+
+	<p>This displays the GMT time of the most recent article revision.</p>
+
+	<p>The <strong>format</strong> parameter is used to determine the date's formatting using ExpressionEngine's <a href="../../templates/date_variable_formatting.html">Date Variable Formatting</a>. 
+
+<h4><a name="search_sin_page_id">page_id</a></h4>
+
+	<code>{page_id}</code>
+
+	<p>This is used to get the page's unique ID. This is used for identifying purposes in RSS/Atom Feeds.</p>
+
+<h4><a name="search_sin_path_view_article">path:view_article</a></h4>
+
+	<code>{path:view_article}</code>
+
+	<p>Displays a URL to view the article.</p>
+		
+<h4><a name="search_sin_revision_date">revision_date</a></h4>
+
+	<code>{revision_date format=""}</code>
+
+	<p>This displays the time of the most recent article revision.</p>
+
+	<p>The <strong>format</strong> parameter is used to determine the date's formatting using ExpressionEngine's <a href="../../templates/date_variable_formatting.html">Date Variable Formatting</a>. 
+
+<h4><a name="search_sin_revision_id">revision_id</a></h4>
+
+	<code>{revision_id}</code>
+
+	<p>Displays the revision's unique ID number.</p>
+
+<h4><a name="search_sin_revsion_notes">revision_notes</a></h4>
+
+	<code>{revision_notes}</code>
+
+	<p>This displays the revision's notes (if any).</p>
+
+<h4><a name="search_sin_switch">switch</a></h4>
+
+	<code>{switch}</code>
+
+	<p>This is used in combination with the <a href="#search_para_switch">switch parameter</a> to "switch" the css class being used to display search results. Please see the <a href="#search_para_switch">switch parameter</a> for example usage.</p>
+
+<h4><a name="search_sin_switch_adv">switch=</a></h4>
+
+	<code>{switch="option_one|option_two|option_three"}</code>
+
+	<p>This variable permits you to rotate through any number of values as the results are displayed.  The first article will use "option_one", the second will use "option_two", the third "option_three", the fourth "option_one", and so on.</p>
+
+	<p>Multiple instances of the <samp>{switch=}</samp> tag may be used and the system will intelligently keep track of each one.</p>
+
+<h4><a name="search_sin_title">title</a></h4>
+
+	<code>{title}</code>
+
+	<p>Displays the article/page's Title.</p>
+
+<h4><a name="search_sin_url">url</a></h4>
+
+	<code>{url}</code>
+
+	<p>This displays the author's URL.</p>
+
+
+</div>
+	
+	<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

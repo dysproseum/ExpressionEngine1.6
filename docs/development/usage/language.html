@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Language Class  &#8211; ExpressionEngine Developer Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../index.html">Development</a> &gt;
+<strong>Language Class</strong>
+</div>
+
+
+<div id="content">
+<h1>Language Class</h1>
+
+
+<div class="section">
+	<ul>
+		<li><a href="language.html#calling">Calling the Language Class</a></li>
+		<li><a href="language.html#fetching_line">Fetching a Line of Text</a></li>
+		<li><a href="language.html#calling_file">Calling a Language File</a></li>
+	</ul>
+</div>
+
+
+<a name="calling"></a><div class="section">
+<h2>Calling the Language Class</h2>
+
+<p>ExpressionEngine uses the Language class for calling language files and making the Control Panel side of ExpressionEngine translatable into multiple languages. To use the Language class in your modules you must call the <var>$LANG</var> global in every function that will require the use of any text.  The language used when this class is called is dependent on the logged in user's localization preferences.</p>
+
+<pre>
+function database_example()
+{
+	global $LANG;
+
+	echo $LANG->line('');
+}
+</pre>
+
+<p>ExpressionEngine also requires that every module have a file in the language directory (ex: /system/language/english/) for the module with its filename in this form: 'lang.your_module_name.php'.  Contained in this file with be an array ($L) of all the language variables for your module.  Every module language file must contain <em>at least</em> two values for the name and description of the module, which are displayed in the Module page in the Control Panel.</p>
+
+<pre>&lt;?php
+
+$L = array(
+
+//----------------------------------------
+// Required for MODULES page
+//----------------------------------------
+
+"moblog_module_name" =>
+"Moblog",
+
+"moblog_module_description" =>
+"Moblogging Module",
+
+//----------------------------------------
+
+"moblog" =>
+"Moblogging",
+
+"edit_moblog" =>
+"Update Moblog",
+
+"view_moblogs" =>
+"Moblog Accounts",
+
+// END
+''=>''
+);
+?&gt;
+</pre>
+
+<p>When adding text to your language file array, be careful when using non-alphanumeric characters such as quotes and monetary symobls.  For such things we suggest that you convert them into HTML entities or escape them with a backslash.</p>
+
+</div>
+
+
+<a name="fetching_line"></a>
+<div class="section">
+<h2>Fetching a Line of Text</h2>
+
+<p>A module's language file is automatically loaded whenever the module is accessed through the Module section of the Control Panel.  So, in that instance, you simply need to call the piece of text you wish from the array contained in your module's langauge file.  To do so, you simply use the $LANG->line() function and specify the key for that piece of text in the array.</p>
+
+<pre>
+$DSP->title = $LANG->line('view_moblogs');
+// Returns "Moblog Accounts";
+</pre>
+
+<p>EXTRA:  If you are using the lines of text as a label for form fields, then you can automatically create the &lt;label&gt; HTML tag for that field.</p>
+
+<pre>
+$DSP->body .= $DSP->itemgroup(
+                              $DSP->required().NBS.
+                              $LANG->line('username', 'username'),
+                              $DSP->input_text('username', '',)
+                              );                             
+</pre>
+
+</div>
+
+
+
+<a name="calling_file"></a>
+<div class="section">
+<h2>Calling a Language File</h2>
+
+<p>A module's language file is automatically loaded whenever the module is accessed through the Module section of the Control Panel.  There are also two other language files that will be loaded automatically by ExpressionEngine.  The first, lang.core.php, is always available on both the user side and Control Panel side of ExpressionEngine.  It contains many often used pieces of text and also Localization related lines of text.  Second, if accessing any part of the Control Panel, then the values located in lang.cp.php are always available to you.  On the user side of the site, the values located in lang.core.</p>
+
+<p>Every so often, you might require or desire the language values from another language file.  For example, you know that the lang.members.php file contains many member related pieces of text, and instead of duplicating those in your module's language file you could use the text in that language file.  To load that language file and its values, you simply need to call the $LANG->fetch_language_file() function with the name of the language file.</p>
+
+<pre>
+$LANG->fetch_language_file('members');
+</pre>
+
+</div>
+
+
+
+
+
+
+
+</div>
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

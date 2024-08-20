@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Upgrading the Discussion Forum Module &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Forum Module</a> &gt;
+<strong>Upgrading Forum</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Upgrading the Discussion Forum Module From an Earlier Version</h1>
+
+	<p class="critical"><strong>Note:</strong> Before upgrading to a new version of the Discussion Forum module insure that you are running the current version of ExpressionEngine.<br /><br />
+
+	Also, please note these instructions are only applicable for <em>upgrading</em> an existing installation.  If you have not installed the Discussion Forum Module, you will need to follow the <a href="forum_installation.html">forum installation instructions</a>.</p>
+
+
+	<h2>Step 1</h2>
+
+		<p>The first step is to <a href="https://secure.expressionengine.com/download.php">download</a> the most current version of the Discussion Forum Module.  Once you have downloaded it, Unzip the software to your local computer.</p>
+
+
+	<h2>Step 2</h2>
+
+		<p>
+
+		<p>Inside the unzipped software, you will find a folder called <kbd>forum</kbd>.</p>
+		
+		<p>Using an FTP program, upload this folder and everything inside it to your server at this location:</p>
+		
+		<p class="leftpad"><kbd>system/modules/</kbd></p>
+
+		<p>Note: You will replace the existing <kbd>forum</kbd> folder with the new one, ending up with this:</p>
+
+		<p class="leftpad"><kbd>system/modules/forum/</kbd></p>
+
+
+	<h2>Step 3</h2>
+	
+
+		<p>Inside the unzipped software you will also find two language files:</p>
+
+		<ul>
+			<li><var>lang.forum.php</var></li>
+			<li><var>lang.forum_cp.php</var></li>
+		</ul>
+
+		<p>Upload these two files into your <kbd>system/language/english/</kbd> directory on your server, replacing the existing ones.  You should end up with:</p>
+
+		<ul>
+			<li><var>system/language/english/lang.forum.php</var></li>
+			<li><var>system/language/english/lang.forum_cp.php</var></li>
+		</ul>
+
+
+
+	<h2>Step 4</h2>
+
+		<p>Log into your ExpressionEngine Control Panel and visit this page:</p>
+		
+		<p class="leftpad"><dfn>Modules &gt; Discussion Forum</dfn></p>
+		
+		<p>Accessing that page will automatically tell ExpressionEngine to perform any internal updates that are needed for the new version.</p>
+		
+		<p class="important"><strong>IMPORTANT:</strong>  When you click on the link to the Discussion Forum module, the update will begin taking place.  Do not close your browser window or click on any links until the page has finished loading.  Depending on the size of your forums, the update may take several seconds to complete.</p>
+
+
+
+	<h2>Step 5: Version Specific Notes</h2>
+
+	<p>Please view the update notes that apply to any versions that are newer than the version you have been running.</p>
+
+		<ul>
+			<li><a href="forum_update_notes_2.2.0.html">Version Notes 2.2.0</a></li>
+			<li><a href="forum_update_notes_2.1.2.html">Version Notes 2.1.2</a></li>
+			<li><a href="forum_update_notes_2.1.1.html">Version Notes 2.1.1</a></li>
+			<li><a href="forum_update_notes_2.1.html">Version Notes 2.1</a></li>
+			<li><a href="forum_update_notes_2.0.html">Version Notes 2.0</a></li>
+			<li><a href="forum_update_notes_1.3.2.html">Version Notes 1.3.2</a></li>
+			<li><a href="forum_update_notes_1.3.1.html">Version Notes 1.3.1</a></li>
+			<li><a href="forum_update_notes_1.3.html">Version Notes 1.3</a></li>
+			<li><a href="forum_update_notes_1.2.html">Version Notes 1.2</a></li>
+			<li><a href="forum_update_notes_1.1.1.html">Version Notes 1.1.1</a></li>
+			<li><a href="forum_update_notes_1.1.html">Version Notes 1.1</a></li>
+		</ul>
+
+
+	<h2><em>You're done!</em></h2>
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

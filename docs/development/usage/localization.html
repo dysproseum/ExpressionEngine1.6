@@ -1,0 +1,364 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Localization Class  &#8211; ExpressionEngine Developer Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../index.html">Development</a> &gt;
+<strong>Localization Class</strong>
+</div>
+
+
+<div id="content">
+<h1>Localization Class</h1>
+
+
+<div class="section">
+	<ul>
+		<li><a href="localization.html#calling">Calling the Localize Class</a></li>
+		<li><a href="localization.html#time_now">What time is it now?</a></li>
+		<li><a href="localization.html#localized_time">User's Localized Time</a></li>
+		<li><a href="localization.html#url_date">Date in the URL</a></li>
+		<li><a href="localization.html#date_tag_params">Date Tag Parameters</a></li>
+		<li><a href="localization.html#human_readable">Human Readable Time</a></li>
+		<li><a href="localization.html#foreign_dates">Foreign Dates</a></li>
+		<li><a href="localization.html#timezone_menu">Timezone Menu</a></li>
+	</ul>
+</div>
+
+
+<a name="calling"></a>
+<div class="section">
+<h2>Calling the Localize Class</h2>
+
+<p>ExpressionEngine stores all dates and times in UTC (Universal Coordinated Time), formerly known as GMT (Greenwich Mean Time). The benefit of doing so is that each member of an EE site can choose their own time zone and date localization settings. This permits entries and other information containing dates/times to appear in each member's local time. ExpressionEngine uses the date/time and localization functions available in the Localize class to set and display dates and times throughout the program.</p>
+
+<p>To use the Localize class in your modules you must call the <var>$LOC</var> global in every function that will require the use of the functions contained in the class.</p>
+
+<pre>
+function localization_example()
+{
+    global $LOC, $IN, $DB;
+
+    $entry_data = array(
+                        'entry_id'			=> $entry_id,
+                        'title'				=> $title,
+                        'url_title'			=> $url_title,
+                        'ip_address'		=> $IN->IP,
+                        'entry_date'		=> $LOC->now,
+                        'year'				=> gmdate('Y', $LOC->now),
+                        'month'				=> gmdate('m', $LOC->now),
+                        'day'				=> gmdate('d', $LOC->now),
+                        'status'			=> 'open'
+                        );
+            
+    $DB->query($DB->update_string('exp_weblog_titles', $entry_data , "entry_id='$entry_id'")); 
+}
+</pre>
+</div>
+
+
+<!-- Current Time -->
+
+
+<a name="time_now"></a>
+<div class="section">
+<h2>What time is it now?</h2>
+
+<p><strong>$LOC->now</strong> will probably be the Localization variable used the most often in any module.  Basically, it returns the current UTC (Universal Coordinated Time) and when making an INSERT into the database, this is the time that should be used.</p>
+
+<p>If you need to enter the current day, month, or year into the database you should also inserted into the database as UTC/GMT.  To do this, use the PHP function gmdate() with the $LOC->now variable.</p>
+
+<pre>
+$year = gmdate('Y', $LOC->now);
+</pre>
+
+</div>
+
+
+<a name="localized_time"></a>
+<div class="section">
+<h2>User's Localized Time</h2>
+
+<p><strong>$LOC->set_localized_time()</strong> is used to return back the current localized time of the user, which is required when displaying dates and times from the database. If the user is a visitor or a member who has not specified their Localization, then the system default will be used.</p>
+
+<p>By default, <strong>$LOC->set_localized_time()</strong> will return the current time.</p>
+
+<pre>
+if (ereg("^current_time", $key))
+{
+    $now = $LOC->set_localized_time();
+    $tagdata = $TMPL->swap_var_single($key, $LOC->decode_date($val,$now), $tagdata);
+}
+</pre>
+
+<p>You can also specify the time in Unix timestamp form, i.e. as from the database.</p>
+
+<pre>
+$d = date('d', $LOC->set_localized_time($query->row['entry_date']));
+</pre>
+
+
+<p>If you want to set the timezone and/or DST (Daylight Savings Time) independently of the user, you can specify those in the second and third parameter for this tag.</p>
+
+<pre>
+$day = date('d', $LOC->set_localized_time('','-8','n');
+// Returns the current day in the PST timezone without DST set.
+</pre>
+
+</div>
+
+<!-- Date in the URL -->
+
+<a name="url_date"></a>
+<div class="section">
+<h2>Date in the URL</h2>
+
+<p><strong>$LOC->set_localized_offset()</strong> is used when the date is specified in the URL (ex: http://www.site.com/index.php/features/module/2004/07/04/) and we need to determine the current user's offset from GMT in order to pull the correct date range from the database.  If the user is a visitor or a member who has not specified their Localization, then the system default will be used.</p>
+
+<pre>
+// Start of day and end of day in Unix timestamp for UTC
+$start_time = $LOC->set_gmt(mktime(0, 0, 0, $month, $day, $year));
+$end_time = $LOC->set_gmt(mktime(23, 59, 59, $month, $day, $year)); 
+
+// Checks for Daylight Savings Time (DST)		
+// Adds or subtracts an hour
+
+if (date("I", $LOC->now) AND ! date("I", $start_time))
+{
+    $start_time -= 3600;            
+}
+elseif (date("I", $start_time))
+{
+    $start_time += 3600;           
+}
+
+if (date("I", $LOC->now) AND ! date("I", $end_time))
+{
+    $end_time -= 3600;            
+}
+elseif (date("I", $end_time))
+{
+    $end_time += 3600;           
+}
+
+// Adds localised offset		
+$start_time += $LOC->set_localized_offset();
+$end_time += $LOC->set_localized_offset();
+</pre>
+
+
+<p>NOTE: If no day is specified, then the entire month can be selected by using the <strong>$LOC->fetch_days_in_month()</strong> function.</p>
+
+<pre>
+if ($day == '')
+{
+    $sday = 1;
+    $eday = $LOC->fetch_days_in_month($month, $year);
+}
+else
+{
+    $sday = $day;
+    $eday = $day;
+}
+
+$start_time = $LOC->set_gmt(mktime(0, 0, 0, $month, $sday, $year));
+$end_time = $LOC->set_gmt(mktime(23, 59, 59, $month, $eday, $year))
+</pre>
+
+
+</div>
+
+
+<!-- Tag Parameters -->
+
+<a name="date_tag_params"></a>
+<div class="section">
+<h2>Date Tag Parameters</h2>
+
+<p>Your module might allow the use of date parameters in its tag(s) so that only content from a certain date/month/year will be displayed to the users.  To do this, the date parameters must first be converted into unixtime for the server and then into UTC time to check against the database time.</p>
+
+<pre>
+$year = ( ! $TMPL->fetch_param('year'))  ? date('Y') : $TMPL->fetch_param('year');
+$month = ( ! $TMPL->fetch_param('month')) ? date('m') : $TMPL->fetch_param('month');
+$day = ( ! $TMPL->fetch_param('day')) ? date('d') : $TMPL->fetch_param('day');
+
+if (strlen($month) == 1) $month = '0'.$month;
+
+$utc_time = $LOC->set_gmt(mktime(0, 0, 0, $month, $day, $year));
+</pre>
+
+<p>NOTE: If no day is specified, then the entire month can be selected by using the <strong>$LOC->fetch_days_in_month()</strong> function.</p>
+
+<pre>
+$year = ( ! $TMPL->fetch_param('year'))  ? date('Y') : $TMPL->fetch_param('year');
+$month = ( ! $TMPL->fetch_param('month')) ? date('m') : $TMPL->fetch_param('month');
+$day = ( ! $TMPL->fetch_param('day')) ? '' : $TMPL->fetch_param('day');
+
+if (strlen($month) == 1) $month = '0'.$month;
+
+if ($day == '')
+{
+    $sday = 1;
+    $eday = $LOC->fetch_days_in_month($month, $year);
+}
+else
+{
+    $sday = $day;
+    $eday = $day;
+}
+
+$start_time = $LOC->set_gmt(mktime(0, 0, 0, $month, $sday, $year));
+$end_time = $LOC->set_gmt(mktime(23, 59, 59, $month, $eday, $year))
+</pre>
+
+
+</div>
+
+
+<!-- Human Readable -->
+
+<a name="human_readable"></a>
+<div class="section">
+<h2>Human Readable Time</h2>
+
+<p><strong>$LOC->set_human_time()</strong> formats a Unix/GMT timestamp to the following format: 2003-08-21 11:35 PM.  My default, it will use the current time and localize it for the current user. You can also specify a time using the first parameter and by setting the second parameter to FALSE, you can turn off the localization.  The third parameter, allows you to add the current seconds past the minute for the human readable time.</p>
+
+<pre>
+$current_user_time = $LOC->set_human_time();
+// 2003-06-23 10:35 PM
+
+$current_gmt = $LOC->set_human_time('',FALSE);
+// PST timezone for user -8 from GMT
+// 2003-06-24 06:35 AM
+
+$time_with_seconds = $LOC->set_human_time('',1,1);
+// 2003-06-23 10:35:21 PM
+
+$last_visit = $LOC->set_human_time($row['last_visit']);
+// 2003-07-05 9:22 AM
+</pre>
+
+<p><strong>$LOC->convert_human_date_to_gmt()</strong> converts a string in the following format to a Unix/GMT timestamp: 2003-08-21 11:35 PM. This function uses the set_localized_offset() function to make sure the returned timestamp is in returned for UTC/GMT.</p>
+
+<pre>
+$entry_date = 2003-06-23 10:35 PM
+$entry_UTC_time = $LOC->convert_human_date_to_gmt($entry_date);
+</pre>
+
+
+</div>
+
+
+
+<!-- Foreign Dates -->
+
+<a name="foreign_dates"></a>
+<div class="section">
+<h2>Foreign Dates</h2>
+
+<p>Whenever possible in an ExpressionEngine user interface, you should use numbers opposed to written text to specify months and specific days.  However, for displaying content, ExpressionEngine uses <strong>$LOC->decode_date()</strong> to parse the date format string (ex: %y %m %d) for a variable and with the UTC/GMT timestamp it will output the correct text according to the language and timezone specified in the user's localization preferences.</p>
+
+<pre>
+$join_date = $LOC->decode_date($date_format, $row['join_date']);
+</pre>
+
+<p>If part of an ExpressionEngine variable, you can simply send the variable to the function, and it will parse out the date format string automatically for you.</p>
+
+<pre>
+foreach ($TMPL->var_single as $key => $val)
+{
+    if (ereg("^current_time", $key))
+    {
+        $tagdata = $TMPL->swap_var_single($key, $LOC->decode_date($val,$LOC->now), $tagdata);
+    }
+}
+</pre>
+
+<p>The Location class has some predefined formatting strings that work in conjunction with <strong>$LOC->decode_date()</strong>, available in the array: <strong>$LOC->format</strong></p>
+
+<pre>
+'DATE_ATOM'		=>	'%Y-%m-%dT%H:%i:%s%Q',
+'DATE_COOKIE'		=>	'%l, %d-%M-%y %H:%i:%s UTC',
+'DATE_ISO8601'	=>	'%Y-%m-%dT%H:%i:%s%O',
+'DATE_RFC822'		=>	'%D, %d %M %y %H:%i:%s %O',
+'DATE_RFC850'		=>	'%l, %d-%M-%y %H:%m:%i UTC',
+'DATE_RFC1036'	=>	'%D, %d %M %y %H:%i:%s %O',
+'DATE_RFC1123'	=>	'%D, %d %M %Y %H:%i:%s %O',
+'DATE_RFC2822'	=>	'%D, %d %M %Y %H:%i:%s %O',
+'DATE_RSS'		=>	'%D, %d %M %Y %H:%i:%s %O',
+'DATE_W3C'		=>	'%Y-%m-%dT%H:%i:%s%Q'
+</pre>
+
+<p>An example usage would be:</p>
+
+<pre>
+$atom_date = $LOC->decode_date($LOC->format['DATE_ATOM'], $LOC->now);
+</pre>
+
+</div>
+
+
+<!-- Timezone Menu -->
+
+<a name="timezone_menu"></a>
+<div class="section">
+<h2>Timezone Menu</h2>
+
+<p>If, for some reason, you need to create a timezone menu for your module, then you can use the <strong>$LOC->timezone_menu()</strong> function, and it will automatically create a form select list with the name 'server_timezone'.  You can set the current or default value using the first parameter.  Check the zones() function in the Localize class file for acceptable values.</p>
+
+<pre>
+$time_menu = $LOC->timezone_menu('UTC');
+// UTC/GMT is selected (0)
+
+$time_menu = $LOC->timezone_menu('UP8');
+// PST is selected (-8)
+
+$time_menu = $LOC->timezone_menu('UM2');
+// MAST is selected (+2)
+
+</pre>
+
+</div>
+
+
+
+
+
+
+
+
+</div>
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

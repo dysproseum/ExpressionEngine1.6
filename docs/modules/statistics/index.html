@@ -1,0 +1,284 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Statistics Module Tags &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<strong>Statistics Module</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Statistics Module Tags</h1>
+
+	<p>ExpressionEngine includes a Statistics Module that tracks a number of system statistics.  The basic statistics tag consists of a tag pair:</p>
+
+	<code>{exp:stats}<br />
+<br />
+statistics content<br />
+<br />
+{/exp:stats}</code>
+
+
+	<h2>Parameters</h2>
+
+	<ul class="minitoc">
+		<li><a href="#par_site">site="default_site"</a></li>
+		<li><a href="#par_weblog">weblog="news"</a></li>
+	</ul>
+
+	<h3><a name="par_site">site=</a></h3>
+
+		<code>site="default_site"</code>
+
+		<p>This parameter can be used to restrict the statistics reporting to specific sites when using the Multiple Site Manager.  You can use the pipe character to separate multiple sites:</p>
+
+		<code>site="default_site|boston|new_york"</code>
+
+		<p>Or you can add the word "not" (followed by a space) to exclude sites:</p>
+
+		<code>site="not chicago|los_angeles"</code>
+
+		<h3><a name="par_weblog">weblog=</a></h3>
+
+		<code>weblog="default_site"</code>
+
+		<p>This parameter can be used to restrict the statistics reporting to specific weblogs.  Note that not all of the statistics variables are affected by this parameter; those that are affected will be noted.  Additionally, you can use the pipe character to separate multiple weblogs:</p>
+
+		<code>weblog="default_site|sports|news"</code>
+
+		<p>Or you can add the word "not" (followed by a space) to exclude weblogs:</p>
+
+		<code>weblog="not weblog5|weblog6"</code>
+
+		<p>Here is an example of the tag with the parameter in use:</p>
+
+		<code>{exp:stats weblog="news|sports"}<br />
+	<br />
+	statistics content<br />
+	<br />
+	{/exp:stats}</code>
+
+
+
+	<h2>Variables</h2>
+
+	<ul class="minitoc">
+		<li><a href="#var_last_comment_date">{last_comment_date format="%m/%d/%Y %h:%i %a"}</a></li>
+		<li><a href="#var_last_entry_date">{last_entry_date format="%m/%d/%Y %h:%i %a"}</a></li>
+		<li><a href="#var_last_trackback_date">{last_trackback_date format="%m/%d/%Y %h:%i %a"}</a></li>
+		<li><a href="#var_last_visitor_date">{last_visitor_date format="%m/%d/%Y %h:%i %a"}</a></li>
+		<li><a href="#var_most_visitor_date">{most_visitor_date format="%m/%d/%Y %h:%i %a"}</a></li>
+		<li><a href="#var_most_visitors">{most_visitors}</a></li>
+		<li><a href="#var_total_anon">{total_anon}</a></li>
+		<li><a href="#var_total_comments">{total_comments}</a></li>
+		<li><a href="#var_total_entries">{total_entries}</a></li>
+		<li><a href="#var_total_guests">{total_guests}</a></li>
+		<li><a href="#var_total_logged_in">{total_logged_in}</a></li>
+		<li><a href="#var_total_members">{total_members}</a></li>
+		<li><a href="#var_total_trackbacks">{total_trackbacks}</a></li>
+	</ul>
+
+
+	<h3>dates</h3>
+
+		<p>Several date variables are available for use.  As with other date variables, these require the "format" parameter in order to define how the date should be displayed.  See the <a href="../templates/date_variable_formatting.html">date variable formatting</a> page for more information.</p>
+
+
+	<h3><a name="var_last_comment_date">last_comment_date</a></h3>
+
+		<code>{last_comment_date format="%m/%d/%Y %h:%i %a"}</code>
+
+		<p>The date of the most recent comment.  This variable can be affected by the <samp>weblog=</samp> parameter.</p>
+
+
+	<h3><a name="var_last_entry_date">last_entry_date</a></h3>
+
+		<code>{last_entry_date format="%m/%d/%Y %h:%i %a"}</code>
+
+		<p>The date of the most recent entry.  This variable can be affected by the <samp>weblog=</samp> parameter.</p>
+
+
+	<h3><a name="var_last_trackback_date">last_trackback_date</a></h3>
+
+		<code>{last_trackback_date format="%m/%d/%Y %h:%i %a"}</code>
+
+		<p>The date of the most recent trackback.  This variable can be affected by the <samp>weblog=</samp> parameter.</p>
+
+
+	<h3><a name="var_last_visitor_date">last_visitor_date</a></h3>
+
+		<code>{last_visitor_date format="%m/%d/%Y %h:%i %a"}</code>
+
+		<p>The date of most most recent visitor to the site</p>
+
+
+	<h3><a name="var_most_visitor_date">most_visitor_date</a></h3>
+
+		<code>{most_visitor_date format="%m/%d/%Y %h:%i %a"}</code>
+
+		<p>The date on which the most visitors were ever viewing the site at the same time</p>
+
+
+	<h3><a name="var_most_visitors">most_visitors</a></h3>
+
+		<code>{most_visitors}</code>
+
+		<p>The greatest number of visitors ever online at the same time.  This includes members, guests/non-members, and anonymous users.</p>
+
+
+	<h3><a name="var_total_anon">total_anon</a></h3>
+
+		<code>{total_anon}</code>
+
+		<p>The total number of people currently online who have chosen to be "anonymous" and not have their name revealed</p>
+
+
+	<h3><a name="var_total_comments">total_comments</a></h3>
+
+		<code>{total_comments}</code>
+
+		<p>The combined total number of comments for all entries.  This variable can be affected by the <samp>weblog=</samp> parameter.</p>
+
+
+	<h3><a name="var_total_entries">total_entries</a></h3>
+
+		<code>{total_entries}</code>
+
+		<p>The total number of entries in the database.  This variable can be affected by the <samp>weblog=</samp> parameter.</p>
+
+
+	<h3><a name="var_total_guests">total_guests</a></h3>
+
+		<code>{total_guests}</code>
+
+		<p>The total number of people currently using the system that are <em>not</em> logged in as members</p>
+
+
+	<h3><a name="var_total_logged_in">total_logged_in</a></h3>
+
+		<code>{total_logged_in}</code>
+
+		<p>The total number of members that are currently logged in to the system</p>
+
+
+	<h3><a name="var_total_members">total_members</a></h3>
+
+		<code>{total_members}</code>
+
+		<p>The total number of registered members</p>
+
+
+	<h3><a name="var_total_trackbacks">total_trackbacks</a></h3>
+
+		<code>{total_trackbacks}</code>
+
+		<p>The combined total number of trackbacks for all entries.  This variable can be affected by the <samp>weblog=</samp> parameter.</p>
+
+
+
+
+	<h2>Member Names</h2>
+
+	<p>The member_names variable pair allows you to show the currently logged in users:</p>
+
+	<code>{member_names}<br />
+<br />
+&lt;a href="{member_path='member/index'}">{name}&lt;/a>&lt;br /><br />
+<br />
+{/member_names}</code>
+
+	<p>This will be replaced with a list like this:</p>
+
+	<code>Joe&lt;br /><br />
+Fred&lt;br /><br />
+Sallie&lt;br /></code>
+
+	<p>The <samp>{member_path=''}</samp> variable allows you to create a link that points to the member's profile page.  The example above illustrates how it can be used.</p>
+
+	<p>There is one optional parameter that goes in the opening {member_names} variable that allows "backspacing":</p>
+
+	<code>{member_names backspace="6"}</code>
+
+	<p>Backspacing removes characters from the last iteration of the loop.  For example, if you put a <samp>&lt;br /></samp> tag between each member name you'll have this layout:</p>
+
+	<code>Joe&lt;br /><br />
+Fred&lt;br /><br />
+Sallie&lt;br /></code>
+
+		<p>You might, however, not want the <samp>&lt;br /></samp> tag after the final item.  By adding backspacing you can remove it.  Simply count the number of characters and spaces in the item you want to remove and add it to the tag (do not include trailing spaces in your count).  A <samp>&lt;br /></samp> tag has 6 characters, so you would do this:</p>
+
+	<code>{member_names backspace="6"}<br />
+<br />
+&lt;a href="{member_path='member/index'}">{name}&lt;/a>&lt;br /><br />
+<br />
+{/member_names}</code>
+
+	<p>That will produce code like this:</p>
+
+	<code>Joe&lt;br /><br />
+Fred&lt;br /><br />
+Sallie</code>
+
+
+	<h2>Conditional Variables</h2>
+
+	<p>There is one conditional variable that allows you to show the list of logged-in members only if it  actually contains members.  This would be useful for times when there weren't any members currently logged in:</p>
+
+	<code>{if member_names}<br />
+<br />
+content<br />
+<br />
+{/if}</code>
+
+	<p>The conditional might be used with something like this:</p>
+
+	<code>{if member_names}<br />
+	<br />
+&lt;p>Currently Online Members:<br />
+<br />
+{member_names backspace="6"}<br />
+{name}&amp;nbsp;<br />
+{/member_names}<br />
+<br />
+&lt;/p><br />
+<br />
+{/if}</code>
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

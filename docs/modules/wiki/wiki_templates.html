@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Wiki Theme Template &#8211; ExpressionEngine Documentation</title> 
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style> 
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="README.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+</tr>
+</table>
+</div>
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Wiki Module</a> &gt;
+<strong>Theme Template</strong>
+</div>
+
+<div id="content">
+
+	<h1>Wiki Theme Template</h1>
+
+<p>The wiki's theme (visual design) is determined by a single php file (the template) located in the <kbd>themes/wiki_themes</kbd> directory. The following describes how the Theme Template is put together and lists the available tags, parameters, and variables for each section of the Theme Template.</p>
+
+<p class="important"><strong>NOTE:</strong> The included default wiki theme is fully commented with all the tags, parameters, and variables available in the wiki. This provides a quick reference while building your own theme or modifying the default one.</p>
+
+<h2>How the Template Works</h2>
+
+<p>The Theme Template is divided up into sections. Each section determines how a portion of the wiki is rendered. Each section has tags, parameters, and/or variables available to it. They work like normal ExpressionEngine tags, parameters, and variables except that you'll use them in a Theme Template instead of a ExpressionEngine Template within the Control Panel.</p>
+
+<p>When you open the Theme Template in a text editor you'll find the beginning of each section clearly marked with a comment. For example, the start of the <strong>History section</strong> looks like this:</p>
+
+<code>
+/* ----------------------------------------<br />
+/*  Template - History<br />
+/* ----------------------------------------*/
+</code>
+
+<p>You'll find all the available tags, parameters, and variables at the end of the section.</p>
+
+<h2>Sections</h2>
+
+<p>This is a list of all the sections in the order they appear in the default template. It will be helpful to have the default template file (<var>themes/wiki_themes/default/default.php</var>) open in a text editor while reviewing the Template section documentation.</p>
+
+<ul>
+<li><a href="wiki_templates_page.html">Wiki Page</a>: This is the <b>wrapper</b> section that contains the header, sidebar, navigation, CSS, and the elements found in a standard HTML page including the CSS. It "wraps" around all the user editable content.</li>
+<li><a href="wiki_templates_article.html">Wiki Article</a>: Displays the article and a list of it's assigned categories.</li>
+<li><a href="wiki_templates_history.html">Wiki History</a>: Displays an article's history.</li>
+<li><a href="wiki_templates_edit.html">Wiki Edit</a>: Displays a article's editing interface.</li>
+
+<li><strong>Special sections</strong>: Content created dynamically by the wiki.
+	<ul>
+		<li><a href="wiki_templates_special_recent_changes.html">Recent Changes</a>: This section creates a page that shows the wiki's recent changes.</li>
+		<li><a href="wiki_templates_special_categories.html">Categories</a>: This section creates a page of the wiki's categories.</li>
+		<li><a href="wiki_templates_special_titles.html">Titles</a>: This section creates a page of all the wiki's articles by title.</li>
+		<li><a href="wiki_templates_special_uncategorized.html">Uncategorized</a>: This section creates a page of all uncategorized wiki articles.</li>
+		<li><a href="wiki_templates_special_search_results.html">Search Results</a>: This section creates a page to display wiki search results.</li>
+		<li><a href="wiki_templates_special_files.html">Files list</a>: This section creates a page of all the files uploaded to the wiki.</li>
+		<li><a href="wiki_templates_special_file.html">File page</a>: This displays the information about a single uploaded file.</li>
+		<li><a href="wiki_templates_special_upload_form.html">Upload Form</a>: This section creates the wiki's upload form.</li>
+		<li><a href="wiki_templates_special_associated_pages.html">Associated Pages</a>: This section displays a list of pages that link to the current article.</li>
+	</ul>
+</li>
+<li><a href="wiki_templates_special_feeds.html">RSS and ATOM feeds</a>: The templates used to generate the wiki's feeds.</li>
+<li><a href="wiki_templates_special_email.html">Email notification</a>: The templates used to create the article moderator notification email.</li>
+</ul>
+</div>
+	
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

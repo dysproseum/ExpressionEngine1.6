@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Photo Gallery Entries &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Photo Gallery</a> &gt;
+<strong>Photo Gallery Entries</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Photo Gallery Entries</h1>
+	
+	<ul>
+	<li><a href="#multi_entry">Multi-Entry Format</a></li>
+	<li><a href="#single_entry">Single-Entry Format</a></li>	
+	</ul>
+
+	<h2><a name="multi_entry">Multi-Entry Format</a></h2>
+	
+	<p>ExpressionEngine uses a single gallery tag to display both <kbd>multi-entry</kbd> and <kbd>single-entry</kbd> content.  
+	Typically, the <kbd>multi-entry</kbd> version of the tag displays a set of thumb-nail images, each acting as a gateway
+	to the full-sized image shown on its own page.  Here is an example of multiple entries:</p>
+
+	<code>{exp:gallery:entries gallery="bikes" orderby="entry_date" columns="3" rows="2"}<br />
+<br />
+&lt;table ><br />
+&lt;tr><br />
+&lt;th colspan="4">Most Recent Images&lt;/th><br />
+&lt;/tr><br />
+<br />
+{entries}<br />
+<br />
+{row_start}&lt;tr>{/row_start}<br />
+<br />
+{row}<br />
+&lt;td><br />
+&lt;a href="{id_path='gallery/comments'}">&lt;img src="{thumb_url}" width="{thumb_width}" height="{thumb_height}" alt="{title}" title="{title}" />&lt;/a>&lt;br /><br />
+{title}<br />
+&lt;/td><br />
+{/row}<br />
+<br />
+{row_blank}&lt;td>&amp;nbsp;&lt;/td>{/row_blank}<br />
+<br />
+{row_end}&lt;/tr>{/row_end}<br />
+<br />
+{/entries}<br />
+<br />
+&lt;/table><br />
+<br />
+{/exp:gallery:entries}</code>
+
+
+	<p>The above code example would produce a layout similar to this:</p>
+	
+	<div class="imgwrapper"><img src="../../images/gallery_multi.jpg" width="725" height="269" alt="Multi Entries" title="Multi Entries" border="0" /></div>
+
+	<h3>Multi-entry Notes</h3>
+
+	<p>There are several <dfn>tag pairs</dfn> in the above example that permit the entries to be shown horizontally in columns, and vertically
+	in rows.</p>
+
+	<ul>
+	<li>The <dfn>{entries}</dfn> tag pair must surround the entire "repeating" chunk of HTML.</li>
+	<li>The <dfn>{row_start}</dfn> tag pair must surround the HTML code that displays the start of each new vertical row.</li>
+	<li>The <dfn>{rows}</dfn> tag pair must surround the HTML code that repeats horizontally.</li>
+	<li>The <dfn>{row_end}</dfn> tag pair must surround the HTML code that displays the end of each new vertical row.</li>
+	<li>The <dfn>{row_blank}</dfn> tag pair must surround the HTML code used when there is no image for a given cell.</li>
+	</ul>
+
+	<p class="important">To achieve this type of layout you will typically use a standard HTML table as shown in the example.</p>
+
+
+
+	<h2><a name="single_entry">Single-Entry Format</a></h2>
+	
+	<p>When using the Gallery Entries tag in <kbd>single-entry</kbd> mode, the various tag pairs listed above do <b>not</b> need to be used, since
+	only one entry is being shown. Here is an example:</p>
+	
+	<code>{exp:gallery:entries gallery="vacations"}<br />
+<br />
+&lt;div><br />
+&lt;img src="{image_url}" width="{width}" height="{height}" border="0" alt="{title}" title="{title}" /><br />
+&lt;/div><br />
+<br />
+&lt;h3>{title}&lt;/h3><br />
+<br />
+{caption}<br />
+<br />
+{if allow_comments}<br />
+&lt;a href="{id_path='gallery/comments'}">{if total_comments == 0}No comments have been submitted yet{/if}{if total_comments == 1}1 person has commented{/if}{if total_comments   > 1}{total_comments} people have commented{/if}&lt;/a><br />
+{/if}<br />
+<br />
+&lt;p>This image has been viewed {views} {if views == 1}time{/if}{if views != 1}times{/if}&lt;/p><br /><br />{/exp:gallery:entries}</code>
+
+	<h3>Single-entry Notes</h3>
+
+	<p>The <kbd>single-entry</kbd> version of the tag is typically used on pages that show a specific, full-size image.  The image shown is
+	usually determined by the ID number of the image being present in the URL, but it can also be hard coded in the tag via the "entry_id" parameter, described below.
+	If the image ID number is <b>not</b> present either in the URL or in the parameter, 
+	the various other parameters available in the tag will determine which image is shown.  Pagination is available with this tag, allowing
+	you to display one image per page, as in the case of a "photo blog".
+
+	<p class="important"><b>Note:</b>&nbsp; When using the <kbd>single-entry</kbd> version of the tag only one entry will be shown.  The "limit" parameter is effectively disabled for this tag.</p>
+
+	<h2>Parameters and Variables</h2>
+
+	<p>To further control what the gallery tag displays you will use Parameters and Variables:</p>
+
+	<ul>
+		<li><a href="parameters.html">Tag Parameters</a></li>
+		<li><a href="variables.html">Variables</a></li>
+		<li><a href="variable_pairs.html">Variable Pairs</a></li>
+	</ul>
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

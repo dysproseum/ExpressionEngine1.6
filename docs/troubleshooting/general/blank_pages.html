@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Troubleshooting &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="./index.html" />
+  <style type="text/css" media="screen,print">@import url(./../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="index.html"><img src="./../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="/index.html">Table of Contents</a> &gt; 
+<a href="../index.html">Troubleshooting</a> &gt;
+<strong>Receiving Blank Pages</strong>
+</div>
+
+
+
+<div id="content">
+
+	<h1>Receiving Blank Pages</h1>
+
+	<p class="ts_desc">A given action results in a completely blank, white page</p>
+	
+	<h2>Troubleshooting Blank Pages</h2>
+	
+	<p>Blank pages in ExpressionEngine, where also the source is empty, are usually the result of a suppressed PHP error.</p>
+	
+	<p>The first step is to ensure that error reporting is enabled:</p>
+	
+	<ul>
+		<li>Check PHP Info for display_errors and ensure it is set to "yes".  If it is not then the host can change this setting</li>
+		<li>Check <var>Admin -> System Preferences -> Output and Debugging Preferences</var> to ensure that <dfn>Debug Preferences</dfn> are set to <dfn>1: PHP/SQL error messages shown only to Super Admins</dfn></li>
+		<li>In <var>index.php</var> change <code>error_reporting(0)</code> to <code>error_reporting(E_ALL);</code></li>
+		<li>Check the server error logs for the cases where errors are output to logs and not to the screen</li>
+	</ul>
+	
+	<p>Following is a list of the more common circumstances that can result in a blank page:</p>
+	
+	<ul>
+		<li>Running out of PHP memory: This can occur especially when working with large images</li>
+		<li>Errors with Conditionals in the Templates.</li>
+		<li>Plugin Syntax errors when visiting <var>Admin -> Utilities -> Plugin Manager</var></li>
+		<li>RSS templates not set to <dfn>Template Type: RSS Template</dfn></li>
+		<li>Comment forms may output a blank page when using CAPTCHA if TrueType is enabled but not supported on the server.  Go to <dfn>Admin > Captcha Preferences</dfn> and turn off the TrueType Font option.</li>
+	</ul>
+	
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+</div>
+</body>
+</html>

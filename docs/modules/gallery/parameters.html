@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Photo Gallery Entry Tag Parameters &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Photo Gallery</a> &gt;
+<strong>Gallery Entry Tag Parameters</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Gallery Entry Tag Parameters</h1>
+
+	<p>A variety of parameters can be added to control what is displayed by the gallery tag.  Parameters are added to the opening partion of the tag.
+	Here is a simple example of the gallery tag with four parameters.</p>
+
+	<code>{exp:gallery:entries&nbsp; gallery="vacation"&nbsp; orderby="date"&nbsp; columns="4"&nbsp; rows="2" }<br />
+	content<br />
+	{/exp:gallery:entries}</code>
+	
+	<p>In the above example, 2 rows of entries are shown, with 4 images per column, all from the "vacation" gallery, ordered by "date".
+
+	<p>The following parameters are available:</p>
+	
+	<ul class="minitoc">
+		<li><a href="#par_category">category="2"</a></li>
+		<li><a href="#par_columns">columns="4" rows="2"</a></li>
+		<li><a href="#par_dynamic">dynamic="off"</a></li>
+		<li><a href="#par_entry_id">entry_id="147"</a></li>
+		<li><a href="#par_entry_id_from">entry_id_from="20"</a></li>
+		<li><a href="#par_entry_id_to">entry_id_to="40"</a></li>
+		<li><a href="#par_gallery">gallery="vacations"</a></li>
+		<li><a href="#par_limit">limit="10"</a></li>
+		<li><a href="#par_log_views">log_views="off"</a></li>
+		<li><a href="#par_orderby">orderby="date"</a></li>
+		<li><a href="#par_paginate">paginate="top"</a></li>
+		<li><a href="#par_show_future_entries">show_future_entries="yes"</a></li>
+		<li><a href="#par_sort">sort="asc"</a></li>
+		<li><a href="#par_status">status="open"</a></li>
+	</ul>
+
+
+	<h3><a name="par_category">category=</a></h3>
+
+		<code>category="2"</code>
+
+		<p>Categories are specified by ID number (the ID number of each category is displayed in the Control Panel for the gallery).  The reason we use the ID is because categories can be called anything (with spaces, quotes, etc.), and also renamed.</p>
+
+		<p>You may specify multiple categories by separating them with the pipe character:</p>
+
+		<code>category="2|45|4|9"</code>
+
+		<p>Or use "not" to exclude categories</p>
+
+		<code>category="not 4|5|7"</code>
+
+
+	<h3><a name="par_columns">columns= rows=</a></h3>
+
+		<code>columns="4" rows="2"</code>
+
+		<p>You may specify how many columns and rows the entry output will contain.  This will also naturally limit the number of entries displayed.  Using the above values, 8 entries would be shown.  If these values aren't specified each will default to "3".</p>
+
+
+	<h3><a name="par_dynamic">dynamic=</a></h3>
+
+		<code>dynamic="off"</code>
+
+		<p>The gallery display engine sets some parameters dynamically, based on what is in the URL.  There are times, however, where you do not want the parameters affected by what the URL contains.  To override the dynamic nature of the weblog tag, use <samp>dynamic="off"</samp>.</p>
+
+		<p>This is often useful if you want to list entries in a "sidebar" on your site and have them always be the same ones regardless of which page on your site you visit (main page, archives, comments, etc.).  By setting <samp>dynamic="off"</samp> you will ensure that the list is not affected by anything passed in the URL.</p>
+
+
+	<h3><a name="par_entry_id">entry_id=</a></h3>
+
+		<code>entry_id="147"</code>
+
+		<p>You can hard code the gallery tag to show a specific gallery entry.  You may also specify multiple entries by separating them with the pipe character:</p>
+
+		<code>entry_id="13|42|147"</code>
+
+		<p>Or use "not" to exclude entries</p>
+
+		<code>entry_id="not 7|26"</code>
+
+
+	<h3><a name="par_entry_id_from">entry_id_from=</a></h3>
+
+		<code>entry_id_from="20"</code>
+
+		<p>This parameter is used together with <a href="#par_entry_id_to">entry_id_to=</a> to designate a range of entries to display.  This parameter indicates the beginning of the range.  With the example above, the tag would begin displaying entries starting with entry ID 20.</p>
+
+
+	<h3><a name="par_entry_id_to">entry_id_to=</a></h3>
+
+		<code>entry_id_to="40"</code>
+
+		<p>This parameter is used together with <a href="#par_entry_id_from">entry_id_from=</a> to designate a range of entries to display.  This parameter indicates the end of the range.  With the example above, the tag would stop displaying entries at entry ID 40.</p>
+
+
+	<h3><a name="par_gallery">gallery=</a></h3>
+
+		<code>gallery="vacations"</code>
+
+		<p>This parameter is <strong>required</strong>. The name (short name) of the gallery for which you wish to display the entries.</p>
+
+
+	<h3><a name="par_limit">limit=</a></h3>
+
+		<code>limit="12"</code>
+
+		<p>This parameter limits the number of entries on any given page.  If you are using <a href="../../modules/weblog/pagination_page.html">pagination</a> then this will determine the number of entries shown per page.</p>
+
+		<p>Note that this parameter is usually unnecessary since the <samp>columns= rows=</samp> parameters will naturally limit the display.</p>
+
+		<h3><a name="par_log_views">log_views=</a></h3>
+
+			<code>log_views="off"</code>
+
+			<p>This parameter allows you to switch off hit tracking for single gallery entries.  If you do not specify this parameter, it will default to "on".</p>
+
+			<ul>
+				<li>log_views="on"</li>
+				<li>log_views="off"</li>
+			</ul>
+
+	<h3><a name="par_orderby">orderby=</a></h3>
+
+		<code>orderby="date"</code>
+
+		<p>The "order" parameter sets the display order of the entries.  Setting options for this parameter include:</p>
+
+		<ul>
+			<li>orderby="caption"</li>
+			<li>orderby="date"</li>
+			<li>orderby="edit_date"</li>
+			<li>orderby="entry_id"</li>
+			<li>orderby="most_comments"</li>
+			<li>orderby="most_recent_comment"</li>
+			<li>orderby="most_views"</li>
+			<li>orderby="random"</li>
+			<li>orderby="screen_name"</li>
+			<li>orderby="title"</li>
+			<li>orderby="username"</li>
+		</ul>
+
+
+	<h3><a name="par_paginate">paginate=</a></h3>
+
+		<code>paginate="top"</code>
+		<code>paginate="bottom"</code>
+		<code>paginate="both"</code>
+
+		<p>This parameter is for use with entry <a href="../../modules/weblog/pagination_page.html">pagination</a> and determines where the pagination code will appear for your gallery entries:</p>
+
+		<ol>
+			<li><b>top</b>: The navigation text and links will appear <em>above</em> your list of entries.</li>
+			<li><b>bottom</b>: The navigation text and links will appear <em>below</em> your list of entries.</li>
+			<li><b>both</b>: The navigation text and links will appear both above and below your list of entries.</li>
+		</ol>
+
+		<p>If no parameter is specified, the navigation block will default to the "bottom" behavior.</p>
+
+
+	<h3><a name="par_show_future_entries">show_future_entries=</a></h3>
+
+		<code>show_future_entries="yes"</code>
+
+		<p>You can determine whether you wish for entries dated in the "future" to be included.  This option is useful when doing things like creating a list of events, some of which have not occurred yet.</p>
+
+
+	<h3><a name="par_sort">sort=</a></h3>
+
+		<code>sort="asc"</code>
+
+		<code>sort="desc"</code>
+
+		<p>The sort order can be ascending or descending.  The order will default to "descending" if nothing is specified.</p>
+
+
+	<h3><a name="par_status">status=</a></h3>
+
+		<code>status="open"</code>
+
+		<p>The gallery status to which you would like to restrict display.  You may choose either "open" or "closed".  If you do not specify this parameter, it will default to "open".</p>
+
+
+
+	<h2>Variables</h2>
+
+	<p>Further, inside of the tag you can use a number of variables to display different information such as entry title, date, body, etc.</p>
+
+	<ul>
+		<li><a href="variables.html#single_variables">Variables</a></li>
+		<li><a href="variable_pairs.html">Variable Pairs</a></li>
+	</ul>
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

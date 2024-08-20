@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Translation Utility &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../../index.html"><img src="../../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../../index.html">Table of Contents</a> &gt;
+<a href="../../../index.html#cp_docs">The Control Panel</a> &gt;
+<a href="../index.html">Admin</a> &gt;
+<a href="index.html">Utilities</a> &gt;
+<strong>Translation Utility</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Translation Utility</h1>
+	<div class="path">Control Panel Location:&nbsp; <dfn>Admin &gt; Utilities &gt; Translation Utility</dfn></div>	
+
+	<p>This <dfn>Translation Utility</dfn> page of the Control Panel allows you to translate the core language files into other languages.</p>	
+	
+	<p>When you use this utility it will create a copy of any file you have translated and put it into the following folder: <dfn>system/translations/</dfn></p>
+	
+	<p class="important">In order to be able to create translation files, you need to set the file permissions to <kbd>666</kbd> or <kbd>777</kbd> for the following folder: <kbd>system/translations/</kbd></p>
+
+	<p>The main <dfn>Translation Utility</dfn> screen shows a list of all the language files currently installed.</p>
+
+
+	<div class="imgwrapper"><img src="../../../images/translation_main.png" width="354" height="728" alt="Translation Utility main screen" title="Translation Utility main screen" border="0" /></div>
+
+
+	<p>When you choose a file name you will be presented with a page showing a list of English words or phrases.  Below each line of text you'll see an input box where you will enter the translated version of the text.</p>
+
+
+	<div class="imgwrapper"><img src="../../../images/translation_editor.png" width="372" height="174" alt="Translation Utility File View screen" title="Translation Utility File View screen" border="0" /></div>
+
+	<p>Once you have translated all the text for a particular file you will click the <dfn>Save Changes</dfn> button and ExpressionEngine will create the new translated file inside the <kbd>translations</kbd> folder.</p>
+	
+	<p>You can also <dfn>Save Changes</dfn> at any point you like; you don't have to complete the translation before saving.</p>
+
+
+
+	<h2>Updating Translations</h2>
+
+	<p>Sometimes you may wish to update an older version of a language pack to be compatible with a new version of ExpressionEngine. To update a language pack:</p>
+
+	<ol>
+		<li>Choose "English" as your language under <dfn>My Account &gt; Localization Settings</dfn>.</li>
+		<li>Place a copy of the old language pack inside of the <kbd>system/translations/</kbd> folder.  Ensure that the files are set to permissions of 666 so that ExpressionEngine can modify them.</li>
+		<li>As you go through each files using the <dfn>Translation Utility</dfn> any new untranslated text will appear in English.</li>
+		<li>Save the translated version of each file and you will have an updated language pack.</li>
+	</ol>
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

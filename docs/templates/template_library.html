@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Using the Template Library &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../index.html" />
+  <style type="text/css" media="screen,print">@import url(../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="../index.html#template_docs">Templating System</a> &gt;
+<strong>Using the Template Library</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Using the Template Library</h1>
+
+	<p>The <strong>Template Library</strong> enables you to store your own templates so that whenever you create a new template you can base it on one from your Template Library.</p>
+
+	<p>The <kbd>system/templates/</kbd> folder is where templates for your library are stored.  Each template is a separate text file.</p>
+
+
+	<h2>Adding Templates to Your Library</h2>
+
+	<p>To add a template to your library create a plain text file containing your template data. Name it using this format:</p>
+	
+	<p class="leftpad"><var>template_name.tpl</var></p>
+	
+	<p>So, if you wanted to make a "comments" type Template, you might name it <var>comments.tpl</var>.</p>
+	
+	<p>The name you've given a file is is what will appear in the Template Library drop-down list when you create new templates.</p>
+
+
+	<h2>Example</h2>
+
+	<p>Let's say you wish to add a "comments" template to your library to make it easy to start new Templates based off of it.  In order to do this, you would follow these basic steps:</p>
+
+	<ol>
+		<li>Create a new text file.  Name it <var>comments.tpl</var>.</li>
+		<li>Edit the text file.  Copy the entire content from your current "comments" Template in the Control Panel and paste it into your new file.  Save the file.</li>
+		<li>Upload your <var>comments.tpl</var> file to <kbd>system/templates/</kbd> so it would be located at <samp>system/templates/comments.tpl</samp>.</li>
+	</ol>
+
+	<p>Now, when you go to create a new Template, you will see a "comments" entry populating the Template Library drop-down list.  If you choose that option during Template creation then you will see that your Template begins with the code that you placed in the file.</p>
+
+	<h2>Sub-folders</h2>
+
+	<p>You may also organize your Template files into sub-folders under <kbd>system/templates/</kbd>.  Using this method, you could end up with something like this:</p>
+
+	<ul>
+		<li>system/templates/index.tpl</li>
+		<li>system/templates/weblog/archives.tpl</li>
+		<li>system/templates/weblog/comments.tpl</li>
+		<li>system/templates/includes/css.tpl</li>
+	</ul>
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Moblog Module &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<strong>Moblog Module</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Moblog Module</h1>
+
+	<p>The <dfn>Moblog</dfn>, or "mobile blogging", Module allows you to submit weblog entries to ExpressionEngine via email.  Emails may contain images or other attachments.</p>
+	
+	<p>Moblogging is popular among people with camera-enabled cellphones since it allows them to email photos, which appear as entries on their site.  It can also be used with regular email just as easily.</p>
+
+	<p>The basic concept is this: You send an email containing the text of your entry along with a file or image attachment to a specific email address you've set up as your Moblog account.  ExpressionEngine will then check that email account looking for any Moblog messages, which will be submitted to your site based on your set-up preferences.</p>
+
+	<p>The Moblog Module is a bit different from other Modules in that there are several separate parts to it.</p>
+
+
+	<ol>
+		<li>The <a href="control_panel/index.html">Moblog Control Panel</a> is where you'll set up your Moblog preferences and account details.</li>
+		<li>The <a href="email_contents.html">Sending a Moblog Email</a> page shows you how to send content to your site.</li>
+		<li>The <a href="check_moblog.html">Check Moblog Tag</a> allows ExpressionEngine to look for your Moblog content automatically.</li>
+	</ol>
+
+
+
+	<h2>Supported Attachment Formats</h2>
+
+	<p>By default, ExpressionEngine's Moblog Module supports a large number of formats.  If needed, you can also edit the available formats at the top of the <var>system/modules/moblog/mod.moblog.php</var> file.</p>
+
+	<ul>
+		<li><b>Images</b>: bmp, gif, jpe, jpeg, jpg, pdf, png, tif, tiff</li>
+		<li><b>Files</b>: doc, xls, zip, tar, tgz, swf, sit, php, txt, html, asp, js, rtf</li>
+		<li><b>Movies</b>: 3gp, mov, mpg, avi, movie</li>
+		<li><b>Audio</b>: mid, midi, mp2, mp3, aac, mp4, aif, aiff, aifc, ram, rm, rpm, wav, ra, rv, wav</li>
+	</ul>
+
+	<p class="important"><b>Note</b>: Be aware that many email services have limits on the size of file attachments you can include with an email.  This could limit how you can send some files, particularly movies and audio files, which tend to be large.  Further, the files have to be uploaded by the system when it checks the moblog, so extremely large files can cause a server time-out. Also, please be aware that every cell phone manufacturer formats their messages and attachments a little differently. If you are having trouble submitting content with your particular phone or email program it could be that the formatting is not properly recognized by ExpressionEngine.  We are constantly adding support for new phones, so please contact ExpressionEngine support to make us aware of your particular situation.</p>
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

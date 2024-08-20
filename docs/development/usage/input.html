@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Input Class  &#8211; ExpressionEngine Developer Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../index.html">Development</a> &gt;
+<strong>Input Class</strong>
+</div>
+
+
+<div id="content">
+<h1>Input Class</h1>
+
+
+<div class="section">
+	<ul>
+		<li><a href="input.html#calling">Calling the Input Class</a></li>
+		<li><a href="input.html#superglobals">Fetching a Superglobal value</a></li>
+		<li><a href="input.html#ip">IP Address of Site Visitor</a></li>
+		<li><a href="input.html#cleaning">Cleaning Globals without Input Class</a></li>
+		<li><a href="input.html#segments">Fetch Segments of the URL</a></li>
+		<li><a href="input.html#other_vars">Other Class Variables</a></li>
+	</ul>
+</div>
+
+
+<a name="calling"></a>
+<div class="section">
+<h2>Calling the Input Class</h2>
+
+<p>ExpressionEngine uses the Input class for fetching all of the incoming data from the superglobal arrays ($_GET, $_POST, $_COOKIE, and $_SERVER), and it also parses the URI of the current page and determines the IP address of the person viewing that page. To use the Input class in your modules, simply call the <var>$IN</var> global in every function that will require the use of any text.</p>
+
+<pre>
+function input_example()
+{
+	global $IN;
+
+	$user_language = $IN->GBL('language', 'COOKIE');
+}
+</pre>
+
+<p>You are not required to use this class to call the incoming data from the superglobal arrays, it will still be available through the superglobals themselves, however, the Input class has the advantage of cleaning up the incoming data by removing any malicious code and managing slashes used for escaping characters. Also, since the ExpressionEngine function for creating cookies [$FNS->set_cookie();] adds a prefix automatically to enable comaptibility with other programs, it is recommended that you use the Input Class, since it automatically strips out that prefix.</p>
+
+</div>
+
+
+<a name="superglobals"></a>
+<div class="section">
+<h2>Fetching a Superglobal value</h2>
+
+<p><strong>$IN->GBL()</strong> is used for fetching a value in a superglobal.  The first parameter is the name of the key in the superglobal and the second parameter is the case-sensitive name of the superglobal that you wish to check.  If no value is found, then FALSE is returned thus allowing you to use this as a check in conditionals or to set default.</p>
+
+<pre>
+$user_language = $IN->GBL('language', 'COOKIE');
+// Cookie of the language of the user.
+
+if ( ! $id = $IN->GBL('id', 'GET'))
+{
+	// If there is no GET value (i.e. &id=4 in URL) do this
+}
+
+$group_id = ( ! $IN->GBL('group', 'POST')) ? '4' : $IN->GBL('group', 'POST');
+// Sets group_id variable to 4 (Pending), if POST variable is not set
+</pre>
+</div>
+
+
+
+
+
+
+
+<a name="ip"></a>
+<div class="section">
+<h2>IP Address of Site Visitor</h2>
+
+<p>For every page view, ExpressionEngine examines three different server variables in an attempt to detemine the true IP Address of the user visiting the page, even if they are going through a proxy.  This IP address' structure is then checked before being set as the class variable <strong>$IN->IP</strong>.  If the IP address does not seem like a valid IP or an IP address is not determinable, then '0.0.0.0' is returned for this variable.</p>
+
+<pre>
+$str = str_replace(LD.'ip_address'.RD, $IN->IP, $str); 
+$str = str_replace(LD.'ip_hostname'.RD, @gethostbyaddr($IN->IP), $str);
+</pre>
+</div>
+
+
+
+
+
+<a name="cleaning"></a>
+<div class="section">
+<h2>Cleaning Globals without Input Class</h2>
+
+<p>There are certain situations where you do not want to use the Input Class, such as multiple variables coming in OR a multi-select list.  However, you still probably want the incoming data have any malicious code removed and the slashes for escaped characters managed correctly.  You can still do this using the <strong>$IN->clean_input_data()</strong> function.</p>
+
+<pre>
+foreach ($_POST as $key => $value)
+{
+	$$key = $IN->clean_input_data($value);
+}
+</pre>
+</div>
+
+
+
+
+
+<a name="segments"></a>
+<div class="section">
+<h2>Fetch Segments of the URL</h2>
+
+<p>There might be a case where you wish to send and retrieve data from the URL.  Instead of using 
+$_GET variables (i.e. &var=variablesvalue), you can also send values by creating URL 
+using segments(.../template/variablevalue/).  Normally, you can get the last URL segment using the 
+class variable <strong>$IN->QSTR</strong>, but you might want more segments and then you can use 
+the array variable <strong>$IN->SEGS</strong> or the <strong>$IN->fetch_uri_segment()</strong> function.</p>
+
+<pre>
+$entry_id = $IN->QSTR;
+// Last segment is often the entry's id or url title.
+
+$entry_id = (! isset($IN->SEGS[sizeof($IN->SEGS)])) ? '0' : $IN->SEGS[sizeof($IN->SEGS)];
+$template = (! isset($IN->SEGS[sizeof($IN->SEGS)-1])) ? 'index' : $IN->SEGS[sizeof($IN->SEGS)-1];
+// Second to last segment is usually the template's name
+
+if ( ! $template_group = $IN->fetch_uri_segment('1'))
+{
+    // No URL segments
+}
+</pre>
+
+<p>Unlike most numeric PHP arrays, this one does not have a 0 key and instead begins with 1, so that each
+key/value corresponds to the correct segment and its value in the URL.</p>
+
+</div>
+
+
+
+
+
+<a name="other_vars"></a>
+<div class="section">
+<h2>Other Class Variables</h2>
+
+<p><strong>$IN->SID</strong> is the Session ID of the currently logged in user extracted from URI. Only useful if Session ID is required for logging in to either the User side or Control Panel.</p>
+
+<p><strong>$IN->URI</strong> is the full URI for this ExpressionEngine page, which is whatever is after the main site file (default is index.php).</p>
+
+<p><strong>$IN->global_vars</strong> is an array of the current $global_vars in the path.php file.
+
+<p><strong>$IN->whitelisted</strong> is a 'y' or 'n' value specifying whether any data for this request has been matched by the whitelist
+
+<p><strong>$IN->blacklisted</strong> is a 'y' or 'n' value specifying whether any data for this request has been matched by the blacklist (if this is "y" and the $IN->whitelisted value is "n", then block the submission).
+
+</div>
+
+
+
+
+
+
+</div>
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

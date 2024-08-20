@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Check Moblog Tag &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Moblog</a> &gt;
+<strong>Check Moblog Tag</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Check Moblog Tag</h1>
+
+	<p>This tag can be placed in any of your ExpressionEngine Site Templates.  It works together with the "Time Between Checks" setting in the Control Panel .  Whenever a visitor to your site loads a Template with this Tag on it, ExpressionEngine will look to see if the necessary amount of time has passed based on the "Time Between Checks" setting for this moblog (<dfn>Modules &gt; <a href="control_panel/index.html#create_a_new_moblog">Moblog</a></dfn> in the Control Panel).  If the necessary time has passed since the last time a check was performed then ExpressionEngine will check the specified Moblog(s) for new messages.</p>
+
+	<p>Typically, this tag would be placed on a relatively high-traffic Template so that checks would be automatically performed at reasonable intervals.  The tag can also be placed on a page dedicated to the purpose so that you could have a "Check Moblogs" page on your site if you wished.</p>
+
+	<code>{exp:moblog:check silent="true" which="cellphone"}</code>
+
+
+
+
+	<h2>Parameters</h2>
+
+
+	<h3>silent=</h3>
+
+		<code>silent="false"</code>
+
+		<p>You can specify whether or not you want messages about the Moblog Check to be seen.  By default, this value is "true", which means that the check will be silent and no messages will be seen.  If you set the parameter to "false", then ExpressionEngine will output messages for errors and successes.</p>
+
+
+	<h3>which=</h3>
+
+		<code>which="cellphone"</code>
+
+		<p>Here you can specify which Moblog or Moblogs you wish to check.  You specify the Moblog by using the "short name" from the Control Panel setup.  You may also specify "all" so that all of your enabled Moblogs will be checked.  Additionally, you can use the pipe character to separate multiple moblogs:</p>
+
+		<code>which="cellphone|moblog2|samsung"</code>
+
+		<p>Or you can add the word "not" (with a space after it) to exclude moblogs:</p>
+
+		<code>which="not moblog2|samsung"</code></p>
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

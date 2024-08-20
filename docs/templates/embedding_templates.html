@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Sub-Templates &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../index.html" />
+  <style type="text/css" media="screen,print">@import url(../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="../index.html#template_docs">Templating System</a> &gt;
+<strong>Embedding Templates</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Embedding Templates within Other Templates</h1>
+
+	<p>Any template can be embedded within another template using the "embed" variable:</p>
+
+	<code>{embed="template_group/template"}</code>
+
+	<p>Where "template_group" is the name of the group and "template" is the name of the template.  For example:</p>
+
+	<code>{embed="site/header"}</code>
+
+	<p>You <strong>must</strong> include both the template group and the template name in the embedded tag.</p>
+
+	<p class="important">By default, you cannot use embeds inside of the Forum Module or in the Membership Templates.</p>
+
+
+	<h2>Embed Variables for the Embedded Template</h2>
+	
+	<p>In the {embed=""} tag you can also specify parameters that will be used as variables in the embedded page.  For example, if you specifiy a parameter of dog_name="Shadow":</p>
+
+	<code>{embed="site/header" dog_name="Shadow"}</code>
+	
+	<p>Then in the site/header template, you can have a variable called {embed:dog_name}, which will be replaced with the value of "Shadow":</p>
+	
+	<code>&lt;h2&gt;My dog&apos;s name is {embed:dog_name}&lt;/h2&gt;</code>
+	
+	<p>Since {embed=""} tags are processed after all of the other tags of the original template are processed, this means you can set these parameters with other variables too:</p>
+	
+	<code>{exp:weblog:entries weblog="default_site" limit="1"}<br />
+	{embed="site/export" the_id="{entry_id}"}<br />
+	{/exp:weblog:entries}</code>
+
+	<p>You may also use embed variables in conditionals:</p>
+	
+	<code>{if embed:dog_name == &quot;Shadow&quot;}<br />
+		My dog&apos;s name is {embed:dog_name}.<br />
+		{if:else}<br />
+		{embed:dog_name} will never be as cool as Shadow.<br />
+		{/if}
+		</code>
+
+	<h2>Notes</h2>
+
+	<ul>
+		<li>You can nest embedded templates as deeply as you want.  In other words, you can put a template within another template, within yet another one.&nbsp;  <strong>However</strong>:  You <strong>can not</strong> put a template within itself or you'll cause a run-away loop.&nbsp; You also <b>can not</b> put an "upstream" template inside of a "downstream" one.&nbsp; For example: You have two templates:  "outer" and "content".  You put "content" inside of "outer".  You therefore can not put "outer" inside of "content".</li>
+		<li>PHP settings for each Template are honored on a per-Template basis, which means that you can embed a Template that has PHP enabled into another Template which does <strong>not</strong> have PHP enabled.</li>
+		<li>A template is fully rendered before any embedded templates are processed and included, which means you cannot break up tags between different templates and embed them in pieces.</li>
+		<li>If you are using the Multiple Site Manager, you can embed templates from one site into another site.  Details can be found here: <a href="../cp/sites/code.html#embedding">Multiple Site Manager Variables and Parameters</a></li>
+	</ul>
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

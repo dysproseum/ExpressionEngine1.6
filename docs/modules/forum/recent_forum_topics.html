@@ -1,0 +1,358 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Displaying Recent Forum Topics &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Forum Module</a> &gt;
+<strong>Displaying Recent Topics</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Displaying Recent Forum Topics</h1>
+
+	<p>While the Discussion Forum module is fairly self-contained, it is possible to display a simple list of "recent forum topics" in your standard Templates.  You could use this to list recent threads in a sidebar on your site's main page, for instance.  An example:</p>
+
+	<p class="important"><strong>Note:</strong>&nbsp; This tag is for use in any of your ExpressionEngine templates that are accessible via the <dfn>TEMPLATES</dfn> page in the control panel.  It is not available for use in your forum templates.  If you would like to show recent topics in your forum templates please use the <strong>{include:recent_posts}</strong> tag, which corresponds to the Archive Template: "Recent Post Table".</p>
+
+	<code>&lt;table><br />
+<br />
+	&lt;tr><br />
+		&lt;td>Title&lt;/td><br />
+		&lt;td>Author&lt;/td><br />
+		&lt;td>Posted On&lt;/td><br />
+		&lt;td>Posts&lt;/td><br />
+		&lt;td>Views&lt;/td><br />
+		&lt;td>Last Post Info&lt;/td><br />
+	&lt;/tr><br />
+<br />
+{exp:forum:topic_titles orderby="post_date" sort="desc" limit="10"}<br />
+	&lt;tr><br />
+		&lt;td>&lt;a href="{thread_path='forums/viewthread'}">{title}&lt;/a>&lt;/td><br />
+		&lt;td>&lt;a href="{profile_path='forums/member'}">{author}&lt;/a>&lt;/td><br />
+		&lt;td>{topic_date format="%m/%d/%Y %h:%i %a"}&lt;/td><br />
+		&lt;td>{post_total}&lt;/td><br />
+		&lt;td>{views}&lt;/td><br />
+		&lt;td>On: {last_post_date format="%m/%d/%Y %h:%i %a"}&lt;br /><br />
+		By: &lt;a href="{last_author_profile_path='forums/member'}">{last_author}&lt;/a>&lt;/td><br />
+	&lt;/tr><br />
+{/exp:forum:topic_titles}<br />
+<br />
+&lt;/table></code>
+
+
+
+	<h2>Parameters</h2>
+
+	<ul class="minitoc">
+		<li><a href="#par_boards">boards="2"</a></li>
+		<li><a href="#par_forums">forums="3"</a></li>
+		<li><a href="#par_limit">limit="30"</a></li>
+		<li><a href="#par_orderby">orderby="post_date"</a></li>
+		<li><a href="#par_sort">sort="asc"</a></li>
+	</ul>
+
+	<h3><a name="par_boards">boards=</a></h3>
+
+		<code>boards="2"</code>
+
+		<p>Allows you to specify which boards to pull topics from by Board ID number.  Board ID 1 will be used if no value is specified.</p>
+		
+		<p>As with many other parameters that use ID specification, you can stack boards to get topics from any number of boards:</p>
+		
+		<code>boards="2|3|4"</code>
+		
+		<p>Or use "not" to exclude boards:</p>
+		
+		<code>boards="not 1|4"</code>
+
+
+	<h3><a name="par_forums">forums=</a></h3>
+
+		<code>forums="3"</code>
+
+		<p>Allows you to specify which forums to pull topics from by Forum ID number.  If no value is specified, the Topic Titles tag will pull from all forums in the specified boards.</p>
+
+		<p>As with many other parameters that use ID specification, you can stack forums to get topics from specific forums only:</p>
+
+		<code>forums="3|14|16"</code>
+
+		<p>Or use "not" to exclude forums:</p>
+
+		<code>forums="not 9|12"</code>
+			
+	<h3><a name="par_limit">limit=</a></h3>
+
+		<code>limit="30"</code>
+
+		<p>Allows you to limit the number of topics displayed.  The limit will default to 10 topics if a value is not specified.</p>
+
+
+	<h3><a name="par_orderby">orderby=</a></h3>
+
+		<code>orderby="post_date"</code>
+
+		<p>The "order" parameter sets the display order of the forum topics.  Setting options for this parameter include:</p>
+
+		<ul>
+			<li>orderby="post_date"</li>
+			<li>orderby="recent_post"</li>
+			<li>orderby="title"</li>
+		</ul>
+
+	
+	<h3><a name="par_sort">sort=</a></h3>
+
+		<code>sort="asc"</code>
+		<code>sort="desc"</code>
+
+		<p>The sort order can be "asc" (ascending order or "oldest item first" for dates) or "desc" (descending order or "newest item first" for dates).  If you do not use a sort order the default is <samp>desc</samp>.</p>
+
+
+
+	<h2>Variables</h2>
+
+	<ul class="minitoc">
+		<li><a href="#var_author">{author}</a></li>
+		<li><a href="#var_auto_thread_path">{auto_thread_path}</a></li>
+		<li><a href="#var_board_label">{board_label}</a></li>
+		<li><a href="#var_board_name">{board_name}</a></li>
+		<li><a href="#var_body">{body}</a></li>
+		<li><a href="#var_forum_name">{forum_name}</a></li>
+		<li><a href="#var_forum_url">{forum_url}</a></li>
+		<li><a href="#var_last_author">{last_author}</a></li>
+		<li><a href="#var_last_author_profile_path">{last_author_profile_path='forums/member'}</a></li>
+		<li><a href="#var_last_post_date">{last_post_date format="%m/%d/%Y %h:%i %a"}</a></li>
+		<li><a href="#var_last_post_id">{last_post_id}</a></li>
+		<li><a href="#var_last_post_relative_date">{last_post_relative_date}</a></li>
+		<li><a href="#var_last_reply">{last_reply}</a></li>
+		<li><a href="#var_post_total">{post_total}</a></li>
+		<li><a href="#var_profile_path">{profile_path='forums/member'}</a></li>
+		<li><a href="#var_thread_path">{thread_path='forums/viewthread'}</a></li>
+		<li><a href="#var_title">{title}</a></li>
+		<li><a href="#var_topic_date">{topic_date format="%m/%d/%Y %h:%i %a"}</a></li>
+		<li><a href="#var_topic_relative_date">{topic_relative_date}</a></li>
+		<li><a href="#var_views">{views}</a></li>
+	</ul>
+
+
+	<h3><a name="var_author">author</a></h3>
+
+		<code>{author}</code>
+
+		<p>The screen name of the thread author.</p>
+
+
+	<h3><a name="var_auto_thread_path">auto_thread_path</a></h3>
+
+		<code>{auto_thread_path}</code>
+
+		<p>This variable is replaced by a path built with the URL set in the "Forum URL" general preference setting for the board that the topic belongs to.  For example, this:</p>
+		
+		<code>&lt;a href=&quot;{auto_thread_path}&quot;&gt;{title}&lt;/a&gt;</code>
+		
+		<p>Would be rendered like this:</p>
+		
+		<code>&lt;a href=&quot;http://example.com/index.php/forums/viewthread/11245/&quot;&gt;My forum topic&lt;/a&gt;</code>
+
+
+	<h3><a name="var_board_label">board_label</a></h3>
+
+		<code>{board_label}</code>
+
+		<p>The name of the board the topic belongs to, taken from the "Forum Board Label" general preference setting.</p>
+
+
+	<h3><a name="var_board_name">board_name</a></h3>
+
+		<code>{board_name}</code>
+
+		<p>The short name of the board the topic belongs to, taken from the "Forum Board Short Name" general preference setting.</p>
+
+
+	<h3><a name="var_body">body</a></h3>
+
+		<code>{body}</code>
+
+		<p>The contents of the topic.</p>
+
+		<p class="important"><strong>NOTE:</strong> This variable will use the formatting preferences of the forum that the topic belongs to.</p>
+		
+	<h3><a name="var_forum_name">forum_name</a></h3>
+
+		<code>{forum_name}</code>
+
+		<p>The Forum Name of the specific forum that the topic belongs to.</p>
+
+
+	<h3><a name="var_forum_url">forum_url</a></h3>
+
+		<code>{forum_url}</code>
+
+		<p>This variable is replaced with the URL set in the "Forum URL" general preference setting for the board that the topic belongs to.</p>
+
+	
+	
+	<h3><a name="var_last_author">last_author</a></h3>
+
+		<code>{last_author}</code>
+
+		<p>The screen name of the most recent user to leave a reply in the thread.  If there are no replies then the last author will be the author of the thread itself.</p>
+
+
+	<h3><a name="var_last_author_profile_path">last_author_profile_path</a></h3>
+
+		<code>{last_author_profile_path='forums/member'}</code>
+
+		<p>The URL to the member profile for the last user to leave a reply in the thread.  If there are no replies then it will be for the author of the thread itself.  For example, this:</p>
+
+		<code>&lt;a href="{last_author_profile_path='forums/member'}">{last_author}&lt;/a></code>
+
+		<p>Would be rendered like this:</p>
+
+		<code>&lt;a href="http://example.com/index.php/forums/member/147/">Fred Smith&lt;/a></code>
+
+
+	<h3><a name="var_last_post_date">last_post_date</a></h3>
+
+		<code>{last_post_date format="%m/%d/%Y %h:%i %a"}</code>
+
+		<p>The date on which the last (most recent) post in the thread was made.  As with other date variables, these require the "format" parameter in order to define how the date should be displayed. See the <a href="../../templates/date_variable_formatting.html">date variable formatting</a> page for more information.</p>
+
+	<h3><a name="var_last_post_id">last_post_id</a></h3>
+
+		<code>{last_post_id}</code>
+
+		<p>The id of the last reply made to the thread.  Will hold a value of 0 if no replies have been made.  Can be used to build links to the
+			last reply, e.g.:</p>
+
+		<code>&lt;a href=&quot;{forum_url}viewreply/{last_post_id}/&quot;&gt;View latest reply&lt;/a&gt;</code>
+		
+		
+	<h3><a name="var_last_post_relative_date">last_post_relative_date</a></h3>
+
+		<code>{last_post_relative_date}</code>
+
+		<p>The date on which the last (most recent) post in the thread was made, displayed relative to the current time.  For instance, if you used this:</p>
+
+		<code>Posted {last_post_relative_date} ago</code>
+
+		<p>It might be displayed as:</p>
+
+		<code>Posted 1 hour and 23 minutes ago</code>
+
+	<h3><a name="var_last_reply">last_reply</a></h3>
+
+		<code>{last_reply}</code>
+
+		<p>If available, the contents of the most recent reply to the thread.</p>
+	
+		<p class="important"><strong>NOTE:</strong> This variable will use the formatting preferences of the forum that the topic belongs to.</p>
+
+
+	<h3><a name="var_post_total">post_total</a></h3>
+
+		<code>{post_total}</code>
+
+		<p>The total number of posts in the thread.</p>
+
+
+	<h3><a name="var_profile_path">profile_path</a></h3>
+
+		<code>{profile_path='forums/member'}</code>
+
+		<p>The URL to the member profile of the thread author.  For example, this:</p>
+
+		<code>&lt;a href="{profile_path='forums/member'}">{author}&lt;/a></code>
+
+		<p>Would be rendered like this:</p>
+
+		<code>&lt;a href="http://example.com/index.php/forums/member/147/">Fred Smith&lt;/a></code>
+
+
+	<h3><a name="var_thread_path">thread_path</a></h3>
+
+		<code>{thread_path='forums/viewthread'}</code>
+
+		<p>The URL to the thread at the specified Template.  For example, this:</p>
+
+		<code>&lt;a href="{thread_path='forums/viewthread'}">{title}&lt;/a></code>
+
+		<p>Would be rendered like this:</p>
+
+		<code>&lt;a href="http://example.com/index.php/forums/viewthread/42/">My Forum Thread&lt;/a></code>
+
+
+	<h3><a name="var_title">title</a></h3>
+
+		<code>{title}</code>
+
+		<p>The title for the thread.</p>
+
+
+	<h3><a name="var_topic_date">topic_date</a></h3>
+
+		<code>{topic_date format="%m/%d/%Y %h:%i %a"}</code>
+
+		<p>The date on which the thread was posted.  As with other date variables, these require the "format" parameter in order to define how the date should be displayed. See the <a href="../../templates/date_variable_formatting.html">date variable formatting</a> page for more information.</p>
+
+
+	<h3><a name="var_topic_relative_date">topic_relative_date</a></h3>
+
+		<code>{topic_relative_date}</code>
+
+		<p>The date on which the thread was posted, displayed relative to the current time.  For instance, if you used this:</p>
+
+		<code>Posted {topic_relative_date} ago</code>
+
+		<p>It might be displayed as:</p>
+
+		<code>Posted 1 hour and 23 minutes ago</code>
+
+
+	<h3><a name="var_views">views</a></h3>
+
+		<code>{views}</code>
+
+		<p>The number of times the thread has been viewed.</p>
+
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

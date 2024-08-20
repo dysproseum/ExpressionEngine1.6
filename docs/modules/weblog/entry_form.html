@@ -1,0 +1,523 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Stand-Alone Entry Form &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Weblog Module</a> &gt;
+<strong>Stand-Alone Entry Form</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Stand-Alone Entry Form</h1>
+
+	<p>Using this tag, you can create an entry form to submit entries to any of your weblogs outside of the Control Panel.</p>
+
+	<p class="important">Users of this form <strong>must</strong> be members of the site and must be logged in.  Further, the user's Member Group must have permission to post entries to the appropriate weblog.  No content will appear if the user is not logged in.</p>
+
+	<p>Here is an example of how the tag might be used to create an entry form:</p>
+
+	<code>{exp:weblog:entry_form weblog="default_site" return="site/index" preview="site/entry"}<br />
+<br />
+{preview}<br />
+&lt;h1>{title}&lt;/h1><br />
+<br />
+{display_custom_fields}<br />
+<br />
+{/preview}<br />
+<br />
+<br />
+&lt;table><br />
+&lt;tr><br />
+&lt;td><br />
+<br />
+&lt;p>Title&lt;br /><br />
+&lt;input type="text" name="title" id="title" value="{title}" size="50" maxlength="100" onkeyup="liveUrlTitle();"  />&lt;/p><br />
+<br />
+&lt;p>URL Title&lt;br /><br />
+&lt;input type="text" name="url_title"  id='url_title' value="{url_title}" maxlength="75" size="50" />&lt;/p><br />
+<br />
+{formatting_buttons}<br />
+<br />
+&lt;p>&lt;a href="{upload_url}" onclick="window.open(this.href, '_blank', 'width=400,height=600');return false;" onkeypress="this.onclick()">File Upload&lt;/a><br />
+<br />
+&lt;a href="{smileys_url}" onclick="window.open(this.href, '_blank', 'width=600,height=440');return false;" onkeypress="this.onclick()">Smileys&lt;/a>&lt;/p><br />
+<br />
+{custom_fields}<br />
+{if required}* {/if}{field_label}&lt;br /><br />
+{field_instructions}
+<br />
+{if textarea}<br />
+&lt;textarea id="{field_name}" name="{field_name}" dir="{text_direction}" cols="50" rows="{rows}" onclick="setFieldName(this.name)">{field_data}&lt;/textarea>&lt;br /><br />
+{/if}<br /><br />
+{if textinput}<br />
+&lt;input type="text" dir="{text_direction}" id="{field_name}" name="{field_name}" value="{field_data}" maxlength="{maxlength}" size="50" onclick="setFieldName(this.name)" />&lt;br /><br />
+{/if}<br /><br />
+{if pulldown}<br />
+&lt;select id="{field_name}" name="{field_name}"><br />
+{options}&lt;option value="{option_value}"{selected}>{option_name}&lt;/option>{/options}&lt;br /><br />
+&lt;/select><br />
+{/if}<br /><br />
+{if date}<br />
+&lt;input type="text" id="{field_name}" name="{field_name}" value="{field_data}" maxlength="{maxlength}" size="50" onclick="setFieldName(this.name)" />&lt;br /><br />
+{/if}<br /><br />
+{if relationship}<br />
+&lt;select id="{field_name}" name="{field_name}"><br />
+{options}&lt;option value="{option_value}"{selected}>{option_name}&lt;/option>{/options}&lt;br /><br />
+&lt;/select><br />
+{/if}<br />
+{/custom_fields}
+<br />
+
+<br />
+&lt;p>Trackback URLs&lt;br /><br />
+&lt;textarea name="trackback_urls" cols="50" rows="5">{trackback_urls}&lt;/textarea>
+&lt;/p><br />
+<br />
+&lt;/td><br />
+&lt;td valign="top"><br />
+<br />
+&lt;input type="submit" name="submit" value="Submit" /><br />
+&lt;input type="submit" name="preview" value="Preview" /><br />
+<br />
+{status_menu}<br />
+&lt;p>Status&lt;br /><br />
+&lt;select name="status"><br />
+{select_options}<br />
+&lt;/select><br />
+&lt;/p><br />
+{/status_menu}<br />
+<br />
+&lt;p>Date &lt;br /><br />
+&lt;input type="text" name="entry_date" value="{entry_date}" maxlength="23" size="25" />&lt;/p><br />
+<br />
+&lt;p>Expiration Date &lt;br /><br />
+&lt;input type="text" name="expiration_date" value="{expiration_date}" maxlength="23" size="25" />&lt;/p><br />
+<br />
+&lt;p>Comment Expiration Date &lt;br /><br />
+&lt;input type="text" name="comment_expiration_date" value="{comment_expiration_date}" maxlength="23" size="25" />&lt;/p><br />
+<br />
+&lt;p>&lt;input type="checkbox" name="sticky" value="y"  {sticky} /> Make Entry Sticky&lt;/p><br />
+&lt;p>&lt;input type="checkbox" name="allow_comments" value="y" {allow_comments} /> Allow Comments&lt;/p><br />
+&lt;p>&lt;input type="checkbox" name="allow_trackbacks" value="y" {allow_trackbacks} /> Allow Trackbacks&lt;/p><br />
+&lt;p>&lt;input type='checkbox' name='dst_enabled' value='y' {dst_enabled} />DST Active on Date of Entry&lt;/p><br />
+<br />
+{ping_servers}<br />
+&lt;p>Ping Servers&lt;br /><br />
+{ping_row}<br />
+&lt;input type="checkbox" name="ping[]" value="{ping_value}" {ping_checked} /> {ping_server_name}&lt;br /><br />
+{/ping_row}<br />
+&lt;/p><br />
+{/ping_servers}<br />
+<br />
+{category_menu}<br />
+&lt;p>Categories&lt;br /><br />
+&lt;select name="category[]" size="4" multiple="multiple"><br />
+{select_options}<br />
+&lt;/select><br />
+&lt;/p><br />
+{/category_menu}<br />
+<br />
+&lt;/td><br />
+&lt;/tr><br />
+&lt;/table><br />
+<br />
+{/exp:weblog:entry_form}</code>
+
+	<p>Further, you should add <a href="entry_form_css.txt">these CSS styles</a> to whatever stylesheet you use when displaying your entry form so that the formatting buttons will appear correctly.</p>
+
+
+
+	<h2>Input Fields</h2>
+
+	<p>All of the fields available on the Control Panel <dfn>Publish</dfn> page are available.  However, the only <em>required</em> fields are the Title field and any entry fields which you have specified in your <dfn>Admin &gt; Custom Weblog Fields</dfn> as required.</p>
+
+	<ul class="minitoc">
+		<li><a href="#field_allow_comments">Allow Comments</a></li>
+		<li><a href="#field_allow_trackbacks">Allow Trackbacks</a></li>
+		<li><a href="#field_category_menu">Category Menu</a></li>
+		<li><a href="#field_comment_expiration_date">Comment Expiration Date</a></li>
+		<li><a href="#field_custom_entry_fields">Custom Entry Fields</a></li>
+		<li><a href="#field_dst_enabled">DST Enabled</a></li>
+		<li><a href="#field_entry_date">Entry Date</a></li>
+		<li><a href="#field_expiration_date">Expiration Date</a></li>
+		<li><a href="#field_formatting_buttons">Formatting Buttons</a></li>
+		<li><a href="#field_sticky">Make Entry Sticky</a></li>
+		<li><a href="#field_ping_servers">Ping Servers</a></li>
+		<li><a href="#field_status_menu">Status Menu</a></li>
+		<li><a href="#field_title">Title</a></li>
+		<li><a href="#field_url_title">URL Title</a></li>
+	</ul>
+
+
+	<h3><a name="field_allow_comments">Allow Comments</a></h3>
+
+		<p>You may allow the user to choose whether or not to allow comments on the entry.</p>
+
+		<code>&lt;p>&lt;input type="checkbox" name="allow_comments" value="y" {allow_comments} /> Allow Comments&lt;/p></code>
+
+
+	<h3><a name="field_allow_trackbacks">Allow Trackbacks</a></h3>
+
+		<p>You may allow the user to choose whether or not to allow trackbacks on the entry.</p>
+
+		<code>&lt;p>&lt;input type="checkbox" name="allow_trackbacks" value="y" {allow_trackbacks} /> Allow Trackbacks&lt;/p></code>
+
+
+	<h3><a name="field_category_menu">Category Menu</a></h3>
+
+		<p>This allows the user to select one or more categories for the entry.</p>
+
+		<code>{category_menu}<br />
+&lt;p>Categories&lt;br /><br />
+&lt;select name="category[]" size="4" multiple="multiple"><br />
+{select_options}<br />
+&lt;/select><br />
+&lt;/p><br />
+{/category_menu}</code>
+
+
+	<h3><a name="field_comment_expiration_date">Comment Expiration Date</a></h3>
+
+		<p>The user can specify the exact date for comment expiration if desired.  This is specified in the format <samp>YYYY-MM-DD hh:mm PM</samp> exactly as in the Control Panel <dfn>Publish</dfn> section.</p>
+
+		<code>&lt;p>Comment Expiration Date &lt;br /><br />
+&lt;input type="text" name="comment_expiration_date" value="{comment_expiration_date}" maxlength="23" size="25" />&lt;/p></code>
+
+
+	<h3><a name="field_custom_entry_fields">Custom Entry Fields</a></h3>
+
+		<p>The entry fields are displayed dynamically by ExpressionEngine.  These are displayed by an outer variable pair, which loops through all of the fields for the weblog and then displays a field appropriate for the type.</p>
+
+		<code>{custom_fields}<br />
+{if required}* {/if}{field_label}&lt;br /><br />
+<br />
+{if textarea}<br />
+&lt;textarea name="{field_name}" dir="{text_direction}" cols="50" rows="{rows}" onclick="setFieldName(this.name)">{field_data}&lt;/textarea><br />
+{/if}<br /><br />
+{if textinput}<br />
+&lt;input type="text" dir="{text_direction}" name="{field_name}" value="{field_data}" maxlength="{maxlength}" size="50" onclick="setFieldName(this.name)" /><br />
+{/if}<br /><br />
+{if pulldown}<br />
+&lt;select name="{field_name}"><br />
+{options}&lt;option value="{option_value}"{selected}>{option_name}&lt;/option>{/options}<br />
+&lt;/select><br />
+{/if}<br /><br />
+{if date}<br />
+&lt;input type="text" name="{field_name}" value="{field_data}" maxlength="{maxlength}" size="50" onclick="setFieldName(this.name)" /><br />
+{/if}<br /><br />
+{if relationship}<br />
+&lt;select name="{field_name}"><br />
+{options}&lt;option value="{option_value}"{selected}>{option_name}&lt;/option>{/options}<br />
+&lt;/select><br />
+{/if}<br />
+{/custom_fields}
+<br />
+
+</code>
+
+	<p><b>Note:</b> The <samp>onclick="setFieldName(this.name)"</samp> attribute is only needed if you are including the <a href="#field_formatting_buttons">formatting buttons</a> in the form.</p>
+
+
+	<h3><a name="field_dst_enabled">DST Enabled</a></h3>
+
+		<p>You may allow the user to choose whether or not to store that <a href="../../general/date_localization.html">DST is active</a> with the entry.</p>
+
+		<code>&lt;p>&lt;input type="checkbox" name="dst_enabled" value="y" {dst_enabled} /> DST Active on Date of Entry&lt;/p></code>
+
+
+	<h3><a name="field_entry_date">Entry Date</a></h3>
+
+		<p>The user can specify the exact date for the entry.  This is specified in the format <samp>YYYY-MM-DD hh:mm PM</samp> exactly as in the Control Panel <dfn>Publish</dfn> section.</p>
+
+		<code>&lt;p>Date &lt;br /><br />
+&lt;input type="text" name="entry_date" value="{entry_date}" maxlength="23" size="25" />&lt;/p></code>
+
+
+	<h3><a name="field_expiration_date">Expiration Date</a></h3>
+
+		<p>The user can specify the exact expiration date for the entry if desired.  This is specified in the format <samp>YYYY-MM-DD hh:mm PM</samp> exactly as in the Control Panel <dfn>Publish</dfn> section.</p>
+
+		<code>&lt;p>Expiration Date &lt;br /><br />
+&lt;input type="text" name="expiration_date" value="{expiration_date}" maxlength="23" size="25" />&lt;/p></code>
+
+
+	<h3><a name="field_formatting_buttons">Formatting Buttons</a></h3>
+
+		<p>You may include the formatting button toolbar just like in the Control Panel <dfn>Publish</dfn> section.</p>
+
+		<code>{formatting_buttons}</code>
+
+		<p>Remember, you should add <a href="entry_form_css.txt">these CSS styles</a> to whatever stylesheet you use when displaying your entry form so that the formatting buttons will appear correctly.</p>
+
+
+	<h3><a name="field_sticky">Make Entry Sticky</a></h3>
+
+		<p>The user can specify whether to make the entry "sticky" or not.</p>
+
+		<code>&lt;p>&lt;input type="checkbox" name="sticky" value="y"  {sticky} /> Make Entry Sticky&lt;/p></code>
+
+
+	<h3><a name="field_ping_servers">Ping Servers</a></h3>
+
+		<p>The user can any servers they wish to ping when the entry is submitted.</p>
+
+		<code>{ping_servers}<br />
+&lt;p>Ping Servers&lt;br /><br />
+{ping_row}<br />
+&lt;input type="checkbox" name="ping[]" value="{ping_value}" {ping_checked} /> {ping_server_name}&lt;br /><br />
+{/ping_row}<br />
+&lt;/p><br />
+{/ping_servers}</code>
+
+
+	<h3><a name="field_status_menu">Status Menu</a></h3>
+
+		<p>The user can select the appropriate entry status for the entry.</p>
+
+		<code>{status_menu}<br />
+&lt;p>Status&lt;br /><br />
+&lt;select name="status"><br />
+{select_options}<br />
+&lt;/select><br />
+&lt;/p><br />
+{/status_menu}</code>
+
+
+	<h3><a name="field_title">Title</a></h3>
+
+		<p>The user can input the title for the entry.</p>
+
+		<code>&lt;p>Title&lt;br /><br />
+&lt;input type="text" name="title" id="title" value="{title}" size="50" maxlength="100" onkeyup="liveUrlTitle();"  />&lt;/p></code>
+
+
+	<h3><a name="field_url_title">URL Title</a></h3>
+
+		<p>The user can specify the URL Title for the entry.  By default, it will be dynamically created as the user types the title.  If this field is not included or is left blank, then the URL Title will be created by ExpressionEngine based on the Title.</p>
+
+		<code>&lt;p>URL Title&lt;br /><br />
+&lt;input type="text" name="url_title"  id='url_title' value="{url_title}" maxlength="75" size="50" />&lt;/p></code>
+
+
+
+	<h2>Parameters</h2>
+
+	<ul class="minitoc">
+		<li><a href="#par_allow_comments">allow_comments="yes"</a></li>
+		<li><a href="#par_allow_trackbacks">allow_trackbacks="yes"</a></li>
+		<li><a href="#par_category">category="3|7|13"</a></li>
+		<li><a href="#par_hidden_pings">hidden_pings="yes"</a></li>
+		<li><a href="#par_preview">preview="site/entry"</a></li>
+		<li><a href="#par_return">return="site/index"</a></li>
+		<li><a href="#par_show_fields">show_fields="3|7"</a></li>
+		<li><a href="#par_status">status="pending"</a></li>
+		<li><a href="#par_sticky_entry">sticky_entry="yes"</a></li>
+		<li><a href="#par_use_live_url">use_live_url="no"</a></li>
+		<li><a href="#par_weblog">weblog="news"</a></li>
+	</ul>
+
+
+	<h3><a name="par_allow_comments">allow_comments=</a></h3>
+
+		<code>allow_comments="yes"</code>
+
+		<p>If you don't wish to include the form option on the page then you can set whether or not to allow comments with the entry via this parameter.  Options are "yes" and "no".</p>
+
+
+	<h3><a name="par_allow_trackbacks">allow_trackbacks=</a></h3>
+
+		<code>allow_trackbacks="yes"</code>
+
+		<p>If you don't wish to include the form option on the page then you can set whether or not to allow trackbacks with the entry via this parameter.  Options are "yes" and "no".</p>
+
+
+	<h3><a name="par_category">category=</a></h3>
+
+		<code>category="7|13"</code>
+
+		<p>If you don't wish to include the form option on the page then you can set any categories that you wish to assign the entry to via this parameter.  Specify the category by Category ID.  You may specify multiple categories by separating the Category ID with the pipe character:</p>
+
+		<code>category="3|7|13|42"</code>
+
+
+	<h3><a name="par_hidden_pings">hidden_pings=</a></h3>
+
+		<code>hidden_pings="yes"</code>
+
+		<p>If you don't wish to include the form options on the page to select the servers to ping, then you can specify whether or not to send the pings via this parameter.  Options are "yes" and "no".  If you select "yes", then EE will send a ping to all of the servers that are specified under <dfn>Admin &gt; Default Ping Servers</dfn>.</p>
+
+
+	<h3><a name="par_preview">preview=</a></h3>
+
+		<code>preview="site/entry"</code>
+
+		<p>This parameter specifies the Template Group/Template to use for displaying the entry preview.  Typically, it is easiest to specify the same Template being used for the entry form.</p>
+
+
+	<h3><a name="par_return">return=</a></h3>
+
+		<code>return="site/index"</code>
+
+		<p>You may specify where to take the user after the entry has been submitted.  Specify the Template Group/Template.  This is a <strong>required</strong> parameter.</p>
+
+
+	<h3><a name="par_show_fields">show_fields=</a></h3>
+
+		<code>show_fields="body|extended"</code>
+
+		<p>If you wish, you may elect not to display all of the entry fields assigned to your weblog.  This could be useful if you have fields that are only used for administrative purposes.  Specify which fields to include by using their field name (the short name, not the label).  You may specify multiple fields by separating their field names with the pipe character:</p>
+
+		<code>show_fields="body|extended|full_image"</code>
+
+		<p>You may exclude fields by placing the word "not" in front of the list:</p>
+
+		<code>show_fields="not image_thumbnail|source|rating"</code>
+
+		<p><b>Note:</b> You <strong>must</strong> include all fields that are designated as "required".</p>
+
+
+	<h3><a name="par_status">status=</a></h3>
+
+		<code>status="pending"</code>
+
+		<p>If you don't wish to include the form option on the page  you can set the status that you wish to assign the entry to.  Simply use the name of the status as specified under <dfn>Admin &gt; Custom Entry Statuses</dfn>.  The two statuses "open" and "closed" are default statuses that are always available, so you can always specify those if needed.</p>
+
+
+	<h3><a name="par_sticky_entry">sticky_entry=</a></h3>
+
+		<code>sticky_entry="yes"</code>
+
+		<p>If you don't wish to include the form option on the page then you can set whether or not to make the entry "sticky" via this parameter.  Options are "yes" and "no".</p>
+
+
+	<h3><a name="par_use_live_url">use_live_url=</a></h3>
+
+		<code>use_live_url="no"</code>
+
+		<p>By default, the URL Title field will be dynamically populated as you type your Title.  If you do not wish to have that happen, you can turn off the feature using this parameter.  Options are "yes" and "no".</p>
+
+
+	<h3><a name="par_weblog">weblog=</a></h3>
+
+		<code>weblog="news"</code>
+
+		<p>The name (short name) of the weblog that the categories are assigned to.  This is a <strong>required</strong> parameter.</p>
+
+
+
+	<h2>Variables</h2>
+
+	<p>The Stand Alone Entry Form also contains a few special variables.</p>
+
+	<ul class="minitoc">
+		<li><a href="#var_field_instructions">{field_instructions}</a></li>
+		<li><a href="#var_smiley_url">{smiley_url}</a></li>
+		<li><a href="#var_upload_url">{upload_url}</a></li>
+	</ul>
+
+
+	<h3><a name="var_field_instructions">field_instructions</a></h3>
+
+		<code>{field_instructions}</code>
+
+		<p>The custom field instructions as entered in the <a href="../../cp/admin/weblog_administration/custom_fields_edit.html">custom fields edit screen</a>.</p>
+
+		
+	<h3><a name="var_smiley_url">smiley_url</a></h3>
+
+		<code>{smileys_url}</code>
+
+		<p>The URL to the "smileys" palette.  Smileys are often also called emoticons.  This variable is typically used in a link of the form:</p>
+
+		<code>&lt;a href="{smileys_url}" onclick="window.open(this.href, '_blank', 'width=600,height=440');return false;" onkeypress="this.onclick()">Smileys&lt;/a></code>
+
+		<address>Added EE 1.3</address>
+
+
+	<h3><a name="var_upload_url">upload_url</a></h3>
+
+		<code>{upload_url}</code>
+
+		<p>The URL to the File Upload Utility.  This variable is typically used in a link of the form:</p>
+
+		<code>&lt;a href="{upload_url}" onclick="window.open(this.href, '_blank', 'width=400,height=600');return false;" onkeypress="this.onclick()">File Upload&lt;/a></code>
+
+		<p>In order to use the File Upload Utility, the member must have access to the Control Panel since the upload form uses content from the Control Panel.</p>
+
+		<address>Added EE 1.3</address>
+
+
+
+	<h2>Previewing</h2>
+
+	<p>Within the main <samp>{exp:weblog:entry_form}</samp> tag, you may place a variable pair to allow you to display a preview of the entry.</p>
+
+	<code>{preview}<br />
+&lt;h1>{title}&lt;/h1><br />
+<br />
+{display_custom_fields}<br />
+<br />
+{/preview}</code>
+
+
+	<h3>Displaying Custom Fields</h3>
+
+		<p>There are two ways to display your custom field data in the preview.  The first, and simplest, way is simply to use this variable:</p>
+
+		<code>{display_custom_fields}</code>
+
+		<p>That variable will automatically loop through and display all of the entry fields.</p>
+
+		<p>The other method is to individually specify the fields, just as you might when displaying an entry in a Template.  For instance:</p>
+
+		<code>{preview}<br />
+&lt;h2>{title}&lt;/h2><br />
+<br />
+{body}<br />
+<br />
+&lt;div class="more">{extended}&lt;/div><br />
+<br />
+{/preview}</code>
+
+		<p>You must specify the fields by their field name (short name) and not by their <em>label</em>.</p>
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

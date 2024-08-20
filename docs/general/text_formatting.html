@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Text Formatting Features &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../index.html" />
+  <style type="text/css" media="screen,print">@import url(../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="../index.html#gen_docs">General Information</a> &gt;
+<strong>Text Formatting</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Text Formatting</h1>
+
+	<p>ExpressionEngine has a number of text formatting options that enable you to control how text is rendered within your weblog entries and comments.</p>
+
+
+	<h2>Auto XHTML</h2>
+	
+	<p>The purpose of the <em>Auto XHTML</em> option is to make your content semantically and typographically correct. This feature does the following:</p>
+	
+	<ul>
+		<li>Double Line Breaks are wrapped in paragraph tags:&nbsp; <span class="highlight">&lt;p><em>content..</em>&lt;/p></span></li>
+		<li>Single Line Breaks are turned into <span class="highlight">&lt;br /></span> tags.</li>
+		<li>Double quotes are converted to curly double quotes:&nbsp; <span class="highlight">"this" becomes &#8220;this&#8221;</span></li>
+		<li>Single quotes are converted to curly single quotes:&nbsp; <span class="highlight">Joe's becomes Joe&#8217;s</span></li>
+		<li>Double dashes are converted to em-dashes:&nbsp; <span class="highlight">This -- text becomes this&#8212;text.</span></li>
+		<li>Three periods are converted to ellipsis:&nbsp; <span class="highlight">This... becomes this&#8230;</span></li>
+	</ul>
+	
+	<p>In addition, the Auto XHTML feature intelligently handles text containing block level elements, like &lt;div>, &lt;blockquote>, etc.
+	so that they are not wrapped in paragraph tags. Further, elements within &lt;pre> tags are exempt from the paragraph conversion.
+
+	<p>The Auto XHTML Feature can be found in the <kbd>PUBLISH</kbd> page of the Control Panel.  You'll see a menu below each entry field with this option.  
+	You can also configure your Comment Preferences so that any comments will be formatted this way.</p> 
+	
+	<p><strong>Note:</strong> By default, all entries and comments are assigned to this formatting option.</p>
+
+
+	<h2>Auto BR</h2>
+	
+	<p>This Auto BR feature simply converts each line break into an HTML &lt;br /> tag.</p>
+	
+	<p>This feature can be found in the <kbd>PUBLISH</kbd> page of the Control Panel.  Youll see a menu below each entry field with this option.  
+	You can also configure your Comment Preferences so that any comments will be formatted this way. </p>
+	
+	<h2>Convert High ASCII to Entities</h2>
+	
+	<p>Due to the inherent limitations of the web only <var>Low-ASCII characters</var> can be shown reliably in web browsers.  Low-ASCII values are 
+	the basic characters, numbers, and standard punctuation on your computer keyboard.</p>
+	
+	<p>If your text contains <dfn>High-ASCII values</dfn>, 
+	like accented characters, or if you copy your text from <b>Microsoft Word</b>, which uses High-ASCII values
+	for quotes and other characters, then you run the risk that some characters will not be displayed correctly on your web pages.</p>
+	
+	<p>Furthermore, depending on a number of factors related to your server's character encoding support, when
+	 you submit High-ASCII values into your database they might not be recognized properly for storage.</p>
+	
+	<p>ExpressionEngine's <var>Convert High ASCII to Entities</var> feature will automatically convert these high-ASCII characters into their 
+	appropriate HTML character entity so that any web browser can display them correctly.  
+	For instance, the <samp>&#169;</samp> character will 
+	be converted into its HTML entity (<samp>&amp;#169;</samp>), which any web browser, regardless of its character encoding, will correctly display as a copyright symbol.</p>
+	
+	<p><strong>To enable this feature go to the following page in your Control Panel:</strong>
+	
+	<p class="leftpad"><dfn>Admin &gt; Weblog Management &gt; Global Weblog Preferences</dfn></p>
+	
+	<p>Once enabled, whenever you submit new entries they will be processed.</p>
+	
+	<p class="important"><strong>Note:</strong> The conversion happens when you submit entries, <strong>not</strong> at run time, so
+	you'll need to edit/re-save any entries containing High-ASCII values for this feature to work.</p>
+	
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

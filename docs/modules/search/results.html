@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Search Results Tag &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Search Module</a> &gt;
+<strong>Search Results</strong>
+</div>
+
+<div id="content">
+
+	<h1>Search Results Tag</h1>
+
+	<p>The <dfn>Search Results Tag</dfn> controls how you display results from your searches.  Example:</p>
+
+	<code>&lt;table border="0" cellpadding="6" cellspacing="1" width="100%"><br />
+&lt;tr><br />
+&lt;th>{lang:title}&lt;/th><br />
+&lt;th>{lang:excerpt}&lt;/th><br />
+&lt;th>{lang:author}&lt;/th><br />
+&lt;th>{lang:date}&lt;/th><br />
+&lt;th>{lang:total_comments}&lt;/th><br />
+&lt;th>{lang:recent_comments}&lt;/th><br />
+&lt;/tr><br />
+<br />
+{exp:search:search_results switch="resultRowOne|resultRowTwo"}<br />
+<br />
+&lt;tr class="{switch}"><br />
+&lt;td width="30%" valign="top">&lt;b>&lt;a href="{auto_path}">{title}&lt;/a>&lt;/b>&lt;/td><br />
+&lt;td width="30%" valign="top">{excerpt}&lt;/td><br />
+&lt;td width="10%" valign="top">&lt;a href="{member_path='member/index'}">{author}&lt;/a>&lt;/td><br />
+&lt;td width="10%" valign="top">{entry_date format="%m/%d/%y"}&lt;/td><br />
+&lt;td width="10%" valign="top">{comment_total}&lt;/td><br />
+&lt;td width="10%" valign="top">{recent_comment_date format="%m/%d/%y"}&lt;/td><br />
+&lt;/tr><br />
+<br />
+{/exp:search:search_results}<br />
+<br />
+&lt;/table><br />
+<br />
+{if paginate}<br />
+<br />
+&lt;div class='paginate'><br />
+<br />
+&lt;span class='pagecount'>{page_count}&lt;/span>&amp;nbsp; {paginate}<br />
+<br />
+&lt;/div><br />
+<br />
+{/if}<br /></code>
+
+
+
+	<h2>Parameters</h2>
+
+	<ul class="minitoc">
+		<li><a href="#par_backspace">backspace="6"</a></li>
+		<li><a href="#par_rdf">rdf="off"</a></li>
+		<li><a href="#par_switch">switch="option_one|option_two"</a></li>
+	</ul>
+	
+		<h3><a name="par_backspace">backspace=</a></h3>
+
+			<code>backspace="6"</code>
+
+			<p>Backspacing removes characters from the last iteration of the search results loop.  For example, if you put a <samp>&lt;br /></samp> tag between each result you'll have this layout:</p>
+
+			<code>Entry 1 title&lt;br /><br />
+	Entry 2 title&lt;br /><br />
+	Entry 3 title&lt;br /></code>
+
+			<p>You might, however, not want the <samp>&lt;br /></samp> tag after the final item.  By adding backspacing you can remove it.  Simply count the number of characters and spaces in the item you want to remove and add it to the tag (do not include trailing spaces in your count).  A <samp>&lt;br /></samp> tag has 6 characters, so you would do this:</p>
+
+			<code>{exp:search:search_results switch="resultRowOne|resultRowTwo" backspace="6" rdf="off"}<br />
+	<br />
+	{title}&lt;br /><br />
+	<br />
+	{/exp:search:search_results}</code>
+
+			<p>That will produce code like this:</p>
+
+			<code>Entry 1 title&lt;br /><br />
+	Entry 2 title&lt;br /><br />
+	Entry 3 title</code>
+
+		<p class="important"><b>Note:</b>&nbsp; The "backspace" parameter will only work if you have either the <a href="#par_rdf">rdf="off"</a> parameter specified or you have "Add Trackback Auto-discovery code to your pages?" setting turned <strong>off</strong> under <dfn>Weblog Management</dfn>.</p>
+
+		<h3><a name="par_rdf">rdf=</a></h3>
+
+			<code>rdf="off"</code>
+			<code>rdf="on"</code>
+
+			<p>The Trackback Autodiscovery RDF code can be manually set for any particular weblog entry listing.  This is useful when used on the RSS pages if the "global" setting in <dfn><a href="../../cp/admin/weblog_administration/weblog_management.html">Weblog Management</a></dfn> is turned on.</p>
+
+	<h3><a name="par_switch">switch=</a></h3>
+
+		<code>switch="option_one|option_two"</code>
+
+		<p>This parameter allows you to set two values that will alternate between the result rows.  This is commonly used to have alternating colored backgrounds for the result rows.  This parameter works in conjunction with the <samp><a href="#var_switch">{switch}</a></samp> variable.</p>
+		
+		<p class="important">This is a legacy parameter, and has been replaced by the more advanced <a href="../weblog/variables.html#var_switch">{switch=} variable</a> from the Weblog Entries tag which has greater flexibility.  This parameter / variable combo will continue to function, but it is recommended that the Weblog Entries tag's {switch=} variable be used.</p>
+
+
+
+	<h2>Variables</h2>
+
+	<code>{title}<br />
+	{permalink}<br />
+	{author}<br />
+	{body}<br />
+	et cetera...</code>
+
+	<p>Nearly all of the <a href="../../modules/weblog/variables.html">Weblog Entries 
+	Tag Variables</a> are available for the search results page so that you can
+	display as much or as little of the weblog entry's data as possible depending on your needs.
+	There are also some search results specific variables available in the results page: </p>
+	
+
+	<ul class="minitoc">
+		<li><a href="#var_auto_path">{auto_path}</a></li>
+		<li><a href="#var_excerpt">{excerpt}</a></li>
+		<li><a href="#var_full_text">{full_text}</a></li>
+		<li><a href="#var_id_auto_path">{id_auto_path}</a></li>
+		<li><a href="#var_member_path">{member_path='member/index'}</a></li>
+		<li><a href="#var_switch">{switch}</a></li>
+	</ul>
+
+
+	<h3><a name="var_auto_path">auto_path</a></h3>
+
+		<code>{auto_path}</code>
+
+		<p>This parameter is replaced with the URL to the entry with the URL Title appended to the end.  Unlike other "path" variables, this variable does <strong>not</strong> require the Template_Group/Template to be specified.  Instead, the path will automatically be determined by the Weblog URL setting for the weblog in <dfn><a href="../../cp/admin/weblog_administration/weblog_management.html">Weblog Management</a></dfn>.</p>
+
+
+	<h3><a name="var_excerpt">excerpt</a></h3>
+
+		<code>{excerpt}</code>
+
+		<p>An excerpt from the entry.  The excerpt consists of the first 50 words from the field specified for search excerpting in your <dfn><a href="../../cp/admin/weblog_administration/weblog_management.html">Weblog Management</a></dfn> settings for your weblogs.  HTML markup is stripped prior to output.</p>
+
+
+	<h3><a name="var_full_text">full_text</a></h3>
+
+		<code>{full_text}</code>
+
+		<p>The text from the entry.  Unlike the <samp>{excerpt}</samp> variable, this one returns the entire text from the field specified for search excerpting in your <dfn><a href="../../cp/admin/weblog_administration/weblog_management.html">Weblog Management</a></dfn> settings for your weblogs.</p>
+
+
+	<h3><a name="var_id_auto_path">id_auto_path</a></h3>
+
+		<code>{id_auto_path}</code>
+
+		<p>This parameter is replaced with the URL to the entry with the Entry ID appended to the end.  Unlike other "path" variables, this variable does <strong>not</strong> require the Template_Group/Template to be specified.  Instead, the path will automatically be determined by the Weblog URL setting for the weblog in <dfn><a href="../../cp/admin/weblog_administration/weblog_management.html">Weblog Management</a></dfn>.</p>
+
+
+	<h3><a name="var_member_path">member_path</a></h3>
+
+		<code>{member_path='member/index'}</code>
+
+		<p>The Template_Group/Template with which to display the member profile of the author of the entry.  Typically, this variable will be specified as <samp>{member_path='member/index'}</samp>.</p>
+
+	<h3><a name="var_switch">switch</a></h3>
+
+		<code>{switch}</code>
+
+		<p>This variable is dynamically replaced by the appropriate value specified in the <samp><a href="#par_switch">switch=</a></samp> parameter.  This variable is commonly used to set a CSS class or a background color.</p>
+
+		<p class="important">This is a legacy variable, and has been replaced by the more advanced <a href="../weblog/variables.html#var_switch">{switch=} variable</a> from the Weblog Entries tag which has greater flexibility.  This parameter / variable combo will continue to function, but it is recommended that the Weblog Entries tag's {switch=} variable be used.</p>
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

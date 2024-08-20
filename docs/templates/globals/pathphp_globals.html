@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Path.php Global Variables &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="var_MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#template_docs">Templating System</a> &gt;
+<a href="index.html">Global Variables</a> &gt;
+<strong>Path.php Global Variable</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Path.php Global Variables</h1>
+
+	<p>Within your <var>path.php</var> file, you can create global variables that are available to any Templates accessed through its associated <var>index.php</var> page (or whatever it might have been renamed).</p>
+
+
+	<h3>Defining Variables</h3>
+
+		<p>You may specify a PHP array containing "global variables" that will be available only to Templates accessed through that <var>path.php</var> file.</p>
+
+		<code>$global_vars = array(); // This array must be associative</code>
+
+		<p>For instance, let's say you want to define a weblog name and a Template Group name.  You could use this:</p>
+
+		<code>$global_vars = array(<br />
+"my_weblog_name" => "news",<br />
+"my_template_group" => "display"<br />
+); // Last entry must not include the comma at the end</code>
+
+		<p>Within your Templates, you would then be able to use the <samp>{my_weblog_name}</samp> and <samp>{my_template_group}</samp> variables.</p>
+
+
+	<h3>Using Conditionals</h3>
+
+		<p>Global variables defined in the <var>path.php</var> file can be used in conditional statements within your Templates.  For instance:</p>
+
+		<code>{if my_template_group == "display"}<br />
+Hey, it's the 'display' Template!<br />
+{/if}</code>
+
+		<p>In addition, they may be used with <a href="conditionals.html#multiple_conditions">multiple conditions</a> as described in the Conditional Global Variables page.</p>
+		
+		<p class="important"><strong>NOTE:</strong> It is not recommended that path.php global variables be used to hold HTML, ExpressionEngine tags, or PHP, as these and all inputted variables are sanitized for security reasons.</p>
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

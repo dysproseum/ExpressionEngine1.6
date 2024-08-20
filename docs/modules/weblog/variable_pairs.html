@@ -1,0 +1,272 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Weblog Entries Variable Pairs &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Weblog Module</a> &gt;
+<strong>Variable Pairs</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Weblog Entries - Variable Pairs</h1>
+
+	<p>Variable pairs contain an opening and closing tag as well as content in-between.  Example:</p>
+
+	<code>{date_heading}<br />
+<br />
+&lt;h1>{entry_date format="%Y %m %d"}&lt;/h1><br />
+<br />
+{/date_heading}</code>
+
+	<p>The reason variable pairs have an opening and closing pair is because the information between the pairs can be shown or not shown if the criteria for each tag is met.</p>
+
+	<p>In the case of the "date_heading" pair, for example, it only appears at a certain interval that you set (hourly, daily, weekly, monthly, etc.).  By using a pair of variables you can put HTML formatting between them that only gets shown when the interval is met.  Otherwise, the chunk is not displayed.</p>
+
+	<ul class="minitoc">
+		<li><a href="#var_date_footer">{date_footer}</a></li>
+		<li><a href="#var_date_heading">{date_heading}</a></li>
+		<li><a href="#var_categories">{categories}</a></li>
+	</ul>
+
+
+
+	<h2><a name="var_date_footer">date_footer</a></h2>
+
+	<code>{date_footer display="daily"}<br />
+<br />
+&lt;p>That's all from today!&lt;/p><br />
+<br />
+{/date_footer}</code>
+
+	<p>The date footer can be used to show a footer at certain intervals.  The interval can be set to show hourly, daily, weekly, monthly, or yearly.</p>
+
+
+	<h3>Display Parameter</h3>
+
+		<p>The opening {date_footer} tag has an optional "display" parameter used to set the display interval:</p>
+
+		<code>{date_footer display="daily"}</code>
+
+		<p>Choices for the "display" parameter are:</p>
+
+		<ul>
+			<li>{date_footer display="hourly"}</li>
+			<li>{date_footer display="daily"}</li>
+			<li>{date_footer display="weekly"}</li>
+			<li>{date_footer display="monthly"}</li>
+			<li>{date_footer display="yearly"}</li>
+		</ul>
+
+		<p>If no parameter is specified it will default to "daily".</p>
+
+		<p><b>Note:</b> You can use as many date_footers as you want in the same tag. There is a bit of a performance hit, however, since date parsing is the most processor intensive.  Read the caching section for information on improving performance.</p>
+
+
+
+	<h2><a name="var_date_heading">date_heading</a></h2>
+
+	<code>{date_heading}<br />
+<br />
+&lt;h1>{entry_date format="%Y %m %d"}&lt;/h1><br />
+<br />
+{/date_heading}</code>
+
+	<p>The date heading can be used to show a heading at certain intervals.  The interval can be set to show hourly, daily, weekly, monthly, or yearly.</p>
+
+	<p>When using weekly intervals, the <a href="variables.html#var_week_date">{week_date}</a> variable would typically be used.</p>
+	
+	<code>{date_heading display="weekly"}Week of {week_date format="%Y %m %d"}{/date_heading}</code>
+
+	<h3>Display Parameter</h3>
+
+		<p>The opening {date_heading} tag has an optional "display" parameter used to set the display interval:</p>
+
+		<code>{date_heading display="daily"}</code>
+
+		<p>Choices for the "display" parameter are:</p>
+
+		<ul>
+			<li>{date_heading display="hourly"}</li>
+			<li>{date_heading display="daily"}</li>
+			<li>{date_heading display="weekly"}</li>
+			<li>{date_heading display="monthly"}</li>
+			<li>{date_heading display="yearly"}</li>
+		</ul>
+
+		<p>If no parameter is specified it will default to "daily".</p>
+
+		<p><b>Note:</b> You can use as many date_headers as you want in the same tag. There is a bit of a performance hit, however, since date parsing is the most processor intensive.  Read the caching section for information on improving performance.</p>
+
+
+
+	<h2><a name="var_categories">categories</a></h2>
+
+	<code>{categories}<br />
+<br />
+{category_image} &lt;a href="{path='weblog/index'}">{category_name}&lt;/a><br />
+<br />
+{/categories}</code>
+
+	<p>Categories are unique in that they are a "looping pair".  Since you can have multiple categories per entry, we need a mechanism to show as many categories as exist for each entry.</p>
+
+
+	<h3>Backspace Parameter</h3>
+
+		<p>You can add an optional parameter that allows "backspacing":</p>
+
+		<code>{categories backspace="6"}</code>
+
+		<p>Backspacing removes characters from the last iteration of the loop.  For example, if you put a <samp>&lt;br /></samp> tag between each category you would normally have this layout:</p>
+
+		<code>News&lt;br /><br />
+Sports&lt;br /><br />
+Politics&lt;br /></code>
+
+		<p>You might, however, not want the <samp>&lt;br /></samp> tag after the final item.  By adding backspacing you can remove it.  Simply count the number of characters and spaces in the item you want to remove and add it to the tag (do not include trailing spaces in your count).  A <samp>&lt;br /></samp> tag has 6 characters, so you would do this:</p>
+
+		<code>{categories backspace="6"}<br />
+<br />
+{category_name}&lt;br /><br />
+<br />
+{/categories}</code>
+
+		<p>This would display output similar to this:</p>
+
+		<code>News&lt;br /><br />
+Sports&lt;br /><br />
+Politics</code>
+
+	<h3>Limit Parameter</h3>
+	
+		<code>{categories limit="1"}</code>
+		
+		<p>This parameter limits the number of categories output by this variable pair.  When in use, it will limit the output to the number provided, using the specified order in the Category Management page to determine which categories get shown.</p>
+		
+	<h3><a name="par_category_show"></a>Show Parameter</h3>
+
+		<code>{categories show="4|7"}</code>
+
+		<p>With this parameter, you can specify which categories can be included when listing them with the <samp>{categories}</samp> variable pair.  For instance, if you had entries that belonged to several categories, you could use this parameter to limit the display to only those categories you specified.  While the entries may actually belong to more categories, only those you specify would be shown.  Category IDs are separated by the pipe character to specify more than one category.</p>
+
+		<p>You may alternatively specify which categories to not show:</p>
+
+		<code>{categories show="not 3|6|8"}</code>
+		
+	<h3><a name="par_category_show_group"></a>Show Group Parameter</h3>
+
+		<code>{categories show_group="1|3"}</code>
+
+		<p>With this parameter, you can specify which category groups can be 
+		included when listing categories with the <samp>{categories}</samp> variable pair. 
+		
+		For instance, if you had entries in a weblog that had multiple category groups
+		but only wanted to show the categories for one of those groups, you could 
+		specify that category group's ID number with this parameter. Category Group IDs are 
+		separated by the pipe character to specify more than one category group.</p>
+
+		<p>You may alternatively specify which category groups to not show:</p>
+
+		<code>{categories show_group="not 2|4"}</code>
+
+
+	<h3><a name="var_category_id">{category_id}</a></h3>
+
+		<code>{category_id}</code>
+
+		<p>The category ID associated with the category.</p>
+		
+	<h3><a name="var_parent_id">{parent_id}</a></h3>
+
+		<code>{parent_id}</code>
+
+		<p>The category ID associated with the category's parent (or 0 in the case of a top level category).</p>		
+		
+	<h3><a name="var_category_group">{category_group}</a></h3>
+
+		<code>{category_group}</code>
+
+		<p>The category group ID associated with the category.</p>
+
+	<h3><a name="var_category_image">{category_image}</a></h3>
+
+		<code>{category_image}</code>
+
+		<p>The image link (or other information) you can optionally store with each category within the Control Panel.</p>
+
+
+	<h3><a name="var_category_name">{category_name}</a></h3>
+
+		<code>{category_name}</code>
+
+		<p>This displays the name of the category.</p>
+
+	<h3><a name="var_category_url_title">{category_url_title}</a></h3>
+
+		<code>{category_url_title}</code>
+
+		<p>This variable displays the URL title of the category</p>
+
+	<h3><a name="var_path">{path=''}</a></h3>
+
+		<code>{path='weblog/index'}</code>
+
+		<p>This variable will be replaced by a URL to the specifies Template Group/Template.  The category designation information will automatically be added to the end of the URL so that the target page will know which category to display.</p>
+
+		<p>If you want the category links to point to your site index instead of a particular template group/template you can use <samp>SITE_INDEX</samp> instead:</p>
+
+		<code>{categories}<br />
+<br />
+&lt;a href="{path='SITE_INDEX'}">{category_name}&lt;/a><br />
+<br />
+{/categories}</code>
+
+	<h3><a name="var_custom">Custom Category Fields</a></h3>
+
+		<p>All custom fields assigned to a category can be accessed using the "short name" of the field:</p>
+
+		<code>{class}<br />
+{extended_description}<br />
+{category_name_fr}<br />
+etc..</code>
+
+		<p>These are totally dynamic in that any field you create for your category will automatically be available by its "short name" as a variable.</p>
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

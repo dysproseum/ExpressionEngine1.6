@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Forum Update Notes 2.1 &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Forum Module</a> &gt;
+<a href="forum_update.html">Forum Update</a> &gt;
+<strong>Version Notes 2.1</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Forum Update Notes for Version 2.1</h1>
+	
+	<p class="important">The Discussion Forum Module Version 2.1 requires ExpressionEngine Version 1.6 (or greater)</p>
+	
+	<p>Version 2.1 has a few theme modifications.</p>
+	
+	<h2>If you have <strong>not</strong> customized your existing forum templates:</h2>
+	
+	<p>Simply replace your entire forum theme folder with the new set:
+	</p>
+	<p class="leftpad"><kbd>themes/forum_themes/</kbd></p>
+	
+	<p class="important">The update process is now complete.  You can disregard the rest of the information in this page.</p>
+		
+	
+	<h2>If you <strong>have</strong> customized your existing templates:</h2>
+	
+	<p>If you have customized the look of your forum you will need to manually add the new template features described below.</p>
+	
+	<p>&nbsp;</p>
+	
+	<h1>Incorporating New Features</h1>
+
+	<p class="important">The information below assumes you are running customized templates.  If you are using the default theme there is no need to use the information below.</p>
+	
+	<h2>Global Theme Changes</h2>
+	
+	<ul>
+		<li>/themes/forum_themes/blue/theme_global.php</li>
+		<li>/themes/forum_themes/default/theme_global.php</li>
+		<li>/themes/forum_themes/developer/theme_global.php</li>
+		<li>/themes/forum_themes/grey/theme_global.php</li>
+		<li>/themes/forum_themes/shares/theme_global.php</li>
+	</ul>
+
+	<h3>&lt;html&gt; Tags</h3>
+		
+	<p>Due to changes in the W3's validator, change the &lt;html&gt; tags from:</p>
+	
+	<code>&lt;html&gt;</code>
+	
+	<p>to:</p>
+	
+	<code>&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; xml:lang=&quot;{lang}&quot; lang=&quot;{lang}&quot;&gt;</code>
+	
+	
+	<h2>Member Profile Theme Changes</h2>
+	
+	<ul>
+		<li>/themes/forum_themes/blue/theme_member.php</li>
+		<li>/themes/forum_themes/default/theme_member.php</li>
+		<li>/themes/forum_themes/developer/theme_member.php</li>
+		<li>/themes/forum_themes/grey/theme_member.php</li>
+		<li>/themes/forum_themes/shares/theme_member.php</li>
+	</ul>
+	
+	<h3>Bulletin Board Template</h3>
+	
+	<p>Add a closing &lt;/div> to the <kbd>{if no_bulletins}</kbd> conditional:</p>
+	
+	<code>{if no_bulletins}<br />
+&lt;div class=&quot;tableCellOne&quot;&gt;<br />
+&lt;span class=&quot;defaultBold&quot;&gt;{lang:message_no_bulletins}&lt;/span&gt;<br />
+&lt;/div&gt;<br />
+{/if}</code>
+	
+	<h3>Success &amp; Error Templates</h3>
+	
+	<p>Remove extraneous &lt;/h2> from "Success" and "Error" themes.  Change:</p>
+	
+	<code>&lt;div class=&apos;profileHeadingBG&apos;&gt;&lt;div class=&quot;tableHeading&quot;&gt;{lang:heading}&lt;/h2&gt;&lt;/div&gt;&lt;/div&gt;</code>
+	
+	<p>to:</p>
+	
+	<code>&lt;div class=&apos;profileHeadingBG&apos;&gt;&lt;div class=&quot;tableHeading&quot;&gt;{lang:heading}&lt;/div&gt;&lt;/div&gt;</code>
+	
+	<p><br /><br /><a href="forum_update.html">Return to Update Page</a></p>
+	
+	
+</div>
+
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

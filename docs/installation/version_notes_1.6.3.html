@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Upgrading to ExpressionEngine 1.6.3 &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../index.html" />
+  <style type="text/css" media="screen,print">@import url(../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="../index.html#install_docs">Installation and Update Instructions</a> &gt;
+<a href="update.html">Updating EE</a> &gt;
+<strong>Version 1.6.3 Notes</strong>
+</div>
+
+<div id="content">
+
+	<h1>Update Notes for Version 1.6.3</h1>
+	
+	<h2>index.php Updated</h2>
+	
+	<p>The <dfn>index.php</dfn> file has been updated for Version 1.6.3, so you will need to overwrite your existing index.php file
+		with the new file from Version 1.6.3.</p>
+		
+	<h2>Masked Control Panel Access</h2>
+	
+	<p>If you are using <a href="masked_cp_access.html">Masked Control Panel Access</a> you will need to update your
+		masked access file (admin.php) with the new file from Version 1.6.3</p>
+
+	<h2>Member Profile Theme Changes</h2>
+
+	<ul>
+		<li>/themes/profile_themes/default/profile_theme.php</li>
+	</ul>
+
+	<h3>Success &amp; Error Templates</h3>
+
+	<p>Remove extraneous &lt;/h2> from "Success" and "Error" themes.  Change:</p>
+
+	<code>&lt;div class=&apos;profileHeadingBG&apos;&gt;&lt;div class=&quot;tableHeading&quot;&gt;{lang:heading}&lt;/h2&gt;&lt;/div&gt;&lt;/div&gt;</code>
+
+	<p>to:</p>
+
+	<code>&lt;div class=&apos;profileHeadingBG&apos;&gt;&lt;div class=&quot;tableHeading&quot;&gt;{lang:heading}&lt;/div&gt;&lt;/div&gt;</code>
+
+
+	<p><br /><br /></p>
+	
+	<p><a href="update.html">Return to Update Page</a></p>
+
+	<p><br /><br /><br /><br /><br /><br /></p>
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

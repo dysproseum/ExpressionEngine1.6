@@ -1,0 +1,859 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Comment Entry Tag &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Comment Module</a> &gt;
+<strong>Comment Entry Tag</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Comment Entry Tag</h1>
+		
+	<p>The <dfn>Comment Entries Tag</dfn> enables you to show the user-submitted comments associated with your entries.</p> 	
+		
+	<p class="important"><b>Note:</b>&nbsp; The Comment Entries Tag is intended for use in one of your "single entry" pages.&nbsp; That is, a page that shows a single, specific weblog entry.&nbsp; Therefore, your Comment page must be linked to from within your Weblog entries using the <a href="../weblog/variables.html#var_url_title_path">URL Title Path</a> variable or the <a href="../weblog/variables.html#var_entry_id_path">Entry ID Path</a> variable, so that the comments can be associated to a specific entry.&nbsp; You may also combine <a href="../comment/combined.html">Comments and Trackbacks</a> together in an integrated display.</p>
+		
+	<p>Here is a basic example showing how you might use the comment tag:</p>
+
+	<code>{exp:comment:entries sort="asc" limit="20"}<br />
+<br />
+{comment}<br />
+<br />
+&lt;p>By {name} on {comment_date format="%Y %m %d"}&lt;/p><br />
+<br />
+{/exp:comment:entries}</code>
+
+	<p>Please note that the comment entries tag should <strong>not</strong> typically be nested inside of a standard <samp>{exp:weblog:entries}</samp> tag.</p>
+
+	<ul>
+		<li><a href="#submission_form">Comment Submission Form</a></li>
+		<li><a href="#conditionals">Conditionals</a></li>
+		<li><a href="#parameters">Parameters</a></li>
+		<li><a href="#var_dates">Single Variable Dates</a></li>
+		<li><a href="#variables">Variables</a></li>
+	</ul>
+	
+	<h2><a name="parameters"></a>Parameters</h2>
+
+	<ul class="minitoc">
+		<li><a href="#par_dynamic">dynamic="off"</a></li>
+		<li><a href="#par_entry_id">entry_id="24"</a></li>
+		<li><a href="#par_limit">limit="30"</a></li>
+		<li><a href="#par_orderby">orderby="date"</a></li>
+		<li><a href="#par_paginate">paginate="top"</a></li>
+		<li><a href="#par_paginate_base">paginate_base="site/index"</a></li>
+		<li><a href="#par_show_expired">show_expired="yes"</a></li>
+		<li><a href="#par_sort">sort="asc"</a></li>
+		<li><a href="#par_url_title">url_title="my_wedding"</a></li>
+		<li><a href="#par_weblog">weblog="news"</a></li>
+	</ul>
+
+
+	<h3><a name="par_dynamic">dynamic=</a></h3>
+
+		<code>dynamic="off"</code>
+
+		<p>The weblog and comment display engines set some parameters dynamically, based on what is in the URL.  There are times, however, where you do not want the parameters affected by what the URL contains.  To override the dynamic nature of the comment tag, use <samp>dynamic="off"</samp>.</p>
+
+		<p>This is often useful if you want to list comments in a "sidebar" on your site and have them always be the same ones regardless of which page on your site you visit (main page, archives, comments, etc.).  Using this, you can create a "recent comments" list.  By setting <samp>dynamic="off"</samp> you will ensure that the list is not affected by anything passed in the URL.</p>
+
+		<p>When dynamic is set to 'off', pagination will still function using an 'N' as a pagination indicator in the url rather than the standard 'P' indicator.</p>
+
+	<h3><a name="par_entry_id">entry_id=</a></h3>
+
+		<code>entry_id="24"</code>
+
+		<p>You can hard code the comment entries tag to show comments for a specific weblog entry by its entry ID.</p>
+		
+		<p class="important"><strong>NOTE:</strong> This parameter takes precedence over any entry specified dynamically in the URL, so when using this parameter you will want to make sure it is clear to the user which entry the displayed comments belong to.</p>
+	
+
+	<h3><a name="par_limit">limit=</a></h3>
+
+		<code>limit="30"</code>
+
+		<p>Allows you to limit the number of comments.  The limit will default to 100 comments if a value is not specified.  If you are using <a href="../../modules/weblog/pagination.html">pagination</a> then this will determine the number of comments shown per page.</p>
+
+
+	<h3><a name="par_orderby">orderby=</a></h3>
+
+		<code>orderby="date"</code>
+
+		<p>The "order" parameter sets the display order of the comments.  Setting options for this parameter include:</p>
+
+		<ul>
+			<li>orderby="date"</li>
+			<li>orderby="email"</li>
+			<li>orderby="location"</li>
+			<li>orderby="name"</li>
+			<li>orderby="url"</li>
+		</ul>
+
+		<p>If you are combining the display of comments and trackbacks, then you may <strong>only</strong> set this parameter to <samp>date</samp>.</p>
+
+	
+			
+	<h3><a name="par_paginate">paginate=</a></h3>
+
+		<code>paginate="top"</code>
+		<code>paginate="bottom"</code>
+		<code>paginate="both"</code>
+
+		<p>This parameter is for use with entry <a href="../weblog/pagination_page.html">pagination</a> and determines where the pagination code will appear for your comments:</p>
+
+		<ol>
+			<li><b>top</b>: The navigation text and links will appear <em>above</em> your list of comments.</li>
+			<li><b>bottom</b>: The navigation text and links will appear <em>below</em> your list of comments.</li>
+			<li><b>both</b>: The navigation text and links will appear both above and below your list of comments.</li>
+		</ol>
+
+		<p>If no parameter is specified, the navigation block will default to the "bottom" behavior.</p>
+
+			<h3><a name="par_paginate_base">paginate_base=</a></h3>
+
+				<code>paginate_base="site/index"</code>
+
+				<p>This tells ExpressionEngine to override the normal <a href="../weblog/pagination_page.html">pagination</a> link locations and point instead to the explicitly stated template group and template.</p>
+
+	<h3><a name="par_show_expired">show_expired=</a></h3>
+
+		<code>show_expired="yes"</code>
+
+		<p>You can determine whether you wish for comments on "expired" entries to be included.</p>
+
+			
+	<h3><a name="par_sort">sort=</a></h3>
+
+		<code>sort="asc"</code>
+		<code>sort="desc"</code>
+
+		<p>The sort order can be "asc" (ascending order or "oldest item first" for dates) or "desc" (descending order or "newest item first" for dates).  If you do not use a sort order the default is <samp>desc</samp>.</p>
+
+	<h3><a name="par_url_title">url_title=</a></h3>
+
+		<code>url_title="my_wedding"</code>
+
+		<p>You can hard code the comment entries tag to show comments for a specific weblog entry by its URL title.</p>
+		
+		<p class="important"><strong>NOTE:</strong> This parameter takes precedence over any entry specified dynamically in the URL, so when using this parameter you will want to make sure it is clear to the user which entry the displayed comments belong to.</p>
+
+	
+	<h3><a name="par_weblog">weblog=</a></h3>
+
+		<code>weblog="which"</code>
+
+		<p>From which <a href="../../cp/admin/weblog_administration/weblog_management.html">weblog</a> to show the comments (will show comments from any weblog if no weblog is specified).  Additionally, you can use the pipe character to separate multiple weblogs:</p>
+
+		<code>weblog="weblog1|weblog2|weblog3"</code>
+
+		<p>Or you can add the word "not" (with a space after it) to exclude weblogs:</p>
+
+		<code>weblog="not weblog1|weblog2|weblog3"</code>
+
+		<p class="important">The <samp>weblog=</samp> parameter can have some security implications.  If you do <strong>not</strong> use this parameter then it is possible that people could see comments for a weblog entry that they otherwise would not have access to.  If you use multiple weblogs and want to make sure only certain people can see certain content, then you're encouraged to make use of this parameter.</p>
+
+
+	<h2><a name="variables"></a>Variables</h2>
+
+	<ul class="minitoc">
+		<li><a href="#var_absolute_count">{absolute_count}</a></li>
+		<li><a href="#var_aol_im">{aol_im}</a></li>
+		<li><a href="#var_author">{author}</a></li>
+		<li><a href="#var_author_id">{author_id}</a></li>
+		<li><a href="#var_avatar_image_height">{avatar_image_height}</a></li>
+		<li><a href="#var_avatar_image_width">{avatar_image_width}</a></li>
+		<li><a href="#var_avatar_url">{avatar_url}</a></li>
+		<li><a href="#var_blog_title">{blog_title}</a></li>
+		<li><a href="#var_comment">{comment}</a></li>
+		<li><a href="#var_comment_auto_path">{comment_auto_path}</a></li>
+		<li><a href="#var_comment_entry_id_auto_path">{comment_entry_id_auto_path}</a></li>
+		<li><a href="#var_comment_id">{comment_id}</a></li>
+		<li><a href="#var_comment_site_id">{comment_site_id}</a></li>
+		<li><a href="#var_comment_url_title_auto_path">{comment_url_title_auto_path}</a></li>
+		<li><a href="#var_count">{count}</a></li>
+		<li><a href="#var_email">{email}</a></li>		
+		<li><a href="#var_entry_author_id">{entry_author_id}</a></li>
+		<li><a href="#var_entry_id">{entry_id}</a></li>
+		<li><a href="#var_entry_id_path">{entry_id_path='weblog/comments'}</a></li>
+		<li><a href="#var_icq">{icq}</a></li>
+		<li><a href="#var_interests">{interests}</a></li>
+		<li><a href="#var_ip_address">{ip_address}</a></li>
+		<li><a href="#var_location">{location}</a></li>
+		<li><a href="#var_member_search_path">{member_search_path}</a></li>
+		<li><a href="#var_msn_im">{msn_im}</a></li>
+		<li><a href="#var_occupation">{occupation}</a></li>
+		<li><a href="#var_name">{name}</a></li>
+		<li><a href="#var_permalink">{permalink}</a></li>
+		<li><a href="#var_photo_url">{photo_url}</a></li>
+		<li><a href="#var_photo_image_height">{photo_image_height}</a></li>
+		<li><a href="#var_photo_image_width">{photo_image_width}</a></li>
+		<li><a href="#var_signature">{signature}</a></li>
+		<li><a href="#var_signature_image_height">{signature_image_height}</a></li>
+		<li><a href="#var_signature_image_url">{signature_image_url}</a></li>
+		<li><a href="#var_signature_image_width">{signature_image_width}</a></li>
+		<li><a href="#var_switch">{switch="option_one|option_two|option_three"}</a></li>
+		<li><a href="#var_title">{title}</a></li>
+		<li><a href="#var_total_comments">{total_comments}</a></li>
+		<li><a href="#var_total_results">{total_results}</a></li>
+		<li><a href="#var_url">{url}</a></li>
+		<li><a href="#url_as_author">{url_as_author}</a></li>
+		<li><a href="#var_url_or_email">{url_or_email}</a></li>
+		<li><a href="#var_url_or_email_as_author">{url_or_email_as_author}</a></li>
+		<li><a href="#var_url_or_email_as_link">{url_or_email_as_link}</a></li>
+		<li><a href="#var_url_title_path">{url_title_path='weblog/comments'}</a></li>
+		<li><a href="#var_weblog_id">{weblog_id}</a></li>
+		<li><a href="#var_yahoo_im">{yahoo_im}</a></li>
+		<li><a href="#var_custom_member_fields">Custom Member Fields</a></li>
+	</ul>
+
+
+	<h3><a name="var_absolute_count">absolute_count</a></h3>
+
+		<code>{absolute_count}</code>
+
+		<p>The absolute "count" out of the current comment being displayed by the tag, including those comments on previous pages (if using pagination). </p>
+		
+		<p>If five entries are being displayed per page, then for the fourth entry on the second page the {absolute_count} variable would have a value of "9".</p>
+
+
+	<h3><a name="var_author">author</a></h3>
+
+		<code>{author}</code>
+
+		<p>The comment author's screen name, if a member; otherwise, this variable will display the name submitted with the comment.</p>
+		
+		<code>&lt;a href="http://example.com/index.php/member/{author_id}/">{author}&lt;/a></code>
+		
+	<h3><a name="var_author_id">author_id</a></h3>
+
+		<code>{author_id}</code>
+
+		<p>The ID corresponding to the comment author's member profile.  This is only applicable if the comment was left by a registered member.  Non-registered commenters will return a zero (0).</p>
+
+		<p>This can be useful for creating links to the commenter's member profile:</p>
+
+		<code>&lt;a href="http://example.com/index.php/member/{author_id}/">{name}&lt;/a></code>
+
+
+	<h3><a name="var_aol_im">aol_im</a></h3>
+
+		<code>{aol_im}</code>
+
+		<p>The author's AOL IM account name</p>
+
+
+	<h3><a name="var_avatar_image_height">avatar_image_height</a></h3>
+
+		<code>{avatar_image_height}</code>
+
+		<p>The height of the avatar image associated with the entry's author.  Typically used as such:</p>
+
+		<code>{if avatar}<br />
+&lt;img src="{avatar_url}" width="{avatar_image_width}" height="{avatar_image_height}" alt="{author}'s avatar" /><br />
+{/if}</code>
+
+
+	<h3><a name="var_avatar_image_width">avatar_image_width</a></h3>
+
+		<code>{avatar_image_width}</code>
+
+		<p>The width of the avatar image associated with the entry's author.  Typically used as such:</p>
+
+		<code>{if avatar}<br />
+&lt;img src="{avatar_url}" width="{avatar_image_width}" height="{avatar_image_height}" alt="{author}'s avatar" /><br />
+{/if}</code>
+
+
+	<h3><a name="var_avatar_url">avatar_url</a></h3>
+
+		<code>{avatar_url}</code>
+
+		<p>The URL to the avatar image associated with the entry's author.  Typically used as such:</p>
+
+		<code>{if avatar}<br />
+&lt;img src="{avatar_url}" width="{avatar_image_width}" height="{avatar_image_height}" alt="{author}'s avatar" /><br />
+{/if}</code>
+
+	<h3><a name="var_blog_title">blog_title</a></h3>
+	
+		<code>{blog_title}</code>
+		
+		<p>This variable simply displays the content from the "Full Weblog Name" setting of the weblog that the comment belongs to.</p>
+
+	<h3><a name="var_comment">comment</a></h3>
+
+		<code>{comment}</code>
+
+		<p>The body of the comment</p>
+
+
+	<h3><a name="var_comment_auto_path">comment_auto_path</a></h3>
+
+		<code>{comment_auto_path}</code>
+
+		<p>This variable is replaced by the URL set in the "Comment Page URL" preference under <dfn>Admin &gt; Weblog Management</dfn>.  No entry id, URL Title, or other information is included; this is simply the exact URL from the preference.</p>
+
+
+	<h3><a name="var_comment_entry_id_auto_path">comment_entry_id_auto_path</a></h3>
+
+		<code>{comment_entry_id_auto_path}</code>
+
+		<p>This variable is replaced by the URL set in the "Comment Page URL" preference under <dfn>Admin &gt; Weblog Management</dfn>.  The ID number of the entry will be automatically added.  For example, this:</p>
+
+		<code>&lt;a href="{comment_entry_id_auto_path}">my entry&lt;/a></code>
+
+		<p>Would be rendered like this:</p>
+
+		<code>&lt;a href="http://example.com/index.php/weblog/comments/234/">my entry&lt;/a></code>
+
+
+	<h3><a name="var_comment_id">comment_id</a></h3>
+
+		<code>{comment_id}</code>
+
+		<p>The ID associated with the comment</p>
+
+
+	<h3><a name="var_comment_site_id">comment_site_id</a></h3>
+
+		<code>{comment_site_id}</code>
+
+		<p>The Site ID for the comment.</p>
+
+	
+	<h3><a name="var_comment_url_title_path">comment_url_title_auto_path</a></h3>
+
+		<code>{comment_url_title_auto_path}</code>
+
+		<p>This variable is replaced by the URL set in the "Comment Page URL" preference under <dfn>Admin &gt; Weblog Management</dfn>.  The URL Title of the entry will be automatically added.  For example, this:</p>
+
+		<code>&lt;a href="{comment_url_title_auto_path}">my entry&lt;/a></code>
+
+		<p>Would be rendered like this:</p>
+
+		<code>&lt;a href="http://example.com/index.php/weblog/comments/ice_cream/">my entry&lt;/a></code>
+		
+		
+		<h3><a name="var_count">count</a></h3>
+
+		<code>{count}</code>
+
+		<p>The "count" out of the current comment being displayed by the tag on the current page. </p>
+		
+		<p>If five entries are being displayed per page, then for the fourth entry on the page the {count} variable would have a value of "4".</p>
+
+	<h3><a name="var_email">email</a></h3>
+
+		<code>{email}</code>
+
+		<p>The comment author's email address, if specified.</p>
+
+	<h3><a name="var_entry_author_id">entry_author_id</a></h3>
+
+		<code>{entry_author_id}</code>
+
+		<p>The member ID for the creator of the entry whose comments are being displayed.</p>
+		
+		
+<h3><a name="var_entry_id">entry_id</a></h3>
+
+		<code>{entry_id}</code>
+
+		<p>The ID number of the entry</p>
+
+
+	<h3><a name="var_entry_id_path">entry_id_path</a></h3>
+
+		<code>{entry_id_path='weblog/comments'}</code>
+
+		<p>The URL to the specified template.  The ID number of the entry with which the comment is associated will be automatically added.  For example, this:</p>
+
+		<code>&lt;a href="{entry_id_path='weblog/comments'}">my entry&lt;/a></code>
+
+		<p>Would be rendered like this:</p>
+
+		<code>&lt;a href="http://example.com/index.php/weblog/comments/234/">my entry&lt;/a></code>
+
+
+	<h3><a name="var_icq">icq</a></h3>
+
+		<code>{icq}</code>
+
+		<p>The author's ICQ IM user identification number</p>
+
+
+	<h3><a name="var_interests">interests</a></h3>
+
+		<code>{interests}</code>
+
+		<p>The author's "interests" as entered in their profile</p>
+
+
+	<h3><a name="var_ip_address">ip_address</a></h3>
+
+		<code>{ip_address}</code>
+
+	  <p>The IP address of the commenter</p>
+
+
+	<h3><a name="var_location">location</a></h3>
+
+		<code>{location}</code>
+
+		<p>The author's location as entered in their profile</p>
+
+
+	<h3><a name="var_member_search_path">member_search_path</a></h3>
+
+		<code>{member_search_path='search/results'}</code>
+
+		<p>This variable is replaced by a URL that passes the author's member name to your search results Template.  In this way, you can display all entries made by the author.  You should specify the Template_Group/Template that you use to display search results.  For example:</p>
+
+		<code>&lt;a href="{member_search_path='search/results'}">View entries by this member&lt;/a></code>
+
+
+	<h3><a name="var_msn_im">msn_im</a></h3>
+
+		<code>{msn_im}</code>
+
+		<p>The author's MSN IM account name</p>
+
+
+	<h3><a name="var_occupation">occupation</a></h3>
+
+		<code>{occupation}</code>
+
+		<p>The author's occupation as entered in their profile</p>
+
+
+	<h3><a name="var_name">name</a></h3>
+
+		<code>{name}</code>
+
+		<p>Name of the author</p>
+
+
+	<h3><a name="par_paginate">paginate=</a></h3>
+
+		<code>paginate="top"</code>
+		<code>paginate="bottom"</code>
+		<code>paginate="both"</code>
+
+		<p>This parameter is for use with entry <a href="../../modules/weblog/pagination.html">pagination</a> and determines where the pagination code will appear for your gallery entries:</p>
+
+		<ol>
+			<li><b>top</b>: The navigation text and links will appear <em>above</em> your list of entries.</li>
+			<li><b>bottom</b>: The navigation text and links will appear <em>below</em> your list of entries.</li>
+			<li><b>both</b>: The navigation text and links will appear both above and below your list of entries.</li>
+		</ol>
+
+		<p>If no parameter is specified, the navigation block will default to the "bottom" behavior.</p>
+
+
+	<h3><a name="var_permalink">permalink</a></h3>
+
+		<code>{permalink}</code>
+
+		<p>The URL to the actual comment with anchor.  Put this variable in	a link:</p>
+
+		<code>&lt;a href="{permalink}">permanent link&lt;/a></code>
+
+
+
+	<h3><a name="var_photo_url">photo_url</a></h3>
+	<code>{photo_url}</code>
+	<p>This variable supplies the URL to the member photo (if you have that option enabled and the member has uploaded their photo). It is intended for use in an image tag.</p>
+
+
+	<h3><a name="var_photo_image_height">photo_image_height</a></h3>
+	<code>{photo_image_height}</code>
+	<p>This variable supplies the height of the member photo. It is intended for use in an image tag.</p>
+
+
+	<h3><a name="var_photo_image_width">photo_image_width</a></h3>
+	<code>{photo_image_width}</code>
+	<p>This variable supplies the width of the member photo. It is intended for use in an image tag.</p>
+		
+
+
+	<h3><a name="var_signature">signature</a></h3>
+
+		<code>{signature}</code>
+
+		<p>The signature associated with the entry's author.  Typically used as such:</p>
+
+		<code>{if signature}<br />
+&lt;p>{signature}&lt;/p><br />
+{/if}</code>
+
+
+	<h3><a name="var_signature_image_height">signature_image_height</a></h3>
+
+		<code>{signature_image_height}</code>
+
+		<p>The height of the signature image associated with the entry's author.  Typically used as such:</p>
+
+		<code>{if signature_image}<br />
+&lt;img src="{signature_image_url}" width="{signature_image_width}" height="{signature_image_height}" alt="{author}'s signature" /><br />
+{/if}</code>
+
+
+	<h3><a name="var_signature_image_url">signature_image_url</a></h3>
+
+		<code>{signature_image_url}</code>
+
+		<p>The URL to the signature image associated with the entry's author.  Typically used as such:</p>
+
+		<code>{if signature_image}<br />
+&lt;img src="{signature_image_url}" width="{signature_image_width}" height="{signature_image_height}" alt="{author}'s signature" /><br />
+{/if}</code>
+
+
+	<h3><a name="var_signature_image_width">signature_image_width</a></h3>
+
+		<code>{signature_image_width}</code>
+
+		<p>The width of the signature image associated with the entry's author.  Typically used as such:</p>
+
+		<code>{if signature_image}<br />
+&lt;img src="{signature_image_url}" width="{signature_image_width}" height="{signature_image_height}" alt="{author}'s signature" /><br />
+{/if}</code>
+
+
+	<h3><a name="var_switch">switch=</a></h3>
+
+		<code>{switch="option_one|option_two|option_three"}</code>
+
+		<p>This variable permits you to rotate through any number of values as the entries are displayed.  The first entry will use "option_one", the second will use "option_two", the third "option_three", the fourth "option_one", and so on.</p>
+
+		<p>The most straightforward use for this would be to alternate colors.  It could be used like so:</p>
+
+		<code>{exp:comment:entries}<br />
+&lt;div class="{switch="one|two"}"><br />
+&lt;h1>{name}&lt;/h1><br />
+{comment}<br />
+&lt;/div><br />
+{/exp:comment:entries}</code>
+
+		<p>The entries would then alternate between <samp>&lt;div class="one"></samp> and <samp>&lt;div class="two"></samp>.</p>
+
+		<p>Multiple instances of the <samp>{switch=}</samp> tag may be used and the system will intelligently keep track of each one.</p>
+
+
+	<h3><a name="var_title">title</a></h3>
+
+		<code>{title}</code>
+
+		<p>The title of the weblog entry with which the comment is associated.</p>
+		
+	<h3><a name="var_total_results">total_results</a></h3>
+
+		<code>{total_results}</code>
+
+		<p>The total number of comments being displayed by this tag on the current page. </p>
+		
+	<h3><a name="var_total_comments">total_comments</a></h3>
+
+		<code>{total_comments}</code>
+
+		<p>The total number of comments for this tag on all pages. </p>
+
+
+	<h3><a name="var_url">url</a></h3>
+
+		<code>{url}</code>
+
+		<p>The author's raw URL, if it exists</p>
+
+	<h3><a name="url_as_author">url_as_author</a></h3>
+
+		<code>{url_as_author}</code>
+
+		<p>Hyperlink pointing to the URL (if it exists) with the author name as the link title.  If the URL does not exist simply the name is returned.</p>
+
+	<h3><a name="var_url_or_email">url_or_email</a></h3>
+
+		<code>{url_or_email}</code>
+
+		<p>URL if it exists, otherwise the email address</p>
+
+
+	<h3><a name="var_url_or_email_as_author">url_or_email_as_author</a></h3>
+
+		<code>{url_or_email_as_author}</code>
+
+		<p>Hyperlink or email link as author screen_name (or username if they haven't specified a screen name)</p>
+
+
+	<h3><a name="var_url_or_email_as_link">url_or_email_as_link</a></h3>
+
+		<code>{url_or_email_as_link}</code>
+
+		<p>Same as above only it will display the URL or email address as a link</p>
+
+
+	<h3><a name="var_url_title_path">url_title_path</a></h3>
+
+		<code>{url_title_path='weblog/comments'}</code>
+
+		<p>The URL to the specified template.  The "url title" of the entry with which the comment is associated will be automatically added.  For example, this:</p>
+
+		<code>&lt;a href="{url_title_path='weblog/comments'}">permalink&lt;/a></code>
+
+		<p>Would be rendered like this:</p>
+
+		<code>&lt;a href="http://example.com/index.php/weblog/comments/ice_cream/">permalink&lt;/a></code>
+
+
+	<h3><a name="var_weblog_id">weblog_id</a></h3>
+
+		<code>{weblog_id}</code>
+
+		<p>The ID number of the actual weblog</p>
+
+
+	<h3><a name="var_yahoo_im">yahoo_im</a></h3>
+
+		<code>{yahoo_im}</code>
+
+		<p>The author's Yahoo IM account name</p>
+
+
+	<h3><a name="var_custom_member_fields">Custom Member Fields</a></h3>
+
+		<p>All custom member profile fields can be accessed using the "short name" of the field:</p>
+
+		<code>{age}<br />
+{gender}<br />
+{zodiac}<br />
+etc..</code>
+
+		<p>These are totally dynamic in that any profile field you create for your members will automatically be available by its "short name" as a variable.</p>
+
+
+
+	<h2><a name="var_dates"></a>Single Variable Dates</h2>
+
+	<p>Several date variables are available for use. As with other date variables, these require the "format" parameter in order to define how the date should be displayed. See the <a href="../../templates/date_variable_formatting.html">date variable formatting</a> page for more information.</p>
+
+	<ul class="minitoc">
+		<li><a href="#var_comment_date">{comment_date format="%Y %m %d"}</a></li>
+		<li><a href="#var_edit_date">{edit_date format="%Y %m %d"}</a></li>
+		<li><a href="#var_gmt_comment_date">{gmt_comment_date format="%Y %m %d"}</a></li>
+	</ul>
+
+
+	<h3><a name="var_comment_date">comment_date</a></h3>
+
+		<code>{comment_date format="%Y %m %d"}</code>
+
+		<p>The date of the comment.</p>
+
+
+	<h3><a name="var_edit_date">edit_date</a></h3>
+
+		<code>{edit_date format="%Y %m %d"}</code>
+
+		<p>The date on which the comment was edited.</p>
+
+	<h3><a name="var_gmt_comment_date">gmt_comment_date</a></h3>
+
+		<code>{gmt_comment_date format="%Y %m %d"}</code>
+
+		<p>The date of the comment but <strong>not</strong> localized for the user.</p>
+
+	<h2><a name="conditionals"></a>Conditionals</h2>
+
+	<p>Conditionals work in comments:</p>
+
+	<code>{if name=="bozo"}<br />
+<br />
+You've got a big nose!<br />
+<br />
+{/if}</code>
+
+
+	<h3><a name="cond_if_avatar">if avatar</a></h3>
+
+		<code>{if avatar}<br />
+content<br />
+{/if}</code>
+
+		<p>This special conditional lets you conditionally display content if the current entry's author has an avatar image specified.</p>
+
+		<code>{if avatar}<br />
+&lt;img src="{avatar_url}" width="{avatar_image_width}" height="{avatar_image_height}" alt="{author}'s avatar" /><br />
+{/if}</code>
+
+	
+	<h3>if is_ignored</h3>
+	
+	<code>{if is_ignored}<br />
+content<br />
+{/if}</code>
+
+	<p>This conditionals allows you to show (or hide) specific content if the comment was made by a member on the logged-in user's ignore list.  A simplified example of how this might be used is:</p>
+	
+	<code>{exp:comment:entries}<br />
+	<br />
+	{if is_ignored}You are ignoring {author}.{/if}<br />
+<br />
+	&lt;div {if is_ignored}style=&quot;display: none;&quot;{/if}&gt;{comment}&lt;/div&gt;<br />
+<br />
+	{/exp:comment:entries}
+	</code>
+	
+	<p>Or you can use Javascript to allow the user to read the comment if they wish:</p>
+	
+	<code>&lt;script type=&quot;text/javascript&quot;&gt;<br />
+	&lt;!--<br />
+<br />
+	function showHideComment(el)<br />
+	{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (document.getElementById(el).style.display == &quot;block&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(el).style.display = &quot;none&quot;;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;else<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(el).style.display = &quot;block&quot;;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}	<br />
+	}<br />
+	//--&gt;<br />
+	&lt;/script&gt;<br />
+<br />
+	{exp:comment:entries}<br />
+	<br />
+	{if is_ignored}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;&lt;a href=&quot;#&quot; onclick=&quot;showHideComment(&apos;{comment_id}&apos;)&quot;&gt;View / Hide&lt;/a&gt; comment from ignored member: {author}&lt;/p&gt;<br />
+	{/if}<br />
+<br />
+	&lt;div id=&quot;{comment_id}&quot; {if is_ignored}style=&quot;display: none;&quot;{/if}&gt;{comment}&lt;/div&gt;<br />
+<br />
+	{/exp:comment:entries}
+	</code>
+	
+	<p class="important"><strong>Important:</strong>&nbsp; Avoid using Template Caching on any Template containing this conditional.  If you do not avoid caching, then data will not be dynamic for each user. Instead, whoever happens to load the page when it is cached will have their ignore list applied to everyone until the cache expires.</p>
+	
+	<h3>if no_results</h3>
+
+		<code>{if no_results}<br />
+content<br />
+{/if}</code>
+
+		<p>You may use this conditional for displaying a message in the case when no comments are returned.  The contents inside of the conditional will be displayed in cases where there are no results returned for the tag.</p>
+
+		<code>{if no_results}<br />
+<br />
+&lt;p>There are no comments for this entry yet.&lt;/p><br />
+<br />
+{/if}</code>
+
+		<p>Further, you may specify that another Template be shown in a case when there are no results.  In order to do that, you must use the <samp>redirect=</samp> variable:</p>
+
+		<code>{if no_results}<br />
+{redirect="site/noresult"}<br />
+{/if}</code>
+
+
+	<h3><a name="cond_if_signature_image">if signature_image</a></h3>
+
+		<code>{if signature_image}<br />
+content<br />
+{/if}</code>
+
+		<p>This special conditional lets you conditionally display content if the current entry's author has a signature image specified.</p>
+
+		<code>{if signature_image}<br />
+&lt;img src="{signature_image_url}" width="{signature_image_width}" height="{signature_image_height}" alt="{author}'s signature" /><br />
+{/if}</code>
+
+
+
+	<h2><a name="submission_form"></a>Comment Submission Form</h2>
+
+	<code>{exp:comment:form}<br />
+<br />
+{/exp:comment:form}</code>
+
+
+	<p>There is one required parameter in the comment form but only if you want to use the preview feature:</p>
+
+	<code>{exp:comment:form preview="weblog/preview"}</code>
+
+	<p>The "preview" parameter specifies the template group/template in which the
+preview will be shown.  More on previewing later.</p>
+
+	<p>The comment form is created pretty much like a normal form, only you don't specify the opening and closing form tags.  There are a few variables that are required in order to enable people's personal information (name, email, url, etc.) to appear in the form.  Here's how the comment form is typically created:</p>
+
+	<code>{exp:comment:form preview="weblog/preview"}<br />
+<br />
+{if logged_out}<br />
+<br />
+&lt;p>Name: &lt;input type="text" name="name" value="{name}" size="50" />&lt;/p><br />
+<br />
+&lt;p>Email: &lt;input type="text" name="email" value="{email}" size="50" />&lt;/p><br />
+<br />
+&lt;p>Location: &lt;input type="text" name="location" value="{location}" size="50" />&lt;/p><br />
+<br />
+&lt;p>URL: &lt;input type="text" name="url" value="{url}" size="50" />&lt;/p><br />
+<br />
+{/if}<br />
+<br />
+&lt;p>&lt;textarea name="comment" cols="70" rows="10">{comment}&lt;/textarea>&lt;/p><br />
+<br />
+&lt;p>&lt;input type="checkbox" name="save_info" value="yes" {save_info} /> Remember my personal information&lt;/p><br />
+<br />
+&lt;p>&lt;input type="checkbox" name="notify_me" value="yes" {notify_me} /> Notify me of follow-up comments?&lt;/p><br />
+<br />
+&lt;input type="submit" name="submit" value="Submit" /><br />
+&lt;input type="submit" name="preview" value="Preview" /><br />
+<br />
+{/exp:comment:form}</code>
+
+	<p><b>Notes:</b><br />
+The conditional variable <samp>{if logged_out}</samp> allows the system to show the short form (textarea only) if the user is a logged in member.  We recommend you use the form this way because if a member is logged in, their personal data is fetched automatically.</p>
+
+	<p>Notice the variables in the "value" form fields?  These allow us to show the user's information in the form automatically if they click the "remember personal info" option.</p>
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

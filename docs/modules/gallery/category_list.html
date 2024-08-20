@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Photo Gallery Category List &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Photo Gallery</a> &gt;
+<strong>Category List Tag</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Gallery Category List Tag</h1>
+
+	<p>This <dfn>Gallery Category List Tag</dfn> allows you to display a list of all your categories.  This type of list can be
+	useful for creating navigation to each category page, as shown in this example:
+	
+	<h3>Category "Jump" Navigation</h3>
+	
+	<p>Here is an example showing how you might use the cateogry list tag to create navigation:</p>
+	
+	<code>&lt;form><br />
+&lt;select name="URL" onChange="window.location=this.options[this.selectedIndex].value"><br />
+&lt;option value=" ">Category Jump Navigation&lt;/option><br /><br />
+
+{exp:gallery:category_list gallery="gallery"}<br />
+&lt;option value="{category_path='gallery/category'} ">{category_name}&lt;/option><br />
+{/exp:gallery:category_list}<br /><br />
+
+&lt;/select><br />
+&lt;/form></code>
+
+<h2><a name="parameters">Parameters</a></h2>
+<ul class="minitoc">
+	<li><a href="#par_gallery">gallery="my_gallery"</a></li>
+</ul>
+<h3><a name="par_gallery">gallery=</a></h3>
+<code>gallery="my_gallery"</code>
+<p>This parameter is <strong>required</strong>. The name (short name) of the gallery for which you wish to display the categories.</p>
+
+<h2><a name="variables">Variables</a></h2>
+<ul class="minitoc">
+	<li><a href="#var_category_name">{category_name}</a></li>
+	<li><a href="#var_category_description">{category_description}</a></li>
+	<li><a href="#var_category_id">{category_id}</a></li>
+	<li><a href="#var_category_path">{category_path=''}</a></li>
+</ul>
+
+<h3><a name="var_category_name">category_name</a></h3>
+<code>{category_name}</code>
+<p>The name of the category.</p>
+
+<h3><a name="var_category_description">category_description</a></h3>
+<code>{category_description}</code>
+<p>The category description.</p>
+
+<h3><a name="var_category_id">category_id</a></h3>
+<code>{category_id}</code>
+<p>The ID associated with the category.</p>
+
+<h3><a name="var_category_path">category_path=</a></h3>
+<code>&lt;a href="{category_path='gallery/category'}">{category_name}&lt;/a></code>
+<p>The URL to the category.</p>
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

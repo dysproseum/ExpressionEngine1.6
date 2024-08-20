@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Session Class  &#8211; ExpressionEngine Developer Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../index.html">Development</a> &gt;
+<strong>Session Class</strong>
+</div>
+
+
+<div id="content">
+<h1>Session Class</h1>
+
+
+<div class="section">
+	<ul>
+		<li><a href="session.html#calling">Calling the Session Class</a></li>
+		<li><a href="session.html#user_data">User Data Information</a></li>
+		<li><a href="session.html#tracker">Tracker Array</a></li>
+	</ul>
+</div>
+
+
+<a name="calling"></a>
+<div class="section">
+<h2>Calling the Session Class</h2>
+
+<p>ExpressionEngine uses the Session class for storing information about the user currently visiting the ExpressionEngine site.  If the user is a member and is logged in, then their various preferences and privileges are loading into variables, which are then immediately available throughout the entire program without the use of a query. To use the Session class in your modules, simply call the <var>$SESS</var> global in every function that will require the use of any text.</p>
+
+<pre>
+function session_example()
+{
+    global $SESS;
+
+    if ($SESS->userdata['group_id'] != 1)
+    {
+        exit('Not a Superadmin');
+    }
+    else
+    {
+        $admin_email = $SESS->userdata['email']
+    }
+}
+</pre>
+
+<p>The Functions class has numerous functions that use the information in the Session class variables to provide useful information for modules and plugins, such as allowed weblogs and access to areas.  Make sure to check out the Functions class reference file for more information on these functions</p>
+
+</div>
+
+
+<a name="user_data"></a>
+<div class="section">
+<h2>User Data Information</h2>
+
+<p>The <strong>$SESS->userdata</strong> variable is an array that contains information about that specific user, and it will likely be the most used part of this class for any module.  Below is a list of the variables that it contains.  <em>NOTE: If a user has a group_id of 1, then they can access anything, no matter the other settings.</em></p>
+
+<ul>
+<li><strong>username</strong> - Username of user</li>
+<li><strong>screen_name</strong> - Screename of user, if any</li>
+<li><strong>email</strong> - Email Address</li>
+<li><strong>url</strong> - Homepage, if any</li>
+<li><strong>location</strong> - Location, if any</li>
+<li><strong>language</strong> - Chosen Language</li>
+<li><strong>timezone</strong> - Chosen Timezone (UM12 - UTC - UP12) </li>
+<li><strong>daylight_savings</strong> - y/n</li>
+<li><strong>time_format</strong> - eu/us</li>
+<li><strong>group_id</strong> - Group ID number (1-Superadmin, 2-Banned, 3-Guests, 4-Pending, 5-Members, 6+ Other Member Groups</li>
+<li><strong>access_cp</strong> - y/n</li>
+<li><strong>is_banned</strong> - 0/1</li>
+<li><strong>weblog_id</strong> - Default weblog's weblog_id number</li>
+<li><strong>tmpl_group_id</strong> - Default template's group_id number</li>
+<li><strong>member_id</strong> - User's unique member_id</li>
+<li><strong>last_visit</strong> - Last visit of user in Unixtime</li>
+<li><strong>total_entries</strong> - Total entries</li>
+<li><strong>total_comments</strong> - Total comments</li>
+<li><strong>total_forum_posts</strong> - Total Forum Posts for User (sum of topics and replies)</li>
+<li><strong>total_forum_topics</strong> - Total topics posted by user</li>
+<li><strong>total_forum_replies</strong> - Total replies posted by user</li>
+<li><strong>last_forum_post_date</strong> - Last time user posted in forum in GTM Unix timestamp</li>
+<li><strong>profile_theme</strong> - Selected member profile theme, if blank then default</li>
+<li><strong>forum_theme</strong> - Select forum theme, if blank then default</li>
+<li><strong>private_messages</strong> - Number of unread private messages</li>
+<li><strong>accept_messages</strong> - (y/n) Accept Private Messages</li>
+<li><strong>display_signatures</strong> - (y/n)</li>
+<li><strong>display_avatars</strong> - (y/n)</li>
+<li><strong>last_email_date</strong> - Last time an email was sent</li>
+<li><strong>notify_by_default</strong> - Notify of comments by default</li>
+<li><strong>ignore_list</strong> - Array containing member_id's that the logged in user wishes to ignore</li>
+<li><strong>group_title</strong> - Name of Group</li>
+<li><strong>is_locked</strong> - (y/n) Is member group access locked and only available to Superadmins?</li>
+<li><strong>can_view_offline_system</strong> - (y/n)</li>
+<li><strong>can_view_online_system</strong> - (y/n)</li>
+<li><strong>can_access_cp</strong> - (y/n)</li>
+<li><strong>can_access_publish</strong> - (y/n)</li>
+<li><strong>can_access_edit</strong> - (y/n)</li>
+<li><strong>can_access_design</strong> - (y/n)</li>
+<li><strong>can_access_comm</strong> - (y/n)</li>
+<li><strong>can_access_modules</strong> - (y/n)</li>
+<li><strong>can_access_admin</strong> - (y/n)</li>
+<li><strong>can_admin_weblogs</strong> - (y/n)</li>
+<li><strong>can_admin_members</strong> - (y/n)</li>
+<li><strong>can_delete_members</strong> - (y/n)</li>
+<li><strong>can_admin_mbr_groups</strong> - (y/n)</li>
+<li><strong>can_admin_mbr_templates</strong> - (y/n)</li>
+<li><strong>can_ban_users</strong> - (y/n)</li>
+<li><strong>can_admin_utilities</strong> - (y/n)</li>
+<li><strong>can_admin_preferences</strong> - (y/n)</li>
+<li><strong>can_admin_modules</strong> - (y/n)</li>
+<li><strong>can_admin_templates</strong> - (y/n)</li>
+<li><strong>can_view_other_entries</strong> - (y/n)</li>
+<li><strong>can_edit_other_entries</strong> - (y/n)</li>
+<li><strong>can_assign_post_authors</strong> - (y/n)</li>
+<li><strong>can_delete_self_entries</strong> - (y/n)</li>
+<li><strong>can_delete_all_entries</strong> - (y/n)</li>
+<li><strong>can_view_other_comments</strong> - (y/n)</li>
+<li><strong>can_edit_own_comments</strong> - (y/n)</li>
+<li><strong>can_delete_own_comments</strong> - (y/n)</li>
+<li><strong>can_edit_all_comments</strong> - (y/n)</li>
+<li><strong>can_delete_all_comments</strong> - (y/n)</li>
+<li><strong>can_moderate_comments</strong> - (y/n)</li>
+<li><strong>can_send_email</strong> - (y/n)</li>
+<li><strong>can_send_cached_email</strong> - (y/n)</li>
+<li><strong>can_email_members</strong> - (y/n)</li>
+<li><strong>can_email_member_groups</strong> - (y/n)</li>
+<li><strong>can_email_mailinglist</strong> - (y/n)</li>
+<li><strong>can_email_from_profile</strong> - (y/n)</li>
+<li><strong>can_view_profiles</strong> - (y/n)</li>
+<li><strong>can_post_comments</strong> - (y/n)</li>
+<li><strong>exclude_from_moderation</strong> - (y/n)</li>
+<li><strong>can_search</strong> - (y/n)</li>
+<li><strong>search_flood_control</strong> - Number of seconds between searches</li>
+<li><strong>can_send_private_messages</strong> - (y/n)</li>
+<li><strong>can_attach_in_private_messages</strong> - (y/n)</li>
+<li><strong>include_in_memberlist</strong> - (y/n)</li>
+<li><strong>display_photos</strong> - (y/n)</li>
+<li><strong>session_id</strong> - Session ID number</li>
+<li><strong>admin_sess</strong> - (0/1) Admin Session (0 => no, 1 => yes)</li>
+<li><strong>ip_address</strong> - IP Address of user</li>
+<li><strong>user_agent</strong> - HTTP User Agent of user</li>
+</ul>
+
+<p>On the Control Panel side of ExpressionEngine a few more variables are included:</p>
+
+<ul>
+<li><strong>theme</strong> - Chosen Control Panel theme</li>
+<li><strong>quick_links</strong> - Quick Links for member</li>
+<li><strong>template_size</strong> - Size of Template textarea</li>
+<li><strong>assigned_weblogs</strong> - Array containing weblog_id's of assigned weblogs for member.</li>
+<li><strong>assigned_modules</strong> - Array where the keys are the module_id's and the values determine if access is allowed (0 => no, 1=> yes).  For Superadmins it will be empty, since they have unlimited access.</li>
+<li><strong>assigned_template_groups</strong> - Assigned Template groups for member.  Will be used for Community Blogs Module.</li>
+</ul>
+</div>
+
+
+
+
+<a name="tracker"></a>
+<div class="section">
+<h2>Tracker Array</h2>
+
+<p>The Session class has one more useful variable that is only available on the user side of the site.  <strong>$SESS->tracker</strong> is an array that contains the last five ExpressionEngine pages viewed by this user in the form of a ExpresionEngine query string (i.e. '/weblog/comments/' or 'index' for main site page).  The array's keys ranges from 0-5.</p>
+
+<pre>
+$current_page = $SESS->tracker['0'];
+$last_page = $SESS->tracker['1'];
+$two_pages_ago = $SESS->tracker['2'];
+</pre>
+
+<p>If a page is constantly reloaded, ExpressionEngine will not allow the array to fill up with just the page's query string but waits until the user visits another page before updating the tracker array.</p>
+</div>
+
+
+
+
+
+
+</div>
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

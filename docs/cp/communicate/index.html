@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="author" content="Paul Burdick" />
+
+  <title>Communicate &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#cp_docs">The Control Panel</a> &gt;
+<strong>Communicate Tab</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Communicate<div class="subhead">Sending Email with ExpressionEngine</div></h1>
+
+	<p>The <dfn>Communicate</dfn> tab in the Control Panel provides access to the email sending part of the system. Email can be sent in plain text or HTML format, and supported email sending protocols are <a href="http://www.webopedia.com/TERM/S/SMTP.html" title="Simple Mail Transfer Protocol">SMTP</a>, <a href="http://www.sendmail.org/">Sendmail</a>, and PHP <a href="http://us2.php.net/mail">mail</a>.</p>
+
+	<p><strong>Note:</strong>&nbsp; In the <dfn>Admin</dfn> area of the Control Panel you'll find the <a href="../admin/system_preferences/email_configuration.html">Email Configuration</a> page.</p>
+
+	<div class="imgwrapper"><img src="../../images/communicate.png" width="850" height="810" alt="Communicate"></div>
+
+	<h2><a name="main_screen">Sending Email</a></h2>
+
+	<p>The main <dfn>Communicate</dfn> screen shows a form that will contain all of the information for the sending of an email to either an individual, member group, or mailing list.  Required fields have a red asterisk next to them. </p>
+
+
+	<h3>Subject</h3>
+
+		<p>The subject of the email that is to be sent.  The field may not contain any HTML or PHP.  This is a <strong>required</strong> field.</p>
+
+	<h3>Message</h3>
+
+		<p>The message of the email that is to be sent. If you wish to send an HTML formatted email message to the recipients of this email, the HTML will be put in this field.  Remember to use absolute URLs for any images, CSS files, javascript files, or links. This is a <strong>required</strong> field.</p>
+
+
+	<h3>Spell Checking</h3>
+
+		<p>In order to be able to use the spell check feature in ExpressionEngine, 
+		your server must have PHP compiled with <a href="http://us2.php.net/pspell">pspell</a> 
+		<strong>or</strong> socket support.  If you are unsure if this is the case please contact your Host or server admin.</p>
+
+
+	<h3>Email Formatting</h3>
+
+		<p>How the email's message should be formatted.  Options include:</p>
+
+		<ol>
+			<li><b>Plain Text</b>: The message will be sent as plain, unformatted text.</li>
+			<li><b>HTML</b>: The message will be sent in HTML format and will be rendered in compatible email applications.  <b>You must submit your email as a complete HTML document if you choose this format.</b> Note that not all email applications will correctly display HTML formatted emails, HTML emails are more likely to be flagged as spam, and that many people prefer not to receive such emails.</li>
+		</ol>
+
+		<div class="important"><strong>NOTE:</strong> If you choose to send your email in the HTML Format, an optional field will appear allowing you specify a Plain Text Alternative to the HTML email.  This allows email clients who have HTML email disabled or unavailable to still view the email in a form that is still easily readable, opposed to be the original HTML email with all tags stripped.</div>
+		
+		<div class="imgwrapper"><img src="../../images/communicate_formatting_html.png" width="259" height="184" alt="Communicate Formatting Html"></div>
+	
+	<h3>Text Formatting</h3>
+	
+		<p>Text Formatting allows you to use any installed plugin to modify the message content, such as using Auto-XHTML, Textile, or Markdown to help create HTML emails, or for more complex actions such as finding the top forum poster for the week.</p>
+		
+	<h3>Word Wrapping</h3>
+
+		<p>If word wrapping is on, the content of your message will automatically be given line breaks to insure that each line's length does not exceed a certain number of characters.  Email programs that do not automatically wrap lines or insert their own line breaks will then be able to better view emails. 72 characters per line is considered the email standard.</p>
+
+	<p class="important"><strong>Note</strong>: Word wrapping affects only plain text emails.</p>
+	
+	<h3>Overriding Word Wrapping</h3>
+			
+		<p>If word wrapping is enabled and a long link is inserted in the email the link can get wrapped too, causing it to become un-clickable by the person receiving it. Use the {unwrap} variable pair to stop the link from wrapping.</p>
+
+		<code>
+		<p>The text of your email that
+		gets wrapped normally.</p>
+
+					<p><var>{unwrap}</var>http://example.com/a_long_link_that_should_not_be_wrapped.html<var>{/unwrap}</var></p>
+
+		<p>More text that will be
+		wrapped normally.</p>
+		</code>
+		
+		<p>Place the item you do not want word-wrapped between: {unwrap} {/unwrap}</p>
+	
+			<p class="important"><strong>Note</strong>: The {unwrap} variable pair affects only plain text emails.</p>
+			
+	<h3>Priority</h3>
+
+		<p>Sets the value for the X-Priority header, which is used by various email programs to assign more or less attention to certain messages.  Different email programs will render these priority values in a variety of different ways, usually using some kind of coloration or symbols to denote level of priority.  Available options:</p>
+
+		<ul>
+			<li>1 (Highest)</li>
+			<li>2 (High)</li>
+			<li>3 (Normal)</li>
+			<li>4 (Low)</li>
+			<li>5 (Lowest)</li>
+		</ul>
+
+		<p>"High" or "highest" priority emails are more likely to be flagged as spam.</p>
+
+
+	<h3>Send only to members who have chosen to accept email</h3>
+
+		<p>If selected, only users who have chosen in their user settings to receive admin emails will receive this email message.  This option is selected by default. <strong>You are encouraged to always use this setting.</strong></p>
+
+
+	<h3>Your Name</h3>
+
+		<p>Many email programs allow the ascribing of a name to a particular email address when viewing messages.  This can be helpful for recipients wishing to know the identity of the person or company sending them an email. No HTML or PHP code is allowed in this field.  This is not a required field, but it is recommended that you fill it out.</p>
+
+
+	<h3>Your Email</h3>
+
+		<p>The email address which you wish to have set as the reply-to for the email.  This is a <strong>required</strong> field and the structure of the email address will be checked before the email is sent.</p>
+
+
+	<h3>Recipient</h3>
+
+		<p>The email address of the recipient.  When sending to multiple addresses, please separate each address with a comma (ex: <samp>joe@example.com, fred@example.com</samp>).  If you are sending this email to a member group or mailing list (see below), then you <em>may</em> leave this field blank.  However, you may also fill it out and thus include more emails than just the ones in the member group or mailing list.   Before sending the email, the program will check and remove all duplicate email addresses to ensure that multiple emails are not sent to the same user.</p>
+
+
+	<h3>CC</h3>
+
+		<p>Carbon Copy.  Recipients you wish to send a copy to.  Multiple emails must be separated by commas.</p>
+
+
+	<h3>BCC</h3>
+
+		<p>Blind Carbon Copy.  Recipients to whom you wish to send a copy of this email but do not wish them to see who else received this email via BCC.  Useful for keeping addresses and other recipients unknown to the main recipients of an email.  Multiple emails must be separated by commas.</p>
+
+
+	<h3>Send to Mailing List</h3>
+
+		<p>You may select one or more of your existing mailing lists as recipients for the email.  See the <dfn><a href="../../modules/mailing_list/index.html">Mailing List</a></dfn> section of the <dfn>Modules</dfn> area for more information on mailing lists.  Mailing list emails are sent as regular recipients.</p>
+
+
+	<h3>Send to Member Groups</h3>
+
+		<p>If you wish to send your email to one or more Member Groups you may do so by selecting them.</p>
+
+
+
+
+	<h2><a name="previously_sent_email">Previously Sent Email</a></h2>
+
+	<p>A link off of the main <dfn>Communicate</dfn> page brings up this screen.  The main <dfn>Previously Sent Email</dfn> screen shows a table of all the previously sent emails.  It lists the email title (subject), when it was sent, number of recipients, a re-send link, and a delete checkbox.</p>
+
+
+	<h3>Email Title</h3>
+
+		<p>By clicking on the email title (the subject of the original email), a popup window will appear with the original email, including message and subject.</p>
+
+
+	<h3>Date Sent</h3>
+
+		<p>The date and time when the original message was sent by the system.</p>
+
+
+	<h3>Total Recipients</h3>
+
+		<p>The number of people who received the email when the email was originally sent.</p>
+
+
+	<h3>Re-send</h3>
+
+		<p>If you click the re-send link for a particular sent email, the Communicate page will reload with all of the information for the original email already filled out. This can be convenient for sending a similar email to a different group or resending an email that did not make it to a particular address.</p>
+
+
+	<h3>Delete</h3>
+
+		<p>By checking this checkbox you can permanently remove this email information from the email cache.  Select each of the emails you wish to delete and the press the Delete button at the bottom of the page.</p>
+
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

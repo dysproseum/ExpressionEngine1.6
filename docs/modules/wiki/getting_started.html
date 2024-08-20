@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Getting Started with the Wiki &#8211; ExpressionEngine Documentation</title> 
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style> 
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+</tr>
+</table>
+</div>
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Wiki Module</a> &gt;
+<strong>Getting Started</strong>
+</div>
+
+<div id="content">
+
+	<h1>Getting Started with the Wiki</h1>
+
+	<p>A wiki is "a type of website that allows users to easily add, remove, or otherwise edit all content, very quickly and easily... The term wiki is a shortened form of 'wiki wiki' which is from the native language of Hawaii (Hawaiian), where it is commonly used as an adjective to denote something 'quick' or 'fast' (Hawaiian dictionary)" (<a href="http://en.wikipedia.org/wiki/Wiki" title="Wikipedia definition of the term wiki">Wikipedia</a>).</p>
+
+<p>For example, a "cookbook wiki" would be a website where you could easily add your own recipes, edit existing recipes, and help organize the recipes using categories. You'd do all of this with simple markup called <strong>wiki syntax</strong> (we'll get to that shortly). Together you and the community would maintain this online recipe collection to help bring more deliciousness to everyone's meals.</p>
+
+<p>The ExpressionEngine Wiki Module is a powerful wiki that integrates seamlessly with ExpressionEngine.</p>
+
+<h2>Edit, Create, Organize</h2>
+
+<p>Editing existing articles (content), creating new articles, and organizing articles into categories are the three main tasks you'll do on any wiki website. </p>
+
+<ul>
+<li><a href="#edit">Edit an Article</a></li>
+<li><a href="#create">Create an Article</a></li>
+<li><a href="#organize">Organize Articles with Categories</a></li>
+</ul>
+
+<h3><a name="edit">Edit an Article</a></h3>
+
+<p>To edit an article click on the <b>edit link</b>. (On the default ExpressionEngine Wiki the <b>edit link</b> is in the upper right.) This puts the article in "edit mode" which lets you edit the content right there on the web page. In Edit mode, simple text formatting such as <em>emphasis</em>, <strong>strong emphasis</strong>, <del>delete</del>, and <ins>insert</ins> are handled by pMcode, an easy-to-remember method of styling text. When you are done editing just click on <b>update</b> and your edits are instantly published.</p>
+
+<h4>pMcode Basics</h4>
+
+<p class="important"><strong>Note:</strong> pMcode is just the default text-formatting option. Your wiki admin may have selected a different text-formatting style such as <b>Textile</b> or <b>Markdown</b> or prefer the use of standard <b>xhtml</b>. If pMcode doesn't work, please contact your wiki admin for text-formatting help.</p>
+
+<p>pMcode works by surrounding the text you want to style with a bracketed tag. For example, if you want to make some text have <strong>strong emphasis</strong> you'd do this:</p>
+
+<code>This text is not bold. &#91;strong]This text is has stronger emphasis&#91;/strong].
+You may also &#91;b]make text bold&#91;/b].</code>
+
+<p>Which would display like this after editing:</p>
+
+<code>This text is not bold. <strong>This text is has stronger emphasis</strong>.
+You may also <b>make text bold</b>.</code>
+
+<p>Adding <em>emphasized</em> or <i>italic</i> text works the same way. For example, this:</p>
+
+<code>&#91;em]This text is emphasized&#91;/em]. &#91;i]This text is italicized&#91;/i].</code>
+
+<p>Would display like this after editing:</p>
+
+<code><em>This text is emphasized</em>. <i>This text is italicized</i>.</code>
+
+<p>You can do a lot more with pMcode. Just see the <a href="../../general/pmcode.html">pMcode Reference</a> section for details.</p>
+
+<h3><a name="create">Create an Article</a></h3>
+
+<p>Creating an article in a wiki is as simple as finding something that doesn't exist. A wiki assumes that whenever someone searches for an article and no results are found or clicks on a link to an article that doesn't exist, that someone will want to create that information for the community. Sound strange? Let's go back to the Cookbook wiki example to explain.</p>
+
+<p>A set of breakfast recipes is not complete without an inspired Peanut Butter Sandwich. You have such a recipe. To add this recipe, the first thing you would do is use the <b>Create or Find a Page</b> search tool in the sidebar to see if someone already added a recipe with the same title. You search for <b>Peanut Butter Sandwich</b>. The wiki checks all existing articles and comes up empty. The wiki then gives you the opportunity to create an article titled <b>Peanut Butter Sandwich</b> by clicking the <b>Edit</b> link. Once you click edit, the article is instantly created and you can share your gooey peanut butter masterpiece with the world.</p>
+
+<p>While editing your Peanut Butter Sandwich recipe you remember that nothing goes with such a delicacy better than a mug of your special hot chocolate. The easiest way to create an article for your hot chocolate recipe is to create a link for it using <b>wiki syntax</b>, a markup very similar to pMcode. But instead of using a single bracket, you'll use double brackets. To create a link for your hot chocolate recipe you'd do something like this:</p>
+
+<code>A mug of [[hot chocolate]] goes great with this sandwich.</code>
+
+<p>Which would display this:</p>
+
+<code>A mug of <a href="#">hot chocolate</a> goes great with this sandwich.</code>
+
+<p>When you click the <b>hot chocolate</b> link, the wiki discovers that the article doesn't exist and then gives you the opportunity to create it by clicking the edit link. If the hot chocolate article already existed then this method would automatically link to it.</p>
+
+<p>You can do a lot more with <b>Wiki Syntax</b>, please see the <a href="wiki_syntax.html">Wiki Syntax</a> section for details.</p>
+
+<h3><a name="organize">Organizing Articles with Categories</a></h3>
+
+<p>Assigning an article to a category is easily accomplished with <b>wiki syntax</b>. For example, to add your Peanut Butter Sandwich to the <b>sandwiches</b> category you would click on the <b>edit link</b> to enter the article's edit mode and add the following anywhere in the article:</p>
+
+<code>[[Category:Sandwiches]]</code>
+
+<p>This would automatically assign the article to the <b>Sandwiches</b> category. If the category doesn't exist, the wiki will create it automatically. To add multiple categories just add an additional category like so:</p>
+
+<code>[[Category:Sandwiches]]<br />
+[[Category:Peanut Butter]]</code>
+
+<p>This would assign the article to the <b>Sandwiches</b> and <b>Peanut Butter</b> categories. And finally, you can add sub-categories. For example, let's say you want to create a "breakfast" sub-category for the main (also called "parent") <b>Sandwiches</b> category. The following would do that:</p>
+
+<code>[[Category:Sandwiches::Breakfast]]</code>
+
+<p>Now the article is assigned to the <b>Sandwiches</b> parent category and the <b>Breakfast</b> sub-category.</p>
+
+<p>You can do a lot more with <b>Wiki Syntax</b>, please see the <a href="wiki_syntax.html">Wiki Syntax</a> section for details.</p>
+	
+</div>
+	
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Forum Update Notes 1.3.2 &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Forum Module</a> &gt;
+<a href="forum_update.html">Forum Update</a> &gt;
+<strong>Version Notes 1.3.2</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Forum Update Notes for Version 1.4</h1>
+	
+	<p class="important">The Discussion Forum Module Version 1.4 requires ExpressionEngine Version 1.6 (or greater)</p>
+	
+	<p>Version 1.4 has a number of template additions.</p>
+	
+	<h2>If you have <strong>not</strong> customized your existing forum templates:</h2>
+	
+	<p>Simply replace your entire forum theme folder with the new set:
+	</p>
+	<p class="leftpad"><kbd>themes/forum_themes/</kbd></p>
+	
+	<p class="important">The update process is now complete.  You can disregard the rest of the information in this page.</p>
+		
+	
+	<h2>If you <strong>have</strong> customized your existing templates:</h2>
+	
+	<p>If you have customized the look of your forum you will need to manually add the new template features described below.</p>
+	
+	<p>&nbsp;</p>
+	
+	<h1>Incorporating New Features</h1>
+
+	<p class="important">The information below assumes you are running customized templates.  If you are using the default theme there is no need to use the information below.</p>
+	
+	<ul class="miniToc">
+		<li><a href="#move_reply">Move Reply</a></li>
+		<li><a href="#search_results">Search Results</a></li>
+	</ul>
+	
+	<h2><a name="move_reply">Move Reply</a></h2>
+	
+		<h3>Move Reply Theme File</h3>
+		
+		<p>Please add the following theme files to your current installation:</p>
+		
+		<ul>
+			<li><kbd>themes/forum_themes/blue/theme_move_reply.php</kbd></li>
+			<li><kbd>themes/forum_themes/default/theme_move_reply.php</kbd></li>
+			<li><kbd>themes/forum_themes/developer/theme_move_reply.php</kbd></li>
+			<li><kbd>themes/forum_themes/shares/theme_move_reply.php</kbd></li>
+		</ul>
+	
+		<h3>Thread Rows</h3>
+		
+		<p>To add this feature you will need to add the following code to your <kbd>Thread Rows</kbd> template in <dfn>/themes/forum_themes/theme_name/theme_threads.php</dfn>.  Replace:</p>
+	
+	<code>{if can_post}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;td align=&quot;center&quot;&gt;&lt;div class=&quot;button100&quot;&gt;&lt;div class=&quot;buttonSmall&quot; id=&quot;{id3}&quot; onclick=&quot;navJump(&apos;{path:quote_reply}&apos;)&quot; onmouseover=&quot;navHover(this);&quot; onmouseout=&quot;navReset(this);&quot;&gt;{lang:quote}&lt;/div&gt;&lt;/div&gt;&lt;/td&gt;<br />
+		{/if}<br />
+	</code>
+	
+	<p>with:</p>
+	
+	<code>{if is_post}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{if can_move}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;&lt;div class=&quot;button100&quot;&gt;&lt;div class=&quot;buttonSmall&quot; id=&quot;{id10}&quot; onclick=&quot;navJump(&apos;{path:move_reply}&apos;)&quot; onmouseover=&quot;navHover(this);&quot; onmouseout=&quot;navReset(this);&quot;&gt;{lang:move}&lt;/div&gt;&lt;/div&gt;&lt;/td&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{/if}<br />
+	{/if}<br />
+	<br />
+	{if can_post}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;td align=&quot;center&quot;&gt;&lt;div class=&quot;button100&quot;&gt;&lt;div class=&quot;buttonSmall&quot; id=&quot;{id3}&quot; onclick=&quot;navJump(&apos;{path:quote_reply}&apos;)&quot; onmouseover=&quot;navHover(this);&quot; onmouseout=&quot;navReset(this);&quot;&gt;{lang:quote}&lt;/div&gt;&lt;/div&gt;&lt;/td&gt;<br />
+	{/if}<br />
+	</code>
+
+	
+	<h2><a name="search_results">Search Results</a></h2>
+	
+	<p>Search results in Discussion Forum module version 1.4 can link directly to the reply in which search terms were found, or even link to a separate "search_thread" for greater granularity in situations where search terms are repeated many times in a given thread.  This requires a modification of your <kbd>Search Results Rows</kbd> template in <dfn>/themes/forum_themes/theme_name/theme_search.php</dfn>.  The {if reply_results} conditionals can be used to give complete control to how the results are presented.  The default themes use the following.  Replace:</p>
+	
+	<code>{topic_type}&lt;a href=&quot;{path:view_thread}&quot; title=&quot;{topic_title}&quot; &gt;&lt;b&gt;{topic_title}&lt;/b&gt;&lt;/a&gt;</code>
+	
+	<p>with:</p>
+	
+	<code>{if reply_results == 0}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{topic_type}&lt;a href=&quot;{path:view_thread}&quot; title=&quot;{topic_title}&quot; &gt;&lt;b&gt;{topic_title}&lt;/b&gt;&lt;/a&gt;<br />
+	{if:elseif reply_results &lt; 6}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{topic_type}&lt;a href=&quot;{path:view_thread}&quot; title=&quot;{topic_title}&quot; &gt;&lt;b&gt;{topic_title}&lt;/b&gt;&lt;/a&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;br /&gt;&lt;span class=&quot;smallLinks&quot;&gt;{lang:found_in} &lt;ul&gt;{include:reply_results}&lt;/ul&gt;&lt;/span&gt;<br />
+	{if:else}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{topic_type}&lt;a href=&quot;{path:view_thread}&quot; title=&quot;{topic_title}&quot; &gt;&lt;b&gt;{topic_title}&lt;/b&gt;&lt;/a&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;br /&gt;&lt;span class=&quot;smallLinks&quot;&gt;{lang:found_in_many} - &lt;a href=&quot;{path:search_thread}&quot;&gt;{lang:search_thread}&lt;/a&gt;&lt;/span&gt;<br />
+	{/if}</code>
+	
+	<p>Additionally, there are some new templates that you need to add.  You will have to edit the <dfn>/themes/forum_themes/theme_name/theme_search.php</dfn> file directly for this addition.  Just before:</p>
+	
+	<code>}<br />
+	// END CLASS<br />
+	?&gt;</code>
+	
+	<p>Add the following:</p>
+	
+	<code>//-------------------------------------<br />
+	//  Search Thread Page<br />
+	//-------------------------------------<br />
+<br />
+	function search_thread_page()<br />
+	{<br />
+	return &lt;&lt;&lt; EOF<br />
+	{include:html_header}<br />
+	{include:top_bar}<br />
+	{include:page_header}<br />
+	{include:page_subheader}<br />
+	&lt;div id=&quot;content&quot;&gt;<br />
+	{include:thread_search_results}<br />
+	&lt;/div&gt;<br />
+	{include:html_footer}<br />
+	EOF;<br />
+	}<br />
+	/* END */<br />
+<br />
+	<br />
+<br />
+	//-------------------------------------<br />
+	//  Reply Results<br />
+	//-------------------------------------<br />
+<br />
+	function reply_results()<br />
+	{<br />
+	return &lt;&lt;&lt; EOF<br />
+	&lt;li&gt;&lt;a href=&quot;{path:viewreply}&quot;&gt;{snippet}&amp;hellip;&lt;/a&gt; by &lt;a href=&quot;{path:member_profile}&quot;&gt;{author}&lt;/a&gt;&lt;/li&gt;<br />
+	EOF;<br />
+	}<br />
+	/* END */<br />
+<br />
+<br />
+<br />
+	//-------------------------------------<br />
+	//  Search Results<br />
+	//-------------------------------------<br />
+<br />
+	function thread_search_results()<br />
+	{<br />
+	return &lt;&lt;&lt; EOF<br />
+<br />
+	&lt;table cellpadding=&quot;3&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;width:98%;&quot; &gt;<br />
+	&lt;tr&gt;<br />
+	&lt;td valign=&quot;middle&quot;&gt;&lt;div class=&quot;itempadbig&quot;&gt;&lt;div class=&quot;defaultBold&quot;&gt;{lang:keywords} {keywords}&lt;/div&gt;&lt;/div&gt;<br />
+	&lt;/td&gt;<br />
+	&lt;td align=&quot;right&quot;&gt;&lt;div class=&quot;defaultBold&quot;&gt;Total Results: {total_results}&lt;/div&gt;<br />
+	&lt;/td&gt;<br />
+	&lt;/tr&gt;<br />
+	&lt;/table&gt;<br />
+<br />
+<br />
+	&lt;table class=&quot;tableBorderLeft&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;width:100%;&quot; &gt;<br />
+	&lt;tr&gt;<br />
+	&lt;td class=&quot;tableHeadingBG&quot; colspan=&quot;5&quot;&gt;&lt;div class=&quot;tableHeading&quot;&gt;{lang:search_results}&lt;/div&gt;&lt;/td&gt;<br />
+	&lt;/tr&gt;&lt;tr&gt;<br />
+	&lt;td class=&quot;tableRowHeadingBold&quot; colspan=&quot;2&quot; style=&quot;width:62%;&quot;&gt;{lang:replies_in_topic} &lt;em&gt;{topic_title}&lt;/em&gt;&lt;/td&gt;<br />
+	&lt;td class=&quot;tableRowHeadingBold&quot; style=&quot;width:38%;&quot;&gt;{lang:reply_info_heading}&lt;/td&gt;<br />
+	&lt;/tr&gt;<br />
+	{include:thread_result_rows}<br />
+	&lt;/table&gt;<br />
+<br />
+<br />
+	&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; &gt;<br />
+	&lt;tr&gt;<br />
+	&lt;td class=&quot;itempadbig&quot; valign=&quot;bottom&quot;&gt;<br />
+	{if paginate}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; class=&quot;paginateBorder&quot;&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;tr&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;&lt;div class=&quot;paginateStat&quot;&gt;{current_page} of {total_pages}&lt;/div&gt;&lt;/td&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{pagination_links}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/tr&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/table&gt;<br />
+	{/if}<br />
+	&lt;/td&gt;<br />
+	&lt;/tr&gt;<br />
+	&lt;/table&gt;<br />
+	EOF;<br />
+	}<br />
+	/* END */<br />
+<br />
+<br />
+<br />
+	//-------------------------------------<br />
+	//  Thread Result Rows<br />
+	//-------------------------------------<br />
+<br />
+	function thread_result_rows()<br />
+	{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;return &lt;&lt;&lt; EOF<br />
+	&lt;tr&gt;<br />
+	&lt;td class=&quot;tableCellTwo&quot; style=&quot;width:4%;&quot; align=&quot;center&quot;&gt;&lt;a href=&quot;{path:view_thread}&quot;&gt;&lt;img src=&quot;{topic_marker}&quot; width=&quot;24&quot; height=&quot;18&quot; border=&quot;0&quot; alt=&quot;{topic_title}&quot; title=&quot;{topic_title}&quot; /&gt;&lt;/a&gt;&lt;/td&gt;<br />
+	&lt;td class=&quot;tableCellOne&quot; style=&quot;width:62%;&quot;&gt;<br />
+	&lt;div class=&quot;topicTitle&quot;&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;a href=&quot;{path:viewreply}&quot; title=&quot;{lang:view_reply}&quot; &gt;{snippet}&amp;hellip;&lt;/a&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;forumLightLinks&quot;&gt;{lang:posted_by} &lt;a href=&quot;{path:member_profile}&quot;&gt;{author}&lt;/a&gt;&lt;/div&gt;<br />
+	&lt;/div&gt;<br />
+	&lt;/td&gt;<br />
+	&lt;td class=&quot;tableCellOne&quot; style=&quot;width:38%;&quot;&gt;<br />
+	&lt;div class=&quot;tablePostInfo&quot;&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{lang:posted_on} {post_date format=&quot;%m-%d-%Y %h:%i %A&quot;}<br />
+	&lt;/div&gt;<br />
+	&lt;/td&gt;<br />
+	&lt;/tr&gt;<br />
+	EOF;<br />
+	}<br />
+	/* END */</code>
+	
+	<p><br /><br /><a href="forum_update.html">Return to Update Page</a></p>
+	
+	
+</div>
+
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

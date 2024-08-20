@@ -1,0 +1,317 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Advanced Search Form Tag &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Search</a> &gt;
+<strong>Advanced Search Form</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Advanced Search Form Tag</h1>
+
+	<p>The <dfn>Advanced Search Form Tag</dfn> allows you to display a detailed search form that will allow your users to make "power searches" to find the information they need.  Example:</p>
+
+	<code>{exp:search:advanced_form result_page="search/results"}<br />
+<br />
+&lt;table cellpadding='4' cellspacing='6' border='0' width='100%'><br />
+&lt;tr><br />
+&lt;td><br />
+<br />
+&lt;fieldset class="fieldset"><br />
+	&lt;legend>{lang:search_by_keyword}&lt;/legend><br />
+<br />
+	&lt;input type="text" class="input" maxlength="100" size="40" name="keywords" style="width:100%;" /><br />
+<br />
+	&lt;div class="default"><br />
+		&lt;select name="search_in"><br />
+			&lt;option value="titles" selected="selected">{lang:search_in_titles}&lt;/option><br />
+			&lt;option value="entries">{lang:search_in_entries}&lt;/option><br />
+			&lt;option value="everywhere" >{lang:search_everywhere}&lt;/option><br />
+		&lt;/select><br />
+	&lt;/div><br />
+<br />
+	&lt;div class="default"><br />
+		&lt;select name="where"><br />
+			&lt;option value="exact" selected="selected">{lang:exact_phrase_match}&lt;/option><br />
+			&lt;option value="any">{lang:search_any_words}&lt;/option><br />
+			&lt;option value="all" >{lang:search_all_words}&lt;/option><br />
+			&lt;option value="word" >{lang:search_exact_word}&lt;/option><br />
+		&lt;/select><br />
+	&lt;/div><br />
+<br />
+&lt;/fieldset><br />
+<br />
+&lt;/td>&lt;td><br />
+<br />
+&lt;fieldset class="fieldset"><br />
+	&lt;legend>{lang:search_by_member_name}&lt;/legend><br />
+<br />
+	&lt;input type="text" class="input" maxlength="100" size="40" name="member_name" style="width:100%;" /><br />
+	&lt;div class="default">&lt;input type="checkbox" class="checkbox" name="exact_match" value="y"  /> {lang:exact_name_match}&lt;/div><br />
+<br />
+&lt;/fieldset><br />
+<br />
+&lt;/td><br />
+&lt;/tr><br />
+&lt;/table><br />
+<br />
+&lt;table cellpadding='4' cellspacing='6' border='0' width='100%'>    <br />
+&lt;tr><br />
+&lt;td valign="top" width="50%"><br />
+<br />
+&lt;table cellpadding='0' cellspacing='0' border='0'><br />
+&lt;tr><br />
+&lt;td valign="top"><br />
+<br />
+&lt;div class="defaultBold">{lang:weblogs}&lt;/div><br />
+<br />
+	&lt;select id="weblog_id" name='weblog_id[]' class='multiselect' size='12' multiple='multiple' onchange='changemenu(this.selectedIndex);'><br />
+		{weblog_names}<br />
+	&lt;/select><br />
+<br />
+&lt;/td><br />
+&lt;td valign="top" width="16">&amp;nbsp;&lt;/td><br />
+&lt;td valign="top"><br />
+<br />
+&lt;div class="defaultBold">{lang:categories}&lt;/div><br />
+<br />
+	&lt;select name='cat_id[]' size='12'  class='multiselect' multiple='multiple'><br />
+		&lt;option value='all' selected="selected">{lang:any_category}&lt;/option><br />
+	&lt;/select><br />
+<br />
+&lt;/td><br />
+&lt;/tr><br />
+&lt;/table><br />
+<br />
+&lt;/td><br />
+&lt;td valign="top" width="50%"><br />
+<br />
+&lt;fieldset class="fieldset"><br />
+	&lt;legend>{lang:search_entries_from}&lt;/legend><br />
+<br />
+	&lt;select name="date" style="width:150px"><br />
+		&lt;option value="0" selected="selected">{lang:any_date}&lt;/option><br />
+		&lt;option value="1" >{lang:today_and}&lt;/option><br />
+		&lt;option value="7" >{lang:this_week_and}&lt;/option><br />
+		&lt;option value="30" >{lang:one_month_ago_and}&lt;/option><br />
+		&lt;option value="90" >{lang:three_months_ago_and}&lt;/option><br />
+		&lt;option value="180" >{lang:six_months_ago_and}&lt;/option><br />
+		&lt;option value="365" >{lang:one_year_ago_and}&lt;/option><br />
+	&lt;/select><br />
+<br />
+&lt;div class="default"><br />
+	&lt;input type='radio' name='date_order' value='newer' class='radio' checked="checked" />&amp;nbsp;{lang:newer}<br />
+	&lt;input type='radio' name='date_order' value='older' class='radio' />&amp;nbsp;{lang:older}<br />
+&lt;/div><br />
+<br />
+&lt;/fieldset><br />
+<br />
+&lt;div class="default">&lt;br />&lt;/div><br />
+<br />
+&lt;fieldset class="fieldset"><br />
+	&lt;legend>{lang:sort_results_by}&lt;/legend><br />
+<br />
+	&lt;select name="orderby"><br />
+		&lt;option value="date" >{lang:date}&lt;/option><br />
+		&lt;option value="title" >{lang:title}&lt;/option><br />
+		&lt;option value="most_comments" >{lang:most_comments}&lt;/option><br />
+		&lt;option value="recent_comment" >{lang:recent_comment}&lt;/option><br />
+	&lt;/select><br />
+<br />
+&lt;div class="default"><br />
+	&lt;input type='radio' name='sort_order' class="radio" value='desc' checked="checked" /> {lang:descending}<br />
+	&lt;input type='radio' name='sort_order' class="radio" value='asc' /> {lang:ascending}<br />
+&lt;/div><br />
+<br />
+&lt;/fieldset><br />
+<br />
+&lt;/td><br />
+&lt;/tr><br />
+&lt;/table><br />
+<br />
+&lt;div class='searchSubmit'><br />
+	&lt;input type='submit' value='Search' class='submit' /><br />
+&lt;/div><br />
+<br />
+{/exp:search:advanced_form}</code>
+
+	<p>The search results are displayed on the page you specify as the <samp><a href="#par_result_page">result_page=</a></samp> page.  Results are displayed with the <a href="results.html">Search Results</a> tag.</p>
+
+
+
+	<h2>Parameters</h2>
+
+	<ul class="minitoc">
+		<li><a href="#par_category">category="1"</a></li>
+		<li><a href="#par_cat_style">cat_style="nested"</a></li>
+		<li><a href="#par_id">id="search_form"</a></li>
+		<li><a href="#par_name">name="search_form"</a></li>
+		<li><a href="#par_no_result_page">no_result_page="search/noresults"</a></li>
+		<li><a href="#par_result_page">result_page="news/searches"</a></li>
+		<li><a href="#par_results">results="20"</a></li>
+		<li><a href="#par_show_expired">show_expired="yes"</a></li>
+		<li><a href="#par_show_future_entries">show_future_entries="yes"</a></li>
+		<li><a href="#par_status">status="open"</a></li>
+		<li><a href="#par_weblog">weblog="news"</a></li>
+	</ul>
+
+	<h3><a name="par_category">category=</a></h3>
+
+		<code>category="1"</code>
+
+		<p>With this parameter, you can specify which categories should be shown in the multiple select list.</p>
+		
+		<p>As with some other parameters, you can pipe multiple categories:</p>
+		
+		<code>category="1|3|7"</code>
+		
+		<p>Or use "not" to exclude categories</p>
+
+		<code>category="not 2|8"</code>
+		
+			<p class="important"><b>Note:</b> If a parent is excluded from the multiple select list, then its children will not be 				shown.</p>
+			
+	<h3><a name="par_cat_style">cat_style=</a></h3>
+
+		<code>cat_style="nested"</code>
+
+		<p>With this parameter, you can specify whether the categories should be displayed in a nested, hierarchical format or displayed linearly.  Available values are "nested" and "linear".</p>
+		
+	<h3><a name="par_id">id=</a></h3>
+
+		<code>id="search_form"</code>
+
+		<p>Specify the ID attribute for the &lt;form> tag, which will allow
+			you to style the form more easily.</p>
+
+	<h3><a name="par_name">name=</a></h3>
+
+		<code>name="search_form"</code>
+
+		<p>Specify the name attribute for the &lt;form> tag, which will allow
+		you to specify CSS and JavaScript to the form more easily.</p>
+
+	<h3><a name="par_no_result_page">no_result_page=</a></h3>
+
+		<code>no_result_page="search/noresults"</code>
+
+		<p>You may specify a particular Template to display in the case when there are no results.  This takes a standard "Template_Group/Template" as input.</p>
+
+
+	<h3><a name="par_result_page">result_page=</a></h3>
+
+		<code>result_page="news/searches"</code>
+
+		<p>The Template_Group/Template  you would like the search results to be shown in.  If you do not specify this parameter, then it will default to "search/results", which is the default location of the search results Template.</p>
+
+
+	<h3><a name="par_results">results=</a></h3>
+
+		<code>results="20"</code>
+
+		<p>The number of results to show per page on the search results.</p>
+
+
+	<h3><a name="par_show_expired">show_expired=</a></h3>
+
+		<code>show_expired="yes"</code>
+
+		<p>With this parameter you can specify whether or not expired entries will be included in search results.  The default behavior is for expired entries to <em>not</em> be included.  You may set this parameter to "yes" or "no".</p>
+
+		<p>You may also let the user choose by using an <samp>Include Expired Entries</samp> form field.  If you change the form field, you need to be sure to leave the <samp>name="show_expired"</samp> attribute alone.</p>
+
+		<code>&lt;label for="field_show_expired">Include Expired Entries?&lt;/label><br />
+&lt;select name="show_expired" id="field_show_expired"><br />
+  &lt;option value="no">No&lt;/option><br />
+  &lt;option value="yes">Yes&lt;/option><br />
+&lt;/select></code>
+
+
+
+	<h3><a name="par_show_future_entries">show_future_entries=</a></h3>
+
+		<code>show_future_entries="yes"</code>
+
+		<p>With this parameter you can specify whether or not entries with the date set in the future will be included in search results.  The default behavior is for future entries to <em>not</em> be included.  You may set this parameter to "yes" or "no".</p>
+
+		<p>You may also let the user choose by using an <samp>Include Future Entries</samp> form field.  If you change the form field, you need to be sure to leave the <samp>name="show_future_entries"</samp> attribute alone.</p>
+
+		<code>&lt;label for="field_show_future_entries">Include Future Entries?&lt;/label><br />
+&lt;select name="show_future_entries" id="field_show_future_entries"><br />
+  &lt;option value="no">No&lt;/option><br />
+  &lt;option value="yes">Yes&lt;/option><br />
+&lt;/select></code>
+
+
+	<h3><a name="par_status">status=</a></h3>
+
+		<code>status="open"</code>
+
+		<p>You may restrict the results to a particular <a href="../../cp/admin/weblog_administration/custom_entry_statuses.html">status</a>.  You can choose multiple statuses using a pipe:</p>
+
+		<code>status="draft|reviewed|published"</code>
+
+		<p>Or exclude statuses using "not"</p>
+
+		<code>status="not submitted|processing|closed"</code>
+
+
+	<h3><a name="par_weblog">weblog=</a></h3>
+
+		<code>weblog="which"</code>
+
+		<p>From which <a href="../../cp/admin/weblog_administration/weblog_management.html">weblog</a> to search the entries.  Additionally, you can use the pipe character to separate multiple weblogs:</p>
+
+		<code>weblog="weblog1|weblog2|weblog3"</code>
+
+		<p>Or you can add the word "not" (with a space after it) to exclude weblogs:</p>
+
+		<code>weblog="not weblog1|weblog2|weblog3"</code>
+
+
+
+	<h2>Variables</h2>
+
+	<p>A full discussion of the available variables is not feasible there is a great deal of interdependence between the various form fields, variables, and javascript functions.  The Parameters can be used to modify how the search behaves.  If you wish to modify the search form itself, simply use the default form as a base and customize it from there.</p>
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

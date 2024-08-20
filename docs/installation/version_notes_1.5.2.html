@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Upgrading to ExpressionEngine 1.5.2 &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../index.html" />
+  <style type="text/css" media="screen,print">@import url(../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="../index.html#install_docs">Installation and Update Instructions</a> &gt;
+<a href="update.html">Updating EE</a> &gt;
+<strong>Version 1.5.2 Notes</strong>
+</div>
+
+<div id="content">
+
+	<h1>Update Notes for Version 1.5.2</h1>
+
+<p>ExpressionEngine 1.5.2 includes a number of new features and updates. Reviewing the notes below will help you transition to 1.5.2 with as little effort as possible.</p>
+
+	<ul>
+	<li><a href="#profile_theme">Profile Theme Updates</a>
+		<ul>
+			<li><a href="#ignore_list">Ignore List Form</a></li>
+			<li><a href="#home_page">Member Profile Home Page</a></li>
+			<li><a href="#profile_menu">Member Profile Menu</a></li>
+			<li><a href="#public_profile">Public Member Profile</a></li>
+		</ul>
+	</li>
+	<li><a href="#language">Language Additions</a></li>
+	</ul>
+	
+	
+	<h2><a name="profile_theme"></a>Profile Theme Updates</h2>
+	
+	<p>Version 1.5.2 has some changes in the member theme file <kbd>/themes/profile_themes/default/profile_theme.php</kbd>, 
+	so either replace that file or if you have a customized the Member Profile theme add the following code.</p>
+	
+	<h3><a name="ignore_list"></a>Ignore List Form</h3>
+
+	<p>There are two new templates that need to be added.  You will have to edit the <dfn>/themes/profile_themes/theme_name/profile_theme.php</dfn> file directly for this addition.  Just before:</p>
+
+	<code>}<br />
+	// END CLASS<br />
+	?&gt;</code>
+
+	<p>Put the following:</p>
+
+	<code>/* -------------------------------------<br />
+	/*  Edit Ignore List Form<br />
+	/* -------------------------------------*/<br />
+<br />
+	function edit_ignore_list_form()<br />
+	{<br />
+	return &lt;&lt;&lt;PHARLEY<br />
+<br />
+	{include:toggle_js}<br />
+<br />
+	&lt;div class=&apos;menuHeadingBG&apos;&gt;&lt;div class=&quot;tableHeading&quot;&gt;{include:member_search} {lang:ignore_list}&lt;/div&gt;&lt;/div&gt;<br />
+<br />
+	{if success_message}&lt;div class=&apos;tableCellOne&apos;&gt;&lt;div class=&apos;success&apos;&gt;{lang:message}&lt;/div&gt;&lt;/div&gt;{/if}<br />
+<br />
+	{form:form_declaration}<br />
+<br />
+	&lt;table border=&apos;0&apos;  cellspacing=&apos;0&apos; cellpadding=&apos;0&apos; style=&apos;width:100%;&apos;  class=&apos;tableBorderTopLeft&apos; &gt;<br />
+<br />
+	&lt;tr&gt;<br />
+<br />
+	&lt;td  class=&apos;tableCellOne&apos;  style=&apos;width:80%;&apos;&gt;<br />
+	&lt;div class=&apos;defaultBold&apos;&gt;{lang:screen_name}&lt;/div&gt;<br />
+	&lt;/td&gt;<br />
+<br />
+	&lt;td  class=&apos;tableCellOne&apos;  style=&apos;width:5%;&apos;&gt;<br />
+	&lt;div class=&apos;defaultBold&apos;&gt;&lt;input class=&apos;checkbox&apos; type=&apos;checkbox&apos; name=&apos;toggleflag&apos; value=&apos;&apos; onclick=&quot;toggle(this);&quot; /&gt;<br />
+	&lt;/div&gt;<br />
+	&lt;/td&gt;<br />
+<br />
+	&lt;/tr&gt;<br />
+<br />
+	{include:edit_ignore_list_rows}<br />
+<br />
+	&lt;/table&gt;<br />
+<br />
+	&lt;div class=&quot;itempad&quot;&gt;<br />
+	&lt;div class=&apos;defaultRight&apos;&gt;{form:add_button}&amp;nbsp;&amp;nbsp;{form:delete_button}&amp;nbsp;&amp;nbsp;&lt;/div&gt;<br />
+	&lt;/div&gt;<br />
+<br />
+	&lt;/form&gt;<br />
+	PHARLEY;<br />
+	}<br />
+	/* END */<br />
+<br />
+<br />
+	/* -------------------------------------<br />
+	/*  Edit Ignore List Rows<br />
+	/* -------------------------------------*/<br />
+<br />
+	function edit_ignore_list_rows()<br />
+	{<br />
+	return &lt;&lt;&lt;PHARLEY<br />
+	&lt;tr&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;td class=&quot;{class}&quot;&gt;&lt;a href=&quot;{path:profile_link}&quot;&gt;{name}&lt;/a&gt;&lt;/td&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;td class=&quot;{class}&quot;&gt;&lt;input type=&apos;checkbox&apos; name=&apos;toggle[]&apos; value=&apos;{member_id}&apos; /&gt; &lt;/td&gt;<br />
+	&lt;/tr&gt;<br />
+	PHARLEY;<br />
+	}<br />
+	/* END */
+	</code>
+		
+	<h3><a name="home_page"></a>Member Profile Home Page Template - home_page()</h3>
+	
+	<p>Change:</p>
+	
+	<code>&lt;/tr&gt;&lt;tr&gt;<br />
+<br />
+	&lt;td class=&apos;tableCellOne&apos;&gt;&lt;div class=&apos;defaultBold&apos;&gt;{lang:total_forum_posts}&lt;/div&gt;&lt;/td&gt;<br />
+	&lt;td class=&apos;tableCellOne&apos;&gt;{total_posts}&lt;/td&gt;<br />
+<br />
+	{/if}<br />
+<br />
+	&lt;/tr&gt;&lt;tr&gt;<br />
+<br />
+	&lt;td class=&apos;tableCellTwo&apos;&gt;&lt;div class=&apos;defaultBold&apos;&gt;{lang:total_entries}&lt;/div&gt;&lt;/td&gt;<br />
+	&lt;td class=&apos;tableCellTwo&apos;&gt;{total_entries}&lt;/td&gt;<br />
+<br />
+	&lt;/tr&gt;&lt;tr&gt;<br />
+<br />
+	&lt;td class=&apos;tableCellOne&apos;&gt;&lt;div class=&apos;defaultBold&apos;&gt;{lang:total_comments}&lt;/div&gt;&lt;/td&gt;<br />
+	&lt;td class=&apos;tableCellOne&apos;&gt;{total_comments}&lt;/td&gt;
+	</code>
+	
+	<p>to:</p>
+	
+	<code>&lt;/tr&gt;&lt;tr&gt;<br />
+<br />
+	&lt;td class=&apos;tableCellOne&apos;&gt;&lt;div class=&apos;defaultBold&apos;&gt;{lang:total_forum_replies}&lt;/div&gt;&lt;/td&gt;<br />
+	&lt;td class=&apos;tableCellOne&apos;&gt;{total_replies}&lt;/td&gt;<br />
+<br />
+	&lt;/tr&gt;&lt;tr&gt;<br />
+<br />
+	&lt;td class=&apos;tableCellTwo&apos;&gt;&lt;div class=&apos;defaultBold&apos;&gt;{lang:total_forum_posts}&lt;/div&gt;&lt;/td&gt;<br />
+	&lt;td class=&apos;tableCellTwo&apos;&gt;{total_posts}&lt;/td&gt;<br />
+<br />
+	{/if}<br />
+<br />
+	&lt;/tr&gt;&lt;tr&gt;<br />
+<br />
+	&lt;td class=&apos;tableCellOne&apos;&gt;&lt;div class=&apos;defaultBold&apos;&gt;{lang:total_entries}&lt;/div&gt;&lt;/td&gt;<br />
+	&lt;td class=&apos;tableCellOne&apos;&gt;{total_entries}&lt;/td&gt;<br />
+<br />
+	&lt;/tr&gt;&lt;tr&gt;<br />
+<br />
+	&lt;td class=&apos;tableCellTwo&apos;&gt;&lt;div class=&apos;defaultBold&apos;&gt;{lang:total_comments}&lt;/div&gt;&lt;/td&gt;<br />
+	&lt;td class=&apos;tableCellTwo&apos;&gt;{total_comments}&lt;/td&gt;
+	</code>
+	
+	<h3><a name="profile_menu"></a>Member Profile Menu - menu()</h3>
+	
+	<p>Change:</p>
+	
+	<code>&lt;div class=&apos;borderTopBot&apos;&gt;&lt;div class=&apos;profileHead&apos;&gt;{lang:subscriptions}&lt;/div&gt;&lt;/div&gt;<br />
+<br />
+	&lt;div class=&apos;profileMenuInner&apos;&gt;<br />
+	&lt;div class=&apos;menuItem&apos;&gt;&lt;a href=&apos;{path:subscriptions}&apos; &gt;{lang:edit_subscriptions}&lt;/a&gt;&lt;/div&gt;<br />
+	&lt;/div&gt;
+	</code>
+	
+	<p>to:</p>
+	
+	<code>&lt;div class=&apos;borderTopBot&apos;&gt;&lt;div class=&apos;profileHead&apos;&gt;{lang:utilities}&lt;/div&gt;&lt;/div&gt;<br />
+<br />
+	&lt;div class=&apos;profileMenuInner&apos;&gt;<br />
+	&lt;div class=&apos;menuItem&apos;&gt;&lt;a href=&apos;{path:subscriptions}&apos; &gt;{lang:edit_subscriptions}&lt;/a&gt;&lt;/div&gt;<br />
+	&lt;div class=&apos;menuItem&apos;&gt;&lt;a href=&apos;{path:ignore_list}&apos; &gt;{lang:ignore_list}&lt;/a&gt;&lt;/div&gt;<br />
+	&lt;/div&gt;
+	</code>
+	
+	<h3><a name="public_profile"></a>Public Member Profile Template - public_profile()</h3>
+	
+	<p>Change:</p>
+	
+	<code>&lt;div class=&apos;itempadbig&apos;&gt;&lt;a href=&quot;{search_path}&quot;&gt;&lt;b&gt;{lang:view_posts_by_member}&lt;/b&gt;&lt;/a&gt;</code>
+	
+	<p>to:</p>
+	
+	<code>&lt;div class=&apos;itempadbig&apos;&gt;&lt;a href=&quot;{search_path}&quot;&gt;&lt;b&gt;{lang:view_posts_by_member}&lt;/b&gt;&lt;/a&gt;&lt;/div&gt;<br />
+	{if ignore}<br />
+	  &lt;div class=&apos;itempad&apos;&gt;&lt;b&gt;{ignore_link}&lt;/b&gt;&lt;/div&gt;<br />
+	{/if}
+	</code>
+	
+	<p>change:</p>
+	
+	<code>&lt;/tr&gt;&lt;tr&gt;<br />
+<br />
+	&lt;td class=&apos;tableCellTwo&apos;&gt;&lt;div class=&apos;defaultBold&apos;&gt;{lang:total_forum_posts}&lt;/div&gt;&lt;/td&gt;<br />
+	&lt;td class=&apos;tableCellOne&apos;&gt;&lt;div class=&apos;default&apos;&gt;{total_forum_posts}&lt;/div&gt;&lt;/td&gt;
+	</code>
+	
+	<p>to:</p>
+	
+	<code>&lt;/tr&gt;&lt;tr&gt;<br />
+<br />
+	&lt;td class=&apos;tableCellTwo&apos;&gt;&lt;div class=&apos;defaultBold&apos;&gt;{lang:total_forum_topics}&lt;/div&gt;&lt;/td&gt;<br />
+	&lt;td class=&apos;tableCellOne&apos;&gt;&lt;div class=&apos;default&apos;&gt;{total_forum_topics}&lt;/div&gt;&lt;/td&gt;<br />
+<br />
+	&lt;/tr&gt;&lt;tr&gt;<br />
+<br />
+	&lt;td class=&apos;tableCellTwo&apos;&gt;&lt;div class=&apos;defaultBold&apos;&gt;{lang:total_forum_posts}&lt;/div&gt;&lt;/td&gt;<br />
+	&lt;td class=&apos;tableCellOne&apos;&gt;&lt;div class=&apos;default&apos;&gt;{total_forum_posts}&lt;/div&gt;&lt;/td&gt;
+	</code>
+		
+	<h2><a name="language"></a>Language Additions</h2>
+	
+	<p>ExpressionEngine 1.5.2 has a number of language file additions.  To assist translators in 
+	updating their language packs, a <a href="language_notes_1.5.2.txt">language notes text file</a>
+	has been provided.  This text file lists all of the new language keys, separated by the each 
+	language file that contains changes.  To update your language pack, you can download this text 
+	file, make the changes, and simply copy the new keys to the appropriate language files.</p>
+	
+	<p><br /><br /><a href="update.html">Return to Update Page</a></p>
+	
+	<p><br /><br /><br /><br /><br /><br /></p>
+	
+</div>
+
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

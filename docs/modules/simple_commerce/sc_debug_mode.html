@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Simple Commerce &#8211; Testing Purchases / Debug Mode &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Simple Commerce Module</a> &gt;
+<strong>Testing Purchases / Debug Mode</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Testing Purchases / Debug Mode</h1>
+
+	<p>When setting up your Simple Commerce store, it can be valuable to test your settings by running fake purchases through your store.  PayPal makes this possible with a "sandbox" area, where fictitious purchases can be made without anyone's credit card or PayPal account actually being used.</p>
+	
+	<h2>Setting up a Developer Account with PayPal</h2>
+	
+	<p>To use the sandbox area, you will have to set up a free developer account with PayPal.</p>
+	
+	<ol>
+		<li>Point your browser to <a href="https://developer.paypal.com/">https://developer.paypal.com/</a></li>
+		<li>Click "Sandbox" and then "Create Test Accounts".  Sandbox accounts are not tied to your PayPal account on www.paypal.com in any way.
+			<ol>
+				<li>Create a Premier Account for Merchant.  You can usually use the same information that your real merchant account uses.  Remember that nothing on the Sandbox is tied to real world information or accounts.</li>
+				<li>Create a Personal Account for a test purchaser.  Keep this account's login information handy, as you will be using it to make test purchases.</li>
+			</ol>
+		</li>
+		<li>Launch Sandbox for the Premier Account
+			<ol>
+				<li>Set up <a href="sc_cp_ipn.html">Instant Payment Notification</a>.</li>
+				<li>Add a Bank Account.  Enter a fictional name, PayPal will automatically create fake account numbers for you.</li>
+				<li>Confirm the Bank Account.  Simply click confirm--no test deposits are made.</li>
+			</ol>
+		</li>
+		<li>Launch Sandbox for the Personal Account
+			<ol>
+				<li>Add a Credit Card.  Again, you can use fictitious information, and allow PayPal to provide the false account numbers automatically.</li>
+			</ol>
+		</li>
+	</ol>
+	
+	<h2>Enable Simple Commerce Module's Debug Mode</h2>
+	
+	<p>In order for the Simple Commerce module to create purchase links that utilize PayPal's Sandbox area instead of the real PayPal site, you need to enable the module's debug mode.  To do so, open mod.simple_commerce.php, and near the top where the class variables are defined, set $debug to TRUE.</p>
+	
+	<code>var $debug				= TRUE;</code>
+	
+	<p>Remember to set this variable to FALSE when you wish to take your store live and route purchases to the real PayPal website.</p>
+	
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

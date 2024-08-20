@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Photo Gallery Toolbox &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../../index.html"><img src="../../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../../index.html">Table of Contents</a> &gt;
+<a href="../../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="../index.html">Photo Gallery</a> &gt;
+<a href="index.html">The Control Panel</a> &gt;
+<strong>Toolbox</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Photo Gallery Toolbox</h1>
+
+	<p>Once you have selected a Photo Gallery to access (<dfn>Modules &gt; Photo Gallery</dfn>) you may choose the <dfn>Toolbox</dfn> menu option to access advanced tools that allow you to manipulate your existing images.  You may crop or resize your image, rotate it, and even make copies of the image.  These are advanced features that bring a great deal of power to your fingertips.</p>
+
+	<p>There are three main operations you can perform on your images:</p>
+
+	<ul>
+		<li><a href="#enable_cropping">Cropping</a></li>
+		<li><a href="#enable_resizing">Resizing</a></li>
+		<li><a href="#enable_rotation">Rotation</a></li>
+	</ul>
+
+	<p>In addition, you may also specify to have the altered images saved as a new file as well as determine whether existing thumbnails will also be updated to match.</p>
+
+
+
+	<h2>Select an Image to Edit</h2>
+
+	<p>You must first select an image to edit.  Your existing gallery images are listed in the drop-down.  Simply select the desired image and ExpressionEngine will load that image in the <dfn>Toolbox</dfn>.</p>
+
+
+
+	<h2><a name="enable_cropping">Enable Cropping</a></h2>
+
+	<p>ExpressionEngine provides a real-time interface to allow you to crop any of your gallery images.  To turn this feature on in the <dfn>Toolbox</dfn>, first simply check the "Enable Cropping" checkbox.</p>
+
+	<p>When active, a number of features become available:</p>
+
+	<ul>
+		<li><b>Width:</b> Specify the width (in pixels) of the cropped box.</li>
+		<li><b>Height:</b> Specify the height (in pixels) of the cropped box.</li>
+		<li><b>Top:</b> Specify the starting postion (in pixels from the top) of the cropped box.</li>
+		<li><b>Left:</b> Specify the starting postion (in pixels from the left) of the cropped box.</li>
+		<li><b>Aspect Ratio:</b> You may check a 4:3 or 1:1 aspect ratio and EE will constrain the box to the specify aspect ratio.  You may select "none" to have no restraint.</li>
+	</ul>
+
+	<p>You will notice that when you have the "Enable Cropping" feature active, a box appears over the image.  This box represents the cropping area.  You may move the box around by clicking and dragging with your mouse.  You may alter the size of the box by holding down the <kbd>SHIFT</kbd> key while dragging the mouse; the box will resize visually for you.  Any changes to the box position or size will be reflected in the options.</p>
+
+
+
+	<h2><a name="enable_resizing">Enable Resizing</a></h2>
+
+	<p>Resizing an image is simple to do with the <dfn>Toolbox</dfn>.  First, you must enable the feature by checking the "Enable Resizing" checkbox.</p>
+
+	<p>When active, a number of features become available:</p>
+
+	<ul>
+		<li><b>Width:</b> Specify the width (in pixels) for the resized image.</li>
+		<li><b>Height:</b> Specify the height (in pixels) for the resized image.</li>
+		<li><b>Constrain Proportions:</b> This option allows you to ensure that the existing proportions of the image will be maintained when resized.</li>
+	</ul>
+
+	<p>You may also dynamically resize the displayed image by	by holding down the <kbd>SHIFT</kbd> key while dragging the mouse; the image will resize visually for you.  Any changes to the box position or size will be reflected in the options.</p>
+
+
+
+	<h2><a name="enable_rotation">Enable Rotation</a></h2>
+
+	<p>You may select to have your image rotated by any of the available options:</p>
+
+	<ul>
+		<li>90&#176; Left</li>
+		<li>90&#176; Right</li>
+		<li>180&#176;</li>
+		<li>Flip Vertical</li>
+		<li>Flip Horizontal</li>
+	</ul>
+
+
+
+	<h2>Options</h2>
+
+
+	<h3>Image Name</h3>
+
+		<p>You may elect to have you altered image replace the existing image or you may specify a new filename and have a new image created (while retaining your original image).</p>
+
+
+	<h3>Image Quality</h3>
+
+		<p>You may also select the quality setting to use when saving the altered image.  This is set as a value from 1 to 100 and indicates the quality setting to be used.  Higher quality settings will result in better looking images but also in larger file sizes.  Settings of "70" to "90" are typically used.</p>
+
+
+	<h3>Apply Watermark</h3>
+
+		<p>This allows you to choose whether or not to apply a watermark to the image.  You can see the <a href="watermarking.html">watermarking</a> section for more information about setting up a watermark.</p>
+
+
+	<h3>Create/Update Thumbnails</h3>
+
+		<p>If you have existing thumbnails that were originally created from this image, you may select this checkbox to have the thumbnails automatically updated to reflect the changes you have made to the image.  This will also update any "medium sized images" that were originally created from this image.</p>
+
+
+	<p class="important">If you make changes to an existing image in your gallery, then you should go edit and entries associated with that image and <dfn>Update</dfn> them.  This will make sure that ExpressionEngine picks up any changes you may have made to the image size.</p>
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

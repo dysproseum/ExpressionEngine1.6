@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Photo Gallery Entry Linking &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Photo Gallery</a> &gt;
+<strong>Photo Gallery Entry Linking</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Photo Gallery Entry Linking</h1>
+
+	<p>The <dfn>Next and Previous Entry Links</dfn> allow you to automatically generate links to the next or previous entry.  They are used when displaying a single entry to provide navigation to other entries.</p>
+
+	<p>These tags work as tag pairs and will cycle through all images in the gallery.</p>
+
+	<code>{exp:gallery:next_entry gallery="vacation"}<br />
+<br />
+&lt;p>Next entry: &lt;a href="{path='gallery/comments'}">{title}&lt;/a>&lt;/p><br />
+<br />
+{/exp:gallery:next_entry}</code>
+
+	<code>{exp:gallery:prev_entry gallery="vacation"}<br />
+<br />
+&lt;p>Previous entry: &lt;a href="{path='gallery/comments'}">{title}&lt;/a>&lt;/p><br />
+<br />
+{/exp:gallery:prev_entry}</code>
+
+	<p>These tags must go on a page designed to show a single entry, such as a comments page. By default, the tags cycle through the current entry's category, but this can be changed with the <kbd>show_all=""</kbd> parameter.</p>
+
+	<p class="important">The contents of these tags will only appear in a Template if you are viewing a "single-entry" type page (comments, permalink, etc.).  The tag contents will not appear for viewers in other cases.</p>
+
+
+	<h2>Parameters</h2>
+
+	<ul class="minitoc">
+		<li><a href="#par_gallery">gallery="vacations"</a></li>
+		<li><a href="#par_show_all">show_all="y"</a></li>
+		<li><a  href="#par_show_future_entries">show_future_entries="yes"</a></li>
+		<li><a href="#par_status">status="open"</a></li>
+	</ul>
+
+
+	<h3><a name="par_gallery">gallery=</a></h3>
+
+		<code>gallery="vacation"</code>
+
+		<p>This parameter <strong>is required</strong>. You can restrict the cycle to a specific gallery.</p>
+		
+		
+	<h3><a name="par_show_all">show_all=</a></h3>
+
+		<code>show_all="y"</code>
+
+		<p>By default, the next and previous link tags are restricted to the current entry's category.  By using this parameter you can make it rotate through all of the categories.</p>
+
+
+	<h3><a name="par_show_future_entries">show_future_entries=</a></h3>
+
+		<code>show_future_entries="yes"</code>
+
+		<p>You can determine whether you wish for entries dated in the "future" to be included.  This option is useful when doing things like creating a list of events, some of which have not occurred yet.</p>
+
+
+	<h3><a name="par_status">status=</a></h3>
+
+		<code>status="open"</code>
+
+		<p>You may restrict entries that are assigned to a particular status.  You can choose multiple statuses using a pipe:</p>
+
+		<code>status="open|closed"</code>
+
+		<p>Or exclude statuses using "not"</p>
+
+		<code>status="not closed"</code>
+
+
+
+	<h2>Variables</h2>
+
+	<ul class="minitoc">
+		<li><a href="#var_path">{path='gallery/comments'}</a></li>
+		<li><a href="#var_title">{title}</a></li>
+	</ul>
+
+
+	<h3><a name="var_path">path='</a></h3>
+
+		<code>{path=gallery/comments'}</code>
+
+		<p>The path (template_group/template) where you want to show the entry.  This is typically used within a standard HTML link tag:</p>
+
+		<code>&lt;a href="{path='gallery/comments'}">{title}&lt;/a></code>
+
+
+	<h3><a name="var_title">title</a></h3>
+
+		<code>{title}</code>
+
+		<p>This variable simply displays the title of the entry.</p>
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

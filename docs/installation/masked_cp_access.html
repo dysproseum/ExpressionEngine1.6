@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Masking Access to the Control Panel &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../index.html" />
+  <style type="text/css" media="screen,print">@import url(../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="../index.html#install_docs">Installation and Update Instructions</a> &gt;
+<strong>Masking Access to the Control Panel</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Masking Access to the Control Panel</h1>
+
+	<p>There may be times when you wish to give some of your users access to your ExpressionEngine Control Panel without revealing the location of your backend ExpressionEngine files for security reasons.</p>
+
+	<h4>To use this feature, follow these steps.</h4>
+
+
+	<h2>Copy <var>admin.php</var></h2>
+
+	<p>Look in your <kbd>system/utilities/</kbd> folder and you will find a file named <var>admin.php</var>.</p>
+	
+	<p>This is the file people will use to access the Control Panel, so copy it and place it wherever you would like access to be granted.</p>
+	
+	<p>For example, if you would like users to access your Control Panel via <samp>http://example.com/admin.php</samp> then place the file in your main directory.</p>
+
+	<p>If you want, you may rename the <var>admin.php</var> file to another name.</p>
+
+	<p class="important"><strong>Important:</strong> A copy of the main site <var>path.php</var> file must be in the same folder that you place the <var>admin.php</var> file.
+	If you are placing your <var>admin.php</var> file in a subdirectory, then make a copy of your <var>path.php</var> file and place it there.</p>
+
+
+
+	<h2>Edit <var>path.php</var></h2>
+
+	<p>If you are using a copy of the <var>path.php</var> file in a sub-folder you will need to edit the file so that it has the correct setting inside it.</p>
+
+
+	<h3>$system_path</h3>
+
+		<p>You must ensure that the <samp>$system_path</samp> variable is set correctly within the file.  The variable should contain a <strong>relative path</strong> from the current directory (in which the <var>path.php</var> file resides) to your site's <kbd>system</kbd> directory.  For instance:</p>
+
+		<code>$system_path = "../system/";</code>
+
+
+	<h3>$site_name (Multiple Site Manager only)</h3>
+	
+	<p>If you are running the <a href="../cp/sites/index.html">Multiple Site Manager</a> and are using this technique to setup a Site specific Control Panel login, you need to add the $site_name variable to your path.php file.</p>
+	
+	<code>$site_name = 'Site_Short_Name';</code>
+	
+	<p>This will tell ExpressionEngine which Site's Control Panel to login to.</p>
+	
+	<h3>$cp_url (optional)</h3>
+	
+	<p>If you run your control panel from both the system folder and a masked access file, or multiple Sites with masked access with the Multiple Site Manager,
+		you can add this variable to your path.php file to ensure that all links created in the control panel for the logged in user are consistent.</p>
+		
+	<code>$cp_url = 'http://example.com/admin.php';</code>
+		
+	<h2>You're Done!</h2>
+
+	<p>Your users can now access your Control Panel via your new <var>admin.php</var> file without ever knowing where your backend files are actually located.</p>
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

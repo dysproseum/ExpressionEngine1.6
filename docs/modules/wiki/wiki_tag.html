@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Wiki Tag &#8211; ExpressionEngine Documentation</title> 
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style> 
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="README.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+</tr>
+</table>
+</div>
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Wiki Module</a> &gt;
+<strong>Wiki Tag</strong>
+</div>
+
+<div id="content">
+
+	<h1>Wiki Tag</h1>
+
+	<p>The Wiki module only has one tag that is used in a ExpressionEngine Template:</p>
+	
+	<code>{exp:wiki}</code>
+	
+<p>This tag is placed in the <strong>index template</strong> of the Template Group that you are using for your wiki as described in the <a href="wiki_installation.html">Wiki Installation</a> instructions. The tag displays the wiki within the specified ExpressionEngine template.</p>
+
+<p class="important"><strong>NOTE:</strong> Modifying the wiki's theme (visual design) is described in the <a href="wiki_templates.html">Wiki Theme Template</a> section of the User Guide.</p>
+
+	<h2>Wiki Tag Parameters</h2>
+	
+<ul>
+<li><a href="#wiki_para_base_path">base_path=""</a></li>
+<li><a href="#wiki_para_profile_path">profile_path=""</a></li>
+<li><a href="#wiki_para_theme">theme=""</a></li>
+<li><a href="#wiki_para_wiki">wiki=""</a></li>
+</ul>
+	
+	<h3><a name="wiki_para_base_path">base_path</a></h3>
+
+	<code>{exp:wiki base_path="wiki/index"}</code>
+
+	<p>The <var>template_group/template</var> location of the Wiki tag in your site.  This parameter is used for creating all links in the Wiki, so make sure it is correct.</p>
+	
+	<p>This is a <strong>required</strong> parameter.</p>
+	
+	<h3><a name="wiki_para_profile_path">profile_path</a></h3>
+
+	<p>When this parameter is used, you can direct the member paths from the default member area of your ExpressionEngine installation to the Discussion Forum member area.</p>
+
+	<p>The value for the <strong>profile_path=""</strong> parameter is the <var>template_group/template</var> or <var>trigger word</var> for your Discussion Forum. The variable will then create the URL automatically.</p>
+	
+	<p>For example if you had this in the wiki tag:</p>
+	
+	<code>{exp:wiki profile_path="site/my_forum"}</code>
+	
+	<p>The <var>{path:register}</var> variable would render:</p>
+	
+	<code>http://example.com/index.php/site/my_forum/member/register/</code>
+	
+	<p>Here is an example using the Discussion Forum trigger word:</p>
+	
+	<code>{exp:wiki profile_path="forums"}</code>
+	
+	<p>The <var>{path:register}</var> variable would render:</p>
+	
+	<code>http://example.com/index.php/forums/member/register/</code>
+	
+	<h3><a name="wiki_para_theme">theme</a></h3>
+
+	<code>{exp:wiki theme="default"}</code>
+
+	<p>The theme to use for your Wiki. Themes are located in the <kbd>themes/wiki_themes/</kbd> directory. The parameter specifies
+	the name of your theme's folder and that folder's theme file. This means that a theme's folder and its main php file will match. For example the default theme structure is <kbd>default/default.php</kbd> so the parameter would be <var>default</var>. See the <a href="wiki_templates.html">Wiki Templates</a> section for more information on themes.</p>
+	
+	<h3><a name="wiki_para_wiki">wiki</a></h3>
+	
+	<code>{exp:wiki wiki="default_wiki"}</code>
+	
+	<p>Use the <strong>Short Name</strong> of the wiki you want to display in the template. If no value is set, ExpressionEngine will attempt to use the 'default_wiki' created when the module is installed. You can only specify one wiki in this parameter.</p>
+	
+</div>
+	
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

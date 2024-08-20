@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Data Caching and Performance &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../index.html" />
+  <style type="text/css" media="screen,print">@import url(../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="../index.html#gen_docs">General Information</a> &gt;
+<strong>Data Caching and Performance</strong>
+</div>
+
+
+
+<div id="content">
+
+	<h1>Data Caching and Performance </h1>
+
+	<p>Although ExpressionEngine renders your web pages very quickly, you'll find that there is a direct correlation between load speed and the amount of dynamic information contained within your pages.  The greater the number of tags and variables you use, the more processing cycles the template rendering engine has to perform.</p>
+
+	<p>Below you will find information on ExpressionEngine's caching mechanisms that are at your disposal to help mitigate some of the on-the-fly processing that ExpressionEngine performs.  Using these may increase the performance of your site and utilize server resources more efficiently.  Speak with your server administrator to determine which settings should be enabled in your environment, so that you do not inadvertently <a href="handling_extreme_traffic.html#disk_io">increase server load</a>.</p>
+
+	<p>The caching technology in ExpressionEngine is comprised of several independent data caching systems and preferences.</p>
+
+	<ol>
+		<li><a href="#query_caching">Query Caching</a></li>
+		<li><a href="#tag_caching">Tag Caching</a></li>
+		<li><a href="#template_caching">Template Caching</a></li>
+		<li><a href="#dynamic_weblog_query_caching">Dynamic Weblog Query Caching</a></li>
+		<li><a href="#query_disabling">Query Disabling</a></li>
+	</ol>
+
+
+	<h2><a name="query_caching">Query Caching</a></h2>
+
+	<p>Query Caching caches the output of your database, saving each query as a text file.  When your visitors access your web pages, the cache files are examined to see if the particular queries being requested exist in cached form.  If they do, ExpressionEngine uses the cached data instead of querying your database. This provides a significant reduction in your overall database load.  The query caching system is completely dynamic, meaning it automatically updates itself when new information is added to your database.</p>
+
+	<p>Some queries can not be cached because the syntax of the query changes dynamically every time the query is run.  The main weblog display query, for example, always matches the expiration date against the current time in order to determine if entries have expired.  This causes the query to change slightly with each page load; thus it cannot use the standard query caching.  (See <a href="#dynamic_weblog_query_caching">Dynamic Weblog Query Caching</a> for an alternative that can be used in many cases.)</p>
+
+	<p>The query caching system will provide anywhere from a 30% to 90% reduction in the total number of queries depending on how your pages are constructed.</p>
+
+	<p>This feature can be manually turned off from within your <dfn>Database Preferences</dfn> page in the Control Panel.</p>
+
+
+
+	<h2><a name="tag_caching">Tag Caching</a></h2>
+
+	<p>The Tag Caching system lets you cache the output of individual tags.  This enables you to display sections of your pages completely dynamically while leaving others to display statically.  By caching individual tags you will reduce the amount of scripting and server resources needed to display any given page while maintaining a fully dynamic presentation for things that require it.</p>
+
+	<p>Tag caching is time-based, meaning the cache is used for a user-definable time interval.  When the time expires, the cache is automatically refreshed.</p>
+
+	<p>To enable tag caching, add these two parameters to <strong>any</strong> tag:</p>
+
+	<code>cache="yes" refresh="10"</code>
+
+	<p><b>Note:</b> <samp>refresh</samp> indicates the time, in minutes, between cache refreshes.</p>
+
+	<p>For example, to cache your weblog tag in 30 minute intervals you'll do this:</p>
+
+	<code>{exp:weblog:entries cache="yes" refresh="30"}</code>
+
+
+
+	<h2><a name="template_caching">Template Caching</a></h2>
+
+	<p>Template Caching (or Dynamic Page Caching) lets you cache entire templates, making your pages much more light-weight.  Because ExpressionEngine requires some scripting and a few database queries in order to manage core resources, we can't achieve 100% static pages, but we can get close.</p>
+
+	<p>Template caching, like tag caching, is time-based.  To enable Template caching, click the "Preferences" link in your <dfn>Templates</dfn> page.  There you will enable caching as well as set the time interval of the refreshes.</p>
+
+	<p>We call it Dynamic Page Caching because the system will clear itself automatically when certain events happen.  For example, if you cache your comments page, when someone submits a comment, the cache will be cleared, momentarily overriding the normal caching preferences.</p>
+ 
+	<p><b>Note:</b> Dynamic Page Caching will supersede Tag Caching.  There is no increased benefit to using tag caching and page caching together.  When page caching is on, no other caching setting matters.  Therefore, if you want to cache individual tags, turn off page caching.</p>
+
+
+
+	<h2><a name="dynamic_weblog_query_caching">Dynamic Weblog Query Caching</a></h2>
+
+	<p>This feature is found under <dfn>Admin &gt; Global Weblog Preferences</dfn>.  This feature will improve the speed at which the <samp>{exp:weblog:entries}</samp> tag is rendered by caching queries that are normally executed dynamically.  This option cannot be used for all people, though.</p>
+
+	<p class="important">Enable this feature only if you <strong>do not</strong> use future entries, expiring entries, or random entries.</p>
+
+
+
+	<h2><a name="query_disabling">Query Disabling</a></h2>
+
+	<p>The <samp>disable=</samp> parameter is available in the <samp>{exp:weblog:entries}</samp> tag.  It allows you to turn off aspects of the tag that you might not be using in order to improve performance.  The weblog tag is designed to fetch a lot of information by default: Categories, custom fields, member data, etc.  Depending on how you use the tag, some of this data may not be needed.  Through the use of the "disable" parameter you can turn off aspects of the tag in order to make it more lightweight.</p>
+
+	<p>The syntax for the disable parameter is this: <samp>disable="ITEM YOU WANT TO DISABLE"</samp>.  There are six things that can be turned off:</p>
+
+	<ul>
+		<li>categories</li>
+		<li>category_fields</li>
+		<li>custom_fields</li>
+		<li>member_data</li>
+		<li>pagination</li>
+		<li>trackbacks</li>
+	</ul>
+
+	<p>You may specify multiple items to disable by separating them with the pipe character:</p>
+
+	<code>disable="categories|member_data|trackbacks"</code>
+
+	<p>The best approach is to examine the data you are showing in each instance of the tag. If there is a type of data you are not utilizing, turn it off.</p>
+
+	<p>For example, let's say you are using an instance of your weblog tag to show your 10 most recent entry titles:</p>
+
+	<code>{exp:weblog:entries orderby="date" sort="desc" limit="10"}<br />
+&lt;a href="{title_permalink='weblog/comments'}">{title}&lt;/a>&lt;br /><br />
+{/exp:weblog:entries}</code>
+
+	<p>In this example you are only showing the title of your entries and nothing else; yet, the weblog tag automatically fetches categories and other data automatically.  Using the <samp>disable=</samp> parameter you can turn off the unneeded features from being queried.  In this case, you don't need any of the features that can be disabled.</p>
+
+	<code>{exp:weblog:entries orderby="date" sort="desc" limit="10" disable="categories|custom_fields|member_data|pagination|trackbacks"}<br />
+&lt;a href="{title_permalink='weblog/comments'}">{title}&lt;/a>&lt;br /><br />
+{/exp:weblog:entries}</code>
+
+<p class="important"><strong>Note</strong>: You can also use <dfn>disable="category_fields"</dfn> in the <a href="../modules/weblog/categories.html" id="" title="categories">weblog categories</a> tag, the  <a href="../modules/weblog/category_heading.html" id="" title="category_heading">category heading</a> tag, and the <a href="../modules/weblog/category_archive.html" id="" title="category_archive">category archives</a> tag.
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

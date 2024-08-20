@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Wiki Module Version 1.2 Update Notes &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Wiki Module</a> &gt;
+<a href="wiki_update.html">Wiki Updates</a> &gt;
+<strong>Wiki Module Version 1.2 Update Notes</strong>
+</div>
+
+
+<div id="content">
+
+	<h2>Wiki Module v. 1.2</h2>
+	
+	<strong>* Released with ExpressionEngine 1.6.1</strong>
+	
+	<p class="important">The changes made to version 1.2 of the Wiki module require updating your themes.
+		If you are using one of the two supplied themes, 'Default' or 'Azure', you can simply update your
+		 <samp>/themes/wiki_themes/</samp> folder.  If you are using a customized theme, you will need
+		to make the changes indicated below.</p>
+		
+	<h3>Edit Previews</h3>
+	
+	<p>Starting with version 1.2, it is possible to preview article submissions when editing. This requires
+		a change to your <samp>Edit Template - wiki_edit()</samp>.  Before the Form Declaration tag, add:</p>
+		
+	<code>{if preview}<br />
+&lt;div class=&quot;defaultBold&quot;&gt;WARNING: You are viewing a preview of your submission.  No changes to the article have been made.&lt;/div&gt;<br />
+&lt;div class=&quot;preview&quot;&gt;{preview}&lt;/div&gt;<br />
+{/if}</code>
+	
+	<p>Additionally, a few variables must be added to the value attributes of the input fields.
+		The new variables are in bold, shown in context.</p>
+		
+	<code>Notes:&amp;nbsp; &lt;input class=&quot;input&quot; name=&quot;revision_notes&quot; id=&quot;revision_notes&quot; value=&quot;<strong>{revision_notes}</strong>&quot; type=&quot;text&quot; size=&quot;50&quot; maxlength=&quot;80&quot; /&gt;</code>
+	
+	<code>Rename:&amp;nbsp; &lt;input class=&quot;input&quot; name=&quot;rename&quot; id=&quot;rename&quot; type=&quot;text&quot; value=&quot;<strong>{rename}</strong>&quot; size=&quot;50&quot; maxlength=&quot;80&quot; /&gt;</code>
+	
+	<p>Finally, the submit button needs to be replaced with:</p>
+	
+	<code>&lt;input name=&quot;submit&quot; class=&quot;submit&quot; type=&quot;submit&quot; value=&quot;Submit&quot; onclick=&quot;is_preview = false;&quot; /&gt;<br />
+	&lt;input name=&quot;preview&quot; class=&quot;submit&quot; type=&quot;submit&quot; value=&quot;Preview&quot; onclick=&quot;is_preview = true;&quot; /&gt;</code>
+	
+	<h3>Associated Pages, i.e. What Links Here?</h3>
+	
+	<p>A new Special page was added for articles to show what other articles in the wiki link to the viewed article.
+		A new template must be added to accommodate this change.  Before the closing PHP tag in your theme file
+		(the <strong>?&gt;</strong>), add:</p>
+		
+	<code>
+/* ----------------------------------------<br />
+/*  Template - Special Page: Associated Pages<br />
+/* ----------------------------------------*/<br />
+<br />
+function wiki_special_associated_pages()<br />
+{<br />
+&nbsp;&nbsp;ob_start();<br />
+<br />
+&nbsp;&nbsp;?&gt;<br />
+<br />
+{wiki:associated_pages}<br />
+<br />
+{if no_results}<br />
+&lt;h3&gt;No Articles Link to {article_title}&lt;/h3&gt;<br />
+{/if}<br />
+<br />
+{header}&lt;h3&gt;Articles that link to {article_title}&lt;/h3&gt;<br />
+&lt;p&gt;The following pages link to &lt;a href=&quot;{path:view_orig_article}&quot;&gt;{article_title}&lt;/a&gt;:&lt;/p&gt;<br />
+&lt;ul&gt;<br />
+{/header}<br />
+<br />
+&lt;li&gt;&lt;a href=&quot;{path:view_article}&quot;&gt;{title}&lt;/a&gt;&lt;/li&gt;<br />
+<br />
+{footer}&lt;/ul&gt;{/footer}<br />
+<br />
+{/wiki:associated_pages}<br />
+<br />
+&nbsp;&nbsp;&lt;?php<br />
+<br />
+&nbsp;&nbsp;$buffer = ob_get_contents();<br />
+&nbsp;&nbsp;ob_end_clean();<br />
+<br />
+&nbsp;&nbsp;return $buffer;<br />
+}<br />
+/* END */<br />
+<br />
+/** Variables List for wiki_special_associated_articles():<br />
+<br />
+Along with the variables from wiki_page(), this template also has:<br />
+<br />
+TAG VARIABLES:<br />
+{wiki:associated_articles}&nbsp;&nbsp;- Used for displaying list of recent changes<br />
+&nbsp;&nbsp;--- SINGLE VARIABLES:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{title}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Page Title<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{path:view_article}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Link to View Article<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{article_title}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Page Title of the originating article<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{path:view_orig_article}&nbsp;&nbsp;&nbsp;&nbsp;- Link to view the originating article<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{count}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- &quot;count&quot; of the current revision being displayed<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{switch=&quot;one|two|three&quot;}&nbsp;&nbsp;&nbsp;&nbsp;- Rotate between any number of values, separated by a pipe symbol<br />
+&nbsp;&nbsp;--- PAIR VARIABLES:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{header}{/header}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Content to go before this tag&#x27;s content<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{footer}{/footer}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Content to go after this tag&#x27;s content<br />
+&nbsp;&nbsp;--- CONDITIONAL VARIABLES:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{if no_results}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-- Content to display if there are no associated articles<br />
+<br />
+*/
+		</code>
+	
+	<p>Your Wiki Menu will need a link to access this page.  Placement is entirely up to you; the default themes choose
+		to place this as the last item on the Wiki menu.</p>
+		
+	<code>{if article}&lt;li&gt;&lt;a href=&quot;{path:wiki_home}{special_namespace}:Associated_Pages/{url_title}/&quot; title=&quot;What Links Here&quot;&gt;What Links Here&lt;/a&gt;&lt;/li&gt;{/if}</code>
+	
+	<h3>Uncategorized Pages</h3>
+	
+	<p>A new Special page was added to show articles that are not assigned to any categories.
+		A new template must be added to accommodate this change.  Before the closing PHP tag in your theme file
+		(the <strong>?&gt;</strong>), add:</p>
+		
+	<code>
+/* ----------------------------------------<br />
+/*  Template - Special Page: Uncategorized Pages<br />
+/* ----------------------------------------*/<br />
+<br />
+function wiki_special_uncategorized_pages()<br />
+{<br />
+&nbsp;&nbsp;ob_start();<br />
+<br />
+&nbsp;&nbsp;?&gt;<br />
+<br />
+&lt;div class=&#x27;defaultLeft&#x27;&gt;<br />
+Choose Namespace:  &lt;select onchange=&quot;location.href=this.value&quot;&gt;<br />
+&lt;option value=&quot;{path:wiki_home}{special_namespace}:Uncategorized/&quot;&gt;{main_namespace}&lt;/option&gt;<br />
+{wiki:custom_namespaces_list}<br />
+&lt;option value=&quot;{path:wiki_home}{special_namespace}:Uncategorized/{namespace_short_name}/&quot; {namespace_selected}&gt;{namespace_label}&lt;/option&gt;<br />
+{/wiki:custom_namespaces_list}<br />
+&lt;/select&gt;<br />
+&lt;/div&gt;<br />
+<br />
+{wiki:title_list columns=&quot;3&quot;}<br />
+<br />
+{if no_results}<br />
+&lt;div class=&quot;marginpad&quot;&gt;&lt;strong&gt;Sorry, there seem to be no uncategorized articles for this namespace.&lt;/strong&gt;&lt;/div&gt;<br />
+{/if}<br />
+<br />
+&lt;table style=&quot;width:98%;&quot;&gt;<br />
+<br />
+{articles}<br />
+{row_start}&lt;tr&gt;{/row_start}<br />
+<br />
+{row_column}<br />
+&lt;td style=&quot;width:33%&quot;&gt;<br />
+&lt;a href=&quot;{path:view_article}&quot;&gt;{title}&lt;/a&gt;&lt;br /&gt;<br />
+&lt;/td&gt;<br />
+{/row_column}<br />
+<br />
+{row_blank}&lt;td&gt;&amp;nbsp;&lt;/td&gt;{/row_blank}<br />
+<br />
+{row_end}&lt;/tr&gt;{/row_end}<br />
+<br />
+{/articles}<br />
+<br />
+&lt;/table&gt;<br />
+<br />
+{/wiki:title_list}<br />
+<br />
+&nbsp;&nbsp;&lt;?php<br />
+<br />
+&nbsp;&nbsp;$buffer = ob_get_contents();<br />
+&nbsp;&nbsp;ob_end_clean();<br />
+<br />
+&nbsp;&nbsp;return $buffer;<br />
+}<br />
+/* END */<br />
+<br />
+/** Variables List for wiki_special_uncategorized_pages():<br />
+<br />
+Along with the variables from wiki_page(), this template also has:<br />
+<br />
+TAG VARIABLES:<br />
+{wiki:title_list}&nbsp;&nbsp; - Used for displaying list of titles<br />
+&nbsp;&nbsp;--- CONDITIONALS<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{if no_results}&nbsp;&nbsp;- If there are no articles to show<br />
+&nbsp;&nbsp;--- PARAMETERS<br />
+&nbsp;&nbsp;&nbsp;&nbsp;columns=&quot;&quot;&nbsp;&nbsp; - How many columns to display<br />
+&nbsp;&nbsp;-- VARIABLE PAIRS<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{articles}&nbsp;&nbsp; - Encloses the repeating portion of the tag<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{row_start}&nbsp;&nbsp; - What content to use at start of a row<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{row_blank}&nbsp;&nbsp; - What content to use if blank column<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{row_end}&nbsp;&nbsp; - What content to use at end of a row<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{row_column} - Used for each column in a row<br />
+&nbsp;&nbsp;&nbsp;&nbsp;--- SINGLE VARIABLES<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{title}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Title of article<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{last_updated format=&quot;&quot;}&nbsp;&nbsp;- When Article was last updated<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{author}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Screen Name of revision author<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{email}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Email for Revision Author<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{url}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- URL for Revision Author<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{revision_notes}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Notes about revision, if any<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{path:view_article}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Link to View Article<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{content}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Content of revision<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{article}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Fully rendered article<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{count}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- &quot;count&quot; of the current article being displayed<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{switch=&quot;one|two|three&quot;}&nbsp;&nbsp;- Rotate between any number of values, separated by a pipe symbol<br />
+<br />
+*/
+	</code>
+
+		<p>Your Wiki Menu will need a link to access this page.  Placement is entirely up to you; the default themes choose
+			to place this following the Title List on the Wiki menu.</p>
+		
+		<code>&lt;li&gt;&lt;a href=&quot;{path:wiki_home}{special_namespace}:Uncategorized&quot; title=&quot;Uncategorized Pages&quot;&gt;Uncategorized Pages&lt;/a&gt;&lt;/li&gt;</code>
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Hidden Templates &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../index.html" />
+  <style type="text/css" media="screen,print">@import url(../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="../index.html#template_docs">Templating System</a> &gt;
+<strong>Hidden Templates</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Hidden Templates</h1>
+
+	<p>Sometimes it is undesirable to allow access to a template via a URL.  For instance, a template that you only use as an <a href="./embedding_templates.html">embedded template</a> would likely be an incomplete HTML document, and not something you would want your users to be able to come across on its own, even accidentally.</p>
+
+	<p>"Hidden" templates are just that: templates that cannot be accessed from a URL, but can be used as embedded templates.  What makes a template "hidden"?</p>
+	
+	<h2>Hiding Templates</h2>
+	
+	<p>ExpressionEngine uses a convention that is common among many file-systems, so it may already be familiar to you. To make a template "hidden", simply give it a name preceded by a period, e.g. "<samp>.my_hidden_template</samp>".</p>
+	
+	<h2>When a Hidden Template is Requested in the URL</h2>
+	
+	<p>When someone attempts to access a hidden template via the URL, one of two things will occur.  If you have specified a 404 template in your <a href="../cp/templates/global_template_preferences.html">Global Template Preferences</a>, then the 404 template will be displayed, with 404 headers.  If you have not specified a 404 template, then the <dfn>index</dfn> template of the requested template group will be displayed.</p>
+	
+	<h3>Example</h3>
+	
+	<code>{embed="site/.navigation" loc="books"}</code>
+	
+	<p>In this example, if the URL <kbd>http://example.com/index.php/site/.navigation</kbd> was requested, the site's 404 template would be shown if it was defined, or the <dfn>site/index</dfn> template if it were not.</p>
+	
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

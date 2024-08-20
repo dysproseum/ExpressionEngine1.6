@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Multiple Site Manager &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#cp_docs">The Control Panel</a> &gt;
+<a href="index.html">Multiple Site Manager</a> &gt; 
+<strong>Variables and Parameters</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Multiple Site Manager Variables and Parameter</h1>
+
+<h2>Parameter</h2>
+
+	<p>The Multiple Site Manager enables the use of the <samp>site=""</samp> parameter installation wide. This parameter will be used when you want to pull the content of one Site into another Site's templates. The value of the parameter is always the Site's Short Name.</p>
+
+<p>The <samp>site=""</samp> parameter is available to the following:</p>
+
+<ul>
+	<li>Weblog Module: Every single tag.</li>
+	<li>Comment Module: Every single tag.</li>
+	<li>RSS Module</li>
+	<li>Trackback Module</li>
+</ul>
+
+<p>When you use the <samp>site=""</samp> parameter it will exclude all other Sites. If the <samp>site=""</samp> parameter is not specified then the current site is used.</p>
+
+<h3><a name="embedding"></a>Embedding Templates from Another Site</h3>
+
+<p>To embed a template from another Site, simply prefix the template group and template specified with the short name of the site you wish to pull the template from as follows:</p>
+
+<code>{embed="site_short_name:template_group/template"}</code>
+
+<p>So if the Site's Short Name is "siteA" and you want to embed the "global/footer" template:</p>
+
+<code>{embed="siteA:global/footer"}</code>
+
+<h3>Specifying Multiple Sites (prepare for a head trip)</h3>
+
+<div class="important">
+<p><strong>Note:</strong>&nbsp; Specifying multiple Sites does not work with the <samp>{embed=""}</samp> tag.</p>
+</div>
+
+<p>When using the <samp>site=""</samp> parameter in the Weblog, Comment, Statistics, and RSS modules you can specify multiple Sites like so:</p>
+
+<code>site="siteA|siteB|siteC"</code>
+
+<p>Like other ExpressionEngine parameters, you can also use 'not' to specify what Sites not to show:</p>
+
+<code>site="not SiteD"</code>
+
+<p>Let's pause a moment to remember that each Site is independent of other Sites. This means you can have Weblogs that have the same short_name. The implications of this are far reaching and provide a lot of flexibility but will also require careful consideration.</p>
+
+<p>For example, let's say you have SiteA, SiteB, and SiteC. Each of these Sites has a "news" weblog which uses the Weblog Short Name of "news". The following code would display the "news" weblogs from all the Sites:</p>
+
+<code>{exp:weblog:entries weblog="news" site="siteA|siteB|siteC"}</code>
+
+<h2>Parameters</h2>
+
+<p>Within the weblog entries tag, it is possible to output a list of entries from multiple Sites while ordering by Site and Custom Field.  Read more about the <a href="../../modules/weblog/parameters.html#par_orderby" id="" title="parameters">Multiple Site Manager and orderby=</a>.
+	
+<h2>Variables</h2>
+
+<p>The following Global Variables are available with the Multiple Site Manager:</p>
+
+	<ul>
+		<li><em>{site_id}</em>: Displays the Site's ID number.</li>
+		<li><em>{site_label}</em>: Displays the Site's Label.</li>
+		<li><em>{site_short_name}</em>: Displays the Site's Short Name.</li>
+	</ul>	
+
+
+<h1>Next:&nbsp; <a href="managesites.html">Manage existing Sites</a></h1>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+</div>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

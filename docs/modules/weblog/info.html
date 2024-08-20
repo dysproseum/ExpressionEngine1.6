@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Weblog Information Tag &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Weblog Module</a> &gt;
+<strong>Weblog Information Tag</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Weblog Information Tag</h1>
+
+	<p>The purpose of this tag is to display general information about the specified weblog as set under <dfn>Admin &gt; Weblog Management</dfn>.</p>
+
+	<code>{exp:weblog:info weblog="news"}<br />
+<br />
+Weblog Name: {blog_title}&lt;br /><br />
+Description: {blog_description}<br />
+<br />
+{/exp:weblog:info}</code>
+
+
+	<h2>Parameters</h2>
+
+	<ul class="minitoc">
+		<li><a href="#par_weblog">weblog="news"</a></li>
+	</ul>
+
+	<h3><a name="par_weblog">weblog=</a></h3>
+
+		<code>weblog="weblog_name"</code>
+
+		<p>The name (short name) of the weblog.  This is a <strong>required</strong> parameter.</p>
+
+
+
+	<h2>Variables</h2>
+
+	<ul class="minitoc">
+		<li><a href="#var_blog_description">{blog_description}</a></li>
+		<li><a href="#var_blog_encoding">{blog_encoding}</a></li>
+		<li><a href="#var_blog_lang">{blog_lang}</a></li>
+		<li><a href="#var_blog_title">{blog_title}</a></li>
+		<li><a href="#var_blog_url">{blog_url}</a></li>
+	</ul>
+
+
+	<h3><a name="var_blog_description">blog_description</a></h3>
+
+		<code>{blog_description}</code>
+
+		<p>This variable simply displays the content from the "Weblog Description" field.</p>
+
+
+	<h3><a name="var_blog_encoding">blog_encoding</a></h3>
+
+		<code>{blog_encoding}</code>
+
+		<p>This variable simply displays the content from the "XML Character Encoding" setting.</p>
+
+
+	<h3><a name="var_blog_lang">blog_lang</a></h3>
+
+		<code>{blog_lang}</code>
+
+		<p>This variable simply displays the content from the "XML Language" setting.</p>
+
+
+	<h3><a name="var_blog_title">blog_title</a></h3>
+
+		<code>{blog_title}</code>
+
+		<p>This variable simply displays the content from the "Full Weblog Name" setting.</p>
+
+
+	<h3><a name="var_blog_url">blog_url</a></h3>
+
+		<code>{blog_url}</code>
+
+		<p>This variable simply displays the content from the "Weblog URL" setting.</p>
+
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Image Resizing Preferences &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../../index.html"><img src="../../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../../index.html">Table of Contents</a> &gt;
+<a href="../../../index.html#cp_docs">The Control Panel</a> &gt;
+<a href="../index.html">Admin</a> &gt;
+<a href="index.html">System Preferences</a> &gt;
+<strong>Image Resizing Preferences</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Image Resizing Preferences</h1>
+
+	<div class="path">Control Panel Location:&nbsp; <dfn>Admin &gt; System Preferences &gt; Image Resizing Preferences</dfn></div>	
+
+	<p>This section of the Control Panel allows you to define preferences for image resizing, such as creating thumbnails or resizing uploaded images.</p>
+
+
+	<h3>Image Resizing Protocol</h3>
+
+		<p>This is where you indicate which resizing protocol to use.  You may need to contact your Host or server admin to determine which protocols are installed and available on your server.  The options are:</p>
+
+		<ol>
+			<li><a href="http://www.boutell.com/gd/">GD</a></li>
+			<li><a href="http://www.boutell.com/gd/">GD 2</a></li>
+			<li><a href="http://www.imagemagick.org/">ImageMagick</a></li>
+			<li><a href="http://netpbm.sourceforge.net/">NetPBM</a></li>
+		</ol>
+
+
+	<h3>Image Converter Path</h3>
+
+		<p>If you specified either "ImageMagick" or "NetPBM" in the preference above, then you <strong>must</strong> list the <em>server path</em> to the library in this setting.  If you do not know the server path, contact your Host or server admin.</p>
+
+
+	<h3>Image Thumbnail Suffix</h3>
+
+		<p>You may specify a suffix to be automatically added to the filename of any generated thumbnail.  This will ensure that the thumbnail image does not overwrite the original and will also make it easy to see that it is a thumbnail image.  "<samp>thumb</samp>" is used by default.</p>
+
+		<p>If the original image was <var>flowers.jpg</var> then the thumbnail would be <var>flowers_thumb.jpg</var>.</p>
+
+
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

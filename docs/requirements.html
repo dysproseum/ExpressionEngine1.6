@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Requirements &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="./index.html" />
+  <style type="text/css" media="screen,print">@import url(./docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="index.html"><img src="./images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="index.html">Table of Contents</a> &gt;
+<strong>Requirements</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Requirements</h1>
+	
+	<div class="critical">
+	<p>We have created a <a href="http://expressionengine.com/files/wizard.zip"><b>Server Wizard</b></a> that will verify whether your server is compatible with ExpressionEngine. To use the Wizard:</p>
+		<ul>
+		<li><a href="http://expressionengine.com/files/wizard.zip">Download</a> and unzip the file.</li>
+		<li>Upload the file to your server.</li>
+		<li>Point your web browser to the file.&nbsp; Example: http://example.com/wizard.php</li>
+		</ul>		
+	</div>
+	
+		<p>To create a site with ExpressionEngine, you must have at least minimal experience with HTML and understand how to create a website. Further, you must be familiar with the process of uploading files to your server via FTP.</p>
+
+	<p>To experience the full functionality of ExpressionEngine you must use a web browser with Javascript enabled.  If Javascript is disabled, then some dynamic functionality in the Control Panel and other areas of the site may not function.</p>
+	
+	<h2>Server Requirements</h2>
+	
+	<ul>
+		<li><a href="http://www.php.net/">PHP</a> version 4.1 or newer</li>
+		<li><a href="http://www.mysql.com/">MySQL</a> version 3.23.32 or newer</li>
+
+		<li>Your hosting account must have the following minimum MySQL grant privileges for database tables:
+			
+			<ul>
+				<li>SELECT</li>
+				<li>INSERT</li>
+				<li>UPDATE</li>
+				<li>DELETE</li>
+				<li>CREATE</li>
+				<li>ALTER</li>
+				<li>DROP</li>
+			</ul>
+		</li>
+		<li>Your MySQL server must not be running in Strict mode.</li>
+		<li>10 MB of free space on your server for the ExpressionEngine software and modules.</li>
+		<li>2 MB of Database space. Note: The database will increase in size as you add new content.</li>
+	</ul>
+
+
+	<h2>Optional Requirements</h2>
+
+	<p>Some features of ExpressionEngine are optional to use.  However, in order to be able to use them you will need to meet their requirements.</p>
+
+	<ul>
+	<li><strong>CAPTCHAs and Watermarking.</strong>&nbsp; Your server must have the <a href="http://www.php.net/manual/en/ref.image.php">GD (or GD 2)</a> 
+	library compiled into PHP in order to use the <a href="./general/captchas.html">CAPTCHAs</a> feature or the 
+	<a href="./modules/gallery/control_panel/watermarking.html">watermarking</a> feature in the Photo Gallery Module.</li>
+	
+	<li><strong>Image Thumbnailing.</strong>&nbsp; To take advantage of the image thumbnailing feature your server must support one of these image manipulation protocols:
+		<ol>
+			<li><a href="http://www.php.net/manual/en/ref.image.php">GD (or GD 2)</a></li>
+			<li>ImageMagick</li>
+			<li>NetPBM</li>
+		</ol>
+	</li>
+	<li><strong>Pings and Trackbacks.</strong>&nbsp; Your server must have XML support compiled into PHP in order to send pings and Trackbacks.</li>
+	<li><strong>Spell Checking.</strong>&nbsp; In order to be able to use the spell check feature in ExpressionEngine, 
+	your server must have PHP compiled with <a href="http://us2.php.net/pspell">pspell</a> support <strong>or</strong> be able to contact remote servers though PHP.  
+	If you are unsure if this is the case, contact your Host or server admin.</li>
+
+	</ul>
+
+
+	<h2>Notes</h2>
+
+<h3>Apache Server</h3>
+
+	<p>If you are hosted on an Apache server it needs to be configured with <samp>AcceptPathInfo On</samp> for the URLs to work with the default settings.  Most server are configured this way, but if yours is <strong>not</strong> then there are three options:</p>
+
+	<ol>
+		<li>Manually turn that feature on using a <var>.htaccess</var> file.</li>
+		<li>Contact your Host or server admin to have them enable the option.</li>
+		<li>Run your site using query strings. See the "Query String" section of the <a href="general/urls.html">Explanation of URLs</a> page for details.</li>
+	</ol>
+
+<h3>URL Segment Support</h3>
+
+<p>If the Server Wizard lists <samp>URL Segment Support</samp> as <em>Unsupported</em>, you will need to run your ExpressionEngine site using query strings. The "Query String" section on the <a href="general/urls.html">Explanation of URLs</a> page contains the needed details.</p>
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

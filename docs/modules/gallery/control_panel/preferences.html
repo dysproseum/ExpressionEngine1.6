@@ -1,0 +1,359 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Photo Gallery Preferences &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../../index.html"><img src="../../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../../index.html">Table of Contents</a> &gt;
+<a href="../../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="../index.html">Photo Gallery</a> &gt;
+<a href="index.html">The Control Panel</a> &gt;
+<strong>Preferences</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Photo Gallery Preferences</h1>
+
+	<p>Once you have selected a photo gallery to access (<dfn>Modules &gt; Photo Gallery</dfn>) you may choose the <dfn>Preferences</dfn> menu option to alter the settings for the gallery.</p>
+
+
+	<h2>General Configuration</h2>
+
+	<h3>Photo Gallery Name</h3>
+
+		<p>This is the full, descriptive name for your Photo Gallery.  This is the name of your gallery that you will show to visitors and display on your site.</p>
+
+		<p>The Photo Gallery name is a required field. Spaces, punctuation, and other special characters are allowed. For example, the gallery's descriptive name might be <samp>Joe's Personal Gallery</samp>.</p>
+
+
+	<h3>Photo Gallery Short Name</h3>
+
+		<p>The "short name" for the gallery is the name used internally within the program. It is also used when specifying a gallery in variables or parameters in your Templates. It is not normally shown to visitors or otherwise exposed outside of your gallery "setup".</p>
+
+		<p>The gallery's short name is a required field. It must be a single word with no spaces. The underscore character is allowed. For example, the gallery's "short name" might be <samp>joe_gallery</samp>.</p>
+
+
+	<h3>Gallery URL</h3>
+
+
+
+		<p>The full URL to the main page for this gallery.</p>
+
+
+
+
+
+	<h3>Comment Page URL</h3>
+
+
+
+		<p>The full URL to the "comments" page for this gallery.  The URL should include the Template Group and Template.  For example: <samp>http://example.com/index.php/gallery/comments/</samp></p>
+
+
+
+
+	<h2>Image Paths</h2>
+
+	<h3>Image Folder Name</h3>
+
+		<p>The name of the folder/directory you created on the server for this gallery.</p>
+
+
+	<h3>Server Path to Image Directory</h3>
+
+		<p>For this setting, you may put in either the relative path (from the Control Panel) or the full server path to the directory you created for this gallery. A server path is typically something similar to <samp>/home/domain.com/http_docs/images/gallery/</samp>. The specific setting will vary from server to server so you may need to contact your Host or server admin to determine what your correct "server path" is.</p>
+
+
+	<h3>Full URL to Image Directory</h3>
+
+		<p>The full URL for the directory you created for this gallery.</p>
+
+
+
+	<h2>Batch Processing Preferences</h2>
+
+	<h3>Batch Processing Folder</h3>
+
+		<p>The name of the folder/directory you have set up to hold the images to be batch processed.  See the <dfn><a href="batch_entries.html">Batch Entries</a></dfn> section for more information on the process.</p>
+
+
+	<h3>Server Path to Batch Folder</h3>
+
+		<p>This is the full server path to the directory you have designated for batch processing. A server path is typically something similar to <samp>/home/domain.com/http_docs/images/gallery_batch/</samp>. The specific setting will vary from server to server so you may need to contact your Host or server admin to determine what your correct "server path" is.</p>
+
+
+	<h3>Full URL to Batch Directory</h3>
+
+		<p>The full URL to the directory you have designated for batch processing.</p>
+
+
+
+	<h2>Caption Formatting Preferences</h2>
+
+	<h3>Text Formatting</h3>
+
+		<p>You may specify what type of formatting to apply to the "Caption" field of gallery entries.</p>
+
+
+	<h3>Auto-link URLs</h3>
+
+		<p>The determines whether or not URLs placed in the "Caption" field of gallery entries are automatically converted to be links.</p>
+
+
+
+	<h2>Image Conversion Preferences</h2>
+
+	<h3>Image Conversion Protocol</h3>
+
+		<p>You may specify which image library to use for the Photo Gallery Module.  You must ensure that whichever one you select is correctly installed and configured on your server. "GD" or "GD2" are the most common choices.</p>
+
+
+	<h3>Image Converter Path</h3>
+
+		<p>If you selected either "NetPBM" or "Image Magick" for the preference above, then you must supply the server path to the directory in which the image library files are installed.</p>
+
+
+
+	<h2>Thumbnail Preferences</h2>
+
+	<h3>Create Thumbnail Upon Upload?</h3>
+
+		<p>This determines whether ExpressionEngine should create a thumbnail image automatically when you submit a new entry to the gallery.</p>
+
+
+	<h3>Thumbnail Indicator</h3>
+
+		<p>This is the suffix that will be added to the filename of automatically created thumbnail images.</p>
+
+
+	<h3>Create Medium Sized Image Upon Upload?</h3>
+
+		<p>This determines whether ExpressionEngine should create a "medium sized" image automatically when you submit a new entry to the gallery.</p>
+
+
+	<h3>Medium Sized Image Indicator</h3>
+
+		<p>This is the suffix that will be added to the filename of automatically created medium sized images.</p>
+
+
+
+	<h2>Thumbnail Resizing Preferences</h2>
+
+	<h3>Thumbnail Width x Height</h3>
+
+		<p>Here you set the width and height for the thumbnail images if you selected to have one created.  The first box is "width" while the second box is "height".</p>
+
+		<p>You may also check the "Constrain proportions" checkbox, which will ensure that the values you place in the input boxes maintain the same ratio.</p>
+
+
+	<h3>Medium Sized Image Width x Height</h3>
+
+		<p>Here you set the width and height for the medium sized images if you selected to have one created.  The first box is "width" while the second box is "height".</p>
+
+		<p>You may also check the "Constrain proportions" checkbox, which will ensure that the values you place in the input boxes maintain the same ratio.</p>
+
+
+	<h3>Maintain Aspect Ratio</h3>
+
+		<p>If a thumbnail can not be scaled proportionally to your desired width and height, the values will be adjusted as close as possible while maintaining the original proportions if you select this preference.</p>
+
+
+	<h3>Thumbnail Quality</h3>
+
+		<p>This setting is done in percentage and indicates the quality setting that the automatically created thumbnail should use.  Higher quality settings will result in better looking images but also in larger file sizes.  Settings of "70%" to "90%" are typically used.</p>
+
+
+	<h3>Medium Sized Image Quality</h3>
+
+		<p>This setting is done in percentage and indicates the quality setting that the automatically created medium sized image should use.  Higher quality settings will result in better looking images but also in larger file sizes.  Settings of "70%" to "90%" are typically used.</p>
+
+
+
+	<h2>Watermarking Preferences</h2>
+
+	<h3>Enable Watermarking</h3>
+
+		<p>This preference allows you to set whether or not watermarking is used for your images and, if so, how.  See the <a href="watermarking.html">Watermarking</a> section for details.  Selecting "Text Version" will reveal preferences related to setting a text watermark.  Selecting "Graphic Version" will reveal preferences related to setting a graphic watermark.</p>
+
+
+
+
+
+	<h2>Custom Field Preferences</h2>
+	
+	<p>The Photo Gallery comes with six custom fields which can be used for additional content.  Each field can be one of three field types:  Input field, texteara, or drop-down menu.</p>
+	
+	<div class="important">
+		<p>Note: To specify a custom filed in your templates you will use the following variable names:</p>
+		
+		<ul>
+			<li>{custom_field_one}</li>
+			<li>{custom_field_two}</li>
+			<li>{custom_field_three}</li>
+			<li>{custom_field_four}</li>
+			<li>{custom_field_five}</li>
+			<li>{custom_field_six}</li>
+		</ul>
+	</div>
+
+
+
+
+	<h2>Comment Preferences</h2>
+
+	<h3>Allow Comments By Default?</h3>
+
+		<p>When you create an entry for the gallery, you may choose on a per-entry basis whether comments are allowed.  This preference simply sets the default state for that choice.</p>
+
+
+	<h3>Require membership to post comments?</h3>
+
+		<p>This determines whether or not membership is required in order to be able to post a comment on a gallery entry.</p>
+
+
+	<h3>Enable Captcha for Comment Posting?</h3>
+
+		<p>Determines whether or not you require <a href="../../../general/captchas.html">CAPTCHAs</a> to be used when submitting comments.</p>
+
+
+	<h3>Comment Expiration</h3>
+
+
+
+		<p>The number of days after an entry is posted in which to allow comments.  After that period has expired, the entry will be closed to commenting and the comment form will no longer appear.  Existing comments will still be displayed.  Enter 0 (zero) for no expiration.</p>
+
+
+
+	<h3>Maximum number of characters allowed in comments</h3>
+
+
+
+		<p>You may set a maximum number of characters allowed in any comment.  Setting this preference to 0 (zero) will not place a restriction on the number of characters allowed.</p>
+
+
+
+	<h3>Comment Re-submission Time Interval</h3>
+
+
+		<p>This is the optional number of seconds that must lapse after a comment is posted before that same user can post another comment.  This setting can help reduce comment "spam".  The preference can be left blank or set to 0 (zero) if you do not want to impose a limit.</p>
+
+
+
+	<h3>Require email address to post comments?</h3>
+
+
+
+		<p>You can optionally require that anyone posting comments must list an email address.  Requiring an email address in order to post comments can help reduce the number of "spam" comments you receive since the visitor must submit a valid email address.</p>
+
+
+
+	<h3>Comment Text Formatting</h3>
+
+
+
+		<p>This setting determines how comments are formatted by the system.  There are three possible choices:</p>
+
+
+
+		<ol>
+			<li><b>None</b>: No automatic formatting is done; the comment is left as-is.  This could be useful if you want people to be able to use full HTML in their comments.</li>
+			<li><b>xhtml</b>: Comments will be formatted as valid XHTML.  Text blocks with double line breaks will be turned into paragraphs, line breaks will be replaced by <samp>&lt;br /></samp> tags, special characters will be formatted as character entities, etc.</li>
+			<li><b>Auto &lt;br /></b>: All line breaks in the comment will be converted into <samp>&lt;br /></samp> tags.  This includes any line breaks that may occur inside HTML code, which could cause unexpected displays.</li>
+		</ol>
+
+	<h3>Comment HTML Formatting</h3>
+
+
+
+		<p>Like the weblog setting, this preference determines how raw HTML code within comments is handled.  There are three options:</p>
+
+
+
+		<ol>
+			<li><b>Convert HTML into character entities</b>: This will convert the HTML tags so that they will display as plain text on a page when viewed.  This would be useful if you want to display example code often.</li>
+			<li><b>Allow only safe HTML</b>: This will allow "safe" HTML (&lt;b>, &lt;i>, &lt;u>, &lt;em>, &lt;strike>, &lt;strong>, &lt;pre>, &lt;code>, &lt;blockquote>, &lt;h2&gt;, &lt;h3&gt;, &lt;h4&gt;, &lt;h5&gt;, &lt;h6&gt;) to be kept so that they are interpreted by the browser when the entry is viewed.  All other HTML is converted to character entities and the raw code will be seen upon viewing.</li>
+			<li><b>Allow all HTML (not recommended)</b>: This leaves the HTML code as written and the code will then be interpreted by the browser when the entry is viewed.  This is generally not recommended since visitors would be able to submit HTML code which could drastically alter the display of your webpage.</li>
+		</ol>
+
+
+
+	<h3>Allow image URLs in comments?</h3>
+
+
+
+		<p>You can determine whether or not you want people to be able to display images within comments simply by using the URL for the image.</p>
+
+
+
+
+
+	<h3>Automatically turn URLs and email addresses into links?</h3>
+
+
+
+		<p>When this option is set to "Yes", any full URLs or email addresses will be automatically formatted as a valid HTML link to the address.  If the option is "No" then the URL or email address will simply be treated and displayed as plain text.</p>
+
+
+
+
+	<h2>Comment Notification Preferences</h2>
+
+	<h3>Notify the author of an entry whenever a comment is submitted?</h3>
+
+		<p>Whenever a new comment is submitted, the author of the entry can be notified.  An email will be sent to the email address associated with the author member in the system.</p>
+
+
+	<h3>Enable recipient list below for comment notification?</h3>
+
+
+
+		<p>You can specify a list of email addresses to receive notifications when a comment is posted.  This setting determines whether or not the list will receive the updates.  The addresses are specified in the next setting.</p>
+
+
+
+
+
+	<h3>Email address of Notification Recipient(s)</h3>
+
+
+
+		<p>If the previous setting is set to "Yes", then these are the recipients of the email alert.  You may define a single email address or list multiple addresses by separating them with a comma.  Ex: "<samp>admin@example.com, joe@example.com</samp>"</p>
+
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>File Upload Preferences &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../../index.html"><img src="../../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../../index.html">Table of Contents</a> &gt;
+<a href="../../../index.html#cp_docs">The Control Panel</a> &gt;
+<a href="../index.html">Admin</a> &gt;
+<a href="index.html">Weblog Administration</a> &gt;
+<strong>File Upload Preferences</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>File Upload Preferences</h1>
+
+	<div class="path">Control Panel Location:&nbsp; <dfn>Admin &gt; Weblog Administration &gt; File Upload Preferences</dfn></div>	
+
+	<p>This section of the Control Panel allows you to manage file upload destinations.  These destinations determine where you can upload files when using the upload utility  in the <kbd>PUBLISH</kbd> page. You can create as many destinations as you need in order to organize your uploaded images in the manner you wish.</p>
+
+	<p class="important"><strong>Note:</strong>&nbsp; This utility will <b>not</b> create the actual destination folder on your server so you'll need to do that using your FTP program.  In addition, you must set the file permissions for that folder to <dfn>777</dfn> so that ExpressionEngine will be allowed to put files into it.</p>
+
+
+	<h2><a name="main_screen">Main Screen</a></h2>
+	<p>The main <dfn>File Upload Preferences</dfn> page shows a list of all the existing upload destinations.</p>
+
+	<div class="imgwrapper"><img src="../../../images/file_upload_overview.png" width="682" height="97" alt="File Upload Prefs" title="File Upload Prefs" border="0" /></div>
+
+	<p>The <dfn>Create a New Upload Destination</dfn> tab takes you to a page where you can create a new destination, or you can click the <dfn>Edit</dfn> link to edit an existing destination. Either of these options will take you to the following page:</p>
+
+
+	<h2><a name="create_a_new_upload_destination">Create/Edit Upload Destination</a></h2>
+
+
+	<div class="imgwrapper"><img src="../../../images/file_upload_prefs.png" width="472" height="478" alt="File Upload Prefs"></div>
+
+
+
+
+	<h3>Descriptive name of upload directory</h3>
+
+		<p>This is the descriptive name of the upload destination.  It is a <strong>required</strong> field and must be unique, but spaces are allowed.  This name will appear when uploading files via the <kbd>PUBLISH</kbd> page.</p>
+
+
+	<h3>Server Path to Upload Directory</h3>
+
+		<p>This is the <b>server path</b> to the upload folder for this destination. It is recommended that you use a <em>full server path</em> (not a URL), although in many cases you can use a simple <em>relative path</em> (Example: /home/user/example.com/http_docs/images/uploads/). If you are not sure how to determine your server path please contact your hosting company.</p>
+
+
+	<h3>URL of Upload Directory</h3>
+
+		<p>You will also need to supply the full <b>URL</b> to the new destination (Example: http://example.com/images/uploads/).</p>
+
+
+	<h3>Allowed File Types</h3>
+
+		<p>This preference will determine how the system handles the uploaded files.  You have two choices for this preference:</p>
+
+		<ol>
+			<li><b>Images only</b>: With this preference set, the system will only allow image files of the type GIF, JPG, JPEG, or PNG.</p>
+			<li><b>All file types</b>: This option will allow you to upload files of any type to the system.  <strong>Be careful</strong> with this setting since it could be possible for someone to upload a malicious file.</li>
+		</ol>
+
+		<p class="important"><strong>Note:</strong>&nbsp; Only file types that are specified in ExpressionEngine's <dfn>Mime Type</dfn> file are allowed to 
+		be uploaded.  If you are uploading something uncommon and run into problems you may need to add the mime type for your file. The Mime Type
+		file can be found at:  <var>system/lib/mimes.php</var> </p>
+
+
+	<h3>Maximum File Size (in bytes)</h3>
+
+		<p>You can optionally set a maximum allowed size for uploaded file.  Leave the setting blank if you do not wish to impose a limit.  The size is defined in bytes; 1 kilobyte = 1024 bytes.  Example: to limit each upload to 30 kilobytes, you'll put 30720 in the field.</p>
+
+		<p class="important"><b>Note:</b>	Servers usually also have built-in limits on the amount of data that can be uploaded via PHP at one time.  The default value for this in PHP is 2 MB.  If you have a need to upload very large files, then you should contact your Host or server admin and talk to them about any size limits they have in place.</p>
+
+	<h3>Maximum Image Height (in pixels)</h3>
+
+		<p>You can optionally set the maximum allowed height for uploaded images.  Leave the setting blank if you do not with to impose a limit.  The size is defined in pixels.  This option only applies to uploaded images and not other file types.</p>
+
+
+	<h3>Maximum Image Width</h3>
+
+		<p>You can optionally set the maximum allowed width for uploaded images.  Leave the setting blank if you do not with to impose a limit.  The size is defined in pixels.  This option only applies to uploaded images and not other file types.</p>
+
+
+	<h3>Image Properties</h3>
+
+		<p>These properties will be added inside the image tag (if an image is uploaded).  
+		Leave this setting blank if you do not wish for any properties to be added.</p>
+
+		<p>For example:  If you have <samp>border="0" alt="image" name="image"</samp>
+		set as your preference, when you upload an image , the resulting tag 
+		will look like this:</p>
+
+		<code>&lt;img src="http://example.com/images/upload/pic.jpg" border="0" alt="image" name="image" width="124" height="98" /></code>
+		
+	<h3>File Properties</h3>
+
+		<p>These properties will be added inside the link tag (if a file is uploaded).  
+		Leave this setting blank if you do not wish for any properties to be added.</p>
+
+		<p>For example:  If you have <samp>title="file_name"</samp>
+		set as your preference, when you upload a file, the resulting tag 
+		will look like this:</p>
+
+		<code>&lt;a href="http://example.com/images/upload/plan.txt" title="file_name">plan.txt&lt;/a></code>
+
+
+	<h3>Image Pre Formatting</h3>
+
+		<p>This setting lets you specify data to be placed <em>before</em> the 
+		HTML for an uploaded image.  Using this (and the following) setting you 
+		can easily "wrap" your file code.  For example, you could use 
+		<samp>&lt;div class="thumb"></samp>.</p>
+
+
+	<h3>Image Post Formatting</h3>
+
+		<p>This setting lets you specify data to be placed <em>after</em> the 
+		HTML for an uploaded image.  Using this (and the previous) setting you 
+		can easily "wrap" your file code.  For example, you could use <samp>&lt;/div></samp>.  
+		Together with the previous setting you would get this output:</p>
+
+		<code>&lt;div class="thumb">&lt;img src="http://example.com/images/upload/pic.jpg" border="0" alt="image" name="image" width="124" height="98" />&lt;/div></code>
+
+	<h3>File Pre Formatting</h3>
+
+		<p>This setting lets you specify data to be placed <em>before</em> the 
+		HTML for an uploaded file (non-image).  Using this (and the following) setting you 
+		can easily "wrap" your file code.  For example, you could use 
+		<samp>&lt;div class="file"></samp>.</p>
+
+
+	<h3>File Post Formatting</h3>
+
+		<p>This setting lets you specify data to be placed <em>after</em> the 
+		HTML for an uploaded file (non-image).  Using this (and the previous) setting you 
+		can easily "wrap" your file code.  For example, you could use <samp>&lt;/div></samp>.  
+		Together with the previous setting you would get this output:</p>
+
+		<code>&lt;div class="file">&lt;a href="http://example.com/images/upload/plan.txt" >plan.txt&lt;/a>&lt;/div></code>
+
+	<h3>Restrict file uploading to select member groups</h3>
+
+	<div class="imgwrapper"><img src="../../../images/file_upload_restrict.png" width="354" height="215" alt="Restrict to select member groups" title="Restrict to select member groups" border="0" /></div>
+
+		<p>This setting allows you to specify which member groups have permission to upload files to this file upload destination.  By default, only the "Members" group and any user-created member groups are listed.  Super Admins can always upload files.</p>
+
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

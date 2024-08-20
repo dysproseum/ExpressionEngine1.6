@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Handling Extreme Traffic with ExpressionEngine &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../index.html" />
+  <style type="text/css" media="screen,print">@import url(../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="../index.html#gen_docs">General Information</a> &gt;
+<strong>Handling Extreme Traffic with ExpressionEngine</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Handling Extreme Traffic with ExpressionEngine</h1>
+
+	<p class="important"><strong>Notice:</strong> This info is intended for Server Admins when dealing with high-volume traffic spikes or as a permanent solution for radically high volume sites.</p>
+
+	<ul class="minitoc">
+		<li><a href="#database_activity">Database Activity</a></li>
+		<li><a href="#disk_io">Disk I/O</a></li>
+	</ul>
+	
+	<p>These ExpressionEngine features will help Server Admins decrease server resource usage and keep an ExpressionEngine installation running smoothly in the event of a traffic spike or as a way of dealing with the day-to-day reality of radically high-volume sites.</p>
+	
+	<h2><a name="database_activity"></a>Database Activity</h2>
+	
+		<p>ExpressionEngine uses the default MySQL storage engine as specified by the MySQL server when it is installed, which in nearly every case will be MyISAM.  This is an appropriate choice since ExpressionEngine is primarily a read-heavy application, hosts are typically much more familiar with tuning the server for that storage engine, and using different storage engines for different tables requires greater resource usage and more nuanced server management than most administrators will typically allow.</p>
+		
+		<p>MyISAM requires MySQL to establish a file lock to update a table.  In normal operation, this is perfectly fine.  However, during extreme traffic events, there are a few tracking features of ExpressionEngine that update certain tables on every page load, resulting in a queue of locked tables as MySQL tries to keep up.  These can be disabled in your Control Panel <a href="../cp/admin/system_preferences/tracking_preferences.html">Tracking Preferences</a>.  If you are unable to access your site due to the traffic, you or your server administrator can manually override these features in your <kbd>config.php</kbd> file as follows:</p>
+		
+		<table>
+				<thead>
+					<tr><th class="caption" colspan="2">config.php Extreme Traffic Overrides</th></tr>
+					<tr><th>Variable</th><th>Description</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><strong><strong>$conf['enable_online_user_tracking']</strong></td>
+						<td><kbd>(y/n)</kbd> - Corresponds to <a href="../cp/admin/system_preferences/tracking_preferences.html#enable_online_user_tracking">Enable Online User Tracking?</a></td>
+					</tr>
+					<tr>
+						<td><strong>$conf['enable_hit_tracking']</strong></td>
+						<td><kbd>(y/n)</kbd> - Corresponds to <a href="../cp/admin/system_preferences/tracking_preferences.html#enable_hit_tracking">Enable Template Hit Tracking?</a></td>
+					</tr>				
+					<tr>
+						<td><strong>$conf['enable_entry_view_tracking']</strong></td>
+						<td><kbd>(y/n)</kbd> - Corresponds to <a href="../cp/admin/system_preferences/tracking_preferences.html#enable_entry_view_tracking">Enable Weblog Entry View Tracking?</a></td>
+					</tr>
+					<tr>
+						<td><strong>$conf['log_referrers']</strong></td>
+						<td><kbd>(y/n)</kbd> - Corresponds to <a href="../cp/admin/system_preferences/tracking_preferences.html#log_referrers">Enable Referrer Logging?</a></td>
+					</tr>
+					<tr>
+						<td><strong>$conf['dynamic_tracking_disabling']</strong></td>
+						<td><kbd>(numeric)</kbd> - Corresponds to <a href="../cp/admin/system_preferences/tracking_preferences.html#dynamic_tracking_disabling">Suspend ALL tracking when number of online visitors exceeds:</a></td>
+					</tr>
+					<tr>
+						<td><strong>$conf['disable_all_tracking']</strong></td>
+						<td><kbd>(y/n)</kbd> - Emergency <kbd>config.php only</kbd> preference which when set to 'y' will disable all of the above.  This is useful for 				server administrators who need a way to respond immediately to table locks during a traffic spike to keep the site running smoothly.</td>
+					</tr>
+				<tbody>
+		</table>
+
+		<p>If you have public facing ExpressionEngine-generated forms, you may also find it beneficial to disable the <a href="spam_protection.html">Secure Forms</a> feature, though be aware that that hinders ExpressionEngine's ability to help prevent CSRF and spam attacks on your site.  Or you may temporarily remove the forms or move them to a less popular URL (such as off of the index page) to mitigate the additional database use.</p>
+		
+		<p>Lastly, if you have a membership based site and have a sudden and tremendous influx of traffic of members who have not visited your site in a number of hours, the update of their last activity may cause a table lock.  If you find this to be the case, you can have the server administrator run the following query after killing the locks, to delay the individual updates for members until a later time, perhaps when traffic is less tense.  The example below pushes this off for another 20 hours (72000 seconds).</p>
+		
+		<code>UPDATE exp_members SET last_activity = (UNIX_TIMESTAMP() + 72000)</code>
+		
+		<h2><a name="disk_io"></a>Disk I/O</h2>
+		
+		<p>ExpressionEngine's caching mechanisms can help reduce database load in most situations. However if your site is hosted on an environment using NAS/SAN storage for single or load-balanced web servers, <a href="caching.html#query_caching">Query Caching</a> and <a href="caching.html#dynamic_weblog_query_caching">Dynamic Weblog Query Caching</a> in most cases should <strong>not be used</strong>.  Doing so could be doubling up on caching efforts and inadvertently negate any caching benefits (or perhaps even worsen server resource usage) due to the increased disk activity.</p>
+		
+		<p><a href="caching.html#tag_caching">Tag</a> and <a href="caching.html#template_caching">Template Caching</a> on such environments should be minimal unless experienced review of your templates has been performed with the assistance of the <a href="../cp/admin/system_preferences/output_and_debugging_preferences.html">Template Debugging utility</a>, and revealed resource intensive tags or templates that are greatly improved after enabling the respective caching mechanism.</p>
+
+		<p>Likewise, <a href="http://expressionengine.com/docs/templates/flat_file_templates.html">saving templates as files</a> can marginally increase disk i/o as each template must be retrieved from disk in addition to the standard database query responsible for managing your template's meta data (access, PHP parsing, template type, etc.).</p>
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

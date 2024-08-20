@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Simple Commerce &#8211; Purchase Tag &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Simple Commerce Module</a> &gt;
+<strong>Purchase Tag</strong>
+</div>
+
+
+<div id="content">
+
+		<h1>Simple Commerce &#8211; Purchase Tag</h1>
+
+		<p>The <dfn>Simple Commerce Purchase</dfn> tag is the primary tag used to display information about items in your store.  It is designed to be used within a weblog entries tag, as store items are directly associated to weblog entries.</p>
+
+		<p>Here is a simple example of a possible usage of this tag:</p>
+		
+<code>
+{exp:simple_commerce:purchase entry_id="{entry_id}" success="site/success" cancel="site/index"}<br />
+<br />
+{item_name}<br />
+<br />
+&lt;p>&lt;strong>{item_sale_price}&lt;/strong>&lt;/p><br />
+<br />
+&lt;p>&lt;a href="{buy_now_url}" onclick="window.open(this.href);return false;">Buy Now&lt;/a>&lt;/p><br />
+&lt;p>&lt;a href="{add_to_cart_url}" onclick="window.open(this.href);return false;">Add to Cart&lt;/a>&lt;/p><br />
+&lt;p>&lt;a href="{view_cart_url}" onclick="window.open(this.href);return false;">View Cart&lt;/a>&lt;/p><br />
+<br />
+{/exp:simple_commerce:purchase}
+</code>
+
+	<h2>Parameters</h2>
+	
+	<p>The Simple Commerce Purchase tag has a few <a href="sc_parameters.html">parameters</a> that can be used to control the behavior of the tag.</p>
+
+	<h2>Variables</h2>
+
+	<p>Inside of the tag you can use a number of <a href="sc_variables.html">variables</a> to display different information such as the item's name, its price, how many times it has been purchased, and various other details.</p>
+	
+</div>
+		
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

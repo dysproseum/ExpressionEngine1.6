@@ -1,0 +1,250 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Next/Previous Entry Linking &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Weblog Module</a> &gt;
+<strong>Next/Previous Entry Linking</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Next/Previous Entry Linking</h1>
+
+	<p>The <dfn>Next and Previous</dfn> entry links allow you to generate links to the next or previous entry, based on the date of the entry.</p>
+	
+	<p class="important"><b>Note:</b>&nbsp; These links can <b>only</b> be used on pages displaying a <kbd>single entry</kbd>, such as a "comment" page, since they are designed to provide navigation from one entry to another.</p>
+
+	<p>These tags work as tag pairs so that they will conditionally show the content between the pair if there is a next (or previous) entry.</p>
+
+	<code>{exp:weblog:next_entry}<br />
+<br />
+&lt;p>Next entry: &lt;a href="{path='site/comments'}">{title}&lt;/a>&lt;/p><br />
+<br />
+{/exp:weblog:next_entry}</code>
+
+	<code>{exp:weblog:prev_entry}<br />
+<br />
+&lt;p>Previous entry: &lt;a href="{path='site/comments'}">{title}&lt;/a>&lt;/p><br />
+<br />
+{/exp:weblog:prev_entry}</code>
+
+
+	<p class="important"><b>Note:</b> If you are viewing the most recent entry in your weblog, then the "next_entry" tag's contents will not be shown (since there is no "next entry").  Likewise, when you are viewing the oldest/first entry in the weblog the "previous_entry" content will not be shown.</p>
+
+
+	<h2>Parameters</h2>
+
+	<ul class="minitoc">
+		<li><a href="#par_category">category="17"</a></li>
+		<li><a href="#par_category_group">category_group="2"</a></li>
+		<li><a href="#par_entry_id">entry_id="23"</a></li>
+		<li><a href="#par_show_expired">show_expired="yes"</a></li>
+		<li><a href="#par_show_future_entries">show_future_entries="yes"</a></li>
+		<li><a href="#par_status">status="open"</a></li>
+		<li><a href="#par_weblog">weblog="news"</a></li>
+	</ul>
+	
+	<h3><a name="par_category">category=</a></h3>
+
+		<code>category="2"</code>
+
+		<p>Categories are specified by ID number (the ID number of each <a href="../../cp/admin/weblog_administration/category_edit.html">category</a> is displayed in the Control Panel).  The reason we use the ID is because categories can be called anything (with spaces, quotes, etc.), and also renamed.  It would be much more difficult to have to update the tag parameters every time you updated a category name.  Further, you can have multiple categories with the same name either in different Category Groups or in different parts of the hierarchy within the same Category Group.</p>
+
+		<p>And as with some of the other parameters, you can stack categories to get entries with any of those categories:</p>
+
+		<code>category="2|45|4|9"</code>
+
+		<p>Or use "not" to exclude categories</p>
+
+		<code>category="not 4|5|7"</code>
+		
+		<p>And, you can use an inclusive stack to only get entries with <em>all</em> of the categories:</p>
+		
+		<code>category="3&7&8"</code>
+		
+		<p>Or you can negate the inclusive stack and get entries that do not of <em>all</em> of those categories:</p>
+		
+		<code>category="not 3&5"</code>
+		
+
+		<p class="important"><b>Note:</b> When you use the <samp>category="3|4"</samp> 
+		parameter (not excluding), you are implicitly telling ExpressionEngine to only deal with 
+		entries that have been assigned one or more categories.  If you have 
+		entries that haven't been categorized then they will be ignored and not
+		included in the results.  However, if you are using exclusion (<samp>category="not 3|4"</samp>), 
+		then you will be shown all entries without those categories <em>including</em> those
+		without any categories assigned.  To change this behavior when excluding 
+		categories use the <a href="parameters.html#par_uncategorized_entries">uncategoried_entries=""</a> parameter.
+		</p>
+		
+		
+	<h3><a name="par_category_group">category_group=</a></h3>
+
+		<code>category_group="2"</code>
+
+		<p>Category Groups are specified by ID number (the ID number of each 
+		<a href="../../cp/admin/weblog_administration/category_management.html">category group</a> 
+		is displayed in the Control Panel).  The reason we use the ID is because
+		category groups can be called anything (with spaces, quotes, etc.), and also 
+		renamed.  It would be much more difficult to have to update the tag 
+		parameters every time you updated a category name.</p>
+
+		<p>And as with some of the other parameters, you can stack category groups:</p>
+
+		<code>category_group="1|2|4"</code>
+
+		<p>Or use "not" to exclude categories</p>
+
+		<code>category_group="not 2"</code>
+
+
+	<h3><a name="par_entry_id">entry_id=</a></h3>
+
+		<code>entry_id="12"</code>
+
+		<p>You can limit the tag to specific entries, or more practically, you can ommit specific entries from showing up in the cycle, by using "not":</p>
+
+		<code>entry_id="not 2|9|23|50"</code>
+		
+		<p>The above example would ignore entries 2, 9, 23, and 50.</p>
+
+	<h3><a name="par_show_expired">show_expired=</a></h3>
+
+		<code>show_expired="yes"</code>
+
+		<p>You can determine whether you wish for entries that have "expired" to be included.</p>
+
+
+	<h3><a name="par_show_future_entries">show_future_entries=</a></h3>
+
+		<code>show_future_entries="yes"</code>
+
+		<p>You can determine whether you wish for entries dated in the "future" to be included.  This option is useful when doing things like creating a list of events, some of which have not occurred yet.</p>
+
+
+	<h3><a name="par_status">status=</a></h3>
+
+		<code>status="open"</code>
+
+		<p>You may restrict to entries assigned to a particular <a href="../../cp/admin/weblog_administration/custom_entry_statuses.html">status</a>.  You can choose multiple statuses using a pipe:</p>
+
+		<code>status="draft|reviewed|published"</code>
+
+		<p>Or exclude statuses using "not"</p>
+
+		<code>status="not submitted|processing|closed"</code>
+
+
+	<h3><a name="par_weblog">weblog=</a></h3>
+
+		<code>weblog="news"</code>
+
+		<p>You can restrict the cycle to a specific weblog.  You may also specify multiple weblogs by using the pipe character:</p>
+
+		<code>weblog="weblog1|weblog2|weblog3"</code>
+
+		<p>Or you can exclude weblogs by including the word "not" followed by a space:</p>
+
+		<code>weblog="not weblog4|weblog5"</code>
+
+
+
+	<h2>Variables</h2>
+
+	<ul class="minitoc">
+		<li><a href="#var_entry_id">{entry_id}</a></li>
+		<li><a href="#var_id_path">{id_path='site/index'}</a></li>
+		<li><a href="#var_path">{path='site/index'}</a></li>
+		<li><a href="#var_title">{title}</a></li>
+		<li><a href="#var_url_title">{url_title}</a></li>
+	</ul>
+
+	<h3><a name="var_entry_id">entry_id</a></h3>
+
+		<code>{entry_id}</code>
+
+		<p>The ID number of the weblog entry</p>
+		
+	<h3><a name="var_id_path">id_path='</a></h3>
+
+		<code>{id_path=template_group/template'}</code>
+
+		<p>The path (template_group/template) where you want to show the entry. 
+		The ID number of the entry will be automatically added instead of the entry's url_title.
+		This is typically used within a standard HTML link tag:</p>
+
+		<code>&lt;a href="{id_path='site/index'}">{title}&lt;/a></code>
+
+		<p>You can also use <samp>SITE_INDEX</samp> in your path to point to your main site index page.  
+		If you show your blog on your home page, using <samp>SITE_INDEX</samp> 
+		is preferable since it will make the URL cleaner.</p>
+
+		<code>&lt;a href="{path='SITE_INDEX'}">{title}&lt;/a></code>
+		
+		
+
+
+	<h3><a name="var_path">path='</a></h3>
+
+		<code>{path=template_group/template'}</code>
+
+		<p>The path (template_group/template) where you want to show the entry.  This is typically used within a standard HTML link tag:</p>
+
+		<code>&lt;a href="{path='site/index'}">{title}&lt;/a></code>
+
+		<p>You can also use <samp>SITE_INDEX</samp> in your path to point to your main site index page.  If you show your blog on your home page, using <samp>SITE_INDEX</samp> is preferable since it will make the URL cleaner.</p>
+
+		<code>&lt;a href="{path='SITE_INDEX'}">{title}&lt;/a></code>
+
+
+	<h3><a name="var_title">title</a></h3>
+
+		<code>{title}</code>
+
+		<p>This variable simply displays the title of the entry.</p>
+
+	<h3><a name="var_url_title">url_title</a></h3>
+
+		<code>{url_title}</code>
+
+		<p>The human readable title used in the URL as a permalink</p>
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

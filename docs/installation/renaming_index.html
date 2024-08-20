@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Renaming Main Site File &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../index.html" />
+  <style type="text/css" media="screen,print">@import url(../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="../index.html#install_docs">Installation and Update Instructions</a> &gt;
+<strong>Renaming Main Site File</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Renaming Main Site File</h1>
+
+
+	<h2>Naming your Main Site File</h2>
+
+	<p>You can name your site <var>index.php</var> file anything you want and the system
+will automatically be able to use the name.  However, you will need to update the <dfn>Admin &gt; System Preferences &gt; General Configuration</dfn> settings within the Control Panel with the new name of your site index so that links will be rendered correctly.</p>
+
+
+
+	<h2>Removing the File Extension</h2>
+
+	<p>In addition to simply being able to rename your main site file, you can also make your URLs even more friendly by eliminating the file extension from the file.  In order to be able to do this you will have to instruct your web server to process the file as a PHP file even though it no longer has a <var>.php</var> extension.</p>
+
+	<p>Here are instructions for accomplishing this if your website is on a server running the Apache web server:</p>
+
+	<ol>
+		<li>Rename your actual file by removing the "<var>.php</var>" file extension.  You may also change the name from "index" to something else if you wish.  For example, let's say you want to change the name to <var>mynewindex</var>.  Make a note of the new name.</li>
+
+		<li>Create a blank text file on your server in the same directory as your main site file.  Name this text file "<var>.htaccess</var>" (without the quotes).  Be sure to note the period at the beginning of the filename; this is <strong>very</strong> important.</li>
+
+		<li><p>Place the following code in your new <var>.htaccess</var> file.  <b>Note:</b> the word "mynewindex" needs to correspond to the new name of your site index file from Step 1.</p>
+
+			<ul>
+				<li><p>If your site runs on the <b>Apache 2.x</b> server try this code:</p>
+
+		<code>&lt;Files <var>mynewindex</var>><br />
+    AcceptPathInfo on<br />
+    SetOutputFilter PHP<br />
+    SetInputFilter PHP<br />
+&lt;/Files></code></li>
+
+				<li><p>If your site runs on the <b>Apache 1.x</b> server, Apache 2.x with PHP 4.3.2 or newer, or another server, try this code:</p>
+
+		<code>&lt;Files <var>mynewindex</var>><br />
+    ForceType application/x-httpd-php<br />
+&lt;/Files></code></li>
+
+				<li><p>If your Host/server runs PHP as a CGI process (as opposed to a web server module) you <em>may</em> need to use this code:</p>
+
+		<code>&lt;Files <var>mynewindex</var>><br />
+     SetHandler application/x-httpd-php<br />
+&lt;/Files></code></li>
+
+			</ul>
+
+		<div class="important">
+			<p><b>Important:</b><br />
+				You should confirm with your Host/server admin that the web server is set up to "AllowOverride".  Otherwise the above commands may not actually take effect.</p>
+
+			<p>You can also confirm the correct <var>.htaccess</var> commands to use with your Host/server admin.  While the above commands will usually work, occasionally servers will be set up in non-standard ways and your Host/server admin will need to tell you the correct commands.</p>
+
+			<p>If your Host uses a non-Apache webserver, then you will need to contact them for how to instruct your web server to process the file as a PHP file even though it no longer has a <var>.php</var> extension.</p>
+		</div>
+		</li>
+
+		<li>Go to <dfn>Admin &gt; General Configuration</dfn> in your Control Panel and update the name of your website index page to what you chose in Step 1 (make sure that the "<var>.php</var>" file extension is not on the name).</li>
+
+		<li>Update any path/URL settings you may have under <dfn>Admin &gt; Weblog Management</dfn> to match your renamed file.</li>
+
+
+		<li><p>You may also discover that your newly-renamed <var>mynewindex</var> file is not being displayed when you simply go to the directory for your site (without including the file name).  If that's the case, then you may need to add one more thing to the top of your <var>.htaccess</var> file:</p>
+
+			<code>DirectoryIndex <var>mynewindex</var> index.php index.shtml index.html index.htm</code>
+
+			<p>The server looks for the files you list in the order you list them.  The first file it finds meeting the description will be shown as the "default" page for that directory.</p></li>
+
+
+		<li>If you are using the Multiple Site Manager and following the instructions for accessing EE <a href="../cp/sites/domainsetup.html">from subdomains</a> or other access points then you may also need to edit your <var>path.php</var> file(s) to reference the new name for the <var>index.php</var> file.</li>
+
+	</ol>
+
+
+	<h2>Remove <var>index.php</var> Entirely from the URL</h2>
+
+	<p>The unofficial EE Wiki has a page with instructions on ways you can <a href="http://expressionengine.com/wiki/Remove_index.php_From_URLs/">completely remove the <var>index.php</var> file</a> from your URLs.  Note that this is only possible on some servers and EllisLab does not officially support this use.</p>
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

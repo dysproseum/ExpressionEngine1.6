@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Global Template Preferences &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#cp_docs">The Control Panel</a> &gt;
+<a href="index.html">Templates</a> &gt;
+<strong>Global Template Preferences</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Global Template Preferences</h1>
+
+	<div class="path">Control Panel Location:&nbsp; <dfn>Templates &gt; Global Template Preferences</dfn></div>	
+
+	<p>This section of the Control Panel allows you to define global preferences which globally affect all Templates.</p>
+
+	
+	<h3>Strict URLs</h3>
+	
+		<p>This setting determines whether or not ExpressionEngine allows Templates from your default Template Group to be directly accessed in the first URL segment.  Enabling Strict URLs requires that the first URL segment be a valid template group, or a 404 page is shown.</p>
+
+		<p>If you wish to extend this to the second segment, requiring a valid template, then in your "index" template of your Template Group(s) that you wish to do this, you can take advantage of the <a href="../../templates/globals/single_variables.html#var_redirect">{redirect=} global variable</a>:</p>
+		
+		<code>{if segment_2 != ''}<br />
+&nbsp;&nbsp;{redirect="404"}<br />
+{/if}</code>
+	
+		<p>Our official recommendation is that users <strong>enable</strong> Strict URLs, as doing so makes the path to your content more precise, allows more relevant 404 pages, and does not allow your content to be shown with variances in the URL structure.  However, for legacy reasons, Strict URLs are disabled by default.</p>
+				
+	<h3>404 Page</h3>
+
+		<p>This determines which template should be displayed when someone tries to access an invalid URL. If you choose "None", a standard 404 message and server header will be shown.</p>
+		
+		<p>Please note that ExpressionEngine <strong>only</strong> validates the first two segments of your URLs when determining whether to show a 404 page, since these segments will correlate to a Template Group and Template name (which represent your site's "pages").  Anything beyond the first two segments can not be used to show a 404 page (with one notable exception, using the <a href="../../modules/weblog/parameters.html#par_req_entry">require_entry=</a> parameter).</p> 
+					
+		<p>For an explanation regarding how ExpressionEngine interprets your URLs, please see <a href="../../general/urls.html">ExpressionEngine URLs</a> page.</p>
+				
+
+	<h3>Save Template Revisions</h3>
+
+		<p>If this preference is set to "Yes", then any changes you make to one of your <a href="edit_template.html">Templates</a> will be saved.  This allows you to keep a record of all changes made so that you can easily revert back to an earlier version of a Template if you need to do so.</p>
+
+
+	<h3>Maximum Number of Revisions to Keep</h3>
+
+		<p>The maximum number of revisions that should be kept for <strong>each</strong> template. For example, if you set this to 5, only the most recent 5 revisions will be saved for any given template.  This setting helps ensure that your database does not get too large due to storing Template revisions.</p>
+
+
+	<h3>Allow Templates to be Saved as Files?</h3>
+
+		<p>This determines whether your Templates are saved out to a flat text file when you save them.  See the <a href="../../templates/flat_file_templates.html">Flat File Templates</a> section for specific information.</p>
+
+
+	<h3>Basepath to Template File Directory</h3>
+
+		<p>This is the <em>server path</em> to the folder you have created to hold the Template files.  It is important that you use the server path for the preference and not a URL.  A server path often looks similar to:</p>
+		
+		<p><kbd>/home/usr/domain.com/http_docs/system/template_files/</kbd></p>
+		
+		<p>Server paths will vary from server to server, so you should contact your Host or server admin if you are unsure of what your setting should be.</p>
+
+		<p>See the <a href="../../templates/flat_file_templates.html">Flat File Templates</a> section for more information.</p>
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

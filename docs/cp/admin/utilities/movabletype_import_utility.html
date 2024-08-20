@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Movable Type Import Utility &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../../index.html"><img src="../../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../../index.html">Table of Contents</a> &gt;
+<a href="../../../index.html#cp_docs">The Control Panel</a> &gt;
+<a href="../index.html">Admin</a> &gt;
+<a href="index.html">Utilities</a> &gt;
+<a href="import_utilities.html">Import Utilities</a> &gt;
+<strong>Movable Type Pro Import Utility</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Movable Type Import Utility</h1>
+	<div class="path">Control Panel Location:&nbsp; <dfn>Admin &gt; Utilities &gt; Import Utilities &gt; Movable Type Import Utility</dfn></div>	
+
+	<p>The <dfn>Movable Type Import Utility</dfn> enables people to migrate from Movable Type to ExpressionEngine. Additionally, since the 
+	MT export format consists of a simple text file, it is common for those migrating to EE from other publishing systems, like 
+	Blogger and Wordpress, to format their exported data such that the MT Import Utility can be used.</p>
+	
+	<p class="important"><strong>Note:</strong> The ExpressionEngine wiki has a section called 
+	<a href="http://expressionengine.com/wiki/Migrate_To_EE">Migrate to EE</a>
+	that has links for getting content from Blogger, Textpattern, or Wordpress 
+	into the Movable Type Import Format. If you are using either system and wish
+	to import content into EE, check that page out.</p>
+
+	<h3>Importing Tips</h3>
+	
+	<p>The <dfn>Movable Type Import Utility</dfn> itself contains the instructions needed to assist
+	you with the import process, and you should read each area carefully before importing
+	your entries.  Since ExpressionEngine allows content to be created and entered in a very flexible
+	way (custom weblog field, custom statues, multiple categories, etc), you will have some decisions
+	to make in how the content is imported.</p>
+	
+	
+	<p class="important"><b>Note:</b>&nbsp; If you have done any customization to your EE installation, or if you have submitted any new content, it is recommended that you back up your database before performing an import. </p>
+	
+	<h3>Additional Fields for MT Export Format</h3>
+	
+	<div class="important"><strong>NOTE:</strong> Experienced users only!</div>
+	
+	<p>By default the <dfn>Movable Type Export Format</dfn> only has four fields for importing weblog content.
+	ExpressionEngine's MT Import Utility allows you to expand its functionality so that you can import an unlimited
+	number of data chunks into ExpressionEngine.   Open up your cp.mt_import.php file in your text editor of choice, and at
+	the top you will see this:</p>
+	
+	<pre>var $extra_fields = 0;</pre>
+	
+	<p>Change that zero to the number of extra fields you need.  Then, in your MT Export formatted text file, your extra
+	fields will take the form EXTRA FIELD-# where the hash is the number for that field. Example:</p>
+	
+	<pre>TITLE: A simple title
+AUTHOR: Doctor Suess
+DATE: 02/28/1979 12:17:05 AM
+PRIMARY CATEGORY: Books
+CATEGORY: Children
+-----
+BODY:
+This is the body text.
+-----
+EXTENDED BODY:
+Here is some more text.
+-----
+EXTRA FIELD-1:
+Here is even more text.
+-----</pre>
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

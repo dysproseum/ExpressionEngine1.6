@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Simple Commerce &#8211; Purchase Tag Parameters &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Simple Commerce Module</a> &gt;
+<a href="sc_purchase.html">Simple Commerce Purchase Tag</a> &gt;
+<strong>Purchase Tag Parameters</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Simple Commerce &#8211; Purchase Tag Parameters</h1>
+
+	<p>There are a few parameters that you can use with the <dfn>Simple Commerce Purchase</dfn> tag.</p>
+	
+	<ul class="minitoc">
+		<li><a href="#par_cancel">cancel="store/cancel"</a></li>
+		<li><a href="#par_country_code">country_code="DE"</a></li>
+		<li><a href="#par_currency">currency="USD"</a></li>
+		<li><a href="#par_decimal">decimal=","</a></li>
+		<li><a href="#par_entry_id">entry_id="{entry_id}"</a> <em>(required)</em></li>
+		<li><a href="#par_show_disabled">show_disabled="yes"</a></li>
+		<li><a href="#par_success">success="store/thank_you"</a> <em>(required)</em></li>
+	</ul>
+	
+	<h2><a name="par_cancel">cancel=</a></h2>
+	
+	<code>cancel="store/cancel"</code>
+	
+	<p>You may specify a particular Template to display if a purchase is cancelled mid-transaction. This takes a standard "Template_Group/Template" as input, or you may provide a full URL, e.g. <samp>http://example.com/index.php/store/cancel/</samp>.  If this parameter is not supplied, your site's main index template will be displayed.</p>
+	
+	<h2><a name="par_country_code">country_code=</a></h2>
+	
+	<code>country_code="DE"</code>
+	
+	<p>This parameter controls the language that will be used on the initial PayPal shopping cart / log in screen when someone makes a purchase from your store.  Use the two letter country abbreviation, following the <a href="http://www.iso.org/iso/en/prods-services/iso3166ma/02iso-3166-code-lists/list-en1.html">ISO 3166 standard</a>.  If no parameter is given, a default of 'US' will be used.</p>
+	
+	<h2><a name="par_currency">currency=</a></h2>
+	
+	<code>currency="USD"</code>
+	
+	<p>The three letter representation of the currency for the item prices in the store, using the ISO 4217 standard.  Default is "USD" (U.S. Dollars).  For other currencies, please refer to <a href="http://www.iso.org/iso/en/prods-services/popstds/currencycodeslist.html">official ISO 4217 lising</a>.</p>
+	
+	<h2><a name="par_decimal">decimal=</a></h2>
+	
+	<code>decimal=","</code>
+	
+	<p>Change the decimal separator for display.  For example, instead of display 3.95, you can have the price outputted as 3,95.</p>
+	
+	<h2><a name="par_entry_id">entry_id=</a></h2>
+	
+	<code>entry_id="{entry_id}"</code>
+	
+	<p><strong>REQUIRED</strong>.  As the Simple Commerce Purchase tag is designed to be used inside a Weblog Entries tag, the {entry_id} variable of the Weblog Entries tag will normally be used to provide the value.  You may also use a specific entry id to display an item's information outside of a Weblog Entries tag.</p>
+	
+	<h2><a name="par_show_disabled">show_disabled=</a></h2>
+	
+	<code>show_disabled="yes"</code>
+	
+	<p>Allows the Simple Commerce Purchase tag to output information for store items that are not enabled.  This can be used in conjunction with an <kbd>item_enabled</kbd> conditional to display information for enabled / disabled items.  e.g.:</p>
+	
+	<code>
+{if item_enabled == &apos;n&apos;}<br />
+&nbsp;&nbsp;&nbsp;&lt;b&gt;NOT AVAILABLE&lt;/b&gt;<br />
+{if:else}<br />
+&nbsp;&nbsp;&nbsp;&lt;p>&lt;strong>{item_sale_price}&lt;/strong>&lt;/p><br />
+<br />
+&nbsp;&nbsp;&nbsp;&lt;p>&lt;a href="{buy_now_url}" onclick="window.open(this.href);return false;">Buy Now&lt;/a>&lt;/p><br />
+&nbsp;&nbsp;&nbsp;&lt;p>&lt;a href="{add_to_cart_url}" onclick="window.open(this.href);return false;">Add to Cart&lt;/a>&lt;/p><br />
+&nbsp;&nbsp;&nbsp;&lt;p>&lt;a href="{view_cart_url}" onclick="window.open(this.href);return false;">View Cart&lt;/a>&lt;/p><br />
+{/if}</code>
+	
+	<h2><a name="par_success">success=</a></h2>
+	
+	<code>success="store/thank_you"</code>
+	
+	<p><strong>REQUIRED</strong>.  You must specify a particular Template to display after a successful purchase transaction. This takes a standard "Template_Group/Template" as input, or you may provide a full URL, e.g. <samp>http://example.com/index.php/store/thank_you/</samp>.</p>
+	
+	
+	
+</div>
+		
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

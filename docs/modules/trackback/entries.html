@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Trackback Entries Tags &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Trackback Module</a> &gt;
+<strong>Trackback Entries Tag</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Trackback Entries Tag</h1>
+
+	<p>The <dfn>Trackback Entries Tag</dfn> permits you to show all of the received Trackbacks for a given entry. </p>
+
+	<p class="important"><b>Note:</b>&nbsp; The Trackback Entries Tag is intended for use in one of your "single entry" pages.&nbsp; That is, a page that shows a single, specific weblog entry.&nbsp; Therefore, your Trackback page must be linked to from within your Weblog entries using the <a href="../weblog/variables.html#var_url_title_path">URL Title Path</a> variable or the <a href="../weblog/variables.html#var_entry_id_path">Entry ID Path</a> variable, so that the Trackback can be associated to a specific entry.&nbsp; You may also combine <a href="../comment/combined.html">Trackbacks and Comments</a> together in an integrated display.</p>
+	
+	<p>The basic Trackback tag syntax is:</p>
+	
+	
+	<code>{exp:trackback:entries}<br />
+<br />
+trackback content<br />
+<br />
+{/exp:trackback:entries}</code>
+
+	<p>Here is a more complete example:</p>
+
+	<code>{exp:trackback:entries}<br />
+<br />
+&lt;h3>{title}&lt;/h3><br />
+<br />
+&lt;p>{content}&lt;/p><br />
+<br />
+&lt;div class="posted">Tracked on: &lt;a href="{trackback_url}">{weblog_name}&lt;/a> ({trackback_ip}) at {trackback_date format="%Y %m %d %H:%i:%s"}&lt;/div><br />
+<br />
+{/exp:trackback:entries}</code>
+
+
+
+	<h2>Parameters</h2>
+
+	<ul class="minitoc">
+		<li><a href="#par_limit">limit="30"</a></li>
+		<li><a href="#par_orderby">orderby="trackback_date"</a></li>
+		<li><a href="#par_sort">sort="asc"</a></li>
+	</ul>
+
+
+	<h3><a name="par_limit">limit=</a></h3>
+
+		<code>limit="30"</code>
+
+		<p>Allows you to limit the number of trackbacks.</p>
+
+
+	<h3><a name="par_orderby">orderby=</a></h3>
+
+		<code>orderby="trackback_date"</code>
+
+		<p>The "order" parameter sets the display order of the entries.  Setting options for this parameter include:</p>
+
+		<ul>
+			<li>orderby="content"</li>
+			<li>orderby="entry_id"</li>
+			<li>orderby="title"</li>
+			<li>orderby="trackback_date"</li>
+			<li>orderby="trackback_id"</li>
+		</ul>
+
+		<p>If no order is specified, then it will default to "trackback_date".</p>
+
+
+	<h3><a name="par_sort">sort=</a></h3>
+
+		<code>sort="asc"</code>
+		<code>sort="desc"</code>
+
+		<p>The sort order can be "asc" (ascending order or "oldest item first") or "desc" (descending order or "newest item first").  If you do not use a sort order the default is desc.</p>
+
+
+
+	<h2>Variables</h2>
+
+	<ul class="minitoc">
+		<li><a href="#var_content">{content}</a></li>
+		<li><a href="#var_switch">{switch="option_one|option_two}</a></li>
+		<li><a href="#var_title">{title}</a></li>
+		<li><a href="#var_trackback_date">{trackback_date}</a></li>
+		<li><a href="#var_trackback_id">{trackback_id}</a></li>
+		<li><a href="#var_trackback_ip">{trackback_ip}</a></li>
+		<li><a href="#var_trackback_url">{trackback_url}</a></li>
+		<li><a href="#var_weblog_name">{weblog_name}</a></li>
+	</ul>
+
+
+	<h3><a name="var_content">content</a></h3>
+
+		<code>{content}</code>
+
+		<p>The content or body of the trackback</p>
+
+
+	<h3><a name="var_switch">switch=</a></h3>
+
+		<code>{switch="option_one|option_two}</code>
+
+		<p>This variable permits you to alternate between any two values as the entries are displayed.  The first entry will use "option_one", the second will use "option_two", the third "option_one", and so on.</p>
+
+		<p>The most straightforward use for this would be to alternate colors.  It could be used like so:</p>
+
+		<code>{exp:trackback:entries}<br />
+&lt;div class="{switch="one|two"}"><br />
+&lt;h1>{title}&lt;/h1><br />
+{content}<br />
+&lt;/div><br />
+{/exp:trackback:entries}</code>
+
+		<p>The entries would then alternate between <samp>&lt;div class="one"></samp> and <samp>&lt;div class="two"></samp>.</p>
+
+		<p>Multiple instances of the <samp>{switch=}</samp> tag may be used and the system will intelligently keep track of each one.</p>
+
+
+	<h3><a name="var_title">title</a></h3>
+
+		<code>{title}</code>
+
+		<p>The title of the trackback</p>
+
+
+	<h3><a name="var_trackback_date">trackback_date</a></h3>
+
+		<code>{trackback_date format="%Y %m %d %H:%i:%s"}</code>
+
+		<p>The date on which the trackback was received.  As with other date variables, this one requires the "format" parameter in order to define how the date should be displayed.  See the <a href="../templates/date_variable_formatting.html">date variable formatting</a> page for more information.</p>
+
+
+	<h3><a name="var_trackback_id">trackback_id</a></h3>
+
+		<code>{trackback_id}</code>
+
+		<p>The ID associated with the trackback</p>
+
+
+	<h3><a name="var_trackback_ip">trackback_ip</a></h3>
+
+		<code>{trackback_ip}</code>
+
+		<p>The IP address of the site that sent the trackback</p>
+
+
+	<h3><a name="var_trackback_url">trackback_url</a></h3>
+
+		<code>{trackback_url}</code>
+
+		<p>The URL of the entry that sent the trackback.  This leads back to the site of the person making the trackback.</p>
+
+
+	<h3><a name="var_weblog_name">weblog_name</a></h3>
+
+		<code>{weblog_name}</code>
+
+		<p>The name of the site that sent the trackback</p>
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

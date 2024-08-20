@@ -1,0 +1,437 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Upgrading to ExpressionEngine 1.5 &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../index.html" />
+  <style type="text/css" media="screen,print">@import url(../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="../index.html#install_docs">Installation and Update Instructions</a> &gt;
+<a href="update.html">Updating EE</a> &gt;
+<strong>Version 1.5 Notes</strong>
+</div>
+
+<div id="content">
+
+	<h1>Update Notes for Version 1.5</h1>
+
+<p>ExpressionEngine 1.5 includes a number of new features and updates. Reviewing the notes below will help you transition to 1.5 with as little effort as possible.</p>
+
+	<ul>
+	<li><a href="#template_updates">Template Updates</a></li>
+	<li><a href="#profile_theme">Profile Theme Updates</a>
+		<ul>
+			<li><a href="#pm_profile_link">PM Link in Public Profile</a></li>
+			<li><a href="#member_search">Member Search in Member List</a></li>
+			<li><a href="#self_delete">Member Self-Delete Ability</a></li>
+			<li><a href="#bulletin_board">Bulletin Board</a></li>
+		</ul>
+	</li>
+	<li><a href="#wiki_theme">Wiki Theme Updates</a></li>
+	<li><a href="#language">Language Additions</a></li>
+	</ul>
+	
+	<h2><a name="template_updates"></a>Template Updates</h2>
+	<p>In order to make sure ExpressionEngine always outputs valid XHTML Strict, 
+	pMachine decided to remove the name="" attribute from all of its &lt;form> tags.
+	This change means that the smiley popup javascript, used in ExpressionEngine's default theme, needs to be modified in order to work properly. The change is simple.  Simply find the
+	following code in your 'smileys' templates:</p>
+	
+	<code>opener.document.comment_form.comment.value += " " + smiley + " ";<br />
+	opener.window.document.comment_form.comment.focus();</code>
+	
+	<p>And change it to this:</p>
+	
+	<code>opener.document.getElementById('comment_form').comment.value += " " + smiley + " ";<br />
+	opener.window.document.getElementById('comment_form').comment.focus();</code>
+	
+	
+	<h2><a name="profile_theme"></a>Profile Theme Updates</h2>
+	<p>Version 1.5 has some changes in the member theme file (./themes/profile_themes/default/profile_theme.php), 
+	so either replace that file or if you have a customized the Member Profile theme add the following code.</p>
+	
+	<h3><a name="pm_profile_link"></a>PM Link in Public Profile</h3>
+	
+	<p><strong>Public Profile</strong> part of the theme after the email link row:</p>
+	
+	<code>&#123;if can_private_message}<br />
+&lt;tr><br />
+<br />
+&lt;td class='tableCellTwo' style="width:42%;">&lt;div class='defaultBold'>&#123;lang:private_message}&lt;/div>&lt;/td><br />
+&lt;td class='tableCellOne' style="width:58%;"><br />
+&lt;a href="&#123;send_private_message}">&lt;img src="&#123;path:image_url}icon_pm.gif" width="56" height="14" alt="Send Private Message" title="Send Private Message" border="0" />&lt;/a><br />
+&lt;/td><br />
+<br />
+&lt;/tr><br />
+&#123;/if}</code>
+
+
+	<h3><a name="member_search"></a>Member Search in Member List</h3>
+
+	<p><strong>Member List</strong> part of the theme at the very bottom:</p>
+
+
+<code>
+&lt;!--- Begin Member Search --><br />
+<br />
+&lt;script type="text/javascript"><br />
+&lt;!--<br />
+<br />
+var searchFieldCount = 1;<br />
+<br />
+function add_search_field()<br />
+&#123;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (document.getElementById('search_field_1'))<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&#123;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Find last search field<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var originalSearchField = document.getElementById('search_field_1');<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searchFieldCount++;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Clone it, change the id<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var newSearchField = originalSearchField.cloneNode(true);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;newSearchField.id = 'search_field_' + searchFieldCount;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Zero the input and change the names of fields<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var newFieldInputs = newSearchField.getElementsByTagName('input');<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;newFieldInputs[0].value = '';<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;newFieldInputs[0].name = 'search_keywords_' + searchFieldCount;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var newFieldSelects = newSearchField.getElementsByTagName('select');<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;newFieldSelects[0].name = 'search_field_' + searchFieldCount;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Append it and we're done<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;originalSearchField.parentNode.appendChild(newSearchField);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+}<br />
+<br />
+function delete_search_field(obj)<br />
+&#123;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (obj.parentNode && obj.parentNode.id != 'search_field_1')<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&#123;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;obj.parentNode.parentNode.removeChild(obj.parentNode)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+}<br />
+<br />
+//--><br />
+&lt;/script><br />
+<br />
+&lt;table class='tableborder' border='0' cellspacing='0' cellpadding='0' style='width:100%'><br />
+&lt;tr><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;td class='memberlistHead'>&#123;lang:member_search}&lt;/td><br />
+&lt;/tr><br />
+&lt;tr><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;td class='tableCellOne'><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#123;form:form_declaration:do_member_search}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div id="member_search_fields"><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div id="search_field_1" class="itempadbig"><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="text" name="search_keywords_1" /><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;select name='search_field_1' class='select' ><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value='screen_name'>Search Field&lt;/option><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value='screen_name'>Screen Name&lt;/option><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value='email'>Email Address&lt;/option><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value='url'>URL&lt;/option><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value='location'>Location&lt;/option><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#123;custom_profile_field_options}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/select><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;a href="#" onclick="add_search_field(); return false;" class="defaultBold">+&lt;/a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;a href="#" onclick="delete_search_field(this); return false;" class="defaultBold">-&lt;/a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;select name='search_group_id' class='select' ><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#123;group_id_options}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/select><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="itempadbig">&nbsp; &lt;input type='submit' value='Search' class='submit' />&lt;/div><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/form><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/td><br />
+&lt;/tr><br />
+&lt;/table>
+</code>
+
+	<h3><a name="self_delete"></a>Member Self-Delete Ability</h3>
+
+	<p><strong>Member Profile Menu</strong> after &#123;if localization}&#8230;&#123;/if} clause:</p>
+
+	<code>
+&#123;if can_delete}<br />
+&lt;div class="menuItem">&lt;a href="&#123;path:delete}">&#123;lang:mbr_delete}&lt;/a>&lt;/div><br />
+&#123;/if}
+</code>
+	
+	<p>Finally, you will need to add a new template, <strong>Delete Account Confirmation Form</strong> which will require you to edit your <dfn>profile_theme.php</dfn> file via FTP.  At the end of the file, just before:</p>
+	
+	<code>
+}<br />
+// END CLASS<br />
+?></code>
+
+	<p>Add:</p>
+	
+<code>
+	/* -------------------------------------<br />
+	/*  delete_confirmation_form<br />
+	/* -------------------------------------*/<br />
+	<br />
+	function delete_confirmation_form()<br />
+	&#123;<br />
+	return &lt;&lt;&lt; EOF<br />
+	<br />
+	&#123;form_declaration}<br />
+	<br />
+	&lt;table class="tableborder" cellpadding="0" cellspacing="0" border="0" style="width:560px;" align="center"><br />
+	&lt;tr><br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&lt;td class="profileAlertHeadingBG" colspan="2">&#123;lang:mbr_delete}&lt;/td><br />
+	&lt;/tr><br />
+	&lt;tr><br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&lt;td class="tableRowHeadingBold" colspan="2">&#123;lang:confirm_password}&lt;/td><br />
+	&lt;/tr><br />
+	&lt;tr><br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&lt;td class="tableCellOne" align="right">&lt;b>&#123;lang:password}&lt;/b>&lt;/td><br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&lt;td class="tableCellOne">&lt;input type="password" style="width:80%" class="input" name="password" size="20" value="" maxlength="32" />&lt;/td><br />
+	&lt;/tr><br />
+	&lt;tr><br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&lt;td class="tableCellOne" colspan="2"><br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="itempadbig">&#123;lang:mbr_delete_blurb}&lt;/div><br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="itempadbig alert">&#123;lang:mbr_delete_warning}&lt;/div><br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&lt;/td><br />
+	&lt;/tr><br />
+	&lt;tr><br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&lt;td class="tableCellTwo" colspan="2">&lt;div class="itempadbig">&lt;input type="submit" class="submit" value="&#123;lang:submit}" />&lt;/div>&lt;/td><br />
+	&lt;/tr><br />
+	&lt;/table><br />
+	<br />
+	&lt;/form><br />
+	<br />
+	EOF;<br />
+	}<br />
+	/* END */<br />
+</code>	
+
+	<h3><a name="bulletin_board"></a>Bulletin Board</h3>
+
+	<p>There are three new templates associated with Bulletin Boards in the Private Messaging area.  Like the Delete Account Confirmation Form above, you will need to edit your <dfn>profile_theme.php</dfn> via FTP.  At the end of the file, just before:</p>
+	
+	<code>
+}<br />
+// END CLASS<br />
+?></code>
+
+	<p>Add:</p>
+
+<code>
+	// -----------------------------------<br />
+	//  Bulletin Board - USER<br />
+	// -----------------------------------   <br />
+	    <br />
+	function bulletin_board()<br />
+	{<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;return &lt;&lt;&lt;ONEIL<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	&lt;div class='menuHeadingBG'>&lt;div class="tableHeading">{lang:bulletin_board}&lt;/div>&lt;/div><br />
+	<br />
+	{if can_post_bulletin}<br />
+	&lt;table border='0'  cellspacing='0' cellpadding='0' style='width:100%;' ><br />
+	&lt;tr>&lt;td class='tableCellOne'><br />
+	&lt;span class="defaultBold">&#187; &lt;a href='{path:send_bulletin}' >{lang:send_bulletin}&lt;/a>&lt;/span><br />
+	&lt;/td>&lt;/tr><br />
+	&lt;/table><br />
+	{/if}<br />
+	<br />
+	{if no_bulletins}<br />
+	&lt;div class="tableCellOne"><br />
+	&lt;span class="defaultBold">{lang:message_no_bulletins}&lt;/span><br />
+	{/if}<br />
+	<br />
+	<br />
+	{if bulletins}<br />
+	{include:bulletins}<br />
+	{/if}<br />
+	<br />
+	{if paginate}<br />
+	&lt;table border='0'  cellspacing='5' cellpadding='0' class='tablePad' ><br />
+	&lt;tr><br />
+	&lt;td  class='default' ><br />
+	{include:pagination_link}<br />
+	&lt;/td><br />
+	&lt;/tr><br />
+	&lt;/table><br />
+	{/if}<br />
+	    &nbsp;&nbsp;&nbsp;&nbsp;<br />
+	ONEIL;<br />
+	<br />
+	}<br />
+	// END<br />
+	<br />
+	<br />
+	// -----------------------------------<br />
+	//  Single Bulletin<br />
+	// -----------------------------------   <br />
+	    <br />
+	function bulletin()<br />
+	{<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;return &lt;&lt;&lt;JAFFA<br />
+	<br />
+	&lt;div class="{style}" id="bulletin_div_{bulletin_id}"><br />
+	<br />
+	&lt;span class="defaultBold">{lang:message_sender}&lt;/span>: {bulletin_sender}&lt;br /><br />
+	&lt;span class="defaultBold">{lang:message_date}&lt;/span>: {bulletin_date}&lt;br /><br />
+	<br />
+	&lt;div class="itempadbig"><br />
+	&lt;textarea name='bulletin_{bulletin_id}' readonly='readonly' style='width:100%' class='textarea' rows='8' cols='90'>{bulletin_message}&lt;/textarea><br />
+	&lt;/div><br />
+	<br />
+	&lt;/div><br />
+	    &nbsp;&nbsp;&nbsp;&nbsp;<br />
+	JAFFA;<br />
+	<br />
+	}<br />
+	// END<br />
+	<br />
+	<br />
+	<br />
+	//-------------------------------------<br />
+	//  Bulletin Sending Form<br />
+	//-------------------------------------<br />
+	<br />
+	function bulletin_form()<br />
+	{<br />
+	return &lt;&lt;&lt; EOF<br />
+	<br />
+	{form:form_declaration:sending_bulletin}<br />
+	<br />
+	{if message}<br />
+	&lt;div class='tableCellOne'>&lt;div class='success'>{include:message}&lt;/div>&lt;/div><br />
+	{/if}<br />
+	<br />
+	&lt;table border='0' cellspacing='0' cellpadding='0' style='width:100%'><br />
+	<br />
+	&lt;tr><br />
+	&lt;td class='profileHeadingBG' colspan="2">&lt;div class="tableHeading">{lang:send_bulletin}&lt;/div>&lt;/td><br />
+	&lt;/tr><br />
+	<br />
+	&lt;tr><br />
+	&lt;td class='tableCellOne' style="width:20%;">&lt;div class='defaultBold'>{lang:member_group}&lt;/div>&lt;/td><br />
+	&lt;td class='tableCellOne' style="width:80%;"><br />
+	&lt;select name="group_id"><br />
+	{group_id_options}<br />
+	&lt;/select><br />
+	&lt;/td><br />
+	&lt;/tr><br />
+	<br />
+	&lt;tr><br />
+	&lt;td class='tableCellTwo' style="width:20%;">&lt;div class='defaultBold'>{lang:bulletin_message}&lt;/div>&lt;/td><br />
+	&lt;td class='tableCellTwo' style="width:80%;">&lt;textarea name='bulletin_message' style='width:100%' class='textarea' rows='10' cols='90'>&lt;/textarea>&lt;/td><br />
+	&lt;/tr><br />
+	<br />
+	&lt;tr><br />
+	&lt;td class='tableCellOne' style="width:20%;">&lt;div class='defaultBold'>{lang:bulletin_date}&lt;/div>&lt;/td><br />
+	&lt;td class='tableCellOne' style="width:80%;"><br />
+	&lt;input type="text" style="width:80%" class="input" name="bulletin_date" size="20" value="{input:bulletin_date}" maxlength="50" /><br />
+	&lt;/td><br />
+	&lt;/tr><br />
+	<br />
+	<br />
+	&lt;tr><br />
+	&lt;td class='tableCellOne' style="width:20%;">&lt;div class='defaultBold'>{lang:bulletin_expires}&lt;/div>&lt;/td><br />
+	&lt;td class='tableCellOne' style="width:80%;"><br />
+	&lt;input type="text" style="width:80%" class="input" name="bulletin_expires" size="20" value="{input:bulletin_expires}" maxlength="50" /><br />
+	&lt;/td><br />
+	&lt;/tr><br />
+	<br />
+	&lt;tr><br />
+	&lt;td class='tableCellTwo' colspan="2"><br />
+	&lt;div class='marginpad'><br />
+	&lt;input type='submit' class='submit' value='{lang:submit}' /><br />
+	&lt;/div><br />
+	&lt;/td><br />
+	&lt;/tr><br />
+	<br />
+	&lt;/table><br />
+	<br />
+	&lt;/form><br />
+	EOF;<br />
+	}<br />
+	// END
+</code>
+
+<h2><a name="wiki_theme"></a>Wiki Theme Updates</h2>
+
+	<h3>Namespaces Displaying</h3>
+	
+	<p>In <strong>wiki_special_titles()</strong> template function at the very top, after:</p>
+	
+	<code>ob_start();<br />
+<br />
+	?></code>
+	
+	<p>add:</p>
+	
+	<code>	
+&lt;div class='defaultLeft'><br />
+Choose Namespace:  &lt;select onchange="location.href=this.value"><br />
+&lt;option value="{path:wiki_home}{special_namespace}:Titles/">Main&lt;/option><br />
+{wiki:custom_namespaces_list}<br />
+&lt;option value="{path:wiki_home}{special_namespace}:Titles/{namespace_short_name}/" {namespace_selected}>{namespace_label}&lt;/option><br />
+{/wiki:custom_namespaces_list}<br />
+&lt;/select><br />
+&lt;/div>
+</code>
+
+	<p>In <strong>wiki_special_titles()</strong> template function within the {wiki:title_list} tag</p>
+	
+	<code>{if no_results}<br />
+&lt;div class="marginpad">&lt;strong>Sorry, there seem to be no articles for this namespace.&lt;/strong>&lt;/div><br />
+{/if}
+</code>
+
+	<p>In <strong>wiki_edit()</strong> template, change the {wiki:files} tag from:</p>
+	
+	<code>{wiki:files limit="10"}</code>
+	
+	<p>to:</p>
+	
+	<code>{wiki:files limit="10" orderby="upload_date" sort="desc"}</code>
+		
+	<h2><a name="language"></a>Language Additions</h2>
+	
+	<p>ExpressionEngine 1.5 has a number of language file additions.  To assist translators in updating their language packs, a <a href="language_notes_1.5.txt">language notes text file</a> has been provided.  This text file lists all of the new language keys, separated by the each language file that contains changes.  To update your language pack, you can download this text file, make the changes, and simply copy the new keys to the appropriate language files.</p>
+	
+	<p><br /><br /><a href="update.html">Return to Update Page</a></p>
+	
+	<p><br /><br /><br /><br /><br /><br /></p>
+	
+</div>
+
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

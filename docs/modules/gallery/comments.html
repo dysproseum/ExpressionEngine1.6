@@ -1,0 +1,577 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Photo Gallery Comments &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Photo Gallery</a> &gt;
+<strong>Photo Gallery Comments</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Photo Gallery Comments</h1>
+
+	<p>The <dfn>Gallery Comments Tag</dfn> enables you to show the user-submitted comments associated with your gallery entries.</p> 	
+		
+	<p class="important"><b>Note:</b>&nbsp; This Tag is intended for use in one of your "single entry" pages.&nbsp; That is, a page that contains the gallery entry ID number in the URL.</p>
+		
+	<p>Here is a basic example showing how you might use the comment tag:</p>
+
+	<code>{exp:gallery:comments sort="asc" limit="20"}<br />
+<br />
+{comment}<br />
+<br />
+&lt;p>By {name} on {comment_date format="%Y %m %d"}&lt;/p><br />
+<br />
+{/exp:gallery:comments}</code>
+
+
+	<h2>Parameters</h2>
+
+	<ul class="minitoc">
+		<li><a href="#par_dynamic">dynamic="off"</a></li>
+		<li><a href="#par_gallery">gallery="vacations"</a></li>
+		<li><a href="#par_limit">limit="30"</a></li>
+		<li><a href="#par_orderby">orderby="date"</a></li>
+		<li><a href="#par_paginate">paginate="top"</a></li>
+		<li><a href="#par_sort">sort="asc"</a></li>
+	</ul>
+
+
+	<h3><a name="par_dynamic">dynamic=</a></h3>
+
+		<code>dynamic="off"</code>
+
+		<p>The gallery and comment display engines set some parameters dynamically, based on what is in the URL.  There are times, however, where you do not want the parameters affected by what the URL contains.  To override the dynamic nature of the comment tag, use <samp>dynamic="off"</samp>.</p>
+
+		<p>This is often useful if you want to list comments in a "sidebar" on your site and have them always be the same ones regardless of which page on your site you visit (main page, archives, comments, etc.).  Using this, you can create a "recent comments" list.  By setting <samp>dynamic="off"</samp> you will ensure that the list is not affected by anything passed in the URL.</p>
+
+
+	<h3><a name="par_gallery">gallery=</a></h3>
+
+		<code>gallery="vacations"</code>
+
+		<p>From which gallery to show the comments (will show comments from any gallery if no gallery is specified).</p>
+
+		<p class="important">The <samp>gallery=</samp> parameter can have some security implications.  If you do <strong>not</strong> use this parameter then it is possible that people could see comments for a gallery entry that they otherwise would not have access to.  If you use multiple galleries and want to make sure only certain people can see certain content, then you're encouraged to make use of this parameter.</p>
+
+
+	<h3><a name="par_limit">limit=</a></h3>
+
+		<code>limit="30"</code>
+
+		<p>Allows you to limit the number of comments.  The limit will default to 100 comments if a value is not specified.  If you are using <a href="../../modules/weblog/pagination_page.html">pagination</a> then this will determine the number of comments shown per page.</p>
+
+
+	<h3><a name="par_orderby">orderby=</a></h3>
+
+		<code>orderby="date"</code>
+
+		<p>The "order" parameter sets the display order of the comments.  Setting options for this parameter include:</p>
+
+		<ul>
+			<li>orderby="date"</li>
+			<li>orderby="email"</li>
+			<li>orderby="location"</li>
+			<li>orderby="name"</li>
+			<li>orderby="url"</li>
+		</ul>
+
+		<p>If you are combining the display of comments and trackbacks, then you may <strong>only</strong> set this parameter to <samp>date</samp>.</p>
+
+
+	<h3><a name="par_paginate">paginate=</a></h3>
+
+		<code>paginate="top"</code>
+		<code>paginate="bottom"</code>
+		<code>paginate="both"</code>
+
+		<p>This parameter is for use with entry <a href="../../modules/weblog/pagination_page.html">pagination</a> and determines where the pagination code will appear for your gallery entries:</p>
+
+		<ol>
+			<li><b>top</b>: The navigation text and links will appear <em>above</em> your list of entries.</li>
+			<li><b>bottom</b>: The navigation text and links will appear <em>below</em> your list of entries.</li>
+			<li><b>both</b>: The navigation text and links will appear both above and below your list of entries.</li>
+		</ol>
+
+		<p>If no parameter is specified, the navigation block will default to the "bottom" behavior.</p>
+
+
+	<h3><a name="par_sort">sort=</a></h3>
+
+		<code>sort="asc"</code>
+		<code>sort="desc"</code>
+
+		<p>The sort order can be "asc" (ascending order or "oldest item first") or "desc" (descending order or "newest item first").  If you do not use a sort order the default is desc.</p>
+
+
+
+
+	<h2>Variables</h2>
+
+	<ul class="minitoc">
+		<li><a href="#var_aol_im">{aol_im}</a></li>
+		<li><a href="#var_author_id">{author_id}</a></li>
+		<li><a href="#var_comment">{comment}</a></li>
+		<li><a href="#var_comment_id">{comment_id}</a></li>
+		<li><a href="#var_entry_id">{entry_id}</a></li>
+		<li><a href="#var_entry_id_path">{entry_id_path='gallery/comments'}</a></li>
+		<li><a href="#var_icq">{icq}</a></li>
+		<li><a href="#var_interests">{interests}</a></li>
+		<li><a href="#var_ip_address">{ip_address}</a></li>
+		<li><a href="#var_location">{location}</a></li>
+		<li><a href="#var_member_search_path">{member_search_path}</a></li>
+		<li><a href="#var_msn_im">{msn_im}</a></li>
+		<li><a href="#var_occupation">{occupation}</a></li>
+		<li><a href="#var_name">{name}</a></li>
+		<li><a href="#var_permalink">{permalink}</a></li>
+		<li><a href="#var_switch">{switch="option_one|option_two"}</a></li>
+		<li><a href="#var_title">{title}</a></li>
+		<li><a href="#var_url">{url}</a></li>
+		<li><a href="#var_url_or_email">{url_or_email}</a></li>
+		<li><a href="#var_url_or_email_as_author">{url_or_email_as_author}</a></li>
+		<li><a href="#var_url_or_email_as_link">{url_or_email_as_link}</a></li>
+		<li><a href="#var_yahoo_im">{yahoo_im}</a></li>
+		<li><a href="#var_custom_member_fields">Custom Member Fields</a></li>
+	</ul>
+
+
+	<h3><a name="var_author_id">author_id</a></h3>
+
+		<code>{author_id}</code>
+
+		<p>The ID corresponding to the comment author's member profile.  This is only applicable if the comment was left by a registered member.  Non-registered commenters will return a zero (0).</p>
+
+		<p>This can be useful for creating links to the commenter's member profile:</p>
+
+		<code>&lt;a href="http://example.com/index.php/member/{author_id}/">{name}&lt;/a></code>
+
+
+	<h3><a name="var_aol_im">aol_im</a></h3>
+
+		<code>{aol_im}</code>
+
+		<p>The author's AOL IM account name</p>
+
+
+	<h3><a name="var_comment">comment</a></h3>
+
+		<code>{comment}</code>
+
+		<p>The body of the comment</p>
+
+
+	<h3><a name="var_comment_id">comment_id</a></h3>
+
+		<code>{comment_id}</code>
+
+		<p>The ID associated with the comment</p>
+
+
+	<h3><a name="var_entry_id">entry_id</a></h3>
+
+		<code>{entry_id}</code>
+
+		<p>The ID number of the entry</p>
+
+
+	<h3><a name="var_entry_id_path">entry_id_path</a></h3>
+
+		<code>{entry_id_path='gallery/comments'}</code>
+
+		<p>The URL to the specified template.  The ID number of the entry with which the comment is associated will be automatically added.  For example, this:</p>
+
+		<code>&lt;a href="{entry_id_path='gallery/comments'}">my entry&lt;/a></code>
+
+		<p>Would be rendered like this:</p>
+
+		<code>&lt;a href="http://example.com/index.php/gallery/comments/234/">my entry&lt;/a></code>
+
+
+	<h3><a name="var_icq">icq</a></h3>
+
+		<code>{icq}</code>
+
+		<p>The author's ICQ IM user identification number</p>
+
+
+	<h3><a name="var_interests">interests</a></h3>
+
+		<code>{interests}</code>
+
+		<p>The author's "interests" as entered in their profile</p>
+
+
+	<h3><a name="var_ip_address">ip_address</a></h3>
+
+		<code>{ip_address}</code>
+
+	  <p>The IP address of the commenter</p>
+
+
+	<h3><a name="var_location">location</a></h3>
+
+		<code>{location}</code>
+
+		<p>The author's location as entered in their profile</p>
+
+
+	<h3><a name="var_member_search_path">member_search_path</a></h3>
+
+		<code>{member_search_path='search/results'}</code>
+
+		<p>This variable is replaced by a URL that passes the author's member name to your search results Template.  In this way, you can display all entries made by the author.  You should specify the Template_Group/Template that you use to display search results.  For example:</p>
+
+		<code>&lt;a href="{member_search_path='search/results'}">View entries by this member&lt;/a></code>
+
+
+	<h3><a name="var_msn_im">msn_im</a></h3>
+
+		<code>{msn_im}</code>
+
+		<p>The author's MSN IM account name</p>
+
+
+	<h3><a name="var_occupation">occupation</a></h3>
+
+		<code>{occupation}</code>
+
+		<p>The author's occupation as entered in their profile</p>
+
+
+	<h3><a name="var_name">name</a></h3>
+
+		<code>{name}</code>
+
+		<p>Name of the author</p>
+
+
+	<h3><a name="var_permalink">permalink</a></h3>
+
+		<code>{permalink}</code>
+
+		<p>The URL to the actual comment with anchor.  Put this variable in	a link:</p>
+
+		<code>&lt;a href="{permalink}">permanent link&lt;/a></code>
+
+
+	<h3><a name="var_switch">switch=</a></h3>
+
+		<code>{switch="option_one|option_two"}</code>
+
+		<p>This variable permits you to alternate between any two values as the entries are displayed.  The first entry will use "option_one", the second will use "option_two", the third "option_one", and so on.</p>
+
+		<p>The most straightforward use for this would be to alternate colors.  It could be used like so:</p>
+
+		<code>{exp:gallery:comments}<br />
+&lt;div class="{switch="one|two"}"><br />
+&lt;h1>{name}&lt;/h1><br />
+{comment}<br />
+&lt;/div><br />
+{/exp:gallery:comments}</code>
+
+		<p>The entries would then alternate between <samp>&lt;div class="one"></samp> and <samp>&lt;div class="two"></samp>.</p>
+
+		<p>Multiple instances of the <samp>{switch=}</samp> tag may be used and the system will intelligently keep track of each one.</p>
+
+
+	<h3><a name="var_title">title</a></h3>
+
+		<code>{title}</code>
+
+		<p>The title of the gallery entry with which the comment is associated.</p>
+
+
+	<h3><a name="var_url">url</a></h3>
+
+		<code>{url}</code>
+
+		<p>The author's raw URL, if it exists</p>
+
+
+	<h3><a name="var_url_or_email">url_or_email</a></h3>
+
+		<code>{url_or_email}</code>
+
+		<p>URL if it exists, otherwise the email address</p>
+
+
+	<h3><a name="var_url_or_email_as_author">url_or_email_as_author</a></h3>
+
+		<code>{url_or_email_as_author}</code>
+
+		<p>Hyperlink or email link as author screen_name (or username if they haven't specified a screen name)</p>
+
+
+	<h3><a name="var_url_or_email_as_link">url_or_email_as_link</a></h3>
+
+		<code>{url_or_email_as_link}</code>
+
+		<p>Same as above only it will display the URL or email address as a link</p>
+
+
+	<h3><a name="var_yahoo_im">yahoo_im</a></h3>
+
+		<code>{yahoo_im}</code>
+
+		<p>The author's Yahoo IM account name</p>
+
+
+	<h3><a name="var_custom_member_fields">Custom Member Fields</a></h3>
+
+		<p>All custom member profile fields can be accessed using the "short name" of the field:</p>
+
+		<code>{age}<br />
+{gender}<br />
+{zodiac}<br />
+etc..</code>
+
+		<p>These are totally dynamic in that any profile field you create for your members will automatically be available by its "short name" as a variable.</p>
+
+
+
+	<h2>Single Variable Dates</h2>
+
+	<p>Several date variables are available for use. As with other date variables, these require the "format" parameter in order to define how the date should be displayed. See the <a href="../../templates/date_variable_formatting.html">date variable formatting</a> page for more information.</p>
+
+	<ul class="minitoc">
+		<li><a href="#var_comment_date">{comment_date format="%Y %m %d"}</a></li>
+		<li><a href="#var_edit_date">{edit_date format="%Y %m %d"}</a></li>
+	</ul>
+
+
+	<h3><a name="var_comment_date">comment_date</a></h3>
+
+		<code>{comment_date format="%Y %m %d"}</code>
+
+		<p>The date of the comment.</p>
+
+
+	<h3><a name="var_edit_date">edit_date</a></h3>
+
+		<code>{edit_date format="%Y %m %d"}</code>
+
+		<p>The date on which the comment was edited.</p>
+
+
+
+	<h2>Conditionals</h2>
+
+	<p>Conditionals work in comments:</p>
+
+
+	<h3>if no_results</h3>
+
+		<code>{if no_results}<br />
+content<br />
+{/if}</code>
+
+		<p>You may use this conditional for displaying a message in the case when no comments are returned.  The contents inside of the conditional will be displayed in cases where there are no results returned for the tag.</p>
+
+		<code>{if no_results}<br />
+<br />
+&lt;p>There are no comments for this entry yet.&lt;/p><br />
+<br />
+{/if}</code>
+
+
+
+	<h2>Comment Submission Form</h2>
+
+	<code>{exp:gallery:comment_form}<br />
+<br />
+{/exp:gallery:comment_form}</code>
+
+
+	<p>There is one parameter in the comment form but only if you want to use the preview feature:</p>
+
+	<code>{exp:gallery:comment_form preview="gallery/preview"}</code>
+
+	<p>The "preview" parameter specifies the template group/template in which the
+preview will be shown.  More on previewing later.</p>
+
+	<p>The comment form is created pretty much like a normal form, only you don't specify the opening and closing form tags.  There are a few variables that are required in order to enable people's personal information (name, email, url, etc.) to appear in the form.  Here's how the comment form is typically created:</p>
+
+	<code>{exp:gallery:comment_form preview="gallery/preview"}<br />
+<br />
+{if logged_out}<br />
+<br />
+&lt;p>Name: &lt;input type="text" name="name" value="{name}" size="50" />&lt;/p><br />
+<br />
+&lt;p>Email: &lt;input type="text" name="email" value="{email}" size="50" />&lt;/p><br />
+<br />
+&lt;p>Location: &lt;input type="text" name="location" value="{location}" size="50" />&lt;/p><br />
+<br />
+&lt;p>URL: &lt;input type="text" name="url" value="{url}" size="50" />&lt;/p><br />
+<br />
+{/if}<br />
+<br />
+&lt;p>&lt;textarea name="comment" cols="70" rows="10">{comment}&lt;/textarea>&lt;/p><br />
+<br />
+&lt;p>&lt;input type="checkbox" name="save_info" value="yes" {save_info} /> Remember my personal information&lt;/p><br />
+<br />
+&lt;p>&lt;input type="checkbox" name="notify_me" value="yes" {notify_me} /> Notify me of follow-up comments?&lt;/p><br />
+<br />
+{if captcha}<br />
+<br />
+&lt;p>Please enter the word you see in the image below:&lt;/p><br />
+<br />
+&lt;p>{captcha}&lt;br /><br />
+&lt;input type="text" name="captcha" value="{captcha_word}" maxlength="20" />&lt;/p><br />
+<br />
+{/if}<br />
+<br />
+&lt;input type="submit" name="submit" value="Submit" /><br />
+&lt;input type="submit" name="preview" value="Preview" /><br />
+<br />
+{/exp:gallery:comment_form}</code>
+
+	<p><b>Notes:</b><br />
+The conditional variable <samp>{if logged_out}</samp> allows the system to show the short form (textarea only) if the user is a logged in member.  We recommend you use the form this way because if a member is logged in, their personal data is fetched automatically.</p>
+
+	<p>Notice the variables in the "value" form fields?  These allow us to show the user's information in the form automatically if they click the "remember personal info" option.</p>
+
+
+	<h2>Previewing</h2>
+
+	<p>To preview a comment requires that you create a specific template for it. This template will contain at minimum two tags.  The first is the tag that shows the preview:</p>
+
+	<code>{exp:gallery:comment_preview}<br />
+<br />
+{comment}<br />
+<br />
+{/exp:gallery:comment_preview}</code>
+
+	<p>The second is the comment form tag from earlier.  This allows the comment to be displayed as well as the form containing the info so it can be previewed again or submitted.</p>
+
+
+	<h2>Variables</h2>
+
+	<ul class="minitoc">
+		<li><a href="#var_comment">{comment}</a></li>
+		<li><a href="#var_comment_date">{comment_date format="%Y %m %d"}</a></li>
+		<li><a href="#var_email">{email}</a></li>
+		<li><a href="#var_location">{location}</a></li>
+		<li><a href="#var_name">{name}</a></li>
+		<li><a href="#var_url">{url}</a></li>
+		<li><a href="#var_url_or_email">{url_or_email}</a></li>
+		<li><a href="#var_url_or_email_as_author">{url_or_email_as_author}</a></li>
+		<li><a href="#var_url_or_email_as_link">{url_or_email_as_link}</a></li>
+	</ul>
+
+
+	<h3><a name="var_comment">comment</a></h3>
+
+		<code>{comment}</code>
+
+		<p>The body of the comment.</p>
+
+
+	<h3><a name="var_comment_date">comment_date</a></h3>
+
+		<code>{comment_date format="%Y %m %d"}</code>
+
+		<p>The date of the comment.  As with other date variables, this requires the "format" parameter in order to define how the date should be displayed. See the <a href="../../templates/date_variable_formatting.html">date variable formatting</a> page for more information.</p>
+
+
+	<h3><a name="var_email">email</a></h3>
+
+		<code>{email}</code>
+
+		<p>The email address of the comment author.</p>
+
+
+	<h3><a name="var_location">location</a></h3>
+
+		<code>{location}</code>
+
+		<p>The author's location as entered in their profile or the comment entry form.</p>
+
+
+	<h3><a name="var_name">name</a></h3>
+
+		<code>{name}</code>
+
+		<p>Name of the author.</p>
+
+
+	<h3><a name="var_url">url</a></h3>
+
+		<code>{url}</code>
+
+		<p>The author's raw URL, if it exists.</p>
+
+
+	<h3><a name="var_url_or_email">url_or_email</a></h3>
+
+		<code>{url_or_email}</code>
+
+		<p>URL if it exists, otherwise the email address.</p>
+
+
+	<h3><a name="var_url_or_email_as_author">url_or_email_as_author</a></h3>
+
+		<code>{url_or_email_as_author}</code>
+
+		<p>Hyperlink or email link as author screen_name (or username if they haven't specified a screen name).</p>
+
+
+	<h3><a name="var_url_or_email_as_link">url_or_email_as_link</a></h3>
+
+		<code>{url_or_email_as_link}</code>
+
+		<p>Same as above only it will display the URL or email address as a link.</p>
+
+
+
+	<h2>Conditionals</h2>
+
+	<p>The following conditionals are available:</p>
+
+	<ul>
+		<li>{if email}</li>
+		<li>{if location}</li>
+		<li>{if logged_in}</li>
+		<li>{if logged_out}</li>
+		<li>{if name}</li>
+		<li>{if url}</li>
+	</ul>
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

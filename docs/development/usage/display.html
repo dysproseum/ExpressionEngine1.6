@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Display Class  &#8211; ExpressionEngine Developer Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../index.html">Development</a> &gt;
+<strong>Display Class</strong>
+</div>
+
+
+<div id="content">
+<h1>Display Class</h1>
+
+
+<div class="section">
+	<ul>
+		<li><a href="display.html#usage">Usage of Display Class</a></li>
+		<li><a href="display.html#important_vars">Three Important Class Variables</a></li>
+		<li><a href="display.html#other_vars">Other Class Variables</a></li>
+		<li><a href="display.html#class_functions">Class Functions</a></li>
+	</ul>
+</div>
+
+
+
+
+<a name="usage"></a>
+<h2>Usage of Display Class</h2>
+
+<p>The Display class provides all the HTML display elements used in the ExpressionEngine Control Panel.  By creating this abstract layer, the Control Panel side of modules can be created without actually writing out a great deal of the HTML, especially the header and XHTML Strict design. In the Control Panel file for your module, the constructor function* of the module's Control Panel class will have a switch function used for navigation through the CP side of this module.  Each case statement in the switch directs to a function in the class, and these functions used in the switch will either be used for displaying a page OR processing the content of a page.  So, essentially, each page of the Control Panel side of your module is a function.</p>
+<p>* the function with the same name as the class and is thus called every time the class is called</p>
+
+<a name="important_vars"></a>
+<h2>Three Important Class Variables</h2>
+
+<p>There are three class variables that should be set whenever creating a function in the module's CP class that will be used for displaying a page.</p>
+
+<h3>$DSP->title</h3> 
+<p>Is used to set the content for the HTML &lt;title&gt; tag for the page.  It should be set using a member of the language array, called via the Language class.</p>
+
+<pre>
+$DSP->title = $LANG->line('moblog');
+</pre>
+
+
+<h3>$DSP->crumb</h3>
+<p>Is used for displaying the name of the current page within the naviagational (breadcrump) links at the top of the main body of the page. (ex:  Control Panel Home &gt; Modules &gt; Moblogging).</p>
+
+<pre>
+$DSP->crumb = $LANG->line('moblog');
+</pre>
+
+
+<h3>$DSP->body</h3>
+<p>Contains the main content of the page.</p>
+
+<pre>
+$DSP->body .= $DSP->heading($LANG->line('moblog_form'));
+$DSP->body .= $form_content; 
+</pre>
+
+
+
+<!-- SECTION -->
+
+
+
+<a name="other_vars"></a>
+<h2>Other Class Variables</h2>
+
+<p>There are other Display class variables that you may wish to use but that are not required for a Control Panel page to display properly.</p>
+
+
+<h3>$DSP->body_props</h3>
+<p>Is used to add content to the &lt;body&gt; HTML tag, such as javascript.</p>
+
+<pre>
+$DSP->body_props = " onLoad=\"document.forms[0].username.focus();\"";
+</pre>
+
+
+<h3>$DSP->crumbline</h3>
+<p>Set to FALSE, if you wish the line underneath the breadcrump content not to be displayed.</p>
+
+
+<h3>$DSP->ref_rate</h3>
+<p>Rate of refresh in seconds for the &lt;meta&gt; tag when setting the <strong>$DSP->refresh</strong> class variable. By default it is set to 0.</p>
+
+
+<h3>$DSP->refresh</h3>
+<p>If set to a URL, the header will contain a &lt;meta&gt; refresh to that URL.  Useful for creating some manner of batch processing. </p>
+
+<pre>
+$DSP->refresh = BASE.AMP.'C=communicate'.AMP.'M=batch_send'.AMP.'id='.$id;
+$DSP->ref_rate = 4;
+</pre>
+
+<h3>$DSP->rcrumb</h3>
+<p>Used if you wish to create a right side breadcrump or link.  Often used at the top of Control Panel section subpages for creating something like a new custom field.</p>
+
+<pre>
+$DSP->rcrumb = $DSP->qdiv('crumbLinksR',
+                          $DSP->anchor(
+                                       BASE.AMP.'C=admin'.AMP.'M=blog_admin'.AMP.'P=edit_field',
+                                       $LANG->line('create_new_custom_field')
+                                       ));        
+</pre>
+
+<h3>$DSP->show_crumb</h3>
+<p>Set to FALSE, if you do not wish the breadcrumb navigation to be displayed.</p>
+
+
+
+<!-- SECTION -->
+
+
+
+<a name="class_functions"></a>
+<h2>Class Functions</h2>
+<p>Consult the list of functions in the Class Reference section.</p>
+
+
+
+
+
+
+</div>
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

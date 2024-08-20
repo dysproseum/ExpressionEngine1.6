@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Installing the Discussion Forum Module &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Forum Module</a> &gt;
+<strong>Forum Installation</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Installing the Discussion Forum Module</h1>
+
+	<p>The Discussion Forum Module is simple to install.</p>
+
+	<p class="important">The Discussion Forum Module requires the latest version of ExpressionEngine.</p>
+
+	<p class="important">These instructions are <strong>only</strong> for first-time installations.  <b>Do not follow the instructions below if you need to <em>update</em> your forum installation.</b>  Instead, follow the <a href="forum_update.html">Forum Update</a> instructions.</p>
+
+	<h2>Step 1</h2>
+
+		<p>The first step is simply to download the Discussion Forum software once you purchase it. Unzip the software to your local computer.</p>
+
+
+	<h2>Step 2</h2>
+
+		<p>Inside the unzipped software, you will find a <kbd>forum</kbd> directory.  Upload this directory and everything inside it to your server and place it in the <kbd>system/modules/</kbd> directory.  You should end up with it located at <kbd>system/modules/forum/</kbd>.</p>
+
+
+	<h2>Step 3</h2>
+
+		<p>Inside the unzipped software, you will find a <kbd>forum_themes</kbd> directory.  Upload this directory and everything inside it to your server and place it in the <kbd>themes</kbd> directory.  You should end up with it located at <kbd>themes/forum_themes/</kbd>.</p>
+
+
+	<h2>Step 4</h2>
+
+		<p>Inside the unzipped software, you will find a <kbd>forum_attachments</kbd> directory.  Upload this directory and everything inside it to your server and place it in the <kbd>images</kbd> directory.  You should end up with it located at <kbd>images/forum_attachments/</kbd>.</p>
+
+
+	<h2>Step 5</h2>
+
+		<p>Set the permissions of the newly uploaded <kbd>images/forum_attachments/</kbd> directory to 777 so that ExpressionEngine can place the necessary files in it if someone includes an attachment in their forum post.  If you're on a Windows-based server you will need to ensure that the directory is "writable".</p>
+
+
+	<h2>Step 6</h2>
+
+		<p>Inside the unzipped software, you will find two language files:</p>
+
+		<ul>
+			<li><var>lang.forum.php</var></li>
+			<li><var>lang.forum_cp.php</var></li>
+		</ul>
+
+		<p>Upload these two files into your <kbd>system/language/english/</kbd> directory on your server.  You should end up with:</p>
+
+		<ul>
+			<li><var>system/language/english/lang.forum.php</var></li>
+			<li><var>system/language/english/lang.forum_cp.php</var></li>
+		</ul>
+
+
+	<h2>Step 7</h2>
+
+		<p>Log into your ExpressionEngine Control Panel with a SuperAdmin user.  Go to the <dfn>Modules</dfn> tab.  You will see an entry listed for the "Discussion Forum".  On the right side of the table, click the <dfn>Install</dfn> link corresponding to the Discussion Forum Module.  This will install the necessary database tables and settings for the forum.</p>
+
+		<p>You are now ready to start using your new forum!</p>
+
+
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

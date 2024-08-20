@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Simple Commerce &#8211; Instant Payment Notification &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Simple Commerce Module</a> &gt;
+<a href="sc_cp.html">Simple Commerce Control Panel</a> &gt;
+<strong>Instant Payment Notification</strong>
+</div>
+
+
+<div id="content">
+
+		<h1>Simple Commerce &#8211; Instant Payment Notification</h1>
+
+		<p>The Simple Commerce Module and PayPal's IPN (Instant Payment Notification) allow you to fully integrate PayPal with your store, automatically keeping track of purchases, and sending notification emails to both administrators and customers.</p>
+		
+			<div class="imgwrapper"><img src="../../images/sc_cp_ipn.png" width="487" height="208" alt="Simple Commerce Instant Payment Notification" title="Simple Commerce Instant Payment Notification" border="0" /></div>
+		
+		<p>PayPal's Instant Payment Notification service processes transactions on their server, and notifies ExpressionEngine when the transaction is complete, so purchases are not recorded in your store until they are finalized.</p>
+		
+		<p class="important"><strong>NOTE:</strong> While you can still use Simple Commerce generated PayPal links to sell items to users browsing your site as guests, the Instant Payment Notification features, such as transaction recording and email notifications, will only work for purchases made by logged-in members of your site.</p>
+		
+		<p class="important"><strong>NOTE:</strong> In order for PayPal to be able to send payment notifications to your site, your site needs to be online and accessible to the public.  If anything would prevent an unauthenticated user from visiting your site, PayPal will be unable to send payment notifications.</p>
+		
+		<h2>Enabling PayPal Instant Payment Notification</h2>
+		
+		<p>Please refer to <a href="https://www.paypal.com/IntegrationCenter/ic_ipn.html">PayPal's instructions</a> for the latest information.  To enable Instant Payment Notification, login to PayPal, and select "Payment Notifications" from the Profile submenu.  Provide PayPal with the ExpressionEngine notification URL by typing or pasting the URL shown in your Simple Commerce control panel.</p>
+				
+</div>
+		
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Photo Gallery Categories &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Photo Gallery</a> &gt;
+<strong>Categories</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Photo Gallery Categories</h1>
+
+	<p>The Photo Gallery <dfn>Categories Tag</dfn> shows a listing of all the categories/sub-categories in the gallery, as in this example:</p>
+	
+	<div class="imgwrapper"><img src="../../images/gallery_categories.jpg" width="724" height="105" alt="Categories" title="Categories" border="0" /></div>
+
+	<p>Normally this  appears on the gallery front page.  The name of the category will typically be a link pointing to the page that shows all the thumbnails in the particular category.</p>
+
+	<p>Here is an example of the <dfn>Categories Tag</dfn>:</p>
+
+	<code>{exp:gallery:categories gallery="GALLERY_NAME"}<br />
+<br />
+ &lt;table cellpadding="6" cellspacing="1" border="0" width="100%"><br />
+ &lt;th>Category&lt;/th><br />
+ &lt;th>Description&lt;/th><br />
+ &lt;th>Files&lt;/th><br />
+ &lt;th>Comments&lt;/th><br />
+ &lt;th>Views&lt;/th><br />
+ <br />
+{category_row}<br />
+<br />
+	{row_start}&lt;tr>{/row_start}<br />
+<br />
+		{row}<br />
+		&lt;td>&lt;a href="{category_path='gallery/category'}">{category}&lt;/a>&lt;/td><br />
+		&lt;td>{category_description}&lt;/td><br />
+		&lt;td>{total_files}&lt;/td><br />
+		&lt;td>{total_comments}&lt;/td><br />
+		&lt;td>{total_views}&lt;/td><br />
+		{/row}<br />
+<br />
+	{row_end}&lt;/tr>{/row_end}<br />
+<br />
+{/category_row}<br />
+<br />
+ &lt;/table><br />
+<br />
+{/exp:gallery:categories}</code>
+
+	<ul>
+		<li><a href="#parameters">Parameters</a></li>
+		<li><a href="#single_variables">Single Variables</a></li>
+		<li><a href="#variable_pairs">Variable Pairs</a></li>
+		<li><a href="#subcategories">Displaying Subcategories</a></li>
+	</ul>
+
+
+
+	<h2><a name="parameters">Parameters</a></h2>
+
+	<ul class="minitoc">
+		<li><a href="#par_gallery">gallery="vacations"</a></li>
+	</ul>
+
+
+	<h3><a name="par_gallery">gallery=</a></h3>
+
+		<code>gallery="vacations"</code>
+
+		<p>The name (short name) of the gallery for which you wish to display the categories.  This is a <strong>required</strong> parameter.</p>
+
+
+
+
+	<h2><a name="single_variables">Single Variables</a></h2>
+
+	<p>These are available for use between the <samp>{row} {/row}</samp> variable pair.</p>
+
+	<p>All variables are available for conditional use. e.g.</p>
+
+	<code>{if total_files > 0}<br />
+	content<br />
+{/if}</code>
+
+	<ul class="minitoc">
+		<li><a href="#var_category">{category}</a></li>
+		<li><a href="#var_category_description">{category_description}</a></li>
+		<li><a href="#var_category_id">{category_id}</a></li>
+		<li><a href="#var_category_path">{category_path='gallery/category'}</a></li>
+		<li><a href="#var_recent_entry_date">{recent_entry_date format="%Y %m %d"}</a></li>
+		<li><a href="#var_total_comments">{total_comments}</a></li>
+		<li><a href="#var_total_files">{total_files}</a></li>
+		<li><a href="#var_total_views">{total_views}</a></li>
+	</ul>
+
+
+	<h3><a name="var_category">category</a></h3>
+
+		<code>{category}</code>
+
+		<p>This variable simply displays the name of the category.</p>
+
+
+	<h3><a name="var_category_description">category_description</a></h3>
+
+		<code>{category_description}</code>
+
+		<p>This variable simply displays the content from the "category description" field.</p>
+
+
+	<h3><a name="var_category_id">category_id</a></h3>
+
+		<code>{category_id}</code>
+
+		<p>This variable simply displays the ID of the category.</p>
+
+	<h3><a name="var_category_path">category_path='</a></h3>
+
+		<code>{category_path=gallery/category'}</code>
+
+		<p>The path (template_group/template) where you want the category links to point.  This is typically used within a standard HTML link tag:</p>
+
+		<code>&lt;a href="{category_path='gallery/category'}">{category}&lt;/a></code>
+
+
+	<h3><a name="var_recent_entry_date">recent_entry_date</a></h3>
+
+		<code>{recent_entry_date format="%Y %m %d"}</code>
+
+		<p>The date of the most recent entry in the category.  See the <a href="../../templates/date_variable_formatting.html">date variable formatting</a> page for more information.</p>
+
+
+	<h3><a name="var_total_comments">total_comments</a></h3>
+
+		<code>{total_comments}</code>
+
+		<p>The total number of comments associated with entries in this category.</p>
+
+
+	<h3><a name="var_total_files">total_files</a></h3>
+
+		<code>{total_files}</code>
+
+		<p>The total number of files in this category.</p>
+
+
+	<h3><a name="var_total_views">total_views</a></h3>
+
+		<code>{total_views}</code>
+
+		<p>The total combined number of views of entries in this category.</p>
+
+
+
+	<h2><a name="variable_pairs">Variable Pairs</a></h2>
+
+	<ul class="minitoc">
+		<li><a href="#pair_category_row">{category_row}{/category_row}</a></li>
+		<li><a href="#pair_row">{row}{/row}</a></li>
+		<li><a href="#pair_row_end">{row_end}{/row_end}</a></li>
+		<li><a href="#pair_row_start">{row_start}{/row_start}</a></li>
+		<li><a href="#pair_subcat_marker">{subcat_marker}{/subcat_marker}</a></li>
+		<li><a href="#pair_subcategory_row">{subcategory_row}{/subcategory_row}</a></li>
+	</ul>
+
+
+	<h3><a name="pair_category_row">category_row</a></h3>
+
+		<code>{category_row}<br />
+<br />
+	{row_start}&lt;tr>{/row_start}<br />
+<br />
+{row}<br />
+&lt;td>&lt;a href="{category_path='gallery/category'}">{category}&lt;/a>&lt;/td><br />
+&lt;td>{total_files}&lt;/td><br />
+{/row}<br />
+<br />
+	{row_end}&lt;/tr>{/row_end}<br />
+<br />
+{/category_row}</code>
+
+		<p>The entire repeating category "row".  This includes any starting or ending content for each "row".</p>
+
+
+	<h3><a name="pair_row">row</a></h3>
+
+		<code>{row}<br />
+&lt;td>&lt;a href="{category_path='gallery/category'}">{category}&lt;/a>&lt;/td><br />
+&lt;td>{total_files}&lt;/td><br />
+{/row}</code>
+
+		<p>The category "row" contents.  In the context of a table, you could think of these as the individual cells in a row.</p>
+
+
+	<h3><a name="pair_row_end">row_end</a></h3>
+
+		<code>{row_end}&lt;/tr>{/row_end}</code>
+
+		<p>The ending declaration of the row.  In the context of a table, you could think of this as the "&lt;/tr> tag.</p>
+
+
+	<h3><a name="pair_row_start">row_start</a></h3>
+
+		<code>{row_start}&lt;tr>{/row_start}</code>
+
+		<p>The starting declaration of the row.  In the context of a table, you could think of this as the "&lt;tr> tag.</p>
+
+
+	<h3><a name="pair_subcat_marker">subcat_marker</a></h3>
+
+		<code>{subcat_marker}&lt;img src="/images/cat_marker.gif" alt="" />{/subcat_marker}</code>
+
+		<p>The sub-category marker.  Generally, this is an indentation image to show the relationship between a parent category and a child.  <b>Note:</b> This can <strong>only</strong> be used within the <samp>{row} {/row}</samp> variable pair.</p>
+
+
+	<h3><a name="pair_subcategory_row">subcategory_row</a></h3>
+
+		<code>{subcategory_row}{/subcategory_row}</code>
+
+		<p>The entire repeating subcategory "row".  This includes any starting or ending content for each "row".</p>
+
+
+
+	<h2><a name="subcategories">Displaying Subcategories</a></h2>
+
+	<p>There are two general approaches to displaying your subcategories and differentiating them from the main categories.</p>
+
+	<ul>
+		<li><a href="#subcategories_subcat_marker">Subcategory Markers</a></li>
+		<li><a href="#subcategories_subcategory_row">Subcategory Rows</a></li>
+	</ul>
+
+
+	<h3><a name="subcategories_subcat_marker">Subcategory Markers</a></h3>
+
+	<p>The first way you can differentiate your subcategories is to designate a specific marker to be used when displaying a subcategory row (but not a main category row).  This is done with the <a href="#pair_subcat_marker">{subcat_marker} {/subcat_marker}</a> variable pair.</p>
+
+	<p>This marker will be shown <strong>only</strong> preceding each sub-category.  Note: The marker will be indented automatically based on the number of sub-categories.  The marker can be added wherever you want the marker to appear within the <samp>{row} {/row}</samp>.</p>
+
+	<p>Example:</p>
+
+<code>{exp:gallery:categories gallery="vacations"}<br />
+<br />
+ &lt;table cellpadding="6" cellspacing="1" border="0" width="100%"><br />
+ &lt;th>Category&lt;/th><br />
+ &lt;th>Description&lt;/th><br />
+ &lt;th>Files&lt;/th><br />
+ &lt;th>Comments&lt;/th><br />
+ &lt;th>Views&lt;/th><br />
+ <br />
+{category_row}<br />
+	<br />
+	{row_start}&lt;tr>{/row_start}<br />
+		<br />
+		{row}<br />
+		&lt;td>{subcat_marker}&lt;img src="/images/marker.gif" alt="" />{/subcat_marker}&amp;nbsp;&lt;a href="{category_path='gallery/category'}">{category}&lt;/a>&lt;/td><br />
+		&lt;td>{category_description}&lt;/td><br />
+		&lt;td>{total_files}&lt;/td><br />
+		&lt;td>{total_comments}&lt;/td><br />
+		&lt;td>{total_views}&lt;/td><br />
+		{/row}<br />
+		<br />
+	{row_end}&lt;/tr>{/row_end}<br />
+<br />
+{/category_row}<br />
+<br />
+ &lt;/table><br />
+<br />
+{/exp:gallery:categories}</code>
+
+
+	<h3><a name="subcategories_subcategory_row">Subcategory Rows</a></h3>
+
+	<p>For those who want absolute control over the presentation of subcategories in order to show them totally differently, you may use a separate "category row" variable pair so that you can differentiate regular categories from subcategories.  This is the <a href="#pair_subcategory_row">{subcategory_row} {/subcategory_row}</a> variable pair.</p>
+
+	<p>You use this by specifying both the <samp>{category_row} {/category_row}</samp> and <samp>{subcategory_row} {/subcategory_row}</samp> content.</p>
+
+	<p>Example:</p>
+
+	<code>{exp:gallery:categories gallery="vacations"}<br />
+<br />
+ &lt;table cellpadding="6" cellspacing="1" border="0" width="100%"><br />
+ &lt;th>Category&lt;/th><br />
+ &lt;th>Description&lt;/th><br />
+ &lt;th>Files&lt;/th><br />
+ &lt;th>Comments&lt;/th><br />
+ &lt;th>Views&lt;/th><br />
+ <br />
+{category_row}<br />
+	<br />
+	{row_start}&lt;tr>{/row_start}<br />
+		<br />
+		{row}<br />
+		&lt;td>&lt;a href="{category_path='gallery/category'}">{category}&lt;/a>&lt;/td><br />
+		&lt;td>{category_description}&lt;/td><br />
+		&lt;td>{total_files}&lt;/td><br />
+		&lt;td>{total_comments}&lt;/td><br />
+		&lt;td>{total_views}&lt;/td><br />
+		{/row}<br />
+		<br />
+	{row_end}&lt;/tr>{/row_end}<br />
+ <br />
+{/category_row}<br />
+<br />
+{subcategory_row}<br />
+	<br />
+	{row_start}&lt;tr>{/row_start}<br />
+		<br />
+		{row}<br />
+		&lt;td>&lt;img src="/images/marker.gif" alt="" />&amp;nbsp;&lt;a href="{category_path='gallery/category'}">{category}&lt;/a>&lt;/td><br />
+		&lt;td>{category_description}&lt;/td><br />
+		&lt;td>{total_files}&lt;/td><br />
+		&lt;td>{total_comments}&lt;/td><br />
+		&lt;td>{total_views}&lt;/td><br />
+		{/row}<br />
+		<br />
+	{row_end}&lt;/tr>{/row_end}<br />
+	<br />
+{/subcategory_row}<br />
+<br />
+ &lt;/table><br />
+<br />
+{/exp:gallery:categories}
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

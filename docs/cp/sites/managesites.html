@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Multiple Site Manager &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#cp_docs">The Control Panel</a> &gt;
+<a href="index.html">Multiple Site Manager</a> &gt; 
+<strong>Manage Sites</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Managing Sites</h1>
+
+<ul class="mini_toc">
+	<li><a href="#site_management">Intuitive Multiple Site Management</a></li>
+	<li><a href="#no_master">No "Master" Site</a></li>
+	<li><a href="#delete_site">Delete a Site</a></li>
+	<li><a href="#installation_wide">Installation Wide Assets</a></li>
+	<li><a href="#site_specific">Site Specific Preferences</a></li>
+	<li><a href="#weblogs_templates">Accessing Site Specific Weblogs and Templates</a></li>
+	<li><a href="#find_replace">Find and Replace Utility</a></li>
+</ul>
+<h2><a name="site_management"></a>Intuitive Multiple Site Management</h2>
+
+<p>Managing each Site is very easy since its exactly like managing a single ExpressionEngine installation. To manage a Site, just select it from the Sites tab. This switches you to the Site's Control Panel and from there its exactly like working in a single ExpressionEngine Installation.</p>
+
+<p style="text-align: center;"><img style="border: 1px solid black;" src="../../images/sites_cp_dropdown.png" width="436" height="203" alt="The Multiple Site Manager Tab" /></p>
+
+<p>For example, to add a Template Group to the New York City Site, just select New York City from the Multiple Site Manager's Tab, click the Templates' Tab, and then proceed as normal.</p>
+
+<p>You can always tell which Site is selected by looking at the Control Panel's bread-crumb navigation as highlighted below:</p>
+
+<p style="text-align: center;"><img style="border: 1px solid black;" src="../../images/sites_breadcrumb.png" width="490" height="293" alt="Sites Breadcrumb" /></p>
+
+<h2><a name="no_master"></a>No "Master" Site</h2>
+
+<p>An important concept in the Multiple Site Manager is that there is no "Master" Site, there is only the Site you are currently viewing. For example, when you create a new Site the preferences copied to the new Site will be based off the Site you are currently viewing.</p>
+
+<p>ExpressionEngine is the "hub" that runs all the Sites, but no one Site takes precedence above another and updating one Site does not update or alter other Sites unless you are updating an <b>installation wide</b> asset.</p>
+
+<h2><a name="delete_site"></a>Delete a Site</h2>
+
+<p>To delete a Site, select <em>Edit Sites</em> from the Multiple Site Manager menu and choose <em>Delete</em>.</p>
+
+<div class="important">
+	<p><strong>Important:</strong>&nbsp; Deleting a Site completely removes and deletes all information specific to that Site from the database including Weblogs and Templates.</p>
+	</div>
+	 
+<p style="text-align: center;"><img src="../../images/sites_delete.png" width="406" height="169" alt="Delete a Site" /></p>
+
+<h2><a name="installation_wide"></a>Installation Wide Assets</h2>
+
+<p>The following apply installation wide and are not specific to a Site:</p>
+
+<ul>
+	<li>Member Database</li>
+	<li>Member Groups</li>
+	<li>Add-ons (Modules, Plugins, Extensions)</li>
+</ul>
+
+
+<h2><a name="site_specific"></a>Site Specific Preferences</h2> 
+
+<p>Aside from the items mentioned above, every preference and feature in a ExpressionEngine installation can be set per Site. Instead of an exhaustive list that basically repeats the User Guide, here are some key areas to think about when creating Sites:</p>
+
+<ul>
+	<li>Speciality Templates</li>
+	<li>Email responses</li>
+	<li>Member Profile templates</li>
+	<li>Member Group Preferences</li>
+	<li>Site specific Themes</li>
+</ul>
+
+<p>The Multiple Site Manager is deceptive in some ways because it appears simple on the surface. But once you start using it the possibilities go very deep. The important concept is that almost all of a Sites preferences are unique to that Site.</p>
+
+<p>For example, though Member Groups are shared installation wide, their preferences can be set per Site. This allows you to give Member Groups different permissions at different Sites. It also allows you to automatically assign a person to a Member Group depending on which Site they registered at.</p>
+
+<p>Site specific Themes can be setup by creating a new Theme folder, selecting the appropriate Site, and updating the path in <kbd>Admin --> System Preferences --> General Configuration</kbd>.</p>
+
+<h2><a name="weblogs_templates"></a>Accessing Site Specific Weblogs and Templates</h2>
+
+<p>Weblogs and Templates are assigned to a Site and only available through the Control Panel when that Site is selected. This means a Weblog created in SiteA will not be visible when viewing SiteB through the Control Panel.</p>
+
+<p>However, you can access any Weblog or Template from any Site for display on any Site at the Template level using the new <a href="code.html"><samp>site=""</samp> parameter</a>.</p>
+
+<p>This would allow, for example, creating an installation wide Announcement Weblog that can be displayed on all Sites.</p>
+
+<h2><a name="find_replace"></a>Find and Replace Utility</h2>
+
+<p>The <a href="../admin/utilities/search_and_replace.html">Find and Replace</a> Utility has been updated to include searching in specific Sites. It can access all the Templates, Weblogs, and Preferences from all your Sites no matter which Site you are currently viewing.</p>
+ 
+<p class="center"><a href="#top">Top of Page</a></p>
+
+</div>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

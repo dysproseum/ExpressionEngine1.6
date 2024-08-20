@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Displaying Pings &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Updated Sites Module</a> &gt;
+<strong>Displaying Pings</strong>
+</div>
+
+<div id="content">
+	
+	<h1>Displaying Pings</h1>
+
+	<p>You may display the pings you have received for any of your configurations.  Here is an example of code you will place in one of your templates:</p>
+
+	<code>{exp:updated_sites:pings which="default" orderby="title" limit="20"}<br />
+<br />
+&lt;p>&lt;a href="{ping_site_url}">{ping_site_name}&lt;/a>&lt;/p><br />
+<br />
+{/exp:updated_sites:pings}</code>
+
+
+
+	<h2>Parameters</h2>
+
+	<ul class="minitoc">
+		<li><a href="#par_limit">limit="30"</a></li>
+		<li><a href="#par_orderby">orderby="date"</a></li>
+		<li><a href="#par_sort">sort="asc"</a></li>
+		<li><a href="#par_which">which="default"</a></li>
+	</ul>
+
+
+	<h3><a name="par_limit">limit=</a></h3>
+
+		<code>limit="30"</code>
+
+		<p>Allows you to limit the number of pings displayed.  The limit will default to 100 pings if a value is not specified.</p>
+
+
+	<h3><a name="par_orderby">orderby=</a></h3>
+
+		<code>orderby="date"</code>
+
+		<p>The "order" parameter sets the display order of the pings.  Setting options for this parameter include:</p>
+
+		<ul>
+			<li>orderby="date"</li>
+			<li>orderby="rss"</li>
+			<li>orderby="title"</li>
+			<li>orderby="url"</li>
+		</ul>
+
+
+	<h3><a name="par_sort">sort=</a></h3>
+
+		<code>sort="asc"</code>
+
+		<code>sort="desc"</code>
+
+
+		<p>The sort order can be "asc" (ascending order or "oldest item first" for dates) or "desc" (descending order or "newest item first" for dates).  If you do not use a sort order the default is <samp>desc</samp>.</p>
+
+
+	<h3><a name="par_which">which=</a></h3>
+
+		<code>which="default"</code>
+
+		<p>From which Configuration to show the pings (will show comments from all configurations if none is specified).  Additionally, you can use the pipe character to separate multiple configurations:</p>
+
+		<code>which="default|private|business"</code>
+
+		<p>Or you can add the word "not" (with a space after it) to exclude configurations:</p>
+
+		<code>which="not private|secret|friends"</code>
+
+
+
+	<h2>Variables</h2>
+
+	<ul class="minitoc">
+		<li><a href="#var_count">{count}</a></li>
+		<li><a href="#var_ping_date">{ping_date format="%Y %m %d"}</a></li>
+		<li><a href="#var_ping_ipaddress">{ping_ipaddress}</a></li>
+		<li><a href="#var_ping_site_check">{ping_site_check}</a></li>
+		<li><a href="#var_ping_site_name">{ping_site_name}</a></li>
+		<li><a href="#var_ping_site_rss">{ping_site_rss}</a></li>
+		<li><a href="#var_ping_site_url">{ping_site_url}</a></li>
+		<li><a href="#var_switch">{switch="option_one|option_two"}</a></li>
+		<li><a href="#var_total_results">{total_results}</a></li>
+	</ul>
+
+
+	<h3><a name="var_count">count</a></h3>
+
+		<code>{count}</code>
+
+		<p>The current increment value for this ping out of the total being displayed.  i.e. if EE is currently displaying the 7th ping out of 20 then the count value would be "7".</p>
+
+
+	<h3><a name="var_ping_date">ping_date</a></h3>
+
+		<code>{ping_date format="%Y %m %d"}</code>
+
+		<p>The date the ping was received.  See the <a href="../../templates/date_variable_formatting.html">date variable formatting</a> page for more information.</p>
+
+
+	<h3><a name="var_ping_ipaddress">ping_ipaddress</a></h3>
+
+		<code>{ping_ipaddress}</code>
+
+		<p>The IP address from which the ping was received.</p>
+
+
+	<h3><a name="var_ping_site_check">ping_site_check</a></h3>
+
+		<code>{ping_site_check}</code>
+
+		<p>The "check URL" for the site that sent the ping.  This is part of the Extended Ping format and is not often available.</p>
+
+
+	<h3><a name="var_ping_site_name">ping_site_name</a></h3>
+
+		<code>{ping_site_name}</code>
+
+		<p>The name of the site that sent the ping.</p>
+
+
+	<h3><a name="var_ping_site_rss">ping_site_rss</a></h3>
+
+		<code>{ping_site_rss}</code>
+
+		<p>The RSS URL for the site that sent the ping.  This is part of the Extended Ping format and is not often available.</p>
+
+
+	<h3><a name="var_ping_site_url">ping_site_url</a></h3>
+
+		<code>{ping_site_url}</code>
+
+		<p>The URL for new content from the site that sent the ping.</p>
+
+
+	<h3><a name="var_switch">switch=</a></h3>
+
+		<code>{switch="option_one|option_two}</code>
+
+		<p>This variable permits you to alternate between any two values as the pings are displayed.  The first result will use "option_one", the second will use "option_two", the third "option_one", and so on.</p>
+
+		<p>The most straightforward use for this would be to alternate colors.  It could be used like so:</p>
+
+		<code>{exp:updated_sites:pings which="default limit="20"}<br />
+	&lt;p class="{switch="one|two"}"><br />
+		&lt;a href="{ping_site_url}">{ping_site_name}&lt;/a><br />
+	&lt;/p><br />
+	{/exp:updated_sites:pings}<br /></code>
+
+		<p>The entries would then alternate between <samp>&lt;p class="one"></samp> and <samp>&lt;p class="two"></samp>.</p>
+
+		<p>Multiple instances of the <samp>{switch=}</samp> tag may be used and the system will intelligently keep track of each one.</p>
+
+
+	<h3><a name="var_total_results">total_results</a></h3>
+
+		<code>{total_results}</code>
+
+		<p>The total number of pings being displayed.</p>
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

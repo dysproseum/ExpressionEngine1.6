@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Simple Commerce &#8211; Encrypted Website Payments &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Simple Commerce Module</a> &gt;
+<a href="sc_cp_paypal_settings.html">Simple Commerce PayPal Settings</a> &gt;
+<strong>Encrypted Website Payments</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Simple Commerce &#8211; Encrypted Website Payments</h1>
+	
+	<p>The Simple Commerce Module has the ability to utilize PayPal's  Encrypted Website Payments feature.  In order to use these features, there are some additional steps you will need to take to set up Encrypted Website Payments with PayPal.  A brief background on the process will also be beneficial.</p>
+	
+	<h2>How Encrypted Payments Work</h2>
+	
+	<p>After exchanging public certificates with PayPal, the button or link parameters of a purchase are encrypted with PayPal's public key, and digitally signed with the merchant's private key.  When a purchase request is made from the encrypted form or link, PayPal checks the authenticity of the information by using the merchant's uploaded public certificate.  PayPal then decrypts the information with their private key, and the purchase transaction is allowed to continue.</p>
+	
+	<p>The steps required to use Encrypted Website Payments with PayPal are to:</p>
+	
+	<ol>
+		<li><a href="#private_key">Generate a private key</a></li>
+		<li><a href="#public_cert">Generate a public certificate</a></li>
+		<li><a href="#upload_public_cert">Upload your public certificate to PayPal</a></li>
+		<li><a href="#public_cert_id">Update your Certificate ID in your Simple Commerce control panel</a></li>
+		<li><a href="#download_paypal_cert">Download PayPal's public certificate</a></li>
+		<li><a href="#update_paths">Update the paths to the files in your Simple Commerce control panel</a></li>
+	</ol>
+	
+	<p>For the most security, you may also wish to set up your PayPal account so that it <a href="#encrypted_only">only accepts encrypted payments</a>.</p>
+	
+	<p>PayPal accepts only X.509 public certificates in OpenSSL PEM format, from any established certificate authority, such as <a href="http://www.verisign.com/">VeriSign</a>  You can also create your own private key and public certificate using the open source software <a href="http://www.openssl.org/">OpenSSL</a>.  Most *nix based operating systems (including Macintosh OS X) will already have this software compiled and ready to use.  If you are running Windows, there are <a href="http://www.openssl.org/related/binaries.html">pre-compiled binaries</a> available.  The sections that follow describe creating your public certificate and private key using OpenSSL.</p>
+	 
+	<h3><a name="private_key"></a>Generate a private key</h3>
+	
+	<p>The <strong>private key</strong> is the portion of the encryption method that is kept secret and not sent to anyone.  To create your private key, key in the following at the command line:</p>
+	
+	<code>openssl genrsa -out private_key.pem 1024</code>
+	
+	<p>"private_key.pem" is the name of the file that will be created in the directory you are running the command from.  You will need to upload this file to <em>your server only</em>.</p>
+	
+	<p class="important"><strong>NOTE:</strong>  ExpressionEngine must have read access to the directory you upload the private key to, but for security it is highly recommended that you use a location above the public HTML folder on your account so that it is not accessible via the web.</p>
+	
+	<h3><a name="public_cert"></a>Generate a public certificate</a></h3>
+	
+	<p>The <strong>public certificate</strong> is the portion of the encryption method that you provide PayPal to enable them to accept encrypted payments for you.  To create your public certificate, key in the following at the command line:</p>
+	
+	<code>openssl req -new -key private_key.pem -x509 -days 730 -out public_certificate.pem</code>
+	
+	<p>"private_key.pem" is the name of the private key file generated in step one.  This command needs to be ran from the same directory, or provide a path to the private key file.  "public_certificate.pem" is the name of the public certificate file that will be created in the directory you are running the command from.</p>
+	
+	<p>You will be prompted to answer some questions.  You should answer these questions with the same information used by the PayPal merchant account.  Once the public certificate is created, you must upload it to your server.</p>
+	
+	<p class="important"><strong>NOTE:</strong>  ExpressionEngine must have read access to the directory you upload the public certificate to, but for security it is highly recommended that you use a location above the public HTML folder on your account so that it is not accessible via the web.</p>
+	
+	<h3><a name="upload_public_cert"></a>Upload your public certificate to PayPal</h3>
+
+	<p>You must also upload your public certificate to PayPal at the following URL: <a href="https://www.paypal.com/us/cgi-bin/webscr?cmd=_profile-website-cert">https://www.paypal.com/us/cgi-bin/webscr?cmd=_profile-website-cert</a>, or as follows:</p>
+	
+	<ol>
+		<li>Log into your PayPal account</li>
+		<li>Click the Profile subtab</li>
+		<li>In the Seller Preferences column, click Encrypted Payment Settings.</li>
+		<li>Click Add</li>
+		<li>Click browse and select the public certificate file you just created</li>
+	</ol>
+	
+	<p>When you have successfully uploaded your public certificate to PayPal, it will be displayed under "Your Public Certificates".  You will need information from this screen in the following step.</p>
+	
+	<h3><a name="public_cert_id"></a>Update your Certificate ID</h3>
+	
+	<p>In the Encrypted Payment Settings section of your PayPal Seller Preferences, the "Cert ID" column of the table showing your uploaded public certificates displays the certificate ID that PayPal assigned to the certificate.  In your Simple Commerce control panel <a href="sc_cp_paypal_settings.html">PayPal Settings</a>, key in your certificate ID to the field marked <strong>ID Given to Public Certificate by PayPal</strong>.
+	
+	<h3><a name="download_paypal_cert"></a>Download PayPal's public certificate</h3>
+	
+	<p>In the same area of PayPal's website that you used in step 3 to upload your public certificate, download PayPal's public certificate.  Upload this file to your server.</p>
+	
+	<p class="important"><strong>NOTE:</strong>  ExpressionEngine must have read access to the directory you upload the public certificate to, but for security it is highly recommended that you use a location above the public HTML folder on your account so that it is not accessible via the web.</p>
+	
+	<h3><a name="update_paths"><a/>Update paths to your certificates and key</h3>
+		
+	<p>In your Simple Commerce control panel <a href="sc_cp_paypal_settings.html">PayPal Settings</a>, update the paths for the certificates and key, as well as the folder used to temporarily store encrypted files.  As indicated in the notes, this path must be readable by ExpressionEngine, but should not be accessible from the web.</p>
+	
+	<h3><a name="encrypted_only"></a>Accept encrypted payments only</h3>
+	
+	<p>For maximum security, you may wish to set up PayPal so that your account only accepts encrypted payments.  This will make it impossible for people to alter the price or information for a purchase unless they obtain your public certificate and private key (keep them safe!).</p>
+	
+	<p>To block unencrypted payments, log in to PayPal and click the Profile subtab.  Click Website Payment Preferences in the right-hand menu, and then select "On" next to "Block Non-encrypted Website Payments".</p>
+
+</div>
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

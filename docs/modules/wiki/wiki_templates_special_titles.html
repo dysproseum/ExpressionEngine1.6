@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Wiki Template, Special Titles Section &#8211; ExpressionEngine Documentation</title> 
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style> 
+
+<style type="text/css">
+.screencap {
+margin: 30px 0;
+text-align: center;
+}
+
+#content h4 {
+	font-size: 12px;
+	font-weight: bold;
+	color:	#363;
+	background-color: transparent;
+	border-bottom: 1px solid #363;
+	margin: 10px 0 0 35px;
+	padding: 5px 0 3px 9px;
+	}
+
+#content h5 {
+	font-size: 12px;
+	font-weight: bold;
+	color:	#369;
+	background-color: transparent;
+	border-bottom: 1px solid #369;
+	margin: 10px 0 0 55px;
+	padding: 5px 0 3px 9px;
+	}
+</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="README.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+</tr>
+</table>
+</div>
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Wiki Module</a> &gt;
+<a href="wiki_templates.html">Theme Template</a> &gt;
+<strong>Special Titles</strong>
+</div>
+
+<div id="content">
+
+	<h1>Wiki Template, Special Titles Section</h1>
+
+	<p>This section displays a list of all titles in the wiki as outlined below:</p>
+
+<div class="screencap"><img src="../../images/wiki_titles_list.jpg" width="550" height="190" alt="Displays all the titles in the wiki." /></div>
+
+	<p>In addition to the variables in the <a href="wiki_templates_page.html">Wiki Page section</a>, the Special Titles section has:</p>
+
+<ul>
+<li><a href="#tag">Tags</a></li>
+</ul>
+
+<h2><a name="tag">Tags</a></h2>
+
+	<p>The Special Titles section has the <strong>{wiki:title_list}</strong> tag available which is used to display all the wiki's article titles. This tag has <a href="#para">Parameters</a> and <a href="#vars">Variables</a>.</p>
+
+<h3><a name="para">{wiki:title_list} | Parameters</a></h3>
+
+<ul>
+<li><a href="#wiki_para_columns">columns=""</a></li>
+</ul>
+
+<h4><a name="wiki_para_columns">columns</a></h4>
+
+	<code>{wiki:title_list columns="#"}</code>
+
+	<p>Determines the number of columns to use in displaying the articles titles.</p>
+
+<h3><a name="vars">{wiki:title_list} | Variables</a></h3>
+
+<ul>
+<li><a href="#titles_pair_vars">Variable Pairs</a></li>
+<li><a href="#titles_sin_vars">Single Variables</a></li>
+</ul>
+
+<h4><a name="titles_vars_pairs">Variable Pairs</a></h4>
+
+<ul>
+<li><a href="#titles_pair_articles">{articles}</a></li>
+<li><a href="#titles_pair_row_start">{row_start}</a></li>
+<li><a href="#titles_pair_row_blank">{row_blank}</a></li>
+<li><a href="#titles_pair_row_end">{row_end}</a></li>
+<li><a href="#titles_pair_row_column">{row_column}</a></li>
+</ul>
+
+<h5><a name="titles_pair_articles">articles</a></h5>
+
+	<code>{articles}</code>
+
+	<p>This displays the articles and is used to encase the variable pairs below. It repeats through all the articles and applies the specified formatting to build a list of article titles. Please see the default file for an example.</p>
+
+<h5><a name="titles_pair_row_start">row_start</a></h5>
+
+	<code>{row_start}</code>
+
+	<p>Determines what content to use at the start of a row of titles.</p>
+
+<h5><a name="titles_pair_row_blank">row_blank</a></h5>
+
+	<code>{row_blank}</code>
+
+	<p>Determines what content to use if a column is blank.</p>
+
+<h5><a name="titles_pair_row_end">row_end</a></h5>
+
+	<code>{row_end}</code>
+
+	<p>Determines what content to use at end of a row.</p>
+
+<h5><a name="titles_pair_row_column">row_column</a></h5>
+
+	<code>{row_column}</code>
+
+	<p>Determines what content to use for each column in a row.</p>
+
+<h4><a name="titles_sin_vars">Single Variables</a></h4>
+
+<ul>
+<li><a href="#titles_sin_article">{article}</a></li>
+<li><a href="#titles_sin_author">{author}</a></li>
+<li><a href="#titles_sin_content">{content}</a></li>
+<li><a href="#titles_sin_count">{count}</a></li>
+<li><a href="#titles_sin_email">{email}</a></li>
+<li><a href="#titles_sin_last_updated">{last_updated format=""}</a></li>
+<li><a href="#titles_sin_path_view_article">{path:view_article}</a></li>
+<li><a href="#titles_sin_revision_notes">{revision_notes}</a></li>
+<li><a href="#titles_sin_switch_adv">{switch="one|two|three"}</a></li>
+<li><a href="#titles_sin_title">{title}</a></li>
+<li><a href="#titles_sin_url">{url}</a></li>
+</ul>
+
+
+<h5><a name="titles_sin_article">article</a></h5>
+
+	<code>{article}</code>
+
+	<p>Displays the fully rendered article. This means that all the html/markup code is processed before display.</p>
+
+<h5><a name="titles_sin_author">author</a></h5>
+
+	<code>{author}</code>
+
+	<p>Displays the Screen Name of the revision's author.</p>
+
+<h5><a name="titles_sin_content">content</a></h5>
+
+	<code>{content}</code>
+
+	<p>Displays the raw content of an article. This means that all the html or markup code is revealed.</p>
+
+<h5><a name="titles_sin_count">count</a></h5>
+
+	<code>{count}</code>
+
+	<p>"count" of the article currently being displayed</p>
+
+<h5><a name="titles_sin_email">email</a></h5>
+
+	<code>{email}</code>
+
+	<p>Displays the email of the revision's author.</p>
+
+<h5><a name="titles_sin_last_updated">last_updated</a></h5>
+
+	<code>{last_updated format=""}</code>
+
+	<p>Displays the time when an article was last updated.</p>
+
+	<p>The <strong>format</strong> parameter is used to determine the date's formatting using ExpressionEngine's <a href="../../templates/date_variable_formatting.html">Date Variable Formatting</a>.</p>
+
+<h5><a name="titles_sin_path_view_article">path:view_article</a></h5>
+
+	<code>{path:view_article}</code>
+
+	<p>Displays a URL to View Article.</p>
+		
+<h5><a name="titles_sin_revision_notes">revision_notes</a></h5>
+
+	<code>{revision_notes}</code>
+
+	<p>Displays the revision's notes, if any.</p>
+
+<h5><a name="titles_sin_switch_adv">switch=</a></h5>
+
+	<code>{switch="option_one|option_two|option_three"}</code>
+
+	<p>This variable permits you to rotate through any number of values as the articles are displayed.  The first article will use "option_one", the second will use "option_two", the third "option_three", the fourth "option_one", and so on.</p>
+
+	<p>Multiple instances of the <samp>{switch=}</samp> tag may be used and the system will intelligently keep track of each one.</p>
+
+<h5><a name="titles_sin_title">title</a></h5>
+
+	<code>{title}</code>
+
+	<p>Displays the title of an article.</p>
+
+<h5><a name="titles_sin_url">url</a></h5>
+
+	<code>{url}</code>
+
+	<p>Displays the member profile URL for the revision's author.</p>
+
+</div>
+	
+	<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

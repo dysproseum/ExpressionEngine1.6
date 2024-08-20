@@ -1,0 +1,614 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>ExpressionEngine Plugin API</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../index.html" />
+  <style type="text/css" media="screen,print">@import url(../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="index.html">Development</a> &gt;
+<strong>Plugin API</strong>
+</div>
+
+
+
+  <div id="content">
+
+    <h1>ExpressionEngine Plugin API</h1>
+
+<h2>Tag Construction</h2>
+
+<p>A typical ExpressionEngine tag looks like this:</p>
+
+<pre>&#123;exp:weblog:entries}</pre>
+
+<p>The first segment is the tag identifier: <samp>&#123;exp:</samp>.  It tells the template engine that it has just encountered a tag.</p>
+
+<p>The second segment is the "family" name: <samp>&#123;exp:weblog</samp>.  There are different families of tags:  weblog, comments, members, email, stats, etc.  In programming terms, the second segment is the name of the 'class' that is instantiated by the tag.</p>
+
+<p>The above example would tell the template engine to dynamically instantiate the "weblog" class.</p>
+
+<p>The third segment indicates the 'function' from within a particular family of tags: <samp>&#123;exp:weblog:entries}</samp>.  This example would tell ExpressionEngine you want to use the "entries" function in the "weblog" class.  To be more precise, the third segment is the "method" or "function" name within a given class.</p>
+
+<p>A tag, therefore, mirrors an object oriented approach:  Class->function</p>
+
+<pre>&#123;exp:class_name:function_name}</pre>
+
+<p><b>Note:</b> Tags are not always required to have three segments.  If your plugin is very simple you might opt to only use the class constructor. In this case you can get by only using two segments:</p>
+
+<pre>&#123;exp:class_name}</pre>
+
+
+
+<h3>Two Kinds of Tags</h3>
+
+<p>There are two kinds of tags:  Single tags and tag pairs.  A single tag does not have a closing tag:</p>
+
+<pre>&#123;exp:randomizer:set_one}</pre>
+
+<p>Single tags are designed to return a single value.  Tag pairs look like this:</p>
+
+<pre>&#123;exp:xml_encode}
+
+Stuff between the tags
+
+&#123;/exp:xml_encode}</pre>
+
+<p>Tag pairs allow you to process the information contained between the tags.  In the above example, the text between the pairs would be encoded with XML entities.</p>
+
+
+
+<h2>Anatomy of a Plugin</h2>
+
+<p>A plugin consists of a class and at least one function:</p>
+
+<pre>&lt;?php
+
+class Plugin_name &#123;
+
+  function Plugin_name()
+  &#123;
+
+  }
+
+}
+
+?></pre>
+
+<p>In addition, you should add some information that is displayed in the <dfn>Plugin Manager</dfn> section of the Control Panel.  This is covered in the <a href="#cp_info">Control Panel Information</a> section.</p>
+
+
+
+<h2>Creating a Plugin</h2>
+
+<p>The best way to learn how a plugin is created is to walk you through the process of creating one.  For this example, we will create a plugin that prints "Hello World".
+Our example plugin will have this syntax:</p>
+
+<pre>&#123;exp:hello_world}</pre>
+
+<p>You will be able to use this plugin anywhere in a Template.</p>
+
+
+	<h2>Creating the Plugin File</h2>
+
+		<p>Once you've decided on a name for your plugin you will create a text file for it.  The file name must be the same as the class name and it must have <var>pi.</var> as the prefix.  We will name our file: <var>pi.hello_world.php</var>.</p>
+
+		<p>Plugin file names are always lower case and they must be identical to the name of the second segment of the tag:</p>
+
+		<pre>&#123;exp:hello_world}</pre>
+
+
+	<h2>Creating the Class</h2>
+
+		<p>In the new file you've created add this class and constructor:</p>
+
+		<pre>&lt;?php
+
+class Hello_world
+&#123;
+
+  function Hello_world()
+  &#123;
+
+
+  }
+
+}
+
+?></pre>
+
+		<p><b>Note</b>: Class name must always be capitalized.  This is the one exception to the rule.  Tag names and file names are always lowercase, while the class name is capitalized.</p>
+
+
+	<h3>Returning a Value</h3>
+
+		<p>Your new class is useless unless it can return a value.  There are two ways to return a value depending on whether your tag has three segments or two.</p>
+
+		<h3>Two Segments</h3>
+
+			<p>The above tag only has two segments therefore it only utilizes a constructor.  Since constructors cannot return a value directly, we will assign it to a variable called:  <samp>$return_data</samp>.</p>
+
+			<pre>&lt;?php
+
+class Hello_world
+&#123;
+
+var $return_data = "";
+
+  function Hello_world()
+  &#123;
+    $this->return_data = "Hello World";
+  }
+
+}
+
+?></pre>
+
+		<h3>Three Segments</h3>
+
+			<p>With tags that utilize three segments you can return directly.  Consider a tag with this syntax:</p>
+
+			<pre>&#123;exp:hello_world:bold}</pre>
+
+			<p>The third segment represents a function called bold, which can return a value directly:</p>
+
+			<pre>&lt;?php
+
+class Hello_world
+&#123;
+
+  function bold()
+  &#123;
+    return "&lt;b>Hello World&lt;/b>";
+  }
+
+}
+
+?></pre>
+
+			<p>You could create a class with several functions this way:</p>
+
+
+			<pre>&lt;?php
+
+class Hello_world
+&#123;
+
+  function normal()
+  &#123;
+    return "Hello World";
+  }
+
+  function bold()
+  &#123;
+    return "&lt;b>Hello World&lt;/b>";
+  }
+
+  function italic()
+  &#123;
+    return "&lt;i>Hello World&lt;/i>";
+  }
+
+}
+
+?></pre>
+
+			<p>Each function would be accessible using these tags:</p>
+
+			<pre>&#123;exp:hello_world:normal}
+&#123;exp:hello_world:bold}
+&#123;exp:hello_world:italic}</pre>
+
+
+	<h3>Processing Data Within Tag Pairs</h3>
+
+	<p>Often you will want to process data contained between a pair of tags. Let's create a simple tag that makes text bold to illustrate how this is done.  Our example plugin will have this syntax:</p>
+
+	<pre>&#123;exp:bold}
+
+Some text we want to process.
+
+&#123;/exp:bold}</pre>
+
+	<p>You will be able to use this plugin anywhere in a Template.  You can even put this tag within another tag in order to affect a variable:</p>
+
+	<pre>&#123;exp:weblog:entries}
+
+&#123;exp:bold}&#123;title}&#123;/exp:bold}
+
+&#123;/exp:weblog:entries}</pre>
+
+	<p>In following our naming rules, we will create a plugin file named: <var>pi.bold.php</var>.  And we will create a class with this syntax:</p>
+
+	<pre>&lt;?php
+
+class Bold
+&#123;
+
+var $return_data = "";
+
+  function Bold()
+  &#123;
+
+  }
+
+}
+
+?></pre>
+
+	<p>So how do we fetch the data contained within the tag pairs?  Using the following variable:</p>
+
+	<pre>$TMPL->tagdata;</pre>
+
+	<p>Here is how the variable is used:</p>
+
+	<pre>&lt;?php
+
+class Bold
+&#123;
+
+var $return_data = "";
+
+  function Bold()
+  &#123;
+    global $TMPL;
+
+    $this->return_data = $TMPL->tagdata;
+  }
+
+}
+
+?></pre>
+
+	<p>Notice we've made <samp>$TMPL</samp> global.  This is very important.  <samp>$TMPL</samp> represents the Template class, which makes the contents of the tag available to us.</p>
+
+	<p>Of course you'll want to do something with the data before you return it, so let's make it bold:</p>
+
+	<pre>&lt;?php
+
+class Bold
+&#123;
+
+var $return_data = "";
+
+  function Bold()
+  &#123;
+    global $TMPL;
+
+    $this->return_data = "&lt;b>".$TMPL->tagdata."&lt;/b>";
+  }
+
+}
+
+?></pre>
+
+
+	<h3>Parameters</h3>
+
+	<p>Since tags will often have parameters, the template engine makes it easy to fetch them using the following variable:</p>
+
+	<pre>$TMPL->fetch_param('param_name');</pre>
+
+	<p>To see how this is used, let's create a plugin that lets you format text based on the parameter.  Our new plugin will have this syntax:</p>
+
+	<pre>&#123;exp:format type="uppercase"}
+
+Some text to process.
+
+&#123;/exp:format}</pre>
+
+	<p>We will allow the following parameter choices:</p>
+
+	<ul>
+		<li>type="uppercase"</li>
+		<li>type="lowercase"</li>
+		<li>type="bold"</li>
+		<li>type="italic"</li>
+	</ul>
+
+	<p>Create a plugin file named <var>pi.format.php</var> and in it put this:</p>
+
+	<pre>&lt;?php
+
+class Format
+&#123;
+
+var $return_data = "";
+
+  function Format()
+  &#123;
+    global $TMPL;
+
+    $parameter = $TMPL->fetch_param('type');
+
+    switch ($parameter)
+    &#123;
+      case "uppercase":
+        $this->return_data = strtoupper($TMPL->tagdata);
+        break;
+      case "lowercase":
+        $this->return_data = strtolower($TMPL->tagdata);
+        break;
+      case "bold" :
+        $this->return_data = "&lt;b>".$TMPL->tagdata."&lt;/b>";
+        break;
+      case "italic":
+        $this->return_data = "&lt;i>".$TMPL->tagdata."&lt;/i>";
+        break;
+    }
+  }
+
+}
+
+?></pre>
+
+
+	<h3>Passing Data Directly</h3>
+
+	<p>ExpressionEngine allows any plugin to be assigned as a text formatting choice in the <dfn>Publish</dfn> page of the Control Panel.  In order to allow a plugin to be used this way it needs to be able to accept data directly.  This is how it's done.</p>
+
+	<p>Add a parameter to the function.  It's best to make the parameter conditional so it will know whether it's being used in a template or directly as a formatting choice:</p>
+
+	<pre>&lt;?php
+
+class Bold
+&#123;
+
+var $return_data = "";
+
+
+  function Bold($str = "")
+  &#123;
+    global $TMPL;
+
+    if ($str == '')
+    &#123;
+      $str = $TMPL->tagdata;
+    }
+
+    $return_data = "&lt;b>".$str."&lt;/b>";
+  }
+
+}
+
+?></pre>
+
+	<p>The above tag can then be assigned in the <dfn>Publish</dfn> page, allowing you to run your weblog entries through it.</p>
+
+
+
+<h2>Database Access</h2>
+
+<p>ExpressionEngine makes it easy to access the database using the provided database class.  To run a query you will use this syntax:</p>
+
+<pre>$query = $DB->query("YOUR SQL QUERY");</pre>
+
+<p><b>Note</b>: You must always make the <samp>$DB</samp> variable global in scope in any function that you run queries in, like this:</p>
+
+<pre>&lt;?php
+
+class Some_plugin
+&#123;
+
+var $return_data = "";
+
+
+  function Some_plugin()
+  &#123;
+    global $DB;
+
+    $query = $DB->query("YOUR SQL QUERY");
+  }
+
+}
+
+?></pre>
+
+<p>To show the result of a query you will generally use the "result" array.  This is an associative array provided by the database class that contains the query result.  Let's use a real example to show how this is used.</p>
+
+<p>We will run a query that shows a list of members.  For this we will create a plugin called <var>pi.memberlist.php</var>.  The tag syntax will be this:</p>
+
+<pre>&#123;exp:memberlist}</pre>
+
+<p>Here is the class syntax:</p>
+
+<pre>&lt;?php
+
+class Memberlist
+&#123;
+
+var $return_data = "";
+
+  function Memberlist()
+  &#123;
+    global $DB;
+
+    $query = $DB->query("SELECT screen_name
+      FROM exp_members LIMIT 15");
+
+    foreach($query->result as $row)
+    &#123;
+      $this->return_data .= $row['screen_name'];
+      $this->return_data .= "&lt;br />";
+    }
+  }
+
+}
+
+?></pre>
+
+<p>Here are some additional variables available in the database class:</p>
+
+
+	<h3>$query->row</h3>
+
+	<p>If your query only returns one row you can use this variable like this:</p>
+
+	<pre>$query = $DB->query("SELECT screen_name
+  FROM exp_members LIMIT 1");
+
+return $query->row['screen_name'];</pre>
+
+
+	<h3>$query->num_rows</h3>
+
+	<p>The number of rows returned by the query.  This is a handy variable that can be used like this:</p>
+
+	<pre>$query = $DB->query("SELECT screen_name
+  FROM exp_members WHERE URL != '' ");
+
+if ($query->num_rows == 0)
+&#123;
+  $this->return_data = "Sorry, no results";
+}
+else
+&#123;
+  $this->return_data .= "Total results: ".
+    $query->num_rows."&lt;br />";
+
+  foreach($query->result as $row)
+  &#123;
+    $this->return_data .= $row['screen_name'];
+    $this->return_data .= "&lt;br />";
+  }
+
+}</pre>
+
+
+
+<h2><a name="cp_info">Control Panel Information</a></h2>
+
+<p>In addition to the class and function, you should also add some information that will display in the <dfn>Plugin Manager</dfn> section of the Control Panel.  There are two parts to this information.</p>
+
+	<h3>$plugin_info array</h3>
+
+		<p>At the top of your file you can specify a PHP array that contains information about the Plugin.  The array follows this format:</p>
+
+		<pre>$plugin_info = array(
+  'pi_name' => 'Member List',
+  'pi_version' =>'1.0',
+  'pi_author' =>'Joe Smith',
+  'pi_author_url' => 'http://example.com/',
+  'pi_description' => 'Returns a list of site members',
+  'pi_usage' => Memberlist::usage()
+  );</pre>
+
+		<p>The information is as follows:</p>
+
+		<ul>
+			<li><b>pi_name</b>: The display name of the Plugin</li>
+			<li><b>pi_version</b>: The Plugin version number</li>
+			<li><b>pi_author</b>: The name of the Plugin author</li>
+			<li><b>pi_author_url</b>: The URL associated with the author (or a URL to a page about the Plugin)</li>
+			<li><b>pi_description</b>: A short description of the purpose of the Plugin</li>
+			<li><b>pi_usage</b>: This array item is special.  It should be the name of the Plugin 'class' followed by "::usage".  So for the 'Memberlist' class it is "Memberlist::usage".</li>
+		</ul>
+
+
+	<h3>usage() function</h3>
+
+		<p>The "usage" function is designed to easily allow you to give a description of how to use your new Plugin, including giving example ExpressionEngine code.</p>
+
+		<p>This function should be placed inside the 'class', just like the other functions.  Your finished Plugin would look like this:</p>
+
+		<pre>&lt;?php
+
+$plugin_info = array(
+  'pi_name' => 'Member List',
+  'pi_version' => '1.0',
+  'pi_author' => 'Joe Smith',
+  'pi_author_url' => 'http://example.com/',
+  'pi_description' => 'Returns a list of site members',
+  'pi_usage' => Memberlist::usage()
+  );
+
+class Memberlist
+&#123;
+
+var $return_data = "";
+
+  function Memberlist()
+  &#123;
+    global $DB;
+
+    $query = $DB->query("SELECT screen_name
+      FROM exp_members LIMIT 15");
+
+    foreach($query->result as $row)
+    &#123;
+      $this->return_data .= $row['screen_name'];
+      $this->return_data .= "&lt;br />";
+    }
+  }
+
+  // ----------------------------------------
+  //  Plugin Usage
+  // ----------------------------------------
+
+  // This function describes how the plugin is used.
+  //  Make sure and use output buffering
+
+  function usage()
+  {
+  ob_start(); 
+  ?>
+The Memberlist Plugin simply outputs a
+list of 15 members of your site.
+
+&#123;exp:memberlist}
+
+This is an incredibly simple Plugin.
+
+  &lt;?php
+  $buffer = ob_get_contents();
+	
+  ob_end_clean(); 
+
+  return $buffer;
+  }
+  // END
+
+}
+
+?></pre>
+
+
+
+  </div>
+
+
+
+
+
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Mailing List Tags &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<strong>Mailing List</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Mailing List Tags</h1>
+
+	<p>ExpressionEngine comes with an integrated Mailing List Module.</p>
+	
+	<p>The Mailing List is an <dfn>opt in</dfn> type, meaning that when someone adds their email address to the list, they are sent a confirmation email containing a link with an access code.  Unless they click the link, their email address will not be added to the list. The opt-in link will expire in 48 hours.  Conversely, when someone in your mailing list receives an email, there will be an "unsubscribe" link permitting them to remove themselves from the list.</p>
+		
+	<p>To access the Mailing List backed functions, go to the <dfn>Modules &gt; Mailing List</dfn> page in your Control Panel.  There you will be able to create and manage your mailing lists, as well as find and delete email addresses. See <a href="control_panel/index.html">Mailing List control panel</a> for more information.  To send email to any of your lists you will use the Control Panel <a href="../../cp/communicate/index.html">Communicate Page</a>.</p>
+
+	
+	<h2>Adding a Mailing List Form to Your Site</h2>
+	
+	<p>To add the mailing list form to any of your pages, use the following tag in any template:</p>
+
+	<code>{exp:mailinglist:form list="default"}<br />
+<br />
+&lt;p>Join our Mailing List&lt;/p><br />
+<br />
+&lt;p>&lt;input type="text" name="email" value="{email}" />&lt;/p><br />
+<br />
+&lt;p>&lt;input type="submit" value="submit" />&lt;/p><br />
+<br />
+{/exp:mailinglist:form}</code>
+
+
+	<h2>Parameters</h2>
+
+	<ul class="minitoc">
+		<li><a href="#par_list">list="default"</a></li>
+	</ul>
+
+
+	<h3><a name="par_list">list=</a></h3>
+
+		<code>list="default"</code>
+
+		<p>This parameter allows you to specify which Mailing List the email address will be subscribed to.  This parameter takes the "short name" of the List as set in the Mailing List control panel.  If no list is specified with the parameter then the "default" list is assumed.</p>
+
+
+
+	<h2>Variables</h2>
+
+	<ul class="minitoc">
+		<li><a href="#var_email">{email}</a></li>
+		<li><a href="#var_full_name">{full_name}</a></li>
+	</ul>
+
+
+	<h3><a name="var_email">email</a></h3>
+
+		<code>{email}</code>
+
+		<p>This is the standard <a href="../../templates/globals/single_variables.html#var_email">{email}</a> global variable.  Using this variable as the value of the email input field lets you automatically populate the field for logged-in members.  Use as follows:</p>
+
+		<code>&lt;input type="text" name="email" value="<kbd>{email}</kbd>" /></code>
+
+	<h3><a name="var_full_name">full_name</a></h3>
+
+		<code>{full_name}</code>
+
+		<p>You may use this variable to display the full name of the Mailing List.</p>
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

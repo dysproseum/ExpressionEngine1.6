@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Create a New Weblog &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../../index.html"><img src="../../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../../index.html">Table of Contents</a> &gt;
+<a href="../../../index.html#cp_docs">The Control Panel</a> &gt;
+<a href="index.html">Weblog Administration</a> &gt;
+<a href="weblog_management.html">Weblog Management</a> &gt;
+<strong>Create a New Weblog</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Create a New Weblog</h1>
+
+	<div class="imgwrapper"><img src="../../../images/weblog_create.png" width="566" height="606" alt="Weblog Create" title="Weblog Create" border="0" /></div>
+
+
+	<h3>Short Name</h3>
+
+		<p>The "short name" for the weblog is the name used internally within the program.  It is also used when specifying a weblog in variables of parameters in your <dfn><a href="../../templates/index.html">Templates</a></dfn>.  It is not normally shown to visitors or otherwise exposed outside of your weblog "setup".</p>
+
+		<p>The weblog's short name is a required field.  It must be a single word with no spaces.  The underscore character is allowed.  For example, the weblog's "short name" might be <samp>joe_blog</samp>.</p>
+
+		<p>When duplicating a template group, parameters that call for a weblog short name (<samp>weblog="my_weblog"</samp>) will be updated with the new weblog short name in the duplicated templates. (only if the the parameter contains the old weblog short name).</p>
+
+	<h3>Full Weblog Name</h3>
+
+		<p>The "full weblog name" is the descriptive name for the weblog.  This is the name of your weblog that you will show to visitors and display on your site.</p>
+
+		<p>The full weblog name is a required field.  Spaces, punctuation, and other special characters are allowed.  For example, the weblog's descriptive name might be <samp>Joe's Personal Weblog</samp>.</p>
+	
+	<h3>Duplicate existing weblog's preferences</h3>
+	
+		<p>Allows you to duplicate the preferences from an existing weblog.<p>
+
+		<p>When duplicating a weblog's preferences and an existing template group, ExpressionEngine will attempt to update the new weblog's path settings with the new template group name.</p>
+	
+	<h3>Edit Group Preferences</h3>
+		
+		<p>Allows you to set the group preferences for a weblog upon creation.</p>
+		
+		<p class="important"><strong>NOTE:</strong> Changing these settings will override the settings that would be applied when duplicating an existing weblog's preferences</p>
+		
+		<h4>Category Group</h4>
+		
+		<p>Allows you to select the Category Group(s) to assign to this weblog</p>
+		
+		<h4>Status Group</h4>
+		
+		<p>Allows you to select the Status Group to assign to this weblog</p>
+		
+		<h4>Field Group</h4>
+		
+		<p>Allows you to select the Custom Field Group to assign to this weblog</p>
+		
+	<h3>Create New Templates For This Weblog?</h3>
+
+		<p>With this setting you can specify whether you would like Templates and a Template Group to be automatically created.  If you choose to have Templates created then you can base them off of either one of the default "Themes" or from an existing Template Group.</p>
+
+		<p>ExpressionEngine will go through the Templates and attempt to update them for use with the newly created weblog.  This would include things such as altering the <samp>weblog="default_site"</samp> parameter in weblog entries tags.  ExpressionEngine cannot always be 100% accurate in this so you're encouraged to go through the Templates and ensure they are correct.  The system will also not be able to do things such as place your weblog entry field variables in the Template.</p>
+
+		<p>The feature should greatly help get you on your way when creating a new weblog, though.</p>
+
+		<p>When a template group is duplicated it's name is replaced in the new template group with the new template group name. ex: <samp>{stylesheet="old_template_group/template"}</samp> becomes <samp>{stylesheet="new_template_group/template"}</samp></p>
+
+		<p>Also, two other variables are replaced. The first is "master_weblog_name" <samp>{assign_variable:master_weblog_name="my_weblog"}</samp>, the second is "my_template_group" <samp>{assign_variable:my_template_group="template_group"}</samp>. These two will be replaced with the new weblog name and template group respectively.</p>
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>
