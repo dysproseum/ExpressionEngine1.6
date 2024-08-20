@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Migrating from pMachine Pro &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../index.html" />
+  <style type="text/css" media="screen,print">@import url(../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="../index.html#install_docs">Installation and Update Instructions</a> &gt;
+<strong>Migrating from pMachine Pro</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Migrating from pMachine Pro</h1>
+
+	<p>This page is designed to help you make an easier migration from an existing pMachine Pro installation over to ExpressionEngine.</p>
+
+	<p>ExpressionEngine has a built-in utility that permits you to import your existing pMachine content.  This is located in the Control Panel under <dfn>Admin &gt; Utilities &gt; Import Utilities &gt; pMachine Import Utility</dfn>.  The database structure in ExpressionEngine is different in many ways than pMachine, so during the import process your pMachine information will be reformatted.  This process can be processor intensive, particularly if you have many comments associated with your weblog entries, so the utility will import your data in small batches.  As you perform the import process you will have a chance to set the size of the batches.</p>
+
+	<p>The following pMachine Pro information can be imported into ExpressionEngine:</p>
+
+	<ul>
+		<li>Weblog entries</li>
+		<li>pMachine Pro Forum posts/threads</li>
+		<li>Comments</li>
+		<li>Trackbacks</li>
+		<li>Member accounts</li>
+		<li>Mailing List email addresses</li>
+	</ul>
+
+
+	<h2>Notes</h2>
+	
+	<p>Your pMachine site must be running version 2.3 or higher of pMachine Free or pMachine Pro for the import to work successfully</p>
+
+	<p>Your pMachine Template data can not be imported, nor can your weblog preferences.  This is due to the differences in the approach that both programs use, making such importation impossible.</p>
+
+	<p>ExpressionEngine only has single mailing list so if you use the multi-list capability of pMachine Pro the email addresses will be consolidated into one list.</p>
+
+	<p>If you have files or images which you have uploaded using pMachine you will need to move those over to ExpressionEngine yourself.  The Import Utility will take care of changing any dynamic links you had in your entries to point to the correct location in ExpressionEngine, but it will not automatically move the actual files themselves.</p>
+
+
+	<h2>Strategy</h2>
+
+	<p>The best approach to migration is to continue to use your pMachine Pro site while you develop your new version with ExpressionEngine.  Once your new site is ready, import your pMachine data as a final step so your weblog entries, comments and other information will be current.</p>
+
+
+	<h3>Import Utility</h3>
+
+		<p>The pMachine Import Utility is located in the Control Panel at <dfn>Admin &gt; <a href="../cp/admin/utilities/pmachine_import_utility.html">pMachine Import Utility</a></dfn>.  When you first visit this page you will see a form that asks you for your pMachine database information.  You will find this information in your pMachine <var>config.php</var> file.</p>
+
+	<p>Once you have submitted the correct information you will be presented with a page containing five steps.  Perform each step in order.  You will be prompted with instructions where needed in each step.</p>
+
+
+
+	<h2>pMachine URL Remapping</h2>
+
+	<p>Once ExpressionEngine is installed and running, you can turn on URL remapping for your old pMachine Pro URLs.  These settings are found under <dfn>Admin &gt; <a href="cp/admin/weblog_administration/global_weblog_preferences.html">Global Weblog Preferences</a></dfn>.  It is important to understand how this feature works and the limitations that exist with it.</p>
+
+	<p>First, ExpressionEngine can only perform URL Remapping <em>when ExpressionEngine is called</em>.  What that means in practice is that the remapping will only take place when the requested URL includes the main site file for EE, which is <var>index.php</var> by default (though you may have <a href="../installation/renaming_index.html">renamed it</a>).</p>
+
+	<p>So, if ExpressionEngine receives a URL in the pMachine format then it can perform the remapping.  For example:</p>
+
+	<code>http://example.com/index.php?id=147_0_1_0</code>
+
+
+	<h3>What About Other Files?</h3>
+
+		<p>However, pMachine Pro used a number of files such as <var>weblog.php</var>, <var>comments.php</var>, <var>archive.php</var>, etc. that might all have pMachine formatted URLs used.  Since those files don't exist for ExpressionEngine and EE doesn't run through them, then URLs using those files cannot be remapped by default.  Luckily, you can use some simple PHP to redirect requests for those pages to your main ExpressionEngine page.</p>
+
+		<p>For instance, if you wanted to redirect the requests to your <var>comments.php</var> file, then you could replace the contents of the <var>comments.php</var> (or create one) with this:</p>
+
+		<code>&lt;?php<br />
+<br />
+// The full URL to your main site EE file<br />
+$new_ee_url = "http://example.com/index.php";<br />
+<br />
+if (isset($_GET['id']))<br />
+{<br />
+	header("location:" . $new_ee_url . "?id=" . $_GET['id']);<br />
+	exit;<br />
+}<br />
+<br />
+?></code>
+
+		<p>You can make similar files for all of the pMachine files that you may have used which might be used in links.</p>
+
+
+	<h2>Anything Else?</h2>
+
+		<p>You can find some further discussion on this topic as well as some information on using "mod_rewrite" in a <var>.htaccess</var> file to greatly enhance the URL remapping functionality.  See the <a href="http://expressionengine.com/wiki/Redirecting_pMachine_URLs/">Redirecting pMachine URLs</a> discussion on the EE Wiki site.</p>
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Wiki Template, Special Upload Form Section &#8211; ExpressionEngine Documentation</title> 
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style> 
+
+<style type="text/css">
+.screencap {
+margin: 30px 0;
+text-align: center;}
+</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="README.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+</tr>
+</table>
+</div>
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Wiki Module</a> &gt;
+<a href="wiki_templates.html">Theme Template</a> &gt;
+<strong>Special Upload Form</strong>
+</div>
+
+<div id="content">
+
+	<h1>Wiki Template, Special Upload Section</h1>
+
+<p>This section displays the wiki's upload form as outlined below:</p>
+
+<div class="screencap"><img src="../../images/wiki_upload_form.jpg" width="550" height="308" alt="Displays the wiki's upload form." /></div>
+
+<p>In addition to the variables in the <a href="wiki_templates_page.html">Wiki Page section</a>, the Special Single File section has:</p>
+
+<ul>
+<li><a href="#sin">Single Variables</a></li>
+<li><a href="#con">Conditional Variables</a></li>
+<li><a href="#form">Form Variables</a></li>
+</ul>
+
+<h2><a name="sin">Single Variables</a></h2>
+
+<ul>
+<li><a href="#upload_sin_file_types">{file_types}</a></li>
+</ul>
+
+<h3><a name="upload_sin_file_types">file_types</a></h3>
+
+<code>{file_types}</code>
+
+<p>This displays the allowed file types that can be uploaded. The value is determined by the settings of the File Upload Directory that the wiki is using, which is set from the <a href="wiki_cp.html">Wiki's Control Panel</a>.</p>
+
+<h2><a name="con">Conditional Variables</a></h2>
+
+<ul>
+<li><a href="#upload_con_file_types">{if file_types}</a></li>
+</ul>
+
+<h3><a name="upload_con_file_types">if file_types</a></h3>
+
+<code>{if file_types == 'images'}</code>
+
+<p>This checks to see if the Upload Directory specified in the <a href="wiki_cp.html">Wiki's Control Panel</a> allows only images to be uploaded. This is used in combination with the <a href="#upload_sin_file_types">{file_types}</a> variable to display what kind of files can be uploaded. Please see the default theme file for an example (search for {if file_types == 'images'}).</p>
+
+<h2><a name="form">Form Variables</a></h2>
+
+<ul>
+<li><a href="#form_var_declaration">{form_declaration:wiki:uploads}</a></li>
+</ul>
+
+<h3><a name="form_var_declaration">form_declaration:wiki:uploads</a></h3>
+
+<code>{form_declaration:wiki:uploads}</code>
+
+<p>This creates the opening &lt;form> tag and hidden fields needed for the upload form.</p>
+
+</div>
+	
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

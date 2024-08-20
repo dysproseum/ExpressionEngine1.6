@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Comment Submission Form &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Comment Module</a> &gt;
+<strong>Comment Submission Form</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Comment Submission Form</h1>
+
+
+	<code>{exp:comment:form}<br />
+<br />
+{/exp:comment:form}</code>
+
+	<p>The comment form is created very similar to a standard web form, only you don't specify the opening and closing form tags.  There are a few variables that are required in order to enable people's personal information (name, email, url, etc.) to appear in the form.  Here's how the comment form is typically created:</p>
+
+	<code>{exp:comment:form weblog="news" preview="weblog/preview"}<br />
+<br />
+{if logged_out}<br />
+<br />
+&lt;p>Name: &lt;input type="text" name="name" value="{name}" size="50" />&lt;/p><br />
+<br />
+&lt;p>Email: &lt;input type="text" name="email" value="{email}" size="50" />&lt;/p><br />
+<br />
+&lt;p>Location: &lt;input type="text" name="location" value="{location}" size="50" />&lt;/p><br />
+<br />
+&lt;p>URL: &lt;input type="text" name="url" value="{url}" size="50" />&lt;/p><br />
+<br />
+{/if}<br />
+<br />
+&lt;p>&lt;textarea name="comment" cols="70" rows="10">{comment}&lt;/textarea>&lt;/p><br />
+<br />
+&lt;p>&lt;input type="checkbox" name="save_info" value="yes" {save_info} /> Remember my personal information&lt;/p><br />
+<br />
+&lt;p>&lt;input type="checkbox" name="notify_me" value="yes" {notify_me} /> Notify me of follow-up comments?&lt;/p><br />
+<br />
+{if captcha}<br />
+<br />
+&lt;p>Please enter the word you see in the image below:&lt;/p><br />
+<br />
+&lt;p>{captcha}&lt;br /><br />
+&lt;input type="text" name="captcha" value="{captcha_word}" maxlength="20" />&lt;/p><br />
+<br />
+{/if}<br />
+<br />
+&lt;input type="submit" name="submit" value="Submit" /><br />
+&lt;input type="submit" name="preview" value="Preview" /><br />
+<br />
+{/exp:comment:form}</code>
+
+
+	<h2>Parameters</h2>
+
+	<ul class="minitoc">
+		<li><a href="#par_entry_id">entry_id="24"</a></li>
+		<li><a href="#par_preview">preview="weblog/preview"</a></li>
+		<li><a href="#par_url_title">url_title="my_wedding"</a></li>
+		<li><a href="#par_weblog">weblog="news"</a></li>
+	</ul>
+
+	<h3><a name="par_entry_id">entry_id=</a></h3>
+
+		<code>entry_id="24"</code>
+
+		<p>You can hard code the comment form tag to display a comment form for a specific weblog entry by its entry ID.</p>
+		
+		<p class="important"><strong>NOTE:</strong> This parameter takes precedence over any entry specified dynamically in the URL, so when using this parameter you will want to make sure it is clear to the user which entry the displayed comment form belongs to.</p>
+
+	<h3><a name="par_preview">preview=</a></h3>
+
+		<code>preview="weblog/preview"</code>
+
+		<p>This is a <strong>required</strong> parameter indicating which template should be used for comment previews. Like other "path" variables in ExpressionEngine you will use the Template Group/Template name. More on previewing can be found on the <a href="preview.html">Comment Previewing</a> page.</p>
+
+	<h3><a name="par_url_title">url_title=</a></h3>
+
+		<code>url_title="my_wedding"</code>
+
+		<p>You can hard code the comment for tag to display a comment form for a specific weblog entry by its URL title.</p>
+
+		<p class="important"><strong>NOTE:</strong> This parameter takes precedence over any entry specified dynamically in the URL, so when using this parameter you will want to make sure it is clear to the user which entry the displayed comment form belong to.</p>
+
+	<h3><a name="par_weblog">weblog=</a></h3>
+
+		<code>weblog="news"</code>
+
+		<p>With this parameter you can specify exactly which weblog you want the submitted comment associated to.  This is an important, but optional, parameter.</p>
+
+		<div class="important">
+			<p>If you link to your comment form page using the entry's URL Title, then you are <strong>strongly encouraged</strong> to include this parameter in your tag.</p>
+
+			<p>Because you can have the same URL Title in different weblogs, using this parameter will ensure that the comment submitted will be associated with the correct entry.  Without this parameter, it is possible that the comment could be associated with an entry in a different weblog that happens to have the same URL Title.</p>
+		</div>
+
+
+
+	<h2>Notes</h2>
+
+	<p>The conditional variable <samp>{if logged_out}</samp> allows the system to show the short form (textarea only) if the user is a logged in member.  We recommend you use the form this way because if a member is logged in, their personal data is fetched automatically.</p>
+
+	<p>Notice the variables in the "value" form fields?  These allow us to show the user's information in the form automatically if they click the "remember personal info" option.</p>
+
+	<p>This form should be placed on a "single-entry" type page such as a comments page, of course.</p>
+
+<div class="important">
+	<p><strong>Important:</strong> As noted in the <a href="../../general/captchas.html#thecode">captcha section</a>, the contents of the conditional ({if captcha}) tag will only appear if you have the CAPTCHA preference turned on for comments in the weblog the entry is associated with.</p>
+</div>
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

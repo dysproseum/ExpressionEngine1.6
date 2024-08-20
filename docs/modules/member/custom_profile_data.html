@@ -1,0 +1,370 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Custom Profile Data Tag &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Member Management</a> &gt;
+<strong>Custom Profile Data</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Custom Profile Data Tag</h1>
+
+	<p>The <dfn>Custom Profile Data Tag</dfn> allows you to display member profile information in 
+	any of your templates.   Fields can either be shown from the currently logged-in user or 
+	from a specified user using the member_id="" parameter.</p>
+
+	<div class="important"><p><b>Notes:</b>
+	Remember that the profile information for the current visitor to a page such as {screen_name}, 
+	{location}, {email}, etc. are always available in any template as <a href="../../templates/globals/index.html">Global Variables</a>. 
+	
+	Therefore, <b>only</b> use this tag
+	if you need to show custom profile data (that is, fields that you have created in the <a href="../../cp/admin/members_and_groups/custom_profile_fields.html">Custom Profile Page</a>)
+	or member data for a specific user.</p>
+
+	<p>Also, this tag can ONLY be used in the templates accessed via the <kbd>TEMPLATES</kbd> tab in the Control Panel, not in member profile or forum templates.</p>
+
+	<p><b>Important:</b>&nbsp; If not using the member_id="" attribute, avoid using Template Caching on any Template containing this tag.  
+	If you do not avoid caching, then data will not be dynamic for each user. Instead, whoever 
+	happens to load the page when it is cached will have their information shown for everyone until 
+	the cache expires. Unlike this tag, <a href="../../templates/globals/index.html">Global Variables</a>
+	can be used in templates that are cached.</p>
+
+	</div>
+
+	<p>Here is the basic tag syntax:</p>
+
+	<code>{exp:member:custom_profile_data}<br />
+<br />
+	&lt;div>{age}&lt;/div><br />
+	&lt;div>{gender}&lt;/div><br />
+<br />
+{/exp:member:custom_profile_data}</code>
+
+
+
+	<h2>Parameters</h2>
+
+
+	<h3>member_id=</h3>
+
+		<code>member_id="147"</code>
+
+		<p>You can specify a particular member's information to display.  By default (if you do not include the <samp>member_id</samp> parameter), the tag will simply display information pertaining to the currently logged-in user.</p>
+
+
+
+	<h2>Variables</h2>
+	
+	<ul class="minitoc">
+		<li><a href="#var_avatar_height">{avatar_height}</a></li>
+		<li><a href="#var_avatar_width">{avatar_width}</a></li>
+		<li><a href="#var_avatar_url">{avatar_url}</a></li>
+		<li><a href="#var_bio">{bio}</a></li>
+		<li><a href="#var_birthday">{birthday}</a></li>
+		<li><a href="#var_daylight_savings">{daylight_savings}</a></li>
+		<li><a href="#var_email">{email}</a></li>
+		<li><a href="#var_group_id">{group_id}</a></li>
+		<li><a href="#var_join_date">{join_date}</a></li>
+		<li><a href="#var_language">{language}</a></li>
+		<li><a href="#var_last_activity">{last_activity}</a></li>
+		<li><a href="#var_last_comment_date">{last_comment_date}</a></li>
+		<li><a href="#var_last_entry_date">{last_entry_date}</a></li>
+		<li><a href="#var_last_forum_post_date">{last_forum_post_date}</a></li>
+		<li><a href="#var_last_visit">{last_visit}</a></li>
+		<li><a href="#var_local_time">{local_time}</a></li>
+		<li><a href="#var_member_group">{member_group}</a></li>
+		<li><a href="#var_member_id">{member_id}</a></li>
+		<li><a href="#var_photo_url">{photo_url}</a></li>
+		<li><a href="#var_photo_height">{photo_height}</a></li>
+		<li><a href="#var_photo_width">{photo_width}</a></li>
+		<li><a href="#var_screen_name">{screen_name}</a></li>
+		<li><a href="#var_search_path">{search_path}</a></li>
+		<li><a href="#var_send_private_message">{send_private_message}</a></li>
+		<li><a href="#var_signature">{signature}</a></li>
+		<li><a href="#var_timezone">{timezone}</a></li>
+		<li><a href="#var_total_comments">{total_comments}</a></li>
+		<li><a href="#var_total_entries">{total_entries}</a></li>
+		<li><a href="#var_total_forum_posts">{total_forum_posts}</a></li>
+		<li><a href="#total_forum_topics">{total_forum_topics}</a></li>
+		<li><a href="#var_url">{url}</a></li>
+		<li><a href="#var_username">{username}</a></li>	
+		<li><a href="#var_custom_member_fields">Custom Member Fields</a></li>
+	</ul>
+
+	<h3><a name="var_avatar_height">avatar_height</a></h3>
+
+		<code>{avatar_height}</code>
+
+		<p>The height of the avatar image associated with the user.  Typically used as such:</p>
+
+		<code>{if avatar}<br />
+&lt;img src="{avatar_url}" width="{avatar_width}" height="{avatar_height}" alt="{screen_name}'s avatar" /><br />
+{/if}</code>
+
+
+	<h3><a name="var_avatar_width">avatar_width</a></h3>
+
+		<code>{avatar_width}</code>
+
+		<p>The width of the avatar image associated with the user.  Typically used as such:</p>
+
+		<code>{if avatar}<br />
+&lt;img src="{avatar_url}" width="{avatar_width}" height="{avatar_height}" alt="{screen_name}'s avatar" /><br />
+{/if}</code>
+
+
+	<h3><a name="var_avatar_url">avatar_url</a></h3>
+
+		<code>{avatar_url}</code>
+
+		<p>The URL to the avatar image associated with the user.  Typically used as such:</p>
+
+		<code>{if avatar}<br />
+&lt;img src="{avatar_url}" width="{avatar_width}" height="{avatar_height}" alt="{screen_name}'s avatar" /><br />
+{/if}</code>
+
+	<h3><a name="var_bio">bio</a></h3>
+
+		<code>{bio}</code>
+
+		<p>The user's bio.</p>
+		
+	<h3><a name="var_birthday">birthday</a></h3>
+	
+		<code>{birthday}</code>
+
+		<p>The user's birthday.</p>
+		
+	<h3><a name="var_daylight_savings">daylight_savings</a></h3>
+	
+			<code>{daylight_savings}</code>
+
+			<p>The user's daylight savings setting.</p>
+	
+	<h3><a name="var_email">email</a></h3>
+	
+		<code>{email}</code>
+
+		<p>The user's Javascript encoded email address.</p>
+		
+	<h3><a name="var_group_id">group_id</a></h3>
+	
+		<code>{group_id}</code>
+
+		<p>The user's Group ID.</p>
+		
+	<h3><a name="var_join_date">join_date</a></h3>
+	
+		<code>{join_date format="%Y %m %d"}</code>
+
+		<p>The date the user joined the site.</p>
+		
+	<h3><a name="var_language">language</a></h3>
+	
+			<code>{language}</code>
+
+			<p>The user's language.</p>
+			
+	<h3><a name="var_last_activity">last_activity</a></h3>
+	
+		<code>{last_activity format="%Y %m %d"}</code>
+
+		<p>The time of the user's last page load.</p>
+		
+	<h3><a name="var_last_comment_date">last_comment_date</a></h3>
+	
+		<code>{last_comment_date format="%Y %m %d"}</code>
+
+		<p>The date of the user's last comment.</p>
+		
+	<h3><a name="var_last_entry_date">last_entry_date</a></h3>
+	
+		<code>{last_entry_date format="%Y %m %d"}</code>
+
+		<p>The date of the user's last weblog entry.</p>
+		
+	<h3><a name="var_last_forum_post_date">last_forum_post_date</a></h3>
+	
+		<code>{last_forum_post_date format="%Y %m %d"}</code>
+
+		<p>The date of the user's last forum post.</p>
+		
+	<h3><a name="var_last_visit">last_visit</a></h3>
+	
+		<code>{last_visit format="%Y %m %d"}</code>
+
+		<p>The date when the user was last active on the site PRIOR to their current session.</p>
+		
+	<h3><a name="var_local_time">local_time</a></h3>
+	
+		<code>{local_time format="%Y %m %d"}</code>
+
+		<p>The user's local time.</p>
+		
+	<h3><a name="var_member_group">member_group</a></h3>
+	
+		<code>{member_group}</code>
+
+		<p>The user's member group.</p>
+		
+	<h3><a name="var_member_id">member_id</a></h3>
+
+		<code>{member_id}</code>
+
+		<p>The user's Member ID.</p>
+		
+		<h3><a name="var_photo_height">photo_height</a></h3>
+
+			<code>{photo_height}</code>
+
+			<p>The height of the photo image associated with the user.  Typically used as such:</p>
+
+			<code>{if photo}<br />
+			&lt;img src="{photo_url}" width="{photo_width}" height="{photo_height}" alt="{screen_name}'s photo" /><br />
+			{/if}</code>
+
+
+		<h3><a name="var_photo_width">photo_width</a></h3>
+
+			<code>{photo_width}</code>
+
+			<p>The width of the photo image associated with the user.  Typically used as such:</p>
+
+			<code>{if photo}<br />
+			&lt;img src="{photo_url}" width="{photo_width}" height="{photo_height}" alt="{screen_name}'s photo" /><br />
+			{/if}</code>
+
+
+		<h3><a name="var_photo_url">photo_url</a></h3>
+
+			<code>{photo_url}</code>
+
+			<p>The URL to the photo image associated with the user.  Typically used as such:</p>
+
+			<code>{if photo}<br />
+			&lt;img src="{photo_url}" width="{photo_width}" height="{photo_height}" alt="{screen_name}'s photo" /><br />
+			{/if}</code>
+	
+
+	<h3><a name="var_screen_name">screen_name</a></h3>
+	
+		<code>{screen_name}</code>
+
+		<p>The user's screen name.</p>
+		
+	<h3><a name="var_search_path">search_path</a></h3>
+	
+		<code>{search_path}</code>
+
+		<p>The search path to show entries and posts by this user.</p>
+		
+		<code>&lt;a href="{search_path}">View Entries by User&lt;/a></code>
+		
+	<h3><a name="var_send_private_message">send_private_message</a></h3>
+	
+		<code>{send_private_message}</code>
+
+		<p>The URL to send a Private Message to this user.</p>
+		
+		<code>&lt;a href="{send_private_message}">Send Private Message to {screen_name}.&lt;/a></code>
+		
+	<h3><a name="var_signature">signature</a></h3>
+	
+		<code>{signature}</code>		
+
+		<p>The user's signature.</p>
+		
+	<h3><a name="var_timezone">timezone</a></h3>
+	
+		<code>{timezone}</code>
+
+		<p>The user's timezone.</p>
+		
+	<h3><a name="var_total_comments">total_comments</a></h3>
+	
+		<code>{total_comments}</code>
+
+		<p>The total number of comments made by the user.</p>
+		
+	<h3><a name="var_total_entries">total_entries</a></h3>
+	
+		<code>{total_entries}</code>
+
+		<p>The total number of entries made by the user.</p>
+		
+	<h3><a name="var_total_forum_posts">total_forum_posts</a></h3>
+	
+		<code>{total_forum_posts}</code>
+
+		<p>The total number of forum posts made by the user.</p>
+		
+	<h3><a name="total_forum_topics">total_forum_topics</a></h3>
+	
+		<code>{total_forum_topics}</code>
+
+		<p>The total number of forum topics made by the user.</p>
+		
+	<h3><a name="var_url">url</a></h3>
+	
+		<code>{url}</code>
+
+		<p>The user's URL.</p>
+		
+	<h3><a name="var_username">username</a></h3>
+	
+		<code>{username}</code>
+
+		<p>The user's username.</p>
+		
+
+	<h3><a name="var_custom_member_fields">Custom Member Fields</a></h3>
+
+		<p>All custom member profile fields can be accessed using the "short name" of the field:</p>
+
+		<code>{age}<br />
+{gender}<br />
+{zodiac}<br />
+etc..</code>
+
+		<p>These are totally dynamic in that any profile field you create for your members will automatically be available by its "short name" as a variable.</p>
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

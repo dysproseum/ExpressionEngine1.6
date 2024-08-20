@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Referrer Module Tags &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<strong>Referrer Module</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Referrer Module Tags</h1>
+
+	<p>ExpressionEngine enables you track referrers with the Referrer Module.</p>
+	
+	<p>A <dfn>referrer</dfn> is the URL that led a someone to your site.&nbsp;  For example, if the URL to your site appears as a link at your friend's site, when someone clicks the link, your friend's URL will show up in your referrer page. Tracking referrers allows you to see how people are finding your website.</p>
+	
+	<p>To access the Referrer Module backed functions, go to the <dfn>Modules &gt; Referrer</dfn> page in your Control Panel.</p>
+	
+	<p>To globally disable referrer tracking, as well as set the maximum number of referrers to keep, visit the  <dfn>Admin &gt; System Preferences &gt; Referrer Preferences</dfn> page in your Control Panel.</p>
+
+	<p>To display your referrers information use the following code in one of your templates:</p>
+
+	<code>&lt;table border="0" width="100%" cellpadding="6" cellspacing="1"><br />
+	&lt;tr><br />
+		&lt;th>Date&lt;/th><br />
+		&lt;th>From&lt;/th><br />
+		&lt;th>IP Address&lt;/th><br />
+		&lt;th>To&lt;/th><br />
+	&lt;/tr><br />
+<br />
+	{exp:referrer limit="50" popup="yes"}<br />
+	&lt;tr><br />
+		&lt;td>{ref_date format="%m/%d/%Y"}&lt;/td><br />
+		&lt;td>{ref_from}&lt;/td><br />
+		&lt;td>{ref_ip}&lt;/td><br />
+		&lt;td>{ref_to}&lt;/td><br />
+	&lt;/tr><br />
+	{/exp:referrer}<br />
+<br />
+&lt;/table></code>
+
+	<p><b>Note:</b> You enclose from the opening &lt;tr> to the closing &lt;/tr> since that is the portion that gets repeated for each referrer.</p>
+
+
+	<h3>Blacklist and Whitelist</h3>
+
+		<p>ExpressionEngine maintains an editable Blacklist so that you can keep certain IP addresses, URLs, or even User Agents from being counted in your referrals as well as a Whitelist that will automatically let matches through.  You may access this through the <dfn>Blacklist/Whitelist</dfn> Module in the <dfn><a href="../cp/modules/index.html">Modules</a></dfn> area.</p>
+
+
+
+	<h2>Parameters</h2>
+
+	<ul class="minitoc">
+		<li><a href="#par_limit">limit="50"</a></li>
+		<li><a href="#par_popup">popup="yes"</a></li>
+	</ul>
+
+
+	<h3><a name="par_limit">limit=</a></h3>
+
+		<code>limit="50"</code>
+
+		<p>The number of results you want to see</p>
+
+
+	<h3><a name="par_popup">popup=</a></h3>
+
+		<code>popup="yes"</code>
+
+		<p>This parameter makes the link to the referring site open in a new window.</p>
+
+
+
+
+	<h2>Variables</h2>
+
+	<ul class="minitoc">
+		<li><a href="#var_ref_agent">{ref_agent}</a></li>
+		<li><a href="#var_ref_agent_short">{ref_agent_short}</a></li>
+		<li><a href="#var_ref_date">{ref_date format="%m/%d/%Y"}</a></li>
+		<li><a href="#var_ref_from">{ref_from}</a></li>
+		<li><a href="#var_ref_ip">{ref_ip}</a></li>
+		<li><a href="#var_ref_to">{ref_to}</a></li>
+		<li><a href="#var_switch">{switch="option_one|option_two"}</a></li>
+	</ul>
+
+
+	<h3><a name="var_ref_agent">ref_agent</a></h3>
+
+		<code>{ref_agent}</code>
+
+		<p>The user agent that made the referral to the site.  For most cases, the "user agent" is simply a web browser that visited your site.  The <samp>{ref_agent}</samp> variable outputs the full user agent string recorded by ExpressionEngine.  It might look something like:</p>
+
+		<code>Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 5.0)</code>
+
+		<p>Which is the common user agent string for Internet Explorer 5.5 running on a Windows 2000 machine.</p>
+
+
+	<h3><a name="var_ref_agent_short">ref_agent_short</a></h3>
+
+		<code>{ref_agent_short}</code>
+
+		<p>A shortened version of the user agent that made the referral to the site.It might look something like:</p>
+
+		<code>Mozilla/5.0</code>
+
+
+	<h3><a name="var_ref_date">ref_date</a></h3>
+
+		<code>{ref_date format="%m/%d/%Y"}</code>
+
+		<p>The date on which the referral was made.</p>
+
+
+	<h3><a name="var_ref_from">ref_from</a></h3>
+
+		<code>{ref_from}</code>
+
+		<p>The URL of the referring site.</p>
+
+
+	<h3><a name="var_ref_ip">ref_ip</a></h3>
+
+		<code>{ref_ip}</code>
+
+		<p>The IP address of the referring site.</p>
+
+
+	<h3><a name="var_ref_to">ref_to</a></h3>
+
+		<code>{ref_to}</code>
+
+		<p>The URL of the page they arrived from.</p>
+
+
+	<h3><a name="var_switch">switch=</a></h3>
+
+		<code>{switch="option_one|option_two}</code>
+
+		<p>This variable permits you to alternate between any two values as the entries are displayed.  The first entry will use "option_one", the second will use "option_two", the third "option_one", and so on.</p>
+
+		<p>The most straightforward use for this would be to alternate colors.  It could be used like so:</p>
+
+		<code>{exp:referrer limit="50" popup="yes"}<br />
+	&lt;tr class="{switch="one|two"}"><br />
+		&lt;td>&lt;div>{ref_from}&lt;/div>&lt;/td><br />
+		&lt;td>&lt;div>{ref_to}&lt;/div>&lt;/td><br />
+	&lt;/tr><br />
+	{/exp:referrer}<br /></code>
+
+		<p>The entries would then alternate between <samp>&lt;tr class="one"></samp> and <samp>&lt;tr class="two"></samp>.</p>
+
+		<p>Multiple instances of the <samp>{switch=}</samp> tag may be used and the system will intelligently keep track of each one.</p>
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

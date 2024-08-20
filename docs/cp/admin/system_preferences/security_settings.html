@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Security and Session Preferences &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../../index.html"><img src="../../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../../index.html">Table of Contents</a> &gt;
+<a href="../../../index.html#cp_docs">The Control Panel</a> &gt;
+<a href="../index.html">Admin</a> &gt;
+<a href="index.html">System Preferences</a> &gt;
+<strong>Security and Session Preferences</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Security and Session Preferences</h1>
+	<div class="path">Control Panel Location:&nbsp; <dfn>Admin &gt; System Preferences &gt; Security and Session Preferences</dfn></div>	
+
+
+	<p>This section of the Control Panel allows you to define the basic security-related settings for your website.  These are security settings that apply throughout the website/system.</p>
+
+
+	<h3>Control Panel Session Type</h3>
+
+		<p>This determines how sessions are handled for the Control Panel.  You may use cookies, session IDs, or a combination.  The available options are:</p>
+
+		<ol>
+			<li><b>Cookies and session ID</b>: Both cookies and URL session ID parameters are used to track the admin user.  This is the default setting, and is the most secure since it relies on two individual cookies and a URL session ID.</li>
+			<li><b>Cookies only</b>: Only cookies are used to track the admin user.  When this setting is used a "remember me" checkbox will appear next to the Control Panel login page, enabling users to stay permanently logged in.</li>
+			<li><b>Session ID only</b>: Only URL session IDs are used to track the admin user. This option should only be used if your desktop computer prevents you from accepting cookies in the event you are behind a firewall or due to some other technical issue.</li>
+		</ol>
+
+
+	<h3>User Session Type</h3>
+
+		<p>This determines how sessions for regular users on your website are handled.  You may use cookies, session IDs, or a combination.  The available options are:</p>
+
+		<ol>
+			<li><b>Cookies and session ID</b>: Both cookies and URL session ID parameters are used to track the user throughout their visit.</li>
+			<li><b>Cookies only</b>: Only cookies are used to track the user throughout their visit.  This is the default setting, and generally the best option since it prevents URLs from showing session IDs.</li>
+			<li><b>Session ID only</b>: Only URL session IDs are used to track the user throughout their visit.</li>
+		</ol>
+
+
+	<h3>Process Form Data in Secure Mode</h3>
+
+	<p>This setting determines how form data is processed.  When this preference is set to "Yes", forms are processed in <a href="../../../general/spam_protection.html">Secure Mode</a>.  This setting is designed to deter automated spam attacks as well as multiple accidental submissions.  Enabling this feature does add one additional database query for each form submission.</p>
+
+
+	<h3>Deny Duplicate Data</h3>
+
+		<p>This option prevents data submitted by users (such as comments or trackbacks) from being processed if it is an exact duplicate of data that already exists.  This setting is designed to deter automated spam attacks as well as multiple accidental submissions.</p>
+
+
+	<h3>Apply Rank Denial to User-submitted Links</h3>
+
+		<p>This option rewrites links submitted in comments so they first point to an intermediary redirect page. This helps deter comment spam by preventing linked sites from gaining a page rank advantage.</p>
+
+
+	<h3>Allow members to change their username</h3>
+
+		<p>As the name suggests, this setting determines whether or not members are allowed to change their "username" after they register.  Members will always be able to change their "screen name" if they choose to use one.</p>
+
+
+	<h3>Allow Multiple Accounts Using the Same Email Address</h3>
+
+		<p>You can choose whether or not you want to allow members to use the same email address to register more than one account.  If this preference is set to "No" then a unique email address will be required for every account.</p>
+		
+		<p class="important"><b>Note:</b>&nbsp; It's generally <b>not</b> a good idea to allow this since it can cause problems if a user forgets their password.  Since the "forgotten password" feature is based on a user's email address, unless the email address is unique the system won't know which user is requesting their password.</p>
+
+
+	<h3>Allow Multiple Log-ins From a Single Account</h3>
+
+		<p>This setting determines whether more than one person can simultaneously log-in and use ExpressionEngine with the same membership account.</p>
+		
+		<p class="important"><b>Note:</b> If the Session Type above is set to "Cookies Only" this feature will not work.  The system can only track multiple people using the same account if a session is generated, which does not happen when only cookies are used.</p>
+
+
+	<h3>Require IP Address and User Agent for Login</h3>
+
+		<p>If this preference is set to "Yes", then users will not be able to log in unless their browser (or other access device) correctly supplies their IP address and User Agent (browser) information.  Having this set to "Yes" can help prevent hackers from logging in using direct socket connections or from trying to access the system with a masked IP address.</p>
+
+
+	<h3>Require IP Address and User Agent when receiving comments</h3>
+
+		<p>Similar to the previous setting, when turned on, this setting requires IP address and user agent information to be supplied when submitting comments.</p>
+
+
+	<h3>Enable Password Lockout</h3>
+
+		<p>When this preference is set to "Yes", the system will lock a member account if more than four invalid login attempts are made within a specified time period (see next setting).  This preference is designed to deter hackers from using collision attacks to guess poorly chosen passwords.  The account remains locked for the duration of the time period.  Once the period expires it becomes unlocked.</p>
+
+
+	<h3>Time Interval for Lockout</h3>
+
+		<p>This setting is used together with the previous preference.  Here you can determine, in minutes, the time interval over which more than four invalid login attempts will trigger a lockout.  You may use decimals to indicate fractions of a minute: e.g. 1.5 equals one and a half minutes.</p>
+
+
+	<h3>Require Secure Passwords</h3>
+
+		<p>If this preference is set to "Yes", then users will be required to choose a minimally "secure" password.  In this case, a password containing at least one uppercase character, one lowercase character, and one numeric character.  Passwords that follow this basic formula are much more difficult to guess.</p>
+
+
+	<h3>Allow Dictionary Words as Passwords</h3>
+
+		<p>Setting this preference to "No" will prevent users from being able to set their password using words and names that are commonly found in a dictionary.  This will make "dictionary attacks" by hackers much more difficult.  <b>Note:</b> In order to be able to use this setting you must have a dictionary file installed for the system. See below.</p>
+
+
+	<h3>Name of Dictionary File</h3>
+
+		<p>This is the filename of the dictionary file used for the previous preference.</p>
+
+		<p>You may download a 23,000 word <a href="http://expressionengine.com/files/dictionary.zip">dictionary file</a> from ExpressionEngine.com.  Simply unzip the download and place the text file (dictionary.txt) in the following location on your server:</p>
+		
+		<p class="leftpad"><kbd>system/dictionary/</kbd></p>
+		
+		<p>Submit the <b>name</b> of the file in this setting.</p>
+
+	<h3>Minimum Username Length</h3>
+
+		<p>You may specify the minimum length required for a member username during new member registration.  Specify the minimum number of characters required.</p>
+
+
+	<h3>Minimum Password Length</h3>
+
+		<p>You may specify the minimum length required for a member password during new member registration.  Specify the minimum number of characters required.  It is common practice to require passwords at least eight (8) characters long.</p>
+
+
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

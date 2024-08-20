@@ -1,0 +1,758 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Forum Update Notes 1.3.2 &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Forum Module</a> &gt;
+<a href="forum_update.html">Forum Update</a> &gt;
+<strong>Version Notes 1.3.2</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Forum Update Notes for Version 1.3.2</h1>
+	
+	<p class="important">The Discussion Forum Module Version 1.3.2 requires ExpressionEngine Version 1.5.2 (or greater)</p>
+	
+	<p>Version 1.3.2 has a number of template additions.</p>
+	
+	<h2>If you have <strong>not</strong> customized your existing forum templates:</h2>
+	
+	<p>Simply replace your entire forum theme folder with the new set:
+	</p>
+	<p class="leftpad"><kbd>themes/forum_themes/</kbd></p>
+	
+	<p class="important">The update process is now complete.  You can disregard the rest of the information in this page.</p>
+		
+	
+	<h2>If you <strong>have</strong> customized your existing templates:</h2>
+	
+	<p>If you have customized the look of your forum you will need to manually add the new template features described below.  Version 1.3.2 has a great deal of small changes due to a refinement in semantic meaning of topics, replies, and posts.  Depending on the extent of your own customizations, you may find it easier to start from a fresh copy of the default themes and add your own changes back in.</p>
+	
+	<p>&nbsp;</p>
+	
+	<h1>Incorporating New Features</h1>
+
+	<p class="important">The information below assumes you are running customized templates.  If you are using the default theme there is
+	no need to use the information below.</p>
+	
+	<ul>
+		<li><a href="#edit_date">Edit Date Indicators</a></li>
+		<li><a href="#ignore">Ignore Feature</a></li>
+		<li><a href="#reply_changes">Language changes for Posts vs. Replies</a></li>
+		<li><a href="#opt_notification">Notification Option for Moderation Actions</a></li>
+		<li><a href="#report">Report Post Feature</a></li>
+		<li><a href="#search">Search by Member Group</a></li>
+	</ul>
+	
+	<h2><a name="edit_date"></a>Edit Date Indicators</h2>
+	
+	<p>In conjunction with the new "Display Edit Dates" preference setting, the following template additions allow you to display the date a post was edited.  You can use the markup and CSS styling that you wish; the following is the suggested presentation, and is what was used in the default themes.</p>
+	
+	<h3>Thread Rows</h3>
+	
+	<p>To add this feature you will need to add the following code to your <kbd>Thread Rows</kbd> template in <dfn>/themes/forum_themes/theme_name/theme_threads.php</dfn>.  Add the following in-between the body and the signature &amp; attachment section:</p>
+	
+	<code>{if edited}&lt;div class=&quot;edited&quot;&gt;&lt;em&gt;[ {lang:edited}: {edit_date format=&quot;%d %F %Y %h:%i %A&quot;} {lang:by} &lt;a href=&quot;{path:edit_author_profile}&quot;&gt;{edit_author}&lt;/a&gt; ]&lt;/em&gt;&lt;/div&gt;{/if}</code>
+	
+	<p>In its context, it should look like:</p>
+	
+	<code>&lt;td class=&quot;tableCellOne&quot; valign=&quot;top&quot; colspan=&quot;2&quot;&gt;&lt;div class=&quot;post&quot;&gt;{body}&lt;/div&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{if edited}&lt;div class=&quot;edited&quot;&gt;&lt;em&gt;[ {lang:edited}: {edit_date format=&quot;%d %F %Y %h:%i %A&quot;} {lang:by} &lt;a href=&quot;{path:edit_author_profile}&quot;&gt;{edit_author}&lt;/a&gt; ]&lt;/em&gt;&lt;/div&gt;{/if}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{if attachments}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{include:post_attachments}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{/if}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{if signature}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{include:signature}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{/if}<br />
+	&lt;/td&gt;
+	</code>
+	
+	<h3>CSS Stylesheet</h3>
+	
+	<p>You will also need to add the following code to your <kbd>CSS Stylesheet</kbd> template in <dfn>/themes/forum_themes/theme_name/theme_css.php</dfn>.  It is suggested that you add this style rule to the "Forum related text formatting" section:</p>
+	
+	<code>.edited {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;font-size:&nbsp;&nbsp;&nbsp;&nbsp;9px;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;color:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#555;<br />
+	}
+	</code>
+	
+	<h2><a name="ignore"></a>Ignore Feature</h2>
+	
+	<p>Version 1.3.2 has added the ability for members to "ignore" other members, which will automatically hide any posts made by members on their ignore list.  The following templates will need to be modified with the recommended presentation as follows.</p>
+	
+	<h3>Topics</h3>
+	
+	<p>At the very top of the <kbd>Topics</kbd> template in <dfn>/themes/forum_themes/theme_name/theme_topics.php</dfn> (after <samp>return <<< EOF</samp> if you are editing the PHP file), add:</p>
+	
+	<code>&lt;script type=&quot;text/javascript&quot;&gt;<br />
+	&lt;!--<br />
+<br />
+	function showHideRow(el)<br />
+	{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (document.getElementById(el).style.display == &quot;&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(el).style.display = &quot;none&quot;;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;else<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(el).style.display = &quot;&quot;;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}	<br />
+	}<br />
+	//--&gt;<br />
+	&lt;/script&gt;
+	</code>
+	
+	<h3>Topic Rows</h3>
+	
+	<p>At the top of the <kbd>Topic Rows</kbd> template in <dfn>/themes/forum_themes/theme_name/theme_topics.php</dfn>, change:</p>
+	
+	<code>&lt;tr&gt;</code>
+	
+	<p>to:</p>
+	
+	<code>{if is_ignored}<br />
+	&lt;tr&gt;<br />
+&nbsp;&lt;td class=&quot;tableCellOne&quot; colspan=&quot;5&quot;&gt;<br />
+&nbsp;&nbsp;{lang:topic_hidden} &lt;strong&gt;{author}&lt;/strong&gt; {lang:is_ignored}.<br />
+&nbsp;&nbsp;&lt;span style=&quot;float:right&quot;&gt;&lt;a href=&quot;#&quot; onclick=&quot;showHideRow(&apos;{id1}&apos;);return false;&quot;&gt;{lang:view_hide}&lt;/a&gt; &amp;bull;<br />
+&nbsp;&nbsp;&lt;a href=&quot;{path:ignore}&quot;&gt;{lang:stop_ignoring} {author}&lt;/a&gt;&lt;/span&gt;
+&nbsp;&lt;/td&gt;<br />
+	&lt;/tr&gt;<br />
+	{/if}<br />
+	<br />
+	&lt;tr id=&quot;{id1}&quot; {if is_ignored}style=&quot;display: none;&quot;{/if}&gt;</code>
+	
+	<h3>Threads</h3>
+	
+	<p>At the top of the <kbd>Threads</kbd> template in <dfn>/themes/forum_themes/theme_name/theme_threads.php</dfn>, change:</p>
+	
+	<code>function showfastreply()<br />
+	{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (document.getElementById(&apos;fastreply&apos;).style.display == &quot;block&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(&apos;fastreply&apos;).style.display = &quot;none&quot;;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;else<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(&apos;fastreply&apos;).style.display = &quot;block&quot;;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	}<br />
+<br />
+	//--&gt;<br />
+	&lt;/script&gt;
+	</code>
+	
+	<p>to:</p>
+	
+	<code>function showfastreply()<br />
+	{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (document.getElementById(&apos;fastreply&apos;).style.display == &quot;block&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(&apos;fastreply&apos;).style.display = &quot;none&quot;;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;else<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(&apos;fastreply&apos;).style.display = &quot;block&quot;;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	}<br />
+<br />
+	function showHideRow(el)<br />
+	{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (document.getElementById(el).style.display == &quot;&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(el).style.display = &quot;none&quot;;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;else<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(el).style.display = &quot;&quot;;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}	<br />
+	}<br />
+	//--&gt;<br />
+	&lt;/script&gt;
+	</code>
+	
+	<p>Also, in the <kbd>Threads</kbd> template in <dfn>/themes/forum_themes/theme_name/theme_threads.php</dfn>, change any cases of the word "of" to {lang:of}.</p>
+	
+	<h3>Thread Rows</h3>
+	
+	<p>At the top of the <kbd>Thread Rows</kbd> template in <dfn>/themes/forum_themes/theme_name/theme_threads.php</dfn>, change:</p>
+	
+	<code>&lt;tr&gt;</code>
+	
+	<p>to:</p>
+	
+	<code>{if is_ignored}<br />
+	&lt;tr&gt;<br />
+&nbsp;&lt;td colspan=&quot;3&quot;&gt;<br />
+&nbsp;&nbsp;&lt;table class=&quot;ignored&quot; style=&quot;width:100%&quot;&gt;<br />
+&nbsp;&nbsp;&nbsp;&lt;tr&gt;<br />
+&nbsp;&nbsp;&nbsp;&lt;td class=&quot;tableCellOne&quot; colspan=&quot;3&quot;&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{lang:post_hidden} &lt;strong&gt;{author}&lt;/strong&gt; {lang:is_ignored}.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;span style=&quot;float:right&quot;&gt;&lt;a href=&quot;#&quot; onclick=&quot;showHideRow(&apos;{id9}&apos;);return false;&quot;&gt;{lang:view_hide}&lt;/a&gt; &amp;bull;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;a href=&quot;{path:ignore}&quot;&gt;{lang:stop_ignoring} {author}&lt;/a&gt;&lt;/span&gt;<br />
+&nbsp;&nbsp;&nbsp;&lt;/td&gt;<br />
+&nbsp;&nbsp;&nbsp;&lt;/tr&gt;<br />
+&nbsp;&nbsp;&lt;/table&gt;<br />
+&nbsp;&lt;/td&gt;<br />
+	&lt;/tr&gt;<br />
+	{/if}<br />
+<br />
+	&lt;tr id=&quot;{id9}&quot; {if is_ignored}style=&quot;display: none;&quot;{/if}&gt;
+	</code>
+	
+	<p>and just before the post permalink (shown below)</p>
+	
+	<code>{if is_post}&amp;nbsp;&amp;nbsp;&lt;span class=&quot;smallLinks&quot;&gt;[ &lt;a name=&quot;{post_id}&quot; href=&quot;{path:post_link}&quot; title=&quot;{lang:post_permalink}&quot;&gt;# {post_number}&lt;/a&gt; ]&lt;/span&gt;{/if}
+	</code>
+	
+	<p>Add:</p>
+	
+	<code>&amp;nbsp;&amp;nbsp;&lt;span class=&quot;smallLinks&quot;&gt;[ &lt;a href=&quot;{path:ignore}&quot; title=&quot;{lang:ignore}&quot;&gt;{lang:ignore}&lt;/a&gt; ]&lt;/span&gt;</code>
+	
+	<h3>Thread Review</h3>
+	
+	<p>At the top of the <kbd>Thread Review</kbd> template in <dfn>/themes/forum_themes/theme_name/theme_threads.php</dfn>, change:</p>
+	
+	<code>function showhide_topic_review()<br />
+	{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (document.getElementById(&apos;review_on&apos;).style.display == &quot;block&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(&apos;review_on&apos;).style.display = &quot;none&quot;;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(&apos;review_off&apos;).style.display = &quot;block&quot;;				<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;else<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(&apos;review_on&apos;).style.display = &quot;block&quot;;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(&apos;review_off&apos;).style.display = &quot;none&quot;;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	}<br />
+<br />
+	//--&gt;<br />
+	&lt;/script&gt;
+	</code>
+	
+	<p>to:</p>
+	
+	<code>function showhide_topic_review()<br />
+	{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (document.getElementById(&apos;review_on&apos;).style.display == &quot;block&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(&apos;review_on&apos;).style.display = &quot;none&quot;;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(&apos;review_off&apos;).style.display = &quot;block&quot;;				<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;else<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(&apos;review_on&apos;).style.display = &quot;block&quot;;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(&apos;review_off&apos;).style.display = &quot;none&quot;;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	}<br />
+<br />
+	function showHideRow(el)<br />
+	{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (document.getElementById(el).style.display == &quot;&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(el).style.display = &quot;none&quot;;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;else<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(el).style.display = &quot;&quot;;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}	<br />
+	}<br />
+	//--&gt;<br />
+	&lt;/script&gt;
+	</code>
+	
+	<h3>Thread Review Rows</h3>
+	
+	<p>At the top of the <kbd>Thread Review Rows</kbd> template in <dfn>/themes/forum_themes/theme_name/theme_threads.php</dfn>, change:</p>
+	
+	<code>&lt;tr&gt;</code>
+	
+	<p>to:</p>
+	
+	<code>{if is_ignored}<br />
+&lt;tr&gt;<br />
+&nbsp;&lt;td colspan=&quot;3&quot;&gt;<br />
+&nbsp;&nbsp;&lt;table class=&quot;ignored&quot; style=&quot;width:100%&quot;&gt;<br />
+&nbsp;&nbsp;&nbsp;&lt;tr&gt;<br />
+&nbsp;&nbsp;&nbsp;&lt;td class=&quot;tableCellOne&quot;&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{lang:post_hidden} &lt;strong&gt;{author}&lt;/strong&gt; {lang:is_ignored}.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;span style=&quot;float:right&quot;&gt;&lt;a href=&quot;#&quot; onclick=&quot;showHideRow(&apos;{id1}&apos;);showHideRow(&apos;{id2}&apos;);return false;&quot;&gt;{lang:view_hide}&lt;/a&gt; &amp;bull;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;a href=&quot;{path:ignore}&quot;&gt;{lang:stop_ignoring} {author}&lt;/a&gt;&lt;/span&gt;<br />
+&nbsp;&nbsp;&nbsp;&lt;/td&gt;<br />
+&nbsp;&nbsp;&nbsp;&lt;/tr&gt;<br />
+&nbsp;&nbsp;&lt;/table&gt;<br />
+&nbsp;&lt;/td&gt;<br />
+	&lt;/tr&gt;<br />
+	{/if}<br />
+<br />
+	&lt;tr id=&quot;{id1}&quot; {if is_ignored}style=&quot;display: none;&quot;{/if}&gt;
+	</code>
+	
+	<p>and about sixteen lines below that, you will find and change</p>
+	
+	<code>&lt;/tr&gt;&lt;tr&gt;</code>
+	
+	<p>to:</p>
+	
+	<code>&lt;/tr&gt;&lt;tr id=&quot;{id2}&quot; {if is_ignored}style=&quot;display: none;&quot;{/if}&gt;</code>
+	
+	<h3>CSS Stylesheet</h3>
+	
+	<p>You will also need to add the following code to your CSS Stylesheet template in <dfn>/themes/forum_themes/theme_name/theme_css.php</dfn>. Change the border color, margins, and other styling as necessary to match your customized theme.  It is suggested that you add this style rule to the "Table Formatting" section:</p>
+	
+	<code>.ignored {<br />
+&nbsp;&nbsp;border:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1px solid #B2B3CE;<br />
+&nbsp;&nbsp;padding:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0;<br />
+&nbsp;&nbsp;margin-top:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1px;<br />
+&nbsp;&nbsp;margin-bottom:&nbsp;&nbsp;8px;<br />
+	}
+	</code>
+	
+	<h3>Member Profile Templates</h3>
+	
+	<p>The following changes apply to Member Profile Templates</p>
+	
+	<h4>Member Profile Menu - menu()</h4>
+	
+	<p>Change:</p>
+	
+	<code>&lt;div class=&apos;borderTopBot&apos;&gt;&lt;div class=&apos;profileHead&apos;&gt;{lang:subscriptions}&lt;/div&gt;&lt;/div&gt;<br />
+<br />
+	&lt;div class=&apos;profileMenuInner&apos;&gt;<br />
+	&lt;div class=&apos;menuItem&apos;&gt;&lt;a href=&apos;{path:subscriptions}&apos; &gt;{lang:edit_subscriptions}&lt;/a&gt;&lt;/div&gt;<br />
+	&lt;/div&gt;
+	</code>
+	
+	<p>to:</p>
+	
+	<code>&lt;div class=&apos;borderTopBot&apos;&gt;&lt;div class=&apos;profileHead&apos;&gt;{lang:utilities}&lt;/div&gt;&lt;/div&gt;<br />
+<br />
+	&lt;div class=&apos;profileMenuInner&apos;&gt;<br />
+	&lt;div class=&apos;menuItem&apos;&gt;&lt;a href=&apos;{path:subscriptions}&apos; &gt;{lang:edit_subscriptions}&lt;/a&gt;&lt;/div&gt;<br />
+	&lt;div class=&apos;menuItem&apos;&gt;&lt;a href=&apos;{path:ignore_list}&apos; &gt;{lang:ignore_list}&lt;/a&gt;&lt;/div&gt;<br />
+	&lt;/div&gt;
+	</code>
+	
+	<h4>Public Member Profile - public_profile()</h4>
+	
+	<p>Change:</p>
+	
+	<code>&lt;div class=&apos;itempadbig&apos;&gt;&lt;a href=&quot;{search_path}&quot;&gt;&lt;b&gt;{lang:view_posts_by_member}&lt;/b&gt;&lt;/a&gt;&lt;/div&gt;</code>
+	
+	<p>to:</p>
+	
+	<code>&lt;div class=&apos;itempadbig&apos;&gt;&lt;a href=&quot;{search_path}&quot;&gt;&lt;b&gt;{lang:view_posts_by_member}&lt;/b&gt;&lt;/a&gt;&lt;/div&gt;<br />
+	{if ignore}<br />
+&nbsp;&nbsp;&lt;div class=&apos;itempad&apos;&gt;&lt;b&gt;{ignore_link}&lt;/b&gt;&lt;/div&gt;<br />
+	{/if}</code>
+	
+	<p>Finally, there are two new templates that need to be added.  You will have to edit the <dfn>/themes/forum_themes/theme_name/theme_member.php</dfn> file directly for this addition.  Just before:</p>
+	
+	<code>}<br />
+	// END CLASS<br />
+	?&gt;</code>
+	
+	<p>Put the following:</p>
+	
+	<code>/* -------------------------------------<br />
+	/*  Edit Ignore List Form<br />
+	/* -------------------------------------*/<br />
+<br />
+	function edit_ignore_list_form()<br />
+	{<br />
+	return &lt;&lt;&lt;PHARLEY<br />
+<br />
+	{include:toggle_js}<br />
+<br />
+	&lt;div class=&apos;menuHeadingBG&apos;&gt;&lt;div class=&quot;tableHeading&quot;&gt;{include:member_search} {lang:ignore_list}&lt;/div&gt;&lt;/div&gt;<br />
+<br />
+	{if success_message}&lt;div class=&apos;tableCellOne&apos;&gt;&lt;div class=&apos;success&apos;&gt;{lang:message}&lt;/div&gt;&lt;/div&gt;{/if}<br />
+<br />
+	{form:form_declaration}<br />
+<br />
+	&lt;table border=&apos;0&apos;  cellspacing=&apos;0&apos; cellpadding=&apos;0&apos; style=&apos;width:100%;&apos;  class=&apos;tableBorderTopLeft&apos; &gt;<br />
+<br />
+	&lt;tr&gt;<br />
+<br />
+	&lt;td  class=&apos;tableCellOne&apos;  style=&apos;width:80%;&apos;&gt;<br />
+	&lt;div class=&apos;defaultBold&apos;&gt;{lang:screen_name}&lt;/div&gt;<br />
+	&lt;/td&gt;<br />
+<br />
+	&lt;td  class=&apos;tableCellOne&apos;  style=&apos;width:5%;&apos;&gt;<br />
+	&lt;div class=&apos;defaultBold&apos;&gt;&lt;input class=&apos;checkbox&apos; type=&apos;checkbox&apos; name=&apos;toggleflag&apos; value=&apos;&apos; onclick=&quot;toggle(this);&quot; /&gt;<br />
+	&lt;/div&gt;<br />
+	&lt;/td&gt;<br />
+<br />
+	&lt;/tr&gt;<br />
+<br />
+	{include:edit_ignore_list_rows}<br />
+<br />
+	&lt;/table&gt;<br />
+<br />
+	&lt;div class=&quot;itempad&quot;&gt;<br />
+	&lt;div class=&apos;defaultRight&apos;&gt;{form:add_button}&amp;nbsp;&amp;nbsp;{form:delete_button}&amp;nbsp;&amp;nbsp;&lt;/div&gt;<br />
+	&lt;/div&gt;<br />
+<br />
+	&lt;/form&gt;<br />
+	PHARLEY;<br />
+	}<br />
+	/* END */<br />
+<br />
+<br />
+	/* -------------------------------------<br />
+	/*  Edit Ignore List Rows<br />
+	/* -------------------------------------*/<br />
+<br />
+	function edit_ignore_list_rows()<br />
+	{<br />
+	return &lt;&lt;&lt;PHARLEY<br />
+	&lt;tr&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;td class=&quot;{class}&quot;&gt;&lt;a href=&quot;{path:profile_link}&quot;&gt;{name}&lt;/a&gt;&lt;/td&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;td class=&quot;{class}&quot;&gt;&lt;input type=&apos;checkbox&apos; name=&apos;toggle[]&apos; value=&apos;{member_id}&apos; /&gt; &lt;/td&gt;<br />
+	&lt;/tr&gt;<br />
+	PHARLEY;<br />
+	}<br />
+	/* END */
+	</code>
+	
+	<h3>Theme Ignore</h3>
+	
+	<p>There is also a new template file, <dfn>/themes/forum_themes/default/theme_ignore.php</dfn> that you will need to copy to your customized theme folder.  One you have uploaded the file to your theme folder, it will be available in the Templates section of the Discussion Forum Control Panel.  Remember that to edit it in that location, the permissions will need to be set to 666.</p>
+	
+	<h2><a name="reply_changes"></a>Language Changes for Topics, Replies, and Posts</h2>
+	
+	<p>In previous versions of the Discussion Forum module, the term "Posts" had multiple meanings depending on the context.  It could mean either "replies" to a topic, or a sum of both "topics" and "replies".  Version 1.3.2 refines this and simply specifies that "topic" means the topic, "replies" means the replies to the topic, and "posts" is the sum of "topics" and "replies".  This creates a number of areas that need minor modifications in your templates, as follows:</p>
+	
+	<h3>Archive Templates <dfn>/themes/forum_themes/theme_name/theme_archive.php</dfn></h3>
+	
+	<p>In the <kbd>Recent Post Table</kbd> template, replace both instances of:</p>
+	
+	<code>{lang:total_posts_heading}</code>
+	
+	<p>with:</p>
+	
+	<code>{lang:total_replies_heading}</code>
+	
+	<p>In both the <kbd>Most Popular Post Item</kbd> and <kbd>Most Recent Topics Item</kbd> templates, replace:</p>
+	
+	<code>{posts}</code>
+	
+	<p>with:</p>
+	
+	<code>{replies}</code>
+	
+	<h3>Index Templates <dfn>/themes/forum_themes/theme_name/theme_index.php</dfn></h3>
+	
+	<p>In the <kbd>Forum Table Heading</kbd> template, replace:</p>
+	
+	<code>{lang:total_posts_heading}</code>
+	
+	<p>with:</p>
+	
+	<code>{lang:total_replies_heading}</code>
+	
+	<p>In the <kbd>Forum Table Rows</kbd> template, replace:</p>
+	
+	<code>{total_posts}</code>
+	
+	<p>with:</p>
+	
+	<code>{total_replies}</code>
+	
+	<h3>Stats Templates <dfn>/themes/forum_themes/theme_name/theme_stats.php</dfn></h3>
+	
+	<p>In the <kbd>Visitor Stats</kbd> template, replace:</p>
+	
+	<code>&lt;div class=&quot;itempad&quot;&gt;{lang:total_posts} {total_forum_posts}&lt;/div&gt;</code>
+	
+	<p>with:</p>
+	
+	<code>&lt;div class=&quot;itempad&quot;&gt;{lang:total_replies} {total_forum_replies}&lt;/div&gt;<br />
+	&lt;div class=&quot;itempad&quot;&gt;{lang:total_posts} {total_forum_posts}&lt;/div&gt;
+	</code>
+
+	<h3>Topic View Templates <dfn>/themes/forum_themes/theme_name/theme_topics.php</dfn></h3>
+	
+	<p>In the <kbd>Topics</kbd> template, replace:</p>
+	
+	<code>{lang:total_posts_heading}</code>
+	
+	<p>with:</p>
+	
+	<code>{lang:total_replies_heading}</code>
+	
+	<p>In the <kbd>Topic Rows</kbd> template, replace:</p>
+	
+	<code>{total_posts}</code>
+	
+	<p>with:</p>
+	
+	<code>{total_replies}</code>
+
+	<h3>Member Profile Templates <dfn>/themes/forum_themes/theme_name/theme_member.php</dfn></h3>
+	
+	<p>In the <kbd>Member Profile Home Page</kbd> template, replace:</p>
+
+	<code>&lt;/tr&gt;&lt;tr&gt;<br />
+<br />
+	&lt;td class=&apos;tableCellOne&apos;&gt;&lt;div class=&apos;defaultBold&apos;&gt;{lang:total_forum_posts}&lt;/div&gt;&lt;/td&gt;<br />
+	&lt;td class=&apos;tableCellOne&apos;&gt;{total_posts}&lt;/td&gt;<br />
+<br />
+	{/if}<br />
+<br />
+	&lt;/tr&gt;&lt;tr&gt;<br />
+<br />
+	&lt;td class=&apos;tableCellTwo&apos;&gt;&lt;div class=&apos;defaultBold&apos;&gt;{lang:total_entries}&lt;/div&gt;&lt;/td&gt;<br />
+	&lt;td class=&apos;tableCellTwo&apos;&gt;{total_entries}&lt;/td&gt;<br />
+<br />
+	&lt;/tr&gt;&lt;tr&gt;<br />
+<br />
+	&lt;td class=&apos;tableCellOne&apos;&gt;&lt;div class=&apos;defaultBold&apos;&gt;{lang:total_comments}&lt;/div&gt;&lt;/td&gt;<br />
+	&lt;td class=&apos;tableCellOne&apos;&gt;{total_comments}&lt;/td&gt;
+	</code>
+
+	<p>with:</p>
+
+	<code>&lt;/tr&gt;&lt;tr&gt;<br />
+<br />
+	&lt;td class=&apos;tableCellOne&apos;&gt;&lt;div class=&apos;defaultBold&apos;&gt;{lang:total_forum_replies}&lt;/div&gt;&lt;/td&gt;<br />
+	&lt;td class=&apos;tableCellOne&apos;&gt;{total_replies}&lt;/td&gt;<br />
+<br />
+	&lt;/tr&gt;&lt;tr&gt;<br />
+<br />
+	&lt;td class=&apos;tableCellTwo&apos;&gt;&lt;div class=&apos;defaultBold&apos;&gt;{lang:total_forum_posts}&lt;/div&gt;&lt;/td&gt;<br />
+	&lt;td class=&apos;tableCellTwo&apos;&gt;{total_posts}&lt;/td&gt;<br />
+<br />
+	{/if}<br />
+<br />
+	&lt;/tr&gt;&lt;tr&gt;<br />
+<br />
+	&lt;td class=&apos;tableCellOne&apos;&gt;&lt;div class=&apos;defaultBold&apos;&gt;{lang:total_entries}&lt;/div&gt;&lt;/td&gt;<br />
+	&lt;td class=&apos;tableCellOne&apos;&gt;{total_entries}&lt;/td&gt;<br />
+<br />
+	&lt;/tr&gt;&lt;tr&gt;<br />
+<br />
+	&lt;td class=&apos;tableCellTwo&apos;&gt;&lt;div class=&apos;defaultBold&apos;&gt;{lang:total_comments}&lt;/div&gt;&lt;/td&gt;<br />
+	&lt;td class=&apos;tableCellTwo&apos;&gt;{total_comments}&lt;/td&gt;
+	</code>
+	
+	<p>In the <kbd>Public Member Profile</kbd> template, replace:</p>
+	
+	<code>&lt;/tr&gt;&lt;tr&gt;<br />
+<br />
+	&lt;td class=&apos;tableCellTwo&apos;&gt;&lt;div class=&apos;defaultBold&apos;&gt;{lang:total_forum_posts}&lt;/div&gt;&lt;/td&gt;<br />
+	&lt;td class=&apos;tableCellOne&apos;&gt;&lt;div class=&apos;default&apos;&gt;{total_forum_posts}&lt;/div&gt;&lt;/td&gt;
+	</code>
+	
+	<p>with:</p>
+	
+	<code>&lt;/tr&gt;&lt;tr&gt;<br />
+<br />
+	&lt;td class=&apos;tableCellTwo&apos;&gt;&lt;div class=&apos;defaultBold&apos;&gt;{lang:total_forum_replies}&lt;/div&gt;&lt;/td&gt;<br />
+	&lt;td class=&apos;tableCellOne&apos;&gt;&lt;div class=&apos;default&apos;&gt;{total_forum_replies}&lt;/div&gt;&lt;/td&gt;<br />
+	<br />
+	&lt;/tr&gt;&lt;tr&gt;<br />
+<br />
+	&lt;td class=&apos;tableCellTwo&apos;&gt;&lt;div class=&apos;defaultBold&apos;&gt;{lang:total_forum_posts}&lt;/div&gt;&lt;/td&gt;<br />
+	&lt;td class=&apos;tableCellOne&apos;&gt;&lt;div class=&apos;default&apos;&gt;{total_forum_posts}&lt;/div&gt;&lt;/td&gt;
+	</code>
+	
+
+		
+		
+		
+		
+	<h2><a name="opt_notification"></a>Notification Option for Moderation Actions</h2>
+	
+	<p>This feature allows you to choose whether or not you wish a notification email to be sent to the thread owner when performing a moderation action, such as moving, merging, or splitting the thread.</p>
+	
+	<h3>Merge Topics</h3>
+	
+	<p>To add this feature you will need to add the following code to your <kbd>Merge Interface template</kbd> in <dfn>/themes/forum_themes/theme_name/theme_merge.php</dfn>.  Just before the submit button, you will add a new table row and form element.  Change:</p>
+
+	<code>&lt;/tr&gt;&lt;tr&gt;<br />
+<br />
+	&lt;td class=&quot;tableCellTwo&quot;&gt;<br />
+	&lt;div class=&quot;itempadbig&quot;&gt;&lt;input type=&quot;submit&quot; name=&quot;submit&quot; class=&quot;submit&quot; value=&quot;{lang:merge_threads}&quot; /&gt;&lt;/div&gt;<br />
+	&lt;/td&gt;
+	</code>
+	
+	<p>to:</p>
+	
+	<code>&lt;/tr&gt;&lt;tr&gt;<br />
+<br />
+	&lt;td class=&quot;tableCellTwo&quot;&gt;<br />
+	&lt;div class=&quot;itempad&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;checkbox&quot; name=&quot;notify&quot; value=&quot;1&quot; checked=&quot;checked&quot; /&gt; {lang:notify_thread_owner}&lt;/div&gt;<br />
+	&lt;/td&gt;<br />
+<br />
+	&lt;/tr&gt;&lt;tr&gt;<br />
+<br />
+	&lt;td class=&quot;tableCellTwo&quot;&gt;<br />
+	&lt;div class=&quot;itempadbig&quot;&gt;&lt;input type=&quot;submit&quot; name=&quot;submit&quot; class=&quot;submit&quot; value=&quot;{lang:merge_threads}&quot; /&gt;&lt;/div&gt;<br />
+	&lt;/td&gt;
+	</code>
+	
+	<h3>Move Topics</h3>
+	
+	<p>To add this feature you will need to add the following code to your <kbd>Move Topic Confirmation template</kbd> in <dfn>/themes/forum_themes/theme_name/theme_move_topic.php</dfn>.  Change:</p>
+
+	<code>&lt;td class=&quot;tableCellTwo&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;checkbox&quot; name=&quot;redirect&quot; value=&quot;1&quot; checked=&quot;checked&quot; /&gt; {lang:retain_move_link}&lt;/td&gt;
+	</code>
+	
+	<p>to:</p>
+	
+	<code>&lt;td class=&quot;tableCellTwo&quot;&gt;<br />
+	&lt;div class=&quot;itempad&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;checkbox&quot; name=&quot;redirect&quot; value=&quot;1&quot; checked=&quot;checked&quot; /&gt; {lang:retain_move_link}&lt;/div&gt;<br />
+	&lt;div class=&quot;itempad&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;checkbox&quot; name=&quot;notify&quot; value=&quot;1&quot; checked=&quot;checked&quot; /&gt; {lang:notify_thread_owner}&lt;/div&gt;<br />
+	&lt;/td&gt;
+	</code>
+	
+	<h3>Split Topics</h3>
+	
+	<p>To add this feature you will need to add the following code to your <kbd>Split Data template</kbd> in <dfn>/themes/forum_themes/theme_name/theme_split.php</dfn>.  You will need to add a new table row and form element.  Change:</p>
+	
+	<code>{if forums_exist}<br />
+		&lt;tr&gt;<br />
+		&lt;td class=&quot;tableCellOne&quot;&gt;&lt;div class=&quot;itempadbig&quot;&gt;{lang:forum} <br />
+		&lt;select name=&quot;forum_id&quot; class=&quot;select&quot;&gt;<br />
+		{split_select_options}<br />
+		&lt;/select&gt;<br />
+		&lt;/div&gt;&lt;/td&gt;<br />
+		&lt;/tr&gt;<br />
+	{/if}<br />
+<br />
+	&lt;tr&gt;
+	</code>
+	
+	<p>to:</p>
+	
+	<code>{if forums_exist}<br />
+		&lt;tr&gt;<br />
+		&lt;td class=&quot;tableCellOne&quot;&gt;&lt;div class=&quot;itempadbig&quot;&gt;{lang:forum} <br />
+		&lt;select name=&quot;forum_id&quot; class=&quot;select&quot;&gt;<br />
+		{split_select_options}<br />
+		&lt;/select&gt;<br />
+		&lt;/div&gt;&lt;/td&gt;<br />
+		&lt;/tr&gt;<br />
+	{/if}<br />
+<br />
+	&lt;tr&gt;<br />
+<br />
+	&lt;td class=&quot;tableCellOne&quot;&gt;<br />
+	&lt;div class=&quot;itempad&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;checkbox&quot; name=&quot;notify&quot; value=&quot;1&quot; checked=&quot;checked&quot; /&gt; {lang:notify_thread_owner}&lt;/div&gt;<br />
+	&lt;/td&gt;<br />
+<br />
+	&lt;/tr&gt;&lt;tr&gt;
+	</code>
+	
+	
+	<h2><a name="report"></a>Report Post Feature</h2>
+	
+	<h3>Thread Rows</h3>
+	
+	<p>To add this feature you will need to add the following code to your <kbd>Thread Rows</kbd> template in <dfn>/themes/forum_themes/theme_name/theme_threads.php</dfn>.  Change:</p>
+	
+	<code>
+{if can_ban}&amp;nbsp;&amp;nbsp;&lt;span class=&quot;smallLinks&quot;&gt;[ &lt;a href=&quot;{path:ban_member}&quot;&gt;{lang:ban_member}&lt;/a&gt; ]&lt;/span&gt;{/if}
+	</code>
+	
+	<p>to:</p>
+	
+	<code>{if can_ban}&amp;nbsp;&amp;nbsp;&lt;span class=&quot;smallLinks&quot;&gt;[ &lt;a href=&quot;{path:ban_member}&quot;&gt;{lang:ban_member}&lt;/a&gt; ]&lt;/span&gt;{/if}<br />
+<br />
+	{if can_report}&amp;nbsp;&amp;nbsp;&lt;span class=&quot;smallLinks&quot;&gt;[ &lt;a href=&quot;{path:report}&quot; title=&quot;{lang:report}&quot;&gt;{lang:report}&lt;/a&gt; ]&lt;/span&gt;{/if}
+	</code>
+	
+	<h3>Theme Report</h3>
+	
+	<p>There is also a new template file, <dfn>/themes/forum_themes/default/theme_report.php</dfn> that you will need to copy to your customized theme folder.  One you have uploaded the file to your theme folder, it will be available in the Templates section of the Discussion Forum Control Panel.  Remember that to edit it in that location, the permissions will need to be set to 666.</p>
+	
+	
+	<h2><a name="search"></a>Search by Member Group</h2>
+	
+	<h3>Advanced Search Form</h3>
+	
+	<p>To add this feature you will need to add the following code to your <kbd>Advanced Search Form</kbd> template in <dfn>/themes/forum_themes/theme_name/theme_search.php</dfn>.  Change:</p>
+	
+	<code>&lt;fieldset class=&quot;searchBox&quot;&gt;<br />
+	&lt;legend class=&quot;searchBoxTitle&quot;&gt;{lang:search_by_member_name}&lt;/legend&gt;<br />
+<br />
+	&lt;input type=&quot;text&quot; class=&quot;input&quot; maxlength=&quot;100&quot; size=&quot;40&quot; name=&quot;member_name&quot; style=&quot;width:100%;&quot; /&gt;<br />
+	&lt;div class=&quot;searchpad&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;checkbox&quot; name=&quot;exact_match&quot; value=&quot;y&quot;  /&gt; {lang:exact_name_match}&lt;/div&gt;<br />
+	&lt;/fieldset&gt;
+	</code>
+	
+	<p>to:</p>
+	
+	<code>&lt;script type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;function switchto(el)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (el == &apos;byMemberGroup&apos;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(&apos;byMemberGroup&apos;).style.display = &quot;&quot;;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(&apos;byMemberName&apos;).style.display = &quot;none&quot;;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(&apos;byMemberGroup&apos;).style.display = &quot;none&quot;;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(&apos;byMemberName&apos;).style.display = &quot;&quot;;				<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&lt;/script&gt;<br />
+<br />
+	&lt;fieldset id=&quot;byMemberName&quot; class=&quot;searchBox&quot;&gt;<br />
+	&lt;legend class=&quot;searchBoxTitle&quot;&gt;{lang:search_by_member_name} - (&lt;a href=&quot;#&quot; onclick=&quot;switchto(&apos;byMemberGroup&apos;); return false;&quot;&gt;{lang:switch_to_group}&lt;/a&gt;)&lt;/legend&gt;<br />
+<br />
+	&lt;input type=&quot;text&quot; class=&quot;input&quot; maxlength=&quot;100&quot; size=&quot;40&quot; name=&quot;member_name&quot; style=&quot;width:100%;&quot; /&gt;<br />
+	&lt;div class=&quot;searchpad&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;checkbox&quot; name=&quot;exact_match&quot; value=&quot;y&quot;  /&gt; {lang:exact_name_match}&lt;/div&gt;<br />
+	&lt;/fieldset&gt;<br />
+<br />
+	&lt;fieldset id=&quot;byMemberGroup&quot; class=&quot;searchBox&quot; style=&quot;display: none;&quot;&gt;<br />
+	&lt;legend class=&quot;searchBoxTitle&quot;&gt;{lang:search_by_member_group} - (&lt;a href=&quot;#&quot; onclick=&quot;switchto(&apos;byMemberName&apos;); return false;&quot;&gt;{lang:switch_to_name}&lt;/a&gt;)&lt;/legend&gt;<br />
+<br />
+	&lt;select name=&apos;member_group[]&apos; class=&apos;multiselect&apos; size=&apos;5&apos; style=&quot;width:100%;&quot; multiple=&apos;multiple&apos;&gt;<br />
+	{member_group_select_options}<br />
+	&lt;/select&gt;<br />
+	&lt;/fieldset&gt;
+	</code>
+	
+	<p><br /><br /><a href="forum_update.html">Return to Update Page</a></p>
+	
+	
+</div>
+
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

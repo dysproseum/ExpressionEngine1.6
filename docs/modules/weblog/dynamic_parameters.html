@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Dynamic Parameters &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Weblog Module</a> &gt;
+<strong>Dynamic Parameters</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Dynamic Parameters</h1>
+
+	<p>The <var>{exp:weblog:entries}</var> tag has a <dfn>Dynamic Parameters</dfn> feature that permits its parameters to be set "on the fly"
+	using POST data submitted via a form.&nbsp; A practical use for this is to create some display options in a form on your page that your
+	visitors can use to select their preferred page view.</p>
+	
+	<p class="important"><b>Note:</b>&nbsp; This feature will only work if page caching is turned OFF for the template in which it is being used.</p>
+	
+	<p>Every <a href="parameters.html">Parameter</a> available to the weblog tag can be set dynamically.&nbsp;  However, as a security
+	precaution you must specify which parameters you'll allow to be dynamic within a given weblog tag, like this:</p>
+		
+	<code>{exp:weblog:entries&nbsp; <kbd>dynamic_parameters="orderby|limit|sort"</kbd>}</code>
+	
+	<p>In the above example you would be allowing the orderby, limit, and sort parameters.  Note that the allowed parameters are being separated with a "pipe" character: |</p>
+	
+	<p>Once you've enabled the parameters as indicated above, you can create a form on one of your pages to generate the parameters dynamically.  Here's an example of such a form:</p>
+	
+	<p class="highlight">Note that each form field is named exactly the same as the parameter name, and the form "action" must point to the template in which it is being used.</p>
+	
+	<code>&lt;form method="post" action="{path="template_group/template_name"}"><br /><br />
+
+&lt;select name="orderby"><br />
+&lt;option value="date">Sort By:&lt;/option><br />
+&lt;option value="date">Date&lt;/option><br />
+&lt;option value="title">Title&lt;/option><br />
+&lt;option value="comment_total">Most Comments&lt;/option><br />
+&lt;/select><br /><br />
+
+&lt;select name="sort"><br />
+&lt;option value="asc">Order In:&lt;/option><br />
+&lt;option value="asc">Ascending&lt;/option><br />
+&lt;option value="desc">Descending&lt;/option><br />
+&lt;/select><br /><br />
+
+&lt;select name="limit"><br />
+&lt;option value="10">Result Limit:&lt;/option><br />
+&lt;option value="10">10&lt;/option><br />
+&lt;option value="20">20&lt;/option><br />
+&lt;option value="30">30&lt;/option><br />
+&lt;/select><br /><br />
+
+&lt;input type="submit" value="Go!" /><br /><br />
+
+&lt;/form></code>
+
+
+	<p class="important"><b>Note:</b>&nbsp; If you have pagination links on your page they will not retain the page layout options created dynamically
+	using this feature.</p>
+	
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

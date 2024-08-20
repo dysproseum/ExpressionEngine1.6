@@ -1,0 +1,363 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Photo Gallery Entries Variables &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Photo Gallery</a> &gt;
+<strong>Photo Gallery Variables</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Photo Gallery Entries Variables</h1>
+
+	<p>The standard <samp>{exp:gallery:entries}</samp> tag has a multitude of variables that can be used inside of it.  These variables have been split into two broad categories:</p>
+
+	<ul>
+		<li><a href="#single_variables">Single Variables</a></li>
+		<li><a href="#conditional_variables">Conditional Variables</a></li>
+	</ul>
+
+
+
+	<h2><a name="single_variables">Single Variables</a></h2>
+
+	<ul class="minitoc">
+		<li><a href="#var_caption">{caption}</a></li>
+		<li><a href="#var_category">{category}</a></li>
+		<li><a href="#var_category_id">{category_id}</a></li>
+		<li><a href="#var_category_path">{category_path='gallery/category'}</a></li>
+		<li><a href="#var_count">{count}</a></li>
+		<li><a href="#var_custom_fields">{custom_field_one}... {custom_field_six}</a></li>
+		<li><a href="#var_entry_date">{entry_date format="%Y %m %d"}</a></li>
+		<li><a href="#var_entry_id">{entry_id}</a></li>
+		<li><a href="#var_filename">{filename}</a></li>
+		<li><a href="#var_height">{height}</a></li>
+		<li><a href="#var_id_path">{id_path='gallery/comments'}</a></li>
+		<li><a href="#var_image_url">{image_url}</a></li>
+		<li><a href="#var_medium_height">{medium_height}</a></li>
+		<li><a href="#var_medium_url">{medium_url}</a></li>
+		<li><a href="#var_medium_width">{medium_width}</a></li>
+		<li><a href="#var_recent_comment_date">{recent_comment_date format="%Y %m %d"}</a></li>
+		<li><a href="#var_switch">{switch="option_one|option_two|option_three"}</a></li>
+
+		<li><a href="#var_thumb_height">{thumb_height}</a></li>
+		<li><a href="#var_thumb_url">{thumb_url}</a></li>
+		<li><a href="#var_thumb_width">{thumb_width}</a></li>
+		<li><a href="#var_title">{title}</a></li>
+		<li><a href="#var_total_results">{total_results}</a></li>
+		<li><a href="#var_total_comments">{total_comments}</a></li>
+		<li><a href="#var_views">{views}</a></li>
+		<li><a href="#var_width">{width}</a></li>
+	</ul>
+
+
+	<h3><a name="var_caption">caption</a></h3>
+
+		<code>{caption}</code>
+
+		<p>The caption associated with the entry.</p>
+
+
+	<h3><a name="var_category">category</a></h3>
+
+		<code>{category}</code>
+
+		<p>The name of the category that the entry is assigned to.</p>
+
+
+	<h3><a name="var_category_id">category_id</a></h3>
+
+		<code>{category_id}</code>
+
+		<p>The category ID of the category that the entry is assigned to.</p>
+
+
+	<h3><a name="var_category_path">category_path</a></h3>
+
+		<code>{category_path='gallery/category'}</code>
+
+		<p>The URL to the specified template.  The category ID will be automatically added.  For example, this:</p>
+
+		<code>&lt;a href="{category_path='weblog/category'}">{category}&lt;/a></code>
+
+		<p>Could be rendered like this:</p>
+
+		<code>&lt;a href="http://example.com/index.php/gallery/category/C12/">Florida&lt;/a></code>
+		
+		<h3><a name="var_count">count</a></h3>
+
+		<code>{count}</code>
+
+		<p>The "count" out of the current entries being displayed.  If five entries are being displayed, then for the fourth entry the <samp>{count}</samp> variable would have a value of "4".</p>
+
+	<h3><a name="var_custom_fields">custom_field_one</a></h3>
+	
+	<p>Up to six custom fields can be shown, with the following syntax:</p>
+
+		<code>{custom_field_one}</code>
+		<code>{custom_field_two}</code>
+		<code>{custom_field_three}</code>
+		<code>{custom_field_four}</code>
+		<code>{custom_field_five}</code>
+		<code>{custom_field_six}</code>
+
+	<h3><a name="var_entry_date">entry_date</a></h3>
+
+		<code>{entry_date format="%Y %m %d"}</code>
+
+		<p>The date the entry was submitted.  See the <a href="../../templates/date_variable_formatting.html">date variable formatting</a> page for more information.</p>
+
+
+	<h3><a name="var_entry_id">entry_id</a></h3>
+
+		<code>{entry_id}</code>
+
+		<p>The ID number of the gallery entry</p>
+
+
+	<h3><a name="var_filename">filename</a></h3>
+
+		<code>{filename}</code>
+
+		<p>The raw filename of the image associated with the entry.  For instance, <var>zoo.jpg</var>.</p>
+
+
+	<h3><a name="var_height">height</a></h3>
+
+		<code>{height}</code>
+
+		<p>The height (in pixels) of the full-size image.</p>
+
+
+	<h3><a name="var_id_path">id_path</a></h3>
+
+		<code>{id_path='gallery/comments'}</code>
+
+		<p>The URL to the specified template.  The ID number of the entry will be automatically added.  For example, this:</p>
+
+		<code>&lt;a href="{id_path='gallery/comments'}">my entry&lt;/a></code>
+
+		<p>Would be rendered like this:</p>
+
+		<code>&lt;a href="http://example.com/index.php/gallery/comments/234/">my entry&lt;/a></code>
+
+
+	<h3><a name="var_image_url">image_url</a></h3>
+
+		<code>{image_url}</code>
+
+		<p>The URL to the full-size image.</p>
+
+
+	<h3><a name="var_medium_height">medium_height</a></h3>
+
+		<code>{medium_height}</code>
+
+		<p>The height (in pixels) of any "medium sized image" associated with the entry.</p>
+
+
+	<h3><a name="var_medium_url">medium_url</a></h3>
+
+		<code>{medium_url}</code>
+
+		<p>The URL to any "medium sized image" associated with the entry.</p>
+
+
+	<h3><a name="var_medium_width">medium_width</a></h3>
+
+		<code>{medium_width}</code>
+
+		<p>The width (in pixels) of any "medium sized image" associated with the entry.</p>
+
+
+	<h3><a name="var_recent_comment_date">recent_comment_date</a></h3>
+
+		<code>{recent_comment_date format="%Y %m %d"}</code>
+
+		<p>The date of the most recent comment associated with the entry.  See the <a href="../../templates/date_variable_formatting.html">date variable formatting</a> page for more information.</p>
+
+
+	<h3><a name="var_switch">switch=</a></h3>
+
+		<code>{switch="option_one|option_two|option_three"}</code>
+
+		<p>This variable permits you to rotate through any number of values as the entries are displayed.  The first entry will use "option_one", the second will use "option_two", the third "option_three", the fourth "option_one", and so on.</p>
+
+		<p>The most straightforward use for this would be to alternate colors.  It could be used like so:</p>
+
+		<code>{exp:gallery:entries}<br />
+
+{entries}<br />
+<br />
+{row}<br />
+&lt;td class="{switch="one|two"}"><br />
+&lt;a href="{id_path='gallery/comments'}">&lt;img src="{thumb_url}" width="{thumb_width}" height="{thumb_height}" alt="{title}" title="{title}" />&lt;/a>&lt;br /><br />
+{title}<br />
+&lt;/td><br />
+{/row}<br />
+<br />
+{/entries}<br />
+{/exp:gallery:entries}</code>
+
+		<p>The entries would then alternate between <samp>&lt;div class="one"></samp> and <samp>&lt;div class="two"></samp>.</p>
+
+		<p>Multiple instances of the <samp>{switch=}</samp> tag may be used and the system will intelligently keep track of each one.</p>
+
+	<h3><a name="var_thumb_height">thumb_height</a></h3>
+
+		<code>{thumb_height}</code>
+
+		<p>The height (in pixels) of any thumbnail associated with the entry.</p>
+
+
+	<h3><a name="var_thumb_url">thumb_url</a></h3>
+
+		<code>{thumb_url}</code>
+
+		<p>The URL to any thumbnail associated with the entry.</p>
+
+
+	<h3><a name="var_thumb_width">thumb_width</a></h3>
+
+		<code>{thumb_width}</code>
+
+		<p>The width (in pixels) of any thumbnail associated with the entry.</p>
+
+
+	<h3><a name="var_title">title</a></h3>
+
+		<code>{title}</code>
+
+		<p>The title of the entry.</p>
+
+
+	<h3><a name="var_total_comments">total_comments</a></h3>
+
+		<code>{total_comments}</code>
+
+		<p>The total number of comments for this entry.</p>
+		
+<h3><a name="var_total_results">total_results</a></h3>
+
+		<code>{total_results}</code>
+
+		<p>The total number of entries being displayed.</p>
+
+
+
+	<h3><a name="var_views">views</a></h3>
+
+		<code>{views}</code>
+
+		<p>The total number of views for this entry.</p>
+
+
+	<h3><a name="var_width">width</a></h3>
+
+		<code>{width}</code>
+
+		<p>The width (in pixels) of the full-size image.</p>
+
+
+
+
+	<h2><a name="conditional_variables">Conditional Variables</a></h2>
+
+	<p>Conditional variables allow you to add scripting to your regular variables in order to show data if certain criteria that you define are met.  For more information about conditional logic in ExpressionEngine, please refer to the <a href="../../templates/globals/conditionals.html">Global Conditionals</a>.</p>
+
+	<p><b>Note:</b>  The left side of the condition <strong>must</strong> always be the name of a variable (title, body, summary, username, screen_name, entry_date, etc.).  The right side must be the condition you are testing for.</p>
+
+	<p>For example, to test for the "caption" being not empty, you would do this:</p>
+
+	<code>{if caption != ""}<br />
+<br />
+The caption is not empty!<br />
+<br />
+{/if}</code>
+
+	<p>An alternate, shorthand syntax can accomplish the same thing:</p>
+
+	<code>{if caption}<br />
+<br />
+The caption is not empty!<br />
+<br />
+{/if}
+</code>
+
+	<p>If only the variable name is in the conditional statement it tests for "not empty".</p>
+
+
+	<h3>allow_comments</h3>
+
+		<code>{if allow_comments}<br />
+content<br />
+{/if}</code>
+
+		<p>This special conditional lets you conditionally display content if the current entry is set to allow comments.</p>
+
+		<code>{if allow_comments}<br />
+<br />
+({comment_total}) &lt;a href="{id_path='gallery/comments'}">Comments&lt;/a><br />
+<br />
+{/if}</code>
+
+
+	<h3>{if no_results}</h3>
+
+		<code>{if no_results}<br />
+content<br />
+{/if}</code>
+
+		<p>You may use this conditional for displaying a message in the case 
+		when no entries are returned.  The contents inside of the conditional 
+		will be displayed in cases where there are no results returned for the 
+		tag.</p>
+
+		<code>{if no_results}<br />
+<br />
+&lt;p>There are no entries available.&lt;/p><br />
+<br />
+{/if}</code>
+
+
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

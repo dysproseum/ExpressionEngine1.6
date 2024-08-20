@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Throttling Settings &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../../index.html"><img src="../../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../../index.html">Table of Contents</a> &gt;
+<a href="../../../index.html#cp_docs">The Control Panel</a> &gt;
+<a href="../index.html">Admin</a> &gt;
+<a href="index.html">System Preferences</a> &gt;
+<strong>Throttling Settings</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Control Panel Settings</h1>
+	<div class="path">Control Panel Location:&nbsp; <dfn>Admin &gt; System Preferences &gt; Throttling Settings</dfn></div>	
+
+
+	<p>This section of the Control Panel allows you to manage the <dfn>Throttling</dfn> feature. Please visit <a href="../../../general/throttling.html">Throttling Control and 404 Pages</a> for more information regarding this feature.</p>
+
+
+	<h3>Enable Throttling</h3>
+	
+	<p>Allows you to enable or disable this feature.</p>
+	
+	<h3>Deny Access if No IP Address is Present</h3>
+	
+	<p>If this setting is set to <kbd>yes</kbd>, throttling will be immediately triggered if the user visiting your site is not generating IP Address information.</p>
+	
+	
+	<h3>Maximum Number of Page Loads</h3>
+	
+	<p>The total number of times a user is allowed to load your web pages (within the time interval below) before being locked out.  
+	For example, if you set this preference to <kbd>5</kbd> page loads within <kbd>10</kbd> seconds, a user can not browse more than 5 pages
+	within a 10 second interval or the throttling feature will be triggered, locking them out of your site according to the parameters you set below.</p>
+	
+	<h3>Time Interval</h3>
+	
+	<p>The number of <b>seconds</b> during which the above number of page loads are allowed.
+	
+	<h3>Lockout Time</h3>
+	
+	<p>The length of time in <b>seconds</b> that a user will be unable to use your site.
+	
+	<h3>Action to Take</h3>
+	
+	<p>The action that should take place if a user has exceeded the limits.  The options are:</p>
+	
+	<ul>
+	<li><b>Send 404 Headers.</b> This option will cause standard server <dfn>404 Page Not Found</dfn> headers to be sent.</li>
+	<li><b>URL Redirect</b> This option will send the user to a URL of your choice.</li>
+	<li><b>Show a Custom Message.</b> This option will display a custom message you can specify.</li>
+	</ul>
+	
+	
+	<h3>URL for Redirect</h3>
+	
+	<p>If you choose the <b>URL Redirect</b> option above, this preference enables you to set the destination URL.</p>
+	
+	<h3>Custom Message</h3>
+
+	<p>If you choose the <b>Show a Custom Message</b> option above, this preference enables you to specify the message.</p>
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

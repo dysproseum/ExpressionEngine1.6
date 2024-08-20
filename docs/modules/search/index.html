@@ -1,0 +1,262 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Search Module Tags &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Search Module</a> &gt;
+<strong>Search Module Tags</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Search Module Tags</h1>
+
+	<p>The Search Module of ExpressionEngine has several individual tags available for use.  Each tag is explained in a separate section.  Furthermore, there is a section devoted to explaining the syntax that can be used in the search field.</p>
+
+	<ul>
+		<li><a href="#simple">Simple Search Form</a></li>
+		<li><a href="#advanced">Advanced Search Form</a></li>
+		<li><a href="#results">Search Results</a></li>
+		<li><a href="#syntax">Search Syntax</a></li>
+		<li><a href="keywords.html" title="Search Keywords">Search Keywords</a></li>
+	</ul>
+
+
+	<h2><a name="simple">Simple Search Form</a></h2>
+
+	<p>The <a href="simple.html">Simple Search Form</a> tag allows you to easily add a single-form search field to your site.  This allows you to have a simple search box in a sidebar of your site.  Example:</p>
+
+	<code>{exp:search:simple_form weblog="news"}<br />
+<br />
+&lt;p>&lt;label for="keywords">Search:&lt;/label>&lt;br /><br />
+&lt;input type="text" name="keywords" id="keywords" value="" size="18" maxlength="100" />&lt;/p><br />
+<br />
+&lt;p>&lt;a href="{path='search/index'}">Advanced Search&lt;/a>&lt;/p><br />
+<br />
+&lt;p>&lt;input type="submit" value="submit" class="submit" />&lt;/p><br />
+<br />
+{/exp:search:simple_form}</code>
+
+
+
+	<h2><a name="advanced">Advanced Search Form</a></h2>
+
+	<p>The <a href="advanced.html">Advanced Search Form</a> tag allows you to display a detailed search form that will allow your users to make "power searches" to find the information they need.  Example:</p>
+
+	<code>{exp:search:advanced_form result_page="search/results"}<br />
+<br />
+&lt;table cellpadding='4' cellspacing='6' border='0' width='100%'><br />
+&lt;tr><br />
+&lt;td><br />
+<br />
+&lt;fieldset class="fieldset"><br />
+	&lt;legend>{lang:search_by_keyword}&lt;/legend><br />
+<br />
+	&lt;input type="text" class="input" maxlength="100" size="40" name="keywords" style="width:100%;" /><br />
+<br />
+	&lt;div class="default"><br />
+		&lt;select name="search_in"><br />
+			&lt;option value="titles" selected="selected">{lang:search_in_titles}&lt;/option><br />
+			&lt;option value="entries" selected="selected">{lang:search_in_entries}&lt;/option><br />
+			&lt;option value="everywhere" >{lang:search_everywhere}&lt;/option><br />
+		&lt;/select><br />
+	&lt;/div><br />
+<br />
+	&lt;div class="default"><br />
+		&lt;select name="where"><br />
+			&lt;option value="exact" selected="selected">{lang:exact_phrase_match}&lt;/option><br />
+			&lt;option value="any">{lang:search_any_words}&lt;/option><br />
+			&lt;option value="all" >{lang:search_all_words}&lt;/option><br />
+			&lt;option value="word" >{lang:search_exact_word}&lt;/option><br />
+		&lt;/select><br />
+	&lt;/div><br />
+<br />
+&lt;/fieldset><br />
+<br />
+&lt;/td>&lt;td><br />
+<br />
+&lt;fieldset class="fieldset"><br />
+	&lt;legend>{lang:search_by_member_name}&lt;/legend><br />
+<br />
+	&lt;input type="text" class="input" maxlength="100" size="40" name="member_name" style="width:100%;" /><br />
+	&lt;div class="default">&lt;input type="checkbox" class="checkbox" name="exact_match" value="y"  /> {lang:exact_name_match}&lt;/div><br />
+<br />
+&lt;/fieldset><br />
+<br />
+&lt;/td><br />
+&lt;/tr><br />
+&lt;/table><br />
+<br />
+&lt;table cellpadding='4' cellspacing='6' border='0' width='100%'>    <br />
+&lt;tr><br />
+&lt;td valign="top" width="50%"><br />
+<br />
+&lt;table cellpadding='0' cellspacing='0' border='0'><br />
+&lt;tr><br />
+&lt;td valign="top"><br />
+<br />
+&lt;div class="defaultBold">{lang:weblogs}&lt;/div><br />
+<br />
+	&lt;select id="weblog_id" name='weblog_id[]' class='multiselect' size='12' multiple='multiple' onchange='changemenu(this.selectedIndex);'><br />
+		{weblog_names}<br />
+	&lt;/select><br />
+<br />
+&lt;/td><br />
+&lt;td valign="top" width="16">&amp;nbsp;&lt;/td><br />
+&lt;td valign="top"><br />
+<br />
+&lt;div class="defaultBold">{lang:categories}&lt;/div><br />
+<br />
+	&lt;select name='cat_id[]' size='12'  class='multiselect' multiple='multiple'><br />
+		&lt;option value='all' selected="selected">{lang:any_category}&lt;/option><br />
+	&lt;/select><br />
+<br />
+&lt;/td><br />
+&lt;/tr><br />
+&lt;/table><br />
+<br />
+&lt;/td><br />
+&lt;td valign="top" width="50%"><br />
+<br />
+&lt;fieldset class="fieldset"><br />
+	&lt;legend>{lang:search_entries_from}&lt;/legend><br />
+<br />
+	&lt;select name="date" style="width:150px"><br />
+		&lt;option value="0" selected="selected">{lang:any_date}&lt;/option><br />
+		&lt;option value="1" >{lang:today_and}&lt;/option><br />
+		&lt;option value="7" >{lang:this_week_and}&lt;/option><br />
+		&lt;option value="30" >{lang:one_month_ago_and}&lt;/option><br />
+		&lt;option value="90" >{lang:three_months_ago_and}&lt;/option><br />
+		&lt;option value="180" >{lang:six_months_ago_and}&lt;/option><br />
+		&lt;option value="365" >{lang:one_year_ago_and}&lt;/option><br />
+	&lt;/select><br />
+<br />
+&lt;div class="default"><br />
+	&lt;input type='radio' name='date_order' value='newer' class='radio' checked="checked" />&amp;nbsp;{lang:newer}<br />
+	&lt;input type='radio' name='date_order' value='older' class='radio' />&amp;nbsp;{lang:older}<br />
+&lt;/div><br />
+<br />
+&lt;/fieldset><br />
+<br />
+&lt;div class="default">&lt;br />&lt;/div><br />
+<br />
+&lt;fieldset class="fieldset"><br />
+	&lt;legend>{lang:sort_results_by}&lt;/legend><br />
+<br />
+	&lt;select name="orderby"><br />
+		&lt;option value="date" >{lang:date}&lt;/option><br />
+		&lt;option value="title" >{lang:title}&lt;/option><br />
+		&lt;option value="most_comments" >{lang:most_comments}&lt;/option><br />
+		&lt;option value="recent_comment" >{lang:recent_comment}&lt;/option><br />
+	&lt;/select><br />
+<br />
+&lt;div class="default"><br />
+	&lt;input type='radio' name='sort_order' class="radio" value='desc' checked="checked" /> {lang:descending}<br />
+	&lt;input type='radio' name='sort_order' class="radio" value='asc' /> {lang:ascending}<br />
+&lt;/div><br />
+<br />
+&lt;/td><br />
+&lt;/tr><br />
+&lt;/table><br />
+<br />
+&lt;/td><br />
+&lt;/tr><br />
+&lt;/table><br />
+<br />
+&lt;div class='searchSubmit'><br />
+	&lt;input type='submit' value='Search' class='submit' /><br />
+&lt;/div><br />
+<br />
+{/exp:search:advanced_form}</code>
+
+
+
+	<h2><a name="results">Search Results</a></h2>
+
+	<p>The <a href="results.html">Search Results</a> tag controls how you display results from your searches.  Example:</p>
+
+	<code>&lt;table border="0" cellpadding="6" cellspacing="1" width="100%"><br />
+&lt;tr><br />
+&lt;th>{lang:title}&lt;/th><br />
+&lt;th>{lang:excerpt}&lt;/th><br />
+&lt;th>{lang:author}&lt;/th><br />
+&lt;th>{lang:date}&lt;/th><br />
+&lt;th>{lang:total_comments}&lt;/th><br />
+&lt;th>{lang:recent_comments}&lt;/th><br />
+&lt;/tr><br />
+<br />
+{exp:search:search_results switch="resultRowOne|resultRowTwo"}<br />
+<br />
+&lt;tr class="{switch}"><br />
+&lt;td width="30%" valign="top">&lt;b>&lt;a href="{auto_path}">{title}&lt;/a>&lt;/b>&lt;/td><br />
+&lt;td width="30%" valign="top">{excerpt}&lt;/td><br />
+&lt;td width="10%" valign="top">&lt;a href="{member_path='member/index'}">{author}&lt;/a>&lt;/td><br />
+&lt;td width="10%" valign="top">{entry_date format="%m/%d/%y"}&lt;/td><br />
+&lt;td width="10%" valign="top">{comment_total}&lt;/td><br />
+&lt;td width="10%" valign="top">{recent_comment_date format="%m/%d/%y"}&lt;/td><br />
+&lt;/tr><br />
+<br />
+{/exp:search:search_results}<br />
+<br />
+&lt;/table><br />
+<br />
+{if paginate}<br />
+<br />
+&lt;div class='paginate'><br />
+<br />
+&lt;span class='pagecount'>{page_count}&lt;/span>&amp;nbsp; {paginate}<br />
+<br />
+&lt;/div><br />
+<br />
+{/if}<br /></code>
+
+
+
+	<h2><a name="syntax">Search Syntax</a></h2>
+
+	<p>In addition to the options you have available for selection on the Advanced Search Form, you can also narrow down your searches by using special syntax with in the search keyword field.</p>
+
+	<ul>
+		<li>To search for a phrase, place the words inside double quotes. e.g. <samp>"Lance Armstrong"</samp></li>
+		<li>To search for entries without certain words or phrases, place a negative sign ("-") before it.  e.g. <samp>"Lance Armstrong" -charity</samp></li>
+	</ul>
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

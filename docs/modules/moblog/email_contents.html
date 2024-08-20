@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Submitting Content Via Email &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Moblog</a> &gt;
+<strong>Submitting Content via Email</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Submitting Content Via Email</h1>
+
+	<p>This page describes the possible syntax you can use in the body of your Moblog emails.  In addition to the regular body text of the email (and the file/image attachment) you can specify several values that can override the defaults selected for your Moblog in the Control Panel.</p>
+
+	<p>These overrides are placed in the body of the email on their own lines.  The overrides should normally be placed at the top of the email before your actual body content.  Most of the overrides have multiple possible syntaxes in order to give a choice in how to enter them to make it easier.</p>
+
+	<p>There are two different types of moblogs available &#8212; "weblog" and "gallery" &#8212; and each one has different ways in which you can override your default values.</p>
+
+	<ul>
+		<li><a href="#weblog_overrides">"Weblog" Overrides</a></li>
+		<li><a href="#gallery_overrides">"Gallery" Overrides</a></li>
+	</ul>
+
+
+	<h2><a name="weblog_overrides">"Weblog" Overrides</h2>
+
+	<p>In most cases, your email body will simply be whatever text you want to submit along with your file:</p>
+
+	<code>Here's a quick picture of the train station this morning on the way to work.  Notice the guy selling flowers?  He's been there every morning like clockwork for the last 2 years.  He's always cheerful and actually has some pretty nice flowers.</code>
+
+	<p>Here is a more complicated example that uses some of the "overrides":</p>
+
+	<code>AUTH:johnsmith:mysecretword<br />
+{category}3,6{/category}<br />
+<br />
+{field:body format="xhtml"}Here's a quick picture of the train station this morning on the way to work.  Notice the guy selling flowers?  He's been there every morning like clockwork for the last 2 years.  He's always cheerful and actually has some pretty nice flowers.{/field:body}<br />
+<br />
+{field:location format="none"}Train Station{/field:location}</code>
+
+	<p>Available overrides:</p>
+
+	<ul class="minitoc">
+		<li><a href="#var_category">category</a></li>
+		<li><a href="#var_entry_title">entry_title</a></li>
+		<li><a href="#var_field">field:entry_body</a></li>
+		<li><a href="#var_file_archive">file_archive</a></li>
+		<li><a href="#var_status">status</a></li>
+		<li><a href="#var_sticky">sticky</a></li>
+		<li><a href="#var_auth">User Authorization</a></li>
+	</ul>
+
+
+	<h3><a name="var_category">category</a></h3>
+
+		<code>{category}3,News,7{/category}</code>
+		<code>&lt;category>3,News,7&lt;/category></code>
+
+		<p>You may override the default category selection and specify your own.  You may specify either the category ID (the number) or the text name of the category.  Multiple categories can be separated by commas (<samp>,</samp>), colons (<samp>:</samp>), or the pipe character (<samp>|</samp>).</p>
+
+		<p>The category override can be defined using either braces ({category}{/category}) or angle brackets (&lt;category>&lt;/category>).</p>
+
+
+	<h3><a name="var_entry_title">entry_title</a></h3>
+
+		<code>{entry_title}My Unique Title{/entry_title}</code>
+		<code>&lt;entry_title>My Unique Title&lt;/entry_title></code>
+
+		<p>You may override the standard entry title (which is determined from the subject of the email) and specify your own.  The entry title override can be defined using either braces ({entry_title}{/entry_title}) or angle brackets (&lt;entry_title>&lt;/entry_title>).</p>
+
+
+	<h3><a name="var_field">field</a></h3>
+
+		<code>{field:entry_body}food_images{/field:entry_body}</code>
+		<code>&lt;field:entry_body>Food Images&lt;/field:entry_body></code>
+
+		<p>You may override the default field into which the contents will be placed and specify your own.  You must specify into which field the text should be placed and you may also specify more than one field.  For instance, if you want some text placed in the "body" field and other text placed in the "summary" field then you could use:</p>
+
+		<code>{field:body}This is the body text.{/field:body}<br />
+<br />
+{field:summary}This is a summary.{/field:summary}</code>
+
+		<p>Furthermore, you may specify the formatting to use for the field by adding a <samp>format</samp> parameter to the tag.  For instance:</p>
+
+		<code>{field:body format="xhtml"}This is the body text.{/field:body}</code>
+
+		<p>Available choices for the <samp>format</samp> parameter are:</p>
+
+		<ul>
+			<li><b>none</b>: sets the field to use no formatting</li>
+			<li><b>br</b>: sets the field to use "Auto &lt;br />" formatting</li>
+			<li><b>xhtml</b>: sets the field to use "XHTML" formatting.</li>
+			<li>If you have set up your entry field to use a particular Plugin for formatting then you may also specify that Plugin by name here.</li>
+		</ul>
+
+		<p>The field override can be defined using either braces ({field}{/field}) or angle brackets (&lt;field>&lt;/field>).</p>
+
+		<p class="important">You may only specify a field that is of the "textarea" type here.  You cannot specify "text input" or "drop-down list" fields.</p>
+
+
+	<h3><a name="var_file_archive">file_archive</a></h3>
+
+		<code>{file_archive}yes{/file_archive}</code>
+		<code>&lt;file_archive>yes&lt;/file_archive></code>
+
+		<p>You may override the default file archive setting for the entry and specify manually that this email is a file archive (i.e. you are simply uploading a file and no corresponding entry should be made).  Simply use either <samp>yes</samp>, <samp>true</samp>, or <samp>1</samp> to indicate that only the files of this email should be uploaded. Alternatively, use <samp>no</samp>, <samp>false</samp>, or <samp>0</samp> to indicate that an entry should be created using this email.</p>
+
+		<p>The file archive override can be defined using either braces ({file_archive}{/file_archive}) or angle brackets (&lt;file_archive>&lt;/file_archive>).</p>
+
+
+	<h3><a name="var_status">status</a></h3>
+
+		<code>{status}pending{/status}</code>
+		<code>&lt;status>Closed&lt;/status></code>
+
+		<p>You may override the default status for the entry and specify your own.  Simply use the name of the status.</p>
+
+		<p>The status override can be defined using either braces ({status}{/status}) or angle brackets (&lt;status>&lt;/status>).</p>
+
+
+	<h3><a name="var_sticky">sticky</a></h3>
+
+		<code>{sticky}yes{/sticky}</code>
+		<code>&lt;sticky>no&lt;/sticky></code>
+
+		<p>You may override the default "sticky" setting for the entry and specify your own.  Simply use the name of the status.</p>
+
+		<p>The sticky override can be defined using either braces ({sticky}{/sticky}) or angle brackets (&lt;sticky>&lt;/sticky>).</p>
+
+
+	<h3><a name="var_auth">User Authorization</a></h3>
+
+		<code>AUTH:johnsmith:mysecretword</code>
+
+		<p>You may override the default author for the entry and specify your own author.  The syntax for this override is different from the others and follows the guide: <samp>AUTH:theusername:thepassword</samp>.  "theusername" should be replaced by the username of the desired member and "thepassword" should be replaced by their password.</p>
+
+		<p class="important">Place this authorization line as the first line in your email</p>
+
+		<p>Note that if you have the <dfn>Authorization Required in Email?</dfn> option turned on for this Moblog in the Control Panel then you <strong>must</strong> include this user authorization.  If you do not include it or if the authorization fails, the entry will not be posted.  The <dfn>Delete Unauthorized Moblog Emails?</dfn> setting will determine whether or not the email is deleted from the server in these cases.</p>
+
+		<p>Further, note that the member account being used must be part of a Member Group that has permission to post entries to this weblog.</p>
+
+
+
+	<h2><a name="gallery_overrides">"Gallery" Overrides</h2>
+
+	<p>In most cases, your email body will simply be whatever text you want to submit along with your file:</p>
+
+	<code>Here's a quick picture of the train station this morning on the way to work.  Notice the guy selling flowers?  He's been there every morning like clockwork for the last 2 years.  He's always cheerful and actually has some pretty nice flowers.</code>
+
+	<p>Here is a more complicated example that uses some of the "overrides":</p>
+
+	<code>AUTH:johnsmith:mysecretword<br />
+{category}6{/category}<br />
+<br />
+{caption}Here's a quick picture of the train station this morning on the way to work.  Notice the guy selling flowers?  He's been there every morning like clockwork for the last 2 years.  He's always cheerful and actually has some pretty nice flowers.{/caption}</code>
+
+	<p>Available overrides:</p>
+
+	<ul class="minitoc">
+		<li><a href="#var_gallery_caption">caption</a></li>
+		<li><a href="#var_gallery_category">category</a></li>
+		<li><a href="#var_gallery_entry_title">entry_title</a></li>
+		<li><a href="#var_gallery_status">status</a></li>
+		<li><a href="#var_gallery_auth">User Authorization</a></li>
+	</ul>
+
+
+	<h3><a name="var_gallery_caption">caption</a></h3>
+
+		<code>{caption}A beautiful picture of the church across the street.{/caption}</code>
+		<code>&lt;caption>Isn't my cat, Tinkerbell, just adorable?&lt;/caption></code>
+
+		<p>You may specify the caption text to use with your gallery image.  The field override can be defined using either braces ({caption}{/caption}) or angle brackets (&lt;caption>&lt;/caption>).</p>
+
+
+	<h3><a name="var_gallery_category">category</a></h3>
+
+		<code>{category}7{/category}</code>
+		<code>&lt;category>News&lt;/category></code>
+
+		<p>You may override the default category selection and specify your own.  You may specify either the category ID (the number) or the text name of the category.  You may only specify a <strong>single</strong> category; specifying multiple categories will cause failure.</p>
+
+		<p>The category override can be defined using either braces ({category}{/category}) or angle brackets (&lt;category>&lt;/category>).</p>
+
+
+	<h3><a name="var_gallery_entry_title">entry_title</a></h3>
+
+		<code>{entry_title}My Unique Title{/entry_title}</code>
+		<code>&lt;entry_title>My Unique Title&lt;/entry_title></code>
+
+		<p>You may override the standard entry title (which is determined from the subject of the email) and specify your own.  The entry title override can be defined using either braces ({entry_title}{/entry_title}) or angle brackets (&lt;entry_title>&lt;/entry_title>).</p>
+
+
+	<h3><a name="var_gallery_status">status</a></h3>
+
+		<code>{status}open{/status}</code>
+		<code>&lt;status>closed&lt;/status></code>
+
+		<p>You may override the default status for the entry and specify your own.  Simply use the name of the status, either "open" or "closed".  The status override can be defined using either braces ({status}{/status}) or angle brackets (&lt;status>&lt;/status>).</p>
+
+
+	<h3><a name="var_gallery_auth">User Authorization</a></h3>
+
+		<code>AUTH:johnsmith:mysecretword</code>
+
+		<p>You may override the default author for the entry and specify your own author.  The syntax for this override is different from the others and follows the guide: <samp>AUTH:theusername:thepassword</samp>.  "theusername" should be replaced by the username of the desired member and "thepassword" should be replaced by their password.</p>
+
+		<p class="important">Place this authorization line as the first line in your email</p>
+
+		<p>Note that if you have the <dfn>Authorization Required in Email?</dfn> option turned on for this Moblog in the Control Panel then you <strong>must</strong> include this user authorization.  If you do not include it or if the authorization fails, the entry will not be posted.  The <dfn>Delete Unauthorized Moblog Emails?</dfn> setting will determine whether or not the email is deleted from the server in these cases.</p>
+
+		<p>Further, note that the member account being used must be part of a Member Group that has permission to post entries to this gallery and thus must have access to the Photo Gallery Module.</p>
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Photo Gallery Module Installation &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Photo Gallery</a> &gt;
+<strong>Photo Gallery Module Installation</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Photo Gallery Module Installation and Configuration</h1>	
+
+	<h2>Installing the Gallery Module</h2>
+
+		<p>The Photo Gallery comes bundled with ExpressionEngine and ready to be installed.  In your Control Panel, click the <dfn>Modules</dfn> tab.  On the right side of the table, click the <dfn>Install</dfn> link corresponding to the Photo Gallery Module.  This will install the necessary components for the gallery.</p>
+
+
+	<h2>Configuring Your Gallery</h2>
+
+	<p>When you access your Photo Gallery control panel for the first time (via the Modules page) you will be prompted to configure your gallery preferences with the following three steps:</p>
+
+	<h3>Step 1: Create a Folder for your Images</h3>
+
+	<p>Using your FTP program, create a folder on your server for your images.  A good location is within your main "images" folder, but feel free to put it wherever you want.&nbsp; Once you have created the folder you must set its file permissions to <kbd>777</kbd> so that the Photo Gallery program will be allowed to put images into it.</p>
+
+	<p class="important">Note: You will need to determine the <em>full server path</em> to your new image folder so that it can be saved in your gallery preferences.  If you are not sure how to determine the full server path please contact your hosting provider and ask them.</p>
+
+	<h3>Step 2: Choose a Name for your Templates</h3>
+
+	<p>During configuration, the Photo Gallery script will add a set of default templates.  You'll be asked to choose a name for your templates</p>
+
+	<h3>Step 3: Configure your Preferences</h3>
+	
+	<p>Although the Photo Gallery supports dozens of preferences you only need to initially update the following six items:</p>
+	
+	<ol>
+		<li><strong>Photo Gallery Name</strong>&nbsp; Choose a name for your gallery.</li>
+		<li><strong>Photo Gallery Short Name</strong>&nbsp; Choose a single word (no spaces).  This "short name" is used to reference your gallery in the various ExpressionEngine Tags in your gallery templates.</li>
+		<li><strong>Photo Gallery URL</strong>&nbsp; The full URL to your gallery.</li>
+
+		<li><strong>Image Folder Name</strong>&nbsp; The name of the folder you uploaded in step 1.</li>
+		<li><strong>Server Path to Image Folder</strong>&nbsp; The full server path to the folder, as indicated in step 1.</li>
+		<li><strong>URL to Image Folder</strong>&nbsp; The URL to your image folder, in this format:  http://example.com/image_folder_name/</li>
+	</ol>
+	
+	<p>Once you have updated the above items, click the <kbd>submit</kbd> button at the bottom of the page.</p>	
+
+	<h3>Step 4: Add Categories</h3>
+
+	<p>Before you can add photos to your gallery you must create at least one category so your photos can be assigned to it.</p>
+	
+	<p>Click the <kbd>Categories</kbd> tab at the top of the gallery module to add a new category. Repeat this process for each category you would like to create.</p>
+
+	<h2>You are now ready to begin adding content!</h2>
+	
+	<p>You may now click the <kbd>New Entry</kbd> tab to add photos to your Photo Gallery!</p>
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

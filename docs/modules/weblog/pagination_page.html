@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Weblog Entry and Comment Pagination &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Weblog Module</a> &gt;
+<strong>Entry and Comment Pagination</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Weblog Entry and Comment Pagination</h1>
+
+	<p>The pagination feature for both <b>weblog entries</b> and <b>comments</b> works identically and allows you to display a limited number of entries and then automatically link to the next set.  That way you can, for example, show comments 1-10 on the first page and automatically link to pages that display 11-20, 21-30, etc.</p>
+
+	<p>You have two choices as to the style of the navigation element.  The first method would look something like this:</p>
+
+	<code>Page 27 of 344 pages  <a href="#">&laquo; First</a>  <a href="#">&lt;</a>  <a href="#">11</a> <a href="#">12</a> <b>13</b> <a href="#">14</a> <a href="#">15</a> <a href="#">&gt;</a>  <a href="#">Last &raquo;</a></code>
+
+	<p>The second method is a more traditional "next page" / "previous page" output:</p>
+
+	<code><a href="#">Previous Page</a> | <a href="#">Next Page</a></code>
+
+	<p>Pagination will also automatically restrict itself to any category you're currently viewing.  So if you have a category specified in your weblog entries tag or you are viewing the entries of a category, then the pagination links will automatically restrict themselves to only entries in that category.</p>
+
+
+
+	<h2>Example Code</h2>
+
+	<p>Here are two basic code examples, one for each of the methods mentioned above.  Information about the variables and parameters are covered later.</p>
+
+	<code>{exp:weblog:entries weblog="news" orderby="date" sort="desc" limit="1" paginate="bottom"}<br />
+	<br />
+&lt;h2>{title}&lt;/h2><br />
+<br />
+{summary}<br />
+<br />
+{body}<br />
+<br />
+{paginate}<br />
+&lt;p>Page {current_page} of {total_pages} pages {pagination_links}&lt;/p><br />
+{/paginate}<br />
+<br />
+{/exp:weblog:entries}</code>
+
+	<p class="important">It is important to note that it does <strong>not</strong> matter where you put your <samp>{paginate}</samp> code within the weblog entries tag.  The pagination code will be "stripped out" of the regular output and placed in the appropriate location according to what you specify with the <samp>paginate=</samp> parameter (detailed below).</p>
+
+	<p>And for the "next/previous" method:</p>
+
+	<code>{exp:comment:entries weblog="news" sort="desc" limit="1" paginate="bottom"}<br />
+	<br />
+{comment}<br />
+<br />
+&lt;p>By {name} on {comment_date format="%Y %m %d"}&lt;/p><br />
+<br />
+{paginate}<br />
+<br />
+{if previous_page}<br />
+&lt;a href="{auto_path}">Previous Page&lt;/a> &amp;nbsp;<br />
+{/if}<br />
+<br />
+{if next_page}<br />
+&lt;a href="{auto_path}">Next Page&lt;/a><br />
+{/if}<br />
+<br />
+{/paginate}<br />
+<br />
+{/exp:comment:entries}</code>
+
+
+
+	<h2>Parameters</h2>
+
+	<ul class="minitoc">
+		<li><a href="#par_paginate">paginate="bottom"</a></li>
+	</ul>
+
+
+	<h3><a name="par_paginate">paginate=</a></h3>
+
+		<code>paginate="top"</code>
+		<code>paginate="bottom"</code>
+		<code>paginate="both"</code>
+
+		<p>This parameter determines where the pagination code will appear for your weblog entries or comments:</p>
+
+		<ol>
+			<li><b>top</b>: The navigation text and links will appear <em>above</em> your list of entries.</li>
+			<li><b>bottom</b>: The navigation text and links will appear <em>below</em> your list of entries.</li>
+			<li><b>both</b>: The navigation text and links will appear both above and below your list of entries.</li>
+		</ol>
+
+		<p>If no parameter is specified, the navigation block will default to the "bottom" behaviour.</p>
+
+
+
+	<h2>Variable Pairs</h2>
+
+	<ul class="minitoc">
+		<li><a href="#var_paginate">{paginate}</a></li>
+		<li><a href="#var_if_next_page">{if next_page}</a></li>
+		<li><a href="#var_if_previous_page">{if previous_page}</a></li>
+	</ul>
+
+
+	<h3><a name="var_paginate">paginate</a></h3>
+
+		<code>{paginate}<br />
+<br />
+{/paginate}</code>
+
+		<p>The opening and closing tags for pagination.  This can to be used in conjunction with the <samp><a href="#par_paginate">paginate=</a></samp> parameter to determine where the contents of this tag will appear.  See below for the available variables for use inside this tag. This tag is wrapped around either the single variables (see below) or the next/previous variable pairs.</p>
+
+
+	<h3><a name="var_if_next_page">if next_page</a></h3>
+
+		<code>{if next_page}<br />
+<br />
+{/if}</code>
+
+		<p>This tag will conditionally display the code inside the tag if there is a "next" page.  If there is no next page then the content simply will not be displayed.</p>
+
+
+	<h3><a name="var_if_previous_page">if previous_page</a></h3>
+
+		<code>{if previous_page}<br />
+<br />
+{/if}</code>
+
+		<p>This tag will conditionally display the code inside the tag if there is a "previous" page.  If there is no previous page then the content simply will not be displayed.</p>
+
+
+
+	<h2>Variables</h2>
+
+	<ul class="minitoc">
+		<li><a href="#var_auto_path">{auto_path}</a></li>
+		<li><a href="#var_current_page">{current_page}</a></li>
+		<li><a href="#var_pagination_links">{pagination_links}</a></li>
+		<li><a href="#var_total_pages">{total_pages}</a></li>
+	</ul>
+
+	<p>These individual variables are for use inside the <samp><a href="#var_paginate">{paginate}</a></samp> tag pair.</p>
+
+
+	<h3><a name="var_auto_path">auto_path</a></h3>
+
+		<code>{auto_path}</code>
+
+		<p>The <samp>{auto_path}</samp> variable is used inside of the <samp><a href="#var_if_next_page">{if next_page}</a></samp> and <samp><a href="#var_if_previous_page">{if previous_page}</a></samp> variable pairs.  It is dynamically replaced with the correct path to the next/previous page.  Unlike other "path" variables, this variable does <strong>not</strong> require the Template_Group/Template to be specified.</p>
+
+
+	<h3><a name="var_current_page">current_page</a></h3>
+
+		<code>{current_page}</code>
+
+		<p>This variable is replaced by the page number of the current page you are viewing.</p>
+
+
+	<h3><a name="var_pagination_links">pagination_links</a></h3>
+
+		<code>{pagination_links}</code>
+
+		<p>The dynamically created pagination links.  These show the current page you are on as well as "surrounding" pages in addition to links for nex/previous pages and first/last pages.  The output of the variable looks similar to this:</p>
+
+		<code><a href="#">&laquo; First</a>  <a href="#">&lt;</a>  <a href="#">11</a> <a href="#">12</a> <b>13</b> <a href="#">14</a> <a href="#">15</a> <a href="#">&gt;</a>  <a href="#">Last &raquo;</a></code>
+
+
+	<h3><a name="var_total_pages">total_pages</a></h3>
+
+		<code>{total_pages}</code>
+
+		<p>The total number of pages of weblog entries or comments you have.</p>
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Login Form Tag &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Member Management</a> &gt;
+<strong>Login Form Tag</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Login Form Tag</h1>
+
+	<p>The <kbd>Login Form Tag</kbd> allows you to <em>optionally</em> place a login form in any template you choose, so that site members can log in.</p>
+	
+	<p><b>Note:</b>&nbsp; The member profile area has its own login form, which appears when someone who is not logged in tries to access a member's only area.</p>
+
+	<p>Here is an example showing how you might use the tag:</p>
+
+	<code>{exp:member:login_form return="site/index"}<br />
+<br />
+	&lt;p>&lt;label>Username&lt;/label>&lt;br /><br />
+	&lt;input type="text" name="username" value=""  maxlength="32" class="input" size="25" />&lt;/p><br />
+<br />
+		&lt;p>&lt;label>Password&lt;/label>&lt;br /><br />
+	&lt;input type="password" name="password" value="" maxlength="32" class="input" size="25" />&lt;/p><br />
+<br />
+	{if auto_login}<br />
+	&lt;p>&lt;input class='checkbox' type='checkbox' name='auto_login' value='1'  /> Auto-login on future visits&lt;/p><br />
+	{/if}<br />
+<br />
+	&lt;p>&lt;input class='checkbox' type='checkbox' name='anon' value='1'
+	checked='checked' />  Show my name in the online users list&lt;/p><br />
+<br />
+	&lt;p>&lt;input type="submit" name="submit" value="Submit" />&lt;/p><br />
+<br />
+	&lt;p>&lt;a href="{path='member/forgot_password'}">Forgot your password?&lt;/a>&lt;/p><br />
+<br />
+{/exp:member:login_form}</code>
+
+
+
+	<h2>Parameters</h2>
+
+	<h3>id=</h3>
+
+		<code>id="login_form"</code>
+
+		<p>This parameter allows you to specify the id attribute for the &lt;form> tag:</p>
+
+	<h3>name=</h3>
+
+		<code>name="login_form"</code>
+
+		<p>This parameter allows you to specify a name attribute for the &lt;form> tag:</p>
+
+	<h3>return=</h3>
+
+		<code>return="site/index"</code>
+
+		<p>This parameter allows you to define where the user will be returned after successfully logging in.  The parameter can be defined in two ways:</p>
+
+		<ol>
+			<li>Use the standard Template_Group/Template syntax to specify where to return the user.  For instance, if you want the user to be returned to the "local" Template in the "news" Template Group, you would use: <samp>return="news/local"</samp></li>
+			<li>Use a full URL.  For example: <samp>return="http://example.com/return.html"</samp></li>
+		</ol>
+
+		<p>Note that it is also possible to use this parameter on the login form under <dfn>Admin &gt; Member Profile Templates</dfn>, as a parameter of the <kbd>{form_declaration}</kbd> variable:</p>
+		
+		<code>{form_declaration return="site/index"}</code>
+
+
+
+
+	<h2>Variables</h2>
+
+	<h3>{if auto_login}</h3>
+
+		<code>{if auto_login} {/if}</code>
+
+		<p>It is recommended that you use this variable as indicated in the example code at the top.  This conditional will display the contents inside (typically the "stay logged in" checkbox) based on how your session preference is set.  In order for this feature to work you must be set to use "cookies only" and not sessions.</p>
+
+		<code>{if auto_login}<br />
+	&lt;p>&lt;input class='checkbox' type='checkbox' name='auto_login' value='1'  /> Auto-login on future visits&lt;/p><br />
+{/if}</code>
+
+
+
+	<h2>Logging Out</h2>
+
+	<p>You can easily create a logout link using the <samp>{path='LOGOUT'}</samp> variable.  For example:</p>
+
+	<code>&lt;a href="{path='LOGOUT'}">Log out&lt;/a></code>
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

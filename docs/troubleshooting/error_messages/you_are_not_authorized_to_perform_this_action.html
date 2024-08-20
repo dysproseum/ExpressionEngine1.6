@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"> 
+<head> 
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
+ 
+  <title>Troubleshooting &#8211; ExpressionEngine Documentation</title> 
+ 
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" /> 
+  <link rel="contents" href="./index.html" /> 
+  <style type="text/css" media="screen,print">@import url(./../../docs.css);</style> 
+</head> 
+ 
+<body> 
+<div><a name="top"></a></div> 
+ 
+<div id="header"> 
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr> 
+<td class="docheading" style="width:300px;"><a href="index.html"><img src="./../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td> 
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td> 
+</tr> 
+</table> 
+</div> 
+ 
+<div id="navlinks"> 
+<a href="../../index.html">Table of Contents</a> &gt; 
+<a href="../index.html">Troubleshooting</a> &gt; 
+<strong>You are not authorized to perform this action</strong> 
+</div> 
+ 
+ 
+<div id="content"> 
+ 
+	<h1>You are not authorized to perform this action</h1> 
+ 
+	<p class="ts_desc">When accessing certain locations within the control panel 
+	ExpressionEngine returns the following error message: "<strong>You are not authorized to perform this action".</strong></p>
+	
+	<h2>Troubleshooting Authorization Issues</h2> 
+
+<h3>Logging into the Control Panel</h3>
+
+<p>Only members of the "Superadmin" Member Group can access the Control Panel under all circumstances. Users belonging to other groups need to have appropriate group permissions to access the Control Panel. By default, ExpressionEngine expects user's browsers to send a <strong>valid IP address</strong> and <strong>User Agent information</strong>. This is meant to help prevent hacking attempts. Some firewalls and other third-party software installed on the user's computer might block this information.</p>
+
+<p>This requirement can be disabled:</p>
+
+<ul>
+	<li>If the Control Panel can be accessed, it is possible to simply turn off the "<strong>Require IP Address and User Agent for Login?</strong>" and "<strong>Require IP Address and User Agent when receiving comments?</strong>" settings in <dfn>Admin › Security and Session Preferences</dfn>.</li>
+
+	<li>The settings can also be overridden by adding the following line to the <strong>config.php</strong> file:
+
+		<code>
+		$conf['require_ip_for_login'] = "n";
+		</code>
+	</li>
+</ul>
+<h3>Banned or Blacklisted Users</h3>
+
+<p>This error will also occur for users that have been banned, or are being blocked by the <strong>Blacklist</strong>. It is possible to block particular <strong>User Agents</strong> or <strong>domain names</strong> under <dfn>Modules › Blacklist/Whitelist</dfn> in the Control Panel and specific <strong>IP addresses</strong> under <dfn>Admin › User Banning.</dfn></p>
+	
+</div>
+	
+<p class="center"><a href="#top">Top of Page</a></p> 
+ 
+<!-- {user_guide_comments} --> 
+ 
+<div id="footer"> 
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address> 
+</div> 
+ 
+</body> 
+</html>

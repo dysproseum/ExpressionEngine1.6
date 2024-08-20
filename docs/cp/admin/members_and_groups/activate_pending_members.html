@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Activate Pending Members &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" name="../../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../../index.html"><img src="../../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../../index.html">Table of Contents</a> &gt;
+<a href="../../../index.html#cp_docs">The Control Panel</a> &gt;
+<a href="../index.html">Admin</a> &gt;
+<a href="index.html">Members and Groups</a> &gt;
+<strong>Activate Pending Members</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Activate Pending Members</h1>
+
+	<div class="path">Control Panel Location:&nbsp; <dfn>Admin &gt; Members and Groups &gt; Activate Pending Members</dfn></div>	
+
+
+	<p>The <dfn>Activate Pending Members</dfn> section of the Control Panel allows you to activate any members that have registered and are pending activation.</p>
+	
+
+	<div class="imgwrapper"><img src="../../../images/activate_members.png" width="589" height="179" alt="Activate Members Page" border="0" /></div>
+
+
+	<h3>Why Are Members Pending?</h3>
+	<p>There are two circumstances under which a member might be considered "pending":</p>
+	
+	<ol>
+		<li>The user has not activated their account by clicking the link in the "activation email" they were sent upon registering. Normally, when someone registers for a membership account, the system sends them an email containing a special link that must be clicked in order to activate their account. If they have not clicked the link their account will remain as <em>pending</em>, which means they won't be able to log-in or utilize member's only aspects of your site.  You may disable "self-activation" or change it to "admin activation" at:
+			<p class="leftpad"><dfn>Admin &gt; Members and Groups &gt; Membership Preferences</dfn></p>
+		
+		</li>
+	
+		<li>Your site requires Admin activation.  You may optionally set up your membership system to require that an administrator manually review and activate membership accounts manually at:
+			<p class="leftpad"><dfn>Admin &gt; Members and Groups &gt; Membership Preferences</dfn></p>
+
+		</li>
+	</ol>
+	
+	<h3>Activate/Delete Selected Members</h3>
+
+	<p>The pull-down menu at the bottom of the activation page allows you to either activate or delete members you have selected using the checkboxes on the right. When a member is <em>activated</em> what you are really doing is changing the Member Group they are assigned to.  By default ExpressionEngine uses the <dfn>Members</dfn> group for activation but you can set a different group for this purpose at:</p>
+		<p class="leftpad"><dfn>Admin &gt; Members and Groups &gt; Membership Preferences</dfn></p>
+
+	<h3>Send Email Notification</h3>
+
+	<p>The checkbox at the bottom of the page causes one of two emails to be sent, informing the user of your decision, based on whether you are activating or deleting the account.  Each of the two emails is stored as a template, which can be edited in the Specialty Templates area of the Control Panel, located here:</p>
+		<p class="leftpad"><dfn>Admin &gt; Email Notification Templates &gt; Email Notification Templates</dfn></p>
+	
+	<p>The two templates are:</p>
+	
+	<ol>
+		<li>Member Account Validation Notification</li>
+		<li>Member Account Decline Notification</li>
+	</ol>
+
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address><div class="validation"><a name="http://validator.w3.org/check/referer" title="Validate XHTML">XHTML</a> | <a name="http://jigsaw.w3.org/css-validator/check/referer" title="Validate CSS">CSS</a></div>
+</div>
+
+</body>
+</html>

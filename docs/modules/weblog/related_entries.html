@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Relating Entries &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Weblog Module</a> &gt;
+<strong>Relationships</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Relating Entries to Other Entries<div class="subhead">Creating Data Relationships for Increased Power</div></h1>
+
+	<p>ExpressionEngine allows you to create relationships between entries in different weblogs, or between weblog entries and Gallery entries.</p>
+	
+	
+	<h2>Why would you relate entries to other entries?</h2>
+	
+	<h4>Here is an example to illustrate why someone would want to create relationships between entries.</h4>
+	
+	<h3>The Night Club Owner</h3>
+
+	<p>Imagine that you run a night club in which different musical artists perform nightly.  To help promote your club
+	you decide to create an ExpressionEngine weblog to display information about each night's events.</p>
+	
+	<p>Each day you submit a new entry with information about a particular night's performances.  You also include detailed information about each performer (names, bio, discography, etc.), but since many of the performers appear regularly at your 
+	club, over time you end up with a lot of duplicated information in your entries. And if a piece of information about a performer changes
+	you have to updated it in every entry that mentions them. Before long you realize that this is not very efficient.</p>
+	
+	<p>If only you could maintain a second weblog in which you store only
+	information about each performer, and then connect it somehow to the main weblog so that you would never
+	have to duplicate information.  Guess what?  You can with <em>relationships</em>.</p>
+	
+	<p>In the above scenario, your primary weblog (let's call the weblog <dfn>Events</dfn>) would contain only information that is unique about a particular night, like the date, time, any special pricing, etc., and the second weblog (let's call the weblog <dfn>Performers</dfn>) would contain only information about each performer.  You would then dynamically pull information from each performer into the appropriate <em>Events</em> weblog.  To your site visitors the information appears just like a normal weblog entry, but internally, ExpressionEngine is pulling information from one entry and showing it within another.</p>
+	
+	<p>The following graphic illustrates the concept.  The "events" weblog on the left is showing information from the "performers" weblog on the right.
+	Only a <em>relationship</em> exists between the entries.  The data itself is never duplicated.
+	</p> 
+	
+	<div class="imgwrapper"><img src="../../images/related_entries.gif" width="508" height="343" border="0" /></div>
+		
+		
+	<h4>Each weblog entry can be related to one or more entries from other Weblogs and/or to entries from your Image Galleries.</h4>
+
+
+	<h2>Setting Up A Relationship</h2>
+	
+	<p>There are two steps to setting up a relationship, described in detail next:</p>
+	
+	<ol>
+	<li>Create the relationship between a weblog and another (or a gallery).</li>
+	<li>Add "related entry" tags to your Templates so the related data can be shown.</li>
+	</ol>
+
+	<p><dfn>Once your relationship is set up, whenever you access the</dfn> <kbd>PUBLISH</kbd> <dfn>page to
+	submit new content you'll see a drop-down menu showing the titles of all the entries in the related weblog or gallery.
+	Choose a particular entry from the list and voila... the entries will be related.</dfn></p>
+
+	<h3>1. Create the Relationship</h3>
+
+	<p>A relationship is defined in the <kbd>Custom Field Manager</kbd>, located in your Control Panel here:</p>
+	
+	<p class="leftpad"><dfn>Admin &gt; Weblog Management &gt; Custom Weblog Fields</dfn></p>
+
+	<p>Custom fields can be one of several types, including <kbd>Relationship</kbd> types.  When you set up a custom field as a relationship type 
+	you'll be asked to choose which weblog or gallery to associate it with. Once that association is set you'll see a 
+	drop-down menu in the <kbd>PUBLISH</kbd> page showing the titles of all the entries in the related weblog or gallery.
+	</p>
+
+
+	<h3>2. Add Related Entry Tags to your Template</h3>
+
+	<p>To show a related entry, you will use the following tags:</p> 
+	
+	<code>{related_entries id="field_name"}<br /><br />{/related_entries}</code>
+	
+
+	<p><strong>Note:</strong> The <kbd>id</kbd> parameter must contain the <dfn>Field Name</dfn> of the custom field that contains the relationship.  For example, if your custom field is called  <em>performers</em> you'll use this:</p>
+
+	<code>{related_entries id="performers"}<br /><br />{/related_entries}</code>
+
+
+	<p class="important"><strong>Important:</strong> The above tags <strong>must</strong> be placed <kbd>inside</kbd> your <a href="weblog_entries.html">{exp:weblog:entries}</a> tag.</p>
+		
+	<p>Here is an example showing the related entries tags inside your weblog entry tags:</p>	
+		
+	<code>{exp:weblog:entries weblog="news" limit="15"}<br /><br />&lt;h3>{title}&lt;/h3><br /><br />{body}<br /><br /><dfn>{related_entries id="performers"}</dfn><br />&nbsp;&lt;h2>{title}&lt;/h2><br />&nbsp;{body}<br /><dfn>{/related_entries}</dfn><br /><br />Submitted on: {entry_date format='%M %d, %Y'}<br /><br />{/exp:weblog:entries}</code>
+		
+	<a name="cond_no_related_entries"></a>
+	<h3>{if no_related_entries} Conditional</h3>
+	
+	<p>The <kbd>{if no_related_entries}</kbd> conditional allows you specify certain content to be displayed when an entry does not have a related entry for the field specified.</p>
+	
+	<code>{exp:weblog:entries weblog="news" limit="15"}<br /><br />&lt;h3>{title}&lt;/h3><br /><br />{body}<br /><br /><dfn>{related_entries id="performers"}</dfn><br />
+		&nbsp;<kbd>{if no_related_entries}</kbd><br />
+		&nbsp;&nbsp;&lt;h2>No Performer Information Available&lt;/h2><br />
+		&nbsp;<kbd>{/if}</kbd><br />
+		&nbsp;&lt;h2>{title}&lt;/h2><br />
+		&nbsp;{body}<br /><dfn>{/related_entries}</dfn><br /><br />Submitted on: {entry_date format='%M %d, %Y'}<br /><br />{/exp:weblog:entries}</code>
+	
+	<h3>What Type of Related Data can be Displayed?</h3>
+	
+	<p>Nearly anything that is available in the <em>weblog entries</em> and <em>gallery entries</em> tags can be shown as related data. </p>
+	
+	<ul>
+		<li><a href="weblog_entries.html">{exp:weblog:entries}</a></li>
+		<li><a href="../gallery/gallery_entries.html#single_entry">{exp:gallery:entries}</a></li>
+	</ul>
+	
+	<div class="important"><p><b>Important:</b>&nbsp; For performance reasons all related entry data is cached internally by the system when you submit new entries using the <kbd>Publish</kbd> page.
+	This has the unfortunate side effect of making a some items that are normally dynamic not able to be used.  These include various statistical variables:</p>
+	
+<p>{view_count_one}<br />
+{view_count_two}<br />
+{view_count_three}<br />
+{view_count_four}<br />
+{expiration_date }<br />
+{comment_expiration_date}<br />
+{recent_comment_date}<br />
+{comment_total}<br />
+{trackback_total}
+</div>
+
+	<h3>Examples:</h3>
+	
+	<p><b>Gallery:</b>&nbsp; To show a <dfn>Gallery Entry</dfn> within a weblog entry you can do something similar to this:</p>
+	
+	
+	<code>{exp:weblog:entries weblog="news" limit="15"}<br /><br />&lt;h3>{title}&lt;/h3><br /><br />{body}<br /><br /><dfn>{related_entries id="gallery"}</dfn><br /><br />&nbsp;&nbsp;&nbsp;&lt;div class="gallery"><br />&nbsp;&nbsp;&nbsp;&lt;img src="{image_url}" width="{width}" height="{height}" border="0" alt="{title}" title="{title}" /><br />&nbsp;&nbsp;&nbsp;&lt;/div><br />&nbsp;&nbsp;&nbsp;&lt;h3>{title}&lt;/h3><br />&nbsp;&nbsp;&nbsp;{caption}<br /><br /><dfn>{/related_entries}</dfn><br /><br />Submitted on: {entry_date format='%M %d, %Y'}<br /><br />{/exp:weblog:entries}</code>
+	
+	<p class="important"><strong>Note:</strong> Do <b>not</b> place the opening/closing gallery tags within the related tags. ONLY put the variables and HTML you'd like to appear.&nbsp; <b>Also note</b> that you can only create relationships <em>from</em> a weblog entry <em>to</em> a gallery entry.  You can not do it in reverse, that is, submit a new gallery entry with a pointer to a weblog entry.</p>
+		
+	<p><b>Weblog:</b>&nbsp; To relate a weblog entry to another you'll do something similar to this:</p>
+	
+	<code>{exp:weblog:entries weblog="news" limit="15"}<br /><br />&lt;h3>{title}&lt;/h3><br /><br />{body}<br /><br /><dfn>{related_entries id="weblog"}</dfn><br /><br />&nbsp;&nbsp;&nbsp;{date_heading}<br />&nbsp;&nbsp;&nbsp;&lt;h3 class="date">{entry_date format=' %l, %F %d, %Y '}&lt;/h3><br />&nbsp;&nbsp;&nbsp;{/date_heading}<br /><br />&nbsp;&nbsp;&nbsp;&lt;h2 class="title">{title}&lt;/h2><br />&nbsp;&nbsp;&nbsp;{summary}<br /><br />&nbsp;&nbsp;&nbsp;&lt;div class="posted">Posted by &lt;a href="{profile_path='member/index'}">{author}&lt;/a> on {entry_date format='%m/%d'}<br /><br />&nbsp;&nbsp;&nbsp;{categories}<br />&nbsp;&nbsp;&nbsp;&lt;a href="{path='SITE_INDEX'}">{category_name}&lt;/a><br />&nbsp;&nbsp;&nbsp;{/categories}<br /><br /><dfn>{/related_entries}</dfn><br /><br />Submitted on: {entry_date format='%M %d, %Y'}<br /><br />{/exp:weblog:entries}</code>
+
+	<p class="important">As indicated above: Do <b>not</b> place the opening/closing entry tags within the related tags. ONLY put the variables and HTML you'd like to appear.</p>
+	
+
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

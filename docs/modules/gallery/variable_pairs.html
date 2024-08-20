@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Photo Gallery Entries Variable Pairs &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Photo Gallery</a> &gt;
+<strong>Photo Gallery Variable Pairs</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Photo Gallery Entries Variable Pairs</h1>
+
+	<p>Several variable pairs can be used within the gallery entries tag.</p>
+
+	<ul class="minitoc">
+		<li><a href="#pair_entries">{entries}{/entries}</a></li>
+		<li><a href="#pair_row">{row}{/row}</a></li>
+		<li><a href="#pair_row_blank">{row_blank}{/row_blank}</a></li>
+		<li><a href="#pair_row_end">{row_end}{/row_end}</a></li>
+		<li><a href="#pair_row_start">{row_start}{/row_start}</a></li>
+	</ul>
+
+
+	<h3><a name="pair_entries">entries</a></h3>
+
+		<code>{entries}<br />
+<br />
+{row_start}&lt;tr>{/row_start}<br />
+<br />
+{row}<br />
+&lt;td><br />
+&lt;a href="{id_path='gallery/comments'}">&lt;img src="{thumb_url}" width="{thumb_width}" height="{thumb_height}" alt="{title}" />&lt;/a><br />
+&lt;/td><br />
+{/row}<br />
+<br />
+{row_end}&lt;/tr>{/row_end}<br />
+<br />
+{/entries}</code>
+
+		<p>The entire repeating entry "row".  This includes any starting or ending content for each "row".</p>
+
+		<p>Note that this variable pair is required unless the gallery entry ID is being specified in the URL.</p>
+
+
+	<h3><a name="pair_row">row</a></h3>
+
+		<code>{row}<br />
+&lt;td><br />
+&lt;a href="{id_path='gallery/comments'}">&lt;img src="{thumb_url}" width="{thumb_width}" height="{thumb_height}" alt="{title}" />&lt;/a><br />
+&lt;/td><br />
+{/row}</code>
+
+		<p>The entry "row" contents.  In the context of a table, you could think of these as the individual cells in a row.</p>
+
+		<p>Note that this variable pair is required unless the gallery entry ID is being specified in the URL.</p>
+
+
+	<h3><a name="pair_row_blank">row_blank</a></h3>
+
+		<code>{row_blank}&lt;/tr>{/row_blank}</code>
+
+		<p>The content displayed for any "blank" row in the output.</p>
+
+
+	<h3><a name="pair_row_end">row_end</a></h3>
+
+		<code>{row_end}&lt;/tr>{/row_end}</code>
+
+		<p>The ending declaration of the row.  In the context of a table, you could think of this as the "&lt;/tr> tag.</p>
+
+
+	<h3><a name="pair_row_start">row_start</a></h3>
+
+		<code>{row_start}&lt;tr>{/row_start}</code>
+
+		<p>The starting declaration of the row.  In the context of a table, you could think of this as the "&lt;tr> tag.</p>
+
+
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

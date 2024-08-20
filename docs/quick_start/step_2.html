@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"> <head> <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+<title>Quick Start Tutorial - Step 2</title>
+
+<meta name="MSSmartTagsPreventParsing" content="TRUE" /> <link rel="contents" href="../index.html" /> <style type="text/css" media="screen,print">@import
+url(../docs.css);</style> </head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="../index.html#getting_started">Getting Started</a> &gt;
+<a href="index.html">Quick Start Tutorial</a> &gt;
+<strong>Step 2</strong>
+</div>
+
+
+<div id="content">
+
+<h1>Quick Start Tutorial - Step 2<div class="subhead">Creating New Templates</div></h1>
+
+<h4>The Goal:&nbsp; Learn how to create a new Template and add standard HTML to it.</h4>
+
+<p>The first thing to do in setting up your new web site is to create the Template Group and Templates that will hold the HTML of your web site. Templates and Template Groups are managed in the Templates section of the Control Panel.</p>
+
+<p class="important"><strong>Important concept:</strong> Templates are similar to files and Template Groups are similar to folders. Please see the <a href="../overview/templates.html">Overview, Templates</a> section for more information.</p>
+
+<h2>Visit the Templates Section of the Control Panel</h2>
+
+<p>Click on the Template Tab (highlighted in the screen shot below).</p>
+
+<div class="imgwrapper"><img class="imgborder"src="../images/cp_click_templates.jpg" alt="Click on the Templates Tab" title="Click on the Templates Tab" border="0" /></div>
+
+<p>This will take you to the Template section of the EE Control Panel which will look similar to the image below. The highlighted section of the image are the default Template Groups created when EE is installed.</p>
+
+<div class="imgwrapper"><img class="imgborder"src="../images/cp_templates.jpg" alt="Templates section of the EE Control Panel" title="Templates section of the EE Control Panel" border="0" width="600" height="237" /></div>
+
+<h2>Create a New Template Group</h2>
+
+<p>Keep your new web site organized and separate from the default Template Groups created during installation. To help achieve this, put your web site in its own Template Group. Click on "Create a New Template Group (highlighed in the image below).</p>
+
+<div class="imgwrapper"><img class="imgborder"src="../images/cp_create_template_group.jpg" alt="Create a new Template Group" title="Create a new Template Group" border="0" width="600" height="237" /></div>
+
+<p>This will bring up the create New Template Group screen shown below.</p>
+
+<div class="imgwrapper"><img class="imgborder"src="../images/cp_new_template_group.jpg" alt="Create new Template Group screen" title="Create new Template Group screen" border="0" /></div>
+
+<p>Name your Template Group "tutorial" by typing "tutorial" (all lower case) in the field Template Group Name and click submit.</p>
+
+<div class="imgwrapper"><img class="imgborder"src="../images/cp_create_tutorial_group.jpg" alt="Name the new Template Group tutorial" title="Name the new Template Group tutorial" border="0" /></div>
+
+<p>This takes you back to the main Tutorial section of the Control Panel. The tutorial Template Group you just created now shows up in the Template Group list. Your screen should be similar to the screen shot below.</p>
+
+<div class="imgwrapper"><img class="imgborder"src="../images/cp_tutorial_group_created.jpg" alt="The tutorial Template Group now shows in the Template Groups list" title="The tutorial Template Group now shows in the Template Groups list" border="0" width="600" height="119" /></div>
+
+<h2>Add Content to Your Index Template</h2>
+
+<p>Click on the tutorial Template Group to open up the Template Group and view all the Templates inside. Whenever a new Template Group is created, an "index" Template is also created automatically.</p>
+
+<div class="imgwrapper"><img class="imgborder"src="../images/cp_tutorial_group_index.jpg" alt="A index Template is created by default with every new Template Group" title="A index Template is created by default with every new Template Group" border="0" width="600" height="311" /></div>
+
+<p>Now, you're going to add some HTML to the "index" Template and view it in your web browser. Click on "index" (highlighted in the image above) to get to the Edit Template screen, shown below.</p>
+
+<div class="imgwrapper"><img class="imgborder"src="../images/cp_tutorial_template_blank.jpg" alt="The tutorial Template, currently empty" title="The tutorial Template, currently empty" border="0" /></div>
+
+<p>Now, copy the code below.</p>
+
+<code>
+&lt;html><br />
+&lt;head><br />
+&lt;title>My First EE Site&lt;/title><br />
+&lt;/head><br />
+&lt;body>
+<br />
+<br />
+&lt;h1>The title of my post&lt;/h1>
+<br />
+<br />
+&lt;div class="entry">
+<br />
+<br />
+&lt;p>Hello world! This is where my entry should show up.&lt;/p>
+<br />
+<br />
+&lt;/div>
+<br />
+<br />
+&lt;/body><br />
+&lt;/html>
+</code>
+
+<p>Paste the code into the "index" Template, as shown below, and click "Update".</p>
+
+<div class="imgwrapper"><img class="imgborder"src="../images/cp_index_template_html.jpg" alt="Paste the HTML into the index Template and click Update" title="Paste the HTML into the index Template and click Update" border="0" /></div>
+
+<p>After you click Update, EE will tell you that the Template has been updated successfully.</p>
+
+<div class="imgwrapper"><img class="imgborder"src="../images/cp_index_template_updated.jpg" alt="EE will tell you that the Template has been updated successfully." title="EE will tell you that the Template has been updated successfully." border="0" /></div>
+
+
+<h1>Next:&nbsp; <a href="step_3.html">View Your Template</a></h1>
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer"> <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address> </div>
+
+</body> </html>

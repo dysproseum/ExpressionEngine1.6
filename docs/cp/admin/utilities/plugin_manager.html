@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Plugin Manager &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../../index.html"><img src="../../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../../index.html">Table of Contents</a> &gt;
+<a href="../../../index.html#cp_docs">The Control Panel</a> &gt;
+<a href="../index.html">Admin</a> &gt;
+<a href="index.html">Utilities</a> &gt;
+<strong>Plugin Manager</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Plugin Manager</h1>
+	<div class="path">Control Panel Location:&nbsp; <dfn>Admin &gt; Utilities &gt; Plugin Manger</dfn></div>	
+
+	<p>The <dfn>Plugin Manager</dfn> page of the Control Panel allows you to view information about your installed plugins. You can also view information regarding additional plugins that are available, which you can install directly from the plugin page.</p>
+	
+	<div class="imgwrapper"><img src="../../../images/plugin_manager.png" width="385" height="271" alt="Plugin Manager" title="Plugin Manager" border="0" /></div>
+
+	<h3>Requirements</h3>
+
+		<p>In order to take advantage of all the features available in the Plugin Manager, your system will need to meet the following requirements:</p>
+
+		<ul>
+			<li>The "Magpie RSS Parser" Plugin must be installed.  Normally it is included with ExpressionEngine by default.</li>
+			<li>You must have the <var>pclzip.lib</var> file in your <kbd>system/lib/</kbd> folder.  Normally it is included with ExpressionEngine by default.</li>
+			<li>The <a href="http://us4.php.net/manual/en/ref.curl.php">CURL</a> extension must be compiled into PHP on your server.  This is required in order to be able to automatically install new plugins.</li>
+			<li>Your <kbd>system/plugins/</kbd> folder must be writable by ExpressionEngine.  This means it should be set to 777 permissions (for UNIX-based servers) or otherwise made writable by your webserver (for Windows-based servers).</li>
+		</ul>
+
+
+
+	<h3>Currently Installed Plugins</h3>
+
+	  <p>This table lists all of your installed plugins, their installed version, and a short description.  Clicking on a plugin name leads to a subpage with additional information about the selected plugin.</p>
+
+	  <p>This section will also allow you to remove installed plugins.  To do so, select the plugin or plugins with the checkboxes on the right and then use the <dfn>Remove</dfn> button at the bottom.  You will receive a confirmation page to make sure you really want to remove the selected plugins.  There is <strong>no undo</strong> feature here, so once a plugin is removed it is gone.  You can, of course, reinstall it.</p>
+
+
+	<h3>Available Plugins</h3>
+
+		<p>A list of available plugins is provided on the right side.  This list is drawn from the plugins listed on the ExpressionEngine Plugins website.  Plugins may be listed chronologically (newest first) or alphabetically by using the links at the top of the table. The name of the plugin links to the Plugin Library at ExpressionEngine.com where you can get more info regarding the plugin.</p>
+
+
+
+	<h2><a name="install_plugin">Installing Plugins</a></h2>
+
+	<p>The <dfn>Plugin Manager</dfn> will download and install plugins for you if you meet the requirements listed above.  If the plugin is 
+	available as either a Zip file or a plain text file (most meet this criteria) it will be ready for use immediately.  If the plugin is
+	in a different format it will be downloaded and placed in your <kbd>system/plugins/</kbd> folder
+	where you'll have to de-compress it yourself.</p>
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

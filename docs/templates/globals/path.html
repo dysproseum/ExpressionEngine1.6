@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Path Global Variable &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="var_MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#template_docs">Templating System</a> &gt;
+<a href="index.html">Global Variables</a> &gt;
+<strong>Path Global Variable</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Path Variables</h1>
+	
+	<p>The <dfn>Path variable</dfn> is one of the most commonly used variables within templates.&nbsp; It's purpose is 
+	to enable you to easily create links to other templates within your site.&nbsp; Here is the basic format:</p>
+	
+	
+
+	<code>{path='template_group/template'}</code>
+
+	<p class="highlight">Make sure you substitute "template_group" and "template" with the name of an actual template group and template.</p>
+
+
+	<p>When the path variable is rendered it will automatically include your site URL, as you've defined in your <a href="../../cp/admin/system_preferences/general_configuration.html">General Configuration</a>.</p>
+
+	<p>For example, a variable like this:</p>
+	
+	<code>{path='weblog/comments'}</code>
+
+	<p>Will be rendered like this:</p>
+
+	<code>http://example.com/index.php/weblog/comments/</code>
+
+	<p>The path variable is most commonly used to create a link, like this:</p>
+	
+	<code>&lt;a href="<samp>{path='weblog/archives'}</samp>">My Archives Page&lt;/a></code>
+
+
+
+	<h3>Why not hard code URLs instead?</h3> 
+
+	<p>The biggest advantage to using the path variable whenever you must create a link is that if your site URL ever changes you can
+	simply update your <a href="../../cp/admin/system_preferences/general_configuration.html">General Configuration</a> page with the new URL and
+	every link in your templates will update accordingly.&nbsp; Using the path variable is also less prone to errors since you
+	only need to know two pieces of information:  The Template Group name and the template name.</p>
+
+
+	<h2>Other Path Variables</h2>
+	
+	<p>There are several other "path" variables for specific purposes:</p>
+	
+	<h3>Site Index</h3> 
+
+	<p>You can use <samp>site_index</samp> in your path to point to your main site index:</p>
+
+	<code>{path="site_index"}</code>
+
+	<h3>Log-out</h3> 
+
+	<p>Using <samp>logout</samp> in your path variable will let you create a link that logged-in members can used to log out with:</p>
+
+	<code>{path="logout"}</code>
+	
+	<h3>Member Related Links</h3> 
+	
+	<p>The path variable can be used to create a number of different links that point to areas with the Member Profile pages.
+	You'll find more information regarding these in the <a href="../../modules/member/member_links.html">Member Links</a> page.</p>
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

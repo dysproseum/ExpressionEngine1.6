@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>View Files and PHP Syntax &#8221; ExpressionEngine Add-On Development Guidelines  &#8211; ExpressionEngine Developer Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+<style type="text/css" media="screen">
+	code {
+		white-space: pre;
+	}
+</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../index.html">Development</a> &gt;
+<a href="index.html">Guidelines</a> &gt;
+<strong>View Files and PHP Syntax</strong>
+</div>
+
+
+<div id="content">
+<h1>View Files and PHP Syntax</h1>
+<p>In view files <strong>only</strong>, it is recommended that you use PHPs alternative syntax for control structures and short tag echo statements.  This minimizes the amount of PHP code in the view file and makes it easier to identify the code blocks.  If you are not familiar with this syntax, it allows you to eliminate the braces from your code, and eliminate "echo" statements.</p>
+<p class="important"><strong>Note: </strong>If "short tags" are disabled in your PHP ini file, ExpressionEngine will automatically rewrite them for you.  In such a case, if PHP errors are encountered in your <strong>view files</strong>, the error message and line number will not be accurately shown.  Instead, all errors will be shown as <kbd>eval()</kbd> errors.</p>
+
+<h2>Table of Contents</h2>
+<ul class="minitoc">
+	<li><a href="#echos">Alternative Echos</a></li>
+	<li><a href="#control_structures">Alternative Control Structures</a></li>
+</ul>
+
+<h2>PHP Alternate Syntax</h2>
+<ul class="guidelineList">
+
+	<li>
+		<h4><a name="echos"></a>Alternative Echos</h4>
+		<div class="guidelineDetails">
+
+<p>Normally to echo, or print out a variable you would do this:</p>
+
+<code>&lt;?php echo $variable; ?></code>
+
+<p>With the alternative syntax you can instead do it this way:</p>
+
+<code>&lt;?=$variable?></code>
+		</div>
+	</li>
+
+	<li>
+		<h4><a name="control_structures"></a>Alternative Control Structures</h4>
+		<div class="guidelineDetails">
+
+<p>Controls structures, like <var>if</var>, <var>for</var>, <var>foreach</var>, and <var>while</var> can be
+written in a simplified format as well.  Here is an example using foreach:</p>
+
+<code>&lt;ul>
+
+<var>&lt;?php foreach($todo as $item): ?></var>
+
+&lt;li><var>&lt;?=$item?></var>&lt;/li>
+
+<var>&lt;?php endforeach; ?></var>
+
+&lt;/ul></code>
+
+<p>Notice that there are no braces.  Instead, the end brace is replaced with <var>endforeach</var>.
+Each of the control structures listed above has a similar closing syntax:
+<var>endif</var>, <var>endfor</var>, <var>endforeach</var>, and <var>endwhile</var></p>
+
+<p>Also notice that instead of using a semicolon after each structure (except the last one), there is a colon.  This is
+important!</p>
+
+<p>Here is another example, using if/elseif/else.  Notice the colons:</p>
+
+
+<code><var>&lt;?php if ($username == 'sally'): ?></var>
+
+&nbsp;&nbsp;&nbsp;&lt;h3>Hi Sally&lt;/h3>
+
+<var>&lt;?php elseif ($username == 'joe'): ?></var>
+
+&nbsp;&nbsp;&nbsp;&lt;h3>Hi Joe&lt;/h3>
+
+<var>&lt;?php else: ?></var>
+
+&nbsp;&nbsp;&nbsp;&lt;h3>Hi unknown user&lt;/h3>
+
+<var>&lt;?php endif; ?></var></code>
+		</div>
+	</li>
+</ul>
+
+</div>
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>			
+			
+			
+			

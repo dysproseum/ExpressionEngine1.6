@@ -1,0 +1,236 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Member XML Format &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" name="../../../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../../../index.html"><img src="../../../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../../../index.html">Table of Contents</a> &gt;
+<a href="../../../../index.html#cp_docs">The Control Panel</a> &gt;
+<a href="../../index.html">Admin</a> &gt;
+<a href="../index.html">Utilities</a> &gt;
+<a href="index.html">Member Import Utility</a>
+<strong>Member XML Format</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Member XML Format</h1>
+
+	<p>ExpressionEngine utilizes a special XML format for member data.</p>
+
+	<code><strong>&lt;members></strong><br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<strong>&lt;member></strong><br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>&lt;username></strong>brettb<strong>&lt;/username></strong><br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>&lt;screen_name></strong>Brett Bretterson<strong>&lt;/screen_name></strong><br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>&lt;password</strong> <em>type=</em><span style="color: green;">"md5"</span><strong>></strong>653132ffd94b986bf2bb806b3c67d190<strong>&lt;/password></strong><br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>&lt;email></strong>brett@example.com<strong>&lt;/email></strong><br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<strong>&lt;/member></strong><br />
+		
+		&nbsp;&nbsp;&nbsp;&nbsp;<strong>&lt;member></strong><br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>&lt;username></strong>robr<strong>&lt;/username></strong><br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>&lt;screen_name></strong>Robert Robertson<strong>&lt;/screen_name></strong><br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>&lt;password</strong> <em>type=</em><span style="color: green;">"sha1"</span><strong>></strong>1b4395b877794a16a7f4db5747380dbaafc7ff18<strong>&lt;/password></strong><br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>&lt;email></strong>robert@example.com<strong>&lt;/email></strong><br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<strong>&lt;/member></strong><br />
+	<strong>&lt;/members></strong></code>
+
+	<p>The XML tags are identical to their database field counterparts from the exp_members table.  All fields are allowed except for "unique_id".</p>
+	
+	<p class="important"><strong>WARNING:</strong> The &lt;member_id> tag will cause the import utility to overwrite any existing members with the same ID.  It is generally recommended that you do not use a &lt;member_id> tag, so when transferring users from one system to another, ExpressionEngine can automatically create new unique IDs for each member without overwriting any existing members.</p>
+	
+	<ul class="minitoc">
+		<li><a href="#required_tags">Required Tags</a></li>
+		<li><a href="#password_tag">Password Tag</a></li>
+		<li><a href="#birthday_tag">Birthday Tag</a></li>
+		<li><a href="#available_tags">Available Member Data Tags</a></li>
+	</ul>
+	<h2><a name="required_tags">Required Tags</a></h2>
+	
+	<p>There are a few tags common to every ExpressionEngine member XML file, as follows.</p>
+	
+	<h3><a name="root_tag">Root Tag</a></h3>
+	
+	<p>XML documents require a root tag surrounding all of the elements.  For the ExpressionEngine member XML format, the required root tag is <samp>&lt;members>&lt;/members></samp>.</p>
+	
+	<h3><a name="element_tag">Element Tag</a></h3>
+	
+	<p>Each XML element of your member data must be contained in a <samp>&lt;member>&lt;/member></samp> tag block.</p>
+	
+	<h3><a name="member_data_tags">Member Data Tags</a></h3>
+
+	<p>There are three required tags to form a valid member element.</p>
+	
+	<ul>
+		<li>&lt;username></li>
+		<li>&lt;screen_name></li>
+		<li>&lt;email></li>
+	</ul>
+	
+	<h2><a name="password_tag">Password Tag</a></h2>
+	
+	<p>The <samp>&lt;password></samp> tag has a special attribute, <samp>type</samp>.  This allows you to provide contextual information for the password.</p>
+	
+	<h3><a name="type">type=</a></h3>
+
+	<h4><a name="text">"text"</a></h4>
+	
+	<code><strong>&lt;password</strong> <em>type=</em><span style="color: green;">"text"</span><strong>></strong>pa55w0id<strong>&lt;/password></strong></code>
+	
+	<p>"text" type passwords are plain text, unencrypted passwords.  When importing members from an XML file, ExpressionEngine will automatically encrypt "text" type passwords for you before inserting them into the database.  This allows you to keep existing passwords when importing member data from a third party application that does not store encrypted passwords.</p>
+	
+	<h4><a name="md5">"md5"</a></h4>
+	
+	<code><strong>&lt;password</strong> <em>type=</em><span style="color: green;">"md5"</span><strong>></strong>653132ffd94b986bf2bb806b3c67d190<strong>&lt;/password></strong></code>
+	
+	<p>"md5" passwords are those that have been encrypted with an RSA Data Security, Inc. MD5 Message-Digest Algorithm (md5) hash. <a href="http://www.faqs.org/rfcs/rfc1321">[RFC 1321]</a></p>
+	
+	<h4><a name="sha1">"sha1"</a></h4>
+	
+	<code><strong>&lt;password</strong> <em>type=</em><span style="color: green;">"sha1"</span><strong>></strong>1b4395b877794a16a7f4db5747380dbaafc7ff18<strong>&lt;/password></strong></code>
+	
+	<p>"sha1" passwords are those that have been encrypted with a US Secure Hash Algorithm 1 (sha1) hash. <a href="http://www.faqs.org/rfcs/rfc3174">[RFC 3174]</a></p>
+	
+	<p class="important"><strong>NOTE: </strong>If you import encrypted passwords of one type and your ExpressionEngine installation was configured with a different type of encryption, the passwords will not work, and users will need to use the "Forgot Password" link to log in.</p>
+	
+	<h2><a name="birthday_tag">Birthday Tag</a></h2>
+	
+	<p>The <samp>&lt;birthday></samp> tag is an exception to tag and database field name matching.  While you <em>can</em> use <samp>&lt;bday_d></samp>, <samp>&lt;bday_m></samp>, and <samp>&lt;bday_y></samp>, the <samp>&lt;birthday></samp> tag and its children were created to allow for a more semantic member XML file.  The <samp>&lt;birthday></samp> tag contains no value itself, but rather has three child elements.</p>
+
+	<h3>&lt;month></h3>
+	
+	<p>The two digit month of the member's birthday.  Example: <strong>02</strong></p>
+		
+	<h3>&lt;day></h3>
+	
+	<p>The two digit day of the month of the member's birthday.  Example: <strong>19</strong></p>
+	
+	<h3>&lt;year></h3>
+	
+	<p>The four digit year of the member's birthday.  Example: <strong>1977</strong></p>
+	
+	<p>For the above examples, a birthday element of a member XML file would look like:</p>
+	
+	<code><strong>&lt;birthday></strong><br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<strong>&lt;month></strong>02<strong>&lt;/month></strong><br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<strong>&lt;day></strong>19<strong>&lt;/day></strong><br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<strong>&lt;year></strong>1977<strong>&lt;/year></strong><br />
+		<strong>&lt;/birthday></strong></code>
+	
+	<p>The example above would be equivalent to:</p>
+	
+	<pre><strong>&lt;bday_m></strong>02<strong>&lt;/bday_m></strong>
+<strong>&lt;bday_d></strong>19<strong>&lt;/bday_d></strong>
+<strong>&lt;bday_y></strong>1977<strong>&lt;/bday_y></strong></pre>
+	
+	<h2><a name="available_tags">Available Member Data Tags</a></h2>
+	
+	<ul>
+		<li>&lt;accept_admin_email></li>
+		<li>&lt;accept_messages></li>
+		<li>&lt;accept_user_email></li>
+		<li>&lt;aol_im></li>
+		<li>&lt;authcode></li>
+		<li>&lt;avatar_filename></li>
+		<li>&lt;avatar_height></li>
+		<li>&lt;avatar_width></li>
+		<li>&lt;bday_d></li>
+		<li>&lt;bday_m></li>
+		<li>&lt;bday_y></li>
+		<li>&lt;birthday><ul><li>&lt;day></li><li>&lt;month></li><li>&lt;year></li></ul>
+		<li>&lt;bio></li>
+		<li>&lt;cp_theme></li>
+		<li>&lt;daylight_savings></li>
+		<li>&lt;display_avatars></li>
+		<li>&lt;display_signatures></li>
+		<li>&lt;email></li>
+		<li>&lt;forum_theme></li>
+		<li>&lt;group_id></li>
+		<li>&lt;icq></li>
+		<li>&lt;in_authorlist></li>
+		<li>&lt;interests></li>
+		<li>&lt;ip_address></li>
+		<li>&lt;join_date></li>
+		<li>&lt;language></li>
+		<li>&lt;last_activity></li>
+		<li>&lt;last_bulletin_date></li>
+		<li>&lt;last_comment_date></li>
+		<li>&lt;last_email_date></li>
+		<li>&lt;last_entry_date></li>
+		<li>&lt;last_forum_post_date></li>
+		<li>&lt;last_view_bulletins></li>
+		<li>&lt;last_visit></li>
+		<li>&lt;localization_is_site_default></li>
+		<li>&lt;location></li>
+		<li>&lt;member_id></li>
+		<li>&lt;msn_im></li>
+		<li>&lt;notepad></li>
+		<li>&lt;notepad_size></li>
+		<li>&lt;notify_by_default></li>
+		<li>&lt;notify_of_pm></li>
+		<li>&lt;occupation></li>
+		<li>&lt;password></li>
+		<li>&lt;photo_filename></li>
+		<li>&lt;photo_height></li>
+		<li>&lt;photo_width></li>
+		<li>&lt;pmember_id></li>
+		<li>&lt;private_messages></li>
+		<li>&lt;profile_theme></li>
+		<li>&lt;quick_links></li>
+		<li>&lt;quick_tabs></li>
+		<li>&lt;screen_name></li>
+		<li>&lt;sig_img_filename></li>
+		<li>&lt;sig_img_height></li>
+		<li>&lt;sig_img_width></li>
+		<li>&lt;signature></li>
+		<li>&lt;smart_notifications></li>
+		<li>&lt;template_size></li>
+		<li>&lt;time_format></li>
+		<li>&lt;timezone></li>
+		<li>&lt;tmpl_group_id></li>
+		<li>&lt;total_comments></li>
+		<li>&lt;total_entries></li>
+		<li>&lt;total_forum_posts></li>
+		<li>&lt;total_forum_topics></li>
+		<li>&lt;tracker></li>
+		<li>&lt;upload_id></li>
+		<li>&lt;url></li>
+		<li>&lt;username></li>
+		<li>&lt;weblog_id></li>
+		<li>&lt;yahoo_im></li>
+	</ul>
+	
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address><div class="validation"><a name="http://validator.w3.org/check/referer" title="Validate XHTML">XHTML</a> | <a name="http://jigsaw.w3.org/css-validator/check/referer" title="Validate CSS">CSS</a></div>
+</div>
+
+</body>
+</html>

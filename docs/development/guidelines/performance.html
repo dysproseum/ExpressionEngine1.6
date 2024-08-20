@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Performance Guidelines &#8221; ExpressionEngine Add-On Development Guidelines  &#8211; ExpressionEngine Developer Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+<style type="text/css" media="screen">
+	code {
+		white-space: pre;
+	}
+</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../index.html">Development</a> &gt;
+<a href="index.html">Guidelines</a> &gt;
+<strong>Performance Guidelines</strong>
+</div>
+
+
+<div id="content">
+<h1>Performance Guidelines</h1>
+
+<h2>Table of Contents</h2>
+<ul class="minitoc">
+	<li><a href="#posix_extended_regular_expressions">POSIX Extended Regular Expressions</a></li>
+	<li><a href="#perl_compatible_pcre_regular_expressions">Perl-compatible (PCRE) Regular Expressions</a></li>
+	<li><a href="#pcre_subpattern_capture_optimization">PCRE Subpattern Capture Optimization</a></li>
+	<li><a href="#avoid_unnecessary_string_replacements">Avoid Unnecessary String Replacements</a></li>
+	<li><a href="#smart_substring_matching">Smart Substring Matching</a></li>
+	<li><a href="#for_loops">for() Loops</a></li>
+	<li><a href="#heredoc_strings">Heredoc Strings</a></li>
+	<li><a href="#one_time_use_variables">One-time Use Variables</a></li>
+	<li><a href="#redundant_queries">Redundant Queries</a></li>
+</ul>
+
+<h2>Guidelines</h2>
+<ul class="guidelineList">
+	<li>
+		<h4><a name="posix_extended_regular_expressions"></a>POSIX Extended Regular Expressions</h4>
+		<div class="guidelineDetails">
+			<p><strong>Do not use POSIX Extended regular expression functions</strong>.  When you <em>need</em> a regular expression function, always use the Perl-compatible (PCRE) <em>preg_</em> functions.</p>
+
+<code><strong>NEVER USE</strong>:
+ereg()
+eregi()
+ereg_replace()
+eregi_replace()
+split()
+spliti()
+sql_regcase()</code>
+		</div>
+	</li>
+
+	<li>
+		<h4><a name="perl_compatible_pcre_regular_expressions"></a>Perl-compatible (PCRE) Regular Expressions</h4>
+		<div class="guidelineDetails">
+			<p><strong>Do not use regular expression functions unless you need to.</strong></p>
+
+<code><strong>INCORRECT</strong>:
+$str = preg_replace('/foo/', 'bar', $str);
+$arr = preg_split('|', $str);
+$arr = preg_split('|', $str, -1, PREG_SPLIT_NO_EMPTY); // $str is '1|2|3|4|'
+
+<strong>CORRECT</strong>:
+$str = str_replace('foo', 'bar', $str);
+$arr = explode('|', $str);
+$arr = explode('|', trim($str, '|')); // $str is '1|2|3|4|'</code>
+
+		</div>
+	</li>
+
+	<li>
+		<h4><a name="pcre_subpattern_capture_optimization"></a>PCRE Subpattern Capture Optimization</h4>
+		<div class="guidelineDetails">
+			<p>Use <strong>?:</strong> at the start of a subpattern if it does not need to be captured for faster execution and memory conservation.</p>
+<code><strong>INCORRECT</strong>:
+$str = preg_replace('/xyz([0-9]+)/', 'zyx', $str);	// not using the captured subpattern, so ?: should be used
+
+<strong>CORRECT</strong>:
+$str = preg_replace('/xyz(?:[0-9]+)/', 'zyx', $str);	// correct use when not using the captured subpattern
+$str = preg_replace('/xyz([0-9]+)/', 'zyx\\1', $str);	// correct use of a captured subpattern
+
+</code>
+		</div>
+	</li>
+
+	<li>
+		<h4><a name="avoid_unnecessary_string_replacements"></a>Avoid Unnecessary String Replacements</h4>
+		<div class="guidelineDetails">
+			<p>Do not perform string replacements unless you need to, and know that the <em>search</em> string exists in the <em>subject</em> string.  Use <strong>strpos()</strong> to see if the replacement is necessary beforehand.</p>
+
+<code><strong>INCORRECT</strong>:
+foreach ($items as $name => $value)
+{
+	$str = str_replace($name, $value, $str);
+}
+
+<strong>CORRECT</strong>:
+foreach ($items as $name => $value)
+{
+	if (strpos($str, $name) !== FALSE)
+	{
+		$str = str_replace($name, $value, $str);
+	}
+}
+</code>
+
+			<p>Remarkably, even if a match occurs on each loop, the additional processing overhead for the strpos() is negligible (on a 100kb string it adds roughly 0.01 seconds for every <em>10,000</em> loops).  If there are loops that do not match, this method can approach 100% greater efficiency.</p>
+		</div>
+	</li>
+
+	<li>
+		<h4><a name="smart_substring_matching"></a>Smart Substring Matching</h4>
+		<div class="guidelineDetails">
+			<p>When checking to see if a string has matching characters at the front of the string only, use <strong>strncmp()</strong> and <strong>strncasecmp()</strong> instead of <strong>substr()</strong>.  Especially on non-case sensitive checks, these functions are much faster.  Never use regular expression functions for this unless you actually need a regular expression match.</p>
+
+<code><strong>INCORRECT</strong>:
+if (substr($str, 0, 3) == 'foo')
+if (substr(strtolower($str), 0, 3) == 'foo')
+if (preg_match('/^foo/', $str))			// no need for regex match for this type of comparison
+if (ereg('^foo', $str))				// AAAAAH!  Never ever use ereg(), remember?
+
+<strong>CORRECT</strong>:
+if (strncmp($str, 'foo', 3) == 0)
+if (strncasecmp($str, 'foo', 3) == 0)</code>
+		<p><a href="http://us3.php.net/manual/en/function.strncmp.php">strncmp()</a> and <a href="http://us3.php.net/manual/en/function.strcasecmp.php">strncasecmp()</a> return &lt; 0 if <em>str1</em> is less than <em>str2</em>, &gt; 0 if <em>str1</em> is greater than <em>str2</em>, and <strong>0 if they are equal</strong>.</p>
+		
+		</div>
+	</li>
+
+	<li>
+		<h4><a name="for_loops"></a>for() Loops</h4>
+		<div class="guidelineDetails">
+			<p>Do not perform calculations in the second expression of for() loops, as they will be executed on each iteration of the loop.  Perform them either in the first expression, or before entering the loop.</p>
+
+<code><strong>INCORRECT</strong>:
+for ($i = 0; $i &lt; count($arr); $i++)
+
+<strong>CORRECT</strong>:
+for ($i = 0, $foo = $count($arr); $i &lt; $foo; $i++)
+
+<strong>ALTERNATIVE</strong>:
+$foo = count($arr);
+for ($i = 0; $i &lt; $foo; $i++)</code>
+		</div>
+	</li>
+
+	<li>
+		<h4><a name="heredoc_strings"></a>Heredoc Strings</h4>
+		<div class="guidelineDetails">
+			<p>Avoid <a href="http://us3.php.net/manual/en/language.types.string.php#language.types.string.syntax.heredoc">heredoc strings</a> unless absolutely necessary.  They are more intensive for PHP to parse than single or double-quoted strings, resulting in slower code execution and increased memory usage.</p>
+		</div>
+	</li>
+
+	<li>
+		<h4><a name="one_time_use_variables"></a>One-time Use Variables</h4>
+		<div class="guidelineDetails">
+			<p>Avoid assigning new variables for one-time use.  In the example below, $foo is never used again in the method.</p>
+
+<code><strong>INCORRECT</strong>:
+$foo = 'a';
+$str = $str.$foo;
+
+<strong>CORRECT</strong>:
+$str = $str.'a';</code>
+
+		</div>
+	</li>
+
+	<li>
+		<h4><a name="redundant_queries"></a>Redundant Queries</h4>
+		<div class="guidelineDetails">
+			<p>Avoid running queries in loops or running identical queries multiple times across page loads.  Find a way to run such queries only once, outside of loops, by perhaps accessing all of the information your add-on will require for each iteration, storing it in a master array.</p>
+
+			<p>Make intelligent use of <a href="general.html#use_of_sess_cache">$SESS->cache</a> so these and other "meta" queries are executed only once no matter how many times a method is called on a page load.</p>
+			<p class="important"><strong>NOTE:</strong> To keep the code example simple, the values in the $ids array below are assumed to have already been validated in the code prior to what is being shown.  Do not neglect to validate and escape variables before using them in queries!</p>
+
+<code><strong>INCORRECT</strong>:
+foreach ($ids as $id)
+{
+	$query = $DB->query("SELECT name FROM exp_pre_email_addresses WHERE id = {$id}");
+
+	if ($query->num_rows > 0)
+	{
+		$name = $query->row['name'];
+
+		// rest of the code		
+	}
+}
+
+<strong>CORRECT</strong>:
+if ( ! isset($SESS->cache['super_class']['names']))
+{
+	$query = $DB->query('SELECT id, name FROM exp_pre_email_addresses WHERE id IN ('.implode(',', $ids).')');
+
+	if ($query->num_rows > 0)
+	{
+		foreach ($query->result as $row)
+		{
+			$SESS->cache['super_class']['names'][$row['id']] = $row['name'];
+		}
+	}
+	
+}
+
+$names = $SESS->cache['super_class']['names'];
+
+// later in the code looped queries are no longer used
+foreach ($ids as $id)
+{
+	$name = $names[$id];
+
+	// rest of the code
+}</code>
+		</div>
+	</li>
+</ul>
+</div>
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

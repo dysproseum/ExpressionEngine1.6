@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Upgrading to ExpressionEngine 1.6.9 &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../index.html" />
+  <style type="text/css" media="screen,print">@import url(../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="../index.html#install_docs">Installation and Update Instructions</a> &gt;
+<a href="update.html">Updating EE</a> &gt;
+<strong>Version 1.6.9 Notes</strong>
+</div>
+
+<div id="content">
+
+	<h1>Update Notes for Version 1.6.9</h1>
+
+	<h2><a name="preferences"></a>Preferences Array Update</h2>
+	
+<p>The way site pages are stored changed in this release to provide greater flexibility.  If you use <a href="../modules/pages/index.html">Pages</a> and have any add-ons that might make use of this array, be certain to update the add-ons as part of this version update.  Not doing so may result in broken pages.  Add-ons that may be affected include Structure, LG Better Meta, and the Nested Menu Plugin.</p>
+
+<p>For those using PHP in templates or using their own add-ons, you may need to adjust your code to reflect changes to site_pages array.  The array is now saved with an additional dimension, adding a reference to the site_id.  In addition, another element has been added to the array, containing the url for the particular site.</p>
+
+<code>
+print_r($PREFS->ini("site_pages"));
+</code>
+<p>In 1.6.9:</p>
+<pre>
+Array
+(
+   [1] => Array
+       (
+           [uris] => Array
+               (
+                   [12] => /page.html
+               )
+
+           [templates] => Array
+               (
+                   [12] => 2
+               )
+
+           [url] => http://127.0.0.1:8888/20/index.php/
+       )
+
+)
+</pre>
+<p>Prior to 1.6.9:</p>
+<pre>
+Array
+(
+      [uris] => Array
+          (
+              [12] => /page.html
+          )
+
+      [templates] => Array
+          (
+              [12] => 2
+          )
+)
+</pre>	
+
+
+	<h2><a name="template_updates"></a>Profile Theme Updates</h2>
+
+	<p>ExpressionEngine 1.6.9 includes a number of new localization variables available for use in the member profile templates. If you have made no customizations, you may skip this step and replace the profile theme folder with a fresh copy.</p>
+
+	<p>The following words/phrases may now be replaced with localization variables in your profile_themes.php file (found in themes/profile_themes/default/ and any custom profile theme folders you have installed:</p>
+
+<dl class="long">
+	<dt>Powered by ExpressionEngine</dt>
+		<dd>{lang:powered_by_ee}</dd>
+	<dt>No Photo</dt>
+		<dd>{lang:no_photo}</dd>
+	<dt>Email Console</dt>
+		<dd>{lang:email_console}</dd>
+	<dt>Send Private Message</dt>
+		<dd>{lang:send_pm}</dd>
+	<dt>AOL IM</dt>
+		<dd>{lang:mbr_aim_console}</dd>		
+	<dt>ICQ</dt>
+		<dd>{lang:mbr_icq}</dd>
+	<dt>Yahoo Messenger</dt>
+		<dd>{lang:mbr_yahoo}</dd>
+	<dt>{current_page} of {total_pages}</dt>
+		<dd>{current_page} {lang:of} {total_pages}</dd>
+	<dt>Search Field</dt>
+		<dd>{lang:search_field}</dd>		
+	<dt>Screen Name</dt>
+		<dd>{lang:mbr_screen_name}</dd>
+	<dt>Email Address</dt>
+		<dd>{lang:mbr_email_address}</dd>
+	<dt>URL</dt>
+		<dd>{lang:mbr_url}</dd>
+	<dt>Location</dt>
+		<dd>{lang:mbr_location}</dd>
+	<dt>I am Online</dt>
+		<dd>{lang:am_online}</dd>
+	<dt>Add me to your Buddy List</dt>
+		<dd>{lang:add_to_buddy}</dd>
+	<dt>KB</dt>
+		<dd>{lang:kb}</dd>
+	<dt>Private Message</dt>
+		<dd>{lang:private_message}</dd>
+	<dt>value='Search'</dt>
+		<dd>value='{lang:search}'</dd>		
+	<dt>value='Submit'</dt>
+		<dd>value='{lang:submit}'</dd>		
+</dl>
+
+	
+	<p><br /><br /><a href="update.html">Return to Update Page</a></p>
+	
+	<p><br /><br /><br /><br /><br /><br /></p>
+	
+</div>
+
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

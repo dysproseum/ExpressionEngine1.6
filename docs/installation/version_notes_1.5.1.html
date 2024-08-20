@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Upgrading to ExpressionEngine 1.5.1 &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../index.html" />
+  <style type="text/css" media="screen,print">@import url(../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="../index.html#install_docs">Installation and Update Instructions</a> &gt;
+<a href="update.html">Updating EE</a> &gt;
+<strong>Version 1.5.1 Notes</strong>
+</div>
+
+<div id="content">
+
+	<h1>Update Notes for Version 1.5.1</h1>
+
+<p>ExpressionEngine 1.5.1 includes a number of new features and updates. Reviewing the notes below will help you transition to 1.5.1 with as little effort as possible.</p>
+
+	<ul>
+	<li><a href="#cp_image_additions">CP Image Additions</a></li>
+	<li><a href="#profile_theme">Profile Theme Updates</a>
+		<ul>
+			<li><a href="#pm_delete_bulletin">Delete PM Bulletin</a></li>
+			<li><a href="#pm_bulletin_board_message">Bulletin Board Message</a></li>
+		</ul>
+	</li>
+	<li><a href="#language">Language Additions</a></li>
+	</ul>
+	
+	<h2><a name="cp_image_additions"></a>CP Image Additions</h2>
+	
+	<p>A new image was added in 1.5.1 for a Quick Link edit button at the top of the Control Panel pages.
+	The file is located at <var>themes/cp_global_images/edit_quicklinks.png</var>.  Simply copy it over
+	to the same folder on your site.</p>
+	
+		<h2><a name="profile_theme"></a>Profile Theme Updates</h2>
+	<p>Version 1.5.1 has some changes in the member theme file (./themes/profile_themes/default/profile_theme.php), 
+	so either replace that file or if you have a customized the Member Profile theme add the following code.</p>
+	
+	<h3><a name="pm_delete_bulletin"></a>Delete PM Bulletin</h3>
+	
+	<p><strong>Bulletin</strong> part of the theme after the bulletin's date:</p>
+	
+	<code>&#123;if can_delete_bulletin}<br />
+&lt;span class='defaultBold'>&#123;lang:delete_bulletin}:&nbsp;&lt;a href='&#123;path:delete_bulletin}' onclick='if(!confirm("&#123;lang:delete_bulletin_popup}")) return false;'>&#123;lang:yes}&lt;/a>&lt;/span>&lt;br /><br />
+&#123;/if}</code>
+
+
+<h3><a name="pm_bulletin_board_message"></a>Bulletin Board Message</h3>
+	
+	<p><strong>Bulletin Board</strong> right at the top before everything else:</p>
+	
+	<code>&#123;if message}
+&lt;div class='tableCellOne'>&lt;div class='success'>&#123;include:message}&lt;/div>&lt;/div>
+&#123;/if}</code>
+
+	
+		
+	<h2><a name="language"></a>Language Additions</h2>
+	
+	<p>ExpressionEngine 1.5.1 has a number of language file additions.  To assist translators in 
+	updating their language packs, a <a href="language_notes_1.5.1.txt">language notes text file</a>
+	has been provided.  This text file lists all of the new language keys, separated by the each 
+	language file that contains changes.  To update your language pack, you can download this text 
+	file, make the changes, and simply copy the new keys to the appropriate language files.</p>
+	
+	<p><br /><br /><a href="update.html">Return to Update Page</a></p>
+	
+	<p><br /><br /><br /><br /><br /><br /></p>
+	
+</div>
+
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

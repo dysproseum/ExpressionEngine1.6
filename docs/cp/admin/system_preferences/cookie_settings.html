@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Cookie Settings &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../../index.html"><img src="../../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../../index.html">Table of Contents</a> &gt;
+<a href="../../../index.html#cp_docs">The Control Panel</a> &gt;
+<a href="../index.html">Admin</a> &gt;
+<a href="index.html">System Preferences</a> &gt;
+<strong>Cookie Settings</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Cookie Settings</h1>
+	<div class="path">Control Panel Location:&nbsp; <dfn>Admin &gt; System Preferences &gt; Cookie Settings</dfn></div>	
+
+
+	<p>This section of the Control Panel allows you to define cookie settings for your website.</p>
+
+	<h3>Cookie Domain</h3>
+
+		<p>This preference allows you to set your cookie domain.  The vast majority of people will want to set this to:</p>
+		
+		<p class="leftpad"><samp>.example.com</samp></p>
+		<p>Obviously you'll use your actual domain name instead of ".example.com". Note the period at the beginning as it is very important.</p>
+		<p>Setting the cookie domain like this will allow the cookies to work regardless of whether people specify your URL with the <dfn>www</dfn> part or only the <dfn>http://</dfn> part.</p>
+		<p>If you want to restrict your cookies to a single subdomain then you may set that here.</p>
+
+
+	<h3>Cookie Path</h3>
+
+		<p>This is an optional setting.  You will only need to set this if you require a specific server path for your cookies.  If you run multiple installations, or have your installation in a lower folder you can specify a folder from which to make the cooke available.   If you set the path to <kbd>/joe/</kbd>, the cookie will only be available in the "joe" folder and any subdirectories of it.  It will not be available in directories above <kbd>/joe/</kbd>.  The vast majrity of people will leave this setting blank.</p>
+
+
+	<h3>Cookie Prefix</h3>
+
+		<p>If you will be running multiple installations of ExpressionEngine on the same server then you will want to specify a unique cookie prefix for each installation.  This cookie prefix will prevent the cookies from interfering with each other.</p>
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

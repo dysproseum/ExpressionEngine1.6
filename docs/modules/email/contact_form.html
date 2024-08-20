@@ -1,0 +1,287 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Email Contact Form &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Email Module</a> &gt;
+<strong>Contact Form</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Email Contact Form</h1>
+	<p class="important"><strong>NOTE:</strong> The Email Module is not installed by default, so before using these tags make sure it is installed via the <a href="../../cp/modules/index.html">Modules Page</a>.</p>
+	<p>The purpose of this tag is to create a contact form on one of your pages that your users can use to send you email. To show your contact form use this tag pair:</p>
+
+	<code>{exp:email:contact_form}<br />
+<br />
+{/exp:email:contact_form}</code>
+
+	<p>The contact form is created similar to a standard web form, only you <b>do not</b> specify the opening and closing form tags; ExpressionEngine takes care of those for you. There are a few variables that are available in order to auto-fill fields in the form, and also a few tag parameters to specify form handling and hidden recipients. Here's an example showing how you might typically create a contact form:</p>
+
+	<code>{exp:email:contact_form user_recipients="false" recipients="admin@example.com" charset="utf-8"}<br />
+<br />
+&lt;h2>Support Form&lt;/h2><br />
+<br />
+&lt;p>&lt;label for="from">Your Email:&lt;/label>&lt;br /><br />
+&lt;input type="text" id="from" name="from" size="40" maxlength="35" value="{member_email}" />&lt;/p><br />
+<br />
+&lt;p>&lt;label for="subject">Subject:&lt;/label>&lt;br /><br />&lt;input type="text" id="subject" name="subject" size="40" value="Contact Form" />&lt;/p><br />
+<br />
+&lt;p>&lt;label for="message">Message:&lt;/label>&lt;br /><br />&lt;textarea id="message" name="message" rows="18" cols="40">Support Email from: {member_name}<br />
+Sent at:  {current_time format="%Y %m %d"}&lt;/textarea>&lt;/p><br />
+<br />
+&lt;p>&lt;input name="submit" type='submit' value='Submit Form' />&lt;/p><br />
+<br />
+{/exp:email:contact_form}</code>
+
+
+	<h2>Parameters</h2>
+
+	<ul class="minitoc">
+		<li><a href="#par_charset">charset="utf-8"</a></li>
+		<li><a href="#par_name">name="myForm"</a></li>
+		<li><a href="#par_recipients">recipients="you@example.com"</a></li>
+		<li><a href="#par_redirect">redirect="5"</a></li>
+		<li><a href="#par_replyto">replyto="y"</a></li>
+		<li><a href="#par_return">return="http://example.com/index.php"</a></li>
+		<li><a href="#par_user_recipients">user_recipients="true"</a></li>
+	</ul>
+
+
+	<h3><a name="par_charset">charset=</a></h3>
+
+		<code>charset="utf-8"</code>
+
+		<p>This allows you to set the character set of the email being sent. Use this if your form's template is using a character set other than iso-8859-1.</p>
+
+
+	<h3><a name="par_name">name=</a></h3>
+
+		<code>name="myForm"</code>
+
+		<p>This allows you to set a name= attribute for the form.  Keep in mind that name= is deprecated in XHTML.</p>
+
+	
+	<h3><a name="par_recipients">recipients=</a></h3>
+
+		<code>recipients="admin@example.com"</code>
+
+		<p>The <dfn>recipients</dfn> parameter allows you to specify the email address of the person (or persons) you want to receive the email. If you have more than one recipient, please separate each email address with a commas:</p>
+
+		<code>recipients="admin@example.com,ceo@example.com,president@example.com"</code>
+
+		<p><b>Note</b>: In the event that recipients are specified with this parameter and the regular "To:" field is <em>also</em> filled out, the recipients specified with this parameter will be mailed using BCC (Blind Carbon Copy) so that the "To:" recipient does not see those "hidden" email recipients.</p>
+
+
+	<h3><a name="par_redirect">redirect=</a></h3>
+
+		<code>redirect="5"</code>
+
+		<p>After the form is submitted, the user will be shown a message stating that the submission was successful.  With this parameter you can determine how long ExpressionEngine should display the message.  The value for this parameter is set in the number of seconds.  For instance, if you want the message displayed for six seconds, you would use</p>
+
+		<code>redirect="6"</code>
+
+		<p>You may also set ExpressionEngine to not redirect the user after they reach the message page.  In that case, the user would simply remain on the message page.  To do this, set the value to <samp>none</samp>:</p>
+
+		<code>redirect="none"</code>
+
+
+	<h3><a name="par_replyto">replyto=</a></h3>
+
+		<code>replyto="y"</code>
+
+		<p>By default the email address sending the email will be put in the From header for the email.  
+		If this parameter is set to "y", then that email address will be put into the Reply-To field
+		and the site's webmaster email will be put in the From header.  This is necessary at times
+		because certain email servers will not send an email with an address not from its domain,
+		so ExpressionEngine will use the site's webmaster email address to get past this restriction
+		while still allowing any replies to go to the sender of the email.</p>
+
+	<h3><a name="par_return">return=</a></h3>
+
+		<code>return="http://example.com/index.php"</code>
+
+		<p>This parameter lets you specify a URL where the user should be directed after the form is submitted.  Upon submission, the user is presented with a standard "thank you" message and a link.  The <samp>return</samp> parameter sets the location of the link as well as its name.  If this parameter is <strong>not</strong> used, then the link will point to the page they were on prior to arriving at the email form, and the text for the link will be the Site Name.</p>
+
+		<p>The return URL and link text can be specified by separating the two pieces of information with the pipe character.  If you are only specifying the second piece (the link text) then you must precede it by the pipe character.  For example, these would all be legitimate examples of the parameter:</p>
+
+		<code>return="http://example.com/index.php"</code>
+		<code>return="http://example.com/index.php|Home Page"</code>
+		<code>return="|Return to the Site"</code>
+
+
+	<h3><a name="par_user_recipients">user_recipients=</a></h3>
+
+		<code>user_recipients="true"</code>
+		<code>user_recipients="false"</code>
+
+		<p>The <samp>user_recipients</samp> parameter specifies whether or not the form will accept having the user input the recipients via the 'to' field in the form. If set to true, then you can create a 'to' form field where the user can input the addresses where the email should be sent.</p>
+
+
+
+	<h2>Variables</h2>
+
+	<ul class="minitoc">
+		<li><a href="#var_author_email">{author_email}</a></li>
+		<li><a href="#var_author_name">{author_name}</a></li>
+		<li><a href="#var_member_email">{member_email}</a></li>
+		<li><a href="#var_member_name">{member_name}</a></li>
+	</ul>
+
+
+	<h3><a name="var_author_email">author_email</a></h3>
+
+		<code>{author_email}</code>
+
+		<p>If you create a permalink to a page containing the {exp:email:contact_form} tag, then the form allows the use of this variable to put in the email address of the author who wrote the linked entry.  This feature allows the creation of a "contact author" page.</p>
+
+
+	<h3><a name="var_author_name">author_name</a></h3>
+
+		<code>{author_name}</code>
+
+		<p>If you create a permalink to a page containing the {exp:email:contact_form} tag, then the form allows the use of this variable to put in the screen name of the author who wrote the linked entry.  This feature allows the creation of a "contact author" page.</p>
+
+
+	<h3><a name="var_member_email">member_email</a></h3>
+
+		<code>{member_email}</code>
+
+		<p>If a user is logged in, then it will display their email address as recorded in their member profile.</p>
+
+
+	<h3><a name="var_member_name">member_name</a></h3>
+
+		<code>{member_name}</code>
+
+		<p>If a user is logged in, then it will display their screen name as recorded in their member profile.</p>
+
+
+
+
+	<h2>Form Fields</h2>
+
+	<ul class="minitoc">
+		<li><a href="#form_captcha">captcha</a></li>
+		<li><a href="#form_from">from</a></li>
+		<li><a href="#form_message">message</a></li>
+		<li><a href="#form_name">name</a></li>
+		<li><a href="#form_required">required</a></li>
+		<li><a href="#form_subject">subject</a></li>
+		<li><a href="#form_to">to</a></li>
+	</ul>
+
+
+	<h3><a name="form_captcha">captcha</a></h3>
+
+		<code>&lt;input type="text" name="captcha" value="" maxlength="20" /></code>
+
+		<p>The CAPTCHA input for the form.  It is usually used with a conditional so that it is only displayed if necessary:</p>
+
+		<code>{if captcha}<br />
+<br />
+&lt;p>Please enter the word you see in the image below:&lt;/p><br />
+<br />
+&lt;p>{captcha}&lt;br /><br />
+&lt;input type="text" name="captcha" value="" maxlength="20" />&lt;/p><br />
+<br />
+{/if}</code>
+
+		<p>The setting to disable or enable CAPTCHA for the contact form can be found in the <a href="../../cp/admin/system_preferences/email_configuration.html">Email Configuration</a> preferences.</p>
+
+	<h3><a name="form_from">from</a></h3>
+
+		<code>&lt;input type="text" name="from" size="40" /></code>
+
+		<p>Email address of person who is sending the email. You must include this form field, even if it is just a hidden field.</p>
+
+
+	<h3><a name="form_message">message</a></h3>
+
+		<code>&lt;textarea name="message" rows="10" cols="40">&lt;/textarea></code>
+
+		<p>Main message of the email.  You must include this form field, even if it is just a hidden field.</p>
+
+		<p>You may specify multiple fields by making the <samp>name=</samp> attribute an array by using "<samp>message[]</samp>".  For example:</p>
+
+		<code>Home Phone: &lt;input type="text" name="message[]" size="12" maxlength="15" />&lt;br /><br />
+&lt;br /><br />
+Cell Phone: &lt;input type="text" name="message[]" size="12" maxlength="15" /></code>
+
+
+	<h3><a name="form_name">name</a></h3>
+
+		<code>&lt;input type="text" name="name" size="40" /></code>
+
+		<p>Name of person who is sending the email.</p>
+
+
+	<h3><a name="form_required">required</a></h3>
+
+		<code>&lt;textarea name="required" rows="5" cols="40" readonly="readonly">&lt;/textarea></code>
+
+		<p>This field allows you to have required information that is included at top of each email.  Useful for support emails where the information can be readonly or hidden.</p>
+
+		<p>You may specify multiple fields by making the <samp>name=</samp> attribute an array by using "<samp>required[]</samp>".  For example:</p>
+
+		<code>Age: &lt;input type="text" name="required[]" size="3" maxlength="3" />&lt;br /><br />
+&lt;br /><br />
+Bio: &lt;textarea name="required[]" rows="5" cols="40">&lt;/textarea></code>
+
+
+	<h3><a name="form_subject">subject</a></h3>
+
+		<code>&lt;input type="text" name="subject" size="40" /></code>
+
+		<p>Subject of the email that is being sent.  You must include this form field, even if it is just a hidden field.</p>
+
+
+	<h3><a name="form_to">to</a></h3>
+
+		<code>&lt;input type="text" name="to" size="40" /></code>
+
+		<p>Email address to which the email is being sent.  Multiple email addresses may be specified by separating them with a comma.  You must include this form field, even if it is just a hidden field.  This data may also be specified with the <a href="#par_recipients">recipients=</a> parameter of the tag.</p>
+		
+		<p class="important"><strong>WARNING</strong>: If you leave this field open to user input, you are potentially giving spammers an easy way to send anonymous emails.  If you allow users to access this field, consider using a <samp>&lt;select></samp> field to limit the email address to specific choices.  Further, you should enable CAPTCHAs to help prevent automated abuse.</p>
+
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

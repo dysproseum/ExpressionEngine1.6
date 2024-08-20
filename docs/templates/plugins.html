@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Using Plugins &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../index.html" />
+  <style type="text/css" media="screen,print">@import url(../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="../index.html#template_docs">Templating System</a> &gt;
+<strong>Using Plugins</strong>
+</div>
+
+
+<div id="content">
+
+
+	<h1>Using Plugins</h1>
+
+	<p>ExpressionEngine is designed so that features can be added through the use of Plugins.&nbsp; The <a href="http://plugins.expressionengine.com/"><strong>ExpressionEngine Plugins</strong></a> site contains a list of all available plugins, as well as installation and usage instructions for each one. The following are generic instructions that will work for most plugins. Its important to review the notes for the specific plugin you wish to use.</p>
+
+<h2>Installation</h2>
+
+<p>Plugin installation in ExpressionEngine is extremely easy:</p>
+
+      <p>If you are running EE version 1.2.1 or newer and you meet all of the requirements for using the <a href="../cp/admin/utilities/plugin_manager.html">Plugin Manager</a>, you can simply click the "Install" link for the desired Plugin in the list of Available Plugins in the Plugin Manager. The Plugin will then be automatically installed.</p>
+
+      <p>Plugins may also be manually installed by following these simple instructions.  (Note: a few Plugins may have additional &#8212; or optional &#8212; steps that can be performed.  Be sure to consult the notes included with the entry.)</p>
+
+      <ol>
+        <li>Download the Plugin to your local computer.  You'll usually need to unzip the file.</li>
+        <li>Log into your server via FTP and browse to your <kbd>system/plugins/</kbd> directory.</li>
+        <li>Upload the new Plugin <var>.php</var> file.  Be sure to upload in ASCII ("text") mode.</li>
+      </ol>
+
+      <p>Once the Plugin is installed, you should be able to see it listed in the <a href="../cp/admin/utilities/plugin_manager.html">Plugin Manager</a> in your ExpressionEngine Control Panel.</p>
+
+      <p><b>Note:</b> Some Plugins may have additional installation requirements specific to that particular Plugin.  Be sure to read any instructions, readme files, etc. that may come with the Plugin.</p>
+
+	<h2>Basic Usage</h2>
+
+	<p>Within your templates you'll typically wrap the item you want affected by the plugin:</p>
+
+	<code><kbd>{exp:xml_encode}</kbd><br />
+some content<br />
+<kbd>{/exp:xml_encode}</kbd></code>
+
+	<p>In the above example, the content would be <dfn>XML Encoded</dfn>.</p>
+
+	<h2>Nested Plugins</h2>
+
+	<p>It is possible to nest Plugins in order for content to be affected by more than one plugin.  For example, you can do this:</p>
+
+	<code>{exp:word_limit total="35"}<br />
+&nbsp;&nbsp;&nbsp;{exp:xml_encode}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;some content<br />
+&nbsp;&nbsp;&nbsp;{/exp:xml_encode}<br />
+{/exp:word_limit}</code>
+
+	<p>By default, ExpressionEngine will process the innermost Plugin first, then the next Plugin, and so on until all the plugins wrapping a given piece of content have been parsed.  In the above example, the content is XML Encoded first and then the result of that is limited to 35 words.</p>
+
+
+	<h2>Changing Parsing Order</h2>
+
+		<p>You may change the parsing order and instruct ExpressionEngine to parse an outer Plugin first.  This is done by adding a <samp>parse="inward"</samp> parameter to the Plugin opening tag.  Using that parameter will tell EE to parse that Plugin before parsing any Plugins inside of it.</p>
+
+		<code>parse="inward"</code>
+
+	<h2>Examples</h2>
+
+		<p>Here are some examples to help illustrate the parsing order.</p>
+
+<code>{exp:magpie url="http://some-site.com" parse="inward"}<br />
+&nbsp;&nbsp;&nbsp;{items}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;a href="{link}">{title}&lt;/a>&lt;br /><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{exp:word_limit total="20"}{content}{/exp:word_limit}&lt;br /><br />
+&nbsp;&nbsp;&nbsp;{/items}<br />
+{/exp:magpie}</code>
+
+	<p>With the above, the "magpie" Plugin will be parsed first.  This will allow the content of the <samp>{content}</samp> variable to be available to the other, nested Plugin: "word_limit".</p>
+
+	<p>Here is a much more complicated example that demonstrates both parsing orders in action.</p>
+
+<code>{exp:magpie url="http://some-site.com" limit="15" refresh="720" parse="inward"}<br />
+&lt;ul><br />
+&nbsp;&nbsp;&nbsp;{items}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li>&lt;a href="{link}">{title}&lt;/a>&lt;br /><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{exp:word_limit total="35"}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{exp:xml_encode}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{content}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{/exp:xml_encode}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{/exp:word_limit}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/li><br />
+&nbsp;&nbsp;&nbsp;{/items}<br />
+&lt;/ul><br />
+{/exp:magpie}</code>
+
+	<p>The outer "magpie" Plugin has the parameter set to parse inward, so it is parsed first.  This makes the <samp>{content}</samp> variable's content available to the other Plugins.  Next, is the "word_limit" Plugin.  However, since by default EE parses Plugins outward, the "xml_encode" Plugin is parsed first and then "word_limit" after it.
+In this way, "word_limit" will never erase the closing tag for the "xml_encode" Plugin.</p>
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

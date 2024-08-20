@@ -1,0 +1,41 @@
+{assign_variable:master_weblog_name="default_site"}
+{assign_variable:atom_feed_location="site/atom"}
+
+{exp:rss:feed weblog="{master_weblog_name}"}
+
+<?xml version="1.0" encoding="{encoding}"?>
+<feed >
+
+    &lt;title type="text"&gt;{exp:xml_encode}{weblog_name}{/exp:xml_encode}&lt;/title&gt;
+    <subtitle type="text">{exp:xml_encode}{weblog_name}:{weblog_description}{/exp:xml_encode}</subtitle>
+    &lt;link rel="alternate" type="text/html" href="{weblog_url}" /&gt;
+    &lt;link rel="self" type="application/atom+xml" href="http://expressionengine.com/{atom_feed_location/}" /&gt;
+    <updated>{gmt_edit_date format='%Y-%m-%dT%H:%i:%sZ'}</updated>
+    <rights>Copyright (c) {gmt_date format="%Y"}, {author}</rights>
+    <generator uri="http://expressionengine.com/" version="1.6.9">ExpressionEngine</generator>
+    <id>tag:{trimmed_url},{gmt_date format="%Y:%m:%d"}</id>
+
+{exp:weblog:entries weblog="{master_weblog_name}" limit="15" rdf="off" dynamic_start="on" disable="member_data|trackbacks"}
+    <entry>
+      &lt;title&gt;{exp:xml_encode}{title}{/exp:xml_encode}&lt;/title&gt;
+      &lt;link rel="alternate" type="text/html" href="{url_title_path=site/index}" /&gt;
+      <id>tag:{trimmed_url},{gmt_entry_date format="%Y"}:{relative_url}/{weblog_id}.{entry_id}</id>
+      <published>{gmt_entry_date format="%Y-%m-%dT%H:%i:%sZ"}</published>
+      <updated>{gmt_edit_date format='%Y-%m-%dT%H:%i:%sZ'}</updated>
+      <author>
+            <name>{author}</name>
+            <email>lisa.wess@ellislab.com</email>
+                  </author>
+{categories}
+      <category term="{exp:xml_encode}{category_name}{/exp:xml_encode}"
+        scheme="http://expressionengine.com/site/"
+        label="{exp:xml_encode}{category_name}{/exp:xml_encode}" />{/categories}
+      <content type="html">&lt;![CDATA[
+        {body} {extended}
+      ]]></content>
+    </entry>
+{/exp:weblog:entries}
+
+</feed>
+
+{/exp:rss:feed}

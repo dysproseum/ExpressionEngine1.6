@@ -1,0 +1,519 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Wiki Page Section &#8211; ExpressionEngine Documentation</title> 
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style> 
+
+<style type="text/css">
+.screencap {
+margin: 30px 0;
+text-align: center;}
+</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="README.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+</tr>
+</table>
+</div>
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Wiki Module</a> &gt;
+<a href="wiki_templates.html">Theme Template</a> &gt;
+<strong>Wiki Page Section</strong>
+</div>
+
+<div id="content">
+
+	<h1>Wiki Page Section</h1>
+
+<p>This is the <b>wrapper</b> section that contains the header, sidebar, navigation, CSS, and the elements found in a standard HTML page including the CSS. It "wraps" around all the user editable content as outlined in the screencap below.</p>
+
+<div class="screencap"><img src="../../images/wiki_page_highlight.jpg" width="550" height="341" alt="The Wiki Page section controls the highlighted area" /></div>
+
+<p>The variables available to the Wiki Page section are divided into the following broad categories:</p>
+
+<ul>
+<li><a href="#single">Single Variables</a></li>
+<li><a href="#namespace">Namespace Variables</a></li>
+<li><a href="#path">Path Variables</a></li>
+<li><a href="#member">Member Variables</a></li>
+<li><a href="#conditional">Conditional Variables</a></li>
+<li><a href="#categories_list">List of Categories - {wiki:categories_list}</a></li>
+</ul>
+
+<h2><a name="single">Single Variables</a></h2>
+
+<ul>
+<li><a href="#var_sin_elapsed_time">{elapsed_time}</a></li>
+<li><a href="#var_sin_original_age">{original_page}</a></li>
+<li><a href="#var_sin_redirect_page">{redirect_page}</a></li>
+<li><a href="#var_sin_revision_id">{revision_id}</a></li>
+<li><a href="#var_sin_title">{title}</a></li>
+<li><a href="#var_sin_wiki_name">{wiki_name}</a></li>
+<li><a href="#var_sin_XID_HASH">{XID_HASH}</a></li>
+</ul>
+
+<h3><a name="var_sin_elapsed_time">elapsed_time</a></h3>
+
+<code>{elapsed_time}</code>
+
+<p>Time to render page</p>
+
+<h3><a name="var_sin_original_page">original_page</a></h3>
+
+<code>{original_page}</code>
+
+<p>If a page is redirected, this tag displays the name of the original page. This is used inside <a href="#var_con_redirected">redirected conditional</a>.</p>
+
+<h3><a name="var_sin_redirect_page">redirect_page</a></h3>
+
+<code>{redirect_page}</code>
+
+<p>If a page redirects this variable sets the page to which it redirects. The value is set dynamically by ExpressionEngine. This variable is used inside <a href="#var_con_redirect_page:">redirect_page conditional</a>.</p>
+
+<h3><a name="var_sin_revision_id">revision_id</a></h3>
+
+<code>{revision_id}</code>
+
+<p>If you are viewing a revision of an article, this variable displays the the revision id for that revision.</p>
+
+<h3><a name="var_sin_title">title</a></h3>
+
+<code>{title}</code>
+
+<p>Displays the Title/Name of the article page. This variable also works with  <strong>Special</strong> and <strong>File</strong> template sections too).</p>
+
+<h3><a name="var_sin_wiki_name">wiki_name</a></h3>
+
+<code>{wiki_name}</code>
+
+<p>Displays the Wiki's Full Name (see the <a href="wiki_cp.html">Wiki Control Panel</a>).</p>
+
+<h3><a name="var_sin_XID_HASH">XID_HASH</a></h3>
+
+<code>{XID_HASH}</code>
+
+<p>This variable is a required value for hidden form field 'XID' used in secure forms.</p>
+
+
+
+
+<h2><a name="namespace">Namespace Variables</a></h2>
+
+<ul>
+<li><a href="#var_namespace">{namespace}</a></li>
+<li><a href="#var_category_namespace">{category_namespace}</a></li>
+<li><a href="#var_file_namespace">{file_namespace}</a></li>
+<li><a href="#var_image_namespace">{image_namespace}</a></li>
+<li><a href="#var_main_namespace">{main_namespace}</a></li>
+<li><a href="#var_special_namespace">{special_namespace}</a></li>
+</ul>
+
+<h3><a name="var_namespace">namespace</a></h3>
+
+<code>{namespace}</code>
+
+<p>The current namespace being viewed on the page.</p>
+
+
+<h3><a name="var_category_namespace">category_namespace</a></h3>
+
+<code>{category_namespace}</code>
+
+<p>The name of the 'Category' namespace.</p>
+
+
+<h3><a name="var_file_namespace">file_namespace</a></h3>
+
+<code>{file_namespace}</code>
+
+<p>The name of the 'File' namespace.</p>
+
+
+<h3><a name="var_image_namespace">image_namespace</a></h3>
+
+<code>{image_namespace}</code>
+
+<p>The name of the 'Image' namespace.</p>
+
+
+<h3><a name="var_main_namespace">main_namespace</a></h3>
+
+<code>{main_namespace}</code>
+
+<p>The name of the 'Main' default namespace, which is where all articles without a namespace in their title are put.</p>
+
+
+
+<h3><a name="var_special_namespace">special_namespace</a></h3>
+
+<code>{special_namespace}</code>
+
+<p>The name of the 'Special' namespace.</p>
+
+
+
+
+
+
+<h2><a name="path">Path Variables</a></h2>
+
+<ul>
+<li><a href="#var_path_wiki_home">{path:wiki_home}</a></li>
+<li><a href="#var_path_view_article">{path:view_article}</a></li>
+<li><a href="#var_path_edit_topic">{path:edit_article}</a></li>
+<li><a href="var_path_article_history">{path:article_history}</a></li>
+</ul>
+
+<h3><a name="var_path_wiki_home">path:wiki_home</a></h3>
+
+<code>{path:wiki_home}</code>
+
+<p>This variable will generate the URL for the wiki's homepage which is set in the <a href="wiki_cp.html">Wiki Control Panel</a>. For example, this:</p>
+
+<code>&lt;a href="{path:wiki_home}">Home&lt;/a></code>
+
+<p>Would be rendered like this:</p>
+
+<code>&lt;a href="http://example.com/index.php/wiki/">Home&lt;/a></code>
+
+<p>This is useful for linking to special pages like <strong>Categories</strong>, <strong>Title list</strong>, etc... For example, this:</p>
+
+<code>&lt;a href="{path:wiki_home}Special:Titles">Title List&lt;/a></code>
+
+<p>Would be rendered like this:</p>
+
+<code>&lt;a href="http://example.com/index.php/wiki/Special:Titles">Title List&lt;/a></code>
+
+<h3><a name="var_path_view_article">path:view_article</a></h3>
+
+<code>{path:view_article}</code>
+
+<p>When viewing an article page this variable displays the URL to view the article. Think of it as the article's "permalink".</p>
+
+<h3><a name="var_path_edit_topic">path:edit_topic</a></h3>
+
+<code>{path:edit_topic}</code>
+
+<p>When viewing an article page this variable displays the URL to edit the article.</p>
+
+<h3><a name="var_path_article_history">path:article_history</a></h3>
+
+<code>{path:topic_history}</code>
+
+<p>When viewing an article page this variable displays the URL to an article's history.</p>
+
+<h2><a name="member">Member Variables</a></h2>
+
+<ul>
+<li><a href="#var_mem_logged_out">{if logged_out}</a></li>
+<li><a href="#var_mem_logged_in">{if logged_in}</a></li>
+<li><a href="#var_mem_screen_name">{screen_name}</a></li>
+<li><a href="#var_mem_path_login">{path:login}</a></li>
+<li><a href="#var_mem_path_register">{path:register}</a></li>
+<li><a href="#var_mem_path_memberlist">{path:memberlist}</a></li>
+<li><a href="#var_mem_path_your_profile">{path:your_profile}</a></li>
+<li><a href=#var_mem_path_your_control_panel">{path:your_control_panel}</a></li>
+<li><a href="#var_mem_path_logout">{path:logout}</a></li>
+</ul>
+
+<h3><a name="var_mem_logged_out">if logged_out</a></h3>
+
+<code>{if logged_out}</code>
+
+<p>This conditional checks to see if the user IS <strong>NOT</strong> logged in.</p>
+
+<h3><a name="var_mem_logged_in">if logged_in</a></h3>
+
+<code>{if logged_in}</code>
+
+<p>This conditional checks to see if the user <strong>IS</strong> logged in.</p>
+
+<h3><a name="var_mem_screen_name">screen_name</a></h3>
+
+<code>{screen_name}</code>
+
+<p>Displays the Screen Name for logged in user.</p>
+
+<h3><a name="var_mem_path_login">path:login</a></h3>
+
+<code>{path:login}</code>
+
+<p>Displays the URL to the Login page.</p>
+
+<h3><a name="var_mem_path_register">path:register</a></h3>
+
+<code>{path:register}</code>
+
+<p>Displays the URL to the Register page.</p>
+
+<h3><a name="var_mem_path_memberlist">path:memberlist</a></h3>
+
+<code>{path:memberlist}</code>
+
+<p>Displays the URL to the Member List page.</p>
+
+<h3><a name="var_mem_path_your_profile">path:your_profile</a></h3>
+
+<code>{path:your_profile}</code>
+
+<p>Displays the URL to the Profile page of the logged in user.</p>
+
+<h3><a name="var_mem_path_your_control_panel">path:your_control_panel</a></h3>
+
+<code>{path:your_control_panel}</code>
+
+<p>Displays the URL to the Your Control Page of the logged in user.</p>
+
+<h3><a name="var_mem_path_logout">path:logout</a></h3>
+
+<code>{path:logout}</code>
+
+<p>Displays the URL to the logout script.</p>
+
+<p><strong>NOTE to Discussion Forum Module users</strong>:  
+The <a href="wiki_tag.html">Wiki tag</a> has an optional parameter called <strong>profile_path=""</strong>. 
+When this parameter is used, you can direct the member paths from the default member area of your 
+ExpressionEngine installation to the Discussion Forum member area.</p>
+
+
+<h2><a name="conditional">Conditional Variables</a></h2>
+
+<p class="important">The best way to understand how these conditionals are used is to look at the code in the <var>themes/wiki_themes/default/default.php</var> file. Do a search for the conditional you are reviewing and see how it is used in the template.</p>
+
+<ul>
+<li><a href="#var_con_new_article">{if new_article}</a></li>
+<li><a href="#var_con_article">{if article}</a></li>
+<li><a href="#var_con_redirected">{if redirected}</a></li>
+<li><a href="#var_con_redirect_page">{if redirect_page}</a></li>
+<li><a href="#var_con_revision">{if revision}</a></li>
+<li><a href="#var_con_edit_article">{if edit_article}</a></li>
+<li><a href="#var_con_article_history">{if article_history}</a></li>
+<li><a href="#var_con_special_page">{if special_page}</a></li>
+<li><a href="#var_con_file_page">{if file_page}</a></li>
+<li><a href="#var_con_can_edit">{if can_edit}</a></li>
+<li><a href="#var_con_cannot_edit">{if cannot_edit}</a></li>
+<li><a href="#var_con_can_admin">{if can_admin}</a></li>
+<li><a href="#var_con_cannot_admin">{if cannot_admin}</a></li>
+<li><a href="#var_con_uploads">{if uploads}</a></li>
+</ul>
+
+<h3><a name="var_con_new_article">if new_article</a></h3>
+
+<code>{if new_article}</code>
+
+<p>Checks to see if current page is a new article.</p>
+
+<h3><a name="var_con_article">if article</a></h3>
+
+<code>{if article}</code>
+
+<p>Checks to see if the current page is an article.</p>
+
+<h3><a name="var_con_redirected">if redirected</a></h3>
+
+<code>{if redirected}</code>
+
+<p>Checks to see if the current page has been redirected from another page.</p>
+
+<h3><a name="var_con_redirect_page">if redirect_page</a></h3>
+
+<code>{if redirect_page}</code>
+
+<p>Checks if the current page should redirect to another page.</p>
+
+<h3><a name="var_con_revision">if revision</a></h3>
+
+<code>{if revision}</code>
+
+<p>Checks to see if the current page is a revision of an article.</p>
+
+<h3><a name="var_con_edit_article">if edit_article</a></h3>
+
+<code>{if edit_article}</code>
+
+<p>Checks to see if the current page is the article's Editing page.</p>
+
+<h3><a name="var_con_article_history">if article_history</a></h3>
+
+<code>{if article_history}</code>
+
+<p>Checks to see if the current page is the article's History page.</p>
+
+<h3><a name="var_con_special_page">if special_page</a></h3>
+
+<code>{if special_page}</code>
+
+<p>Checks to see if the current page is a <strong>Special page</strong>(Categories, Title list, etc...) in the wiki.</p>
+
+<h3><a name="var_con_file_page">if file_page</a></h3>
+
+<code>{if file_page}</code>
+
+<p>Checks to see if the current page is the special File page in the wiki.</p>
+
+<h3><a name="var_con_can_edit">if can_edit</a></h3>
+
+<code>{if can_edit}</code>
+
+<p>Checks to see if the current visitor to the page is logged in and has permission to edit the article.</p>
+
+<h3><a name="var_con_cannot_edit">if cannot_edit</a></h3>
+
+<code>{if cannot_edit}</code>
+
+<p>Checks to see if the current visitor to the page is logged in and does not have permission to edit the article.</p>
+
+<h3><a name="var_con_can_admin">if can_admin</a></h3>
+
+<code>{if can_admin}</code>
+
+<p>Checks to see if the logged in user is a wiki administrator.</p>
+
+<h3><a name="var_con_cannot_admin">if cannot_admin</a></h3>
+
+<code>{if cannot_admin}</code>
+
+<p>Checks to see if the current user is not a wiki admin.</p>
+
+<h3><a name="var_con_uploads">if uploads</a></h3>
+
+<code>{if uploads}</code>
+
+<p>Checks to see if the wiki allows uploads and if the upload info is valid.</p>
+
+
+
+
+
+
+
+<h2><a name="categories_list">{wiki:categories_list}</a></h2>
+
+<p>This tag is used to display all the wiki's categories. Unlike the <a href="./modules/wiki/wiki_templates_special_categories.html#wiki_tag_categories">{wiki:categories}</a> tag, it is not affected by being put in an article page. It has <a href="#wiki_categories_para">Parameters</a> and <a href="#wiki_categories_var">Variables</a> available to it.</p>
+
+<h3><a name="wiki_categories_para">{wiki:categories_list} | Parameters</a></h3>
+
+<ul>
+<li><a href="#tag_para_backspace">backspace=""</a></li>
+<li><a href="#tag_para_show_empty">show_empty=""</a></li>
+<li><a href="#tag_para_style">style=""</a></li>
+</ul>
+
+<h4><a name="tag_para_backspace">backspace=""</a></h4>
+
+<code>{wiki:categories backspace="#"}</code>
+
+<p>This removes "#" number of characters from the output at the end of the loop. This is useful for removing commas and &lt;br />'s.</p>
+
+<h4><a name="tag_para_show_empty">show_empty=""</a></h4>
+
+<code>{wiki:categories show_empty="n"</code>
+
+<p>This parameter lets you tell the wiki whether or not to display categories with no articles assigned to it. The possible values are:</p>
+
+<ul>
+<li><strong>n</strong>: Categories with no articles will not be displayed.</li>
+</ul>
+
+<h4><a name="tag_para_style">style=""</a></h4>
+
+<code>{wiki:categories style=""}</code>
+
+<p>This will automatically nest the categories for you as standard xhtml using &lt;ul> or render a list without any formatting. The values are:</p>
+
+<ul>
+<li><strong>nested</strong>: renders the categories in a xhtml list with &lt;ul>.</li>
+<li><strong>linear</strong>: renders the categories with no formatting.</li>
+</ul>
+
+<p>For more information on nesting please see the <a href="../../modules/weblog/categories.html#par_style">Style parameter</a> in the Weblog section of the User Guide.</p>
+
+<h3><a name="wiki_categories_var">{wiki:categories_list} | Variables</a></h3>
+
+<ul>
+<li><a href="#tag_sin">Single Variables</a></li>
+<li><a href="#tag_con">Conditional Variables</a></li>
+</ul>
+
+<h4><a name="tag_sin">{wiki:categories_list} | Single Variables</a></h4>
+
+<ul>
+<li><a href="#cat_sin_path_view_category">{path:view_category}</a></li>
+<li><a href="#cat_sin_category_name">{category_name}</a></li>
+<li><a href="#cat_sin_depth">{depth}</a></li>
+</ul>
+
+<h5><a name="cat_sin_path_view_category">path:view_category</a></h5>
+
+<code>{path:view_category}</code>
+
+<p>Creates a link to view a specific category page.</p>
+
+<h5><a name="cat_sin_category_name">category_name</a></h5>
+
+<p>Displays the category name.</p>
+
+<h5><a name="cat_sin_depth">depth</a></h5>
+
+<code>{depth}</code>
+
+<p>Determines how many nested layers down a category is.</p>
+
+<h4><a name="tag_con">{wiki:categories_list} | Conditional Variables</a></h4>
+
+<ul>
+<li><a href="#wiki_con_depth">{if depth}</a></li>
+<li><a href="#wiki_con_children">{if children}</a></li>
+<li><a href="#wiki_con_first_child">{if first_child}</a></li>
+<li><a href="#wiki_con_last_child">{if last_child}</a></li>
+</ul>
+
+<h5><a name="wiki_con_depth">if depth</a></h5>
+
+<code>{if depth == '#'}</code>
+
+<p>You can check to see if a category is at a certain "depth" in the list.</p>
+
+<h5><a name="wiki_con_children">if children</a></h5>
+
+<code>{if children}</code>
+
+<p>Determines if a category has one or more "children" categories.</p>
+
+<h5><a name="wiki_con_first_child">if first_child</a></h5>
+
+<code>{if first_child}</code>
+
+<p>Determines if a category is the first child of a parent category.</p>
+
+<h5><a name="wiki_con_last_child">if last_child</a></h5>
+
+<code>{if last_child}</code>
+
+<p>Determines if a category is the last child of a parent category.</p>
+
+
+</div>
+
+	
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Global Weblog Preferences &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../../index.html"><img src="../../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../../index.html">Table of Contents</a> &gt;
+<a href="../../../index.html#cp_docs">The Control Panel</a> &gt;
+<a href="../index.html">Admin</a> &gt;
+<a href="index.html">Weblog Administration</a> &gt;
+<strong>Global Weblog Preferences</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Global Weblog Preferences</h1>
+
+	<div class="path">Control Panel Location:&nbsp; <dfn>Admin &gt; Weblog Administration &gt; Global Weblog Preferences</dfn></div>	
+
+
+	<p>This section of the Control Panel sets global preferences for your weblogs. The following preferences are available:</p>
+
+
+
+	<h3>Use Category URL Titles In Links?</h3>
+
+		<p>This preference lets the name of each category appear in your URLs rather than the numeric indicator (e.g. "/C12/") on pages such as your <dfn>Category Archive</dfn> page.</p>
+
+		<div class="important">
+			<p>In order to use this feature, you <strong>must</strong> use the <samp>weblog=</samp> parameter in the following tags, and if you specify multiple weblogs, they <strong>must</strong> share identical Category Groups:</p>
+
+			<ul>
+				<li>{exp:weblog:categories}</li>
+				<li>{exp:weblog:category_heading}</li>
+				<li>{exp:weblog:entries}</li>
+			</ul>
+			
+		</div>
+
+
+	<h3>Category URL Indicator</h3>
+
+		<p>If you turn on the preceding preference, you must designate a special "indicator" word, which will be used in the URL whenever a category is intended.  For example, URLs that indicate a category normally use the ID number like this by default:</p>
+
+		<code>http://example.com/index.php/site/C12/</code>
+
+		<p>If you instead specify that the category URL title should be used, the URL will look like this:</p>
+
+		<code>http://example.com/index.php/site/category/blogging/</code>
+
+		<p>In this example, the <i>indicator</i> is "category" and the category URL title is "blogging".</p>
+
+		<div class="important">
+			<p>The "indicator" word that you choose will become a 'reserved' word, which means that it <strong>cannot</strong> be used for Template Group or Template names.</p>
+		</div>
+
+
+	<h3>Automatically Convert High ASCII Text to Entities</h3>
+
+	<p>Due to the inherent limitations of the web only <var>Low-ASCII characters</var> can be shown reliably in web browsers.  Low-ASCII values are 
+	the basic characters, numbers, and standard punctuation on your computer keyboard.</p>
+	
+	<p>If your text contains <dfn>High-ASCII values</dfn>, 
+	like accented characters, or if you copy your text from <b>Microsoft Word</b>, which uses High-ASCII values
+	for quotes and other characters, then you run the risk that some characters will not be displayed correctly on your web pages.</p>
+	
+	<p>Furthermore, depending on a number of factors related to your server's character encoding support, when
+	 you submit High-ASCII values into your database they might not be recognized properly for storage.</p>
+	
+	<p>This preference will automatically convert these high-ASCII characters into their 
+	appropriate HTML character entity so that any web browser can display them correctly.  
+	For instance, the <samp>&#169;</samp> character will 
+	be converted into its HTML entity (<samp>&amp;#169;</samp>), which any web browser, regardless of its character encoding, will correctly display as a copyright symbol.</p>
+		
+	<p class="important"><strong>Note:</strong> The conversion happens when you submit entries, <strong>not</strong> at run time, so
+	you'll need to edit/re-save any entries containing High-ASCII values for this feature to work.</p>
+
+
+	<h3>Auto-Assign Category Parents</h3>
+
+		<p>If this option is set to "yes", when new entries that contain category assignments are submitted, the "parent" category of any sub-categories will be automatically assigned.  If set to "no", the entry will only be assigned to the child category.</p>
+
+
+	<h3>Clear all caches when new entries are posted?</h3>
+
+		<p>You can determine whether your caches will be cleared when you post an entry.  If set to "no", the new entry will not appear on your site until any cache expires.</p>
+
+
+	<h3>Cache Dynamic Weblog Queries?</h3>
+
+		<p>This feature will improve the speed at which your weblog pages load by caching queries that are normally executed dynamically. <b>Note:</b> Enable this preference only if you <strong>do not</strong> use the "future entries" or "expiring entries" feature.</p>
+
+
+	<h3>Word Separator for URL Titles</h3>
+
+		<p>When creating an entry in the <kbd>PUBLISH</kbd> page, if you do not manually enter a "URL Title" then the system will automatically create one based on the entry Title.  This preference determines whether underscore characters (<samp>_</samp>) or dashes (<samp>-</samp>) should be used when automatically creating the URL Title.</p>
+
+
+	<h3>Enable Image Resizing</h3>
+
+		<p>When enabled, you will be able to create thumbnails when you upload images for placement in your weblog entries.</p>
+
+
+	<h3>Remap pMachine Pro URLs to EE</h3>
+
+		<p>If you have imported your entries from pMachine Free or Pro, you'll often have internal links within your entries that point to other entries.  Likewise, other sites or people may have links to your old pMachine URLs.  This feature will look for URLs following the pMachine Free/Pro format and then redirect to the corresponding entry in ExpressionEngine.  This setting is used together with the following setting.</p>
+
+		<p>See the <a href="../../../installation/pmachine_migration.html" id="" title="pmachine_migration">pMachine Migration</a> section for more information about how this feature works and the limitations that exist.</p>
+
+	<h3>Destination of Remapped URLs</h3>
+
+		<p>If the previous setting is turned on, this is where you specify the location where you would like the remapped entries displayed.  This is the full URL, including the Template Group and Template.  For example, <samp>http://example.com/index.php/weblog/comments/</samp>.</p>
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

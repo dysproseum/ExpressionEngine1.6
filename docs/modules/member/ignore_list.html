@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Ignore List Tag &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Member Management</a> &gt;
+<strong>Ignore List</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Ignore List Tag</h1>
+
+	<p>The <dfn>Ignore List Tag</dfn> allows you to display member profile information for members in a member's Ignore List.   Fields can either be shown from the ignore list of currently logged-in user or from a specified user.</p>
+
+	<p class="important"><strong>NOTE:</strong>&nbsp; This tag can only be used in the templates accessed via the <kbd>TEMPLATES</kbd> tab in the Control Panel, not in member profile or forum templates.</p>
+
+	<p class="important"><strong>Important:</strong>&nbsp; Avoid using Template Caching on any Template containing this tag.  If you do not avoid caching, then data will not be dynamic for each user. Instead, whoever happens to load the page when it is cached will have their information shown for everyone until the cache expires. Unlike this tag, <a href="../../templates/globals/index.html">Global Variables</a> can be used in templates that are cached.</p>
+
+	<p>Here is the basic tag syntax:</p>
+
+	<code>{exp:member:ignore_list}<br />
+<br />
+	&lt;div>{ignore_screen_name}&lt;/div><br />
+<br />
+{/exp:member:ignore_list}</code>
+
+
+
+	<h2>Parameters</h2>
+
+
+	<h3>member_id=</h3>
+
+		<code>member_id="147"</code>
+
+		<p>You can specify a particular member's information to display.  By default (if you do not include the <samp>member_id</samp> parameter), the tag will simply display information pertaining to the currently logged-in user.</p>
+
+
+
+	<h2>Variables</h2>
+
+	<p>The following member variables are available. The unique prefix "<samp>ignore_</samp>" ensures that the Ignore List variables do not conflict with Global Variables or member variables from other tags.</p>
+
+	<ul>
+		<li>{ignore_member_id}</li>
+		<li>{ignore_group_id}</li>
+		<li>{ignore_group_description}</li>
+		<li>{ignore_username}</li>
+		<li>{ignore_screen_name}</li>
+		<li>{ignore_email}</li>
+		<li>{ignore_ip_address}</li>
+		<li>{ignore_location}</li>
+		<li>{ignore_total_entries}</li>
+		<li>{ignore_total_comments}</li>
+		<li>{ignore_private_messages}</li>
+		<li>{ignore_total_forum_topics}</li>
+		<li>{ignore_total_forum_replies}</li>
+		<li>{ignore_total_forum_posts}</li>
+	</ul>
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Tag Introduction &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../index.html" />
+  <style type="text/css" media="screen,print">@import url(../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="../index.html#getting_started">Getting Started</a> &gt;
+<a href="index.html">Overview</a> &gt;
+<strong>Tag Introduction</strong>
+</div>
+
+
+
+<div id="content">
+
+	<h1>Tag Introduction</h1>
+
+	<p>ExpressionEngine <dfn>Tags</dfn> enable you to bring your templates to life, displaying dynamic information.</p>
+
+	<h3>Tags let you integrate Modules and Plugins into your pages</h3>
+	
+	<p>ExpressionEngine comes with nearly 20 modules (weblog modules, commenting module, photo gallery module, etc.), as well as
+	dozens of available plugins. Modules provide most of EE's core features, and plugins provide small enhancements.<p>  
+	
+	
+	<p>Each module and plugin has its own <b>tags</b> that enable you use its features within your pages, so understanding Tags is a critical component of learning the system.</p>
+
+	<p class="important"><b>Important Concept:</b>&nbsp; Every ExpressionEngine Tag  has a corresponding Module or Plugin that it is designed to generate content from.</p>
+
+	<p><b>Note:</b>&nbsp; The <a href="../index.html#modules_docs">Modules and Tags</a> section of the user guide has detailed information regarding
+	every tag associated with each module.  When you are ready to begin designing your own templates you will reference
+	that section of the user guide the most.</p>
+
+
+
+	<h2><a name="tags">Anatomy of a Tag</a></h2>
+	
+	<p>A typical ExpressionEngine tag is surrounded by "curly braces" and looks like this:</p>
+
+	<code>{exp:weblog:weblog_name}</code>
+	
+	<h3>Tag Segments</h3>
+	
+	<p>A tag typically has 3 segments.  The segments in the above example are:</p>
+	
+	<p><kbd>exp</kbd> : <kbd>weblog</kbd> : <kbd>weblog_name</kbd></p>
+
+	<p>The first segment, <samp>exp</samp>, tells ExpressionEngine that this is a tag.  The second part, <samp>weblog</samp>,  is the <dfn>Module</dfn> that the tag belongs to.  The third part, <samp>weblog_name</samp>, is the specific function from within the module that you are using.</p>
+	
+	<p>The above tag tells ExpressionEngine to invoke the <kbd>Weblog Name</kbd> function from the <kbd>Weblog Module</kbd>.</p>
+
+	<p>Most tags have three segments, although occasionally in the case of plugins, some will only have two.</p>
+
+	<h2>Two Types of Tags</h2>
+
+	<p>There are two kinds of tags:  <dfn>single tags</dfn> and <dfn>tag pairs</dfn>.</p>
+	
+	<h3>Single Tags</h3>
+	
+	<p>Single tags are designed to return a single piece of information. <b>A single tag does not have a closing tag.</b></p>
+	
+	<p>This is a single tag:</p>
+
+	<code>{exp:weblog:weblog_name}</code>
+
+	<h3>Tag Pairs</h3>
+
+	<p>Tag pairs are designed to return a multiple piece of information.  Tag pairs have both an <em>opening</em> and <em>closing</em> component.  This is a tag pair:</p>
+
+	<code>{exp:weblog:entries}<br />
+<br />
+Entry content<br />
+<br />
+{/exp:weblog:entries}</code>
+
+	<p>The above tag tells ExpressionEngine to invoke the <kbd>Entries</kbd> function from the <kbd>Weblog Module</kbd>.  You'll use this tag a lot in your templates.</p>
+
+
+	<h2>Variables</h2>
+
+	<p>Tag pairs usually contain <dfn>variables</dfn> between the tags.  A variable look like this:</p>
+
+	<code>{title}</code>
+
+	<p>A variable represents a piece of information.&nbsp; This variable, for instance,  might show the title of a weblog entry.  Variables are used like this within tag pairs:</p>
+
+	<code>{exp:weblog:entries}<br />
+<br />
+&lt;h1>{title}&lt;/h1><br />
+<br />
+&lt;p>{body}&lt;/p><br />
+<br />
+&lt;div class="author">Posted by {author}&lt;/div><br />
+<br />
+{/exp:weblog:entries}</code>
+
+
+
+	<h2>Parameters</h2>
+
+	<p>Most tags can have parameters.  Parameters modify the behavior of a tag, letting you control exactly what a tag displays.</p>
+	
+	
+	<p>Parameters are placed inside the opening tag, like this:</p>
+
+	<code>{exp:weblog:entries <dfn>parameter="</dfn><samp>value</samp><dfn>"</dfn>}</code>
+
+	<p>A typical tag with multiple parameters might look like this:</p>
+
+	<code>{exp:weblog:entries <dfn>weblog="</dfn><samp>news</samp><dfn>"</dfn>
+	<dfn>orderby="</dfn><samp>date</samp><dfn>"</dfn>	
+	<dfn>limit="</dfn><samp>10</samp><dfn>"</dfn>}</code>
+
+	<p>The above tag will show 10 weblog entries written in the "news" weblog.  They will be displayed in descending order.</p>
+
+	<p>Parameters give you the flexibility to tailor the output of each tag in a multitude of ways.&nbsp;  Instead of choosing from several ready-made tags that do slight variations of a similar function, you can use the same tag in a variety of different ways by altering the parameters.</p>
+
+	<h2>The Next Step</h2>
+
+	<p>Guess what? You now know nearly everything there is to know about tags!  Take a moment to browse your Control Panel Templates
+	to see if you can identify tags and their components.</p>
+	
+	<p>Then, in the <a href="../index.html#modules_doc">Modules and Tags</a> section
+	of the user guide you'll find information on every tag available in ExpressionEngine.  By adding these tags to your templates you
+	bring your pages to life with dynamic information.</p>
+
+
+
+
+
+<h1>Next:&nbsp; <a href="summary.html">Summary</a></h1>
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

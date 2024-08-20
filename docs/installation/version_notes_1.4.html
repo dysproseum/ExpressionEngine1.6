@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Upgrading to ExpressionEngine 1.4 &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../index.html" />
+  <style type="text/css" media="screen,print">@import url(../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="../index.html#install_docs">Installation and Update Instructions</a> &gt;
+<a href="update.html">Updating EE</a> &gt;
+<strong>Version 1.4 Notes</strong>
+</div>
+
+<div id="content">
+
+	<h1>Update Notes for Version 1.4</h1>
+	
+	<h3>Theme Updates</h3>
+	<p>Version 1.4 has some changes in the control panel CSS file, so please replace the following file with the new copy:</p>
+	
+	<code>themes/cp_themes/default/default.css</code>
+	
+	<h3>Advanced Conditionals</h3>
+	<p>ExpressionEngine 1.4 has expanded its conditional abilities and now allows logical operators and new structures like elseif and else.  
+	With these new abilities, some old conditionals may have problems because the conditional parser is a bit more strict in what it will accept. </p> 
+	
+	<p><strong>Short conditionals - </strong>In previous versions of ExpressionEngine, it was possible to use shortened conditionals like 
+	<kbd>{if allow_comments}</kbd> in a more extended way by simply adding a comparison like <kbd>!=</kbd> and a value like so:</p>
+	
+<code>
+{if allow_comments == 'n'}<br />
+ No Comments Allowed For This Entry<br />
+{/if}
+</code>
+	
+	<p>ExpressionEngine 1.4 has to treat those shortened conditionals differently for them to work with the code for parsing advanced conditionals.  So, instead
+	of using a value like 'n', you will have to use <kbd>FALSE</kbd>.  So, the conditional above will have to become this in EE 1.4:</p>
+	
+<code>
+{if allow_comments == FALSE}<br />
+ No Comments Allowed For This Entry<br />
+{/if}
+</code>
+	
+	<br />
+	
+	<p><strong>Multiple Values (&,|) - </strong>In earlier versions, you were able to compare a variable to multiple values by using the ampersand and bar
+	in your conditionals:</p>
+	
+<code>
+{if segment_2 == "dog|cat"}<br />
+ Segment 2 is either set to dog or cat<br />
+{/if}
+</code>
+
+	<p>While this code will still work in this version, it is no longer the suggested way of writing those manner of conditionals.  Instead you should use the new logical operators
+	and write the conditional out fully: </p>
+
+<code>
+{if segment_2 == "dog" OR segment_2 == "cat"}<br />
+ Segment 2 is either set to dog or cat<br />
+{/if}
+</code>	
+	
+	<p>The code we have that allows the old style to continue working may be removed in a future version of ExpressionEngine, so we suggest you update your conditionals
+	as soon as you can.</p>
+	
+	<p><strong>Protected Characters</strong> We now use PHP to evaluate conditionals in ExpressionEngine
+	and as such there are certain characters that we have to protect in a variable so
+	that they are not treated as PHP code.  We do this by converting those characters
+	into HTML entities or removing the character entirely.  Here is the conversion list:</p>
+	
+	<ul>
+	<li>" => &amp;#34;</li>
+	<li>$ => &amp;#36;</li>
+	<li>( => &amp;#40;</li>
+	<li>) => &amp;#41;</li>
+	<li>{ => removed</li>
+	<li>} => removed</li>
+	</ul>
+	
+	<p>For example, his means that if you are comparing a value against a variable that 
+	might have a double quote, you should have any quotes in the value converted into the entity as well.  
+	For example, if your screen name is "The Republic" you would write the conditional like so:
+	<code>{if screen_name == '&amp;#34;The Republic&amp;#34;'}</code>
+	</p>
+	
+	
+	<p><br /><br /><a href="update.html">Return to Update Page</a></p>
+	
+	<p><br /><br /><br /><br /><br /><br /></p>
+	
+</div>
+
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

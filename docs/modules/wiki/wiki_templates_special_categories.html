@@ -1,0 +1,431 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Wiki Template, Special Categories Section &#8211; ExpressionEngine Documentation</title> 
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style> 
+
+<style type="text/css">
+.screencap {
+margin: 30px 0;
+text-align: center;
+}
+
+#content h4 {
+	font-size: 12px;
+	font-weight: bold;
+	color:	#363;
+	background-color: transparent;
+	border-bottom: 1px solid #363;
+	margin: 10px 0 0 35px;
+	padding: 5px 0 3px 9px;
+	}
+
+#content h5 {
+	font-size: 12px;
+	font-weight: bold;
+	color:	#369;
+	background-color: transparent;
+	border-bottom: 1px solid #369;
+	margin: 10px 0 0 55px;
+	padding: 5px 0 3px 9px;
+	}
+	
+</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="README.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+</tr>
+</table>
+</div>
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Wiki Module</a> &gt;
+<a href="wiki_templates.html">Theme Template</a> &gt;
+<strong>Special Categories</strong>
+</div>
+
+<div id="content">
+
+	<h1>Wiki Template, Special Categories Section</h1>
+
+<p>The Special Categories section creates a list of all the categories in a site as outlined below:</p>
+
+<div class="screencap"><img src="../../images/wiki_categories_highlight.jpg" width="550" height="277" alt="Displays all the categories in the wiki." /></div>
+
+<p>In addition to the variables in the <a href="wiki_templates_page.html">Wiki Page section</a>, the Special Categories section makes use of the the following <strong>Tags</strong>:
+
+<ul>
+<li><a href="#wiki_tag_categories">{wiki:categories}</a></li>
+<li><a href="#wiki_tag_category_subcategories">{wiki:category_subcategories}</a></li>
+<li><a href="#wiki_tag_category_articles">{wiki:category_articles}</a></li>
+</ul>
+
+<h2><a name="wiki_tag_categories">{wiki:categories}</a></h2>
+
+<p>This tag is used to display all the wiki's categories. When put into the <a href="./modules/wiki/wiki_templates_article.html">Wiki Article</a> template, it will only show the categories for that specific article. It has <a href="#wiki_categories_para">Parameters</a> and <a href="#wiki_categories_var">Variables</a> available to it.</p>
+
+<h3><a name="wiki_categories_para">{wiki:categories} | Parameters</a></h3>
+
+<ul>
+<li><a href="#tag_para_backspace">backspace=""</a></li>
+<li><a href="#tag_para_show_empty">show_empty=""</a></li>
+<li><a href="#tag_para_style">style=""</a></li>
+</ul>
+
+<h4><a name="tag_para_backspace">backspace=""</a></h4>
+
+<code>{wiki:categories backspace="#"}</code>
+
+<p>This removes "#" number of characters from the output at the end of the loop. This is useful for removing commas and &lt;br />'s.</p>
+
+<h4><a name="tag_para_show_empty">show_empty=""</a></h4>
+
+<code>{wiki:categories show_empty="n"</code>
+
+<p>This parameter lets you tell the wiki whether or not to display categories with no articles assigned to it. The possible values are:</p>
+
+<ul>
+<li><strong>n</strong>: Categories with no articles will not be displayed.</li>
+</ul>
+
+<h4><a name="tag_para_style">style=""</a></h4>
+
+<code>{wiki:categories style=""}</code>
+
+<p>This will automatically nest the categories for you as standard xhtml using &lt;ul> or render a list without any formatting. The values are:</p>
+
+<ul>
+<li><strong>nested</strong>: renders the categories in a xhtml list with &lt;ul>.</li>
+<li><strong>linear</strong>: renders the categories with no formatting.</li>
+</ul>
+
+<p>For more information on nesting please see the <a href="../../modules/weblog/categories.html#par_style">Style parameter</a> in the Weblog section of the User Guide.</p>
+
+<h3><a name="wiki_categories_var">{wiki:categories} | Variables</a></h3>
+
+<ul>
+<li><a href="#tag_sin">Single Variables</a></li>
+<li><a href="#tag_con">Conditional Variables</a></li>
+</ul>
+
+<h4><a name="tag_sin">{wiki:categories} | Single Variables</a></h4>
+
+<ul>
+<li><a href="#cat_sin_path_view_category">{path:view_category}</a></li>
+<li><a href="#cat_sin_category_name">{category_name}</a></li>
+<li><a href="#cat_sin_count">{count}</a></li>
+<li><a href="#cat_sin_depth">{depth}</a></li>
+<li><a href="#cat_sin_switch">{switch="one|two|three"}</a></li>
+</ul>
+
+<h5><a name="cat_sin_path_view_category">path:view_category</a></h5>
+
+<code>{path:view_category}</code>
+
+<p>Creates a link to view a specific category page.</p>
+
+<h5><a name="cat_sin_category_name">category_name</a></h5>
+
+<p>Displays the category name.</p>
+
+<h5><a name="cat_sin_count">count</a></h5>
+
+	<code>{count}</code>
+
+	<p>"count" of the category currently being displayed in the list</p>
+
+
+<h5><a name="cat_sin_depth">depth</a></h5>
+
+<code>{depth}</code>
+
+<p>Determines how many nested layers down a category is.</p>
+
+<h5><a name="cat_sin_switch">switch=</a></h5>
+
+	<code>{switch="option_one|option_two|option_three"}</code>
+
+	<p>This variable permits you to rotate through any number of values as the categories are displayed.  The first category will use "option_one", the second will use "option_two", the third "option_three", the fourth "option_one", and so on.</p>
+
+	<p>Multiple instances of the <samp>{switch=}</samp> tag may be used and the system will intelligently keep track of each one.</p>
+	
+<h4><a name="tag_con">{wiki:categories} | Conditional Variables</a></h4>
+
+<ul>
+<li><a href="#wiki_con_depth">{if depth}</a></li>
+<li><a href="#wiki_con_children">{if children}</a></li>
+<li><a href="#wiki_con_first_child">{if first_child}</a></li>
+<li><a href="#wiki_con_last_child">{if last_child}</a></li>
+</ul>
+
+<h5><a name="wiki_con_depth">if depth</a></h5>
+
+<code>{if depth == '#'}</code>
+
+<p>You can check to see if a category is at a certain "depth" in the list.</p>
+
+<h5><a name="wiki_con_children">if children</a></h5>
+
+<code>{if children}</code>
+
+<p>Determines if a category has one or more "children" categories.</p>
+
+<h5><a name="wiki_con_first_child">if first_child</a></h5>
+
+<code>{if first_child}</code>
+
+<p>Determines if a category is the first child of a parent category.</p>
+
+<h5><a name="wiki_con_last_child">if last_child</a></h5>
+
+<code>{if last_child}</code>
+
+<p>Determines if a category is the last child of a parent category.</p>
+
+<h2><a name="wiki_tag_category_subcategories">{wiki:category_subcategories}</a></h2>
+
+<p>This tag is used to display the subcategories of a single category. It has <a href="#wiki_subcats_para">Parameters</a> and <a href="#wiki_subcats_var">Variables</a> available to it.</p>
+
+<h3><a name="wiki_subcats_para">{wiki:category_subcategories} | Parameters</a></h3>
+
+<ul>
+<li><a href="#wiki_subcats_backspace">backspace=""</a></li>
+<li><a href="wiki_subcats_style">style=""</a></li>
+</ul>
+
+<h4><a name="wiki_subcats_backspace">backspace</a></h4>
+
+<code>{wiki:category_subcategories backspace="#"}</code>
+
+<p>This removes "#" number of characters from the output at the end of the loop. This is useful for removing commas and &lt;br />'s.</p>
+
+<h4><a name="wiki_subscats_style">style</a></h4>
+
+<code>{wiki:category_subcategories style=""}</code>
+
+<p>This will automatically nest the subcategories for you as standard xhtml using &lt;ul> or render a list without any formatting. The values are:</p>
+
+<ul>
+<li><strong>nested</strong>: renders the categories in a xhtml list with &lt;ul>.</li>
+<li><strong>linear</strong>: renders the categories with no formatting.</li>
+</ul>
+
+<p>For more information on nesting please see the <a href="../../modules/weblog/categories.html#par_style">Style parameter</a> in the Weblog section of the User Guide.</p>
+
+<h3><a name="wiki_subcats_var">{wiki:category_subcategories} | Variables</a></h3>
+
+<ul>
+<li><a href="#wiki_subcats_pair">Pair Variables</a></li>
+<li><a href="#wiki_subcats_con">Conditional Variables</a></li>
+<li><a href="#wiki_subscats_sin">Single Variables</a></li>
+</ul>
+
+<h4><a name="wiki_subcats_pair">Pair Variables</a></h4>
+
+<ul>
+<li><a href="#subcats_pair_header">{header}</a></li>
+<li><a href="#subcats_pair_footer">{footer}</a></li>
+</ul>
+
+<h5><a name="subcats_pair_header">header</a></h5>
+
+<code>
+{header}<br />
+content before listing subcategories.<br />
+{/header}
+</code>
+
+<p>This variable will display content before the subcategories are listed.</p>
+
+<h5><a name="subcats_pair_footer">footer</a></h5>
+
+<code>
+{footer}<br />
+content after listing subcategories.<br />
+{/footer}
+</code>
+
+<p>This variable will display content after the subcategories are listed.</p>
+
+<h4><a name="wiki_subcats_con">Conditional Variables</a></h4>
+
+<ul>
+<li><a href="#subcats_con_total">{if subcategory_total}</a></li>
+</ul>
+
+<h5><a name="subcats_con_total">if subcategory_total</a></h5>
+
+<code>{if subcategory_total == '0'}</code>
+
+<p>Test the number of subcategories. This is typically used display alternate content if no subcategories exist.</p>
+
+<h4><a name="wiki_subcats_sin">Single Variables</a></h4>
+
+<ul>
+<li><a href="#subcats_sin_path_view_category">{path:view_category}</a></li>
+<li><a href="#subcats_sin_category_name">{category_name}</a></li>
+<li><a href="#subcats_sin_subcategory_total">{subcategory_total}</a></li>
+</ul>
+
+<h5><a name="subcats_sin_path_view_category">path:view_category}</a></h5>
+
+<code>{path:view_category}</code>
+
+<p>This creates a link to view a category's page (a list of all the titles in that category).</p>
+
+<h5><a name="subcats_sin_category_name">category_name</a></h5>
+
+<code>{category_name}</code>
+
+<p>Displays a category's name.</p>
+
+<h5><a name="subcates_sin_subcategory_total">subcategory_total</a></h5>
+
+<code>{subcategory_total}</code>
+
+<p>Displays the number of subcategories in a category.</p>
+
+<h2><a name="wiki_tag_category_articles">{wiki:category_articles}</a></h2>
+
+<p>This tag displays a list of articles within a category. It has <a href="#cat_art_para">Parameters</a> and <a href="#cat_art_var">Variables</a> available to it.</p>
+
+<h3><a name="cat_art_para">{wiki:category_articles} | Parameters</h3>
+
+<ul>
+<li><a href="#catart_para_backspace">backspace=""</a></li>
+<li><a href="#catart_para_limit">limit=""</a></li>
+<li><a href="#catart_para_paginate">paginate=""</a></li>
+</ul>
+
+<h4><a name="catart_para_backspace">backspace=""</a></h4>
+
+<code>{wiki:category_articles backspace="#"}</code>
+
+<p>This removes "#" number of characters from the output at the end of the loop. This is useful for removing commas and &lt;br />'s.</p>
+
+<h4><a name="catart_para_limit">limit</a></h4>
+
+<code>{wiki:category_articles limit=""}</code>
+
+<p>This determines how many articles are displayed on a category's page. For example, this:</p>
+
+<code>{wiki:category_articles limit="20"}</code>
+
+<p>Would limit the number of articles displayed to 20.</p>
+
+<h4><a name="catart_para_paginate">paginate</a></h4>
+
+<code>{wiki:category_articles paginate=""}</code>
+
+<p>This determines the placement of pagination. For example, if the <a href="#catart_para_limit">limit</a> parameter is set to 20 and there are 55 articles, then you can use this parameter to create pagination to browse all the articles.</p>
+
+<p>The values for the paginate parameter are:</p>
+
+<ul>
+<li><strong>top</strong>: pagination is placed on top.</li>
+<li><strong>bottom</strong>: pagination is placed on the bottom.</li>
+<li><strong>both</strong>: pagination is placed on the top and the bottom.</li>
+</ul>
+
+<h3><a name="cat_art_var">{wiki:category_articles} | Variables</a></h3>
+
+<ul>
+<li><a href="#catart_pair">Pair Variables</a></li>
+<li><a href="#catart_con">Conditional Variables</a></li>
+<li><a href="#catart_sin">Single Variables</a></li>
+
+<h4><a name="catart_pair">Pair Variables</a></h4>
+
+<ul>
+<li><a href="#catart_pair_header">{header}</a></li>
+<li><a href="#catart_pair_footer">{footer}</a></li>
+<li><a href="catart_pair_letter">{letter_header}</a></li>
+</ul>
+
+<h5><a name="catart_pair_header">header</a></h5>
+
+<code>
+{header}<br />
+content before listing articles.<br />
+{/header}
+</code>
+
+<p>This variable will display content before the articles are listed.</p>
+
+<h5><a name="catart_pair_footer">footer</a></h5>
+
+<code>
+{footer}<br />
+content after listing articles.<br />
+{/footer}
+</code>
+
+<p>This variable will display content after the articles are listed.</p>
+
+<h5><a name="catart_pair_letter">letter_header</a></h5>
+
+<code>
+{letter_header}&lt;div class="cap">{letter}&lt;/div>{/letter_header}
+</code>
+
+<p>This is used to organize articles by the first letter of the title. It looks at the first character of each article and when there is a new character it will create a header for that letter using the <strong>{letter}</strong> variable as in the example above.</p>
+
+<h4><a name="catart_con">Conditional Variables</a></h4>
+
+<ul>
+<li><a href="#catart_con_total">{if articles_total}</a></li>
+</ul>
+
+<h5><a name="catart_con_total">if articles_total</a></h5>
+
+<code>{if articles_total == '0'}</code>
+
+<p>Test the number of articles. This is typically used to display alternate content if no articles exist for a particular category.</p>
+
+<h4><a name="catart_sin">Single Variables</a></h4>
+
+<ul>
+<li><a href="#catart_sin_path_view_category">{path:view_category}</a></li>
+<li><a href="#catart_sin_category_name">{category_name}</a></li>
+<li><a href="#catart_sin_article_total">{articles_total}</a></li>
+</ul>
+
+<h5><a name="catart_sin_path_view_category">path:view_category}</a></h5>
+
+<code>{path:view_category}</code>
+
+<p>This creates a link to view a category's page (a list of all the titles in that category).</p>
+
+<h5><a name="catart_sin_category_name">category_name</a></h5>
+
+<code>{category_name}</code>
+
+<p>Displays a category's name.</p>
+
+<h5><a name="catart_sin_articles_total">articles_total</a></h5>
+
+<code>{articles_total}</code>
+
+<p>Displays the number of articles in a category.</p>
+</div>
+	
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

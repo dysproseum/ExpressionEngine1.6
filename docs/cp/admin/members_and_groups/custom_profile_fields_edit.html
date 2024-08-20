@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>Custom Profile Fields &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" name="../../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../../index.html"><img src="../../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../../index.html">Table of Contents</a> &gt;
+<a href="../../../index.html#cp_docs">The Control Panel</a> &gt;
+<a href="../index.html">Admin</a> &gt;
+<a href="index.html">Members and Groups</a> &gt;
+<strong>Custom Profile Fields</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Custom Profile Fields - Add/Edit</h1>
+	<div class="path">Control Panel Location:&nbsp; <dfn>Admin &gt; Members and Groups &gt; Custom Profile Fields &gt; Add/Edit</dfn></div>	
+
+	<p>The <em>Custom Profile Fields</em> feature permits you to add fields to the member registration form and/or member profile and My Account areas. Here is a description of the fields in the Custom Profile Fields page:</p>
+
+	<div class="imgwrapper"><img src="../../../images/custom_profile_edit.png" width="546" height="571" alt="Custom Fields Edit" title="Custom Fields Edit" border="0" /></div>
+
+	<h3>Field Name</h3>
+
+		<p>This is the internal or "short name" for the field.  This is a <strong>required</strong> field and must be a single word with no spaces or punctuation.  The short name is typically used as the variable name in your member profile and registration templates.  Note: The fields are typically added automatically by the system so you do not need to edit the templates.</p>
+		
+		<p class="important"><strong>NOTE:</strong> Some words are reserved and cannot be used.  Please see the list of <a href="../../reserved_words.html#reserved_fields">reserved words</a> for details.</p>
+
+
+	<h3>Field Label</h3>
+
+		<p>This is the descriptive name for the field.  It will appear as the field title.  This is a <strong>required</strong> field and it may contain spaces or punctuation.</p>
+
+
+	<h3>Field Description</h3>
+	
+	<p>You may optionally add a description of the field, which can be useful if you need to provide instructions for the field's use.</p>	
+	
+
+	<h3>Field Display Order</h3>
+		<p>You can determine the order in which the fields appear on the page.</p>
+
+
+	<h3>Field Width</h3>
+	
+	<p>Determines the width of the field as it appears in the page.  You may use pixels or percentages.  Example: <kbd>300px</kbd> or <kbd>100%</kbd>
+	
+	<h3>Field Type</h3>
+
+		<p>You may choose what type of field this is.  There are three choices:</p>
+
+		<ol>
+			<li><b>Text Input</b>: This is a single input line for text.  It is the type of field you might use for a title, name, or other short information.</li>
+			<li><b>Textarea</b>: This is a standard text entry box with multiple lines.  This is what you would use for larger amount of text.</li>
+			<li><b>Drop-down List</b>: This creates a standard HTML &lt;select> drop-down list.  You will need to define contents of the list in the provided form.</li>
+		</ol>
+
+
+	<h3>Text Formatting</h3>
+
+		<p>This option determines the text formatting selection for this field. There are three  choices:</p>
+		<ol>
+			<li><b>None</b>: No automatic formatting is done; the text is left as-is.  This might be useful if you want people to be able to use full HTML in this field.</li>
+			<li><b>XHTML</b>: The field content will be formatted with ExpressionEngine's <a href="../../../general/text_formatting.html">Auto XHTML feature.</a> </li>
+			<li><b>Auto &lt;br /></b>: All line breaks in the field content will be converted into <samp>&lt;br /></samp> tags.</li>
+		</ol>
+
+	
+	
+	<h3>Is this a required field?</h3>
+		<p>You may determine whether this field is required.  If the field is required and the user leaves it blank, upon submission they will receive an error message prompting them to correct it.</p>
+
+
+	<h3>Is this field visible in public profiles?</h3>
+	
+	<p>When set to "yes", the field will be available within the Member Profile areas (both the public one and the My Account page in the Control Panel).</p>
+	
+	<h3>Is this field visible in registration page?</h3>
+
+	<p>When set to "yes", the field will be available in the public member registration form.</p>
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address><div class="validation"><a name="http://validator.w3.org/check/referer" title="Validate XHTML">XHTML</a> | <a name="http://jigsaw.w3.org/css-validator/check/referer" title="Validate CSS">CSS</a></div>
+</div>
+
+</body>
+</html>

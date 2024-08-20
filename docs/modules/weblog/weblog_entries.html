@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Weblog Entries Tag &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Weblog Module</a> &gt;
+<strong>Weblog Entries Tag</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Weblog Entries Tag</h1>
+	
+	<p>The <dfn>Weblog Entries</dfn> tag is the primary tag used to show the content you manage in your Control Panel <kbd>PUBLISH</kbd> and <kbd>EDIT</kbd> pages.&nbsp; This tag has far more display options, parameters, and variables than any other tag in ExpressionEngine.&nbsp; It is, in fact, the most powerful tag in the entire system since it's main function is to retrieve and display your site's content.&nbsp; You will arguably use this tag more than any other.</p>
+	
+	<p>The <dfn>Weblog Entries</dfn> tag can be used to display both multi-entry and single-entry content - that is, several entries on a page, or one specific one (it dynamically adjusts its output based on the URL request) .&nbsp; It can also show entries from specific categories, specific days, monthly archives, permalinks, and more.&nbsp; In addition to this tag, the Weblog Module has several ancillary tags that provide complimentary features.</p>
+	
+	
+	
+	<p>Here is a simple example of a possible usage of this tag:</p>
+
+	<code>{exp:weblog:entries weblog="news" limit="15"}<br />
+<br />
+&lt;h3>{title}&lt;/h3><br />
+<br />
+{body}<br />
+<br />
+&lt;div class="date">Posted on {entry_date format="%M %d, %Y - %h:%i %A"}&lt;/div><br /><br />
+{/exp:weblog:entries}</code>
+
+
+	<h2>Parameters</h2>
+
+	<p>The Weblog Entries tag has a large number of <a href="parameters.html">parameters</a> that can be used to control what the tag displays.</p>
+
+
+	<h2>Variables</h2>
+
+	<p>Inside of the tag you can use a number of variables to display different information such as entry title, date, body, etc. There are three types of variables:</p>
+
+	<ul>
+		<li><a href="conditional_variables.html">Conditional Variables</a></li>
+		<li><a href="variables.html">Single Variables</a></li>
+		<li><a href="variable_pairs.html">Variable Pairs</a></li>
+	</ul>
+
+	<h2>Pagination</h2>
+
+	<p>The <a href="pagination_page.html">Pagination</a> feature allows you to create "next" and "previous" links between pages of entries.</p>
+
+	<p>You can also span a single entry <a href="pagination_spanning.html">across multiple pages</a>, like online magazines do.</p>
+
+	<h2>Entry "Views" Tracking</h2>
+	
+	<p>The Weblog Entries tag also has a <a href="entry_tracking.html">Views Tracking</a> feature that lets you track the number of times an entry has been viewed.</p>
+	
+	<h2>Relationships</h2>
+	
+	<p>The Weblog Module supports a powerful <a href="related_entries.html">related entries</a> feature that lets you associate one entry to another.</p>
+	
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

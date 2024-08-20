@@ -1,0 +1,601 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Functions Class  &#8211; ExpressionEngine Developer Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../index.html">Development</a> &gt;
+<strong>Functions Class</strong>
+</div>
+
+
+<div id="content">
+<h1>Functions Class</h1>
+
+
+
+
+
+<div class="section">
+<p>
+The Functions class contains commonly required functions used throughout ExpressionEngine's scripts.</p>
+</div>
+
+
+<!-- set_realpath-->
+
+<div class="section">
+<h2>set_realpath(path [string])</h2>
+
+
+<p>Returns realpath for a directory or file.</p>
+
+<p><strong>Class: </strong>Functions (FNS)</p>
+<p><strong>Description: </strong>Takes a path and attempts to determine the full server path for it.</p>
+</div>
+
+
+<!-- fetch_site_index-->
+
+<div class="section">
+<h2>fetch_site_index(add_slash [int], session_id [int])</h2>
+
+
+<p>Returns site's main index URL.</p>
+
+<p><strong>Class: </strong>Functions (FNS)</p>
+<p><strong>Description: </strong>Returns the url of the main site index.  If <var>add_slash</var> is set to 1, then a slash is added to the end of the string.  If <var>session_id</var> is set to 1, then the session id is included (if sessions are being used on the user side and this function is called in a 'webpage' template).  Alternatively, those two values can be set to 0 and no slash will be added and no session id will be added, respecively.  Default is 0 for <var>add_slash</var> and 1 for <var>session_id</var>.</p>
+</div>
+
+<!-- create_url-->
+
+<div class="section">
+<h2>create_url(segment [string], trailing_slash [boolean], session_id [int])</h2>
+
+
+<p>Returns url for site.</p>
+
+<p><strong>Class: </strong>Functions (FNS)</p>
+<p><strong>Description: </strong>The <var>segment</var> inputed to this function is parsed and added to the full site URL to create a full URL/URI. If <var>trailing_slash</var> is set to true, then a slash is added to the end of the string.  If <var>session_id</var> is set to 1, then the session id is included (if sessions are being used on the user side).  Alternatively, <var>trailing_slash</var> and <var>session_id</var> can be set to false/0 and no slash will be added and no session id will be added, respecively. Default is true for <var>add_slash</var> and 1 for <var>session_id</var>.</p>
+
+<pre>
+$memberlist_url = $FNS->create_url('member/memberlist');<br />
+// returns "http://example.com/index.php/member/memberlist/"
+</pre>
+</div>
+
+
+<!-- fetch_current_uri-->
+
+<div class="section">
+<h2>fetch_current_uri()</h2>
+
+
+<p>Returns uri for current page.</p>
+
+<p><strong>Class: </strong>Functions (FNS)</p>
+<p><strong>Description: </strong>Returns the full URI for the current page. Occassionally, used in forms when a return location is not set by default.</p>
+</div>
+
+
+<!-- remove_double_slashes-->
+
+<div class="section">
+<h2>remove_double_slashes(str [string])</h2>
+
+
+<p>Remove duplicate slashes from URL.</p>
+
+<p><strong>Class: </strong>Functions (FNS)</p>
+<p><strong>Description: </strong>A clean up function that removes all double slashes (//) from <var>str</var> and returns the string.  Useful for cleaning up URLs. The double slashes in <kbd>http://</kbd> are preserved.</p>
+</div>
+
+<!-- remove_session_id-->
+
+<div class="section">
+<h2>remove_session_id(str [string])</h2>
+
+
+<p>Removed session IDs from a URL.</p>
+
+<p><strong>Class: </strong>Functions (FNS)</p>
+<p><strong>Description: </strong>A clean up function that removes the session ID from <var>str</var>, which should be a URL, and returns the string.  An example of usage is if you are sending email notifications for a form upon submit (i.e. comments) and including the form's URL in the email being sent.</p>
+</div>
+
+
+
+<!-- extract_path-->
+
+<div class="section">
+<h2>extract_path(str [string])</h2>
+
+
+<p>Removed session IDs from a URL.</p>
+
+<p><strong>Class: </strong>Functions (FNS)</p>
+<p><strong>Description: </strong>Extract the template group/template name from <var>str</var>, like {some_var path="weblog/index"}, and returns just the path.</p>
+
+<pre>
+// Parse permalink path
+$key = '{permalink path="weblog/details"}'
+if ($FNS->extract_path($key) != '' && $FNS->extract_path($key) != 'SITE_INDEX')
+{
+	$path = $FNS->extract_path($key).'/'.$row['entry_id'];
+}
+// function returns 'weblog/details'
+</pre>
+</div>
+
+
+<!-- var_swap-->
+
+<div class="section">
+<h2>var_swap(str [string], data [array])</h2>
+
+
+<p>Replace array of variables in string.</p>
+
+<p><strong>Class: </strong>Functions (FNS)</p>
+<p><strong>Description: </strong>Returns a string where the <var>data</var> array is used to replace all of the occurrences of the <var>data</var>'s keys with <var>data</var>'s values in <var>str</var>.</p>
+
+<pre>
+$str = "Rick and Paul ate {meal} while sitting around the {item}"; <br />
+$swap = array('meal' => "Skittles", 'item' => "computer");<br />
+$msg = $FNS->var_swap($str, $swap);<br />
+// returns "Rick and Paul ate Skittles while sitting around the computer";
+</pre>
+</div>
+
+
+<!-- redirect-->
+
+<div class="section">
+<h2>redirect(location [string])</h2>
+
+
+<p>Redirect to location.</p>
+
+<p><strong>Class: </strong>Functions (FNS)</p>
+<p><strong>Description: </strong>Redirects current browser page to <var>location</var>. Does redirect either by location or meta refresh, depending on the redirect method preference.</p>
+</div>
+
+
+<!-- hash-->
+
+<div class="section">
+<h2>hash(str [string])</h2>
+
+
+<p>Convert a string into a SHA1 encrypted hash.</p>
+
+<p><strong>Class: </strong>Functions (FNS)</p>
+<p><strong>Description: </strong>Returns <var>str</var> as a SHA1 encrypted hash.</p>
+</div>
+
+
+
+<!-- random-->
+
+<div class="section">
+<h2>random(type [string], length (string int))</h2>
+
+
+<p>Random number/password generator.</p>
+
+<p><strong>Class: </strong>Functions (FNS)</p>
+<p><strong>Description: </strong>Returns a random string based on the <var>type</var> and <var>length</var> specified. The default <var>type</var> is 'encrypt'.</p>
+
+<p>
+There are four possible values for <var>type</var>:
+<ul>
+<li><strong>basic</strong> - just a random number</li>
+<li><strong>alpha</strong> - string with length of <var>length</var> using only letters (upper and lower case) of the alphabet</li>
+<li><strong>numeric</strong> - string with length of <var>length</var> using only numbers</li>
+<li><strong>nozero</strong> - string with length of <var>length</var> using all numbers except zero</li>
+<li><strong>md5</strong> - string of a random number that has been md5'ed</li>
+<li><strong>encrypt</strong> - string of a random number that has been hash'ed</li>
+</ul>
+</p>
+</div>
+
+
+
+<!-- form_declaration-->
+
+
+
+<div class="section">
+<h2>form_declaration(data [array])</h2>
+
+
+<p>Creates opening form tag and hidden variables.</p>
+
+<p><strong>Class: </strong>Functions (FNS)</p>
+<p><strong>Description: </strong> The <var>data</var>  array contains the attributes and any hidden fields for the form tag.</p>
+<pre>
+$form_details = array('action'	   => '',
+				  'name'	   => 'upload',
+				  'id'		   => 'upload',
+				  'hidden_fields'  => array('new' => 'y'),
+				  'secure'	   => TRUE,
+				  'onsubmit' => "validate_form(); return false;"
+				  );  	
+
+$r = $FNS->form_declaration($form_details);</pre>
+</div>
+
+
+
+<!-- form_declaration-->
+
+<div class="section">
+<h2>form_backtrack(offset [int])</h2>
+
+
+<p>Returns a URL for previosly viewed page.</p>
+
+<p><strong>Class: </strong>Functions (FNS)</p>
+<p><strong>Description: </strong>Returns a URL that allows us to return a user to a previously visited page after submitting a form.  ExpressionEngine keeps track of the last five pages viewed by a visitor, and the page returned is determined by the value of <var>offset</var>. For example, 0 is the current page, -1 would be the form page, and -2 would be the page prior to the form page. </p>
+
+<pre>
+$data = array('title'   => 'Information Accepted',
+			  'heading'	=> 'Thank you',
+			  'content'	=> 'Thank you for the locale information',
+			  'link'    => array($FNS->form_backtrack('-2'), 'Return to entry')
+			  );
+			  
+$OUT->show_message($data);
+</pre>
+</div>
+
+
+
+
+<!-- evaluate-->
+
+<div class="section">
+<h2>evaluate(str [string])</h2>
+
+
+<p>Evaluates a string as PHP</p>
+
+<p><strong>Class: </strong>Functions (FNS)</p>
+<p><strong>Description: </strong> Evaluates a <var>str</var> as PHP</p>
+
+<pre>
+$str = "echo 3*4;";
+
+ob_start();
+
+echo $FNS->evaluate($str);
+$value = ob_get_contents();
+
+ob_end_clean(); 
+
+// $value is now equal to 12, since that is what would be outputted by the PHP.
+</pre>
+</div>
+
+
+
+<!-- set_cookie-->
+
+
+
+<div class="section">
+<h2>set_cookie(name [string], value [string], expire [int])</h2>
+
+
+<p>Sets cookie for site.</p>
+
+<p><strong>Class: </strong>Functions (FNS)</p>
+<p><strong>Description: </strong> Sets cookie based on <var>name</var> and <var>value</var>.  The optional <var>expire</var> parameter is added to the current time to specify when the cookie expires.  If not set or set to '', then the cookie expiration is set in the past and should usually be evaluated as having expired.</p>
+
+<p>The advantage to using this function over just the standard PHP function is because EE will automatically add the cookie domain, cookie prefix, and cookie path as specified in the preferences.  Those are helpful for making these cookies unique to EE and not interfering with other cookies set for your site by other software.</p>
+</div>
+
+
+<!-- char_limiter-->
+
+<div class="section">
+<h2>char_limiter(str [string], num [int])</h2>
+
+
+<p>Returns section of a string based on number of character.</p>
+
+<p><strong>Class: </strong>Functions (FNS)</p>
+<p><strong>Description: </strong>When given a <var>str</var>, it will return the string limited to a certain amount of characters but rounds the string up to the nearest word.  The <var>num</var> parameter is optional and by default is set to 500 characters</p>
+</div>
+
+
+<!-- word_limiter-->
+
+<div class="section">
+<h2>word_limiter(str [string], num [int])</h2>
+
+
+<p>Returns section of a string based on number of words.</p>
+
+<p><strong>Class: </strong>Functions (FNS)</p>
+<p><strong>Description: </strong>When given a <var>str</var>, it will return the number of words specified by <var>num</var>.  The <var>num</var> parameter is optional and by default is 100.</p>
+</div>
+
+
+<!-- fetch_email_template-->
+
+<div class="section">
+<h2>fetch_email_template(name [string])</h2>
+
+
+<p>Returns the contents of email template.</p>
+
+<p><strong>Class: </strong>Functions (FNS)</p>
+<p><strong>Description: </strong>Returns the contents of the email template requested based on the language settings of the user.</p>
+</div>
+
+
+
+<!-- encoding_menu-->
+
+<div class="section">
+<h2>encoding_menu(which [str], name [str], selected [str])</h2>
+
+
+<p>Returns character encoding or language form select menu</p>
+
+<p><strong>Class: </strong>Functions (FNS)</p>
+<p><strong>Description: </strong> The <var>which</var> variable can be set to either 'languages' or 'charsets', and the <var>name</var> must be set to whatever you want the form field to be named.  The optional value <var>selected</var> is for indicating the selected value or the default value for the pulldown.</p>
+
+<pre>
+echo $FNS->encoding_menu('languages', 'xml_lang', 'ab');
+//  Displays:
+//  &lt;select name="xml_lang"&gt;
+//  &lt;option value='aa'&gt;Afar&lt;/option&gt;
+//  &lt;option value='ab' selected='selected'&gt;Abkhazian&lt;/option&gt;
+//  &lt;option value='af'&gt;Afrikaans&lt;/option&gt;
+//  etc...
+//  &lt;/select&gt;
+</pre>
+</div>
+
+
+
+<!-- create_directory_map-->
+
+<div class="section">
+<h2>create_directory_map(directory [str], top_level_only [bool])</h2>
+
+
+<p>Returns array of files and folders in a directory</p>
+
+<p><strong>Class: </strong>Functions (FNS)</p>
+<p><strong>Description: </strong> Specify a directory and this function will create an array mapping out all the files and folders in that directory, including any sub-folder files.  This functions uses multi-level arrays to show sub-folder depth. </p>
+</div>
+
+
+
+<!-- language_pack_names-->
+
+
+<div class="section">
+<h2>language_pack_names(default [str])</h2>
+
+
+<p>Returns form select menu of avaialable language packs</p>
+
+<p><strong>Class: </strong>Functions (FNS)</p>
+<p><strong>Description: </strong> The optional parameter <var>default</var> is used to specify the currently selected or default value.</p>
+</div>
+
+
+<!-- clear_caching-->
+
+<div class="section">
+<h2>clear_caching(which [str], sub-directory [str], relationships [bool])</h2>
+
+
+<p>Clears one or all of the main cache folders</p>
+
+<p><strong>Class: </strong>Functions (FNS)</p>
+<p><strong>Description: </strong> Set <var>which</var> to one of the six values 'page', 'tag', 'db', 'sql', 'relationships', 'all' to empty the main ExpressionEngine cache directories.  The optional parameter <var>sub_directory</var> can be used to specify a specific folder or file in that the directories.
+<var>relationships</var> used only when clearing 'all' caches, lets you specify whether or not relationship caches should be emptied as well.  Default is FALSE.</p>
+<p>There are certain times when changing data (prefs or templates, for instances) when you want changes to appear immediately.  This allows you to clear the cache files and make sure the changes appear on the next viewing of the site.</p>
+</div>
+
+
+
+<!-- delete_directory-->
+
+<div class="section">
+<h2>delete_directory(path [str], delete root [boolean])</h2>
+
+
+<p>Empties a directory of any files.</p>
+
+<p><strong>Class: </strong>Functions (FNS)</p>
+<p><strong>Description: </strong> Set <var>path</var> to the absolute path of the directory you wish to empty.  Remember to use the EE defined PATH constants to assist you in creating these paths. </p>
+
+<p>If you wish to delete the folder as well as the contents inside of it, then set the optional parameter <var>delete root</var> to TRUE, by default it is set to FALSE.</p>
+</div>
+
+
+<!-- fetch_assigned_weblogs-->
+
+<div class="section">
+<h2>fetch_assigned_weblogs()</h2>
+
+
+<p>Returns array of weblogs accessible by current user.</p>
+
+<p><strong>Class: </strong>Functions (FNS)</p>
+<p><strong>Description: </strong> Returns array of weblogs accessible by current user. </p>
+</div>
+
+
+<!-- fetch_action_id-->
+
+<div class="section">
+<h2>fetch_action_id(class [str], method [str])</h2>
+
+
+<p>Returns action id of action in the database</p>
+
+<p><strong>Class: </strong>Functions (FNS)</p>
+<p><strong>Description: </strong> Modules have certain actions for forms, links, etc. that are recognized via an action ids that are inserted into the database upon installation of that module.</p>
+
+<pre>
+$action_id = $FNS->fetch_action_id('Comment', 'insert_new_comment');
+</pre>
+</div>
+
+
+<!-- create_captcha-->
+
+<div class="section">
+<h2>create_captcha()</h2>
+
+
+<p>Returns &lt;img&gt; tag for newly created captcha</p>
+
+<p><strong>Class: </strong>Functions (FNS)</p>
+<p><strong>Description: </strong> Using a random word chosen from the array stored in the words.php file, this function will create a captcha image and then store that word and the IP address of the current user in the database. You can then put the returned &lt;img&gt; tag in your form along with a text input field for the user submitted word.  When the form is submitted you can check the submitted word against the database for the user's IP.  If it matches, you continue processing the form data.  If it does not, then the form should fail.  This is used to prevent automated spamming tools from submitting spam.</p>
+</div>
+
+
+<!-- sql_andor_string-->
+
+<div class="section">
+<h2>sql_andor_string(str [str], field [str], prefix [str])</h2>
+
+
+<p>Returns query string when tag parameter usings pipes</p>
+
+<p><strong>Class: </strong>Functions (FNS)</p>
+<p><strong>Description: </strong> Certain tag parameters have the option to be in the form of 'value1|value2' or 'not value1|value2', which allows the acceptance of multiple values.  This function takes that parameter as <var>str</var> and the <var>field</var> to check, along with the (optional)  <var>prefix</var> of the table containing the field, and returns the query string required.</p>
+
+<pre>
+$str  = 'weblog|news|sports';
+$sql  = "SELECT * FROM exp_weblogs WHERE is_user_blog = 'n' ";
+$sql .= $FNS->sql_andor_string($str, 'blog_name');
+// $sql equals:
+// SELECT * FROM exp_weblogs WHERE is_user_blog = 'n'
+// AND blog_name = 'weblog' OR blog_name = 'news' OR blog_name = 'sports'
+</pre>
+</div>
+
+
+<!-- assign_variables-->
+
+<div class="section">
+<h2>assign_variables(str [string], slash [string])</h2>
+
+
+<p>Assign variables of tag to array</p>
+
+<p><strong>Class: </strong>Functions (FNS)</p>
+<p><strong>Description: </strong> This function extracts the variables contained within the current tag 
+being parsed and assigns them to one of two arrays which are returned to you: var_single or var_pair. The <var>slash</var> variable
+is used to determine what form the backslash in tags is in, character (/) or entity (&amp;#47;).</p>
+</div>
+
+
+<!-- fetch_date_variables-->
+
+<div class="section">
+<h2>fetch_date_variables(str [string])</h2>
+
+
+<p>Fetch date variables from tag</p>
+
+<p><strong>Class: </strong>Functions (FNS)</p>
+<p><strong>Description: </strong> This function looks for a variable that has this prototype: {date format="%Y %m %d"}.
+If found, returns only the datecodes: %Y %m %d.</p>
+</div>
+
+
+
+
+<!-- assign_parameters-->
+
+<div class="section">
+<h2>assign_parameters(tag [string])</h2>
+
+
+<p>Fetch parameters for tag</p>
+
+<p><strong>Class: </strong>Functions (FNS)</p>
+<p><strong>Description: </strong> Returns an array of parameters for the tag.</p>
+</div>
+
+
+
+
+<!-- prep_conditionals-->
+
+<div class="section">
+<h2>prep_conditionals(str [string], variables [array], safety [string], prefix [string])</h2>
+
+
+<p>Parses conditionals and preps conditional for evaluation</p>
+
+<p><strong>Class: </strong>Functions (FNS)</p>
+<p><strong>Description: </strong> The first two parameters are requried.  If <var>safety</var> is set to 'y', then
+some safety checks are performed to make sure conditionals are well formed.  Normally, do not set this parameter.  The <var>prefix</var>
+is used when your variables might have a prefix (ex: (your_prefix->var_name}), so that you only have to send the normal variables and the prefix 
+opposed to two sets of variables (one with prefix and one without).</p>
+</div>
+
+
+
+
+<!-- filename_security-->
+
+<div class="section">
+<h2>filename_security(filename [string])</h2>
+
+
+<p>Cleans a filename</p>
+
+<p><strong>Class: </strong>Functions (FNS)</p>
+<p><strong>Description: </strong> Takes the filename and cleans it of any unwanted characters or strings for security.</p>
+</div>
+
+
+
+
+
+
+</div>
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

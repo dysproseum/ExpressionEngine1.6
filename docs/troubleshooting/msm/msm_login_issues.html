@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Troubleshooting &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="./index.html" />
+  <style type="text/css" media="screen,print">@import url(./../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="index.html"><img src="./../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt; 
+<a href="../index.html">Troubleshooting</a> &gt; 
+<strong>Troubleshooting MSM Logins</strong>
+</div>
+
+
+
+<div id="content">
+
+	<h1>Troubleshooting MSM Logins</h1>
+
+	<p class="ts_desc">When logging into the control panel, users are logged in to the initial site instead of the specific site they need to work in.</p>
+	
+	<h2>Allowing logins to each Site's Control Panel</h2>
+	
+	<p>Adding the admin.php file to each Site allows users to login directly to that Site's Control Panel.  This is a similar method to  <a href="../installation/masked_cp_access.html" title="masked_cp_access">masking access to the Control Panel</a>.</p>
+	
+	<p>Add the following code to path.php:</p>
+	<code>$cp_url = 'http://example.com/admin.php';</code>
+	
+	<p class="important"><strong>Note</strong>: Clear browser cookies in order for these changes to be used by the browser.</p>
+	
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+</div>
+</body>
+</html>

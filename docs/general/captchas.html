@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>CAPTCHAs &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../index.html" />
+  <style type="text/css" media="screen,print">@import url(../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="../index.html#gen_docs">General Information</a> &gt;
+<strong>CAPTCHAs</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>CAPTCHAs</h1>
+
+	<p>ExpressionEngine supports what are known as "CAPTCHAs", or Completely Automated Public Turing tests to tell Computers and Humans Apart.  A CAPTCHA is a computer-generated test that humans can pass but computer programs cannot.  It's most commonly used to prevent automated Bots from spamming comments, or from signing up for web services.  Yahoo, for example, uses a CAPTCHA when you sign up for an account.</p>
+
+	<p>So how does this work?  An image is generated in real time for a user loading a web page.  This image contains a word that the user must submit in a form.  The concept is effective because automated scripts generally can't read images, only humans can.  Of course there is optical recognition software that can be used to get around CAPTCHAs but this technology can easily be fooled by distorting the image.</p>
+
+	<p>In ExpressionEngine, CAPTCHAs can be used in several places:</p>
+
+	<ol>
+		<li><a href="#comment_form">Weblog Comment Form</a></li>
+		<li><a href="#gallery_comment_form">Photo Gallery Comment Form</a></li>
+		<li><a href="#member_registration_form">Member Registration Form</a></li>
+		<li><a href="#email_forms">Contact and Tell-a-Friend Email Forms</a></li>
+	</ol>
+
+
+	<h2><a name="comment_form">Comment Forms</a></h2>
+
+	<p>In order to use CAPTCHAs on the comment form, you must first enable the preference.  In the Admin section of the Control Panel go to <dfn>Weblog Management</dfn> and look for the "Enable Captcha for Comment Posting?" preferences.  Set this preference to "Yes".</p>
+
+	<p>Once you have the preference turned on, you'll need to add the CAPTCHA code to your {exp:comment:form} <a href="../modules/comment/form.html">Comment Submission Form</a> tag.  See below for the <a href="#thecode">actual code</a>.</p>
+
+
+	<h2><a name="gallery_comment_form">Photo Gallery Comment Forms</a></h2>
+
+	<p>In order to use CAPTCHAs on the photo gallery comment form, you must first enable the preference.  In the Control Panel go to <dfn>Modules &gt; Photo Gallery &gt; [your gallery] &gt; Preferences</dfn> and look for the "Enable Captcha for Comment Posting?" preferences.  Set this preference to "Yes".</p>
+
+	<p>Once you have the preference turned on, you'll need to add the CAPTCHA code to your {exp:gallery:comment_form} <a href="../modules/gallery/comments.html">Comment Submission Form</a> tag.  See below for the <a href="#thecode">actual code</a>.</p>
+
+
+
+	<h2><a name="member_registration_form">Member Registration Form</a></h2>
+
+	<p>In order to use CAPTCHAs on the member registration form, you must first enable the preference.  In the Admin section of the Control Panel go to <dfn>Membership Preferences</dfn> and look for the "Enable Membership Captcha" preferences.  Set this preference to "Yes".</p>
+
+	<p>The necessary CAPTCHA code already exists in the Member Templates by default, so you should not need to add it.  If you have a version of ExpressionEngine from before the CAPTCHA feature was added or if you otherwise need the code, see below for the <a href="#thecode">actual code</a>.</p>
+
+
+
+	<h2><a name="email_forms">Contact and Tell-a-Friend Email Forms</a></h2>
+
+	<p>Both the Contact Form as well as Tell-a-Friend email forms can take advantage of CAPTCHAs.
+
+	In order to use CAPTCHAs on them, you must first enable the preference.  In the Admin section of the Control Panel go to <dfn>System Preferences</dfn> then click <dfn>Email Configuration</dfn> and look for the "Enable CAPTHCAs for Tell-a-Friend and Contact emails?" preferences.  Set this preference to "Yes".</p>
+
+
+
+	<h2><a name="thecode">CAPTCHA Code</a></h2>
+
+	<p>The code used inside both of the Comment Form types (weblog and gallery) is the same:</p>
+
+	<code>{if captcha}<br />
+<br />
+&lt;p>Please enter the word you see in the image below:&lt;/p><br />
+<br />
+&lt;p>{captcha}&lt;br /><br />
+&lt;input type="text" name="captcha" value="{captcha_word}" size="20" maxlength="20" style="width:140px;" />&lt;/p><br />
+<br />
+{/if}</code>
+
+	<p>The contents of the conditional (<samp>{if captcha}</samp>) tag will only appear if you have the CAPTCHA preference turned on for either the comment or member registration forms.</p>
+
+
+	<p>The code used inside the Member Registration Form is very similar, with only the omission of the <samp>{captcha_word}</samp> variable:</p>
+
+	<code>{if captcha}<br />
+<br />
+&lt;p>Please enter the word you see in the image below:&lt;/p><br />
+<br />
+&lt;p>{captcha}&lt;br /><br />
+&lt;input type="text" name="captcha" value="" size="20" maxlength="20" style="width:140px;" />&lt;/p><br />
+<br />
+{/if}</code>
+
+
+	<h2>Notes</h2>
+
+	<p>It is important to note that there is a downside to using CAPTCHAs.  While they can be very successful in stopping automated bots from being able to post comments or sign up for memberships, it can also have the same effect on blind or visually impaired users of your site.  If you enable CAPTCHAs, then you will be making it extremely difficult for these legitimate users to be able to use your site.</p>
+
+	<p>You should determine for yourself whether or not CAPTCHAs are appropriate for your situation and your website audience.</p>
+
+	<p>In addition, your server must have the GD (or GD 2) image library support installed in order for CAPTCHAs to work.</p>
+
+	<p class="important">For ExpressionEngine installations that power multiple domains or subdomains, you may need to place the <em>server</em> path for the "Relative Path to Captcha Folder" setting under <dfn>Admin &gt; Captcha Preferences</dfn>.  A server path is typically something similar to <samp>/home/domain.com/http_docs/images/captchas/</samp>.  The specific setting will vary from server to server so you may need to contact your Host or server admin to determine what your correct "server path" is.</p>
+
+	<p>If your server does not have True Type font support compiled into PHP you should disable the use of True Type fonts under <dfn>Admin &gt; Captcha Preferences</dfn>.</p>
+
+
+	<h2>Special CAPTCHA Files</h2>
+
+	<p>The CAPTCHA system uses a couple of special files inside the backend:</p>
+
+	<ol>
+		<li><kbd>system/fonts/texb.ttf</kbd> - This is the True Type Font that the CAPTCHA system will use in order to create the image files correctly.  You should <strong>not</strong> alter this file.</li>
+
+		<li><kbd>system/lib/words.php</kbd> - The list of words from which the CAPTCHAs will be chosen.  You may alter the list, but you need to ensure that you don't reduce the total number of available words.</li>
+	</ol>
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

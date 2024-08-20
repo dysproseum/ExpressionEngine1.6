@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Metaweblog API &amp; Movable Type API Module &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<strong>MetaWeblog API</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Metaweblog API &amp; Movable Type API Module</h1>
+
+	<p>The Metaweblog API (Application Programming Interface) is an interface or "protocol" that will allow other programs to interact with the backend of your publishing system remotely.  In practical terms, this would allow you to post an entry to a Metaweblog API-compatible site from an external program.</p>
+
+	<p>ExpressionEngine supports the Metaweblog API as well as an extension to it known as the Movable Type API.  It is important to understand that the Metaweblog API was originally written without support for comments or trackbacks, with only one entry field.  Thus, it is very limited by its own nature in what it can do.  The Movable Type API is slightly more flexible in that it supports up to four entry fields.</p>
+
+	<ul>
+		<li><a href="#control_panel">The Control Panel</a></li>
+		<li><a href="#connecting">Connecting with a Metaweblog API Compatible Program</a></li>
+	</ul>
+
+
+	<h2><a name="control_panel">The Control Panel</a></h2>
+
+	<p>The Metaweblog API Control Panel is accessed via <dfn>Modules &gt; Metaweblog API</dfn> in your Control Panel.  Here, you can set up configurations for use with the Metaweblog API.</p>
+
+	<p>The main page will list all of your existing configurations (including the default one) including the URL used for connecting to that configuration with your Metaweblog API compatible program.</p>
+
+	<p>The configuration settings are primarily for when an entry is sent from ExpressionEngine to the Metaweblog API compatible program.  These settings are available because different programs and users might want flexibility in how their entries are sent out.  The following settings are available for each configuration.</p>
+
+
+	<h3>Configuration Name</h3>
+
+		<p>The name for your configuration, which is listed in the main table.</p>
+
+
+	<h3>Text Formatting Preference</h3>
+
+		<p>With this preference set to "Yes", ExpressionEngine will render out all pMcode and file directories contained within your entries before sending the content to your program.</p>
+
+	<h3>Entry Status</h3>
+
+		<p>Choose the Entry Status for all entries submitted using this Configuration.  If you choose the 'Do Not Set Status' option, then whatever the Client sends for status (open or closed) will be accepted.</p>
+
+
+
+	<h3>Weblog Field Group</h3>
+
+		<p>Here you choose the Field Group to use for this Configuration.  This choice determines which fields are available for selection in the following preferences.</p>
+
+
+	<h3>Excerpt Field</h3>
+
+		<p>Here you determine which field from your Field Group corresponds to the "Excerpt Field" in your Metaweblog API-compatible program.  Only "textarea" type fields are available for selection.  This field is only available when using the Movable Type API.</p>
+
+
+	<h3>Content Field</h3>
+
+		<p>Here you determine which field from your Field Group corresponds to the "Content Field" in your Metaweblog API-compatible program.  Only "textarea" type fields are available for selection.</p>
+
+
+	<h3>More Field</h3>
+
+		<p>Here you determine which field from your Field Group corresponds to the "More Field" in your Metaweblog API-compatible program.  Only "textarea" type fields are available for selection.  This field is only available when using the Movable Type API.</p>
+
+
+	<h3>Keywords Field</h3>
+
+		<p>Here you determine which field from your Field Group corresponds to the "Keywords Field" in your Metaweblog API-compatible program.  Only "textarea" type fields are available for selection.  This field is only available when using the Movable Type API.</p>
+
+
+	<h3>Upload Directory for File Uploading</h3>
+
+		<p>If your Metaweblog API-compatible program allows you to upload files, you may specify into which directory you want files uploaded.  Your choices are determined by what you have set up under <dfn>Admin &gt; File Upload Preferences</dfn>.  If you do not wish to allow uploads via the Metaweblog API, select "None".</p>
+
+		<p>In addition, in order to be able to upload files, the user sending the files via the Metaweblog API must have permission to upload to that directory.  See <dfn>Admin &gt; File Upload Preferences</dfn>.</p>
+
+		<p class="important">Many Metaweblog API-compatible programs do not support this file upload feature.  Further, if you wish to upload large files (anything over about 1MB) you would be better off using standard FTP to do so.</p>
+
+
+	<h2><a name="connecting">Connecting with a Metaweblog API Compatible Program</a></h2>
+
+	<p>In general, you will use the URL provided on the Metaweblog API main screen for your configuration to connect with your Metaweblog API compatible program.  Below is information specific to some common programs.</p>
+
+
+	<h3>Ecto</h3>
+
+		<p>To connect with Ecto, you will need the URL provided for your configuration as well as your member login information.</p>
+
+		<p>Using this information, Ecto will contact the API server to determine if that user is valid and what weblogs they are permitted to access.  It then contacts the API Server and downloads recent entries for all of those weblogs.  Ecto does not provide a method for specifying a particular weblog, thus you will receive all weblogs for which your user has access.</p>
+
+
+	<h3>MarsEdit</h3>
+
+		<p>To connect with MarsEdit, you will need the URL provided for your configuration, your member login information, and a weblog ID.  MarsEdit does not automatically detect all of the weblogs you have access to like Ecto, so you will have to make sure to specify which weblog you wish to use with the Weblog ID.</p>
+
+		<p>When setting up your weblog/connection in MarsEdit:</p>
+
+		<ul>
+			<li>Select "Movable Type" as the type of Software since ExpressionEngine supports the Movable Type API.</li>
+			<li>In the "RPC URL" setting, put in the URL for your Configuration found in the Metaweblog API Module Control Panel.</li>
+			<li>Fill in your weblog's ID number.</li>
+		</ul>
+
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Upgrading to ExpressionEngine 1.6.1 &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../index.html" />
+  <style type="text/css" media="screen,print">@import url(../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="../index.html#install_docs">Installation and Update Instructions</a> &gt;
+<a href="update.html">Updating EE</a> &gt;
+<strong>Version 1.6.1 Notes</strong>
+</div>
+
+<div id="content">
+
+	<h1>Update Notes for Version 1.6.1</h1>
+
+<p>ExpressionEngine 1.6.1 includes a number of new features and updates. Reviewing the notes below will help you transition to 1.6 with as little effort as possible.</p>
+
+	<ul>
+		<li><a href="#cp_themes">Control Panel Theme Updates</a></li>
+		<li><a href="#emoticons">Emoticon Updates</a></li>
+ 		<li><a href="#profile_themes">Profile Theme Updates</a></li>
+	</ul>
+	
+	<h2><a name="cp_themes">Control Panel Theme Updates</a></h2>
+
+	<p>Version 1.6.1 has some changes in the control panel theme files, so either replace the themes folder or if you have a customized the themes make the modifications below to the following files.</p>
+	
+	<h3>/themes/cp_themes/default/default.css</h3>
+	
+	<p>Find and replace:</p>
+	
+	<code>.breadcrumbRight a div {</code>
+	
+	<p>with:</p>
+	
+	<code>.breadcrumbRight a div,<br />
+	.breadcrumbRight a span {</code>
+		
+	<p>Also find and replace:</p>
+	
+	<code>.breadcrumbRight a:active div {</code>
+		
+	<p>with:</p>
+	
+	<code>.breadcrumbRight a:active div,<br />
+	.breadcrumbRight a:active span {</code>
+		
+	<h3>/themes/cp_themes/classic/classic.css</h3>
+	
+	<p>Find the style rule block for:</p>
+	
+	<code>.crumblinksR {</code>
+		
+	<p>And add the style rule:</p>
+	
+	<code>display: block;</code>
+		
+	
+	<h2><a name="emoticons">Emoticon Updates</a></h2>
+	
+	<p>ExpressionEngine 1.6.1 fixes a spelling error for the 'raspberry' emoticon.  Please replace your emoticon images in <samp>/images/smileys/</samp>.</p>
+	
+	<h2><a name="profile_themes">Profile Theme Updates</a></h2>
+	
+	<p>Version 1.6.1 has some changes in the member theme files, so either replace the themes folder or if you have a customized the themes make the modifications below to the following files.</p>
+	
+	<ul>
+		<li>/themes/profile_themes/default/profile_theme.php</li>
+	</ul>
+	
+	<h3>Bulletin Board Template</h3>
+	
+	<p>Add a closing &lt;/div> to the <kbd>{if no_bulletins}</kbd> conditional:</p>
+	
+	<code>{if no_bulletins}<br />
+&lt;div class=&quot;tableCellOne&quot;&gt;<br />
+&lt;span class=&quot;defaultBold&quot;&gt;{lang:message_no_bulletins}&lt;/span&gt;<br />
+&lt;/div&gt;<br />
+{/if}</code>
+
+	<h3>&lt;html&gt; Tags</h3>
+	
+	<p>Due to changes in the W3's validator, change the &lt;html&gt; tags from:</p>
+	
+	<code>&lt;html&gt;</code>
+	
+	<p>to:</p>
+	
+	<code>&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; xml:lang=&quot;{lang}&quot; lang=&quot;{lang}&quot;&gt;</code>
+	
+	<h3>Success &amp; Error Templates</h3>
+	
+	<p>Remove extraneous &lt;/h2> from "Success" and "Error" themes.  Change:</p>
+	
+	<code>&lt;div class=&apos;profileHeadingBG&apos;&gt;&lt;div class=&quot;tableHeading&quot;&gt;{lang:heading}&lt;/h2&gt;&lt;/div&gt;&lt;/div&gt;</code>
+	
+	<p>to:</p>
+	
+	<code>&lt;div class=&apos;profileHeadingBG&apos;&gt;&lt;div class=&quot;tableHeading&quot;&gt;{lang:heading}&lt;/div&gt;&lt;/div&gt;</code>
+	
+
+	<h2><a name="language"></a>Language Additions</h2>
+	
+	<p>ExpressionEngine 1.6.1 has a number of language file additions.  To assist translators in 
+	updating their language packs, a <a href="language_notes_1.6.1.txt">language notes text file</a>
+	has been provided.  This text file lists all of the new language keys, separated by the each 
+	language file that contains changes.  To update your language pack, you can download this text 
+	file, make the changes, and simply copy the new keys to the appropriate language files.</p>
+	
+	<p><br /><br /><a href="update.html">Return to Update Page</a></p>
+	
+	<p><br /><br /><br /><br /><br /><br /></p>
+	
+</div>
+
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

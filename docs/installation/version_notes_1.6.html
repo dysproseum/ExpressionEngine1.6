@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Upgrading to ExpressionEngine 1.6 &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../index.html" />
+  <style type="text/css" media="screen,print">@import url(../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="../index.html#install_docs">Installation and Update Instructions</a> &gt;
+<a href="update.html">Updating EE</a> &gt;
+<strong>Version 1.6 Notes</strong>
+</div>
+
+<div id="content">
+
+	<h1>Update Notes for Version 1.6</h1>
+
+<p>ExpressionEngine 1.6 includes a number of new features and updates. Reviewing the notes below will help you transition to 1.6 with as little effort as possible.</p>
+
+	<ul>
+ 	<li><a href="#cat_url_titles">Category URL Titles</a></li>
+	<li><a href="#cp_theme">Control Panel Theme Updates</a></li>
+	<li><a href="#mailing_list">Mailing List Activation Template</a></li>
+	<li><a href="#mailing_list_templates">Mailing List Templates</a></li>
+	<li><a href="#language">Language Additions</a></li>
+	</ul>
+	
+	
+	<h2><a name="cat_url_titles">Category URL Titles</a></h2>
+	
+	<p>During the update, all of your categories will be updated to have a category URL title that is identical to their <em>current</em> Category Name.  Your category trigger, category links, etc. will continue to work without requiring any modifications.  So not until you are ready to go into the category editor and assign URL safe category URL titles will you need to do so.</p>
+	
+	<p class="important">When you edit a category, and submit your changes, the system will automatically convert any existing value in the Category URL Title field to a valid, URL safe value.  Please note that this may change your URLs if your category names had spaces, slashes, accented characters, or other non-URL safe characters and you were previously using category names in the URL.  This may require that you eliminate .htaccess, hacks, PHP, or Plugin workarounds that you may have been implementing in the past to work around non-URL safe characters.  This is a <em>good</em> thing, as ExpressionEngine will now let you have "pretty" category names and URL safe category URLs without any additional effort!</p>
+	
+	<h2><a name="cp_theme"></a>Control Panel Theme Updates</h2>
+	
+	<p class="important">If you were using the "31Three" control panel theme from <a href="http://31three.com/">31three.com</a>, you should remove it, as it has become the new default theme for ExpressionEngine 1.6, and has a number of fixes and enhancements to that theme.</p>
+	
+	<p>Version 1.6 has an entirely new default theme.  <strong>You must upload the 'default' and 'classic' (if you wish to retain the original theme) folders to the <samp>/themes/cp_themes/</samp> folder</strong>.  The original theme is now known as "Classic", and if you had modified that theme, you will need to apply those changes to the renamed "Classic" theme.</p>
+	
+	<p>For other themes, there is a minor change in the control panel CSS that will require you to make this CSS modification, replacing:</p>
+	
+	<code>.uploadBox {<br />
+		&nbsp;&nbsp;&nbsp;background-color:&nbsp;&nbsp;#A5B2DC;  <br />
+		&nbsp;&nbsp;&nbsp;border:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#6F7CA2 1px solid;<br />
+		&nbsp;&nbsp;&nbsp;font-family:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lucida Grande, Verdana, Geneva, Sans-serif;<br />
+		&nbsp;&nbsp;&nbsp;font-size:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11px;<br />
+		&nbsp;&nbsp;&nbsp;color:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#000;<br />
+		&nbsp;&nbsp;&nbsp;text-align:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;center;<br />
+		&nbsp;&nbsp;&nbsp;margin:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2px 0 5px 14px;<br />
+		&nbsp;&nbsp;&nbsp;padding:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5px 0 5px 0;<br />
+	}</code>
+
+	<p>with this:</p>
+	
+	<code>.uploadBox {<br />
+&nbsp;&nbsp;&nbsp;background-color:&nbsp;&nbsp;#A5B2DC;  <br />
+&nbsp;&nbsp;&nbsp;border:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#6F7CA2 1px solid;<br />
+&nbsp;&nbsp;&nbsp;font-family:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lucida Grande, Verdana, Geneva, Sans-serif;<br />
+&nbsp;&nbsp;&nbsp;font-size:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11px;<br />
+&nbsp;&nbsp;&nbsp;color:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#000;<br />
+&nbsp;&nbsp;&nbsp;text-align:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;center;<br />
+&nbsp;&nbsp;&nbsp;margin:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2px 0 5px 14px;<br />
+&nbsp;&nbsp;&nbsp;padding:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5px 0 5px 0;<br />
+&nbsp;&nbsp;&nbsp;height:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20px;<br />
+	}<br />
+<br />
+	.uploadBox a {<br />
+&nbsp;&nbsp;&nbsp;display:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;block;<br />
+&nbsp;&nbsp;&nbsp;font-weight:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bold;<br />
+	}<br />
+<br />
+	.uploadBox a:hover {<br />
+&nbsp;&nbsp;&nbsp;color:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#fff;<br />
+	}<br />
+<br />
+	.uploadBox img {<br />
+&nbsp;&nbsp;&nbsp;vertical-align:&nbsp;&nbsp;&nbsp;&nbsp;bottom;<br />
+&nbsp;&nbsp;&nbsp;margin-bottom:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2px;<br />
+	}</code>
+	
+	<p>Some CSS that was previously hard-coded in the control panel output has been moved to the Control Panel theme CSS files to make this more flexible to theme.  Six variables have been added which are required to allow the drop-down behavior of your choice to function properly for the main navigation menus.  If you are using a customized theme, you will need to add this CSS to your theme:</p>
+	
+	<code>html&gt;body .navCell:{publish_tab_selector} #publishdropmenu { {publish_tab_display} }<br />
+	html&gt;body .navCell:{publish_tab_selector} #publishdropmenu ul { {publish_tab_ul_display} }<br />
+	html&gt;body #publishdropmenu { display:none; position:absolute; }<br />
+	html&gt;body #publishdropmenu,<br />
+	html&gt;body #publishdropmenu * { list-style:none; width:200px; }<br />
+	html&gt;body #publishdropmenu,<br />
+	html&gt;body #publishdropmenu * { margin:0; padding:0; }<br />
+	html&gt;body #publishdropmenu li { position: relative; }<br />
+	html&gt;body #publishdropmenu ul { display:none; position:absolute; top:5px; left:190px; border-top:1px solid #B2B3CE; }<br />
+	html&gt;body .navCell #publishdropmenu li:hover { background: #C0C3E2 url({path:image_url}bg_cell_hover.jpg) repeat-x left top; }<br />
+<br />
+	html&gt;body .navCell:{sites_tab_selector} #sitesdropmenu { {sites_tab_display} }<br />
+	html&gt;body .navCell:{sites_tab_selector} #sitesdropmenu ul { {sites_tab_ul_display} }<br />
+	html&gt;body #sitesdropmenu { display:none; position:absolute; }<br />
+	html&gt;body #sitesdropmenu,<br />
+	html&gt;body #sitesdropmenu * { list-style:none; width:200px; }<br />
+	html&gt;body #sitesdropmenu,<br />
+	html&gt;body #sitesdropmenu * { margin:0; padding:0; }<br />
+	html&gt;body #sitesdropmenu li { position: relative; }<br />
+	html&gt;body #sitesdropmenu ul { display:none; position:absolute; top:5px; left:190px; border-top:1px solid #B2B3CE; }<br />
+	html&gt;body .navCell #sitesdropmenu li:hover { background: #C0C3E2 url({path:image_url}bg_cell_hover.jpg) repeat-x left top; }</code>
+	
+	<h3>Template Manager Icons</h3>
+	
+	<p>New icons are used to indicate the template type and whether or not a template is "hidden".  You will need to either replace your <samp>/themes/cp_global_images/</samp> folder, or upload the following files from the download to your <samp>/themes/cp_global_images/</samp> folder:</p>
+	
+	<code>css_icon.png<br />
+	css_icon_hidden.png<br />
+	index_icon.png<br />
+	js_icon.png<br />
+	js_icon_hidden.png<br />
+	rss_icon_hidden.png<br />
+	rss_icon.png<br />
+	static_icon.png<br />
+	static_icon_hidden.png<br />
+	webpage_icon.png<br />
+	webpage_icon_hidden.png<br />
+	xml_icon.png<br />
+	xml_icon_hidden.png</code>
+		
+		
+	<h2><a name="mailing_list">Mailing List Activation Template</h2>
+		
+	<p>ExpressionEngine 1.6 added a new variable to the Mailing List Activation specialty template, <dfn>{mailing_list}</dfn>.  You may wish to update your template to the new default or modify your customized template to include the new variable:</p>
+	
+	<code>Thank you for joining the &quot;{mailing_list}&quot; mailing list!<br />
+<br />
+	Please click the link below to confirm your email.<br />
+<br />
+	If you do not want to be added to our list, ignore this email.<br />
+<br />
+	{unwrap}{activation_url}{/unwrap}<br />
+<br />
+	Thank You!<br />
+<br />
+	{site_name}
+	</code>
+	
+	<h2><a name="mailing_list_templates">Mailing List Templates</h2>
+		
+	<p>ExpressionEngine 1.6 added a new variable to the Mailing List email templates, <dfn>{mailing_list}</dfn>.  You may wish to update your templates to the new default or modify your customized templates to include the new variable:</p>
+	
+	<code>{message_text}<br />
+<br />
+		To remove your email from the &quot;{mailing_list}&quot; mailing list, click here:<br />
+		{if html_email}&lt;a href=&quot;{unsubscribe_url}&quot;&gt;{unsubscribe_url}&lt;/a&gt;{/if}<br />
+		{if plain_email}{unsubscribe_url}{/if}
+	</code>
+	<h2><a name="language"></a>Language Additions</h2>
+	
+	<p>ExpressionEngine 1.6 has a number of language file additions.  To assist translators in 
+	updating their language packs, a <a href="language_notes_1.6.txt">language notes text file</a>
+	has been provided.  This text file lists all of the new language keys, separated by the each 
+	language file that contains changes.  To update your language pack, you can download this text 
+	file, make the changes, and simply copy the new keys to the appropriate language files.</p>
+	
+	<p><br /><br /><a href="update.html">Return to Update Page</a></p>
+	
+	<p><br /><br /><br /><br /><br /><br /></p>
+	
+</div>
+
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

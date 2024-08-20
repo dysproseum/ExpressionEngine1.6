@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Member-Related Links &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Member Management</a> &gt;
+<strong>Member-Related Links</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Member-Related Links</h1>
+
+	<p>This page describes how to create links that point to the various member-related pages, enabling your visitors to sign-up for a membership account, log-in, log-out, edit their profile, etc.</p>
+
+		
+
+	<h3>Log In</h3>
+	
+		<p>This link points to the personal profile <kbd>login page</kbd>.  To create the link, use this variable:</p>
+
+		<code>{path='member/login'}</code>
+
+		<p>Place the variable inside of a link tag:</p>
+
+		<code>&lt;a href="{path='member/login'}">Log In&lt;/a></code>
+
+
+	<h3>Log Out</h3>
+
+		<p>This link allows users to <kbd>log-out</kbd> of the system.  To create the link, use this variable:</p>
+
+		<code>{path='logout'}</code>
+
+		<p>Place the variable inside of a link tag:</p>
+
+		<code>&lt;a href="{path='logout'}">Log Out&lt;/a></code>
+
+
+	<h3>Registration Page</h3>
+
+		<p>This link points to the <kbd>member registration page</kbd>.  To create the link, use this variable:</p>
+
+		<code>{path='member/register'}</code>
+
+		<p>Place the variable inside of a link tag:</p>
+
+		<code>&lt;a href="{path='member/register'}">Register as a new member&lt;/a></code>
+
+
+	<h3>View Memberlist</h3>
+
+		<p>This link points to the page showing a list of all registered members.  To create the link, use this variable:</p>
+
+		<code>{path='member/memberlist'}</code>
+
+		<p>Place the variable inside of a link tag:</p>
+
+		<code>&lt;a href="{path='member/memberlist'}">View the Memberlist&lt;/a></code>
+
+
+	<h3>Member Profile Page</h3>
+		
+		<p>This link points to the personal profile page of the logged-in user, allowing them to edit any of their settings. To create the link, use this variable:</p>
+		
+		<code>{path='member/profile'}</code>
+
+		<p>Place the variable inside of a link tag:</p>
+
+		<code>&lt;a href="{path='member/profile'}">Edit your profile&lt;/a></code>
+
+		<p>When the link is rendered it will appear similar to: <dfn>http://example.com/index.php/member/profile/</dfn></p>
+
+	<h3>Forgotten Password?</h3>
+	
+		<p>This link points to the page where users can retrieve their password:</p>
+
+		<code>{path='member/forgot_password'}</code>
+
+		<p>Place the variable inside of a link tag:</p>
+
+		<code>&lt;a href="{path='member/forgot_password'}">Forget your password?&lt;/a></code>
+
+
+
+
+	<h2>Member Navigation</h2>
+
+	<p>A good strategy for the above links is to use them within conditional tags that let you present links based on whether someone is logged in or not.  Here's an example:</p>
+
+<code>{if logged_in}<br />
+&nbsp;&nbsp;&nbsp;&lt;a href="{path='member/profile'}">Edit your profile&lt;/a><br />
+&nbsp;&nbsp;&nbsp;&lt;a href="{path='member/memberlist'}">View the Memberlist&lt;/a><br />
+&nbsp;&nbsp;&nbsp;&lt;a href="{path='logout'}">Log Out&lt;/a><br />
+{/if}<br />
+<br />
+{if logged_out}<br />
+&nbsp;&nbsp;&nbsp;Are you a member?  If so, please &lt;a href="{path='member/login'}">log-in&lt;/a>.<br />
+&nbsp;&nbsp;&nbsp;Not a member?  Please &lt;a href="{path='member/register'}">register&lt;/a>.<br />
+&nbsp;&nbsp;&nbsp;Have you &lt;a href="{path='member/forgot'}">forgotten your password&lt;/a>?<br />
+{/if}</code>
+
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

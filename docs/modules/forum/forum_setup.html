@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Discussion Forum Setup &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Forum Module</a> &gt;
+
+<strong>Forum Setup</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Discussion Forum Setup</h1>
+
+
+	<h2><a name="setting_up_your_forums">Setting Up Your Forums</a></h2>
+
+	<p>When setting up a new forum, it is typically best to do things in a certain order.</p>
+
+
+	<h3>Set "Default Preferences"</h3>
+
+		<p>Under the <dfn>Forum Management</dfn> tab in the Forum Module there is a <dfn>General Preferences</dfn> link.  This area will allow you to set the default preferences that will be used whenever a <em>new</em> forum is created.  This area <strong>will not</strong> globally change all preferences for existing forums; it is used to define the base settings that will be in place when a new forum is created.  Each forum can have its preferences set independently after creation.</p>
+
+		<p class="important">Use the <dfn>Default Preferences</dfn> area to set the default values to be applied to <em>new</em> forums.  To alter settings for existing forums, use the <dfn>Edit</dfn> link for that forum.</p>
+		
+
+
+	<h3>Set "Default Permissions"</h3>
+
+		<p>Under the <dfn>Forum Management</dfn> tab in the Forum Module there is a <dfn>Default Permissions</dfn> link.  As with the "Default Preferences", this area allows you to set the default permissions that will be used when a <em>new</em> forum is created.  Each forum has its own permissions settings, so changing these settings <strong>will not</strong> affect existing forums.</p>
+
+		<p class="important">
+		Use the <dfn>Default Permissions</dfn> area to set the default permission values to be applied to <em>new</em> forums.  To alter permissions for existing forums, use the <dfn>Permissions</dfn> link for that forum.</p>
+		
+
+		<p>There are seven types of permissions you can set.  It should be obvious what each type of permission allows.</p>
+
+		<ul>
+			<li>Can View Forum</li>
+			<li>Can View Hidden Forums</li>
+			<li>Can View Posts</li>
+			<li>Can Post</li>
+			<li>Can Report</li>
+			<li>Can Upload</li>
+			<li>Can Search</li>
+		</ul>
+
+		<p>For each type of permission, you can determine whether or not it is available for any of your Member Groups.  Check a checkbox in a permission column for a Member Group row if you want that Member Group to have that permission.  For instance, you might not want to allow a particular Member Group to be able to post in your forum.  If that's the case, then make sure the "Can Post" checkbox is unchecked for that Member Group.</p>
+
+		<p class="important">The Discussion Forum module requires membership in order to post in the forums.  Non logged-in users (the "Guest" Member Group) cannot post to the forums.</p>
+		
+
+		<p>The "blank" boxes in the last column and last row allow you to easily select or de-select an entire column or row.</p>
+
+		<p>Member Groups are managed under <dfn>Admin &gt; Members and Groups &gt; Member Groups</dfn> since Member Groups are used throughout your site and not just as part of the forum.</p>
+
+
+	<h3>Add a New Category</h3>
+
+		<p>Once you've set the default preferences and permissions you can start to add the actual forums.  First, you'll need to create at least one "Category" for your forum.  Let's imagine that your site is about sports and politics.  So, you first go to the <dfn>Add a New Category</dfn> link under the <dfn>Forum Management</dfn> tab in the Forum Module.  Here you could create a "Sports" category.  Later, you can create separate forums for different types of sports.  You might also create a "Politics" category.</p>
+
+		<p>A "category" in the Forum Module is simply a way to organize one or more forums together.</p>
+
+
+	<h3>Add your Forums</h3>
+
+		<p>Now that you've created one or more categories, you can create forums inside them.  Use the <dfn>Add a new forum to this category</dfn> link under the category in which you're interested.  For instance, under the Sports category, you could click that link and then create a "Football" forum.  You might also create "Basketball", "Baseball", "Rugby", and "Hockey" forums in that category.</p>
+
+		<p>In the Politics category you might create "Democrat", "Independent", and "Republican" forums.</p>
+
+		<p>When creating your forums, you can set the "Status" for the forum.  There are three statuses:</p>
+
+		<ul>
+			<li><b>Live</b>: This is the normal state for a forum.  It allows new postings.</li>
+			<li><b>Read Only</b>: A Read Only forum does not permit new posts.  You could use this status if you have a forum that you still want to keep the contents available for viewing but don't want anything new added.  You can think of this as a sort of "archival" mode.</li>
+			<li><b>Hidden</b>: A Hidden forum is one that is only viewable by people given permission to do so (via the forum permissions, as mentioned earlier).</li>
+		</ul>
+
+		<p>Remember how you set your Default Preferences and Default Permissions earlier?  When you create these new forums, each one is created with those settings and permissions applied to them.  So, what if you want some of your forums to have slightly different preferences or permissions?</p>
+
+
+	<h3>Customizing Particular Forums</h3>
+
+		<p>After a forum has been created, you can use the <dfn>Edit</dfn> link for that forum to adjust its settings.  At the bottom of the table you'll see a <dfn>Show Preferences</dfn> link; clicking on that will expand additional preferences that you can adjust.  In this way, you can create a forum and have the Default Preferences applied initially and then later adjust that particular forum differently.</p>
+
+		<p>In the same way, you can use the <dfn>Permissions</dfn> link for a particular forum to adjust the permissions that apply to only <em>that</em> forum.</p>
+
+
+	<h3>Changing the Display Order of Forums and Categories</h3>
+
+		<p>Often, you won't create your categories and forums in the ultimate order in which you'd like them displayed.  In the main <dfn>Forum Management</dfn> screen you can use the Up and Down arrow links to change the order of things.  Using the arrows for forums will change the order of those forums within the category.  You can use the arrows for the categories to change the order in which the categories are displayed.</p>
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

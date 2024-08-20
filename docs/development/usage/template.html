@@ -1,0 +1,308 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Template Class  &#8211; ExpressionEngine Developer Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../index.html">Development</a> &gt;
+<strong>Template Class</strong>
+</div>
+
+
+<div id="content">
+<h1>Template Class</h1>
+
+
+<div class="section">
+	<ul>
+		<li><a href="template.html#intro">Introduction</a></li>
+		<li><a href="template.html#calling">Calling the Template class</a></li>
+		<li><a href="template.html#params">Parameters</a></li>
+		<li><a href="template.html#tag_data">Data within Tag Pairs</a></li>
+		<li><a href="template.html#single_pair">Single and Pair Variables</a></li>
+		<li><a href="template.html#conditional_pairs">Conditional Variables</a></li>
+	</ul>
+</div>
+
+<a name="intro"></a>
+<div class="section">
+<h2>Introduction</h2>
+
+<p>In ExpressionEngine, a template is effectively taking the place of a page on a site and when rendered displays content from modules and plugins. Whenever a page is requested within an ExpressionEngine site, the system calls the Template class to discover which template is being requested and then does all of the parsing and processing required for rendering the template.  This processing includes the embedding of other templates, tag and template caching, PHP processing, and it performs the calling of modules and plugins when their tags are found in the template.</p>
+
+<p>A typical module or plugin tag in ExpressionEngine looks like this:</p>
+
+<pre>{exp:weblog:weblog_name}</pre>
+
+<p>The first part of the tag, <samp>exp:</samp>, tells ExpressionEngine that this is a tag.  The second part, <samp>weblog</samp>, is the module or the plugin that the tag belongs to, in this case the "weblog" module.  The third part (modules only) is the specific function from within the module that you're calling; in this case the function to display the "weblog_name".</p>
+
+</div>
+
+<a name="calling"></a>
+<div class="section">
+<h2>Calling the Template Class</h2>
+<p>When the Template class calls a module, the Template class makes availale to the module class the parameters, variables, and content of the tag currently being processed. To make these values available, simply call the <var>$TMPL</var> global in every function that will require the use of the values.</p>
+
+<pre>
+function module_example()
+{
+    global $TMPL;
+
+    $name = ( ! $TMPL->fetch_param('name')) ? '' : $TMPL->fetch_param('name');
+}
+</pre>
+</div>
+
+
+
+
+<a name="params"></a>
+<div class="section">
+<h2>Parameters</h2>
+
+<p>Before calling the function that is being requested by the ExpressionEngine tag, the Template class will parse out any parameters for that tag and insert them into a Template class variable, thus making them easily accessible by the requested function by using the $TMPL->fetch_param() function.  If the parmeter was not set in the opening tag, then the function will return FALSE, which allows the module developer to easily set default values or add conditionals.</p>
+
+<pre>
+$order = ( ! $TMPL->fetch_param('order')) ? 'random' : $TMPL->fetch_param('order');
+// Default value is 'random'
+
+if ( ! $weblog = $TMPL->fetch_param('weblog'))
+{
+    $LANG->fetch_language_file('module');
+    $OUT->fatal_error($LANG->line('module_invalid_weblog'));
+    exit;
+}
+else
+{            
+    $str = $FNS->sql_andor_string($weblog, 'blog_name');
+    
+    if (substr($str, 0, 3) == 'AND')
+    {
+        $str = substr($str, 3);
+    }
+    
+    $sql .= "SELECT weblog_id FROM exp_weblogs WHERE ".$str;
+    $query = $DB->query($sql);
+}
+// If weblog is not specified, then an error is outputted.
+// Otherwise, perform query.
+</pre>
+</div>
+
+
+
+<a name="tag_data"></a>
+<div class="section">
+<h2>Data Within Tag Pairs</h2>
+
+<p>ExpressionEngine tags are used primarily to output some form of content so it can be displayed within a template.  The formatting for this content is determined by the HTML and variable data contained between the opening and closing tags for the tag being called.  We normally call this formatting information between the opening and closing tags the 'tag data', and this data can be requested by using the $TMPL->tagdata variable.</p>
+
+<p><em><strong>Note: </strong>Except in rare cases, a module will have both an opening and closing tag.  There are exceptions to this rule such as when you might wish to have a tag that simply performs an automated action.  An example of this is the {exp:moblog:check} tag.</em></p>
+
+<p><strong>Module code in template.</strong> The tag data is everything from the end of the opening tag to the beginning of the closing tag, basically the HTML and tag variables:</p>
+<pre>
+{exp:magic:spell}
+
+&lt;h2>{title}&lt;/h2>
+
+&lt;p>{summary}&lt;/p>
+
+{/exp:magic:spell}
+</pre>
+
+<p><strong>A module calling and using the tag data.</strong></p>
+<pre>
+$query = $DB->query($sql);
+
+foreach($query->result as $row)
+{
+    $tagdata = $TMPL->tagdata;
+    
+    foreach ($TMPL->var_single as $key => $val)
+    {
+        if (isset($row[$val]))
+        {
+            $tagdata = $TMPL->swap_var_single($val, $row[$val], $tagdata);
+        }
+    }
+    
+    $this->return_data .= $tagdata; 
+}
+</pre>
+</div>
+
+
+<a name="single_pair"></a>
+<div class="section">
+<h2>Single and Pair Variables</h2>
+
+<p>ExpressionEngine variables are simply a word or underscored phrase with curly brackets on either side.  The names are usually quite simple and contextually understandable for the tag, thus making it easier for users to remember them and understand their usage. There are three kinds of variables in ExpressionEngine, single, pair, and conditional variables.</p>
+
+<pre>
+// Single Variable
+{summary}
+
+// Pair Variable
+{category}
+
+{/category}
+
+// Conditional Variable
+{if body != ""}
+
+{/if}
+</pre>
+
+<p>Before calling the module for the ExpressionEngine tag, the Template class parses out all of the variables contain in the tag's data and puts them into arrays which are Template class variables. This allows the module to simply call the Template class (<kbd>global $TMPL</kbd>) and it will have a list of all the single, pair, and conditional variables that it needs to replace with content.
+
+<p>Single variables output a single piece of content, and in the module's code these variables are usually handled by doing a simple find and replace, where the outputted content is replacing the variable.  The Template class array for single variables is $TMPL->var_single, where the keys are the variable's name and the the values are the full variable including brackets and any formatting parameters (i.e. for dates).  The Template class also provides a function, $TMPL->swap_var_single, for performing the find and replace, making sure that the variable is replaced correctly in the template.</p>
+
+<pre>
+foreach ($TMPL->var_single as $key => $val)
+{
+    if ($key == "spell_name")
+    {
+        $tagdata = $TMPL->swap_var_single($val, $row['spell_name'], $tagdata);
+    }
+    
+    if (ereg("^spell_date", $key))
+    {
+        $date = $LOC->decode_date($val, $row['spell_date']);
+        
+        $tagdata = $TMPL->swap_var_single($key, $date, $tagdata);    
+    }
+}
+</pre>
+
+<p>Pair variables are a bit more complicated, since they are often used for performing a loop within the tag data when there are multiple pieces of content of a similar type.  A good example of this is the weblog module where an entry might have multiple categories.</p>
+
+<pre>
+{exp:weblog:entries}
+
+&lt;ul>
+{categories}
+&lt;li>{category_name}&lt;/li>
+{/categories}
+&lt;/ul>
+
+{exp:weblog:entries}
+</pre>
+
+<p>The Template class variable containing the variable pairs in the tag data is $TMPL->var_pair, which is an array where the keys are the contents of the pair variable's opening tag and the values are an array containing any parameters for the pair variable. Since the $TMPL->var_pair variable does not contain the content of the variable pair, you will have to search the template for it yourself using a preg_match() (or possibly a preg_match_all(), if you believe there could be multiple instances of this variable pair).</p>
+
+<pre>
+foreach ($TMPL->var_pair as $key => $val)
+{
+    if (ereg("^items", $key))
+    {
+    	$temp = preg_match("/".LD."$key".RD."(.*?)".LD.SLASH.'items'.RD."/s", $TMPL->tagdata, $matches)
+
+        // Set the display preference
+        $nest = (is_array($val) && isset($val['nest'])) ? $val['nest'] : 'no';
+        
+        if ($nest == 'yes')
+        {
+        	$temp = $this->nested_items($this->items, $temp);
+        }
+        else
+        {
+        	$temp = $this->linear_items($this->items, $temp);
+        }                  
+    }
+}
+</pre>
+
+</div>
+
+
+<a name="conditional_pairs"></a>
+<div class="section">
+<h2>Conditional Variables</h2>
+
+<p>Conditional variables allow scripting to be added to your module's tag data in order to show data if certain defined criteria are met.  The structure should be a variable being checked against another variable or value via an operator:</p>
+
+<pre>
+// Structure
+{if <samp>variable</samp> <dfn>comparison-operator</dfn> <kbd>value</kbd>}
+
+Data between the tags that gets shown if the condition is met.
+
+{/if}
+
+// Example
+{if spell_level > 3}
+
+Advance Magicians Only
+
+{/if}
+</pre>
+
+<p>There is a great deal more information about possible conditionals in the <a href="/docs/templates/globals/conditionals.html">Conditional Global Variables</a>, so we suggest you give it a quick look over.</p>
+
+	
+<p>If you are scripting conditional variables in your module, then they should be
+done first when processing tag data before any other variables are parsed.  Instead
+of writing your own conditional parsing routine, ExpressionEngine allows you to 
+simply give your data to a function that then takes care of all the work.  The
+data needs to be in the form of an array where the key is the name of the variable
+and the value is the data for that variable.</p>
+
+<p>If you have <em>short conditionals</em> that can be evaluted without a comparison 
+operator (ex: {if allow_comments}), then instead of sending data you will send a string
+of either 'TRUE' or 'FALSE' depending on whether that conditional should be evaluated
+as true or false.  The example belows gives you an idea of how this should work: </p>
+
+<pre>
+$cond					= $row; 	// $row contains query fields and values, ex:  'title' => "First Entry"
+
+$cond['logged_in']			= ($SESS->userdata('member_id') == 0) ? 'FALSE' : 'TRUE';
+$cond['logged_out']			= ($SESS->userdata('member_id') != 0) ? 'FALSE' : 'TRUE';
+$cond['allow_comments']		= (isset($row['allow_comments']) AND $row['allow_comments'] == 'n') ? 'FALSE' : 'TRUE';
+
+$tagdata = $FNS->prep_conditionals($tagdata, $cond);
+</pre>
+
+<p>Once you send your tag data and your array of conditional variables, the $FNS->prep_conditionals() function processes the conditionals
+so that they can be evaluted by the Template parser later.</p>
+
+</div>
+
+
+
+
+
+
+</div>
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

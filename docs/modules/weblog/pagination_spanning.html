@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Spanning a Weblog Entry Across Multiple Pages &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Weblog Module</a> &gt;
+<strong>Spanning Entries</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Spanning a Weblog Entry Across Multiple Pages</h1>
+
+	<p>ExpressionEngine includes a feature that allows you to automatically split a single weblog entry/article across multiple pages.  This feature is particularly useful for webzines or other sites that routinely post long articles.</p>
+
+	<p>Here's an example of what your weblog entries tag might look like with this feature in action:</p>
+
+	<code>{exp:weblog:entries weblog="news" paginate_type="field" paginate="bottom"}<br />
+<br />
+&lt;h3>{title}&lt;/h3><br />
+<br />
+{body}<br />
+<br />
+{multi_field="page1|page2|page3|page4"}<br />
+<br />
+&lt;div>Last updated on {edit_date format='%M %d, %Y'}
+  at {edit_date format='%h:%i %A'}&lt;br /><br />
+&lt;/div><br />
+<br />
+{paginate}<br />
+&lt;p>Page {current_page} of {total_pages} pages for this article {pagination_links}&lt;/p><br />
+{/paginate}<br />
+<br />
+{/exp:weblog:entries}</code>
+
+	<p>You may notice that the code shares a lot in common with the code for <a href="pagination_page.html">weblog entry and comment pagination</a>.  In fact, the feature is very similar.</p>
+
+	<p class="important">The ability to span a weblog entry across multiple pages is only available when showing a single entry.  That means it's useful on single-entry pages such as "comment" pages.</p>
+
+	<h2>Parameters</h2>
+
+	<ul class="minitoc">
+		<li><a href="#par_paginate">paginate="bottom"</a></li>
+		<li><a href="#par_paginate_type">paginate_type="field"</a></li>
+	</ul>
+
+
+	<h3><a name="par_paginate">paginate=</a></h3>
+
+		<code>paginate="top"</code>
+		<code>paginate="bottom"</code>
+		<code>paginate="both"</code>
+
+		<p>This parameter determines where the pagination code will appear for your weblog entries or comments:</p>
+
+		<ol>
+			<li><b>top</b>: The navigation text and links will appear <em>above</em> your list of entries.</li>
+			<li><b>bottom</b>: The navigation text and links will appear <em>below</em> your list of entries.</li>
+			<li><b>both</b>: The navigation text and links will appear both above and below your list of entries.</li>
+		</ol>
+
+		<p>If no parameter is specified, the navigation block will default to the "bottom" behavior.</p>
+
+
+	<h3><a name="par_paginate_type">paginate_type=</a></h3>
+
+		<code>paginate_type="field"</code>
+
+		<p>Adding this parameter to your weblog entries tag simply tells ExpressionEngine to turn this pagination feature on.  There is only one possible value for the parameter: "field".</p>
+
+
+
+	<h2>Variable Pairs</h2>
+
+	<p>The same variable pairs used in the <a href="pagination_page.html">weblog entry and comment pagination</a> feature are available here.  The following links point to the entries for that feature.</p>
+
+	<ul class="minitoc">
+		<li><a href="pagination_page.html#var_paginate">{paginate}</a></li>
+		<li><a href="pagination_page.html#var_if_next_page">{if next_page}</a></li>
+		<li><a href="pagination_page.html#var_if_previous_page">{if previous_page}</a></li>
+	</ul>
+
+
+
+	<h2>Variables</h2>
+
+	<ul class="minitoc">
+		<li><a href="#var_current_page">{current_page}</a></li>
+		<li><a href="#var_multi_field">{multi_field="summary|body|extended"}</a></li>
+		<li><a href="#var_pagination_links">{pagination_links}</a></li>
+		<li><a href="#var_path">{path}</a></li>
+		<li><a href="#var_total_pages">{total_pages}</a></li>
+	</ul>
+
+	<p>These individual variables are for use inside the <samp><a href="page.html#var_paginate">{paginate}</a></samp> tag pair.</p>
+
+
+	<h3><a name="var_current_page">current_page</a></h3>
+
+		<code>{current_page}</code>
+
+		<p>This variable is replaced by the page number of the current page you are viewing.</p>
+
+
+	<h3><a name="var_multi_field">multi_field</a></h3>
+
+		<code>{multi_field="summary|body|extended"}</code>
+
+		<p>The <samp>{multi_field=}</samp> variable is the core of the ability to span a weblog entry across multiple pages.  Within the variable, you specify a pipe-delimited list of the fields.  These are the fields that will be used for each individual page.  Here is an example of how the feature works:</p>
+
+		<ol>
+			<li>Let's say you set up a weblog and it contains (among others) the fields "page1", "page2", "page3", etc.</li>
+
+			<li><p>In your "comments" Template, you set up the <samp>{multi_field}</samp> variable like so:</p>
+
+				<code>{multi_field="page1|page2|page3"}</code>
+
+			<li>When you initially visit your comment page for an entry, where you have the <samp>{multi_field}</samp> tag in your Template, you will see the content of your "page1" field, just as if you had used the regular <samp>{page1}</samp> variable.</li>
+
+			<li>If your entry has content in the "page2" field then you will see a "next page" link.</li>
+
+			<li>When you click that link, you'll see your entry again, but instead of {page1} being displayed, in its place would be {page2}.</li>
+
+			<li>This would continue with as many variables/pages as needed.</li>
+		</ol>
+
+
+	<h3><a name="var_pagination_links">pagination_links</a></h3>
+
+		<code>{pagination_links}</code>
+
+		<p>The dynamically created pagination links.  These show the current page you are on as well as "surrounding" pages in addition to links for next/previous pages and first/last pages.  The output of the variable looks similar to this:</p>
+
+		<code><a href="#">&laquo; First</a>  <a href="#">&lt;</a>  <a href="#">11</a> <a href="#">12</a> <b>13</b> <a href="#">14</a> <a href="#">15</a> <a href="#">&gt;</a>  <a href="#">Last &raquo;</a></code>
+
+
+	<h3><a name="var_path">path</a></h3>
+
+		<code>{path}</code>
+
+		<p>The <samp>{path}</samp> variable is used inside of the <samp><a href="page.html#var_if_next_page">{if next_page}</a></samp> and <samp><a href="page.html#var_if_previous_page">{if previous_page}</a></samp> variable pairs.  It is dynamically replaced with the correct path to the next/previous page.</p>
+
+
+	<h3><a name="var_total_pages">total_pages</a></h3>
+
+		<code>{total_pages}</code>
+
+		<p>The total number of pages of weblog entries or comments you have.</p>
+
+
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

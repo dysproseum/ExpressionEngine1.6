@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Simple Commerce &#8211; PayPal Settings &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Simple Commerce Module</a> &gt;
+<a href="sc_cp.html">Simple Commerce Control Panel</a> &gt;
+<strong>PayPal Settings</strong>
+</div>
+
+
+<div id="content">
+
+		<h1>Simple Commerce &#8211; PayPal Settings</h1>
+
+		<p>The bottom section of the Simple Commerce module's control panel defines your PayPal settings.</p>
+		
+			<div class="imgwrapper"><img src="../../images/sc_paypal_settings.png" width="491" height="272" alt="Simple Commerce PayPal Settings" title="Simple Commerce PayPal Settings" border="0" /></div>
+		
+		<h2>PayPal Account</h2>
+		
+		<p>The email address associated with the PayPal account processing payments for store purchases.</p>
+		
+		<h2>Encryption Settings</h2>
+		
+		<h3>Encrypt PayPal Buttons and Links?</h3>
+		
+		<p>Determines whether or not form data for PayPal purchase links and buttons is encrypted or not.  Encryption greatly reduces the ability of someone to alter the purchase data for your items.
+			
+		<p class="important"><strong>REQUIREMENT:</strong> Enabling this requires that 
+		your server have <a href="http://php.net/manual/en/ref.openssl.php">OpenSSL</a>
+		support compiled into PHP.  Ask your server administrator for this information.</p>
+			
+		<p class="important"><strong>NOTE:</strong> Enabling this requires that you use a public certificate and private key.  Please read the section on <a href="sc_encrypted_payments.html">Encrypted Website Payments</a> for full details.  In order to be the most effective, you should also change your PayPal account settings to only accept encrypted payments.</p>
+		
+		<h3>ID Given to Public Certificate by PayPal</h3>
+		
+		<p>A unique ID that is supplied by PayPal after providing them with a public certificate.</p>
+		
+		<h3>Public Certificate Path</h3>
+		
+		<p>The path to your public certificate file.  Please read the section on <a href="sc_encrypted_payments.html">Encrypted Website Payments</a> for full details.</p>
+		
+		<p class="important"><strong>NOTE:</strong>  ExpressionEngine must have read access to this directory, but for security it is highly recommended that you use a location above the public HTML folder on your account so that the certificate and key files are not accessible via the web.</p>
+		
+		<h3>Private Key Path</h3>
+		
+		<p>The path to your private key file.  Please read the section on <a href="sc_encrypted_payments.html">Encrypted Website Payments</a> for full details.</p>
+		
+		<p class="important"><strong>NOTE:</strong>  ExpressionEngine must have read access to this directory, but for security it is highly recommended that you use a location above the public HTML folder on your account so that the certificate and key files are not accessible via the web.</p>
+		
+		<h3>PayPal Certificate Path</h3>
+		
+		<p>The path to your PayPal certificate file.  Please read the section on <a href="sc_encrypted_payments.html">Encrypted Website Payments</a> for full details.</p>
+		
+		<p class="important"><strong>NOTE:</strong>  ExpressionEngine must have read access to this directory, but for security it is highly recommended that you use a location above the public HTML folder on your account so that the certificate and key files are not accessible via the web.</p>
+		
+		<h3>Temporary Encrypted Files Path</h3>
+		
+		<p>The path to your temporarily stored encrypted files.  Please read the section on <a href="sc_encrypted_payments.html">Encrypted Website Payments</a> for full details.</p>
+		
+		<p class="important"><strong>NOTE:</strong> ExpressionEngine must have read and write access to this directory.  The files created in this directory are temporary and are deleted after processing, but it is still recommended that it is not accessible via the web.</p>
+			
+			
+</div>
+		
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

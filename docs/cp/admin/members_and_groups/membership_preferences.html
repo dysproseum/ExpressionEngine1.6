@@ -1,0 +1,331 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Membership Preferences &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" name="../../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../../index.html"><img src="../../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../../index.html">Table of Contents</a> &gt;
+<a href="../../../index.html#cp_docs">The Control Panel</a> &gt;
+<a href="../index.html">Admin</a> &gt;
+<a href="index.html">Members and Groups</a> &gt;
+<strong>Membership Preferences</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Membership Preferences</h1>
+	
+	<div class="path">Control Panel Location:&nbsp; <dfn>Admin &gt; Members and Groups &gt; Member Preferences</dfn></div>	
+
+
+	<p>The <dfn>Membership Preferences</dfn> section of the Control Panel allows you to set all of your membership-related preferences.</p>
+
+
+
+	<h2>General Configuration</h2>
+
+
+	<h3>Allow New Member Registrations?</h3>
+
+		<p>This specifies whether your site allows people to sign up for a membership account. If set to "No", then new members will not be accepted.</p>
+
+
+	<h3>Require Member Account Activation?</h3>
+
+		<p>Here you can choose how membership accounts are activated:</p>
+
+		<ul>
+			<li><b>No activation required</b>: New members are automatically activated and approved for the site. They can immediately log in and begin using any member areas available at your site.</li>
+			<li><b>Self-activation via email</b>: New members are sent an email.  Inside the email is a special activation link that the user must visit within two days to activate their account. By default ExpressionEngine uses this method since it ensures that the email address the user submitted when signing up is valid.</li>
+			<li><b>Manual activation by an administrator</b>: New members may only be activated by an admin visiting the <dfn>Admin &gt; Activate Pending Members</dfn> section of the Control Panel.</li>
+		</ul>
+
+
+	<h3>Require Terms of Service</h3>
+
+		<p>When new members register through the site, a "terms of service" block of text is displayed.  This preference determines whether new members must indicate that they agree to abide by these terms before they can register. You may edit the terms of service within the registration form template, located at:</p>
+		
+		<p class="leftpad"><dfn>Admin &gt; Members and Groups &gt; Member Profile Templates &gt; Registration Form</dfn></p>
+
+	<h3>Allow members to set their own localization preferences?</h3>
+		
+	<p>If set to <kbd>no</kbd> all dates and times will be localized to the master site default, and the localization preferences will be disabled in the Member Profile and My Account pages.</p>
+
+
+	<h3>Enable Membership Captcha</h3>
+
+		<p>Here you can determine whether <a href="../../../general/captchas.html">CAPTCHAs</a> are required for new members registering.</p>
+
+
+	<h3>Default Member Group Assigned to New Members</h3>
+
+		<p>This allows you to specify the Member Group to which approved members will be assigned.</p>
+
+
+	<h3>Default Member Profile Theme</h3>
+
+		<p>The default member profile theme to be used in the <dfn>Member Profile</dfn> area of your site. Available, installed themes are listed in the menu.</p>
+
+
+	<h3>Profile Triggering Word</h3>
+
+		<p>When this word is encountered your URL it will display your member profile area. The word you choose can not be the name of an existing template group.  The default value of this is "member".  That means that a URL like the following would trigger ExpressionEngine to display the member profile area:</p>
+
+		<p><samp>http://example.com/index.php/member/profile/</samp></p>
+
+
+
+
+	<h2>Default Member List Preferences</h2>
+
+	<p>This sets default values for the public member list, typically located at:</p>
+	
+		<p class="leftpad"><dfn>http://example.com/index.php/member/memberlist/</dfn></p>
+
+	<h3>Member List - Sort By</h3>
+	
+	<p>Specifies the sorting criteria to be used.  Choices are: Total Posts, Screen Name, Total Comments, Total Entries, Join Date.</p>
+	
+	<h3>Member List - Order</h3>
+	
+	<p>Specifies whether to show the list in <em>Ascending</em> or <em>Descending</em> order.</p>
+	
+	<h3>Member List - Rows</h3>
+
+	<p>Specifies the number of rows to return by default.</p>
+
+
+
+	<h2>Notification Preferences</h2>
+
+
+	<h3>Notify administrators of new registrations?</h3>
+
+		<p>Determine whether or not administrators (see next preference) will receive emails notifying them of new member registrations.</p>
+
+
+	<h3>Email address for notifications</h3>
+
+		<p>Here you can specify the email addresses which should receive notifications (see previous preference).  Multiple email addresses should be separated by commas.</p>
+
+
+
+
+
+
+	<h2>Private Messaging Preferences</h2>
+
+
+	<h3>Maximum Number of characters to allow in Private Messages</h3>
+
+		<p>Specifies the maximum number of characters allowed in a Private Message to limit its total length.</p>
+
+
+	<h3>HTML Formatting in Private Messages</h3>
+
+		<p>This setting determines how raw HTML code within Private Messages is handled.  There are three options:</p>
+
+		<ol>
+			<li><b>Allow only safe HTML</b>: This will allow "safe" HTML to be rendered: (&lt;b>, &lt;i>, &lt;u>, &lt;em>, &lt;strike>, &lt;strong>, &lt;pre>, &lt;code>, &lt;blockquote>, &lt;h2&gt;, &lt;h3&gt;, &lt;h4&gt;, &lt;h5&gt;, &lt;h6&gt;).  All other HTML is converted to character entities.</li>
+			<li><b>Convert HTML into character entities</b>: This will convert the HTML tags to HTML character entities so that it will display as plain text when viewed.  This is useful if you want to display example code.</li>
+			<li><b>Allow ALL HTML</b>: This leaves the HTML code as written and the code will then be interpreted by the browser when the message is viewed.</li>
+		</ol>
+
+
+	<h3>Auto-convert URLs and email addresses into links?</h3>
+
+		<p>When this option is set to "Yes", any full URLs or email addresses will be automatically formatted as a valid HTML link to the address.  If the option is "No" then the URL or email address will be treated and displayed as plain text.</p>
+
+
+	<h3>Server Path for Attachment Upload Directory</h3>
+
+		<p>Here you set the <em>full server path</em> (<b>not</b> the URL) to the Private Message attachment upload folder.  By default, it is the <kbd>pm_attachments</kbd> folder inside the <kbd>images</kbd> folder.</p>
+
+		<p>The full server path might look something like <kbd>/home/example.com/public_html/images/pm_attachments/</kbd>.  If you do not know what to use for your full server path, contact your Host or server admin.  Remember that this upload folder must be set to 777 permissions (or otherwise be "writable").</p>
+
+
+	<h3>Maximum Number of Attachments per Private Message</h3>
+
+		<p>Specifies the maximum number of file attachments that are allowed to be included with each Private Message.</p>
+
+
+	<h3>Maximum Size of Attachment for a Private Message (in Kilobytes)</h3>
+
+		<p>Specifies the maximum size of the attachment for each Private Message.</p>
+
+
+	<h3>Maximum Amount of All Attachments (in Megabytes)</h3>
+
+		<p>The maximum total storage space allowed for all Private Message attachments in the system.  Once this limit is reached, no new Private Message attachments will be allowed.</p>
+
+
+
+
+
+
+	<h2>Avatar Preferences</h2>
+
+
+	<h3>Enable Avatars</h3>
+
+		<p>This determines whether avatars are enabled for your site.  If enabled, then users will be able to associate an image with their account that you can optionally display with entries, comments, and forum posts.</p>
+
+
+	<h3>Allow members to upload their own avatars?</h3>
+
+		<p>Specifies whether members are allowed to upload their own avatar image.  If this is set to "No" but avatars are enabled, then members will only be able to choose from among the default avatars. Note: You can add your own Avatars, located in the <kbd>avatars</kbd> folder within the <kbd>images</kbd> folder.</p>
+
+
+	<h3>URL to Avatar Folder</h3>
+
+		<p>The URL to the folder on your site that contains the avatars.</p>
+
+
+	<h3>Server Path to Avatar Folder</h3>
+
+		<p>Here you set the <em>full server page</em> (<b>not</b> the URL) to the avatars folder.  By default avatars are located in the <kbd>avatars</kbd> folder inside the <kbd>images</kbd> folder.</p>
+
+		<p>The full server path might look something like <kbd>/home/example.com/public_html/images/avatars/</kbd>.  If you do not know what to use for your full server path, contact your Host or server admin.</p>
+
+
+	<h3>Avatar Maximum Width</h3>
+
+		<p>The maximum width (in pixels) allowed for user-uploaded avatars.</p>
+
+
+	<h3>Avatar Maximum Height</h3>
+
+		<p>The maximum height (in pixels) allowed for user-uploaded avatars.</p>
+
+
+	<h3>Avatar Maximum Size (in Kilobytes)</h3>
+
+		<p>The maximum file size allowed for user-uploaded avatars. Note: There are 1024 Kilobytes per Megabyte, so if you want to allow a 2 MB avatar you'll enter 2048.</p>
+
+
+
+
+
+	<h2>Member Photo Preferences</h2>
+
+
+	<h3>Enable Member Photos</h3>
+
+		<p>This determines whether member photos are enabled for your site.  If enabled, then users will be able to upload an image to be displayed in their member profile area.</p>
+
+
+	<h3>URL to Photos Folder</h3>
+
+		<p>The URL to the folder on your site that contains the member photos.</p>
+
+
+	<h3>Server Path to Photo Folder</h3>
+
+		<p>Here you set the full <em>server</em> path to the member photos folder.  By default, it is the <kbd>member_photos</kbd> folder inside the <kbd>images</kbd> folder.  This is <strong>not</strong> the URL to the folder.</p>
+
+		<p>The full server path might look something like <kbd>/home/example.com/public_html/images/member_photos/</kbd>.  If you do not know what to use for your full server path, contact your Host or server admin.  Remember that this upload folder must be set to 777 permissions (or otherwise be "writable").</p>
+
+
+	<h3>Photo Maximum Width</h3>
+
+		<p>The maximum width (in pixels) allowed for user-uploaded member photos.</p>
+
+
+	<h3>Photo Maximum Height</h3>
+
+		<p>The maximum height (in pixels) allowed for user-uploaded member photos.</p>
+
+
+	<h3>Photo Maximum Size (in Kilobytes)</h3>
+
+		<p>The maximum file size allowed for user-uploaded member photos.		Note: There are 1024 Kilobytes per Megabyte, so if you want to allow a 2 MB photo you'll enter 2048.</p>
+
+
+
+
+	<h2>Signature Preferences</h2>
+
+
+	<h3>Allow Users to have Signatures?</h3>
+
+		<p>This determines whether member signatures are enabled for your site. If enabled, then users will be able to create a signature for their account that you can optionally display with entries, comments, and forum posts.</p>
+
+
+	<h3>Maximum number of characters per signature</h3>
+
+		<p>The maximum number of characters allowed within a member's signature.</p>
+
+
+	<h3>Allow image hot linking in signatures?</h3>
+
+		<p>Specifies whether or not members can "hot link" to images located on other sites or servers.  Most sites do not like other people to hot link to their content since it basically "steals" their bandwidth.</p>
+
+
+	<h3>Allow users to upload an image in their signature?</h3>
+
+		<p>Determine whether or not members will be allowed to upload images to be used in their signatures.</p>
+
+
+	<h3>URL to Signature Image Upload Folder</h3>
+
+		<p>The URL to the folder on your site that contains the signature image uploads.</p>
+
+
+	<h3>Server path to Signature Image Upload Folder</h3>
+
+		<p>Here you set the <em>full server page</em> (<b>not</b> the URL) to the signature image uploads folder.  By default, it is the <kbd>signature_attachments</kbd> folder inside the <kbd>images</kbd> folder.</p>
+
+		<p>The full server path might look something like <kbd>/home/example.com/public_html/images/signature_attachments/</kbd>.  If you do not know what to use for your full server path, contact your Host or server admin.  Remember that this upload folder must be set to 777 permissions (or otherwise be "writable").</p>
+
+
+	<h3>Maximum Width of Signature Image</h3>
+
+		<p>The maximum width (in pixels) allowed for user-uploaded signature images.</p>
+
+
+	<h3>Maximum Height of Signature Image</h3>
+
+		<p>The maximum height (in pixels) allowed for user-uploaded signature images.</p>
+
+
+	<h3>Maximum Size (in Kilobytes) of Signature Image</h3>
+
+		<p>The maximum file size allowed for user-uploaded signature images.</p>
+
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address><div class="validation"><a name="http://validator.w3.org/check/referer" title="Validate XHTML">XHTML</a> | <a name="http://jigsaw.w3.org/css-validator/check/referer" title="Validate CSS">CSS</a></div>
+</div>
+
+</body>
+</html>

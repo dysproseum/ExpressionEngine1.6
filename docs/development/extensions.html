@@ -1,0 +1,467 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>ExpressionEngine Extensions Developer Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../index.html" />
+  <style type="text/css" media="screen,print">@import url(../docs.css);</style>
+</head>
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-103824-2";
+urchinTracker();
+</script><body>
+<div><a name="top"></a></div>
+
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="index.html">Development</a> &gt;
+<strong>Extensions Development</strong>
+</div>
+
+
+<div id="content">
+<h1>Extensions Development</h1>
+
+
+
+	<ul>
+		<li><a href="extensions.html#overview">Overview</a></li>
+		<li><a href="extensions.html#naming">Naming Convention</a></li>
+		<li><a href="extensions.html#base">The Base Extension Class</a></li>
+		<li><a href="extensions.html#enable">Activating and Updating</a></li>
+		<li><a href="extensions.html#disable">Disabling</a></li>
+		<li><a href="extensions.html#settings">Settings</a></li>
+		<li><a href="extensions.html#extension">Calling of the Extension</a></li>
+		<li><a href="extensions.html#hook">Multiple Extensions, Same Hook</a></li>
+		<li><a href="http://expressionengine.com/developers/extension_hooks/">Extension Hooks Library</a>
+	</ul>
+
+
+<a name="overview"></a>
+<h2>Overview</h2>
+<p>With the release of ExpressionEngine 1.4 comes the ability to rewrite and modify the inner 
+workings of the program.  Within ExpressionEngine are what is known as 'hooks'; little snippets 
+of code in over 100 strategic places that allow the calling of 
+third-party scripts.  <dfn>Extensions</dfn> can do things like modify an entire Control Panel page, 
+add/remove functionality, and modify the appearance of certain page elements.  
+Extensions enable third party developers to modify aspects of ExpressionEngine without hacking the backend scripts.  
+You can think of an Extension as a plugin.  But unlike a plugin, Extensions are not used within your templates, they instead
+allow you to modify the core system itself.
+</p>
+
+<p>An Extension is an add-on script that is placed in the <kbd>/system/extensions/</kbd>
+directory and then enabled via the <a href="../cp/admin/utilities/extension_manager.html">Extensions Manager</a>
+in the Control Panel.  
+Extensions can have their own settings and their own database tables, if necessary, 
+but neither is required. If settings are available for an Extension, a language 
+file is required, but unlike a module there is no control panel for Extensions.</p>
+
+
+
+<a name="naming"></a>
+<h2>Naming Convention</h2>
+<p>Extensions have a similar naming convention to ExpressionEngine plugins so current
+developers should get the hang of them quickly.  There is only a single file required
+for an extension and inside this file should be a PHP class.  The name of the class is 
+used in the file name of the extension so that the name of the file is the <em>lower-cased</em> class name
+with the prefix 'ext.' and the standard PHP suffix of '.php'. So, if we have a 
+class called 'Example_extension', then our file name for this 
+extension would be 'ext.example_extension.php'.</p>
+
+
+<a name="base"></a>
+<h2>Inside the Extension</h2>
+<p>Inside an extension file should be a class, which will be called by ExpressionEngine
+whenever this particular extension is required.  The constructor for the class will
+require one parameter that will receive settings for the extension and set a class variable.</p>
+
+<pre>
+class Example_extension
+{
+    var $settings        = array();
+    
+    // -------------------------------
+    //   Constructor - Extensions use this for settings
+    // -------------------------------
+    
+    function Example_extension($settings='')
+    {
+        $this->settings = $settings;
+    }
+    // END
+}
+// END CLASS
+</pre>
+
+<p>Besides the $settings class variable, there are five other required class variables
+that your extension should have.  These variables output meta information about
+your extension to the Extensions Manager so that it can describe your extension, 
+provide documentation, and update settings (if any).</p>
+
+<pre>
+class Example_extension
+{
+    var $settings        = array();
+    
+    var $name            = 'Example Extension';
+    var $version         = '1.0.0';
+    var $description     = 'Our example extension';
+    var $settings_exist  = 'n';
+    var $docs_url        = '';//'http://expressionengine.com';
+    
+    // -------------------------------
+    //   Constructor - Extensions use this for settings
+    // -------------------------------
+    
+    function Example_extension($settings='')
+    {
+        $this->settings = $settings;
+    }
+    // END
+}
+// END CLASS
+</pre>
+
+<p>If your extension has a language file, then the $name and $description class
+variables can be set in the constructor by calling the language file and variables 
+using the <a href="./usage/language.html">Language ($LANG) class</a>.  
+If your extension is likely to be used internationally and by non-English speakers this
+is a recommended course of action.</p>
+
+<a name="enable"></a>
+<h2>Activating and Updating</h2>
+<p>There are two required methods for your extensions class that control the 
+activating and updating of your extension.  The most important is the function used to activate
+the extension in ExpressionEngine.  To activate an extension, you are simply
+inserting a query into the database with various pieces of information like 
+the extension hook and the name of the method in your extension's class to call
+for this hook.</p>
+
+<pre>
+// --------------------------------
+//  Activate Extension
+// --------------------------------
+
+function activate_extension()
+{
+    global $DB;
+    
+    $DB->query($DB->insert_string('exp_extensions',
+                                  array(
+                                        'extension_id' => '',
+                                        'class'        => "Example_extension",
+                                        'method'       => "rewrite_admin_home",
+                                        'hook'         => "admin_home_page_start",
+                                        'settings'     => "",
+                                        'priority'     => 10,
+                                        'version'      => $this->version,
+                                        'enabled'      => "y"
+                                      )
+                                 )
+              );
+}
+// END
+</pre>
+
+<p>Here is a quick run down of what each of these fields in the database table mean:
+<ul>
+<li><strong>extension_id</strong> - primary id for row in table</li>
+<li><strong>class</strong> - name of your extension's class</li>
+<li><strong>method</strong> - method being called for this extension hook</li>
+<li><strong>hook</strong> - name of the extension hook in the program</li>
+<li><strong>settings</strong> - serialized array of settings, usually empty by default</li>
+<li><strong>priority</strong> - an extension hook could have many extensions being called, so there needs to be priority. 1 => First, 10 => Last.</li>
+<li><strong>version</strong> - version of extension when activated, used for updating</li>
+<li><strong>enabled</strong> - is this extension activated</li>
+</ul>
+</p>
+
+<p>Updating an extension is extremely easy in ExpressionEngine.  The user will
+simply upload the new version of the extension and ExpressionEngine will automatically
+update the extension the next time it is called.  All that is required is an intelligent 
+function called update_extension().  The program will automatically compare the version
+of the extension information in the database against the version of the extension file, and
+if the extension file is a newer version it calls this function.</p>
+
+<pre>
+// --------------------------------
+//  Update Extension
+// --------------------------------  
+
+function update_extension($current='')
+{
+    global $DB;
+    
+    if ($current == '' OR $current == $this->version)
+    {
+        return FALSE;
+    }
+    
+    if ($current < '1.0.1')
+    {
+        // Update to next version 1.0.1
+    }
+    
+    if ($current < '1.0.2')
+    {
+        // Update to next version 1.0.2
+    }
+    
+    $DB->query("UPDATE exp_extensions 
+                SET version = '".$DB->escape_str($this->version)."' 
+                WHERE class = 'Example_extension'");
+}
+// END
+</pre>
+
+
+
+<a name="disable"></a>
+<h2>Disabling</h2>
+<p>When an extension is enabled for the very <em>first</em> time, the activate_extension()
+function is called and all of the extension calls are inserted into the database.  When
+an extension is disabled though, these extension calls are not removed from the database.
+Instead they are merely disabled, which allows settings to be preserved and not removed
+so that they are still there if the extension is enabled again in the future.</p>
+
+<p>This causes a problem for developers who, while developing an extension, will often 
+enable an extension to test their code but before they have added all of their extension calls
+to the activate_extension() function.  What we have done is allowed the creation
+of a disable_extension() function in an extension's class.  If this function exists
+in the class, it will be called whenever your extension is disabled.
+This will allow you to clear out your extension's data and basically start fresh
+every single time.</p>
+
+
+<pre>
+// --------------------------------
+//  Disable Extension
+// --------------------------------
+
+function disable_extension()
+{
+    global $DB;
+    
+    $DB->query("DELETE FROM exp_extensions WHERE class = 'Example_extension'");
+}
+// END
+</pre>
+
+
+
+<a name="settings"></a>
+<h2>Settings</h2>
+
+<h3>Abstracted Settings Form and Processing</h3>
+<p>If you want to give your extension the ability to have settings, then we have
+written an abstracted layer to make it extremely easy.  First, you have to make
+sure that you have your $settings_exist class variable set to 'y'.  Second, you need
+a language file for your extension with the file name of the language file being the extension's
+lower-cased class name with a prefix of 'lang.' and a suffix of '.php'. Make sure the language
+file is put in the <kbd>/system/language/</kbd> directory too.  And finally, you need to 
+have a method in your extension's class called settings().  This function will 
+return an array in a certain form that will help the Extensions Manager automatically
+create a form for your settings.</p>
+
+<pre>
+// --------------------------------
+//  Settings
+// --------------------------------  
+
+function settings()
+{
+    $settings = array();
+    
+    $settings['butter']    = "Quite Tasty";
+    $settings['buttery']   = array('r', array('yes' => "yes", 'no' => "no"), 'no');
+    
+    // Complex:
+    // [variable_name] => array(type, values, default value)
+    // variable_name => short name for setting and used as the key for language file variable
+    // type:  t - textarea, r - radio buttons, s - select, ms - multiselect, f - function calls
+    // values:  can be array (r, s, ms), string (t), function name (f)
+    // default:  name of array member, string, nothing
+    //
+    // Simple:
+    // [variable_name] => 'Butter'
+    // Text input, with 'Butter' as the default.
+    
+    return $settings;
+}
+// END
+</pre>
+
+<p>The above example will create a settings form with a text input field with a variable name of 'butter' and 
+a default value of "Not Tasty" and a radio button field with a variable name of 'buttery' with possible
+values of "Yes" or "No" and a default of "No".</p>
+
+<p>A note about the values array for the second field, the keys 
+will be used as the value for that item  while the value will be the language text for that item.  If you want,
+the value can be the name of a language variable from your extension's language file and the Extensions Manager
+will automatically retrieve it for you.
+
+
+<h3>Built In Settings Form and Processing</h3>
+
+<p>Alternatively, if your settings require a special form that cannot created by the abstracted layer
+above, then ExpressionEngine permits you to create your own settings form and processing functions
+within your Extension. First, you need to will need have a method in your extension's class called settings_form().  
+This function will create the form and output it to Control Panel. Treat this function as any other page created 
+for ExpressionEngine's Control Panel, so create it using the <a href="./usage/display.html">Display</a> class
+and its methods.</p>
+
+<pre>function settings_form($current)
+{
+    global $DSP, $LANG, $IN;
+    
+    $DSP->crumbline = TRUE;
+    
+    $DSP->title  = $LANG->line('extension_settings');
+    $DSP->crumb  = $DSP->anchor(BASE.AMP.'C=admin'.AMP.'area=utilities', $LANG->line('utilities')).
+                               $DSP->crumb_item($DSP->anchor(BASE.AMP.'C=admin'.AMP.'M=utilities'.AMP.'P=extensions_manager', $LANG->line('extensions_manager')));
+    $DSP->crumb .= $DSP->crumb_item($this->name);
+    
+    $DSP->right_crumb($LANG->line('disable_extension'), BASE.AMP.'C=admin'.AMP.'M=utilities'.AMP.'P=toggle_extension_confirm'.AMP.'which=disable'.AMP.'name='.$IN->GBL('name'));
+    
+    $DSP->body = $DSP->form_open(
+                                array(
+                                        'action' => 'C=admin'.AMP.'M=utilities'.AMP.'P=save_extension_settings',
+                                        'name'   => 'settings_example',
+                                        'id'     => 'settings_example'
+                                    ),
+                                array('name' => get_class($this))
+                            );
+    
+    
+    $DSP->body .=   $DSP->table('tableBorder', '0', '', '100%');
+    $DSP->body .=   $DSP->tr();
+    $DSP->body .=   $DSP->td('tableHeadingAlt', '', '2');
+    $DSP->body .=   $this->name;
+    $DSP->body .=   $DSP->td_c();
+    $DSP->body .=   $DSP->tr_c();
+    
+    $DSP->body .=   $DSP->tr();
+    $DSP->body .=   $DSP->td('tableCellOne', '45%');
+    $DSP->body .=   $DSP->qdiv('defaultBold', $LANG->line('log_table'));
+    $DSP->body .=   $DSP->td_c();
+    
+    $DSP->body .=   $DSP->td('tableCellOne');
+    $DSP->body .=   $DSP->input_text('log_table', ( ! isset($current['log_table'])) ? '' : $current['log_table']);
+    $DSP->body .=   $DSP->td_c();
+    $DSP->body .=   $DSP->tr_c();
+    
+    $DSP->body .=   $DSP->table_c();
+    $DSP->body .=   $DSP->qdiv('itemWrapperTop', $DSP->input_submit());
+    $DSP->body .=   $DSP->form_c();
+}</pre>
+
+<p>Lastly, you will need to have a method in your extension's class called save_settings().  
+This function will be called when your settings_form() method's form is submitted.  Use it to process the data
+sent and put it into the <dfn>exp_extensions</dfn> database table.  Remember that the data
+put into the database is a serialized array, so handle it appropriately.</p>
+
+
+
+
+<a name="extension"></a>
+<h2>Calling of the Extension</h2>
+<p>The following is an example of an ExpressionEngine Extension Hook that is available for use:</p>
+
+<pre>
+// -------------------------------------------
+// 'publish_form_start' hook.
+//  - Allows complete rewrite of Publish page.
+//
+	$edata = $EXT->call_extension('publish_form_start', $which, $submission_error, $entry_id);
+	if ($EXT->end_script === TRUE) return;
+//
+// -------------------------------------------
+</pre>
+
+<p>The first parameter of <dfn>$EXT->call_extension</dfn> is the name of the hook, which lets the Extension
+class know what extensions to call.  The other three parameters are variables taken from the function that the
+hook is embedded within.  They provide information and data for the extensions being called for this hook, which
+allows those extensions to have information about the script that allow them to perform certain actions or manipulate
+data.  When an extension is called, ExpressionEngine loads the extension file, instantiates the extension's class, and then calls 
+the method specified for this extension hook as specified by the extension when it was activated (see above concerning activation).</p>
+
+<p>When that method is called in the extension's class those other three parameters will be sent to the method automatically.
+Here is what the method might look like:</p>
+
+<pre>
+function replace_entry_form($which, $submission_error, $entry_id)
+{
+    global $DSP, $DB, $IN, $EXT;
+    
+    $EXT->end_script = TRUE;
+
+    $DSP->body = 'New Entry Form Here';
+}
+</pre>
+
+<p>The three parameters from the extension hook are mapped straight to the three parameters of the method being called,
+and so your extension can easily use those parameters and do what it needs to do.  The ExpressionEngine.com 
+<a href="http://expressionengine.com/developers/extension_hooks/">Extension Hook
+library</a> will have a record of all extension hooks and the parameters available to you, along with a suggestion or two
+about what can be done with the extension hook.</p>
+
+
+
+<a name="hook"></a>
+<h2>Multiple Extensions, Same Hook</h2>
+
+<p>When an extension hook is called, ExpressionEngine checks the database to see if there are any extensions
+available for the hook.  If there are extensions, then it processes them in order based on their priority level 
+with the lower the priority number the sooner the extension is called.  Because of priority, extensions might interfere
+with each other, so we have provided two variables for helping with that.</p>
+
+<h3>$EXT->last_call</h3>
+
+<p>There will be rather popular hooks being used by multiple extensions and some hooks will expect you to return
+data to the extension hook.  Because of that, there is a variable available from the Extensions class ($EXT) that 
+will contain the returned data of any prior extensions for that hook.  Say, there is a hook for formatting text and 
+an extension before yours is called.  That extension will be returning the text formatted in its own way, but then 
+your extension is called with the original text details being sent.  In such an instance of data being returned
+and possible prior extensions, there is a variable available to retrieve that already formatted text: <dfn>$EXT->last_call</dfn>.
+This variable will return whatever the last extension returned to this hook.  If there was no prior extension, then
+the value of this variable is FALSE.</p>
+
+<h3>$EXT->end_script</h3>
+
+<p>Many extension hooks exist for the express purpose of totally controlling a page or script in the Control Panel.  They
+are meant for redesigning the appearance of a form or perhaps usurping a script for processing form data.  In those instances
+you want your extension to be the last thing called for that extension hook so that nothing else is processed after that point.
+The <dfn>$EXT->end_script</dfn> exists solely for that purpose. If you set this value to TRUE, then once your extension
+is done being processed the execution of the hook is finished, as is the script that the extension hook is contained within.</p>
+
+</div>
+
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

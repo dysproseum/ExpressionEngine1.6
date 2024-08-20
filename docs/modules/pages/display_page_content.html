@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Display Page Content &#8211; Pages Module &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Pages Module</a> &gt;
+<strong>Displaying Page Content</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Displaying Page Content</h1>
+
+	<p>Displaying Page content is as easy as displaying normal weblog entries.  The primary difference is that when a Page URI is requested, the URL segments do not correlate to a template group and template, as that is determined by the template that the particular "page" entry was assigned to use on the <a href="../../cp/publish/index.html#tab_pages">Pages tab</a> of the Publish form.</p>
+		
+	<p>Additionally, the page will automatically be treated as a single entry page for that page entry, so other tags on the template will need to use the <kbd>dynamic="off"</kbd> parameter (if available) to display other content.</p>
+	
+	<h2>Displaying Page Content with a Weblog Entries Tag</h2>
+	
+	<p>On the template assigned to a Page entry, use a normal <a href="../../modules/weblog/weblog_entries.html">Weblog Entries tag</a> with any parameters and variables that you desire to display the entry, e.g.:</p>
+	
+	<code>{exp:weblog:entries weblog=&quot;personnel&quot;}<br />
+&nbsp;&nbsp;&nbsp;&lt;h2&gt;{title}&lt;/h2&gt;<br />
+		<br />
+&nbsp;&nbsp;&nbsp;&lt;h3&gt;Position&lt;/h3&gt;<br />
+&nbsp;&nbsp;&nbsp;{position}<br />
+			<br />
+&nbsp;&nbsp;&nbsp;&lt;h3&gt;Background&lt;/h3&gt;<br />
+&nbsp;&nbsp;&nbsp;{background}<br />
+			<br />
+&nbsp;&nbsp;&nbsp;&lt;h3&gt;Telephone Extension&lt;/h3&gt;<br />
+&nbsp;&nbsp;&nbsp;{extension}<br />
+	{/exp:weblog:entries}<br />
+	</code>
+	
+	<h2>Parameters</h2>
+
+	<p>The Pages Module adds the following parameters for use in the <dfn>{exp:weblog:entries}</dfn> tag.</p>
+
+	<ul class="minitoc">
+		<li><a href="../weblog/parameters.html#par_show_pages">show_pages="only"</a></li>
+	</ul>
+	
+
+	<h2>Variables</h2>
+
+	<p>The Pages Module adds the following variables for use in the <dfn>{exp:weblog:entries}</dfn> tag.</p>
+	<ul class="minitoc">
+		<li><a href="../weblog/variables.html#var_page_uri">{page_uri}</a></li>
+		<li><a href="../weblog/variables.html#var_page_url">{page_url}</a></li>
+	</ul>
+	
+	<a name="load_site_pages"></a><h2>The {exp:load_site_pages} Tag</h2>
+	
+	<p>If you are using the <a href="../../cp/sites/index.html">Multiple Site Manager</a>, page data are only available for the current site.  If you wish to show the <dfn>{page_uri}</dfn> or <dfn>{page_url}</dfn> for an entry from a different site, you will need to use the <dfn>{exp:pages:load_site_pages}</dfn> tag on the relevant template.  This tag has one required parameter: site.  For example, if your weblog tag is pulling in pages from sites default_site and corporate_site, your tag should look like:</p>
+	
+<pre>{exp:pages:load_site_pages site="default_site|corporate_site"}</pre>
+ 
+	
+	
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Weblog Category Heading Tag &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Weblog Module</a> &gt;
+<strong>Category Heading Tag</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Weblog Category Heading Tag</h1>
+
+	<p>The purpose of this tag is to show the currently viewed category as a heading.</p>
+
+	<code>{exp:weblog:category_heading}<br />
+<br />
+&lt;h1>{category_name}&lt;/h1><br />
+<br />
+{if category_description}<br />
+&lt;p>{category_description}&lt;/p><br />
+{/if}<br />
+<br />
+{/exp:weblog:category_heading}</code>
+
+	<p>When you visit on one of your category links, your weblog entries are shown sorted by the chosen category.  This tag lets you dynamically show the name of the category being viewed.</p>
+
+	<p>If no categories are being shown, the tag will not show anything contained within the opening and closing pair.</p>
+
+
+
+	<h2>Parameters</h2>
+
+	<ul class="minitoc">
+		<li><a href="#par_disable">disable="category_fields"</a></li>
+		<li><a href="#par_relaxed_categories">relaxed_categories="yes"</a></li>
+		<li><a href="#par_weblog">weblog="news"</a></li>
+	</ul>
+
+
+	<h3><a name="par_disable">disable=</a></h3>
+
+		<code>disable="category_fields"</code>
+
+		<p>The <samp>disable=</samp> parameter allows you to turn off aspects of the tag that you might not be using in order to improve performance.  Valid options are:</p>
+
+		<ul>
+			<li>category_fields</li>
+		</ul>
+		
+	<h3><a name="par_relaxed_categories">relaxed_categories=</a></h3>
+
+		<code>relaxed_categories="yes"</code>
+
+		<p>This parameter allows you use the category indicator in your URLs with an entries tag specifying multiple weblogs that do <strong>not</strong> share category groups.</p>
+				
+	<h3><a name="par_weblog">weblog=</a></h3>
+
+		<code>weblog="news"</code>
+
+		<p>The name (short name) of the weblog that the categories are assigned to.  <b>Note:</b>  Unless you are using the <samp>relaxed_categories</samp> parameter, you can only list one weblog name, since each weblog can have separate category groups.</p>
+
+		<p class="important">You must specify this parameter if you use the <a href="../../cp/admin/weblog_administration/global_weblog_preferences.html">category name in URL</a> feature.</p>
+
+	<h2>Variables</h2>
+
+	<ul class="minitoc">
+		<li><a href="#var_category_description">{category_description}</a></li>
+		<li><a href="#var_category_id">{category_id}</a></li>
+		<li><a href="#var_parent_id">{parent_id}</a></li>		
+		<li><a href="#var_category_image">{category_image}</a></li>
+		<li><a href="#var_category_name">{category_name}</a></li>
+		<li><a href="#var_category_url_title">{category_url_title}</a></li>
+		<li><a href="#var_custom">Custom Category Fields</a></li>
+	</ul>
+
+
+	<h3><a name="var_category_description">category_description</a></h3>
+
+		<code>{category_description}</code>
+
+		<p>This variable simply displays the content from the "category description" field.  The variable may also be wrapped in a conditional statement so that it only displays if there is content in the field:</p>
+
+		<code>{if category_description}{category_description}{/if}</code>
+
+
+	<h3><a name="var_category_id">category_id</a></h3>
+
+		<code>{category_id}</code>
+
+		<p>The category ID associated with the category.</p>
+		
+
+	<h3><a name="var_parent_id">parent_id</a></h3>
+
+		<code>{parent_id}</code>
+
+		<p>The category ID associated with the category's parent (or 0 in the case of a top level category).</p>
+
+
+	<h3><a name="var_category_image">category_image</a></h3>
+
+		<code>{category_image}</code>
+
+		<p>The image link (or other information) you can optionally store with each category within the Control Panel.</p>
+
+
+	<h3><a name="var_category_name">category_name</a></h3>
+
+		<code>{category_name}</code>
+
+		<p>The name of the category being viewed</p>
+
+	<h3><a name="var_category_url_title">category_url_title</a></h3>
+
+		<code>{category_url_title}</code>
+
+		<p>This variable displays the URL title of the category</p>
+		
+	<h3><a name="var_custom">Custom Category Fields</a></h3>
+
+		<p>All custom fields assigned to a category can be accessed using the "short name" of the field:</p>
+
+		<code>{class}<br />
+{extended_description}<br />
+{category_name_fr}<br />
+etc..</code>
+
+		<p>These are totally dynamic in that any field you create for your category will automatically be available by its "short name" as a variable.</p>
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

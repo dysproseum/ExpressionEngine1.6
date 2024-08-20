@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Wiki Article Section &#8211; ExpressionEngine Documentation</title> 
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style> 
+
+<style type="text/css">
+.screencap {
+margin: 30px 0;
+text-align: center;}
+</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="README.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+</tr>
+</table>
+</div>
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Wiki Module</a> &gt;
+<a href="wiki_templates.html">Theme Template</a> &gt;
+<strong>Wiki Article Section</strong>
+</div>
+
+<div id="content">
+
+	<h1>Wiki Article Section</h1>
+
+<p>This section determines how an article is displayed within the Wiki Page wrapper template as outlined below:</p>
+
+<div class="screencap"><img src="../../images/wiki_article_highlight.jpg" width="550" height="341" alt="The Wiki Article section of the template determines the visual display of articles as highlighted below." /></div>
+
+<p>In addition to the variables in the <a href="wiki_templates_page.html">Wiki Page section</a>, the Article section has:</p>
+
+<ul>
+<li><a href="#single">Single Variables</a></li>
+<li><a href="#conditional">Conditional Variables</a></li>
+<li><a href="#special">Special Category Tags</a></li>
+<li><a href="#namespace">Special Category Namespace</a></li>
+</ul>
+
+<h2><a name="single">Single Variables</a></h2>
+
+<ul>
+<li><a href="#var_sin_article">{article}</a></li>
+<li><a href="#var_sin_author">{author}</a></li>
+<li><a href="#var_sin_revision_date}">{revision_date format=""}</a></li>
+</ul>
+
+<h3><a name="var_sin_article">article</a></h3>
+
+<code>{article}</code>
+
+<p>This variable displays the fully rendered article's text.</p>
+
+<h3><a name="var_sin_author">author</a></h3>
+
+<code>{author}</code>
+
+<p>Displays the screen name of the member who wrote the current version of article.</p>
+
+<h3><a name="var_sin_revision_date">revision_date</a></h3>
+
+<code>{revision_date format=""}</code>
+
+<p>When a revision of an article is displayed this shows the date of the revision being viewed.</p>
+
+<p>The <strong>format</strong> parameter is used to determine the date's formatting using ExpressionEngine's <a href="../../templates/date_variable_formatting.html">Date Variable Formatting</a>. For example, this:</p>
+
+<code>Revised: {revision_date format="%D, %F %d, %Y - %g:%i:%s"}</code>
+
+<p>Would render this:</p>
+
+<code>Revised: Mon, January 15, 2006 - 10:23:45</code>
+
+<h2><a name="conditional">Conditional Variables</a></h2>
+
+<p>There is only one conditional variable available to the Wiki Article section of the template.</p>
+
+<h3>if categories</h3>
+
+<code>{if categories}</code>
+
+<p>Checks to see if the currently displayed article has been assigned to any categories. If it is, the <a href="#special">Special Category Tags</a> can be used to display the categories on the article page.</p>
+
+<h2><a name="special">Special Category Tags</a></h2>
+
+<p>If an article is assigned to one or more categories you can use the <a href="wiki_templates_special_categories.html#wiki_tag_categories">{wiki:categories}</a> tag to display the categories beneath the article as outlined below:</p>
+
+<div class="screencap"><img src="../../images/wiki_article_cats.gif" width="550" height="338" alt="If an article has categories you can display them beneath the article." /></div>
+
+<h2><a name="namespce">Special Category Namespace</a></h2>
+
+<p>In the "Category" <strong>Namespace</strong> you also have the ability to create a list of articles that are assigned to a specific category as outlined below:</p>
+
+<div class="screencap"><img src="../../images/wiki_single_cat.jpg" width="550" height="381" alt="Displays all the articles in a category." /></div>
+
+<p class="important"><strong>NOTE:</strong> A <strong>Namespace</strong> is a way to organize content by a special keyword (the "namespace") that is not a title, topic, or category name. For example, the wiki currently uses, by default, namespaces called <strong>Special</strong>, <strong>File</strong>, and <strong>Category</strong> to organize wiki content.</p>
+
+<p>Namespace features will be expanded on in future versions. In the current verison you can use the <strong>Category Namespace</strong> in the Theme Template Article section to create a list of articles that are assigned to a specific category.</p>
+
+<p>This is done by using the special <strong>{if namespace == 'Category'}</strong> conditional and a combination of the <a href="wiki_templates_special_categories.html#wiki_tag_category_subcategories">{wiki:category_subcategories}</a> and <a href="wiki_templates_special_categories.html#wiki_tag_category_articles">{wiki:category_articles}</a> tags described in the <a href="wiki_templates_special_categories.html">Special Categories</a> section of the Wiki documentation.</p>
+
+<p>Please see the Template Article section of the default Theme Template for an example of how this is used. If you do a search in the file for <strong>{if namespace == 'Category'}</strong> you'll find exactly where this code is located.</p>
+</div>
+
+
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

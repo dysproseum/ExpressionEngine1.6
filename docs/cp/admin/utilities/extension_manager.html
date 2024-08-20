@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Extensions Manager &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../../index.html"><img src="../../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../../index.html">Table of Contents</a> &gt;
+<a href="../../../index.html#cp_docs">The Control Panel</a> &gt;
+<a href="../index.html">Admin</a> &gt;
+<a href="index.html">Utilities</a> &gt;
+<strong>Extensions Manager</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Extensions Manager</h1>
+	
+	<div class="path">Control Panel Location:&nbsp; <dfn>Admin &gt; Utilities &gt; Extensions Manager</dfn></div>	
+
+	<p>The <dfn>Extensions Manager</dfn> page of the Control Panel allows you 
+	to install and manage Extensions, which are small scripts that expand the 
+	core functionality of ExpressionEngine without hacking any of the ExpressionEngine files.</p>
+
+
+	<div class="imgwrapper"><img src="../../../images/extensions_manager.png" width="600" height="257" alt="Manage Extensions" title="Manage Extensions" border="0" width="771" height="214" /></div>
+
+	<p>As Extensions are calling code within the ExpressionEngine code there is a
+	chance that an extension will interfere with how your site is working.  If you 
+	are unsure of which extension might be causing a problem you can either
+	turn them off one by one until the problem disappears or simply click the 
+	<strong>Disable Extensions?</strong> button at the top right and turn off 
+	all extensions at once.  The latter option allows a quick fix and gives you 
+	the option of solving the problem at your leisure, perhaps when the site is less busy.</p>
+
+	<h2><a name="install_extension">Installing Extensions</a></h2>
+
+	<p>The <dfn>Extensions Manager</dfn> will not download and install extensions for you.
+	In order to install an extension you must first place the extension file in 
+	your <kbd>/system/extensions/</kbd> folder and then when you reload the <dfn>Extensions Manager</dfn>
+	the extension will automatically be available for you to enable.</p>
+	
+	<p><strong>Note:</strong> Some extensions will have language files, especially if there
+	are settings, so put these files in your your default language folder in the <kbd>/system/language/</kbd> directory.
+	Extensions might require other tasks to function correct, so make sure to follow any 
+	instructions included with the extension.</p>
+	
+	<h2><a name="extension_settings">Settings</a></h2>
+
+	<p>The developer of an extension might allow an administrator of a site to 
+	specify certain settings so the administrator can choose how the extension
+	interacts with the site.  If such settings are available, a <strong>Settings</strong>
+	link will appear in the row for the extension and when you click a form will 
+	appear allowing you to fill out information.  Once saved the settings will
+	automatically take effect.</p>
+	
+	
+	<h2><a name="upgrading_extension">Upgrading Extensions</a></h2>
+
+	<p>If a new version of an extension used by your site becomes available, 
+	simply download the new version and upload it to your <kbd>/system/extensions/</kbd>
+	folder where it will overwrite the old version.  The extension will automatically
+	be updated by ExpressionEngine with no further work done by you.  Make sure to update
+	any language files as well.</p>
+
+	<h2><a name="jquery_extension">jQuery for the Control Panel</a></h2>
+	
+	<p>Version 1.6.5+ of ExpressionEngine includes a pre-installed (but not activated) extension: "jQuery for the Control Panel".</p>
+	
+	<p>Created by <a href="http://www.ngenworks.com/">nGen Works</a> and used with permission and modified by EllisLab, this extension allows you
+		make jQuery and the jQuery UI library available in ExpressionEngine control panel pages.  Third party developers wishing to use jQuery in their
+		add-ons are encouraged to list this as a requirement instead of using their own solution to add jQuery.  This will allow your add-on
+		to work without conflict with other add-ons that also utilize jQuery.</p>
+		
+	<p>By default, jQuery for the Control Panel enables both jQuery and the jQuery UI library, utilizing external links to 
+		<a href="http://code.google.com/apis/ajaxlibs/documentation/">Google's AJAX Libraries API</a>.  If
+		you prefer to use a self hosted version of jQuery simply upload the jQuery files to your site, and modify this extension's settings to
+		point to your self hosted URL in place of Google's.</p>
+	
+	<div class="important"><p><strong>Developer's note:</strong> If your add-on requires this extension, please check for its availability before executing your add-on's installation routine, perhaps even activating the extension automatically (with notice) for the user.  You can do this by examining the global $EXT object:</p>
+		<code>if ( ! isset($EXT->version_numbers['Cp_jquery']))<br />
+{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// jQuery for the Control Panel is NOT installed<br />
+}</code>
+	</div>
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

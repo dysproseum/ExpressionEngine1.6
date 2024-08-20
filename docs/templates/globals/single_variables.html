@@ -1,0 +1,355 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Global Variables &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="var_MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#template_docs">Templating System</a> &gt;
+<a href="index.html">Global Variables</a> &gt;
+<strong>Standard Global Variables</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Standard Global Variables</h1>
+
+	<p>These <dfn>Global Variables</dfn> can be used anywhere within your Templates.</p>
+
+
+	<ul class="minitoc">
+		<li><a href="#var_app_build">{app_build}</a></li>
+		<li><a href="#var_app_version">{app_version}</a></li>
+		<li><a href="#var_charset">{charset}</a></li>
+		<li><a href="#var_current_time">{current_time format="%Y %m %d %H:%i:%s"}</a></li>
+		<li><a href="#var_debug_mode">{debug_mode}</a></li>
+		<li><a href="#var_elapsed_time">{elapsed_time}</a></li>
+		<li><a href="#var_email">{email}</a></li>
+		<li><a href="#var_embed">{embed='news/local'}</a></li>
+		<li><a href="#var_encode">{encode=you@example.com}</a></li>
+		<li><a href="#var_group_id">{group_id}</a></li>
+		<li><a href="#var_group_title">{group_title}</a></li>
+		<li><a href="#var_gzip_mode">{gzip_mode}</a></li>
+		<li><a href="#var_hits">{hits}</a></li>
+		<li><a href="#var_homepage">{homepage}</a></li>
+		<li><a href="#var_ip_address">{ip_address}</a></li>
+		<li><a href="#var_lang">{lang}</a></li>
+		<li><a href="#var_location">{location}</a></li>
+		<li><a href="#var_member_group">{member_group}</a></li>
+		<li><a href="#var_member_id">{member_id}</a></li>
+		<li><a href="#var_member_profile_link">{member_profile_link}</a></li>
+		<li><a href="#var_redirect">{redirect='news/local'}</a></li>
+		<li><a href="#var_screen_name">{screen_name}</a></li>
+		<li><a href="#var_site_name">{site_name}</a></li>
+		<li><a href="#var_site_url">{site_url}</a></li>
+		<li><a href="#var_template_edit_date">{template_edit_date format="%Y %m %d %H:%i:%s"}</a></li>
+		<li><a href="#var_total_comments">{total_comments}</a></li>
+		<li><a href="#var_total_entries">{total_entries}</a></li>
+		<li><a href="#var_total_queries">{total_queries}</a></li>
+		<li><a href="#var_username">{username}</a></li>
+		<li><a href="#var_webmaster_email">{webmaster_email}</a></li>
+		<li><a href="#var_xid_hash">{XID_HASH}</a></li>
+	</ul>
+
+	<p>Please note that there is an <a href="#alternative_syntax">alternative syntax</a> for member variables that may be used in situations where an naming conflict with a module's variables may occur.</p>
+
+	<h3><a name="var_app_build">app_build</a></h3>
+
+		<code>{app_build}</code>
+
+		<p>The build of ExpressionEngine that you are using (20070302, 20070328, etc.).</p>
+		
+	<h3><a name="var_app_version">app_version</a></h3>
+
+		<code>{app_version}</code>
+
+		<p>The version of ExpressionEngine that you are using (1.3, 1.4, etc.).</p>
+
+
+	<h3><a name="var_charset">charset</a></h3>
+
+		<code>{charset}</code>
+
+		<p>This variable will be substituted for the global character set preference under <dfn>Admin &gt; Control Panel Settings</dfn>. It is typically used in your <dfn>META</dfn> tags to indicate the character encoding:</p>
+		
+		<code>&lt;meta http-equiv="Content-Type" content="text/html; charset=<samp>{charset}</samp>" /></code>
+
+		<p>If you wish to use the character encoding you have specified for a particular weblog (in the Control Panel <dfn>Admin &gt; Weblog Management</dfn> page) you may use the <a href="../../modules/weblog/info.html">Weblog Information</a> EE Tag instead.</p>
+		
+
+
+	<h3><a name="var_current_time">current_time</a></h3>
+
+		<code>{current_time}</code>
+
+		<p>This variable displays the current server time localized to each user's particular setting.  As with other date variables, you will use the standard <a href="../date_variable_formatting.html">date variable formatting</a>:</p>
+
+		<code>{current_time format="%Y %m %d %H:%i:%s"}</code>
+
+		<p class="important"><strong>NOTE:</strong> Unlike the rest of the Standard Global Variables, {current_time} is parsed very early on in the Template parser, which allows you to make dynamic use of it in your tags, for instance as a tag parameter, or in a conditional.</p>
+
+	<h3><a name="var_debug_mode">debug_mode</a></h3>
+
+		<code>{debug_mode}</code>
+
+		<p>This variable will be substituted with either "on" or "off" based on your debug mode settings.</p>
+
+
+	<h3><a name="var_elapsed_time">elapsed_time</a></h3>
+
+		<code>{elapsed_time}</code>
+
+		<p>The amount of time, in seconds, it took ExpressionEngine to render the current page.</p>
+
+
+	<h3><a name="var_email">email</a></h3>
+
+		<code>{email}</code>
+
+		<p>The email address for the currently logged-in user.</p>
+
+
+	<h3><a name="var_embed">embed</a></h3>
+
+		<code>{embed='news/local'}</code>
+
+		<p>This variable allows you to embed one Template within another.  Please see the <a href="../embedding_templates.html">Embedded Templates</a> section.</p>
+
+
+	<h3><a name="var_encode">encode</a></h3>
+
+		<code>{encode="you@example.com" title="Email Me!"}</code>
+
+		<p>This variable will encode the specified email address using javascript and HTML entities to make it more difficult for spam harvesters to grab an email address from your site.&nbsp; If you normally show your email address on your site you are encouraged to use this variable. The <samp>title</samp> parameter on the variable allows you to specify the text you want to use for the link.</p>
+				
+		<code><a href="mailto:you@example.com">Email Me!</a></code>
+
+
+	<h3><a name="var_group_id">group_id</a></h3>
+
+		<code>{group_id}</code>
+
+		<p>The Member Group ID number for the currently logged-in user.</p>
+
+	<h3><a name="var_group_title">group_title</a></h3>
+
+		<code>{group_title}</code>
+
+		<p>The title of the member group for the currently logged-in user.</p>
+
+	
+	<h3><a name="var_gzip_mode">gzip_mode</a></h3>
+
+		<code>{gzip_mode}</code>
+
+		<p>This variable will be substituted with either "on" or "off" based on your output compression settings mode settings.</p>
+
+
+	<h3><a name="var_hits">hits</a></h3>
+
+		<code>{hits}</code>
+
+		<p>This variable will be substituted with the number of hits that any given template containing the variable has received.</p>
+
+
+	<h3><a name="var_homepage">homepage</a></h3>
+
+		<code>{homepage}</code>
+
+		<p>This variable will be substituted with the URL to your home page as defined under <dfn>Admin &gt; General Configuration</dfn>.</p>
+
+
+	<h3><a name="var_ip_address">ip_address</a></h3>
+
+		<code>{ip_address}</code>
+
+		<p>This variable will be substituted with the IP address of the currently logged in user.</p>
+
+
+	<h3><a name="var_lang">lang</a></h3>
+
+		<code>{lang}</code>
+
+		<p>This variable will be substituted for the "Default XML Language" preference  as defined under <dfn>Admin &gt; General Configuration</dfn>.</p>
+
+
+	<h3><a name="var_location">location</a></h3>
+
+		<code>{location}</code>
+
+		<p>The location (as entered in their profile) for the currently logged-in user.</p>
+
+
+	<h3><a name="var_member_group">member_group</a></h3>
+
+		<code>{member_group}</code>
+
+		<p>The Member Group ID number for the currently logged-in user.</p>
+
+
+	<h3><a name="var_member_id">member_id</a></h3>
+
+		<code>{member_id}</code>
+
+		<p>The Member ID for the currently logged-in user.</p>
+
+
+	<h3><a name="var_member_profile_link">member_profile_link</a></h3>
+
+		<code>{member_profile_link}</code>
+
+		<p>This variable will be substituted with a link to the public profile page for the currently logged in user.  The text of the link will be the member's screen name.  For instance, the output might be:</p>
+
+		<code>&lt;a href="http://example.com/index.php/member/1/">Joe Smith&lt;/a></code>
+
+
+	<h3><a name="var_redirect">redirect</a></h3>
+
+		<code>{redirect='news/local'}</code>
+
+		<p>This variable allows you redirect the visitor to another template.  Typically this will mean that you will be utilizing the tag within conditionals.</p>
+			
+		<code>{if segment_3 != 'cookies'}><br />
+&nbsp;&nbsp;{redirect='bake/cookies'}<br />
+{/if}</code>
+
+		<p>You can also use the redirect variable to provide tighter control of your URLs, and trigger 404 pages in certain conditions.  When you want to display your 404 page, just use "404" for the template.  For instance, you might do this on a template group's 'index' template that you do not wish to be displayed if an arbitrary second URL segment exists.</p>
+
+		<code>{if segment_2 != ''}<br />
+&nbsp;&nbsp;{redirect="404"}<br />
+{/if}</code>
+		
+		<p class="important">Be careful that through your redirect variables that you do not create an infinite loop.</p>
+		
+	<h3><a name="var_screen_name">screen_name</a></h3>
+
+		<code>{screen_name}</code>
+
+		<p>The screen name for the currently logged-in user.</p>
+
+
+	<h3><a name="var_site_name">site_name</a></h3>
+
+		<code>{site_name}</code>
+
+		<p>This variable will be substituted with your site name as defined under <dfn>Admin &gt; General Configuration</dfn>.</p>
+		
+	<h3><a name="var_site_url">site_url</a></h3>
+
+			<code>{site_url}</code>
+
+			<p>This variable will be substituted with your site URL as defined under <dfn>Admin &gt; General Configuration</dfn>.</p>
+
+
+	<h3><a name="var_template_edit_date">template_edit_date=""</a></h3>
+
+		<p>This variable displays the localized time for when the template was last updated.  As with other date variables, you will use the standard <a href="../date_variable_formatting.html">date variable formatting</a>:</p>
+
+		<code>{template_edit_date format="%Y %m %d %H:%i:%s"}</code>
+
+
+	<h3><a name="var_total_comments">total_comments</a></h3>
+
+		<code>{total_comments}</code>
+
+		<p>The total number of comments posted by the currently logged-in user.</p>
+
+
+	<h3><a name="var_total_entries">total_entries</a></h3>
+
+		<code>{total_entries}</code>
+
+		<p>The total number of entries posted by the currently logged-in user.</p>
+
+
+	<h3><a name="var_total_queries">total_queries</a></h3>
+
+		<code>{total_queries}</code>
+
+		<p>The total number of database queries used to generate the current page.</p>
+
+
+	<h3><a name="var_username">username</a></h3>
+
+		<code>{username}</code>
+
+		<p>The username for the currently logged-in user.</p>
+
+
+	<h3><a name="var_webmaster_email">webmaster_email</a></h3>
+
+		<code>{webmaster_email}</code>
+		
+		<code>{encode="{webmaster_email}" title="Contact Us"}</code>
+
+		<p>The email address for the site, as specified in <a href="../../cp/admin/system_preferences/email_configuration.html">Email Configuration</a>.</p>
+
+	<h3><a name="var_xid_hash">XID_HASH</a></h3>
+		<code>{XID_HASH}</code>
+		
+		<p>This variable is a required value for hidden form field 'XID' used in secure forms.</p>
+
+
+	<h2><a name="alternative_syntax">Alternative Syntax</h2>
+	
+		<p>In order to be able to use some member variables inside tags that already parse their own member information, such as the weblog entries tag, it is necessary to use an alternative syntax.  All of the member variables may be used with the addition of the prefix "logged_in_".</p>
+
+		<code>{exp:weblog:entries weblog="default_site"}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;This article was written by: {screen_name}&lt;br /><br />
+	&nbsp;&nbsp;&nbsp;&nbsp;The currently logged in user is: {logged_in_screen_name}<br />
+	{/exp:weblog:entries}</code>
+
+		<p>A list of the available member variables that utilize this alternate syntax follows:</p>
+
+		<ul>
+			<li>logged_in_member_id</li>
+			<li>logged_in_group_id</li>
+			<li>logged_in_group_description</li>
+			<li>logged_in_username</li>
+			<li>logged_in_screen_name</li>
+			<li>logged_in_email</li>
+			<li>logged_in_ip_address</li>
+			<li>logged_in_location</li>
+			<li>logged_in_total_entries</li>
+			<li>logged_in_total_comments</li>
+			<li>logged_in_private_messages</li>
+			<li>logged_in_total_forum_topics</li>
+			<li>logged_in_total_forum_replies</li>
+			<li>logged_in_total_forum_posts</li>
+		</ul>
+	
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>URL Segment Variables &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="var_MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#template_docs">Templating System</a> &gt;
+<a href="index.html">Global Variables</a> &gt;
+<strong>URL Segment Variables</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>URL Segment Variables</h1>
+
+	<p>ExpressionEngine provides an easy way for you to access the information in your URL <dfn>segments</dfn>.&nbsp; 
+	By "segments", we mean the segments of the URL that appear after your <var>index.php</var> page.&nbsp; For example, 
+	this URL has two segments:</p>
+
+	<code>http://example.com/index.php/products/shirts/</code>
+	
+	<p><kbd>products</kbd> is <dfn>Segment 1</dfn> and <kbd>shirts</kbd> is <dfn>segment 2</dfn></p>
+
+
+	<p>If needed, you could access the <em>values</em> of either of those segments using these variables in your templates:<p>
+	
+	<p><samp>{segment_1}</samp> or <samp>{segment_2}</samp>.</p>
+	
+	<p>Up to 9 URL segments can be accessed using the following variables:</p>
+	
+	
+	<code>{segment_1}<br />
+	{segment_2}<br />
+	{segment_3}<br />
+	{segment_4}<br />
+	{segment_5}<br />
+	{segment_6}<br />
+	{segment_7}<br />
+	{segment_8}<br />
+	{segment_9}
+	</code>
+	
+	
+	<p>Segment variables let you dynamically change aspects of your templates based on what appears in the URL.</p>
+	
+	<p>For example, 
+	imagine you use an ExpressionEngine weblog to store information about each employee in your company.&nbsp;  Each weblog entry
+	describes a different person, with the URL Title of the entry being the person's name.&nbsp; In this scenario you could use
+	a single template to dynamically show each employee's information based on what is in the URL.&nbsp; Consider this URL:</p>
+
+	<code>http://example.com/index.php/company/employees/joe/</code>
+	
+	<p>The Template Groups name is "company" and the Template name is "employees".&nbsp; Based on the information 
+	in the 3rd segment (in this case, "joe") you can dynamically cause the "employees" template to change for each person.&nbsp; Here's
+	an example of a weblog tag in which the URL title changes based on the 3rd segment:</p>
+	
+	<code>
+	
+	{exp:weblog:entries&nbsp; <samp>url_title="{segment_3}"</samp>}<br /><br />
+	
+	&lt;h1>{title}&lt;/h1><br />
+	&lt;p>{body}&lt;/p><br />
+	<br />
+	{/exp:weblog:entries}<br />	
+	</code>
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

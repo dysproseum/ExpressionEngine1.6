@@ -1,0 +1,340 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Regular Expressions Class  &#8211; ExpressionEngine Developer Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../index.html">Development</a> &gt;
+<strong>Regular Expressions Class</strong>
+</div>
+
+
+<div id="content">
+<h1>Regular Expressions Class</h1>
+
+
+
+
+<div class="section">
+<p>
+The Regular Expressions class contains functions that process and validate strings using regular expressions.</p>
+</div>
+
+
+
+
+<!---vaild_email--->
+
+<div class="section">
+<h2>valid_email(address [string])</h2>
+
+
+<p>Finds whether a string is a valid email.</p>
+
+<p><strong>Class: </strong>Regex (REGX)</p>
+<p><strong>Description: </strong>When given <var>str</var>, it will return true if <var>str</var> is a valid email, false otherwise.</p>
+</div>
+
+
+<!---vaild_ip--->
+
+
+<div class="section">
+<h2>valid_ip(ip [string])</h2>
+
+
+<p>Finds whether string is a valid ip.</p>
+
+<p><strong>Class: </strong>Regex (REGX)</p>
+<p><strong>Description: </strong>When given <var>ip</var> it will return true if <var>ip</var> is in the form of a valid ip address, false otherwise.</p>
+</div>
+
+
+<!---prep_url--->
+
+
+<div class="section">
+<h2>prep_url(str [string])</h2>
+
+
+<p>Makes string valid external url</p>
+
+<p><strong>Class: </strong>Regex (REGX)</p>
+<p><strong>Description: </strong>Returns <var>str</var> after checking to make sure it has http:// in front of it.</p>
+</div>
+
+
+<!---prep_query_string--->
+
+
+<div class="section">
+<h2>prep_query_string(str [string])</h2>
+
+
+<p>Makes string valid system url</p>
+
+<p><strong>Class: </strong>Regex (REGX)</p>
+<p><strong>Description: </strong>Returns <var>str</var> after checking to make sure that if Force Query Strings is set to yes that a '?' is properly places in the system URL.  Useful for user submitted URLs (like Weblog URL in Weblog Management), when you wish to make sure it is correct for Force Query String.</p>
+</div>
+
+<!---decode_qstr--->
+
+<div class="section">
+<h2>decode_qstr(str [string])</h2>
+
+
+<p>Returns string with certain entities decoded</p>
+
+<p><strong>Class: </strong>Regex (REGX)</p>
+<p><strong>Description: </strong>Returns <var>str</var> after converting the HTML entities for <kbd>.</kbd>, <kbd>?</kbd>, and <kbd>&</kbd> back to those characters.  A URL sent by a form, ping, etc.  might have these entities encoded prior to sending, so this function makes sure that they are converted back prior to processing.</p>
+</div>
+
+
+<!---form_prep--->
+
+<div class="section">
+<h2>form_prep(str [string], strip [int])</h2>
+
+
+<p>Returns string with certain characters encoded</p>
+
+<p><strong>Class: </strong>Regex (REGX)</p>
+<p><strong>Description: </strong>Returns <var>str</var> after preparing for use within a form. If the optional parameter <var>strip</var> is set to 1, then stripslashes() will be performed on <var>str</var> as well. Useful for switching template variables (ex: {member_name}) in a form.</p>
+</div>
+
+
+<!---encode_php_tags--->
+
+<div class="section">
+<h2>encode_php_tags(str [string]</h2>
+
+
+<p>Returns string with PHP tags converted to entities</p>
+
+<p><strong>Class: </strong>Regex (REGX)</p>
+<p><strong>Description: </strong>Returns <var>str</var> after converting the PHP opening and closing tags to entities.  Used by the Typography class.</p>
+</div>
+
+
+<!---encode_ee_tags--->
+
+<div class="section">
+<h2>encode_ee_tags(str [string]</h2>
+
+
+<p>Returns string with EE tags converted to entities</p>
+
+<p><strong>Class: </strong>Regex (REGX)</p>
+<p><strong>Description: </strong>Returns <var>str</var> after converting the EE opening and closing tags (ex: {exp:weblog}) to entities.  Used by the Typography class.</p>
+</div>
+
+
+<!---convert_quotes--->
+
+<div class="section">
+<h2>convert_quotes(str [string])</h2>
+
+
+<p>Converts single and double quotes to entities</p>
+
+<p><strong>Class: </strong>Regex (REGX)</p>
+<p><strong>Description: </strong>Converts <em>just</em> single and double quotes to entities in <var>str</var> and returns <var>str</var>.</p>
+</div>
+
+
+<!---xml_convert--->
+
+<div class="section">
+<h2>xml_convert(str [string])</h2>
+
+
+<p>Converts reserved XML characters</p>
+
+<p><strong>Class: </strong>Regex (REGX)</p>
+<p><strong>Description: </strong>Converts reserved XML characters in <var>str</var> and returns <var>str</var>.  The following values are encoded: &, <, >, \, ', -.  Note: HTML Entities are kept safe and their ampersands are not converted.</p>
+</div>
+
+<!---ascii_to_entities--->
+
+<div class="section">
+<h2>ascii_to_entities(str [string])</h2>
+
+
+<p>Converts ASCII to Entities</p>
+
+<p><strong>Class: </strong>Regex (REGX)</p>
+<p><strong>Description: </strong>Returns <var>str</var> after converting higher ASCII values into HTML entities where possible.  Only use when the <kbd>auto_convert_high_ascii</kbd> config file preference is set to yes (i.e. $PREFS->ini('auto_convert_high_ascii') == 'y').</p>
+</div>
+
+<!---entities_to_ascii--->
+
+<div class="section">
+<h2>entities_to_ascii(str [string], all [boolean])</h2>
+
+
+<p>Entities to ASCII</p>
+
+<p><strong>Class: </strong>Regex (REGX)</p>
+<p><strong>Description: </strong>Converts HTML entities into ASCII values and returns <var>str</var>.  If <var>all</var> is set to <strong>TRUE</strong> (<strong>TRUE</strong> is default), it will also convert all XML reserved charcters (&, <, >, ', ", -) from entity form back to ASCII.  Used mostly in forms and email message sending. </p>
+</div>
+
+
+<!---trim_slashes--->
+
+<div class="section">
+<h2>trim_slashes(str [string])</h2>
+
+
+<p>Trim slashes from string</p>
+
+<p><strong>Class: </strong>Regex (REGX)</p>
+<p><strong>Description: </strong>Trims forward slashes (/) from front and back of <var>str</var> and returns <var>str</var>.  It will also remove slashes that are in the form of an HTML Entity.</p>
+</div>
+
+<!---remove_extra_commas--->
+
+<div class="section">
+<h2>remove_extra_commas(str [string])</h2>
+
+
+<p>Removes extra commas from string</p>
+
+<p><strong>Class: </strong>Regex (REGX)</p>
+<p><strong>Description: </strong>Removes double commas from <var>str</var>, and then removes any commas from beginning and end of <var>str</var>.  Returns <var>str</var>.  Used for cleaning up user inputted values separated by commas.</p>
+</div>
+
+
+<!---strip_quotes--->
+
+<div class="section">
+<h2>strip_quotes(str [string])</h2>
+
+
+<p>Removes quotes from string</p>
+
+<p><strong>Class: </strong>Regex (REGX)</p>
+<p><strong>Description: </strong>Returns <var>str</var> after removing standard (not curly) single and double quotes.</p>
+</div>
+
+
+
+<!---keyword_clean--->
+
+<div class="section">
+<h2>keyword_clean(str [string])</h2>
+
+
+<p>Cleans search keywords</p>
+
+<p><strong>Class: </strong>Regex (REGX)</p>
+<p><strong>Description: </strong>Returns <var>str</var> after removing naughty, unwanted stuff and cleaning it up a bit.</p>
+</div>
+
+
+<!---convert_dissallowed_chars--->
+
+<div class="section">
+<h2>convert_dissallowed_chars(str [string])</h2>
+
+
+<p>Converts Disallowed Characters to Entities</p>
+
+<p><strong>Class: </strong>Regex (REGX)</p>
+<p><strong>Description: </strong>Returns <var>str</var> after converting 
+disallowed characters (parentheses, dollar sign, etc) to entities.</p>
+</div>
+
+
+
+
+<!---xss_clean--->
+
+<div class="section">
+<h2>xss_clean(str [string])</h2>
+
+
+<p>Removes malicious code from string</p>
+
+<p><strong>Class: </strong>Regex (REGX)</p>
+<p><strong>Description: </strong>Removes from <var>str</var> known malicious pieces of code that no non-malicious user would enter.  Highly recommened for cleaning incoming user data.  Returns <var>str</var>.</p>
+
+<p>
+Note:  Incoming $_GET and $_COOKIE data are passed through this function by the system, but $_POST and $_SERVER data is not.
+</p>
+</div>
+
+
+<!---create_url_title--->
+
+<div class="section">
+<h2>create_url_title(str [string])</h2>
+
+
+<p>Creates valid url title from string</p>
+
+<p><strong>Class: </strong>Regex (REGX)</p>
+<p><strong>Description: </strong>Takes <var>str</var> and returns a valid url_title based on that string. Use for importing or creation of entries.</p>
+</div>
+
+
+<!---unhtmlentities--->
+
+<div class="section">
+<h2>unhtmlentities(str [string])</h2>
+
+
+<p>Convert HTML Entities Back to Characters</p>
+
+<p><strong>Class: </strong>Regex (REGX)</p>
+<p><strong>Description: </strong>Takes <var>str</var> and returns with all entities turned into their characters.</p>
+</div>
+
+
+<!---array_stripslashes--->
+
+<div class="section">
+<h2>array_stripslashes(data [array])</h2>
+
+
+<p>Removes Slashes From Array</p>
+
+<p><strong>Class: </strong>Regex (REGX)</p>
+<p><strong>Description: </strong>Takes <var>array</var> and returns it with all forward slashes removed from all of the values, does multi-dimensional arrays too.</p>
+</div>
+
+
+
+</div>
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

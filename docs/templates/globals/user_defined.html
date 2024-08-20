@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>User Defined Global Variables &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="var_MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#template_docs">Templating System</a> &gt;
+<a href="index.html">Global Variables</a> &gt;
+<strong>User Defined Global Variables</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>User Defined Global Variables</h1>
+
+	<p>Custom, <dfn>user-defined global variables</dfn> can be created for use in any Template.  In the <dfn>Control Panel &gt; Templates</dfn> page, click the <kbd>Global Variables</kbd> link at the top of the page.</p>
+	
+	<p>User-defined global variables can hold any <b>static</b> information.  These variables can be useful for things like site header, footers, copyright notices, etc.  Since these variables
+	can go in any template it makes the information very portable and simple to update.</p>
+
+	<p>Once you've created a variable you can use it in any template simply by surrounding the variable name with curly braces.&nbsp;
+	For example, if you create a variable called "copyright", you'll use it in your template this way:</p>
+	
+	<code>{copyright}</code>
+
+	<p class="important"><b>Important:</b>&nbsp; You cannot give a user-defined global variable the same name as an existing variable.  This includes variables native to ExpressionEngine such as other Global Variables.  Please see the list of <a href="../../cp/reserved_words.html#reserved_global_variables" title="reserved_words">reserved words</a> for details.</p>
+
+
+	<p><b>Note:</b>&nbsp; User-defined global variables are not run through the template engine, so you cannot place EE Tags, PHP, or variables inside them.&nbsp; 	Also note that Global Variables are one of the last things parsed in your Templates.  This means that you cannot use a Global Variable as the value for an EE Tag parameter.  For instance, if you had a Global Variable called "special_weblog", the following <b>would not work</b>:</p>
+
+	<code>{exp:weblog:entries weblog="{special_weblog}" limit="10"}</code>
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Import from XML &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" name="../../../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../../../index.html"><img src="../../../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../../../index.html">Table of Contents</a> &gt;
+<a href="../../../../index.html#cp_docs">The Control Panel</a> &gt;
+<a href="../../index.html">Admin</a> &gt;
+<a href="../index.html">Utilities</a> &gt;
+<a href="./index.html">Member Import Utility</a> &gt;
+<strong>Import from XML</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Import from XML</h1>
+	<div class="path">Control Panel Location:&nbsp; <dfn>Admin &gt; Utilities &gt; Import Utilities &gt; Member Import Utility &gt; Import from XML</dfn></div>	
+
+		<p class="important"><strong>NOTE:</strong> There is no undo for importing members.  If you make a mistake or there is an error in your data, there is not a simple method to correct it.  <strong>Always backup your database before using this utility!</strong></p>
+		
+		<p class="important"><strong>WARNING:</strong> The &lt;member_id> tag will cause the import utility to overwrite any existing members with the same ID.  It is generally recommended that you do not use a &lt;member_id> tag, so when transferring users from one system to another, ExpressionEngine can automatically create new unique IDs for each member without overwriting any existing members.</p>
+			
+	<p>The <dfn>Import from XML</dfn> utility enables you import members from an XML file in ExpressionEngine's <a href="member_xml_format.html">Member XML Format</a>.</p>
+	
+	<p>The utility itself contains the instructions needed to assist you during the XML import, and you should read each area carefully before performing the import.  Username, Screen Name, and Email are required, and all standard member database fields are available to you, with the exception of "unique_id".  It is recommended that you do not use member_id, so ExpressionEngine can automatically generate unique Member IDs when the members are later imported from the XML file.</p>
+	
+	<p>Passwords will be randomly created for members who do not have a <samp>&lt;password></samp> element, and those members will need to use the "Forgot Password" link in order to log in. Passwords of the "text" type will be encrypted for you.  Pre-encrypted passwords will be inserted into the database as-is.  Please see the notes on the <a href="./member_xml_format.html#password_tag">password tag</a> for more details.
+	
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address><div class="validation"><a name="http://validator.w3.org/check/referer" title="Validate XHTML">XHTML</a> | <a name="http://jigsaw.w3.org/css-validator/check/referer" title="Validate CSS">CSS</a></div>
+</div>
+
+</body>
+</html>

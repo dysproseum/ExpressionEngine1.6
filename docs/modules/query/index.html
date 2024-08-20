@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Query Module Tags &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<strong>Query Module</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Query Module Tags</h1>
+
+	<p>ExpressionEngine includes a special tag that allows you to perform SQL queries, returning results from your database without having to script it with PHP.  The general syntax for the tag is:</p>
+
+	<code>{exp:query sql="<span class="highlight">SELECT screen_name FROM exp_members WHERE member_id = '1'</span> "}<br />
+<br />
+{screen_name}<br />
+<br />
+{/exp:query}</code>
+
+	<p>This tag works a little bit differently than most of the other ExpressionEngine tags, so it needs to be explained.  First, you may only use <samp>SELECT</samp> statements in the query; it will not process <samp>UPDATE</samp> or <samp>DELETE</samp> queries.  You may use any standard query you want and the syntax used is identical to a regular SQL query.</p>
+
+	<ul>
+		<li><a href="#sel_fields">Selecting Fields and Variables</a></li>
+		<li><a href="#return_rows">Returning Multiple Rows</a></li>
+		<li><a href="#no_results">If You Have No Results</a></li>
+		<li><a href="#dates">Dates</a></li>
+		<li><a href="#pagination">Pagination</a></li>
+		<li><a href="#special_vars">Special Variables</a></li>
+		<li><a href="#notes">Notes</a></li>
+	</ul>
+
+	<h2><a name="sel_fields"></a>Selecting Fields and Variables</h2>
+
+	<p>Each of the columns or fields you include as part of your SELECT statement will be available inside the tag pair as a {variable} with the same name as the field.  So, in the above example the "screen_name" field was selected and thus the <samp>{screen_name}</samp> variable is available inside the tag.</p>
+
+	<code>{exp:query sql="<span class="highlight">SELECT screen_name, email, location FROM exp_members WHERE group_id = '1'</span>"}<br />
+<br />
+{screen_name}<br />
+{email}<br />
+{location}<br />
+<br />
+{/exp:query}</code>
+
+	<p>This query would make three variables from the "exp_members" table available.</p>
+
+	<p>You may also have it select all available columns/fields automatically by using the asterisk character:</p>
+
+	<code>{exp:query sql="<span class="highlight">SELECT * FROM exp_members WHERE group_id = '1'</span>"}<br />
+<br />
+{username}<br />
+{screen_name}<br />
+{password}<br />
+{email}<br />
+{location}<br />
+<br />
+{/exp:query}</code>
+
+
+
+	<h2><a name="return_rows"></a>Returning Multiple Rows</h2>
+
+	<p>Unless you specifically craft your query to only return a single result, most queries will return multiple "rows" of results.  In order to deal with these multiple rows of results, ExpressionEngine will automatically loop through your query tag as many times as necessary to display all the rows of returned data.  Suppose you want to list all the members of one of your particular groups.  You might use something like this:</p>
+
+	<code>{exp:query sql="<span class="highlight">SELECT screen_name FROM exp_members WHERE group_id = '6'</span>"}<br />
+<br />
+{screen_name}&lt;br /><br />
+<br />
+{/exp:query}</code>
+
+	<p>On your page, you might get actual results such as:</p>
+
+	<code>Michael Jordan<br />
+Wayne Gretzky<br />
+Joe Montana<br />
+Roger Clemens<br />
+David Beckham</code>
+
+	<p>This tag will allow you to easily create many results that might otherwise require plugins or special custom-coding in other applications.</p>
+
+
+
+	<h2><a name="no_results"></a>If You Have No Results</h2>
+
+	<p>You may use the <samp>{if no_results}</samp> conditional variable to display content if your query returns no results.  For instance:</p>
+
+	<code>{exp:query sql="<span class="highlight">SELECT screen_name FROM exp_members WHERE group_id = '6'</span>"}<br />
+<br />
+{screen_name}&lt;br /><br />
+<br />
+{if no_results}<br />
+Sorry, no sports heroes here!<br />
+{/if}<br />
+<br />
+{/exp:query}</code>
+
+
+	<h2><a name="dates"></a>Dates</h2>
+
+	<p>If you are pulling dates out of an ExpressionEngine database table, then
+	you can have the dates formatted and localized for the user. As with other 
+	date variables, these require the "format" parameter in order to define how 
+	the date should be displayed. See the 
+	<a href="../../templates/date_variable_formatting.html">date variable formatting</a> page 
+	for more information.</p>
+
+	<code>&lt;p>Dates for the Last Five Entries:&lt;/p>
+	<br /><br />
+{exp:query sql="<span class="highlight">SELECT entry_date FROM exp_weblog_titles ORDER BY entry_date DESC LIMIT 5</span>"}
+<br /><br />
+&lt;p>{entry_date format="%Y %m %d"}&lt;/p>
+<br /><br />
+{/exp:query}</code>
+
+<!-- No LIMIT on the Query itself -->
+
+	<h2><a name="pagination"></a>Pagination</h2>
+
+	<p>The pagination in the Query module works exactly like the
+	<a href="../weblog/pagination_page.html">Weblog and Comment Pagination</a> 
+	with only one exception.  In the Query module
+	you cannot have a LIMIT clause on your query.  Instead you have to use a 
+	<strong>limit=""</strong> parameter to specify how many results to display per page, and then
+	ExpressionEngine will automatically modify your query to display the appropriate 
+	results.</p>
+
+	<code>{exp:query limit="5" sql="<span class="highlight">SELECT title,entry_date FROM exp_weblog_titles ORDER BY entry_date DESC</span>"}
+<br /><br />
+&lt;p>{title} - {entry_date format="%Y %m %d"}&lt;/p>
+<br /><br />
+
+{paginate}<br />
+&lt;p>Page {current_page} of {total_pages} pages {pagination_links}&lt;/p><br />
+{/paginate}<br /><br />
+
+{/exp:query}</code>
+
+	<p>All variables and parameters used by the <a href="../weblog/pagination_page.html">Weblog and Comment Pagination</a>
+	are available for the Query module as well.  So, you can specify where to put the pagination links
+	and what type of pagination links to show.</p>
+	
+		<code>{exp:query limit="5" paginate="top" sql="<span class="highlight">SELECT title,entry_date FROM exp_weblog_titles ORDER BY entry_date DESC</span>"}
+<br /><br />
+&lt;p>{title} - {entry_date format="%Y %m %d"}&lt;/p>
+<br /><br />
+
+{paginate}<br /><br />
+
+{if previous_page}<br />
+&lt;a href="{auto_path}">Previous Page&lt;/a> &nbsp;<br />
+{/if}<br /><br />
+
+{if next_page}<br />
+&lt;a href="{auto_path}">Next Page&lt;/a><br />
+{/if}<br /><br />
+
+{/paginate}<br /><br />
+
+{/exp:query}</code>
+
+	<h2>Backspace Parameter</h2>
+
+		<p>You can add an optional parameter that allows "backspacing":</p>
+
+		<code>{exp:query sql="SELECT screen_name FROM exp_members WHERE group_id = '6'" backspace="2"}</code>
+
+		<p>Backspacing removes characters from the last iteration of the loop.  For example, if you put a comma between each screen name you would normally have this layout:</p>
+
+		<code>Brett Bretterson, Max Goldman, John Gustafson, </code>
+
+		<p>You might, however, not want the comma and space after the final item.  By adding backspacing you can remove it.  Simply count the number of characters and spaces in the item you want to remove and add it to the tag.  A comma plus a space is 2 characters, so you would use the backspace parameter:</p>
+
+		<code>{exp:query sql="SELECT screen_name FROM exp_members WHERE group_id = '6'" backspace="2"}{screen_name}, {/exp:query}</code>
+
+		<p>This would display output similar to this:</p>
+
+		<code>Brett Bretterson, Max Goldman, John Gustafson</code>
+
+	<h2><a name="special_vars"></a>Special Variables</h2>
+	
+	<ul>
+		<li><a href="#var_count">{count}</a></li>
+		<li><a href="#var_switch">{switch="option_one|option_two|option_three"}</a></li>
+		<li><a href="#var_total_results">{total_results}</a></li>
+	</ul>
+	
+	<h3><a name="var_count">count</a></h3>
+
+		<code>{count}</code>
+
+		<p>The "count" out of the current row being displayed.  If five rows are being displayed, then for the fourth row the <samp>{count}</samp> variable would have a value of "4".</p>
+		
+		<p class="important">If one of the database columns is named (or aliased) "count", it will take precedence over the {count} variable.  To use both, you will need to provide a different alias for the field.  e.g.:</p>
+			
+		<code>{exp:query sql=&quot;SELECT count AS census FROM my_table&quot;}<br />
+			{count} &lt;!--This is the row count--&gt;<br />
+			{census} &lt;!--This is the contents of the database field &quot;count&quot;--&gt;<br />
+			{/exp:query}
+		</code>	
+
+		
+		
+	<h3><a name="var_switch">switch=</a></h3>
+
+		<code>{switch="option_one|option_two|option_three"}</code>
+
+		<p>This variable permits you to rotate through any number of values as the entries are displayed.  The first entry will use "option_one", the second will use "option_two", the third "option_three", the fourth "option_one", and so on.</p>
+
+		<p>The most straightforward use for this would be to alternate colors.  It could be used like so:</p>
+
+		<code>{exp:query sql="SELECT screen_name, email FROM exp_members WHERE group_id = '1'"}<br /><br />
+&lt;div class="{switch="one|two"}"><br /><br />
+&lt;h1>{screen_name}&lt;/h1><br />
+{email}<br /><br />
+&lt;/div><br /><br />
+{/exp:query}</code>
+
+		<p>The entries would then alternate between <samp>&lt;div class="one"></samp> and <samp>&lt;div class="two"></samp>.</p>
+
+		<p>Multiple instances of the <samp>{switch=}</samp> tag may be used and the system will intelligently keep track of each one.</p>
+		
+	<h3><a name="var_total_results">total_results</a></h3>
+
+		<code>{total_results}</code>
+
+		<p>The number of total results of the query.</p>
+
+	
+	<h2><a name="notes"></a>Notes</h2>
+
+	<p>While this tag gives you a great amount of power and flexibility, it can sometimes be difficult to construct a query.  ExpressionEngine abstracts its database design quite a bit, which means that related data is not always stored together in the same table.  For instance, the data for weblog entries are stored in two tables: the titles and basic meta data like the date are stored in one table, while the body fields are in another, so if you wanted to try and recreate a regular weblog query which returned
+	data that was stored across several tables, you would need to use SQL JOINS
+	and other advanced syntax.  To take full advantage of this tag's power you
+	will need to have a good understanding of SQL querying.</p>
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

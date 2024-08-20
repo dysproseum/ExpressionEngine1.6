@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Add/Edit Statuses &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../../index.html"><img src="../../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../../index.html">Table of Contents</a> &gt;
+<a href="../../../index.html#cp_docs">The Control Panel</a> &gt;
+<a href="../index.html">Admin</a> &gt;
+<a href="index.html">Weblog Administration</a> &gt;
+<a href="custom_entry_statuses.html">Custom Entry Statuses</a> &gt;
+<strong>Add/Edit Statuses</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Add/Edit Statuses</h1>
+
+	<div class="path">Control Panel Location:&nbsp; <dfn>Admin &gt; Weblog Administration &gt; Custom Entry Statuses &gt; Add/Edit Statuses</dfn></div>	
+	<p>This page allows you to add new statuses or edit existing statuses.</p>
+
+	<div class="imgwrapper"><img src="../../../images/status_new_form.png" width="545" height="183" alt="Custom Entry Statuses" title="Custom Entry Statuses" border="0" /></div>
+
+
+	<h2>Left Column</h2>
+
+		<p>The table on the left displays the existing statuses that belong to the particular group being viewed.  
+		
+		Next to the status names are links to <a href="#edit_status">edit</a> or <a href="#delete_status">delete</a> the status.</p>
+
+
+	<h2>Right Column</h2>
+
+	<p>The table on the right allows you to create a new status.</p>
+
+	<h3>Status Name</h3>
+	
+		<p>This is the name for the status.  It is what will be displayed when creating a new weblog entry.  This is a <strong>required</strong> field and it may contain spaces or punctuation.</p>
+
+
+	<h3>Status Order</h3>
+
+		<p>The order number for this status.</p>
+
+
+	<h3>Highlight Color</h3>
+
+		<p>This optional field allows you to specify a highlight color for this status.  This is the color of the status name in the <dfn><a href="../../edit/index.html">Edit</a></dfn> main table.  Entries assigned to this status will have their status name in this color.  That way you can easily make a specific status stand out in that table.</p>
+
+		<p>This field will take standard <a href=http://www.w3.org/TR/REC-CSS1#color-units">CSS color values</a> as input.  That means you can use color keywords such as <samp>red</samp>, <samp>aqua</samp>, and <samp>navy</samp>; or you could define a specific RGB value in a standard method such as <samp>#f00</samp>, <samp>#ff0000</samp>.</p>
+
+
+	<h3>Restrict status to members of specific groups</h3>
+
+		<p>If any of your Member Groups (besides the Super Admin group) grant access to the Control Panel you will see a table that allows you to specify whether or not each group can access a particular status.  If a Member Group can access the status then it will appear as an option in the <dfn>Publish</dfn> page for users of that Member Group.</p>
+
+		<p>This feature can be used to establish a workflow for multiple Member Groups.  One group might submit entries that are placed in a "closed" or "draft" type status while another group can review the entry and assign it to be "open".</p>
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

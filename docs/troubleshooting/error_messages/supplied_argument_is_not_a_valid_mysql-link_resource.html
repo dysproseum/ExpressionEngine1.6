@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"> 
+<head> 
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
+ 
+  <title>Troubleshooting &#8211; ExpressionEngine Documentation</title> 
+ 
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" /> 
+  <link rel="contents" href="./index.html" /> 
+  <style type="text/css" media="screen,print">@import url(./../../docs.css);</style> 
+</head> 
+ 
+<body> 
+<div><a name="top"></a></div> 
+ 
+<div id="header"> 
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr> 
+<td class="docheading" style="width:300px;"><a href="index.html"><img src="./../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td> 
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td> 
+</tr> 
+</table> 
+</div> 
+ 
+<div id="navlinks"> 
+<a href="../../index.html">Table of Contents</a> &gt; 
+<a href="../index.html">Troubleshooting</a> &gt; 
+<strong>Supplied argument is not a valid MySQL-Link resource</strong> 
+</div> 
+ 
+ 
+<div id="content"> 
+ 
+	<h1>Supplied argument is not a valid MySQL-Link resource</h1> 
+ 
+	<p class="ts_desc">	ExpressionEngine returns the following warning: <strong>"Supplied argument is not a valid MySQL-Link resource."</strong></p>
+	<h2>Troubleshooting</h2> 
+
+	<p>This error is usually returned in one of two cases:</p>
+	
+	<h3>The MySQL server is down</h3>
+	
+	<p>This can only be resolved by the database administrator who should be contacted immediately.</p>
+
+<h3>MySQL has run out of database connections</h3>
+
+<p>If the server is working in principle, MySQL might be running out of database connections. If that is the case then ensure that the database is using non-persistent connections.  This can be set via <dfn>Control Panel > Admin > System Preferences > Database Settings</dfn>, or by adding the following line to config.php:</p>
+
+<code>$conf['db_conntype'] = "0";</code>
+
+</div>
+	
+<p class="center"><a href="#top">Top of Page</a></p> 
+ 
+<!-- {user_guide_comments} --> 
+ 
+<div id="footer"> 
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address> 
+</div> 
+ 
+</body> 
+</html>

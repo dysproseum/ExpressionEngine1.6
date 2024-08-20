@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>pMcode Reference &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../index.html" />
+  <style type="text/css" media="screen,print">@import url(../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="../index.html#gen_docs">General Information</a> &gt;
+<strong>pMcode Reference</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>pMcode Reference</h1>
+
+	<p>ExpressionEngine supports the use of "pMcode" within your entries.  pMcode is a sort of simple syntax that you can use to format your entries with bold text, links, and more.  It is very similar (in many cases identical) to the codes used on many popular forum packages.</p>
+
+	<p>pMcode can be used in your entry fields when you create an entry or when you leave a comment.  It cannot normally be used in a Template.</p>
+
+	<p><strong>SECURITY NOTE:</strong> Whenever pMCode is used, even if your settings Allow All HTML, the pMCode is run through various
+	  security checks to prevent malicious people from posting naughty HTML or code through them.</p>
+
+  <h2>URLs and Linking</h2>
+
+	  <code>&#91;url]http://example.com/&#91;/url]</code>
+
+	  <code>&#91;url=http://example.com/]my site&#91;/url]</code>
+
+	  <p>You can easily create links with custom text or simply with the URL itself as the link.</p>
+	  
+	  
+  <h2>Email Links</h2>
+
+	  <code>&#91;email]you@example.com&#91;/email]</code>
+
+	  <code>&#91;email=you@example.com]click here to email&#91;/email]</code>
+
+	  <p>As with URLs, you can also format email addresses.  These pMcode tags will automatically encode the email address to make it more difficult for "spam bots" to retrieve it.</p>
+
+
+  <h2>Images</h2>
+
+	  <code>&#91;img]http://example.com/pic.jpg&#91;/img]</code>
+
+	  <p>You can easily display an image.</p>
+
+
+	<h2>Apply CSS Classes</h2>
+
+		<code>&#91;style=class_name]your content&#91;/style]</code>
+
+		<p>You may apply a CSS class to a piece of content.  This code will produce HTML like this: <samp>&lt;span class="class_name">your content&lt;/span></samp>.</p>
+
+
+
+  <h2>Font Sizes And Colors</h2>
+
+	  <code>&#91;size=4]Hey look at this!&#91;/size]</code>
+
+  	<p>You can specify font sizes as 1 through 6.  1 is the smallest and 6 is the largest.</p>
+
+	  <code>&#91;color=green]Some green text&#91;/color]</code>
+
+	  <p>You may also specify a color for the text.  Further, these pMcodes can be nested.</p>
+
+  	<code>&#91;size=4]&#91;color=green]some larger green text&#91;/color]&#91;/size]</code>
+
+
+
+  <h2>Bold, Strong, Em And Italic</h2>
+
+	  <code>&#91;b]some bold text&#91;/b]</code>
+
+	  <code>&#91;strong]some strong text&#91;/strong]</code>
+
+	  <code>&#91;em]some em text&#91;/em]</code>
+
+	  <code>&#91;i]some italic text&#91;/i]</code>
+
+	  <p>Bold, strong, em and italic text is simple to add.</p>
+
+
+
+	<h2>Describing Updates and Modifications (Del and Ins)</h2>
+
+		<code>I had &#91;del]146&#91;/del] &#91;ins]147&#91;/ins] glasses of melonade.</code>
+
+		<p><strong>Renders:</strong> I had <del>146</del> <ins>147</ins> glasses of melonade.</p>
+		
+		<p>Most browsers render &lt;del&gt; with a line through the center of it, and &lt;ins&gt; underlined.  They are used together to describe
+			updates and modifications to documents.</p>
+
+
+
+  <h2>Quoting</h2>
+
+	  <code>&#91;quote]Some text. blah, blah, blah...&#91;/quote]</code>
+
+  	<p>You can surround text written by someone else which you'd like to "quote".  These tags will be replaced with <samp>&lt;blockquote&gt;</samp> HTML tags.</p>
+
+
+
+  <h2>Pre-Formatted Text</h2>
+
+	  <code>&#91;pre]Some pre-formatted text...&#91;/pre]</code>
+
+	  <code>&#91;code]Some pre-formatted text...&#91;/code]</code>
+
+	  <p>You can submit pre-formatted text such as script examples.  These will be replaced with <samp>&lt;pre&gt; &lt;/pre&gt;</samp> HTML tags.  Whitespace and line wrapping will be preserved as you input it.  Note that very long lines will <strong>not</strong> automatically be wrapped and thus these could affect your site layout.</p>
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

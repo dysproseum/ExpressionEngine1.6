@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Updated Sites Module &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Updated Sites Module</a> &gt;
+<strong>Receiving Pings</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Receiving Pings</h1>
+
+	<p>You must perform several steps before you can start receiving pings:</p>
+
+	<ol>
+		<li>Install the module in the <dfn>Modules</dfn> section of your ExpressionEngine Control Panel.</li>
+		<li>Go into the Module's Control Panel, located at <dfn>Modules &gt; Updated Sites</dfn>, and edit the <kbd>Default</kbd> configuration.</li>
+		<li>In the configuration there is a field called <dfn>Sites Allowed to Ping</dfn>, which allows you to specify a list of URLs that your site will accept pings from. You need only include part of the URL of the site pinging you, so if you want to accept pings from all weblogs at blogspot.com, you can simply enter 'blogspot.com' into this field.</li>
+		<li>After saving your configuration, you will see a URL in the module's main menu. This is the <kbd>Ping URL</kbd> for this configuration. Give this URL to people you will allow pings from. They will put this URL into their Ping Server preferences for their software.  If they are using ExpressionEngine they can add your ping URL to their <dfn>My Account &gt; Ping Servers</dfn> page.</li>
+	</ol>
+
+	<p><b>Note:</b>&nbsp; You can have multiple configurations if you want to allow different groups to ping your site.</p>
+	
+
+	<h2><a name="pruning_pings">Pruning Pings</a></h2>
+
+	<p>In your ping configuration you'll find a preference for the maximum number of pings to save.   This allows the pings stored to be pruned every so often to keep database size down.</p>
+
+
+
+	<h2><a name="editing_pings">Editing Pings</a></h2>
+
+	<p>In the list of configuration in the module's CP there will be a link called <dfn>View Pings</dfn>. Click on this link to see the pings stored for this configuration.  You can see the information received from this ping and when the ping was received.  You may also deleted any unwanted pings.</p>
+
+
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

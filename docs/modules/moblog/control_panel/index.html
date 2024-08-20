@@ -1,0 +1,331 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Moblogging Module &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../../index.html"><img src="../../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../../index.html">Table of Contents</a> &gt;
+<a href="../../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="../index.html">Moblog Module</a> &gt;
+<strong>Control Panel</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Moblogging Module</h1>
+	<div class="path">Control Panel Location:&nbsp; <dfn>Modules &gt; Moblog Module</dfn></div>	
+
+	<p>The Moblogging Module Control Panel allows you to set up your Moblog account so you can begin emailing content to your site.</p>
+	
+
+	<h2><a name="main_screen">Main Screen</a></h2>
+
+	<p>The main <dfn>Moblog Module</dfn> screen lists your existing Moblogs and allows you to edit, delete, or perform a check on any of them.</p>
+
+	<h3>Create a New Moblog</h3>
+
+		<p>This link in the upper right allows you to <a href="#create_a_new_moblog">create a new moblog</a>.</p>
+
+
+	<h3>Moblogs</h3>
+
+		<p>The name of the moblog.</p>
+
+
+	<h3>Moblog Type</h3>
+
+		<p>List whether the moblog is for a weblog or gallery.</p>
+
+
+	<h3>Check Moblog</h3>
+
+		<p>This link allows you to have ExpressionEngine check the moblog to get new emails.</p>
+
+
+	<h3>Preferences</h3>
+
+		<p>You may edit the preferences for your moblog by following this link.  The preferences are listed under the "Create a New Moblog" section.</p>
+
+
+	<h3>Delete</h3>
+
+		<p>You may select a moblog to delete with the checkbox in this column.  Simply check the box and then use the <dfn>Delete</dfn> button.  All deletions are permanent.</p>
+
+
+	<p class="important">There is also a separate page that covers the syntax available in the <a href="email_template.html">Moblog Email Template</a>, which is a crucial part of setting up a "weblog" Moblog.</p>
+
+
+	<h2><a name="create_a_new_moblog">Create a New Moblog</a></h2>
+
+	<p>This screen allows you to create a new Moblog account.</p>
+
+
+	<h2>General Settings</h2>
+
+	<h3>Full Moblog Name</h3>
+
+		<p>The full display name of the Moblog account.</p>
+
+
+	<h3>Short Name</h3>
+
+		<p>The short name for the Moblog account.  It must be a single word with no spaces or special punctuation.</p>
+
+
+	<h3>Time Between Checks</h3>
+
+		<p>The amount of time that will elapse between checks of your Moblog account.  This is used in conjunction with the <samp><a href="../check_moblog.html">{exp:moblog:check}</a></samp> tag on your page.</p>
+
+
+	<h3>Moblog Enabled</h3>
+
+		<p>You can determine whether or not the Moblog account is enabled.  If the account is disabled then it will not be included when checks are made.</p>
+
+
+	<h3>File Archive Mode</h3>
+
+		<p>Enabling this preference basically means that your moblog is only used for uploading files.  With this enabled, entries in the corresponding weblog will not be created when a moblog email is processed.</p>
+
+
+	<h3>Moblog Type</h3>
+
+		<p>Specify whether this moblog will be posting entries to a weblog or to a gallery.  The settings for the next section will depend on your choice.</p>
+
+
+	<h3>Allow Overrides in Email?</h3>
+
+		<p>This allows you to specify whether or not you can override the default values specified on this page by including <a href="../email_contents.html">overrides</a> in the actual email text.  If turned on, this preference will cause the Moblog to ignore any overrides sent along with the email.</p>
+
+
+
+	<h2>Weblog Entry Settings</h2>
+
+	<h3>Choose Weblog</h3>
+
+		<p>Determine with which weblog the Moblog account will be associated.  When you send in an entry, the entry will go into this weblog.  If you do not specify a weblog, then no entries will be created when you send an email; only the attachments will be processed.</p>
+
+
+	<h3>Default Categories</h3>
+
+		<p>You may choose which category or categories the entry will be assigned to.  This choice is simply a default; it can be overridden when sending the email.  Field must be of the textarea type.</p>
+
+
+	<h3>Default Field</h3>
+
+		<p>You may choose which field the entry will be assigned to.  This choice is simply a default; it can be overridden when sending the email.</p>
+
+
+	<h3>Default Status</h3>
+
+		<p>You may choose which status the entry will be assigned to.  This choice is simply a default; it can be overridden when sending the email.</p>
+
+
+	<h3>Default Author</h3>
+
+		<p>You may choose which field the entry will be assigned to.  This choice is simply a default; it can be overridden when sending the email.</p>
+
+
+	<h3>Upload Directory for Files</h3>
+
+		<p>You may determine into which of your File Upload directories the file attachments will be placed.  You may define them in the <dfn><a href="../../../cp/admin/weblog_administration/file_upload_preferences.html">File Upload Preferences</a></dfn> section.</p>
+
+
+	<h3>Moblog Template</h3>
+
+		<p>This allows you to specify exactly how the contents of your email will be handled.  The syntax for the Template is covered on the <a href="email_template.html">Moblog Email Template</a> page.</p>
+
+
+	<h3>Make Entry Sticky?</h3>
+
+		<p>You may choose whether or not entries submitted via the Moblog should be marked as "sticky" by default.</p>
+
+
+
+	<h2>Gallery Settings for Moblog</h2>
+
+	<h3>Choose Gallery</h3>
+
+		<p>Determine with which gallery the Moblog account will be associated.  When you send in an entry, the entry will go into this gallery.</p>
+
+
+	<h3>Entry Categories</h3>
+
+		<p>You may choose which category the entry will be assigned to.  This choice is simply a default; it can be overridden when sending the email.</p>
+
+
+	<h3>Entry Status</h3>
+
+		<p>You may choose which status the entry will be assigned to.  This choice is simply a default; it can be overridden when sending the email.</p>
+
+
+	<h3>Allow Comments</h3>
+
+		<p>Whether you wish for commenting to be enabled for entries submitted via the Moblog.</p>
+
+
+	<h3>Default Author</h3>
+
+		<p>You may choose to which field the entry will be assigned.  This choice is simply a default; it can be overridden when sending the email.</p>
+
+
+
+	<h2>Email Settings</h2>
+
+	<h3>Email Account Type</h3>
+
+		<p>The type of email account.  Currently, only POP3 accounts are supported.</p>
+
+
+	<h3>Email Address</h3>
+
+		<p>This is the email account to which you will be sending your emails.  ExpressionEngine will check this account to find emails you've sent that should be processed by the Moblog Module.</p>
+
+
+	<h3>Incoming Mail Server</h3>
+
+		<p>The email server on which the email account you specified resides.  This is the server to which ExpressionEngine will attempt to connect.  This is typically something like <samp>mail.example.com</samp>.</p>
+
+
+	<h3>Email Account Username</h3>
+
+		<p>The username for the specified email account.  Once submitted, the information will be encrypted in ExpressionEngine.  Remember that some email accounts require you to use the full email address as the "username": <samp>username@example.com</samp>.</p>
+
+
+	<h3>Email Account Password</h3>
+
+		<p>The password for the specified email account.  Once submitted, the information will be encrypted in ExpressionEngine.</p>
+
+
+	<h3>Moblog Subject Prefix</h3>
+
+		<p>When ExpressionEngine checks the specified email account, it will ignore any messages that do not have this text in the subject.  The text does not technically have to be at the beginning of the subject, either; it can appear anywhere in the subject.  If you leave this setting blank, then all emails will be processed.  By default, any text in the subject that is <em>not</em> the subject prefix will be used for the entry title.</p>
+
+
+	<h3>Authorization Required in Email?</h3>
+
+		<p>If this preferences is set to Yes, then you will need to provide a valid username and password in the email sent.  This ensures an extra level of security so that only authorized people will be able to post via the Moblog Modules.  If the user authentication from the email fails then an entry will not be posted.</p>
+
+
+	<h3>Delete Unauthorized Moblog Emails?</h3>
+
+		<p>You may determine how ExpressionEngine will handle an "unauthorized" email.  If you require email authorization (above) and the email fails the authorization (for instance the username or password are incorrect) then you can have ExpressionEngine automatically delete that email.  If you do not set this, then the email will be left on the server.</p>
+
+
+	<h3>Valid 'From' Emails for Moblog</h3>
+
+		<p>You can specify a list of email addresses from which you can submit Moblog emails.  This preference will allow you to add in another layer of security so that ExpressionEngine will only accept emails that you want it to process.  This feature will check what address is specified as "From" on emails and compare it to your list.</p>
+
+		<p>You can specify one or more email addresses by either placing them on separate lines in the textarea or by separating them with a space.  If you leave the setting blank then ExpressionEngine will not filter emails based on where it is "From".</p>
+
+		<p><b>Note:</b> For security reasons, the email addresses put into this field <strong>must</strong> be case sensitive.  So, if your email client capitalizes letters in your email address, then you will have to capitalize the letters in this field as well.  For example, if your email address is 'web@example.com', your email client might specify the From address  
+
+as 'Web@example.com'.</p>
+
+
+	<h3>Ignore Email Text</h3>
+
+		<p>Here you can specify any text in the email which you want to ignore.  This is useful for email accounts such as those through Hotmail or Yahoo that add advertisements at the bottom.  It's also useful for removing automatically-added signatures.</p>
+
+		<p>ExpressionEngine will first try to match the entire specified text to something in the email.  If there is no match, then it will go through each of the lines (a line being one ended in a carriage return) of specified text individually and try to match content in the email in order to remove the desired content.</p>
+
+
+
+	<h2>Image Settings</h2>
+
+	<h3>Image Width</h3>
+
+		<p>If your images will be of a known width, then enter that here.  ExpressionEngine will attempt to determine the size of the image, but due to server differences this is not always possible.  If you do not know what size the images will be then set it to 0 (zero).</p>
+
+
+	<h3>Image Height</h3>
+
+		<p>If your images will be of a known height, then enter that here.  ExpressionEngine will attempt to determine the size of the image, but due to server differences this is not always possible.  If you do not know what size the images will be then set it to 0 (zero).</p>
+
+
+	<h3>Resize Image on Import?</h3>
+
+		<p>If this is set to "yes" then ExpressionEngine will resize your image according to the following two settings.  This supersedes the settings above.  In order for image resizing to work you must ensure that it is set up correctly under <dfn><a href="../../../cp/admin/system_preferences/image_resizing_preferences.html">Image Resizing Preferences</a></dfn>.</p>
+
+		<p class="important">In general, due to the limitations of the image libraries, image resizing is only available for <var>JPG</var> and <var>PNG</var> type images.  <var>GIF</var> and other image formats <strong>cannot</strong> normally be resized automatically.  ExpressionEngine will automatically determine your image resizing protocol and only resize those image capable of being resized.</p>
+
+
+	<h3>Resize Width</h3>
+
+		<p>The width to which you wish to resize your images.</p>
+
+		<p>If only the width is set (and the height is 0) ExpressionEngine will automatically calculate the height in order to retain the aspect ratio.</p>
+
+
+	<h3>Resize Height</h3>
+
+		<p>The height to which you wish to resize your images.</p>
+
+		<p>If only the height is set (and the width is 0) ExpressionEngine will automatically calculate the width in order to retain the aspect ratio.</p>
+
+
+	<h3>Create Thumbnail on Import?</h3>
+
+		<p>If you elect to have a thumbnail created, then ExpressionEngine will create a thumbnail version of the image of the size specified below.  In order for thumbnailing to work you must ensure that image resizing is set up correctly under <dfn><a href="../../../cp/admin/weblog_administration/global_weblog_preferences.html">Global Weblog Preferences</a></dfn>.</h3>
+
+		<p class="important">In general, due to the limitations of the image libraries, thumbnail creation is only available for <var>JPG</var> and <var>PNG</var> type images.  <var>GIF</var> and other image formats <strong>cannot</strong> normally be thumbnailed. ExpressionEngine will automatically determine your image resizing protocol and only resize those image capable of being resized.</p>
+
+
+	<h3>Thumbnail Width</h3>
+
+		<p>The width for your thumbnail images.</p>
+
+		<p>If only the width is set (and the height is 0) ExpressionEngine will automatically calculate the height in order to retain the aspect ratio.</p>
+
+
+	<h3>Thumbnail Height</h3>
+
+		<p>The height for your thumbnail images.</p>
+
+		<p>If only the height is set (and the width is 0) ExpressionEngine will automatically calculate the width in order to retain the aspect ratio.</p>
+
+
+
+	<h2>Ping Servers</h2>
+
+	<h3>Sites to Ping</h3>
+
+		<p>You may select which sites to ping when submitting a weblog entry.  The list is based off of what you have defined under <dfn>Default Ping Servers</dfn>.</p>
+
+
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

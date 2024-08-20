@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Mailing List Module Control Panel &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../../index.html"><img src="../../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../../index.html">Table of Contents</a> &gt;
+<a href="../../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="../index.html">Mailing List</a> &gt;
+<strong>Control Panel</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Mailing List Module Control Panel</h1>
+
+	<div class="path">Control Panel Location:&nbsp; <dfn>Modules &gt; Mailing List</dfn></div>	
+
+	<p>The Mailing List Control Panel is accessed via <dfn>Modules &gt; Mailing List</dfn> in your Control Panel.  It allows you to manage your mailing lists.</p>
+
+
+	<h2>Mailing List Overview</h2>
+
+	<p>The overview shows a list of all your mailing lists, along with links to view and manage the emails within each list.</p>
+	
+	<div class="imgwrapper"><img src="../../../images/mailinglist_overview.png" width="666" height="181" alt="Mailing List Overview" title="Mailing List Overview" border="0" /></div>
+
+	<h3>View List</h3>
+	
+	<p>The View List page enables you to view and delete the email addresses associated with a particular list.</p>
+
+	<h3>Edit List</h3>
+	
+	<p>The Edit List page enables you to edit the name of your mailing list.</p>
+
+	<h3>Edit Template</h3>
+	
+	<p>Each mailing list has a template that lets you customize the look and layout of the list. This is particularly useful if you  
+	send email in HTML format, since it allows you to create a default HTML "container" for your list.</p>
+	
+	<p>There are three variables that can be used in the template:</p>
+	
+	<code>{message_text}, {mailing_list}, and {unsubscribe_url}</code>
+	
+	<p>In addition, there are two conditional variables:</p>
+	
+	<code>{if html_email}<br />{/if}<br /><br />And:<br /><br />{if plain_email}<br />{/if}</code>
+	
+	<p>These conditionals can be used to show different versions of the unsubscribe link:</p>
+	
+	<code>	
+	To remove your email from the "{mailing_list}" mailing list, click here:<br />
+	{if html_email}&lt;a href="{unsubscribe_url}">{unsubscribe_url}&lt;/a>{/if}<br />
+	{if plain_email}{unsubscribe_url}{/if}</code>
+
+	<h3>Mailing List Preferences</h3>
+	
+	<p>The Mailing List Preferences link at the bottom of the table lets you set global mailing list preferences.</p>
+
+
+	<h2>Mailing List Search</h2>
+	
+	<p>The search utility permits you to look for specific email addresses.  You may also submit partial addresses.</p>
+
+	<div class="imgwrapper"><img src="../../../images/mailinglist_search.png" width="448" height="141" alt="Mailing List Search" title="Mailing List Search" border="0" /></div>
+
+	<h2>Mailing List Batch Subscribe/Unsubscribe</h2>
+
+		<p>This form allows you to conveniently subscribe or unsubscribe multiple email addresses simultaneously.  Submit the individual email addresses separated by spaces, new lines, or commas.</p>
+
+	<div class="imgwrapper"><img src="../../../images/mailinglist_batch.png" width="357" height="313" alt="Mailing List Batch" title="Mailing List Batch" border="0" /></div>
+
+
+
+
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

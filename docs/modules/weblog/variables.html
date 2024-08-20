@@ -1,0 +1,740 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Weblog Entries Single Variables &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Weblog Module</a> &gt;
+<strong>Single Variables</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Weblog Entries - Single Variables</h1>
+
+	<p>The standard <samp>{exp:weblog:entries}</samp> tag has a multitude of variables that can be used inside of it.  These variables have been split into two broad categories:</p>
+
+	<ul>
+		<li><a href="#standard_variables">Standard Variables</a></li>
+		<li><a href="#date_variables">Date Variables</a></li>
+	</ul>
+
+
+
+	<h2><a name="standard_variables">Standard Variables</a></h2>
+
+	<ul class="minitoc">
+		<li><a href="#var_absolute_count">{absolute_count}</a></li>
+		<li><a href="#var_aol_im">{aol_im}</a></li>
+		<li><a href="#var_author">{author}</a></li>
+		<li><a href="#var_author_id">{author_id}</a></li>
+		<li><a href="#var_avatar_image_height">{avatar_image_height}</a></li>
+		<li><a href="#var_avatar_image_width">{avatar_image_width}</a></li>
+		<li><a href="#var_avatar_url">{avatar_url}</a></li>
+		<li><a href="#bio">{bio}</a></li>
+		<li><a href="#var_comment_auto_path">{comment_auto_path}</a></li>
+		<li><a href="#var_comment_entry_id_auto_path">{comment_entry_id_auto_path}</a></li>
+		<li><a href="#var_comment_tb_total">{comment_tb_total}</a></li>
+		<li><a href="#var_comment_total">{comment_total}</a></li>
+		<li><a href="#var_comment_url_title_auto_path">{comment_url_title_auto_path}</a></li>
+		<li><a href="#var_count">{count}</a></li>
+		<li><a href="#var_email">{email}</a></li>
+		<li><a href="#var_entry_id">{entry_id}</a></li>
+		<li><a href="#var_entry_id_path">{entry_id_path='weblog/archives'}</a></li>
+		<li><a href="#var_entry_site_id">{entry_site_id}</a></li>
+		<li><a href="#var_forum_topic_id">{forum_topic_id}</a></li>
+		<li><a href="#var_icq">{icq}</a></li>
+		<li><a href="#var_interests">{interests}</a></li>
+		<li><a href="#var_ip_address">{ip_address}</a></li>
+		<li><a href="#var_location">{location}</a></li>
+		<li><a href="#var_member_search_path">{member_search_path='search/results'}</a></li>
+		<li><a href="#var_msn_im">{msn_im}</a></li>
+		<li><a href="#var_occupation">{occupation}</a></li>
+		<li><a href="#var_page_uri">{page_uri}</a></li>
+		<li><a href="#var_page_url">{page_url}</a></li>
+		<li><a href="#var_permalink">{permalink=weblog/archives}</a></li>
+		<li><a href="#var_photo_url">{photo_url}</a></li>
+		<li><a href="#var_photo_image_height">{photo_image_height}</a></li>
+		<li><a href="#var_photo_image_width">{photo_image_width}</a></li>
+		<li><a href="#var_profile_path">{profile_path='member'}</a></li>
+		<li><a href="#var_relative_date">{relative_date}</a></li>
+		<li><a href="#var_relative_url">{relative_url}</a></li>
+		<li><a href="#var_screen_name">{screen_name}</a></li>
+		<li><a href="#var_signature">{signature}</a></li>
+		<li><a href="#var_signature_image_height">{signature_image_height}</a></li>
+		<li><a href="#var_signature_image_url">{signature_image_url}</a></li>
+		<li><a href="#var_signature_image_width">{signature_image_width}</a></li>
+		<li><a href="#var_status">{status}</a></li>
+		<li><a href="#var_switch">{switch='option_one|option_two|option_three'}</a></li>
+		<li><a href="#var_title">{title}</a></li>
+		<li><a href="#var_title_permalink">{title_permalink=weblog/archives}</a></li>
+		<li><a href="#var_total_results">{total_results}</a></li>
+		<li><a href="#var_trackback_total">{trackback_total}</a></li>
+		<li><a href="#var_trimmed_url">{trimmed_url}</a></li>
+		<li><a href="#var_url">{url}</a></li>
+		<li><a href="#var_url_or_email">{url_or_email}</a></li>
+		<li><a href="#var_url_or_email_as_author">{url_or_email_as_author}</a></li>
+		<li><a href="#var_url_or_email_as_link">{url_or_email_as_link}</a></li>
+		<li><a href="#var_url_title">{url_title}</a></li>
+		<li><a href="#var_url_title_path">{url_title_path='weblog/archives'}</a></li>
+		<li><a href="#var_username">{username}</a></li>
+		<li><a href="#var_weblog">{weblog}</a></li>
+		<li><a href="#var_weblog_id">{weblog_id}</a></li>
+		<li><a href="#var_weblog_short_name">{weblog_short_name}</a></li>
+		<li><a href="#var_yahoo_im">{yahoo_im}</a></li>
+		<li><a href="#var_custom_entry_fields">Custom Entry Fields</a></li>
+		<li><a href="#var_custom_member_fields">Custom Member Fields</a></li>
+	</ul>
+
+	
+	<h3><a name="var_absolute_count">absolute_count</a></h3>
+
+		<code>{absolute_count}</code>
+
+		<p>The absolute "count" out of the current entries being displayed by the tag, including those entries on previous pages (if using pagination). </p>
+		
+		<p>If five entries are being displayed per page, then for the fourth entry on the second page the {absolute_count} variable would have a value of "9"</p>
+		
+		<p class="important"><strong>BONUS:</strong> Since the Search module utilizes weblog variables, {absolute_count} is also available to the Search Results tag.</p>
+
+	
+	<h3><a name="var_aol_im">aol_im</a></h3>
+
+		<code>{aol_im}</code>
+
+		<p>The author's AOL IM account name</p>
+
+
+	<h3><a name="var_author">author</a></h3>
+
+		<code>{author}</code>
+
+		<p>The author's screen name, if it exists; otherwise, this variable will display the username.</p>
+
+
+	<h3><a name="var_author_id">author_id</a></h3>
+
+		<code>{author_id}</code>
+
+		<p>The member ID number of the author</p>
+
+
+	<h3><a name="var_avatar_image_height">avatar_image_height</a></h3>
+
+		<code>{avatar_image_height}</code>
+
+		<p>The height of the avatar image associated with the entry's author.  Typically used as such:</p>
+
+		<code>{if avatar}<br />
+&lt;img src="{avatar_url}" width="{avatar_image_width}" height="{avatar_image_height}" alt="{author}'s avatar" /><br />
+{/if}</code>
+
+
+	<h3><a name="var_avatar_image_width">avatar_image_width</a></h3>
+
+		<code>{avatar_image_width}</code>
+
+		<p>The width of the avatar image associated with the entry's author.  Typically used as such:</p>
+
+		<code>{if avatar}<br />
+&lt;img src="{avatar_url}" width="{avatar_image_width}" height="{avatar_image_height}" alt="{author}'s avatar" /><br />
+{/if}</code>
+
+
+	<h3><a name="var_avatar_url">avatar_url</a></h3>
+
+		<code>{avatar_url}</code>
+
+		<p>The URL to the avatar image associated with the entry's author.  Typically used as such:</p>
+
+		<code>{if avatar}<br />
+&lt;img src="{avatar_url}" width="{avatar_image_width}" height="{avatar_image_height}" alt="{author}'s avatar" /><br />
+{/if}</code>
+
+<h3><a name="bio">bio</a></h3>
+
+	<code>{bio}</code>
+
+	<p>The author's bio as entered in their profile.</p>
+
+
+	<h3><a name="var_comment_auto_path">comment_auto_path</a></h3>
+
+		<code>{comment_auto_path}</code>
+
+		<p>This variable is replaced by the URL set in the "Comment Page URL" preference under <dfn>Admin &gt; Weblog Management</dfn>.  No entry id, URL Title, or other information is included; this is the exact URL from the preference.</p>
+
+
+	<h3><a name="var_comment_entry_id_auto_path">comment_entry_id_auto_path</a></h3>
+
+		<code>{comment_entry_id_auto_path}</code>
+
+		<p>This variable is replaced by the URL set in the "Comment Page URL" preference under <dfn>Admin &gt; Weblog Management</dfn>.  The ID number of the entry will be automatically added.  For example, this:</p>
+
+		<code>&lt;a href="{comment_entry_id_auto_path}">my entry&lt;/a></code>
+
+		<p>Would be rendered like this:</p>
+
+		<code>&lt;a href="http://example.com/index.php/weblog/comments/234/">my entry&lt;/a></code>
+
+
+	<h3><a name="var_comment_tb_total">comment_tb_total</a></h3>
+
+		<code>{comment_tb_total}</code>
+
+		<p>The combined total number of both comments and trackbacks for a particular entry</p>
+
+
+	<h3><a name="var_comment_total">comment_total</a></h3>
+
+		<code>{comment_total}</code>
+
+		<p>The total number of comments for a particular entry</p>
+
+
+	<h3><a name="var_comment_url_title_auto_path">comment_url_title_auto_path</a></h3>
+
+		<code>{comment_url_title_auto_path}</code>
+
+		<p>This variable is replaced by the URL set in the "Comment Page URL" preference under <dfn>Admin &gt; Weblog Management</dfn>.  The URL Title of the entry will be automatically added.  For example, this:</p>
+
+		<code>&lt;a href="{comment_url_title_auto_path}">my entry&lt;/a></code>
+
+		<p>Would be rendered like this:</p>
+
+		<code>&lt;a href="http://example.com/index.php/weblog/comments/ice_cream/">my entry&lt;/a></code>
+
+
+	<h3><a name="var_count">count</a></h3>
+
+		<code>{count}</code>
+
+		<p>The "count" out of the current entries being displayed.  If five entries are being displayed, then for the fourth entry the <samp>{count}</samp> variable would have a value of "4".</p>
+
+
+	<h3><a name="var_email">email</a></h3>
+
+		<code>{email}</code>
+
+		<p>The author's raw email address</p>
+
+
+	<h3><a name="var_entry_id">entry_id</a></h3>
+
+		<code>{entry_id}</code>
+
+		<p>The ID number of the weblog entry</p>
+
+
+	<h3><a name="var_entry_id_path">entry_id_path</a></h3>
+
+		<code>{entry_id_path='weblog/archives'}</code>
+
+		<p>The URL to the specified template.  The ID number of the entry will be automatically added.  For example, this:</p>
+
+		<code>&lt;a href="{entry_id_path='weblog/archives'}">my entry&lt;/a></code>
+
+		<p>Would be rendered like this:</p>
+
+		<code>&lt;a href="http://example.com/index.php/weblog/archives/234/">my entry&lt;/a></code>
+
+
+	<h3><a name="var_entry_site_id">entry_site_id</a></h3>
+
+		<code>{entry_site_id}</code>
+
+		<p>The Site ID of the weblog entry.</p>
+
+	
+
+	<h3><a name="var_forum_topic_id">forum_topic_id</a></h3>
+
+		<code>{forum_topic_id}</code>
+
+		<p>If you have the Discussion Forum Module installed and if you have associated a forum thread with a weblog entry (via the "Forum" section of the <dfn>Publish</dfn> tab), this is the ID number of the forum thread.  It will typically be used like so:</p>
+
+		<code>{if forum_topic}<br />
+&lt;a href="{path='forums/viewthread'}{forum_topic_id}">Discuss this in our forums&lt;/a><br />
+{/if}</code>
+
+
+	<h3><a name="var_icq">icq</a></h3>
+
+		<code>{icq}</code>
+
+		<p>The author's ICQ IM user identification number</p>
+
+
+	<h3><a name="var_interests">interests</a></h3>
+
+		<code>{interests}</code>
+
+		<p>The author's "interests" as entered in their profile</p>
+
+
+	<h3><a name="var_ip_address">ip_address</a></h3>
+
+		<code>{ip_address}</code>
+
+		<p>The IP address of the author when they posted the entry</p>
+
+
+	<h3><a name="var_location">location</a></h3>
+
+		<code>{location}</code>
+
+		<p>The author's location as entered in their profile</p>
+
+
+	<h3><a name="var_member_search_path">member_search_path</a></h3>
+
+		<code>{member_search_path='search/results'}</code>
+
+		<p>This variable is replaced by a URL that passes the author's member name to your search results Template.  In this way, you can display all entries made by the author.  You should specify the Template_Group/Template that you use to display search results.  For example:</p>
+
+		<code>&lt;a href="{member_search_path='search/results'}">View entries by this member&lt;/a></code>
+
+
+	<h3><a name="var_msn_im">msn_im</a></h3>
+
+		<code>{msn_im}</code>
+
+		<p>The author's MSN IM account name</p>
+
+
+	<h3><a name="var_occupation">occupation</a></h3>
+
+		<code>{occupation}</code>
+
+		<p>The author's occupation as entered in their profile</p>
+		
+	<h3><a name="var_page_uri">page_uri</a></h3>
+
+		<code>{page_uri}</code>
+
+		<p>If you have the Pages Module installed and if you have associated a static page with a 
+		weblog entry (via the "Pages" section of the <dfn>Publish</dfn> tab), this is the page uri 
+		for the page.  It will typically be used like so:</p>
+
+		<code>{if page_uri != ''}<br />
+&lt;a href="{page_uri}">View this page&lt;/a><br />
+{/if}</code>
+
+
+	<h3><a name="var_page_url">page_url</a></h3>
+
+		<code>{page_url}</code>
+
+		<p>If you have the Pages Module installed and if you have associated a static page with a 
+		weblog entry (via the "Pages" section of the <dfn>Publish</dfn> tab), this is the page url
+		for the page (the site URL + the page URI).  It will typically be used like so:</p>
+
+		<code>{if page_url != ''}<br />
+&lt;a href="{page_url}">View this page&lt;/a><br />
+{/if}</code>
+
+
+
+	<h3><a name="var_permalink">permalink</a></h3>
+
+		<code>{permalink}</code>
+
+		<p>This variable defaults to site index with entry ID number:</p>
+
+		<code>http://example.com/235/</code>
+
+		<p>In addition, you can specify a template group/template and the entry ID will automatically be added:</p>
+
+		<code>{permalink="weblog/archives"}</code>
+
+		<p>Will render as:</p>
+
+		<code>http://example.com/weblog/archives/235/</code>
+
+
+
+	<h3><a name="var_photo_url">photo_url</a></h3>
+	<code>{photo_url}</code>
+	<p>This variable supplies the URL to the member photo (if you have that option enabled and the member has uploaded their photo). It is intended for use in an image tag.</p>
+
+
+	<h3><a name="var_photo_image_height">photo_image_height</a></h3>
+	<code>{photo_image_height}</code>
+	<p>This variable supplies the height of the member photo. It is intended for use in an image tag.</p>
+
+
+	<h3><a name="var_photo_image_width">photo_image_width</a></h3>
+	<code>{photo_image_width}</code>
+	<p>This variable supplies the width of the member photo. It is intended for use in an image tag.</p>
+		
+
+
+	<h3><a name="var_profile_path">profile_path</a></h3>
+
+		<code>{profile_path='member'}</code>
+
+		<p>The URL to the author of the current entry.  The ID number of the author will be automatically added.  Used in a link:</p>
+
+		<code>&lt;a href="{profile_path='member'}">{author}&lt;/a></code>
+
+
+	<h3><a name="var_relative_url">relative_url</a></h3>
+
+		<code>{relative_url}</code>
+
+		<p>The URL stored in your <dfn>Weblog URL</dfn> setting under <dfn>Weblog Management</dfn>, with the domain information removed.  For example, if your setting is <samp>http://example.com/index.php/site/index/</samp> the variable will output <samp>/index.php/site/index/</samp>.  Typically only used in the Atom feed Template.</p>
+
+
+	<h3><a name="var_relative_date">relative_date</a></h3>
+
+		<code>{relative_date}</code>
+
+		<p>The amount of time that has passed between when the entry was submitted and the current time.  The output is displayed in the format <samp>1 day, 3 hours, 45 minutes</samp>.  This variable is useful for displaying something such as "This entry was posted 1 day, 3 hours, 45 minutes ago."</p>
+
+
+	<h3><a name="var_screen_name">screen_name</a></h3>
+
+		<code>{screen_name}</code>
+
+		<p>The author's screen name, if it exists.  This variable will not return anything if the author does not have a screen name defined.</p>
+
+
+	<h3><a name="var_signature">signature</a></h3>
+
+		<code>{signature}</code>
+
+		<p>The signature associated with the entry's author.  Typically used as such:</p>
+
+		<code>{if signature}<br />
+&lt;p>{signature}&lt;/p><br />
+{/if}</code>
+
+
+	<h3><a name="var_signature_image_height">signature_image_height</a></h3>
+
+		<code>{signature_image_height}</code>
+
+		<p>The height of the signature image associated with the entry's author.  Typically used as such:</p>
+
+		<code>{if signature_image}<br />
+&lt;img src="{signature_image_url}" width="{signature_image_width}" height="{signature_image_height}" alt="{author}'s signature" /><br />
+{/if}</code>
+
+
+	<h3><a name="var_signature_image_url">signature_image_url</a></h3>
+
+		<code>{signature_image_url}</code>
+
+		<p>The URL to the signature image associated with the entry's author.  Typically used as such:</p>
+
+		<code>{if signature_image}<br />
+&lt;img src="{signature_image_url}" width="{signature_image_width}" height="{signature_image_height}" alt="{author}'s signature" /><br />
+{/if}</code>
+
+
+	<h3><a name="var_signature_image_width">signature_image_width</a></h3>
+
+		<code>{signature_image_width}</code>
+
+		<p>The width of the signature image associated with the entry's author.  Typically used as such:</p>
+
+		<code>{if signature_image}<br />
+&lt;img src="{signature_image_url}" width="{signature_image_width}" height="{signature_image_height}" alt="{author}'s signature" /><br />
+{/if}</code>
+
+
+	<h3><a name="var_status">status</a></h3>
+
+		<code>{status}</code>
+
+		<p>The status of the entry (open, closed, etc.)</p>
+
+
+	<h3><a name="var_switch">switch=</a></h3>
+
+		<code>{switch='option_one|option_two|option_three'}</code>
+
+		<p>This variable permits you to rotate through any number of values as the entries are displayed.  The first entry will use "option_one", the second will use "option_two", the third "option_three", the fourth "option_one", and so on.</p>
+
+		<p>The most straightforward use for this would be to alternate colors.  It could be used like so:</p>
+
+		<code>{exp:weblog:entries weblog="yourweblog"}<br />
+&lt;div class="{switch='one|two'}"><br />
+&lt;h1>{title}&lt;/h1><br />
+{body}<br />
+&lt;/div><br />
+{/exp:weblog:entries}</code>
+
+		<p>The entries would then alternate between <samp>&lt;div class="one"></samp> and <samp>&lt;div class="two"></samp>.</p>
+
+		<p>Multiple instances of the <samp>{switch=}</samp> tag may be used and the system will intelligently keep track of each one.</p>
+
+
+	<h3><a name="var_title">title</a></h3>
+
+		<code>{title}</code>
+
+		<p>The title of the entry</p>
+
+
+	<h3><a name="var_title_permalink">title_permalink</a></h3>
+
+		<code>{title_permalink}</code>
+
+		<p>This variable uses the "url title" as the link.  It defaults to the site index with the "url title":</p>
+
+		<code>http://example.com/my_ugly_boyfriend/</code>
+
+		<p>In addition, you can specify a specific template group/template and the "url title" will automatically be added:</p>
+
+		<code>{title_permalink="weblog/archives"}</code>
+
+		<p>Will render as:</p>
+
+		<code>http://example.com/weblog/archives/my_ugly_boyfriend/</code>
+
+		<p><b>Note:</b> When creating a new entry, if you don't supply the "url title" then it will be automatically created from the actual entry title. Spaces are turned into underscores and quotes are removed.  For example, "Joe's night out" becomes "joes_night_out".</p>
+
+
+	<h3><a name="var_total_results">total_results</a></h3>
+
+		<code>{total_results}</code>
+
+		<p>The total number of entries being displayed.</p>
+
+
+	<h3><a name="var_trackback_total">trackback_total</a></h3>
+
+		<code>{trackback_total}</code>
+
+		<p>The total number of trackbacks for a particular entry</p>
+
+
+	<h3><a name="var_trimmed_url">trimmed_url</a></h3>
+
+		<code>{trimmed_url}</code>
+
+		<p>The domain name for your site, trimmed of any subdomains.  For instance, <samp>example.com</samp> becomes <samp>example.com</samp>.  Typically only used in the Atom feed Template.</p>
+
+
+	<h3><a name="var_url">url</a></h3>
+
+		<code>{url}</code>
+
+		<p>The author's raw URL, if it exists</p>
+
+
+	<h3><a name="var_url_or_email">url_or_email</a></h3>
+
+		<code>{url_or_email}</code>
+
+		<p>The author's URL if it exists, otherwise the raw email address</p>
+
+
+	<h3><a name="var_url_or_email_as_author">url_or_email_as_author</a></h3>
+
+		<code>{url_or_email_as_author}</code>
+
+		<p>A hyperlink to the author's URL if it exists, otherwise it will be an email link for the author's email address.  The text of the link will be the author's screenname if it exists, otherwise it will be the username.</p>
+
+
+	<h3><a name="var_url_or_email_as_link">url_or_email_as_link</a></h3>
+
+		<code>{url_or_email_as_link}</code>
+
+		<p>This is similar to the above variable.  The difference is that the text for the link will be either the URL or the email address.</p>
+
+
+	<h3><a name="var_url_title">url_title</a></h3>
+
+		<code>{url_title}</code>
+
+		<p>The human readable title used in the URL as a permalink</p>
+
+
+	<h3><a name="var_url_title_path">url_title_path</a></h3>
+
+		<code>{url_title_path='weblog/archives'}</code>
+
+		<p>The URL to the specified template.  The "url title" of the entry will be automatically added.  For example, this:</p>
+
+		<code>&lt;a href="{url_title_path='weblog/archives'}">permalink&lt;/a></code>
+
+		<p>Would be rendered like this:</p>
+
+		<code>&lt;a href="http://example.com/index.php/weblog/archives/ice_cream/">permalink&lt;/a></code>
+
+
+	<h3><a name="var_username">username</a></h3>
+
+		<code>{username}</code>
+
+		<p>The author's username</p>
+
+
+	<h3><a name="var_weblog">weblog</a></h3>
+
+		<code>{weblog}</code>
+
+		<p>The name of the weblog that the currently displayed entry is assigned to.</p>
+
+
+	<h3><a name="var_weblog_id">weblog_id</a></h3>
+
+		<code>{weblog_id}</code>
+
+		<p>The ID number of the actual weblog (not the <em>entry</em>)</p>
+
+
+	<h3><a name="var_weblog_short_name">weblog_short_name</a></h3>
+
+		<code>{weblog_short_name}</code>
+
+		<p>The short name of the weblog of the currently displayed entry.</p>
+
+	
+	<h3><a name="var_yahoo_im">yahoo_im</a></h3>
+
+		<code>{yahoo_im}</code>
+
+		<p>The author's Yahoo IM account name</p>
+
+
+	<h3><a name="var_custom_entry_fields">Custom Entry Fields</a></h3>
+
+		<p>All custom fields assigned to a weblog can be accessed using the "short name" of the field:</p>
+
+		<code>{body}<br />
+{summary}<br />
+{extended}<br />
+etc..</code>
+
+		<p>These are totally dynamic in that any field you create for your weblog will automatically be available by its "short name" as a variable.</p>
+
+
+	<h3><a name="var_custom_member_fields">Custom Member Fields</a></h3>
+
+		<p>All custom member profile fields can be accessed using the "short name" of the field:</p>
+
+		<code>{age}<br />
+{gender}<br />
+{zodiac}<br />
+etc..</code>
+
+		<p>These are totally dynamic in that any profile field you create for your members will automatically be available by its "short name" as a variable.</p>
+
+
+
+	<h2><a name="date_variables">Date Variables</a></h2>
+
+		<p>Several date variables are available for use.  As with other date variables, these require the "format" parameter in order to define how the date should be displayed.  See the <a href="../../templates/date_variable_formatting.html">date variable formatting</a> page for more information.</p>
+
+	<ul class="minitoc">
+		<li><a href="#var_entry_date">{entry_date format="%Y %m %d"}</a></li>
+		<li><a href="#var_expiration_date">{expiration_date format="%Y %m %d"}</a></li>
+		<li><a href="#var_edit_date">{edit_date format="%Y %m %d"}</a></li>
+		<li><a href="#var_gmt_entry_date">{gmt_entry_date format="%Y %m %d"}</a></li>
+		<li><a href="#var_gmt_edit_date">{gmt_edit_date format="%Y %m %d"}</a></li>
+		<li><a href="#var_recent_comment_date">{recent_comment_date format="%Y %m %d"}</a></li>
+		<li><a href="#var_week_date">{week_date format="%Y %m %d"}</a></li>
+		<li><a href="#var_custom_field_date">Custom Date Fields</a></li>
+	</ul>
+
+
+	<h3><a name="var_entry_date">entry_date</a></h3>
+
+		<code>{entry_date format="%Y %m %d"}</code>
+
+		<p>The date the entry was submitted</p>
+
+
+	<h3><a name="var_expiration_date">expiration_date</a></h3>
+
+		<code>{expiration_date format="%Y %m %d"}</code>
+
+		<p>The expiration date of the entry</p>
+
+
+	<h3><a name="var_edit_date">edit_date</a></h3>
+
+		<code>{edit_date format="%Y %m %d"}</code>
+
+		<p>The date on which the entry was last edited</p>
+
+
+	<h3><a name="var_gmt_entry_date">gmt_entry_date</a></h3>
+
+		<code>{gmt_entry_date format="%Y %m %d"}</code>
+
+		<p>The date the entry was submitted in GMT.  This variable is <strong>not</strong> localized for each user's date settings.</p>
+
+
+	<h3><a name="var_gmt_edit_date">gmt_edit_date</a></h3>
+
+		<code>{gmt_edit_date format="%Y %m %d"}</code>
+
+		<p>The date on which the entry was last edited in GMT.  This variable is <strong>not</strong> localized for each user's date settings.</p>
+
+
+	<h3><a name="var_recent_comment_date">recent_comment_date</a></h3>
+
+		<code>{recent_comment_date format="%Y %m %d"}</code>
+
+		<p>The date of the most recent comment associated with the entry</p>
+		
+	<h3><a name="var_week_date">week_date</a></h3>
+
+		<code>{week_date format="%Y %m %d"}</code>
+
+		<p>The date that the week of the currently displayed entry started on, most commonly used in "weekly" <a href="variable_pairs.html#var_date_heading">date headings</a>.</p>
+		
+		<p class="important">This variable is affected by the <a href="parameters.html#par_start_day">start_day parameter</a>.  By default, the week date will fall on Sunday for the week of the entry.  When start_day="Monday" is used, the week date will fall on Monday for the week of the entry.</p>
+
+	
+
+	<h3><a name="var_custom_field_date">Custom Field Dates</a></h3>
+	
+	<p>Custom weblog fields can be assigned as "date types".  Custom fields are managed in your control panel at:</p>
+	<p><kbd>Admin &gt; Weblog Administration &gt; Custom Weblog Fields</kbd></p>
+	<p>Any field that is a date type can be formatted just like other dates.  Simply use the name of the custom field at the beginning of the tag.
+	For example, if your custom field is named <strong>my_date</strong>, you'll format it like this:</p>
+
+		<code>{my_date format="%Y %m %d"}</code>
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

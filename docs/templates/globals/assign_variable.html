@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Assign Global Variables &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="var_MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#template_docs">Templating System</a> &gt;
+<a href="index.html">Global Variables</a> &gt;
+<strong>Dynamically Assigned Variables</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Dynamically Assigned Variables</h1>
+
+	<p>ExpressionEngine allows you to declare template-level "variables" to save time typing and editing a template where certain bits of text might get used multiple times. Assigned Variables act as a straight string replacement for use later <i>in the same</i> template.</p>
+	
+	<p>Variable assignment and replacement occurs instantly when the template is loaded and may not be affected by the result of another tag's output.</p>
+
+
+	<h2>Creating and Using an Assigned Variable</h2>
+	
+	<p>The basic syntax for creating a variable is this:</p>
+
+	<code>{assign_variable:variable_name="variable_replacement"}</code>
+
+	<p>In the above example, "variable_name" is the name of the variable and "variable_replacement" is the content that will be used to replace all occurrences of {variable_name} in the template.</p>
+			
+	<h3>Example Usage</h3>
+	
+	<p>A common usage for dynamically assigned variables is to hold the Weblog short name(s), to save you from repeatedly typing them
+		into different tags within the same template.</p>
+		
+		<code>
+			
+		{assign_variable:<dfn>weblogs</dfn>="news|reviews"}<br />
+		<br />
+		{exp:weblog:category_heading weblog="<samp>{weblogs}</samp>"}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1>{category_name}&lt;/h1><br />
+&nbsp;&nbsp;&nbsp;&nbsp;{if category_description != ""}&lt;p>{category_description}&lt;/p>{/if}<br />
+		{/exp:weblog:category_heading}<br />
+		<br />
+		{exp:weblog:entries weblog="<samp>{weblogs}</samp>" limit="10"}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2>{title}&lt;/h2><br />
+&nbsp;&nbsp;&nbsp;&nbsp;{body}<br />
+		{/exp:weblog:entries}
+		
+		</code>
+	
+	<p class="important"><strong>Note to developers:</strong> In this context, the word "variable" is used simply to mean the use of an ExpressionEngine style variable in the template to substitute for some other text.  It is not a "variable" in the sense of being an accessible and modifiable value held in memory.  It is a simple text replacement that occurs the moment the Assign Variable tag is encountered by the template parser.</p>
+	
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

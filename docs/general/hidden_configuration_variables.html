@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Hidden Templates &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../index.html" />
+  <style type="text/css" media="screen,print">@import url(../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="../index.html#template_docs">Templating System</a> &gt;
+<strong>Hidden Configuration Variables</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Hidden Configuration Variables</h1>
+
+	<p>Hidden configuration variables are placed in <dfn>system/config.php</dfn> and are used to override default behavior.  These are advanced configuration options that should only be used by experienced ExpressionEngine users.</p>
+
+
+	<ul class="minitoc">
+		<li><a href="#disable_tag_caching">disable_tag_caching</a></li>
+		<li><a href='#encode_removed_text'>encode_removed_text</a></li>
+		<li><a href='#email_crlf'>email_crlf</a></li>
+		<li><a href='#email_newline'>email_newline</a></li>
+		<li><a href='#hidden_template_404'>hidden_template_404</a></li>
+		<li><a href='#hidden_template_indicator'>hidden_template_indicator</a></li>
+		<li><a href='#include_seconds'>include_seconds</a></li>
+		<li><a href='#moblog_allow_nontextareas'>moblog_allow_nontextareas</a></li>
+		<li><a href='#popup_link'>popup_link</a></li>
+		<li><a href='#protect_javascript'>protect_javascript</a></li>
+		<li><a href='#proxy_ips'>proxy_ips</a></li>
+		<li><a href='#prv_msg_throttling_period'>prv_msg_throttling_period</a></li>
+		<li><a href='#prv_msg_waiting_period'>prv_msg_waiting_period</a></li>
+		<li><a href='#publish_page_title_focus'>publish_page_title_focus</a></li>
+		<li><a href='#relaxed_track_views'>relaxed_track_views</a></li>
+		<li><a href='#remove_close_all_button'>remove_close_all_button</a></li>
+		<li><a href='#smart_static_parsing'>smart_static_parsing</a></li>
+		<li><a href='#spellcheck_language_code'>spellcheck_language_code</a></li>
+		<li><a href='#use_forum_url'>use_forum_url</a></li>
+		<li><a href='#view_comment_chars'>view_comment_chars</a></li>
+		<li><a href='#view_comment_leave_breaks'>view_comment_leave_breaks</a></li>
+	</ul>
+	
+	<h3 id='disable_tag_caching'>disable_tag_caching</h3>
+	
+	<p><strong>Value:</strong> y/n</p>
+	
+	<p>Disables tag caching, which if used unwisely on a high traffic site can lead to disastrous disk i/o.
+		This setting allows quick thinking admins to temporarily disable it without hacking or modifying folder permissions</p>
+	
+	<code>$conf['disable_tag_caching'] = 'y';</code>
+	
+	<h3 id='encode_removed_text'>encode_removed_text</h3>
+
+	<p><strong>Value:</strong> text string</p>
+
+	<p>If set, when an {encode=""} tag is encountered, but emails are not to be encoded, this text will be displayed in place of the tag.</p>
+
+	<code>$conf['encode_removed_text'] = 'Encoded emails not allowed';</code>
+
+	<h3 id='email_crlf'>email_crlf</h3>
+
+	<p><strong>Value:</strong> text string</p>
+
+	<p>If set, overrides the core Email class setting for crlf characters in quoted-printable encoded emails (Email class $crlf property).</p>
+
+	<code>$conf['email_crlf'] = "\r\n";</code>
+
+	<h3 id='email_newline'>email_newline</h3>
+
+	<p><strong>Value:</strong> text string</p>
+
+	<p>If set, overrides the core Email class setting for newline characters (Email class $newline property).</p>
+
+	<code>$conf['email_newline'] = "\r\n";</code>
+
+	<h3 id='hidden_template_404'>hidden_template_404</h3>
+
+	<p><strong>Value:</strong> y/n</p>
+
+	<p>If a hidden template is encountered, the default behavior is to throw a 404.  With this set to 'n', the template group's index page will be shown instead.</p>
+
+	<code>$conf['hidden_template_404'] = 'n';</code>
+
+	<h3 id='hidden_template_indicator'>hidden_template_indicator</h3>
+
+	<p><strong>Value:</strong> text string</p>
+
+	<p>Set the character(s) to use at the beginning of a template name to consider it a "hidden" template. Default is a period'.'</p>
+
+	<code>$conf['hidden_template_indicator'] = '_';</code>
+
+	<h3 id='include_seconds'>include_seconds</h3>
+
+	<p><strong>Value:</strong> y/n</p>
+
+	<p>When set to "y" seconds are included on human-readable dates in the Control Panel forms.</p>
+
+	<code>$conf['include_seconds'] = 'y';</code>
+
+	<h3 id='moblog_allow_nontextareas'>moblog_allow_nontextareas</h3>
+
+	<p><strong>Value:</strong> y/n</p>
+
+	<p>Removes the textarea only restriction for custom fields in the moblog module.</p>
+
+	<code>$conf['moblog_allow_nontextareas'] = 'y';</code>
+
+	<h3 id='popup_link'>popup_link</h3>
+
+	<p><strong>Value:</strong> y/n</p>
+
+	<p>Determines whether or not links created by Typography class open in a new window.</p>
+
+	<code>$conf['popup_link'] = 'y';</code>
+
+	<h3 id='protect_javascript'>protect_javascript</h3>
+
+	<p><strong>Value:</strong> y/n</p>
+
+	<p>Prevents the advanced conditionals parser from processing anything in  tags.  By default, it's set to 'y'.</p>
+
+	<code>$conf['protect_javascript'] = 'y';</code>
+
+	<h3 id='proxy_ips'>proxy_ips</h3>
+
+	<p><strong>Value:</strong> comma delimited list of IP addresses</p>
+
+	<p>Whitelist of reverse proxy servers that may forward the visitor's IP address.</p>
+
+	<code>$conf['proxy_ips'] = '10.0.1.25,10.0.1.26';</code>
+
+	<h3 id='prv_msg_throttling_period'>prv_msg_throttling_period</h3>
+
+	<p><strong>Value:</strong> number, in seconds</p>
+
+	<p>How many seconds between PMs?</p>
+
+	<code>$conf['prv_msg_throttling_period'] = '60';</code>
+
+	<h3 id='prv_msg_waiting_period'>prv_msg_waiting_period</h3>
+
+	<p><strong>Value:</strong> number, in hours</p>
+
+	<p>How many hours after becoming a member until they can PM?</p>
+
+	<code>$conf['prv_msg_waiting_period'] = '48';</code>
+
+	<h3 id='publish_page_title_focus'>publish_page_title_focus</h3>
+
+	<p><strong>Value:</strong> y/n</p>
+
+	<p>Makes the title field gain focus when the page is loaded</p>
+
+	<code>$conf['publish_page_title_focus'] = 'n';</code>
+
+	<h3 id='relaxed_track_views'>relaxed_track_views</h3>
+
+	<p><strong>Value:</strong> y/n</p>
+
+	<p>Allows Entry View Tracking to work for ANY combination that results in only one entry being returned by the tag, including channel query caching.</p>
+
+	<code>$conf['relaxed_track_views'] = 'y';</code>
+
+	<h3 id='remove_close_all_button'>remove_close_all_button</h3>
+
+	<p><strong>Value:</strong> y/n</p>
+
+	<p>Removes the Close All button from the Publish/Edit page and user side HTML formatting buttons.  Useful because most browsers no longer need it and Admins might want it gone</p>
+
+	<code>$conf['remove_close_all_button'] = 'y';</code>
+
+	<h3 id='smart_static_parsing'>smart_static_parsing</h3>
+
+	<p><strong>Value:</strong> y/n</p>
+
+	<p>When enabled, parsing of embedded templates that are not set to the template type "Static" will still be parsed as static if they can be (i.e. if they have no PHP or ExpressionEngine tags in them).  This setting is enabled by default.</p>
+
+	<code>$conf['smart_static_parsing'] = 'n';</code>
+
+	<h3 id='spellcheck_language_code'>spellcheck_language_code</h3>
+
+	<p><strong>Value:</strong> two letter language code</p>
+
+	<p>Allows you to specify the language used in the spellchecking functions.  Set the value to the two letter ISO 639 language code for the spellcheck (ex: en, es, de)</p>
+
+	<code>$conf['spellcheck_language_code'] = 'de';</code>
+
+	<h3 id='use_forum_url'>use_forum_url</h3>
+
+	<p><strong>Value:</strong> y/n</p>
+
+	<p>Determines whether the forums run at a different base URL than the main site.  Useful for running forums as a subdomain.</p>
+
+	<code>$conf['use_forum_url'] = 'y';</code>
+
+	<h3 id='view_comment_chars'>view_comment_chars</h3>
+
+	<p><strong>Value:</strong> Number of characters to display</p>
+
+	<p>Sets how many characters to display when viewing comments in the control panel.</p>
+
+	<code>$conf['view_comment_chars'] = '50';</code>
+
+	<h3 id='view_comment_leave_breaks'>view_comment_leave_breaks</h3>
+
+	<p><strong>Value:</strong> y/n</p>
+
+	<p>When set to 'y', creates &lt;br />'s based on line breaks when viewing comments in the control panel.</p>
+
+	<code>$conf['view_comment_leave_breaks'] = 'y';</code>
+
+	
+	
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Upgrading to ExpressionEngine 1.3 &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../index.html" />
+  <style type="text/css" media="screen,print">@import url(../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="../index.html#install_docs">Installation and Update Instructions</a> &gt;
+<a href="update.html">Updating EE</a> &gt;
+<strong>Version 1.3 Notes</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Update Notes for Version 1.3</h1>
+
+	<h2>Update your Member Profile Templates</h2>
+
+		<p>Due to the changes in how ExpressionEngine 1.3 deals with member templates, the "member" Template Group is no longer necessary. 
+		After you finish the update, you can log into your Control Panel, go to the <dfn>Templates</dfn> tab, and <em>delete</em> the <b>member</b> template group</b></p>
+		
+
+		<p>ExpressionEngine 1.3 has greatly changed the member profile section, adding support for private messaging, avatars, signatures, etc., 
+		and the structure of the templates has changed.  Unfortunately, this means it is not possible to retain any previous changes you might have made. 
+		Once you complete the update to 1.3 you may update the new templates, which can be accessed via <dfn>Admin &gt; Member Profile Templates</dfn>.</p>
+
+
+
+	<h2>Update your Statistics Tag</h2>
+
+		<p>If you make use of the <samp>{exp:stats}</samp> EE Tag in your site then you may need to make one small change.  If you're using the <samp>{member_names}</samp> variable pair then you will need to change the path from "member/profile" to "member/index".  For instance, if you previously had this:</p>
+
+		<code>{member_names}<br />
+<br />
+&lt;a href="{member_path='member/<var>profile</var>'}">{name}&lt;/a>&lt;br /><br />
+<br />
+{/member_names}</code>
+
+		<p>You will need to alter it to this:</p>
+
+		<code>{member_names}<br />
+<br />
+&lt;a href="{member_path='member/<var>index</var>'}">{name}&lt;/a>&lt;br /><br />
+<br />
+{/member_names}</code>
+
+
+
+
+</div>
+
+
+	<p class="center"><a href="update.html">Return to Update Page</a></p>
+	
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

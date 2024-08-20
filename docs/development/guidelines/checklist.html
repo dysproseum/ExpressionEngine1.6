@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Developer Guidelines Checklist &#8221; ExpressionEngine Add-On Development Guidelines  &#8211; ExpressionEngine Developer Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+<style type="text/css" media="screen">
+	code {
+		white-space: pre;
+	}
+</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../index.html">Development</a> &gt;
+<a href="index.html">Guidelines</a> &gt;
+<strong>Developer Guidelines Checklist</strong>
+</div>
+
+
+<div id="content">
+<h1>Developer Guidelines Checklist</h1>
+
+
+<ul>
+	<li>General Syntax and Correctness:
+		<ul>
+			<li>Classes and methods are properly named and cased</li>
+			<li>Variables are properly named and cased</li>
+			<li>Prolific and informative commenting using proper comment style</li>
+			<li>Capital letters used for all constants, e.g. CONSTANT_NAME</li>
+			<li>Capital letters used for the keywords: TRUE, FALSE, and NULL</li>
+			<li>Proper comparison of return values and variables (=== and !== as necessary)</li>
+			<li>No debugging code leftover unless commented out</li>
+			<li>No whitespace before or after opening/closing PHP tags in files</li>
+			<li>All code is PHP 4.3+ compatible</li>
+			<li>Proper use of $SESS->cache variables, e.g. $SESS->cache['class_name']['var_name']</li>
+			<li>Class and filenames are prefixed to avoid overlap when the name and purpose may be common</li>
+			<li>Custom database tables all use 'exp_' prefix, followed by unique prefix, then the table name, e.g.: exp_pre_email_addresses</li>
+			<li>Separate files used for unrelated classes.</li>
+			<li>Tabs for whitespacing, not spaces</li>
+			<li>File saved with Unix line breaks</li>
+			<li>Allman style indenting: braces placed on a line by themselves and indented at same level as the control statement</li>
+			<li>Text output in the control panel uses Language variables to allow localization	</li>
+			<li>Private variables and methods start with an underscore: _convert_text() is a private method, convert_text() is public</li>
+			<li>Not using PHP functions that require non-default libraries unless an alternative is provided, or implicitly documented as a requirement.</li>
+			<li>Code executes error free for all users with error_reporting(E_ALL);</li>
+			<li>Full PHP opening tags used.</li>
+			<li>Multiple statements are not combined on a single line</li>
+			<li>Single quoted strings used unless variables are being parsed or string needs to contain single quotes</li>
+			<li>Variables inside double-quoted strings are braced, e.g. {$foo}</li>
+			<li>No overlap of tag parameters effecting the same thing</li>
+			<li>Long queries broken up into multiple lines for legibility.</li>
+			<li>Function argument defaults used when appropriate</li>
+		</ul>
+	</li>
+	<li>Performance:
+		<ul>
+			<li>POSIX extended (ereg, etc.) regular expression functions not being used</li>
+		 	<li>?: used at the start of a PCRE subpattern not being captured for use</li>
+			<li>preg_replace() is not being used where str_replace() would suffice</li>
+			<li>strpos() used before str_replace() to see if the replacement is necessary</li>
+			<li>strncmp() and strncasecmp() instead of substr() or preg_match() when comparing the start of strings</li>
+			<li>Calculations are not being made in the second expression of for() loops</li>
+			<li>Heredoc string syntax avoided whenever possible</li>
+			<li>No variables are being set for one-time use</li>
+			<li>Queries are not needlessly stuck in loops or being run redundantly on a single page load</li>
+		</ul>
+	</li>
+	<li>Security:
+		<ul>
+			<li>XSS Cleaning taking place for all front-side user input before inserting into the database or output to the screen.</li>
+			<li>PHP variables escaped in queries.</li>
+			<li>Manually written queries using $DB->escape_str()</li>
+			<li>$DB->insert_string() used for data INSERTs as</li>
+			<li>$DB->update_string() is used for UPDATEs</li>
+			<li>Strings sent as the WHERE clause to $DB->update_string() are escaped with $DB->escape_str()</li>
+			<li>Security and required preference settings are stored in the database or config.php file.</li>
+			<li>Prefs and settings are not being used in hidden form fields</li>
+			<li>No unnecessary preferences being used</li>
+			<li>Tag parameters are validated before use</li>
+			<li>Tag parameters have default values to fall back on</li>
+			<li>User-side forms are created with $FNS->form_declaration()</li>
+			<li>Checks and deletions of secure form hashes taking place appropriately</li>
+			<li>No unfiltered incoming data output to the screen.</li>
+			<li>Methods processing forms are thorough with regards to validation, security, and processing</li>
+			<li>File name security precautions are being taken for include(), require() and saving files to servers.</li>
+			<li>Typography class used for outputting blocks of user submitted data, with proper settings as security dictates.</li>
+			<li>Security exceptions not being made for Super Admins</li>
+			<li>Built in EE classes and methods used for tasks when possible</li>
+			<li>Least Privilege approach used</li>
+		</ul>
+	</li>
+</ul>
+
+</div>
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

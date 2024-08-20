@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Multiple Site Manager &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#cp_docs">The Control Panel</a> &gt;
+<a href="index.html">Multiple Site Manager</a> &gt; 
+<strong>Create Site</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Creating a New Site</h1>
+
+	<div class="important">
+	<p><strong>Note:</strong>&nbsp; Make a backup of your database before working with the Multiple Site Manager.</p>
+	</div>
+
+<h2>Step 1</h2> 
+
+<p>Select <em>Edit Sites</em> from the Sites Tab and then <em>Create New Site</em>.</p>
+
+<p style="text-align: center; border: 1px solid grey;"><img src="../../images/sites_overview.png" width="641" height="173" alt="Create New Site" /></p>
+
+<p>When a new Site is created it will copy the preferences of the <strong>currently selected Site</strong>. <em>Preferences</em> refer to the configurable options found in:</p>
+
+<ul>
+	<li>Members and Groups</li>
+	<li>Specialty Templates</li>
+	<li>System Preferences</li>
+	<li>Weblog Administration</li>
+</ul>
+
+<p>For example, if you have Site A and Site B and want the new Site C to use the preferences from Site B, make sure you are using Site B when creating Site C. See?</p>
+
+<h2>Step 2</h2>
+
+<p>Enter the following:</p>
+
+<ul>
+	<li><em>Site Label</em>: How your Site will appear in the Control Panel.</li>
+	<li><em>Site Short Name</em>: This will be used in any code-based references to your Site.</li>
+	<li><em>Site Description</em>: Exactly what you would expect.</li>
+</ul>
+
+<p style="text-align: center;"><img src="../../images/sites_create_new.png" width="430" height="221" alt="Create New Site" /></p>
+
+<p>These options can be changed at any time.</p>
+
+<h3>Import Options</h3>
+
+<p>Import options are only available when creating a new Site. They are not available when Editing a Site's information.</p>
+
+<div class="important">
+	<p><strong>Note:</strong>&nbsp; Importing Weblogs, File Upload Preferences, Template Groups, and 
+	Template Global Variables cannot be undone. If you carelessly disregarded the earlier warning, 
+	make a backup of your database before continuing.</p>
+</div>
+
+<p>When creating a new Site you can choose to <strong>Import</strong> or <strong>Duplicate</strong> existing Weblog data, File Upload Preferences, Template Groups, and Template Global Variables to the new Site. Please note that if you import or duplicate weblog entries you'll need to <a href="../admin/utilities/recount_statistics.html">Recount the Statistics</a> in the Site afterwards.</p>
+
+<p><strong>Importing</strong> will move the data from its current site to the new Site. For example, if you import a Weblog from Site A to Site B, it will no longer be listed in Site A.</p>
+
+<p><strong>Duplicating</strong> comes with two options. You can choose to duplicate only the preferences. Or you can choose to duplicate the preferences and the data. Please read each option carefully as there is some variance between the Duplicate options based on what you wish to duplicate. Duplicating is a good choice when you need to create a new Site based on existing content while keeping the current Site live.</p>
+
+<p>Click Submit to create your new Site.</p>
+
+<div class="important">
+	<p><strong>Note:</strong>&nbsp; Since multiple weblogs can use the same category, custom weblog field, and status groups,
+	whenever a weblog is imported <em>or</em> duplicated the groups assigned to the weblog are duplicated in the new site 
+	and are NOT imported.  This means the groups will still remain at the old site so other, non-imported weblogs are 
+	not affected but the imported or duplicated weblogs have new groups created and all data is reassigned to use those groups
+	correctly.</p>
+</div>
+
+<p style="text-align: center;"><img src="../../images/sites_import.png" width="578" height="513" alt="Sites Import" /></p>
+
+<h2>Step 3</h2>
+	
+<p>Your new Site is now created and ready for use. Configure your Site through the Control Panel like you would any ExpressionEngine installation. It is recommended that you start by updating the following:</p>
+
+<ul>
+	<li><var>Admin --> System Preferences</var>: Update the System Preferences to match the URL you will be using for the new Site.</li>
+	<li><var>Templates --> Template Groups --> Edit Group</var>: You'll want to select a Template Group and edit the group preferences to set the Template Group's index page as the Site's home page.</li>
+</ul>
+
+<p>Updating these preferences first will get you ready to setup any domains or sub-domains as necessary.</p>
+
+<h2>Step 4</h2>
+	
+<p>Set up public access via a sub-folder, sub-domain, or domain.</p>
+
+
+<h2>Optional Steps</h2>
+
+<ul>
+	<li><a href="domainsetup.html">Setup domains and sub-domains</a></li>
+	<li>To add Site specific Control Panel logins use the <a href="../../installation/masked_cp_access.html">Masking Control Panel Access</a> instructions.</li>
+</ul>
+
+<h1>Next:&nbsp; <a href="domainsetup.html">Setup domains and sub-domains</a></h1>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+</div>
+
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

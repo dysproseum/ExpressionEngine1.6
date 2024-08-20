@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Wiki Template, Special Single File Section &#8211; ExpressionEngine Documentation</title> 
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style> 
+
+<style type="text/css">
+.screencap {
+margin: 30px 0;
+text-align: center;}
+</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="README.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+</tr>
+</table>
+</div>
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Wiki Module</a> &gt;
+<a href="wiki_templates.html">Theme Template</a> &gt;
+<strong>Special Single File</strong>
+</div>
+
+<div id="content">
+
+	<h1>Wiki Template, Special Single File Section</h1>
+
+<p>This section displays the information about a single file that has been uploaded to the wiki as outlined below:</p>
+
+<div class="screencap"><img src="../../images/wiki_single_file.jpg" width="550" height="381" alt="Displays the information on a single uploaded file." /></div>
+
+<p>In addition to the variables in the <a href="wiki_templates_page.html">Wiki Page section</a>, the Special Single File section has:</p>
+
+<ul>
+<li><a href="#sin">Single Variables</a></li>
+<li><a href="#con">Conditional Variables</a></li>
+</ul>
+
+<h2><a name="sin">Single Variables</a></h2>
+
+<ul>
+<li><a href="#files_sin_file_name">{file_name}</a></li>
+<li><a href="#files_sin_file_type">{file_type}</a></li>
+<li><a href="#files_sin_summary">{summary}</a></li>
+<li><a href="#files_sin_path_view_file">{path:view_file}</a></li>
+<li><a href="#files_sin_upload_date">{upload_date format=""}</a></li>
+<li><a href="#files_sin_author">{author}</a></li>
+<li><a href="#files_sin_url">{url}</a></li>
+<li><a href="#files_sin_path_author_profile">{path:author_profile}</a></li>
+</ul>
+
+<h3><a name="files_sin_file_name">file_name</a></h3>
+
+<code>{file_name}</code>
+
+<p>Displays the file's File name.</p>
+
+<h3><a name="files_sin_file_type">file_type</a></h3>
+
+<code>{file_type}</code>
+
+<p>Displays the file's MIME Type.</p>
+
+<h3><a name="files_sin_summary">summary</a></h3>
+
+<code>{summary}</code>
+
+<p>Displays the file's summary.</p>
+
+<h3><a name="files_sin_path_view_file">path:view_file</a></h3>
+
+<code>{path:view_file}</code>
+
+<p>Displays the URL to view a file's page. This is not the raw path to the file.</p>
+
+<h3><a name="files_sin_upload_date">upload date</a></h3>
+
+<code>{upload_date format=""}</code>
+
+<p>Displays the date the file was uploaded.</p>
+
+<p>The <strong>format</strong> parameter is used to determine the date's formatting using ExpressionEngine's <a href="../../templates/date_variable_formatting.html">Date Variable Formatting</a>.</p>
+
+<h3><a name="files_sin_author">author</a></h3>
+
+<code>{author}</code>
+
+<p>Displays the Screen Name of the person who uploaded the file.</p>
+
+<h3><a name="files_sin_email">email</a></h3>
+
+<code>{email}</code>
+
+<p>This displays the email address of the person who uploaded the file.</p>
+
+<h3><a name="files_sin_url">url</a></h3>
+
+<code>{url}</code>
+
+<p>This displays the author's URL.</p>
+
+<h3><a name="files_sin_path_author_profile">path:author_profile</a></h3>
+
+<code>{path:author_profile}</code>
+
+<p>Displays the path to the member profile of the person who uploaded the file.</p>
+
+<h2><a name="con">Conditional Variables</a></h2>
+
+<ul>
+<li><a href="#files_con_is_image">{if is_image}</a></li>
+</ul>
+
+<h3><a name="files_con_is_image">if is_image</a></h3>
+
+<code>{if is_image}</code>
+
+<p>Checks to see if the uploaded file is an image. If yes, then do something.</p>
+
+</div>
+	
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

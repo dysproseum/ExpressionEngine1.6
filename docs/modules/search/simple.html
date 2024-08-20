@@ -1,0 +1,257 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Simple Search Form Tag &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Search Module</a> &gt;
+<strong>Simple Search Form</strong>
+</div>
+
+<div id="content">
+
+	<h1>Simple Search Form Tag</h1>
+
+	<p>The <dfn>Simple Search Form Tag</dfn> allows you to easily add a single-form search field to your site.  This allows you to have a simple search box in a sidebar of your site.  Example:</p>
+
+	<code>{exp:search:simple_form weblog="news"}<br />
+<br />
+&lt;p>&lt;label for="keywords">Search:&lt;/label>&lt;br /><br />
+&lt;input type="text" name="keywords" id="keywords" value="" size="18" maxlength="100" />&lt;/p><br />
+<br />
+&lt;p>&lt;a href="{path='search/index'}">Advanced Search&lt;/a>&lt;/p><br />
+<br />
+&lt;p>&lt;input type="submit" value="submit" class="submit" />&lt;/p><br />
+<br />
+{/exp:search:simple_form}</code>
+
+	<p>The search results are displayed on the page you specify as the <samp><a href="#par_result_page">result_page=</a></samp> page.  Results are displayed with the <a href="results.html">Search Results</a> tag.</p>
+
+
+
+	<h2>Input Fields</h2>
+
+	<ul class="minitoc">
+		<li><a href="#field_keywords">Keywords</a></li>
+		<li><a href="#field_member_name">Member Name</a></li>
+		<li><a href="#field_exact_match">Exact Matching</a></li>
+		<li><a href="#field_show_expired">Include Expired Entries</a></li>
+		<li><a href="#field_show_future_entries">Include Future Entries</a></li>
+	</ul>
+
+
+	<h3><a name="field_keywords">Keywords</a></h3>
+
+		<p>The primary search method is to search by keyword.  If you change the form field, you need to be sure to leave the <samp>name="keywords"</samp> attribute alone.</p>
+
+		<code>&lt;label for="keywords">Keywords:&lt;/label>&lt;br /><br />
+&lt;input type="text" name="keywords" id="keywords" maxlength="100" size="20"  /></code>
+
+
+	<h3><a name="field_member_name">Member Name</a></h3>
+
+		<p>You may <em>optionally</em> search by member name (the screen name) by adding this field to your form.  If you change the form field, you need to be sure to leave the <samp>name="member_name"</samp> attribute alone.</p>
+
+		<code>&lt;label for="member_name">Member Name:&lt;/label>&lt;br /><br />
+&lt;input type="text" name="member_name" id="member_name" maxlength="100" size="40"  /></code>
+
+
+	<h3><a name="field_exact_match">Exact Matching</a></h3>
+
+		<p>If you offer the ability to search by member name, then you may also offer the option of matching partial member names or exact member names.  If you change the form field, you need to be sure to leave the <samp>name="exact_match"</samp> attribute alone.</p>
+
+		<code>&lt;input type="checkbox" name="exact_match" id="exact_match" value="y"
+/> &lt;label for="exact_match">Match Name Exactly&lt;/label></code>
+
+
+	<h3><a name="field_show_expired">Include Expired Entries</a></h3>
+
+		<p>Besides specifying whether expired entries are included in the search using the <a href="#par_show_expired">show_expired="yes"</a> parameter, it is also possible to include a form field to let the user choose.  If you change the form field, you need to be sure to leave the <samp>name="show_expired"</samp> attribute alone.</p>
+
+		<code>&lt;label for="field_show_expired">Include Expired Entries?&lt;/label><br />
+&lt;select name="show_expired" id="field_show_expired"><br />
+  &lt;option value="no">No&lt;/option><br />
+  &lt;option value="yes">Yes&lt;/option><br />
+&lt;/select></code>
+
+
+	<h3><a name="field_show_future_entries">Include Future Entries</a></h3>
+
+		<p>Besides specifying whether future entries are included in the search using the <a href="#par_show_future_entries">show_future_entries="yes"</a> parameter, it is also possible to include a form field to let the user choose.  If you change the form field, you need to be sure to leave the <samp>name="show_future_entries"</samp> attribute alone.</p>
+
+		<code>&lt;label for="field_show_future_entries">Include Future Entries?&lt;/label><br />
+&lt;select name="show_future_entries" id="field_show_future_entries"><br />
+  &lt;option value="no">No&lt;/option><br />
+  &lt;option value="yes">Yes&lt;/option><br />
+&lt;/select></code>
+
+
+
+
+	<h2>Parameters</h2>
+
+	<ul class="minitoc">
+		<li><a href="#par_id">id="search_form"</a></li>
+		<li><a href="#par_name">name="search_form"</a></li>
+		<li><a href="#par_no_result_page">no_result_page="search/noresults"</a></li>
+		<li><a href="#par_result_page">result_page="news/searches"</a></li>
+		<li><a href="#par_results">results="20"</a></li>
+		<li><a href="#par_search_in">search_in="entries"</a></li>
+		<li><a href="#par_show_expired">show_expired="yes"</a></li>
+		<li><a href="#par_show_future_entries">show_future_entries="yes"</a></li>
+		<li><a href="#par_status">status="open"</a></li>
+		<li><a href="#par_weblog">weblog="news"</a></li>
+		<li><a href="#par_where">where="all"</a></li>
+	</ul>
+
+
+	<h3><a name="par_id">id=</a></h3>
+
+		<code>id="search_form"</code>
+
+		<p>Specify the ID attribute for the &lt;form> tag, which will allow
+			you to style the form more easily.</p>
+			
+	<h3><a name="par_name">name=</a></h3>
+
+		<code>name="search_form"</code>
+
+		<p>Specify the name attribute for the &lt;form> tag, which will allow
+		you to specify CSS and JavaScript to the form more easily.</p>
+
+
+	<h3><a name="par_no_result_page">no_result_page=</a></h3>
+
+		<code>no_result_page="search/noresults"</code>
+
+		<p>You may specify a particular Template to display in the case when there are no results.  This takes a standard "Template_Group/Template" as input.</p>
+
+
+	<h3><a name="par_result_page">result_page=</a></h3>
+
+		<code>result_page="news/searches"</code>
+
+		<p>The Template_Group/Template where you would like the search results to be shown.  If you do not specify this parameter, then it will default to "search/results", which is the default location of the search results Template.</p>
+
+
+	<h3><a name="par_results">results=</a></h3>
+
+		<code>results="20"</code>
+
+		<p>The number of results to show per page on the search results.</p>
+
+
+	<h3><a name="par_search_in">search_in=</a></h3>
+
+		<code>search_in="entries"</code>
+		<code>search_in="everywhere"</code>
+		<code>search_in="titles"</code>
+
+		<p>This parameter specifies which fields you would like to include in the searching.  There are three possible values:</p>
+
+		<ol>
+			<li><b>entries</b>: The search will be conducted in the entry fields and titles of your weblog.  The associated comments will not be included.</li>
+			<li><b>everywhere</b>: The search will be conducted in the title, entry fields, and in associated comments.</li>
+			<li><b>titles</b>: The search will be conducted in the title of your entries.  The weblog entry fields and any associated comments will not be included.</li>
+		</ol>
+
+		<p>If this parameter is not set, the search will default to only search by "titles".</p>
+
+
+	<h3><a name="par_show_expired">show_expired=</a></h3>
+
+		<code>show_expired="yes"</code>
+
+		<p>With this parameter you can specify whether or not expired entries will be included in search results.  The default behavior is for expired entries to <em>not</em> be included.  You may set this parameter to "yes" or "no".  You may also let the user choose by using an <a href="#field_show_expired">Include Expired Entries</a> form field.</p>
+
+
+	<h3><a name="par_show_future_entries">show_future_entries=</a></h3>
+
+		<code>show_future_entries="yes"</code>
+
+		<p>With this parameter you can specify whether or not entries with the date set in the future will be included in search results.  The default behavior is for future entries to <em>not</em> be included.  You may set this parameter to "yes" or "no".  You may also let the user choose by using an <a href="#field_show_future_entries">Include Future Entries</a> form field.</p>
+
+
+	<h3><a name="par_status">status=</a></h3>
+
+		<code>status="open"</code>
+
+		<p>You may restrict the result to entries assigned to a particular  <a href="../../cp/admin/weblog_administration/custom_entry_statuses.html">status</a>.  You can choose multiple statuses using a pipe:</p>
+
+		<code>status="draft|reviewed|published"</code>
+
+		<p>Or exclude statuses using "not"</p>
+
+		<code>status="not submitted|processing|closed"</code>
+
+
+	<h3><a name="par_weblog">weblog=</a></h3>
+
+		<code>weblog="which"</code>
+
+		<p>From which <a href="../../cp/admin/weblog_administration/weblog_management.html">weblog</a> to search the entries.  Additionally, you can use the pipe character to separate multiple weblogs:</p>
+
+		<code>weblog="weblog1|weblog2|weblog3"</code>
+
+		<p>Or you can add the word "not" (with a space after it) to exclude weblogs:</p>
+
+		<code>weblog="not weblog1|weblog2|weblog3"</code>
+
+
+	<h3><a name="par_where">where=</a></h3>
+
+		<code>where="all"</code>
+
+		<p>This parameter allows you to specify how matching in searches are performed.  The options are:</p>
+
+		<ul>
+			<li><b>any</b>: results containing any of the specified words will be returned.</li>
+			<li><b>all</b>: only results containing all of the specified words will be returned.</li>
+			<li><b>word</b>: only results containing the exact phrase specified will be returned.</li>
+			<li><b>exact</b>: only results containing the entire matching phrase will be returned.</li>
+		</ul>
+
+
+
+	<h2>Variables</h2>
+
+	<p>There are no specific variables associated with the Simple Search Form.  You may use the <samp><a href="../../templates/globals/path.html">{path=''}</a></samp> Global Variable to create a link to an Advanced Search Form if you wish.</p>
+
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

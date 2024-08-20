@@ -1,0 +1,480 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>ExpressionEngine Module Developer Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../index.html" />
+  <style type="text/css" media="screen,print">@import url(../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../index.html"><img src="../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../index.html">Table of Contents</a> &gt;
+<a href="index.html">Development</a> &gt;
+<strong>Module Tutorial</strong>
+</div>
+
+
+<div id="content">
+<h1>Module Tutorial</h1>
+
+
+
+	<ul>
+		<li><a href="tutorial.html#naming">Naming Your Module</a></li>
+		<li><a href="tutorial.html#module_folder">Create Module Folder</a></li>
+		<li><a href="tutorial.html#module_files">Create Control Panel and Core Module files</a></li>
+		<li><a href="tutorial.html#language_file">Create Language File</a></li>
+		<li><a href="tutorial.html#required_language_lines">Required Language Lines</a></li>
+		<li><a href="tutorial.html#control_panel_file">The Control Panel file (mcp.fortunes.php)</a>
+			<ul>
+				<li><a href="tutorial.html#installation_function">Installation Function</a></li>
+				<li><a href="tutorial.html#deinstallation_function">Deinstallation Function</a></li>
+				<li><a href="tutorial.html#controller_function">Controller Function</a></li>
+				<li><a href="tutorial.html#module_cp_homepage">Module's Control Panel Homepage</a></li>
+				<li><a href="tutorial.html#cp_everything_else">Everything Else</a></li>
+				<li><a href="tutorial.html#views">View Folders and Files</a></li>
+			</ul>
+		</li>
+		<li><a href="tutorial.html#core_module_file">The Core Module file (mod.fortunes.php)</a></li>
+	</ul>
+
+
+<a name="naming"></a>
+<h2>Naming Your Module</h2>
+<p>The first step before even creating a single script is to choose a name for your module.  
+Usually a single word or two is sufficient and for this example we are going to simply call our module 'Fortunes', 
+and it will allow an administrator to submit fortune cookie-like messages via the Control Panel and 
+then have users view a different fortune cookie message every day.</p>
+
+
+<a name="module_folder"></a>
+<h2>Create Module Folder</h2>
+<p>Once we have the name of our module, we need to create a folder for it in ExpressionEngines's 
+module folder in the system directory.  The name of this folder should be a lowercased and space-less 
+version of the module's name.  Instead of spaces, you should either use a single word for your module 
+or underscores.  For our example, we will create a folder called 'fortunes' that would be located like so:</p>
+
+<code>/system/modules/fortunes/</code>
+
+
+<a name="module_files"></a>
+<h2>Create Control Panel and Core Module files</h2>
+<p>Inside this folder will be two files, one which will control the Control Panel side of the module 
+(installing, uninstalling, and submitting content into the database) and the other which will be used 
+for front-end stuff like form processing and the displaying of content from the database.  Their names
+have to be very specific in order for the system to read them correctly.  The Control Panel file must
+have a prefix of 'mcp', a 'php' suffix, and the name of the module folder.  So, for our example the 
+module's Control Panel file would be 'mcp.fortunes.php'.  The core module file must have a prefix 
+of 'mod', a 'php' suffix, and the name of the module folder.  So, for our example the core module 
+file would be named 'mod.fortunes.php'.</p>
+
+<code>/system/modules/fortunes/mcp.fortunes.php<br />
+/system/modules/fortunes/mod.fortunes.php</code>
+
+
+<a name="language_file"></a>
+<h2>Create Language File</h2>
+<p>Every module requires a language file as well, which is used for displaying text in the Control 
+Panel side of the module and displaying the details of each module in the MODULES section of the
+Control Panel.  This file will be located in your default language folder in the <kbd>/system/language/</kbd> directory,
+and it will have a prefix of 'lang', the 'php' suffix, and use the same name as the module folder.  
+So, for our example, the language file will be called 'lang.fortunes.php' and will be located in 
+the <kbd>/system/language/english/</kbd> directory.</p>
+
+<code>/system/language/english/lang.fortunes.php</code>
+
+<p>As of ExpressionEngine 1.6.8, you can use a local language folder for your language resources, making the module easier
+	to maintain and update.</p>
+	
+<code>/system/modules/fortunes/language/english/lang.fortunes.php</code>
+
+
+<a name="required_language_lines"></a>
+<h2>Required Language Lines</h2>
+<p>The Language file contains an array named $L, which is used along with the Language class to 
+display text on a page in whatever language is selected in the user's account settings, if a 
+translation for the module is available in that language of course.  There are two required lines 
+in the language file for each module, which allows the name and description of the module to be 
+viewable on the MODULES page:</p>
+
+<pre>
+&lt;?php
+
+$L = array(
+
+//----------------------------------------
+// Required for MODULES page
+//----------------------------------------
+
+"fortunes_module_name" =>
+"Fortunes",
+
+"fortunes_module_description" =>
+"Fortune cookie displaying",
+
+//----------------------------------------
+
+// END
+''=>''
+);
+?&gt;
+</pre>
+
+
+<a name="control_panel_file"></a>
+<h2>The Control Panel file (mcp.fortunes.php)</h2>
+<p>The Control Panel file for a module includes a class with a name that is a combination of the 
+modules name with '_CP' tacked on the end.  So, for our fortunes module, we will create a class 
+called 'Fortunes_CP'.  There is only one required class variable for this class and that is 
+<kbd>var $version = '1.0';</kbd> that should indicate the current version of this module.</p>
+
+<div class="important">
+<p><b>Note:</b>&nbsp; If your module name contains two or more words, then the class name should have the first letter 
+uppercased but all other characters in the name lowercased:  Your_module_name_CP</p>
+</div>	
+
+<p>Each Control Panel class has at a minimum two functions, which are used by ExpressionEngine 
+to install or uninstall the module.  These functions are required even if your module has no Control
+Panel side functionality.  The names of these two functions are the lower-cased name of the module 
+followed by '_module_install' and '_module_deinstall'.  So, for our Fortunes module, they will be 
+called 'fortunes_module_install' and 'fortunes_module_deinstall', respectively.</p>
+
+
+<a name="installation_function"></a><h2>Installation Function</h2>
+<p>Here is what our Fortunes module's installation function will look like.  Basically, it inserts the module's name, version, and whether it has a backend into the exp_modules table.  Since our module will have a Control Panel backend, we set the fourth field to 'y', otherwise it should be set to 'n'.  Also, the installation function will create the database table that we will use to store the fortunes in the database.</p>
+
+<pre>
+    // ----------------------------------------
+    //  Module installer
+    // ----------------------------------------
+
+    function fortunes_module_install()
+    {
+        global $DB;        
+        
+        $sql[] = "INSERT INTO exp_modules (module_id, 
+                                           module_name, 
+                                           module_version, 
+                                           has_cp_backend) 
+                                           VALUES 
+                                           ('', 
+                                           'Fortunes', 
+                                           '$this->version', 
+                                           'y')";
+                                           
+        $sql[] = "CREATE TABLE IF NOT EXISTS `exp_fortunes` (
+                 `fortune_id` INT(6) UNSIGNED NOT NULL AUTO_INCREMENT,
+                 `fortune_text` TEXT NOT NULL ,
+                 PRIMARY KEY (`fortune_id`));";
+    
+        foreach ($sql as $query)
+        {
+            $DB->query($query);
+        }
+        
+        return true;
+    }
+    // END
+</pre>
+
+<p>Occasionally, a module will require that certain actions be performed on the user side of the site.  An example of this is when a form is being submitted and the module needs to gather and process the data.  When this is required, the module needs to enter the class and method that the system needs to call to perform into the exp_actions database table during the installation of the module.  Here is an example from the mcp.comments.php file.  </p>
+
+<pre>
+    // --------------------------------
+    //  Module installer
+    // --------------------------------
+
+    function comment_module_install()
+    {
+        global $DB;        
+        
+        $sql[] = "INSERT INTO exp_modules (module_id, 
+                                           module_name, 
+                                           module_version, 
+                                           has_cp_backend) 
+                                           VALUES 
+                                           ('', 
+                                           'Comment', 
+                                           '$this->version', 
+                                           'n')";
+                                           
+        $sql[] = "INSERT INTO exp_actions (action_id, 
+                                           class, 
+                                           method) 
+                                           VALUES 
+                                           ('', 
+                                           'Comment', 
+                                           'insert_new_comment')";
+                                           
+        $sql[] = "INSERT INTO exp_actions (action_id, 
+                                           class, 
+                                           method) 
+                                           VALUES 
+                                           ('', 
+                                           'Comment_CP',
+                                           'delete_comment_notification')";    
+    
+        foreach ($sql as $query)
+        {
+            $DB->query($query);
+        }
+        
+        return true;
+    }
+    // END
+</pre>
+
+<p>When the actions are entered into the exp_actions database table, they are given a unique action_id that the system will recognize and use to call the class and function required.  To discover this action id for use in for a URL or form action, you can usethe Functions class <kbd>fetch_action_id()</kbd> function.</p>
+
+<pre>
+$action_id  = $FNS->fetch_action_id('Comment_CP', 'insert_new_comment');
+</pre>
+
+
+<a name="deinstallation_function"></a><h2>Deinstallation Function</h2>
+
+<p>The deinstallation function in the Control Panel class for the module should be pretty standard for every module.  Basically, it just clears out all mention of the module in the standard ExpressionEngine database tables.  If the module created tables for its own usage, then those will also be deleted in this function.</p>
+
+<pre>
+    // ----------------------------------------
+    //  Module de-installer
+    // ----------------------------------------
+
+    function fortunes_module_deinstall()
+    {
+        global $DB;    
+
+        $query = $DB->query("SELECT module_id
+                             FROM exp_modules 
+                             WHERE module_name = 'Fortunes'"); 
+                
+        $sql[] = "DELETE FROM exp_module_member_groups 
+                  WHERE module_id = '".$query->row['module_id']."'";      
+                  
+        $sql[] = "DELETE FROM exp_modules 
+                  WHERE module_name = 'Fortunes'";
+                  
+        $sql[] = "DELETE FROM exp_actions 
+                  WHERE class = 'Fortunes'";
+                  
+        $sql[] = "DELETE FROM exp_actions 
+                  WHERE class = 'Fortunes_CP'";
+                  
+        $sql[] = "DROP TABLE IF EXISTS exp_fortunes";
+
+        foreach ($sql as $query)
+        {
+            $DB->query($query);
+        }
+
+        return true;
+    }
+    // END
+</pre>
+
+
+<a name="controller_function"></a><h2>Controller Function</h2>
+
+<p>Since our module is going to have a Control Panel interface and ExpressionEngine knows this from the installation query, we need to create a menu with various options and then tell ExpressionEngine where to go when those menu options are selected.  For this module, the obvious menu options are when a user wants to add, modify, delete, or view fortunes. The menu will go in the constructor function for the Control Panel file's class (i.e. Fortunes_CP) and will use the 'P' global from the URL to determine which function to call in the class.</p>
+
+<pre>
+    // -------------------------
+    //  Constructor
+    // -------------------------
+    
+    function Fortunes_CP( $switch = TRUE )
+    {
+        global $IN;
+        
+        if ($switch)
+        {
+            switch($IN->GBL('P'))
+            {
+                 case 'view'            :	$this->view_fortunes();
+                     break;	
+                 case 'delete'          :	$this->delete_fortune();
+                     break;
+                 case 'add'             :	$this->modify_fortune();
+                     break;
+                 case 'modify'          :	$this->modify_fortune();
+                     break;
+                 case 'update'          :	$this->update_fortune();
+                     break;
+                 default                :	$this->fortunes_home();
+                     break;
+            }
+        }
+    }
+    // END
+</pre>
+
+
+<a name="module_cp_homepage"></a><h2>Module's Control Panel Homepage</h2>
+
+<p>In order to make a menu visible when a person first views the module through the Control Panel, we set the default switch option to be a function called <kbd>fortunes_home()</kbd>, which will contain a list of the menu options for this module.  Remember when creating any text that is displayed on a page to create it in the language file array for this module, and then display it using the Language class.</p>
+
+<pre>
+    // ----------------------------------------
+    //  Module Homepage
+    // ----------------------------------------
+
+    function fortunes_home()
+    {
+        global $DSP, $LANG;
+
+        $DSP->title = $LANG->line('fortunes_module_name');
+        $DSP->crumb = $DSP->anchor(BASE.
+                                   AMP.'C=modules'.
+                                   AMP.'M=fortunes',
+                                   $LANG->line('fortunes_module_name'));
+        $DSP->crumb .= $DSP->crumb_item($LANG->line('fortunes_menu')); 
+
+        $DSP->body .= $DSP->heading($LANG->line('fortunes_menu'));
+
+        $DSP->body .= $DSP->qdiv('itemWrapper', $DSP->heading($DSP->anchor(BASE.
+                                                                           AMP.'C=modules'.
+                                                                           AMP.'M=fortunes'.
+                                                                           AMP.'P=add', 
+                                                                           $LANG->line('add_fortune')),
+                                                                           5));
+
+        $DSP->body .= $DSP->qdiv('itemWrapper', $DSP->heading($DSP->anchor(BASE.
+                                                                           AMP.'C=modules'.
+                                                                           AMP.'M=fortunes'.
+                                                                           AMP.'P=view', 
+                                                                           $LANG->line('view_fortunes')),
+                                                                           5));
+    }
+    // END
+</pre>
+
+
+<a name="cp_everything_else"></a><h2>Everything Else</h2>
+<p>The remaining functions in the Control Panel file are up to your own devising, and we suggest you examine this example module and the rest of the module documentation to see how we create them.</p>
+
+
+<h2><a name="views"></a>View Folders and Files</h2>
+<p class="important"><strong>NOTE:</strong> If your module doesn't have a control panel, you may skip this step.</p>
+
+<p>A view is simply a web page or page fragment.  To create your module control panel using views to show the rendered output, you will start by creating a <kbd>views</kbd> folder.  In general, each page of your control panel will have its own view file inside the views folder.</p>
+
+<code>/system/modules/fortune/views/<var>files</var><br />
+	/system/modules/fortune/views/<var>subfolder</var>/<var>files</var></code>
+
+<p class="important"><strong>Note: </strong>You are not required to use a view file to create your output markup.  	Any string added to $DSP->body is placed inside the control panel page's content container.  For very simple pages, this may be the option you choose.  However, views are the best architectural choice, as they are modular and easy to read and modify.  As such, they are the recommended approach.</p>
+
+<p>Since view files are really just HTML snippets with a bit of PHP added to output your variables, one easy way to get started is by viewing the rendered output of your current module.  Using the 'Fortunes' demo module as an example, here is the output html for the home page:</p>
+
+<code style="white-space: pre">&lt;div id='contentNB'>
+
+&lt;h1>Fortunes Control Panel&lt;/h1>
+
+&lt;div class='itemWrapper' >
+&lt;h5>&lt;a href='index.php?S=0&amp;C=modules&amp;M=fortunes&amp;P=add' >Add Fortune&lt;/a>&lt;/h5>
+&lt;/div>
+
+&lt;div class='itemWrapper' >
+&lt;h5>&lt;a href='index.php?S=0&amp;C=modules&amp;M=fortunes&amp;P=view' >View Fortunes&lt;/a>&lt;/h5>
+&lt;/div>
+
+&lt;/div>
+</code>
+
+<p>Everything inside the contentNB division will be controlled by your view file.  Thus to replicate the current module, you could simply copy the rendered html and replace the variable elements with, well, variables:</p>
+
+<code style="white-space: pre">&lt;div class='itemWrapper' >
+&lt;h5>&lt;a href="&lt;?=BASE.AMP.'C=modules'.AMP.'M=fortunes'.AMP.'P=add'?>">&lt;?=lang('add_fortune')?>&lt;/a>&lt;/h5>
+&lt;/div>
+
+&lt;div class='itemWrapper' >
+&lt;h5>href="&lt;?=BASE.AMP.'C=modules'.AMP.'M=fortunes'.AMP.'P=view'?>">&lt;?=lang('view_fortunes')?>&lt;/a>&lt;/h5>
+&lt;/div>
+</code>
+
+<p>There are a few things to note in the above:</p>
+<ol>
+	<li>Views are REALLY easy!</li>
+	<li>Use php <a href="./guidelines/view_php_syntax.html">short tags</a> in your views for increased legibility.  If your server does not support short tags, ExpressionEngine will automatically rewrite them when processing your view file.</li>
+	<li>The ease of using your language variables: &lt;?=lang('view_fortunes')?></li>
+	<li>The Fortunes sample module is kinda ugly.</li>
+</ol>
+
+<p>Let's make the output a bit less ugly.  The 'Referrer' module is a nice example.  Riffing on that, we end up with a completed view file that was shown above: <a name="index_view"></a></p>
+
+<code style="white-space: pre">&lt;ul&gt;
+  &lt;li&gt;&lt;div class=&quot;cp_button&quot;&gt;&lt;a href=&quot;&lt;?=$add_url?&gt;&quot;&gt;&lt;?=lang(&#x27;add_fortune&#x27;)?&gt;&lt;/a&gt;&lt;/div&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;div class=&quot;cp_button&quot;&gt;&lt;a href=&quot;&lt;?=$view_url?&gt;&quot;&gt;&lt;?=lang(&#x27;view_fortunes&#x27;)?&gt;&lt;/a&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;</code>
+
+<p>Now instead of creating the markup within the logic of your module's control panel methods, you'll call the view file, and pass along any variables the view file needs:</p>
+
+<code>$DSP->body .= $DSP->view('subfolder/filename', $vars, TRUE);</code>
+
+<p>The first parameter is the name of the view file, with any subfolders if necessary, the second parameter is an associative array of variables where the keys are the variable names, and the values are the variable's values, and lastly the third parameter tells whether or not you want the view file to return its data or add it to the output buffer.  In this case, we want to return as a string so we can assign it to $DSP->body.</p>
+
+<p>For a refresher on the basics of working with view files, see the CodeIgniter user guide on <a href="http://codeigniter.com/user_guide/general/views.html">view files</a>.</p>
+
+<a name="core_module_file"></a>
+<h2>The Core Module file (mod.fortunes.php)</h2>
+
+<p>The Core Module file is used for outputting content via the Templates and doing any processing that is required by both the Control Panel and any module tags contained in a template.  Inside this file should be a class using the same name of the module and containing at least one class variable, <kbd>$return_data</kbd>, which will contain the module's outputted content and is retrieved by the Template parser after the module is done processing.</p>
+
+<pre>
+class Fortunes {
+
+    var $return_data	= ''; 
+
+    // -------------------------------------
+    //  Constructor
+    // -------------------------------------
+
+    function Fortunes()
+    {
+    }
+    
+}</pre>
+
+<p>In ExpressionEngine, a typical module or plugin tag has an appearance similar to this:</p>
+
+<pre>{exp:weblog:weblog_name}</pre>
+
+<p>The first part of the tag, <samp>exp:</samp>, tells ExpressionEngine that this is a tag.  The second part, <samp>weblog</samp>, is the module or the plugin that the tag belongs to, in this case the "weblog" module.  The third part (modules only) is the specific function from within the Core Module file's class that is being called; in the above example the function called is named "weblog_name".  The third part can be optional for a module and ExpressionEngine will simply call the constructor function for the Core Module class.  Since our Fortunes module is not overly complex, we will take advantage of this and our module will simply use the ExpressionEngine tag <kbd>{exp:fortunes}</kbd>.</p>
+
+<p>Template parameters and output for Core Module functions are covered in the section regarding the Template class, so we suggest you examine this example module and that area of the Developer Documentation for more information about creating functions within the Core Module file for your module tags.</p>
+
+
+
+
+
+
+</div>
+
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

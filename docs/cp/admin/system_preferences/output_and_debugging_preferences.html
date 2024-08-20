@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Output and Debugging Preferences &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../../index.html"><img src="../../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../../index.html">Table of Contents</a> &gt;
+<a href="../../../index.html#cp_docs">The Control Panel</a> &gt;
+<a href="../index.html">Admin</a> &gt;
+<a href="index.html">System Preferences</a> &gt;
+<strong>Output and Debugging Preferences</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Output and Debugging Preferences</h1>
+	<div class="path">Control Panel Location:&nbsp; <dfn>Admin &gt; System Preferences &gt; Output and Debugging Preferences</dfn></div>	
+
+	<p>This section of the Control Panel allows you to define how your site is output from the server to the user.  This includes how debugging information is handled for your website.  These are general settings that apply throughout the website/system.</p>
+
+
+	<h3>Generate HTTP Page Headers?</h3>
+
+		<p>This setting determines whether or not the server should automatically send HTTP page headers when it serves the pages to a user.  Setting this preference to "Yes" causes headers to be explicitly sent by the server.  Sending explicit headers is generally considered to be a good practice, although in some cases it can cause some problems.</p>
+
+
+	<h3>Enable GZIP Output?</h3>
+
+		<p>Setting this preference to "Yes" will cause the web server to send out your pages in the compressed gzip format.  Browsers will automatically decompress the pages and display them as normal; there will be no visible difference to your users apart from a faster page loading time.</p>
+
+		<p>In order for this option to work your server must support the gzip format.  Additionally, the browser being used to view your site must also support pages served in the gzip format.  Many modern browser support this, but not all do, so if you are concerned with wide-spread compatibility you may want to set this to "no".  (Also note that while Internet Explorer does support this feature, it also contains bugs in its implementation which can have adverse consequences.)</p>
+
+
+	<h3>Force URL query strings?</h3>
+
+		<p>Setting this to "Yes" will force the system to use a standard query string in all your URLs like this:</p>
+		
+		<p class="leftpad"><samp>http://example.com/index.php?/blog/joe/</samp> (notice the question mark).</p>
+		
+		<p>When set to "No", the system uses a more search-engine friendly format similar to:</p>
+		
+		<p class="leftpad"><samp>http://example.com/index.php/blog/joe/</samp></p>
+
+		<p>The majority of servers will be able to use the default ("No") method, which is almost universally preferred by users.  Some Windows servers (and very occasionally other types) do not support this feature and will have to be set to "Yes".  You'll know if this affects you if none of your links seem to work.</p>
+
+		<p>In addition, some people will need to use this variable in conjunction with editing the <samp>$qtype</samp> variable in your main site <var>index.php</var> file.</p>
+
+
+	<h3>Redirection Method</h3>
+
+		<p>This setting determines what method is used for page redirections.  These redirections are used relatively frequently throughout the system, especially with things like logging in/out and other membership related functions.  There are two options:</p>
+
+		<ol>
+			<li><b>Location (faster)</b>: This is the preferred method, which uses PHP's "location" functionality.</li>
+			<li><b>Refresh (Windows servers)</b>: The "refresh" method is often necessary for windows-based servers due to the poor way they handle PHP's "location" functionality.  This method is usually slightly slower than the other method.</li>
+		</ol>
+
+
+	<h3>Debug Preference</h3>
+
+		<p>This setting determines how PHP/database error messages are displayed.  Error messages are often very useful during initial development, but they can be very confusing to regular site visitors.  There are three options:</p>
+
+		<ol>
+			<li><b>No PHP/SQL error messages generated</b>: As the name suggests, all error messages and warnings are suppressed from view.</li>
+			<li><b>PHP/SQL error messages shown only to Super Admins</b>: Error messages and warnings are shown only to logged members of the Super Admin group.  All other users will not see anything.</li>
+			<li><b>PHP/SQL error messages shown to anyone - NOT SECURE</b>: As the name suggests, error messages and warnings are shown to all site visitors.  These messages can sometimes have configuration information in them, making this option a security risk.</li>
+		</ol>
+
+
+	<h3>Display SQL Queries?</h3>
+
+		<p>If this preference is set to "Yes", all members of the Super Admin group will see, at the bottom of the page, a list of the database queries used to generate the page.  All other users will see nothing.  This output can be useful during site development or for debugging purposes.</p>
+		
+		
+	<h3>Display Template Debugging?</h3>
+
+		<p>If this preference is set to "Yes", a log of all processing that occurs while a a page is being created in the ExpressionEngine Template parser will be created and outputted to SuperAdmins.  This includes but is not limited to Global Variables, Conditionals, Tags, PHP on Input/Ouput, Embeds, and Extension Hooks.  Excellent tool for debugging your templates.</p>
+
+
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Forum Update Notes 2.2.0 &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Forum Module</a> &gt;
+<a href="forum_update.html">Forum Update</a> &gt;
+<strong>Version Notes 2.2.0</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Forum Update Notes for Version 2.2.0</h1>
+	
+	<p class="important">Discussion Forum 2.2.0 requires version 1.6.9 or greater of ExpressionEngine.</p>
+	
+		<h2>A number of additions have been made to the forum themes.  If you have <strong>not</strong> customized your existing forum templates:</h2>
+
+		<p>Simply replace your entire forum theme folder with the new set:
+		</p>
+		<p class="leftpad"><kbd>themes/forum_themes/</kbd></p>
+
+		<p class="important">The update process is now complete.  You can disregard the rest of the information in this page.</p>			
+
+	<h2>If you <strong>have</strong> customized your existing templates:</h2>
+
+		<p>If you have customized the look of your forum you will need to manually add the new template features described below.</p>
+
+			<h3>Javascript to prevent accidental deletion of attachments on edit</h3>
+
+			<p>To prevent the possibility of deleting an attachment when editing a forum post, auto-submitting when pressing the enter key in a text field has been disabled using javascript.  To add this change manually, you will need to edit three fields, all found in <dfn>/themes/forum_themes/theme_name/theme_submission.php</dfn>:</p>
+
+			<p><kbd>Submission Form Template</kbd></p>
+
+			<p>Replace:</p>
+
+			<code>&lt;input type="text" class="input" name="title" style='width:100%' size="90" value="{title}" /></code>
+
+			<p>with:</p>
+
+			<code>&lt;input type="text" class="input" name="title" style='width:100%' size="90" value="{title}" onkeydown="var evt = arguments[0] || window.event; return (evt.keyCode != 13);" /></code>
+
+			<p>Replace:</p>
+
+			<code>&lt;input type="text" class="input" name="poll_question" style='width:75%' size="90" value="{poll_question}" /></code>
+
+			<p>with:</p>
+
+			<code>&lt;input type="text" class="input" name="poll_question" style='width:75%' size="90" value="{poll_question}" onkeydown="var evt = arguments[0] || window.event; return (evt.keyCode != 13);" /></code>
+
+			<p><kbd>Poll Answer Field Template</kbd></p>
+
+			<p>Replace:</p>
+
+			<code>&lt;input type="text" class="input" name="option[{n}]" style="width:50%" size="60" value="{poll_answer}" maxlength="120" /></code>
+
+			<p>with:</p>
+
+			<code>&lt;input type="text" class="input" name="option[{n}]" style="width:50%" size="60" value="{poll_answer}" maxlength="120" onkeydown="var evt = arguments[0] || window.event; return (evt.keyCode != 13);" /></code>
+
+
+			<h3>Additional Localization Variables</h3>
+			<p>A number of new localization variables have also been added.  They are listed below.
+
+	<table>
+		<tr><th class="caption" colspan="3">New Localization Variables</th></tr>
+		<tr>
+			<th>File name</th><th>Text</th><th>Localization Replacement</th>
+		</tr>
+		<tr>
+			<td rowspan="3">theme_announcements.php</td><td>Avatar</td><td>{lang:avatar}</td>
+		</tr>
+		<tr>
+			<td>Rank</td><td>{lang:rank}</td>
+		</tr>
+		<tr>
+			<td>PM</td><td>{lang:pm_abbrev}</td>
+		</tr>
+		<tr>
+			<td>theme_atom.php</td><td>Copyright</td><td>{lang:copyright}</td>
+		</tr>
+		<tr>
+			<td rowspan="20">theme_member.php</td><td>Rank</td><td>{lang:rank}</td>
+		</tr>
+		<tr>
+			<td>Email Console</td><td>{lang:email_console}</td>
+		</tr>
+		<tr>
+			<td>Send Private Message</td><td>{lang:send_pm}</td>
+		</tr>
+		<tr>
+			<td>AOL IM</td><td>{lang:mbr_aim_console}</td>
+		</tr>
+		<tr>
+			<td>ICQ</td><td>{lang:mbr_icq}</td>
+		</tr>
+		<tr>
+			<td>Yahoo Messenger</td><td>{lang:mbr_yahoo}</td>
+		</tr>
+		<tr>
+			<td>No Photo</td><td>{lang:no_photo}</td>
+		</tr>
+		<tr>
+			<td>{current_page} of {total_pages}</td><td>{current_page} of {total_pages}</td>
+		</tr>
+		<tr>
+			<td>Search Field</td><td>{lang:search_field}</td>
+		</tr>
+		<tr>
+			<td>Screen Name</td><td>{lang:mbr_screen_name}</td>
+		</tr>
+		<tr>
+			<td>Email Address</td><td>{lang:mbr_email_address}</td>
+		</tr>
+		<tr>
+			<td>URL</td><td>{lang:mbr_url}</td>
+		</tr>
+		<tr>
+			<td>Location</td><td>{lang:mbr_location}</td>
+		</tr>
+		<tr>
+			<td>I am Online</td><td>{lang:am_online}</td>
+		</tr>
+		<tr>
+			<td>Add me to your Buddy List</td><td>{lang:add_to_buddy}</td>
+		</tr>
+		<tr>
+			<td>Smileys</td><td>{lang:smileys}</td>
+		</tr>
+		<tr>
+			<td>KB</td><td>{lang:kb}</td>
+		</tr>
+		<tr>
+			<td>Private Message</td><td>{lang:private_message_single}</td>
+		</tr>
+		<tr>
+			<td>value=Search</td><td>value={lang:search}</td>
+		</tr>
+		<tr>
+			<td>value=Submit</td><td>value={lang:submit}</td>
+		</tr>		
+
+		<tr>
+			<td rowspan="9">theme_legends.php</td><td>Old Topic</td><td>{lang:legend_old_topic}</td>
+		</tr>
+		<tr>
+			<td>New Topic</td><td>{lang:legend_new_topic}</td>
+		</tr>
+		<tr>
+			<td>Hot Topic</td><td>{lang:legend_hot_topic}</td>
+		</tr>
+		<tr>
+			<td>New Poll</td><td>{lang:legend_new_poll}</td>
+		</tr>
+		<tr>
+			<td>Moved Topic</td><td>{lang:legend_moved_topic}</td>
+		</tr>
+		<tr>
+			<td>Hot Old Topic</td><td>{lang:legend_hot_old_topic}</td>
+		</tr>
+		<tr>
+			<td>Old Poll</td><td>{lang:legend_old_poll}</td>
+		</tr>
+		<tr>
+			<td>Closed Topic</td><td>{lang:legend_closed_topic}</td>
+		</tr>
+		<tr>
+			<td>Announcement</td><td>{lang:announcement}</td>
+		</tr>
+		<tr>
+			<td rowspan="4">theme_search.php</td><td>Total Results:</td><td>{lang:total_results}</td>
+		</tr>
+		<tr>
+			<td>{current_page} of {total_pages}</td><td>{current_page} {lang:of} {total_pages}</td>
+		</tr>
+		<tr>
+			<td>&lt;/a&gt; by &lt;a</td><td>&lt;/a&gt; {lang:by} &lt;a</td>
+		</tr>
+		<tr>
+			<td>value=Search</td><td>value={lang:search}</td>
+		</tr>		
+
+		<tr>
+			<td rowspan="5">theme_threads.php</td><td>PM</td><td>{lang:pm}</td>
+		</tr>
+		<tr>
+			<td>Expand</td><td>{lang:expand}</td>
+		</tr>
+		<tr>
+			<td>Collapse</td><td>{lang:collapse}</td>
+		</tr>
+		<tr>
+			<td>Avatar</td><td>{lang:avatar}</td>
+		</tr>
+		<tr>
+			<td>Rank</td><td>{lang:rank}</td>
+		</tr>
+		<tr>
+			<td rowspan="8">theme_global.php</td><td>Atom feed</td><td>{lang:atom_feed}</td>
+		</tr>
+		<tr>
+			<td>RSS feed</td><td>{lang:rss_feed}</td>
+		</tr>
+		<tr>
+			<td>Powered by ExpressionEngine</td><td>{lang:powered_by_ee}</td>
+		</tr>
+		<tr>
+			<td>ExpressionEngine Discussion Forum</td><td>{lang:ee_discussion_forum}</td>
+		</tr>
+		<tr>
+			<td>Version</td><td>{lang:version}</td>
+		</tr>
+		<tr>
+			<td>ExpressionEngine Forums</td><td>{lang:ee_forums}</td>
+		</tr>
+		<tr>
+			<td>No New Messages</td><td>{lang:no_new_messages}</td>
+		</tr>
+		<tr>
+			<td>New Messages</td><td>{lang:new_messages}</td>
+		</tr>
+		<tr>
+			<td>theme_rss.php</td><td>Copyright</td><td>{lang:copyright}</td>
+		</tr>
+		<tr>
+			<td>theme_topics.php</td><td>{current_page} of {total_pages}</td><td>{current_page} {lang:of} {total_pages}</td>
+		</tr>
+		<tr>
+			<td>theme_user_banning.php</td><td>This member is currently banned</td><td>{lang:member_is_banned}</td>
+		</tr>
+</table>
+	
+	<p><br /><br /><a href="forum_update.html">Return to Update Page</a></p>
+	
+	
+</div>
+
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

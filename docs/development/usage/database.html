@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Database Class  &#8211; ExpressionEngine Developer Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../index.html">Development</a> &gt;
+<strong>Database Class</strong>
+</div>
+
+
+<div id="content">
+<h1>Database Class</h1>
+
+
+<div class="section">
+	<ul>
+		<li><a href="database.html#calling">Calling the DB Class</a></li>
+		<li><a href="database.html#query">Performing a Query</a></li>
+		<li><a href="database.html#results">Retrieving Results from SELECT query</a></li>
+		<li><a href="database.html#inserting">INSERTing Data</a></li>
+		<li><a href="database.html#updating">UPDATEing Data</a></li>
+		<li><a href="database.html#additional">Additional Functions</a></li>
+	</ul>
+</div>
+
+
+<a name="calling"></a>
+<div class="section">
+<h2>Calling the DB Class</h2>
+
+<p>ExpressionEngine has an abstract database layer that allows developers to easily access the MySQL database and also provide many features like automatic escaping of characters and query caching.</p>
+
+<p>To use this abstract layer in your modules you must call the <var>$DB</var> global in every function that will be accessing the database or using the functions in the DB Class.</p>
+
+<pre>
+function database_example()
+{
+	global $DB;
+
+	$query = $DB->query("SELECT blog_name FROM exp_weblogs");
+
+	if ($query->num_rows > 0)
+	{
+		foreach($query->result as $row)
+		{
+			echo $row['blog_name']."&lt;br />\n";
+		}
+	}
+}
+</pre>
+</div>
+
+
+<!-- Performing Queries -->
+
+
+<a name="query"></a>
+<div class="section">
+<h2>Performing a Query</h2>
+
+<p><strong>$DB->query()</strong> sends a query to the database and will also return back the results, if it is a SELECT query.  If you are doing an INSERT or UPDATE, then you do not need to set a variable since there are no results being returned.</p>
+
+<pre>
+// Simple select query
+$query = $DB->query("SELECT * FROM exp_weblogs");
+
+// Update, with no variable being set
+$DB->query("UPDATE exp_weblogs SET blog_name = 'dog' WHERE blog_name = 'cat'");
+</pre>
+
+<p><em><strong>Note:</strong> When doing any sort of query using user submitted data make sure to use the $DB->escape_str() function (details below) to prevent any problems between MySQL and the data.</em></p>
+</div>
+
+
+<!--- SELECT QUERY -->
+
+
+<a name="results"></a>
+<div class="section">
+<h2>Retrieving Results from SELECT query</h2>
+
+<p>Upon performing a SELECT query an object containing the results of query will be returned by the function.  To check for the number of results returned by the query, use the <strong>num_rows</strong> value in the returned object.</p>
+
+<pre>
+$results = $DB->query("SELECT * FROM exp_weblogs");
+
+if ($results->num_rows == 0)
+{
+	exit('No weblogs exist');
+}
+</pre>
+
+<p>In many instances, you will know that only a single row of data will be returned from a query.  Instead of looping through an array, you can simply use the <strong>row</strong> array in the object returned.</p>
+
+<pre>
+$results = $DB->query("SELECT * FROM exp_weblogs ORDER BY weblog_id LIMIT 0,1");
+
+$first_weblog = $results->row['blog_name'];
+</pre>
+
+<p>When many rows of data are returned you will wish to loop through the returned array and use the values returned for the fields.  ExpressionEngine uses MYSQL_ASSOC, which has MySQL using the field names in the array and not numbers.  To access this array, then you will want to use the <strong>result</strong> array of the object with a foreach loop.</p>
+
+<pre>
+$results = $DB->query("SELECT blog_name, weblog_id FROM exp_weblogs");
+
+if ($results->num_rows > 0)
+{
+    foreach($results->result as $row)
+    {
+        echo $row['weblog_id'].' - '.$row['blog_name']."&lt;br />\n";    
+    }
+}
+</pre>
+</div>
+
+
+
+<!--- INSERT Query -->
+
+
+<a name="inserting"></a>
+<div class="section">
+<h2>INSERTing Data</h2>
+
+<p>Included in the DB Class is a function that makes the inserting of data into the database easier by correctly formatting the INSERT string and escaping the values being inserted.  The <strong>insert_string()</strong> function accepts the name of the table for the insert and an array containing the field names as keys with the values containing the data for those fields.</p>
+
+<pre>
+$data = array('name' => $name, 'email' => $email, 'url' => $url);
+
+$sql = $DB->insert_string('exp_weblog', $data);
+
+// INSERT INTO exp_weblog (name, email, url) VALUES ('Joe', 'joe@joe.com', 'www.joe.com')
+
+$DB->query($sql);
+</pre>
+
+<p>Upon performing an insert you might wish to know the value of the primary key for the row that was added.  The DB Class tracks the last insert and will return the primary key value using the <var>insert_id</var> variable of the class.</p>
+
+<pre>
+$DB->query($insert_sql);
+$entry_id = $DB->insert_id;
+</pre>
+</div>
+
+
+<!--- UPDATE Query -->
+
+
+<a name="updating"></a>
+<div class="section">
+<h2>UPDATEing Data</h2>
+
+<p>Included in the DB Class is a function that makes the updating of data in the database easier by correctly formatting the UPDATE string and escaping the values being inserted.  The <strong>update_string()</strong> function accepts the name of the table for the update, an array containing the field names as keys with the values containing the updated data for those fields, and the WHERE clause for choosing which rows in the table to update.</p>
+
+<pre>
+$data = array('name' => $name, 'email' => $email, 'url' => $url);
+
+$sql = $DB->update_string('exp_weblog', $data, "author_id = '1'");
+
+// UPDATE exp_weblog SET name = 'Joe', email = 'joe@joe.com', url = 'www.joe.com' WHERE author_id = '1'
+
+$DB->query($sql);
+</pre>
+</div>
+
+
+<!--- Additional Functions -->
+
+<a name="additional"></a>
+<div class="section">
+<h2>Additional Functions</h2>
+
+<p><strong>escape_str</strong> will accept a string variable and return that variable prepared for any sql statement to the database.</p>
+
+<pre>
+$query = $DB->query("SELECT FROM exp_comments WHERE url = '".$DB->escape_str($site_url)."'");
+</pre>
+
+<p><strong>affected_rows</strong> will return how many rows in the database were affected during the most recent query.  Every so often a useful variable to have when performing INSERT, UPDATE, or DELETE queries.</p>
+
+<pre>
+$query = $DB->query("DELETE FROM exp_comments WHERE url = '".$DB->escape_str($site_url)."'");
+echo $DB->affected_rows." rows were deleted.";
+</pre>
+
+</div>
+
+
+
+
+
+</div>
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

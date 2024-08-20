@@ -1,0 +1,309 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Publish Page &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#cp_docs">The Control Panel</a> &gt;
+<strong>Publish Page</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Publish Page<div class="subhead">The main interface for creating content for your site</div></h1>
+
+	<p>The <dfn>PUBLISH</dfn> section of the Control Panel is where you will add entries to your weblogs/site sections.</p>
+	
+	<p>If you have more than one weblog, when you move your cursor over the <dfn>PUBLISH</dfn> tab you will see a menu listing your weblogs.</p>
+
+	<div class="important">
+	<p><strong>Note:</strong>&nbsp; If you prefer to change the behavior of the menu so that it must be clicked before revealing the list of weblogs you can do so by visiting this Control Panel page:</p>
+	<p><dfn>Admin &gt; System Preferences &gt; Control Panel Settings</dfn></p>
+	</div>
+
+	<p>Once a weblog is selected, you will see the main Publish screen where you can create your entry.</p>
+
+	<h2>Publish Page Areas</h2>
+
+	<p>The <em>PUBLISH</em> page interface is broken into the following separate "tabs":</p>
+
+	<ul>
+		<li><a href="#tab_publish_form">Publish Form</a></li>
+		<li><a href="#tab_date">Date</a></li>
+		<li><a href="#tab_categories">Categories</a></li>
+		<li><a href="#tab_options">Options</a></li>
+		<li><a href="#tab_trackbacks">Trackbacks</a></li>
+		<li><a href="#tab_pings">Pings</a></li>
+		<li><a href="#tab_forum">Forum</a></li>
+		<li><a href="#tab_revisions">Revisions</a></li>
+		<li><a href="#tab_pages">Pages</a></li>
+		<li><a href="#tab_show_all">Show All</a></li>
+	</ul>
+
+	<h2><a name="tab_publish_form">Publish Form Tab</a></h2>
+
+	<div class="imgwrapper"><img src="../../images/publish_form.png" width="823" height="319" alt="Publish Form"></div>
+
+
+	<h3>Title Field</h3>
+
+		<p>This field contains the title of your weblog entry. Titles can be up to 100 characters in length.</p>
+
+
+	<h3>URL Title</h3>
+
+		<p>Here you can define a "human readable" URL title for your entry.  URL titles may only contain alpha-numeric characters and no spaces. 
+		The purpose of a URL Title is to enable your entries to be accessed using a URL such as:</p>
+
+		<code><kbd>http://example.com/index.php/weblog/comments</kbd><dfn>/joes_first_entry/</dfn></code>
+
+		<p>If you do not specify a "URL Title" one will automatically be created for you based upon your entry Title. URL Titles must be unique within a weblog, so if an entry with the same title already exists then the URL Title will have a number appended to the end to make it unique.</p>
+
+		<div class="important">
+		<p><strong>Note:</strong>&nbsp; If you let the system create your URL Title for you it will convert spaces into underscores by default.  For example, if the title of your entry is "Joe's First Entry" it will be converted to "joes_first_entry".&nbsp; If you prefer dashes to be used instead of underscores (there is some evidence that Google prefers URLs with dashes) you can change it in the following Control Panel page:</p>
+		<p><dfn>Admin &gt; Weblog Administration &gt; Global Weblog Preferences</dfn></p>
+		</div>
+
+	<h3>Formatting Buttons</h3>
+
+		<p>If the user accessing the <kbd>Publish</kbd> page has any HTML Formatting Buttons specified in their <dfn>My Account</dfn> page they
+		will be displayed for use with the entry fields.&nbsp;  Each user is allowed their own formatting buttons, which can be specified at:</p>
+		
+		<p class="leftpad"><dfn>My Account &gt; Weblog Settings &gt; HTML Formatting Buttons</dfn></p>
+
+
+	<h3>Entry Fields</h3>
+
+		<p>The names and types of entry fields displayed will be determined by what <dfn><a href="../admin/weblog_administration/custom_weblog_fields.html">Custom Weblog Fields</a></dfn> you have defined for this weblog. If an entry field is set to be "hidden" by default, it will have to be expanded by clicking on the field name before content can be entered. In addition to the field itself, you can also choose the type of <a href="../../general/text_formatting.html">text formatting</a> to apply to that field. You'll also notice "Check Spelling", "Glossary", and "Smileys" options beneath each field.</p>
+
+
+	<h3>File Upload</h3>
+
+		<p>Below the Preview, Quick Save, and Submit buttons is a button to open the File Upload Utility.  This opens in a pop-up window and allows you to upload files as defined in your File Upload Manager, located at:</p>
+		
+		<p class="leftpad"><dfn>Admin &gt; File Upload Preferences</dfn>.</p>
+
+
+	<h3>Preview</h3>
+
+		<p>The entry may be previewed before fully publishing it.  The Preview allows you to check the content you're inputting.</p>
+
+
+	<h3>Quick Save</h3>
+
+		<p>When an entry is <dfn>Quick Saved</dfn>, the content is saved to the database, but you will remain on the Publish screen to continue working.&nbsp; Note:&nbsp; Pings and Trackbacks are not sent during Quick Saves.</p>
+
+
+	<h3>Submit</h3>
+
+		<p>The Submit button allows you to save the entry and publish it to your site.</p>
+
+
+
+	<h2><a name="tab_date">Date Tab</a></h2>
+	
+	<div class="imgwrapper"><img src="../../images/publish_cal.png" width="618" height="345" alt="Date Tab" title="Date Tab" /></div>
+
+	<h3>Entry Date</h3>
+
+		<p>The entry date is the primary date associated with an entry.  You may use the interactive calendar to set the date/time.  If you specify a date in the future, ExpressionEngine will not display the entry on your site until the date has arrived. This behavior can be overruled if you instruct ExpressionEngine to include "future dates" in the <dfn>Weblog Tags</dfn> in your Templates.</p>
+
+
+	<h3>Expiration Date</h3>
+
+		<p>You may <em>optionally</em> specify an expiration date for the entry, causing the system to no longer show the entry anywhere on your website after that date. You may also use an interactive calendar to set the date/time.</p>
+
+
+	<h3>Comment Expiration Date</h3>
+
+		<p>You may <em>optionally</em> specify a date on which comments for this entry will no longer be accepted.  Once the date passes, the entry will act as though the <dfn>Allow Comments</dfn> checkbox (see below) is unchecked. You may also use an interactive calendar to set the date/time.</p>
+
+
+
+
+	<h2><a name="tab_categories">Categories Tab</a></h2>
+
+	<div class="imgwrapper"><img src="../../images/publish_cats.png" width="619" height="302" alt="Categories Tag" title="Categories Tag" /></div>
+
+		<p>You may assign your entries to one ore more categories.  To select more than one category you will typically hold down the CTRL (or CMD) key while choosing the individual category names.</p>
+
+		<p>Clicking the <dfn>Edit Categories</dfn> link will permit you to add, edit, or delete categories that appear in the list.</p>
+
+	<h2><a name="tab_options">Options Tab</a></h2>
+
+	<div class="imgwrapper"><img src="../../images/publish_options.png" width="622" height="194" alt="Options Tab" title="Options Tab" /></div>
+
+	<h3>Author</h3>
+
+		<p>You may select the author for this entry from the drop-down list.  By default only the person submitting the entry is shown in the author list.  If you would like to enable other authors so that the author name can be changed please see this <a href="http://expressionengine.com/knowledge_base/article/new_members_dont_appear_as_options_in_the_publish_author_list/">Knowledge Base entry</a> for information.</p>
+
+
+	<h3>Weblog</h3>
+
+		<p>This option is only available when <em>editing</em> an entry.</p>
+
+		<p>This drop-down list will contain all weblogs that share the same Field Group, Category Group, and Status Group with the current weblog for the entry.  Using this option, you can move an entry from one weblog to another weblog that is set up similarly.</p>
+
+
+	<h3>Status</h3>
+
+	<p>There are two primary statuses that are always available: <kbd>Open</kbd> and <kbd>Closed</kbd>.&nbsp; Typically, "open" entries are viewable at your site, and "closed" entries are not.&nbsp; You can add additional statuses for editorial workflow in your <dfn><a href="../admin/weblog_administration/custom_entry_statuses.html">Custom Entry Statuses</a></dfn> page, and opt to display or suppress entries assigned to these by modifying the "status" parameter found in the various "Weblog" Tags in your Templates.</p>
+
+
+	<h3>Make Entry Sticky</h3>
+
+		<p>If this option is checked, then the entry will be "stuck" at the top of the list when displaying multiple entries.  This can be useful for things like announcement posts.</p>
+
+
+	<h3>Allow Comments</h3>
+
+		<p>If this option is checked, then comments will be allowed for this entry.  When this option is unchecked, your comment submission form will be suppressed.   Any existing comments will still appear.</p>
+
+
+	<h3>Allow Trackbacks</h3>
+
+		<p>If this option is checked, then trackbacks will be allowed for this entry.  When this option is unchecked, any Trackback pings associated with this entry that are received will not be processed.  Any existing Trackbacks will still appear.</p>
+
+
+
+
+	<h2><a name="tab_trackbacks">Trackbacks Tab</a></h2>
+
+		<p>This field lets you specify one or more Trackback Ping URLs.  Simply place each URL on a separate line in the text box.  If you do not wish to send a ping, then leave the field blank.</p>
+
+	<div class="imgwrapper"><img src="../../images/publish_trackbacks.png" width="623" height="197" alt="Trackbacks Tab" title="Trackbacks Tab" /></div>
+	
+
+
+
+
+	<h2><a name="tab_pings">Pings Tab</a></h2>
+
+	<p>The <dfn>ping</dfn> tab allows you to send "pings" to the Ping Servers you have defined in your <dfn>My Account &gt; Ping Servers</dfn> area.</p>
+
+	<div class="imgwrapper"><img src="../../images/publish_pings.png" width="621" height="155" alt="Pings Tab" title="Pings Tab" /></div>
+
+
+
+
+
+	<h2><a name="tab_forum">Forum Tab</a></h2>
+
+	<p class="important"><strong>Note:</strong>&nbsp; This tab will only appear if you have the Discussion Forum Module installed.</p>
+
+	<div class="imgwrapper"><img src="../../images/publish_forum.png" width="624" height="416" alt="Forum Tab" title="Forum Tab" /></div>
+	
+	<p>The Forum tab allows you to optionally publish a forum topic to be associated with the weblog entry. You can then automatically link to the created forum topic from within your <samp>{exp:weblog:entries}</samp> tag using the <samp><a href="../../modules/weblog/variables.html#var_forum_topic_id">{forum_topic_id}</a></samp> variable.</p>
+
+	<h3>Forum Topic Title</h3>
+
+		<p>You may specify the title to use for the new thread in the forum.</p>
+
+
+	<h3>Forum Topic Text</h3>
+
+		<p>This is the main text for the forum thread.</p>
+
+		<p>You may use <var>{permalink}</var> to link from the Forum Entry to the Weblog Entry.  This variable is replaced by the URL set in the "Comment Page URL" preference under Admin > Weblog Management. The URL Title of the entry will be automatically added. For example, this:</p>
+		
+		<code>
+		&lt;a href="{permalink}">my entry&lt;/a>
+		</code>
+		
+		<p>Would be rendered like this:</p>
+
+		<code>
+		&lt;a href="http://example.com/index.php/weblog/comments/ice_cream/">my entry&lt;/a>
+		</code>
+			
+			
+	<h3>Forum</h3>
+
+		<p>Here you choose in which forum the new thread should be added.</p>
+
+
+	<h3>Forum Topic ID</h3>
+
+		<p>Instead of the previous settings, you may instead specify the ID for an existing forum topic.  This is useful if the forum topic already exists, or if you want it to have a Poll or other special features.</p>
+		
+		<p class="important">This is an "either/or" type situation.  You may either have a forum thread created for you by specifying the title, text, and forum <strong>or</strong> you may associate the entry with an existing ID.</p>
+
+
+	<h2><a name="tab_revisions">Revisions Tab</a></h2>
+
+	<p class="important"><strong>Note:</strong>&nbsp; This tab will only appear if you have Entry Versioning enabled at:<br /><br /><dfn>Admin &gt; Weblog Administration &gt; Weblog Management</dfn></p>
+
+	<div class="imgwrapper"><img src="../../images/publish_revisions.png" width="618" height="211" alt="Revisions Tab" title="Revisions Tab" /></div>
+
+	<p>When Entry Versioning is enabled, every time you save changes to your entries they will be saved so you can go back in time and retrieve older versions of your entries. The Revisions Tab will show a list of all revisions for the entry being edited</p>
+	
+	<p>When a previous revision is selected it will be loaded into the Publish page form so you can view or further edit it.  If you save your changes, a new revision will be created rather than updating the previous revision. In other words, every time you click the save button a new revision is stored.</p>
+
+	<h2><a name="tab_pages">Pages Tab</a></h2>
+	
+		<p class="important"><strong>Note:</strong>&nbsp; This tab will only appear if you have the <a href="../../modules/pages/index.html">Pages Module</a> installed.</p>
+		
+		<div class="imgwrapper"><img src="../../images/publish_pages.png" width="624" height="156" alt="Pages Tab" title="Pages Tab" /></div>
+		
+		<h3>Pages URI</h3>
+		
+		<p>Here you can choose the URI that will be used to display this "page" entry.  Provide only the URI segments and not a full URL.  Since this will be used in the URL, only URL safe characters are allowed, i.e. low ASCII alpha-numeric characters, underscore / dash separators, and periods.</p>
+		
+		<div class="important">
+			<strong>CORRECT:</strong>
+			<ul>
+				<li>/company/roster/board/ceo/</li>
+				<li>/my_stuff/list.html</li>
+			</ul>
+			<strong>INCORRECT:</strong>
+			<ul>
+				<li>http://example.com/index.php/company/roster/board/ceo/</li>
+				<li>/my_stuff/über_list.html</li>
+			</ul>
+		</div>
+		
+		<p class="important"><strong>NOTE:</strong> Entries cannot share the same Page URI.  Each "page" entry must be given a unique URI so the system knows which entry to display when the Page URI is requested.</p>
+		
+		<h3>Template</h3>
+		
+		<p>Here you can choose which template to use to display this "page" entry when the above URI is requested.</p>
+		
+	<h2><a name="tab_show_all">Show All</a></h2>
+	
+	<p>This tab simply shows all of the tabbed options at the same time, along with the publish form. To close the tabs simply select a different tab at the top which will close all tabs except the selected one.</p>
+	
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

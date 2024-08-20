@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Forum Boards and Aliases &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Forum Module</a> &gt;
+<strong>Forum Boards and Aliases</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Forum Boards and Aliases</h1>
+
+	<h2>Overview</h2>
+	
+		<p>The Discussion Forum module allows you to create multiple forum "boards" enabling you to run separate forums on one installation.  Each board
+			can have its own URL, making it possible for you to have separate boards for each site, or even run multiple distinct boards
+			on a single site.</p>
+		
+		<p>Aliases allow you to use alternative URLs from which to display your boards.</p>
+
+	<h2>Managing Boards</h2>
+	
+		<p>The "Forum Board Home" tab reveals a drop-down menu to access the forum boards you have setup, as well as a link to "Edit Forum Boards".</p>
+
+		<div class="imgwrapper"><img src="../../images/forum_board_dropdown.png" width="205" height="181" alt="Forum Board Dropdown"></div>
+
+		<h3>Forum Board Management</h3>
+		
+			<div class="imgwrapper"><img src="../../images/forum_board_management.png" width="725" height="172" alt="Forum Board Management"></div>
+			
+			<h4>Board ID</h4>
+			
+			<p>The unique ID for the forum board.</p>
+			
+			<h4>Forum Board Label</h4>
+			
+			<p>The label that is displayed for the forum board.</p>
+			
+			<h4>Forum Board Short Name</h4>
+			
+			<p>The "short name" for the forum board, used in the <dfn>board=</dfn> parameter of the Forum tag when running forums through regular templates.</p>
+			
+			<h4>Enabled?</h4>
+			
+			<p>Yes / No.  Whether or not the forum board is turned on.</p>
+			
+			<h4>Edit Board</h4>
+			
+			<p>This link will take you to the board's edit preference form.</p>
+			
+			<h4>Delete</h4>
+			
+			<p>This link will delete the board <em>and all forum data</em> contained within it.</p>
+		
+			<h4>Add a New Forum Board?</h4>
+			
+			<p>This link allows you to create a new forum board.</p>
+			
+		<h3>Forum Alias Management</h3>
+		
+			<div class="imgwrapper"><img src="../../images/forum_alias_management.png" width="723" height="121" alt="Forum Alias Management"></div>
+			
+			<h4>Board ID</h4>
+			
+			<p>The unique ID for the forum board alias.</p>
+			
+			<h4>Forum Board Alias Label</h4>
+			
+			<p>The label that is displayed for the forum board alias.</p>
+			
+			<h4>Forum Board Alias Short Name</h4>
+			
+			<p>The "short name" for the forum board alias, used in the <dfn>board=</dfn> parameter of the Forum tag when running forums through regular templates.</p>
+			
+			<h4>Enabled?</h4>
+			
+			<p>Yes / No.  Whether or not the forum board alias is turned on.</p>
+			
+			<h4>Edit Alias</h4>
+			
+			<p>This link will take you to the alias's edit preference form.</p>
+			
+			<h4>Delete</h4>
+			
+			<p>This link will delete the forum board alias.  The original board and forum data that the alias was pointing to are not removed.</p>
+		
+			<h4>Add a New Forum Board alias?</h4>
+			
+			<p>This link allows you to create a new forum board alias.</p>
+	
+	<h2>Forum Board Alias Details</h2>
+	
+		<div class="imgwrapper"><img src="../../images/forum_board_alias_details.png" width="596" height="305" alt="Forum Board Alias Details"></div>
+		
+		<h3>Forum Board Alias Settings</h3>
+		
+			<p>The Forum Board Alias settings are essentially the same as the General Settings for a normal forum board.  The difference is that an existing forum board is selected as the one being aliased.
+				This enables you to display a forum board on different sites / locations within the same ExpressionEngine installation as the normal location.</p>
+				
+			<h4>Forum Board Label</h4>
+
+			<p>The label that is displayed for the forum board alias.</p>
+
+			<h4>Forum Board Short Name</h4>
+
+			<p>The "short name" for the forum board alias, used in the <dfn>board=</dfn> parameter of the Forum tag when running forums through regular templates.</p>
+			
+			<h4>Forum URL</h4>
+			
+			<p>The base URL where the forum board alias will be displayed.</p>
+			
+			<h4>Site for Forum</h4>
+			
+			<p>If the <a href="../../cp/sites/index.html">Multiple Site Manager</a> is installed, this allows you to determine which Site the forum board belongs to.</p>
+			
+			<h4>Forum Triggering Word</h4>
+			
+			<p>When this word is encountered in your URL it will display your forum.  The word you choose cannot be the name of an existing template group.</p>
+			
+			<h4>Enable Forum Board</h4>
+			
+			<p>Yes / No.  Whether or not the forum board alias is turned on.</p>
+			
+			<h4>Forum Board Being Aliased</h4>
+			
+			<p>The Forum Board that this Alias points to.</p>
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

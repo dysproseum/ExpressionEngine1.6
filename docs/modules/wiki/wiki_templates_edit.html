@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Wiki Template, Edit Section &#8211; ExpressionEngine Documentation</title> 
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style> 
+
+<style type="text/css">
+.screencap {
+margin: 30px 0;
+text-align: center;}
+</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="README.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+</tr>
+</table>
+</div>
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Wiki Module</a> &gt;
+<a href="wiki_templates.html">Theme Template</a> &gt;
+<strong>Edit Section</strong>
+</div>
+
+<div id="content">
+
+	<h1>Wiki Template, Edit Section</h1>
+
+<p>This section determines how an article's editing interface (what happens when a user clicks an 'edit' link) is displayed within the Wiki Page wrapper template as outlined below:</p>
+
+<div class="screencap"><img src="../../images/wiki_edit_highlight.png" width="800" height="530" alt="Dislays the editing interface for an article"></div>
+
+<p>In addition to the variables in the <a href="wiki_templates_page.html">Wiki Page section</a>, the Edit section has:</p>
+
+
+<ul>
+<li><a href="#single">Single Variables</a></li>
+<li><a href="#conditional">Conditional Variables</a></li>
+<li><a href="#form">Form Variables</a></li>
+<li><a href="#tag">Tags</a></li>
+</ul>
+
+
+<h2><a name="single">Single Variables</a></h2>
+
+<ul>
+<li><a href="#var_sin_content">{content}</a></li>
+<li><a href="#var_sin_path_redirect_page">{path:redirect_page}</a></li>
+<li><a href="#var_sin_preview">{preview}</a></li>
+<li><a href="#var_sin_redirect_page">{redirect_page}</a></li>
+</ul>
+
+<h3><a name="var_sin_content">content</a></h3>
+
+<code>{content}</code>
+
+<p>Displays the originally submitted content for the article with no processing or formatting.</p>
+
+<h3><a name="var_sin_path_redirect_page">redirect page path</a></h3>
+
+<code>{path:redirect_page}</code>
+
+<p>The URL path to the redirect page, if one is specified for the article.</p>
+
+<h3><a name="var_sin_preview">preview</a></h3>
+
+<code>{preview}</code>
+
+<p>Displays the preview of submitted content for the article with complete formatting.</p>
+
+<h3><a name="var_sin_redirect_page">redirect page</a></h3>
+
+<code>{redirect_page}</code>
+
+<p>The redirect page, if one is specified for the article.</p>
+
+<h2><a name="conditionals">Conditional Variables</a></h2>
+
+<ul>
+<li><a href="#var_con_moderated">{if moderated}</a></li>
+<li><a href="#var_con_old_revision">{if old_revision}</a></li>
+<li><a href="#var_con_locked">{if locked}</a></li>
+<li><a href="#var_con_preview">{if preview}</a></li>
+</ul>
+
+<h3><a name="var_con_moderated">if moderated</a></h3>
+
+<code>{if moderated}</code>
+
+<p>Checks to see if the article is moderated.</p>
+
+<h3><a name="var_con_old_revision">if old_revision</a></h3>
+
+<code>{if old_revision}</code>
+
+<p>Checks to see if a "old" (not the most current) revision of an article is being edited. Old revisions can be edited and submitted as fresh revisions.</p>
+
+<h3><a name="var_con_locked">if locked</a></h3>
+
+<code>{if locked}</code>
+
+<p>Check to see if the article is locked. This is used when an admin is editing an article.</p>
+
+<h3><a name="var_con_preview">if preview</a></h3>
+
+<code>{if preview}</code>
+
+<p>Check to see if a preview is being shown.</p>
+
+<h2><a name="form">Form Variables</a></h2>
+
+<ul>
+<li><a href="#var_form_wiki_edit">{form_declaration:wiki:edit}</a></li>
+</ul>
+
+<h3><a name="var_form_wiki_edit">form_declaration:wiki:edit</a></h3>
+
+<code>{form_declaration:wiki:edit}</code>
+
+<p>This variable is used to create the necessary opening <strong>&lt;form></strong> tag with hidden fields to display the edit textarea.</p>
+
+<h2><a name="tag">Tags</a></h2>
+
+<p>The Wiki Edit Template section can also use the <strong>{wiki:files}</strong> tag as described in the <a href="wiki_templates_special_files.html">Special Files</a> section. This is used to display a list of the wiki's uploaded files in the edit interface as outlined below:</p>
+
+<div class="screencap"><img src="../../images/wiki_edit_files.gif" width="550" height="660" alt="Dislays the wiki's uploaded files in the editing interface" /></div>
+
+</div>
+	
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

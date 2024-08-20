@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Wiki Users &#8211; ExpressionEngine Documentation</title> 
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style> 
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="README.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+</tr>
+</table>
+</div>
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Wiki Module</a> &gt;
+<strong>Wiki Users</strong>
+</div>
+
+<div id="content">
+
+	<h1>Wiki Users</h1>
+
+	<p>The Wiki Module recognizes three types of people accessing the wiki:</p>
+	
+	<ol>
+	<li><a href="#visitors">Visitors</a></li>
+	<li><a href="#users">Users</a></li>
+	<li><a href="#admins">Administrators</a></li>
+	</ol>
+
+<h2><a name="visitors">Visitors</a></h2>
+
+<p>Visitors are people who view your wiki and are not logged into your ExpressionEngine site. They can view and search the wiki but they cannot add, edit, or delete articles.</p>
+
+<p>Visitors are also people who visit your wiki and are logged into your ExpressionEngine site but <strong>are not</strong> in a Member Group that is specified as wiki <a href="#users">Users</a> or <a href="#admins">Admins</a>.</p>
+
+<p class="important"><strong>NOTE:</strong> The Wiki Module does not allow anonymous visitors to contribute to the wiki.</p>
+
+<h2><a name="users">Users</a></h2>
+
+<p>A User is a person who is logged into your ExpressionEngine site and belongs to a <strong>Member Group</strong> that is allowed to <em>use</em> the wiki. You can specify which Member Groups are users from the <a href="wiki_cp.html">Wiki Control Panel</a>.</p>
+
+<p>Users can add and edit articles and categories in the wiki using <a href="wiki_syntax.html">Wiki Syntax</a>.</p>
+
+<h2><a name="admins">Administrators</a></h2>
+
+<p class="important"><strong>NOTE:</strong> A Super-admin is always a Wiki Admin.</p>
+
+<p>A Administrator (admin) has all the <strong>User</strong> privileges plus they can <strong>Moderate</strong>, <strong>Lock</strong>, <strong>Rename</strong> articles, and <strong>Delete</strong> articles and categories.</p>
+
+<h3>Moderate Article</h3>
+
+<p>In a article's Edit Screen you can select to <strong>moderate</strong> an article. This means that <strong>Users</strong> can edit the article, but the edits will not appear on the live wiki until they are approved by a wiki admin.</p>
+
+<p>In the <a href="wiki_cp.html">Wiki Control Panel</a> you can have the Wiki email specified admins of changes to moderated articles. Admins can then approve or reject those changes from the email. You can also view changes to the wiki by clicking on the <em>Recent Changes</em> link in the sidebar.</p>
+
+<h3>Lock Article</h3>
+
+<p>In a article's Edit Screen you can select to <strong>Lock</strong> an article. Locking an article means that only wiki admins can edit, delete, or unlock it.</p>
+
+<h3>Rename Article</h3>
+
+<p>In a article's Edit screen you can rename the article/page to something more appropriate then what the user specified.</p>
+
+<h3>Delete Article</h3>
+
+<p>In a article's Edit screen you can delete the article by checking the "Delete" box.</p>
+
+<h3>Delete Category</h3>
+
+<p>Admins can delete a category from a Category's page. To do this click on the <strong>Categories</strong> link to display a list of all your categories. Now click the category you wish to delete. This will take you to the Category's page. Now click the <strong>Edit</strong> link. In the title area you'll see "Editing Category:Name of the category". Now check the "Delete Category" option and click update to delete the category.</p>
+
+<p class="important"><strong>NOTE:</strong> Deleting a category will not delete any articles that have been assigned to the category. Deleting the category will not remove the category code in an article.</p>
+
+</div>
+	
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

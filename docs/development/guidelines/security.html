@@ -1,0 +1,503 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Security Guidelines &#8221; ExpressionEngine Add-On Development Guidelines  &#8211; ExpressionEngine Developer Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+<style type="text/css" media="screen">
+	code {
+		white-space: pre;
+	}
+</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../index.html">Development</a> &gt;
+<a href="index.html">Guidelines</a> &gt;
+<strong>Security Guidelines</strong>
+</div>
+
+
+<div id="content">
+<h1>Security Guidelines</h1>
+
+<h2>Table of Contents</h2>
+<ul class="minitoc">
+	<li><a href="#cross_site_scripting_xss">Cross Site Scripting (XSS)</a>
+		<ul>
+			<li><a href="#regx_xss_clean">$REGX->xss_clean()</a></li>
+			<li><a href="#sanitized_variables_on_input">Sanitized Variables on Input</a></li>
+			<li><a href="#insert_and_update_queries">INSERT and UPDATE Queries</a></li>
+			<li><a href="#outputting_data_to_the_page">Outputting Data to the Page</a></li>
+			<li><a href="#when_in_doubt">When In Doubt&hellip;</a></li>
+		</ul>
+	</li>
+	<li><a href="#sql_injection_prevention">SQL Injection Prevention</a>
+		<ul>
+			<li><a href="#escaping_php_variables">Escaping PHP Variables</a></li>
+		</ul>
+	</li>
+	<li><a href="#preferences_and_settings">Preferences and Settings</a>
+		<ul>
+			<li><a href="#storage_of_settings">Storage of Settings</a></li>
+			<li><a href="#use_of_settings_in_forms">Use of Settings in Forms</a></li>
+			<li><a href="#yes_no_preferences">Yes / No Preferences</a></li>
+			<li><a href="#follow_the_art_of_keep_it_simple_stupid">Follow the Art of <abbr title="Keep It Simple Stupid">KISS</abbr></a></li>
+		</ul>
+	</li>
+	<li><a href="#tag_parameters">Tag Parameters</a>
+		<ul>
+			<li><a href="#never_assume_tag_parameters_are_good_input">Never Assume Tag Parameters are "Good" Input</a></li>
+			<li><a href="#validate_values_before_using">Validate Values Before Using</a></li>
+			<li><a href="#default_values">Default Values</a></li>
+		</ul>
+	</li>
+	<li><a href="#secure_forms">Secure Forms</a>
+		<ul>
+			<li><a href="#fns_form_declaration">$FNS->form_declaration()</a></li>
+			<li><a href="#handling_form_hashes_in_your_add_on">Handling Form Hashes in Your Add-on</a></li>
+			<li><a href="#forms_in_the_control_panel">Forms in the Control Panel</a></li>
+		</ul>
+	</li>
+	<li><a href="#handling_form_submissions">Handling Form Submissions</a>
+		<ul>
+			<li><a href="#outputting_form_data_to_the_screen">Outputting Form Data to the Screen</a></li>
+			<li><a href="#trust_no_one">Trust No One</a></li>
+			<li><a href="#use_a_logic_map_for_processing">Use a Logic Map for Processing</a></li>
+		</ul>
+	</li>
+	<li><a href="#filename_security">Filename Security</a>
+		<ul>
+			<li><a href="#include_and_require">include() and require()</a></li>
+			<li><a href="#saving_images_or_files_to_the_server">Saving Images or Files to the Server</a></li>
+		</ul>
+	</li>
+	<li><a href="#typography_class">Typography Class</a>
+	<li><a href="#general_security_practice">General Security Practice</a>
+</ul>
+
+
+<h2>Guidelines</h2>
+	<h3><a name="cross_site_scripting_xss"></a>Cross Site Scripting (XSS)</h3>
+
+	<p>Cross Site Scripting is a type of security vulnerability that allows code injection by malicious users onto a page.  You can find some educational reading and examples on the following site: <a href="http://ha.ckers.org/xss.html">http://ha.ckers.org/xss.html</a></p>
+
+	<p>Cross Site Scripting should be taken very seriously as you would never want your add-on to be the source of an attack vector.</p>
+
+<ul class="guidelineList">
+	<li>
+		<h4><a name="regx_xss_clean"></a>$REGX->xss_clean()</h4>
+		<div class="guidelineDetails">
+			<p>$REGX->xss_clean() is the built in ExpressionEngine XSS sanitization method, which is constantly tweaked for improved security and performance.  It accepts both a <em>string</em> and an <em>array</em> and will return sanitized text.</p>
+
+<code>$str = $REGX->xss_clean($str);</code>
+		</div>
+	</li>
+
+	<li>
+		<h4><a name="sanitized_variables_on_input"></a>Sanitized Variables on Input</h4>
+		<div class="guidelineDetails">
+			<p>Keys are cleaned and data sanitized <strong>automatically</strong> by the Input Class for the following:</p>
+			<ul>
+				<li>$_GET</li>
+				<li>$_COOKIE</li>
+				<li>$IN->IP</li>
+				<li>$IN->AGENT</li>
+				<li>$IN->URI</li>
+			</ul>
+
+			<p>Keys are cleaned and the data is <strong>not sanitized automatically</strong> by the Input Class for the following:</p>
+			<ul>
+				<li>$_POST</li>
+				<li>$_SERVER</li>
+			</ul>
+			<p>This means that any front-side user input from these two sources should be sanitized by using $REGX->xss_clean() before inserting into the database our outputting to the screen.  If the user input is in the Control Panel, such as a module's back end, it is at your discretion based on the needs of the module for whether or not administrative input is sanitized.  Always err on the side of caution, and never assume that your end user will only allow access to the back end of your module to trusted members.</p>
+		</div>
+	</li>
+
+	<li>
+		<h4><a name="insert_and_update_queries"></a>INSERT and UPDATE Queries</h4>
+		<div class="guidelineDetails">
+			<p>As ExpressionEngine assumes that all information in the database is sanitized against XSS, the responsibility for sanitization falls on <strong>input</strong> to the database.  Therefore, all INSERT and UPDATE queries should use $REGX->xss_clean() for user input data.</p>
+		</div>
+	</li>
+
+	<li>
+		<h4><a name="outputting_data_to_the_page"></a>Outputting Data to the Page</h4>
+		<div class="guidelineDetails">
+			<p>Use the <a href="../usage/typography.html">Typography class</a> when outputting to a page.  Doing so provides a number of benefits and security precautions:</p>
+			<ul>
+				<li>Allows Safe HTML or no HTML at all if desired</li>
+				<li>Validates all pMcode, such as [url] and [img] to keep them safe</li>
+				<li>Encodes ExpressionEngine tags and variables by default</li>
+			</ul>
+		</div>
+	</li>
+
+	<li>
+		<h4><a name="when_in_doubt"></a>When In Doubt&hellip;</h4>
+		<div class="guidelineDetails">
+			<p>If there is any doubt on the safety of a variable that you are outputting or inserting into the database, use XML Encode ($REGX->xml_encode) or <a href="http://us.php.net/manual/en/function.htmlentities.php">htmlentities()</a> and <a href="http://us.php.net/manual/en/function.strip-tags.php">strip_tags()</a>.</p>
+		</div>
+	</li>
+</ul>
+
+	<h3><a name="sql_injection_prevention"></a>SQL Injection Prevention</h3>
+
+	<p>SQL Injection is a special type of attack in which data is used in a query without being properly filtered, allowing a user to execute their own queries on the database.  Example:</p>
+
+<code>$evil = "brett'; DELETE FROM exp_members;";
+$query = $DB->query("SELECT * FROM exp_members WHERE username='{$evil}'");</code>
+
+	<p>For more information, you can read MySQL's guide to SQL Injection security: <a href="http://dev.mysql.com/tech-resources/articles/guide-to-php-security-ch3.pdf">http://dev.mysql.com/tech-resources/articles/guide-to-php-security-ch3.pdf</a></p>
+
+<ul class="guidelineList">
+	<li>
+		<h4><a name="escaping_php_variables"></a>Escaping PHP Variables</h4>
+		<div class="guidelineDetails">
+			<p>PHP variables should be escaped in queries anytime the variable is not explicitly set to a hard-coded value <em>within</em> the method using the query.  This means that even variables passed as arguments to a method must be escaped before being used in a query.</p>
+
+			<p>Manually written queries should use <strong><a href="../usage/database.html#additional">$DB->escape_str()</a></strong> on variables, even if you think the value is trusted.</p>
+
+<code>$query = $DB->query("SELECT field FROM table WHERE column = '".$DB->escape_str($foo)."'");</code>
+
+			<p><strong><a href="../usage/database.html#inserting">$DB->insert_string()</a></strong> is the preferred method for INSERT queries, as values are escaped automatically in the supplied data array.</p>
+
+<code>$data = array('name' => 'Brett Bretterson', 'email_address' => 'brett@example.com');
+
+$DB->query($DB->insert_string('table', $data));</code>
+
+			<p><strong><a href="../usage/database.html#updating">$DB->update_string()</a></strong> is the preferred method for UPDATE queries, as values are escaped automatically in the supplied data and "where" arrays.</p>
+
+<code>$data = array('email_address' => 'brett.bretterson@example.com');
+$where = array('name' => 'Brett Bretterson');
+
+$DB->query($DB->update_string('table', $data, $where));</code>
+
+			<p><strong>NOTE:</strong> If you send the third argument (the WHERE clause) as an array as shown above, it will automatically be escaped.  If you send a string, you must escape it yourself.</p>
+
+<code>$data = array('email_address' => 'brett.bretterson@example.com');
+
+$DB->query($DB->update_string('table', $data, "name = '".$DB->escape_str($foo)."'"));</code>
+		</div>
+	</li>
+</ul>
+
+	<h3><a name="preferences_and_settings"></a>Preferences and Settings</h3>
+
+<ul class="guidelineList">
+	<li>
+		<h4><a name="storage_of_settings"></a>Storage of Settings</h4>
+		<div class="guidelineDetails">
+			<p>Security and required preference settings should be stored in the database or config.php file.</p>
+		</div>
+	</li>
+
+	<li>
+		<h4><a name="use_of_settings_in_forms"></a>Use of Settings in Forms</h4>
+		<div class="guidelineDetails">
+			<p>Never send values for preferences or settings in hidden form fields.  HTML source is open and readable, so a malicious user could simply copy the HTML or use a browser plugin to alter the form data to something you do not expect or desire.  If <em>absolutely</em> required, encode them:</p>
+
+			<ul>
+				<li>JavaScript is good against bots but not against serious hackers.</li>
+				<li>Base 64 encoding is easy to break and therefore NOT recommended.</li>
+				<li>If there are a limited number of <em>possible</em> values, you could use md5() or sha1() to encode the values and check against encoded <em>possible</em> values.  This is not bulletproof of course, as the hacker needs only to know what the possible values are to be able to utilize them.</li>
+				<li>PHP has the <a href="http://us2.php.net/manual/en/ref.mcrypt.php">Mcrypt library</a> and other PHP libraries which have encryption and decryption with a salt.  CodeIgniter has an <a href="http://codeigniter.com/user_guide/libraries/encryption.html">Encryption class</a>, incidentally.</li>
+			</ul>
+		</div>
+	</li>
+
+	<li>
+		<h4><a name="yes_no_preferences"></a>Yes / No Preferences</h4>
+		<div class="guidelineDetails">
+			<p>If your preference setting is a simple Yes / No, use <strong>'y'</strong> for Yes and <strong>'n'</strong> for No in both the code and the database, to keep things simple and consistent.</p>
+		</div>
+	</li>
+
+	<li>
+		<h4><a name="follow_the_art_of_keep_it_simple_stupid"></a>Follow the Art of <abbr title="Keep It Simple Stupid">KISS</abbr></h4>
+		<div class="guidelineDetails">
+			<p>"Keep It Simple, Stupid".  Before adding a preference, ask yourself: is a preference for 'foo' <em>really</em> needed?  Eventually with too many preferences, there will be interference and priority issues, and overcomplication.</p>
+		</div>
+	</li>
+</ul>
+
+	<h3><a name="tag_parameters"></a>Tag Parameters</h3>
+
+<ul class="guidelineList">
+	<li>
+		<h4><a name="never_assume_tag_parameters_are_good_input"></a>Never Assume Tag Parameters are "Good" Input</h4>
+		<div class="guidelineDetails">
+			<p>Do not make security exceptions for tag parameters.  With PHP on Input, nested tags, other plugins, or variables being possible sources for parameter values, you cannot be sure that the data is safe.</p>
+		</div>
+	</li>
+
+	<li>
+		<h4><a name="validate_values_before_using"></a>Validate Values Before Using</h4>
+		<div class="guidelineDetails">
+			<p>Always validate the values being supplied to a tag parameter before using them in your code.  <strong>switch()</strong> statements are good for numerous possible values, as are arrays of possible values:</p>
+
+<code>switch ($foo = $TMPL->fetch_param('foo'))
+{
+	case 'bar':
+	case 'baz':
+	case 'bag':
+		// value is already set, and okay, so simply break
+		break;
+	default:
+		$foo = '';
+		break;
+}</code>
+
+<code>$valid_foo = array('bar', 'baz', 'bag');
+
+$foo = (in_array($foo = $TMPL->fetch_param('foo'), $valid_foo)) ? $foo : '';
+</code>
+
+			<p>If you cannot validate against specific values, at least validate the type of data.</p>
+
+<code>if (preg_match('/[^0-9]/', $foo = $TMPL->fetch_param('foo')))
+{
+	$TMPL->log_item('Super Class Module error: Provided parameter "foo" contains non-digit characters');
+	return FALSE;
+}</code>
+
+			<p>Or even:</p>
+
+<code>$foo = (preg_match('/[^0-9]/', $foo = $TMPL->fetch_param('foo'))) ? FALSE : $foo;</code>
+
+			<p class="important"><strong>SIDE NOTE:</strong> You no doubt notice that a regular expression is being used here to validate the parameter as a numeric value.  Why?  <a href="http://us3.php.net/manual/en/function.is-numeric.php">is_numeric()</a> returns TRUE for some non-integer numbers, including notation, e.g. "-0123.45e6".  <a href="http://us2.php.net/manual/en/function.is-int.php">is_int()</a> only returns TRUE on actual integer variable types, and tag parameters are always strings.  Lastly, <a href="http://us3.php.net/manual/en/function.ctype-digit.php">ctype_digit()</a>, the function that we are actually emulating here, is sadly not readily available on all servers, so we avoid using it.</p>
+		</div>
+	</li>
+
+	<li>
+		<h4><a name="default_values"></a>Default Values</h4>
+		<div class="guidelineDetails">
+			<p>Always have default values if you plan to allow the code to execute without parameters being supplied, or in the case of invalid parameter values being provided.  An empty string, NULL, or boolean FALSE simply needs to be tested later to accommodate defaults in your code.  This also allows you to change the defaults all in one place in the script.  Here is one method, that takes advantage of PHP's <a href="http://us2.php.net/manual/en/language.variables.variable.php">variable variables</a>.</p>
+
+<code>$defaults = array(
+			'type'		=> '',
+			'show_foo'	=> FALSE,
+			'limit'		=> 5
+		);
+
+foreach ($defaults as $key => $val)
+{
+	$$key = ($$key = $TMPL->fetch_param($key)) ? $$key : $val;
+}
+
+// Results in three variables being set:
+// $type, $show_foo, and $limit, to their corresponding tag parameter value
+// or the default value if the parameter was not present
+// Each variable would still need to be validated as instructed above
+// before using them in the code.
+</code>
+		</div>
+	</li>
+</ul>
+
+	<h3><a name="secure_forms"></a>Secure Forms</h3>
+
+	<p>To help prevent spam and protect against Cross-site Request Forgery (CSRF), ExpressionEngine has a "Secure Form" setting that uses a hash stored in the database tied to the IP address of the machine that the form was generated for.  Here is how to make use of it.</p>
+
+<ul class="guidelineList">
+	<li>
+		<h4><a name="fns_form_declaration"></a>$FNS->form_declaration()</h4>
+		<div class="guidelineDetails">
+			<p>Create all forms on the user side with <a href="../reference/functions.html">$FNS->form_declaration()</a>, so the XID (secure hash ID) is added automatically as a hidden input field.  This also allows any extensions the site may have installed that modifies forms to have effect on your forms.</p>
+		</div>
+	</li>
+
+	<li>
+		<h4><a name="handling_form_hashes_in_your_add_on"></a>Handling Form Hashes in Your Add-on</h4>
+		<div class="guidelineDetails">
+			<p>Do a check and deletion for the secure hash after all error checking has been completed, but prior to any data insertion into the database.  Example:</p>
+
+<code>// error checking and data validation before this!
+
+if ($PREFS->ini('secure_forms') == 'y')
+{
+	$query = $DB->query("SELECT COUNT(*) AS count FROM exp_security_hashes
+			WHERE hash='".$DB->escape_str($_POST['XID'])."' 
+			AND ip_address = '".$IN->IP."' 
+			AND date > UNIX_TIMESTAMP()-7200");  // keep hash valid only for 2 hours
+
+	if ($query->row['count'] == 0)
+	{
+		// no data insertion if a hash isn't found or is too old
+		$FNS->redirect(stripslashes($_POST['RET']));
+	}
+	else
+	{
+		$DB->query($DB->insert_string('table', $data));
+
+		$DB->query("DELETE FROM exp_security_hashes
+			WHERE (
+				hash='".$DB->escape_str($_POST['XID'])."' 
+				AND ip_address = '".$IN->IP."'
+				) 
+			OR date < UNIX_TIMESTAMP()-7200");  // helps garbage collection for old hashes
+	}
+}
+else
+{
+	$DB->query($DB->insert_string('table', $data));
+}</code>
+		</div>
+	</li>
+	<li>
+		<h4><a name="forms_in_the_control_panel"></a>Forms in the Control Panel</h4>
+		<div class="guidelineDetails">
+			<p>The Control Panel's Display class automatically adds hashes to any form tag automatically for you.  Likewise, the system will check for hashes automatically, so forms in the control panel require no additional work for you to use securely.</p>
+		</div>
+	</li>
+</ul>
+
+	<h3><a name="handling_form_submissions"></a>Handling Form Submissions</h3>
+
+	<p>Form submissions are the most common form of user input you will handle in your add-ons, so it is important to understand how to deal with them securely.</p>
+
+<ul class="guidelineList">
+	<li>
+		<h4><a name="outputting_form_data_to_the_screen"></a>Outputting Form Data to the Screen</h4>
+		<div class="guidelineDetails">
+			<p><strong>Never</strong> output unfiltered incoming data directly to the screen.</p>
+		</div>
+	</li>
+
+	<li>
+		<h4><a name="trust_no_one"></a>Trust No One</h4>
+		<div class="guidelineDetails">
+			<p>Treat all input as potentially dangerous, even from within the control panel.</p>
+		</div>
+	</li>
+
+	<li>
+		<h4><a name="use_a_logic_map_for_processing"></a>Use a Logic Map for Processing</h4>
+		<div class="guidelineDetails">
+			<p>In your methods that will be handling form data, create a logic map that you can use to ensure that you are handling all validation and security checks prior to performing any actions.  The following list contains common things to use; your add-on may have fewer or additional requirements.</p>
+			<ul>
+				<li>What is validated and in what order?
+					<ul>
+						<li>Does the user need to be a logged in member?</li>
+						<li>Does the user need to be in a specific member group for the action?</li>
+						<li><a href="../../general/spam_protection.html">Deny Duplicate Data</a> Check?</li>
+					</ul>
+				</li>
+				<li>What security checks are performed?
+					<ul>
+						<li>Secure form hashes</li>
+						<li>CAPTCHA</li>
+						<li>Blacklist Banning / Whitelist Overrides
+							<ul>
+								<li>$IN->blacklisted == 'y' (blacklisted)</li>
+								<li>$IN->whitelisted == 'y' (whitelist override)</li>
+							</ul>
+						</li>
+						<li>Preferences and settings checked against</li>
+					</ul>
+				</li>
+				<li>Data Filtering and Conversion
+					<ul>
+						<li>XSS clean</li>
+						<li>Number formatting: number_format(), ceil(), etc.</li>
+						<li>Character set conversion</li>
+						<li>XML convert</li>
+						<li>Remove PHP or ExpressionEngine tags?</li>
+					</ul>
+				</li>
+				<li>Insert Data or Update
+					<ul>
+						<li>$REGX->xss_clean() on all string data even if there is no intent to output (don't forget about the Query module!)</li>
+						<li>Make sure all data is properly escaped</li>
+					</ul>
+				</li>
+			</ul>
+
+			<p class="important">After processing, make sure submitted data that might be sent to the screen for a success or error message is the filtered and validated version</p>
+		</div>
+	</li>
+</ul>
+
+	<h3><a name="filename_security"></a>Filename Security</h3>
+
+<ul class="guidelineList">
+	<li>
+		<h4><a name="include_and_require"></a>include() and require()</h4>
+		<div class="guidelineDetails">
+			<p>Many servers have the ability to include files from offsite or anywhere in the local server, so when using include() or require() with user submitted data you need to be extremely careful.  The best practice is to not design your add-on in such a way that would make this necessary in the first place, but if you do, either:</p>
+			<ul>
+				<li>Validate the filename based on possible options, OR</li>
+				<li>Use $FNS->filename_security() to remove naughty characters</li>
+			</ul>
+		</div>
+	</li>
+	<li>
+		<h4><a name="saving_images_or_files_to_the_server"></a>Saving Images or Files to the Server</h4>
+		<div class="guidelineDetails">
+			<p>When saving images or files to the server, make sure and validate the file type (MIME) and also clean the file name to remove possible naughty characters.</p>
+			<ul>
+				<li>Sanitize file name: <strong>$FNS->filename_security();</strong></li>
+				<li>Browser provides the MIME type, available in: <strong>$_FILES['userfile']['type']</strong></li>
+				<li>Use ExpressionEngine's Upload class in core.upload.php whenever possible, as it contains methods for validation and sanitizing</li>
+			</ul>
+		</div>
+	</li>
+</ul>
+
+	<h3><a name="typography_class"></a>Typography Class</h3>
+
+	<p>Use the <a href="../usage/typography.html">Typography class</a> whenever outputting blocks of content from user submitted data.  It is regularly updated to improve security and performance, saving you both time and energy.</p>
+
+	<ul>
+		<li>It protects against PHP and ExpressionEngine tags from being parsed</li>
+		<li>pMcode is sanitized, even if Allow All HTML is enabled</li>
+		<li>Using 'safe' or 'none' for HTML formatting further protects output by converting tags to entities</li>
+	</ul>
+
+	<h3><a name="general_security_practice"></a>General Security Practice</h3>
+
+	<ul>
+		<li>Super Admins' absolute power is for <em>access</em>, not security.  Do not make security exceptions for Super Admins.  "Doom, doom, doom," as it were.
+			<ul>
+				<li>Imagine a Super Admin not logging out from a public terminal or not using an SSL connection on an open wireless network.</li>
+				<li>Imagine a Super Admin using Cookies Only sessions in the control panel and then going to a third-party page, which automatically submitted a form with data to the entry submission routine in the control panel.  Theoretically, the Super Admin would be submitting potentially malicious code into an entry automatically and without any knowledge.</li>
+			</ul>
+		</li>
+		<li>Use built in ExpressionEngine classes and methods if they exist for tasks.</li>
+		<li>Use good beta testers and run a tight ship to get the best results.</li>
+		<li>Keep debugging on for all users on your private development / testing site.  Refer to the <a href="general.html#php_errors">instructions for PHP errors</a> in the General Syntax and Style section.</li>
+		<li>Use an approach of Least Privilege.  Start by allowing access to NO one, and explicitly grant access to those that qualify.</li>
+	</ul>
+
+</div>
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Setup Domains and Sub-domains &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#cp_docs">The Control Panel</a> &gt;
+<a href="index.html">Multiple Site Manager</a> &gt; 
+<strong>Setup Domains and Sub-domains</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>Setup Domains and Sub-domains</h1>
+
+	<p>It is recommended that you <a href="createsite.html">Create a Site</a> before setting up the domain or sub-domain.</p>
+
+<h2>Step 1</h2>
+
+<p>Copy an existing Site's <var>path.php</var> and <var>index.php</var> (the ones from your main directory, <strong>not</strong> from the <kbd>system</kbd> directory) files into the directory from which you wish to access your new Site.</p>
+
+	<p class="important">The directory you specify must be able to have files within it be able to access your main installation <kbd>system</kbd> directory.  You should ensure you don't have any "open_basedir" or other restrictions in place which could prevent this.</p>
+
+	<p>If you want, you may rename the <var>index.php</var> file as described on the <a href="../../installation/renaming_index.html">Renaming Main Site File</a> page.</p>
+
+<h2>Step 2</h2>
+
+	<p>Once you've copied the files, you must open <var>path.php</var> to edit it.</p>
+
+	<h3>$system_path</h3>
+
+		<p>First, you must ensure that the <samp>$system_path</samp> variable is set correctly within the file.  The variable should contain a <strong>relative path</strong> from the current directory (in which the <var>path.php</var> file resides) to your site's <kbd>system</kbd> directory.  For instance:</p>
+
+		<code>$system_path = "../system/";</code>
+
+
+
+	<h3>Add Site Short Name Variable</h3>
+
+		<p>Second, you must add the Site Short Name variable to the file:</p>
+
+		<code>$site_name = 'Site_Short_Name';</code>
+
+		<p>This will let ExpressionEngine know which Site's preferences to use for settings like main site index, the 404 page, etc... just like any ExpressionEngine installation.</p>
+
+	<h3>Optional Variables</h3>
+
+		<p>You may specify a PHP array containing "global variables" that will be available only to Templates accessed through that <var>path.php</var> file.</p>
+
+		<code>$global_vars = array(); // This array must be associative</code>
+
+		<p>For instance, let's say you want to define a weblog name and a Template Group name.  You could use this:</p>
+
+		<code>$global_vars = array(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"my_weblog_name" => "news",<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"my_template_group" => "display"<br />
+); // Last entry must not include the comma at the end</code>
+
+		<p>Within your Templates, you would then be able to use the <samp>{my_weblog_name}</samp> and <samp>{my_template_group}</samp> variables.</p>
+
+<h1>Next:&nbsp; <a href="code.html">Sites Variables and Parameters</a></h1>
+
+
+</div>
+
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+</div>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

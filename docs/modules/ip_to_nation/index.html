@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>IP to Nation Module &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="../../index.html" />
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="../../index.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<strong>IP to Nation Module</strong>
+</div>
+
+
+<div id="content">
+
+	<h1>IP to Nation Module</h1>
+
+	<p>The <dfn>IP to Nation</dfn> module enables you to determine which country an IP address is associated with.  You can do two things with this information:</p>
+		
+	<ol>
+	<li><b>Ban entire countries.</b>  When a country is banned, someone with an IP address from that country is not permitted to submit comments, trackbacks, referrer data, or use the email/tell-a-friend forms.</li>
+	<li><b>Show a flag icon</b> <img src="flag_us.gif" width="18" height="12" border="0" /> within your comments or entries to indicate the country of the person who submitted the entry.</li>
+	</ol>
+
+	<p class="important"><strong>NOTE: </strong>When updating your IP to Nation module, make sure that you also update your <dfn>/system/lib/countries.php</dfn> file so that newly added or changed nations display properly.</p>
+	
+	<h2>Database Updates</h2>
+	
+	<p>Periodically, the IP address database for the IP to Nation module is updated from <a href="http://www.maxmind.com/">maxmind.com</a>'s database.  When this occurs, a note will be made in the <a href="../../changelog.html" id="" title="Change Log">Change Log</a>.  To update your installation, simply make sure that you are running the latest version and build of ExpressionEngine, and visit the <dfn>Modules &gt; IP to Nation</dfn> page in your Control Panel.  The update may take a few seconds; do not click any links or refresh the page while the auto-update is taking place.</p>
+	
+	<h2>Banning Counties</h2>
+	
+	<p>To look up the country associated with an IP address, or to ban a country you'll to to the <dfn>Modules &gt; IP to Nation</dfn> page in your Control Panel.</p>
+
+
+
+	<h2>World Flags Tag</h2>
+	
+	<p>In order to use the world flag feature, please first visit the <dfn>Modules</dfn> page of the control panel and make sure your <dfn>IP to Nation</dfn> module is installed.</p>
+
+	<p class="important"><strong>Note:</strong>&nbsp; Please <a href="http://expressionengine.com/files/world_flags.zip">download the flag icons</a> from ExpressionEngine.com.  Once downloaded, unzip the archive, then upload the "world_flags" folder to your server.  The folder can go anywhere since you'll set the URL in the tag as described below.</p>
+	
+	<p><br />The "world flags" tag can be used within your <kbd>{exp:comment:entries}</kbd> or <kbd>{exp:weblog:entries}</kbd> like this:</p>
+
+
+	<code>{exp:ip_to_nation:world_flags &nbsp; image_url="http://example.com/images/world_flags/"}<br />
+	{ip_address}<br />
+	{/exp:ip_to_nation:world_flags}<br />
+	</code>
+
+	<h2>Parameters</h2>
+	
+	<p>The world flags tag has two parameters:</p>
+	
+	<h3>image_url=</h3>
+	<p>This URL to your "world_flags" folder.</p>
+	
+	<p class="important">Make sure you include the folder name in the URL and include a trailing slash:</p>
+	
+	<code>http://example.com/images/world_flags/</code>
+	
+	
+	<h3>type="text"</h3>
+	
+	<p>You can optional set the tag to output the name of the country as text by using the type="text" parameter.</p>
+	
+	<p class="important"><strong>NOTE: </strong>This product includes GeoLite data created by MaxMind, available from http://maxmind.com/</p>
+
+</div>
+
+
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>

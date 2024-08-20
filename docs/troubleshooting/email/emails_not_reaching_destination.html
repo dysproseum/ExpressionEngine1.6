@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Troubleshooting &#8211; ExpressionEngine Documentation</title>
+
+  <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+  <link rel="contents" href="./index.html" />
+  <style type="text/css" media="screen,print">@import url(./../../docs.css);</style>
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="index.html"><img src="./../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+<td class="searchbox"><form method="get" action="http://www.google.com/search" class="searchbox"><div>Search&nbsp;&nbsp;<input type="text" class="input" name="q" id="q" size="31" maxlength="255" value="" /><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="expressionengine.com/legacy_docs/" />&nbsp;<input type="submit" class="submit" name="sa" value="Search" /></div></form></td>
+</tr>
+</table>
+</div>
+
+
+<div id="navlinks">
+<a href="/index.html">Table of Contents</a> &gt; 
+<a href="../index.html">Troubleshooting</a> &gt;
+<strong>Emails sent through EE are not reaching their destination</strong>
+</div>
+
+
+
+<div id="content">
+
+	<h1>Emails sent through EE are not reaching their destination</h1>
+
+	<p class="ts_desc">Emails sent via ExpressionEngine are never reaching their destination.</p>
+
+	<h2>Email Troubleshooting</h2>
+	
+	<p>Here are some simple troubleshooting tips:</p>
+	
+	<ul>
+		<li>Navigate to <var>Admin -> System Preferences -> Email Configuration</var> and check that <dfn>Return email address for auto-generated emails</dfn> contains a valid e-mail address.  (Some servers may require outgoing emails to be sent from an email address on the domain that EE is running on.  If debugging shows a 553 error, make certain the return address complies with this requirement.)</li>
+		<li>Go to <var>Admin -> System Preferences -> Email Configuration</var> and change <dfn>Enable Email Debugging?</dfn> to "On".  Click the <dfn>Communicate</dfn> tab and attempt to send an e-mail.  If the sending fails it will output an error that will assist with troubleshooting the problem.</li>
+		<li>Try changing the method of sending email in <var>Admin -> System Preferences -> Email Configuration</var> -> <dfn>Email Protocol</dfn></li>
+		<li>If <var>Enable Debugging</var> is on and no error message is received it means that EE is successfully opening a socket to the email server, writing the email headers and data to the mail queue, and closing the connection.   In this case, the next step is to contact the hosting provider or server administrator for further troubleshooting.</li>
+	</ul>
+	
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+</div>
+</body>
+</html>

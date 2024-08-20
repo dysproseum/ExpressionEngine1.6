@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Wiki Control Panel&#8211; ExpressionEngine Documentation</title> 
+  <style type="text/css" media="screen,print">@import url(../../docs.css);</style> 
+</head>
+
+<body>
+<div><a name="top"></a></div>
+
+<div id="header">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tr>
+<td class="docheading" style="width:300px;"><a href="README.html"><img src="../../images/user_guide.gif" width="231" height="24" alt="ExpressionEngine User Guide" /></a></td>
+</tr>
+</table>
+</div>
+
+<div id="navlinks">
+<a href="../../index.html">Table of Contents</a> &gt;
+<a href="../../index.html#modules_docs">Modules and Tags</a> &gt;
+<a href="index.html">Wiki Module</a> &gt;
+<strong>Wiki Control Panel</strong>
+</div>
+
+<div id="content">
+
+	<h1>Wiki Control Panel</h1>
+
+	<p class="important">After the initial setup in the Control Panel, all page creation and editing is handled through the Wiki itself. This means your users do not need Control Panel access to create new pages and edit pages on your wiki. See <a href="wiki_syntax.html">Using the Wiki</a> for more information.</p>
+	
+	<h2>Creating Wikis</h2>
+	
+	<p>The Wiki Module Control Panel will display a list of all your wikis. To create a new wiki click <strong>Create Wiki</strong> in the upper right. Fill in all the preferences for the wiki and click update to finish creating the wiki.</p>
+	
+	<h2>Control Panel Preferences</h2>
+	
+	<h3>Full Wiki Name</h3>
+	
+	<p>This is the descriptive name of your wiki that will be displayed on your site.</p>
+	
+	<p>The Full Wiki Name is a required field. Spaces, punctuation, and other special characters are allowed. For example, the wiki's descriptive name might be "Joe's Wiki."</p>
+		
+	<h3>Short Wiki Name</h3>
+	
+	<p>This is the name used internally within ExpressionEngine. For example, you will use the Short Wiki Name in your ExpressionEngine template to specify which wiki you want displayed. It is not normally shown to visitors or otherwise exposed outside of the Control Panel.</p>
+	
+	<p>The wiki's short name is a required field. It must be a single word with no spaces. The underscore character is allowed. For example, if your wiki's Full Name is "Joe's Wiki" your Short Name might be "joes_wiki."</p>
+	
+	<h3>Text Formatting for articles</h3> 
+	
+	<p>You can use any of the text formatting <a href="http://plugins.expressionengine.com/" target="_blank">plugins</a> available for ExpressionEngine including <strong>xhtml</strong>, <strong>Textile</strong>, and <strong>Markdown</strong>.</p>
+	
+	<p>To create pages, categories, and learn more about typically wiki use please see the <a href="wiki_syntax.html">Wiki syntax</a> documentation.</p>
+	
+	
+	<h3>File Upload Directory for Wiki</h3>
+	
+	<p>You can use any existing upload directory for the wiki or create a new one.</p>
+	
+	<p class="important"><strong>NOTE:</strong> The server path for your wiki's File Upload Directory must use a full server path.</p>
+	
+	<h3>Administrator Groups</h3> 
+	
+	<p>Admins can Moderate, Lock, and Delete wiki articles in addition to all the User Group priviliges. Please see the <a href="wiki_users.html">Wiki Users</a> section for details.</p>
+		
+	<h3>User Groups</h3> 
+	
+	<p>These Member Groups have access to the wiki. They can add and edit articles and categories. Please see the <a href="wiki_users.html">Wiki Users</a> section for details.</p>
+	
+	
+	<h3>Number of Revisions to Keep Per Article</h3> 
+	
+	<p>When an article is modified a revision is kept automatically to create a history for that article. You can limit the number of revisions kept to cut down on database usage.</p>
+	
+	<h3>Number of Edits Allowed per Author Per Day</h3> 
+	
+	<p>Some people love to write... too much. Limit the number of times a person can modify an article in a 24 hour period.</p>
+	
+	<h3>Email Addresses for Moderation Notifications</h3> 
+	
+	<p>When an article is moderated an email can be sent to alert Admins of the changes. Please see the <a href="wiki_users.html">Wiki Users</a> section for details.</p>
+		
+		
+	<h2><a name="namespaces">Namespaces</a></h2>
+	
+	<p>Namespaces are set on a per wiki basis and allow you to divide your content up
+	into logical, semantic divisions while also placing restrictions on who can edit and administer
+	that content.</p>
+	
+	<p>For example if you had a wiki dedicated to learning languages you might have a <em>Spanish</em> namespace and a <em>German</em> namespace as a way to organize and separate your content. You could have a different Member Group as the admin for each namespace.</p>
+	
+	<p>Please see the <a href="wiki_syntax.html#syntax_namespaces">Wiki Syntax, Namespaces</a> section for information on using namespaces on your wiki after configuring them.</p>
+	
+	<h3>Setting up Namespaces</h3> 
+	
+	<p>You can setup your wiki's namespaces from the wiki's control panel. For each namespace, create a Label (displayed on the wiki 	pages) and a short name (used internally and in certain forms for referencing the namespace).</p>
+	
+	<p>Your short name should only contain word 
+	characters like letters, numbers, and underscores. Remember to set access
+	permissions for these Namespaces as they override those set for the general wiki. You can see an example in the screen shot below.</p>
+	
+	<div class="imgwrapper"><img src="../../images/wiki_cp_namespaces.png" width="594" height="258" alt="Create Namespace form." border="0" width="747" height="204" /></div>
+	
+	<p>If you wish to delete a namespace, click the minus sign on the right side of its row.  To add a new namespace row, click any of the plus signs and a new, empty row will be created for you.</p>
+	
+	<div class="important"><strong>NOTE:</strong>When you delete a namespace, the articles will
+	still exist in the database but since their Namespace is gone they will no longer be accessible via the wiki.
+	If you ever recreate the namespace with the same short name and label, the articles will once again be accessible.</div>
+		
+</div>
+	
+<p class="center"><a href="#top">Top of Page</a></p>
+
+<!-- {user_guide_comments} -->
+
+<div id="footer">
+  <address><a href="http://expressionengine.com/">ExpressionEngine</a> &#8211; Copyright &#169; 2002-2012 &#8211; <a href="http://ellislab.com/">EllisLab, Inc.</a></address>
+</div>
+
+</body>
+</html>
